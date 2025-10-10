@@ -1,9 +1,4 @@
-# Estruturas de Repetição em JavaScript
-## Automatizando Tarefas e Dominando os Loops
-
----
-
-## Introdução: O Poder da Repetição
+# O Poder da Repetição
 
 Imagine que você precisa exibir na tela todos os números de 1 até 100. Sem o conhecimento de estruturas de repetição, você precisaria escrever 100 linhas de código, algo como:
 
@@ -29,8 +24,6 @@ for (let i = 1; i <= 100; i++) {
 
 Muito mais elegante, não é?
 
----
-
 ## Por Que Usar Loops?
 
 Linguagens de programação são extremamente úteis para completar rapidamente tarefas repetitivas. Os loops resolvem o problema fundamental da repetição de código, tornando nossos programas:
@@ -46,8 +39,6 @@ Evitamos duplicação desnecessária de código. Uma única lógica bem escrita 
 
 ### 4. **Menos Propensos a Erros**
 Uma única implementação correta elimina a possibilidade de erros de cópia e cola que poderiam surgir ao duplicar código manualmente.
-
----
 
 ## O Conceito Fundamental: Repetição Controlada
 
@@ -70,8 +61,6 @@ Vamos explorar como cada tipo de loop implementa esses conceitos.
 ## Os Três Tipos Principais de Loops em JavaScript
 
 JavaScript oferece três estruturas principais de repetição, cada uma adequada para situações específicas. Embora sejam amplamente intercambiáveis, entender suas particularidades ajuda a escolher a ferramenta certa para cada trabalho.
-
----
 
 ## 1. Loop `while` - Repetição Baseada em Condição
 
@@ -172,9 +161,7 @@ while (i < 5) {
 }
 ```
 
----
-
-## 2. Loop `do...while` - Execute Primeiro, Pergunte Depois
+## Loop `do...while` - Execute Primeiro, Pergunte Depois
 
 O `do...while` é uma variação do `while` com uma diferença crucial: ele **garante que o código seja executado pelo menos uma vez**, pois a verificação da condição acontece no final, não no início.
 
@@ -267,9 +254,7 @@ do {
 
 Neste exemplo, queremos mostrar o menu pelo menos uma vez, independentemente de qualquer condição prévia. O `do...while` é perfeito para isso.
 
----
-
-## 3. Loop `for` - O Loop Mais Concentrado
+## Loop `for` - O Loop Mais Concentrado
 
 O loop `for` é considerado o mais "concentrado" porque reúne todos os três componentes essenciais (inicialização, condição e atualização) em uma única declaração. É o loop mais comumente usado, especialmente quando você sabe exatamente quantas iterações precisa.
 
@@ -661,8 +646,6 @@ Usuários ativos maiores de 18 anos:
 - Precisa filtrar dados durante o processamento
 - Quer evitar aninhamento excessivo de `if`
 
----
-
 ## Loops Aninhados - Loops Dentro de Loops
 
 Loops podem conter outros loops dentro deles. Isso é chamado de **aninhamento** (nesting) e é extremamente útil para trabalhar com estruturas bidimensionais ou realizar operações complexas.
@@ -737,8 +720,6 @@ for (let i = 0; i < linhas; i++) {
  16  17  18  19  20
 ```
 
----
-
 ## Qual Loop Escolher?
 
 Para muitos problemas, os loops `for`, `while` e `do...while` são **amplamente intercambiáveis**. Todos podem resolver os mesmos problemas - a escolha depende principalmente do contexto e da clareza do código.
@@ -757,7 +738,7 @@ Cada tipo de loop é otimizado para diferentes **padrões de controle de iteraç
 ```javascript
 // Processar todos os elementos de um array
 for (let i = 0; i < array.length; i++) {
-    processar(array[i]);
+    ++array[i]
 }
 ```
 
@@ -769,7 +750,7 @@ for (let i = 0; i < array.length; i++) {
 ```javascript
 // Continuar até o jogador decidir sair
 while (jogadorQuerContinuar && vidasRestantes > 0) {
-    executarRodada();
+    // Código
 }
 ```
 
@@ -781,8 +762,7 @@ while (jogadorQuerContinuar && vidasRestantes > 0) {
 ```javascript
 // Mostrar menu e pedir opção pelo menos uma vez
 do {
-    mostrarMenu();
-    opcao = lerOpcao();
+    // Código para mostrar menu e obter opção
 } while (opcao !== "sair");
 ```
 
@@ -819,8 +799,6 @@ do {
 ```
 
 Neste caso, o `for` é provavelmente a escolha mais clara porque expressa diretamente a intenção: "repetir 10 vezes".
-
----
 
 ## Boas Práticas com Loops
 
@@ -873,47 +851,13 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
-### 3. Mantenha Loops Simples e Focados
-
-**Ruim:**
-```javascript
-// ❌ Lógica complexa dentro do loop
-for (let i = 0; i < dados.length; i++) {
-    if (dados[i].ativo) {
-        let desconto = dados[i].preco * 0.1;
-        dados[i].precoFinal = dados[i].preco - desconto;
-        if (dados[i].precoFinal < 10) {
-            dados[i].precoFinal = 10;
-        }
-    }
-}
-```
-
-**Melhor:**
-```javascript
-// ✅ Lógica delegada para função
-function calcularPrecoFinal(item) {
-    if (!item.ativo) return item;
-    
-    let desconto = item.preco * 0.1;
-    item.precoFinal = Math.max(item.preco - desconto, 10);
-    return item;
-}
-
-for (let i = 0; i < dados.length; i++) {
-    calcularPrecoFinal(dados[i]);
-}
-```
-
-**Por quê?** Delegar lógica complexa para funções dentro de loops é boa prática porque **mantém o loop simples, focado e mais fácil de entender**.
-
 ### 4. Otimize Cálculos Repetitivos
 
 **Menos Eficiente:**
 ```javascript
 // ❌ array.length é calculado a cada iteração
 for (let i = 0; i < array.length; i++) {
-    processar(array[i]);
+    ++array[i]
 }
 ```
 
@@ -922,7 +866,7 @@ for (let i = 0; i < array.length; i++) {
 // ✅ tamanho é calculado apenas uma vez
 let tamanho = array.length;
 for (let i = 0; i < tamanho; i++) {
-    processar(array[i]);
+    ++array[i]
 }
 ```
 
@@ -934,204 +878,12 @@ for (let i = 0; i < tamanho; i++) {
 // Bom uso de continue - filtragem clara
 for (let i = 0; i < usuarios.length; i++) {
     if (!usuarios[i].ativo) continue;
-    processarUsuario(usuarios[i]);
+    ++usuarios[i];
 }
 
 // Uso excessivo pode prejudicar legibilidade
 // Se você tem muitos continue/break, considere refatorar
 ```
-
----
-
-## Exercícios Práticos
-
-Agora que você compreende os conceitos fundamentais, vamos praticar com exercícios que reforçam o aprendizado.
-
-### Exercício 1: Tabuada Interativa
-
-Crie um programa que exiba a tabuada de um número fornecido.
-
-```javascript
-// Solução
-let numero = 7;
-
-console.log(`=== TABUADA DO ${numero} ===`);
-
-for (let i = 1; i <= 10; i++) {
-    let resultado = numero * i;
-    console.log(`${numero} x ${i} = ${resultado}`);
-}
-```
-
-**Desafio:** Modifique para gerar tabuadas de 1 a 10.
-
-### Exercício 2: Contador Regressivo
-
-Crie uma contagem regressiva de 10 até 1.
-
-```javascript
-// Solução
-console.log("Preparar...");
-
-for (let i = 10; i >= 1; i--) {
-    console.log(i);
-}
-
-console.log("Lançar! 🚀");
-```
-
-**Desafio:** Adicione uma pausa visual entre cada número.
-
-### Exercício 3: Soma de Números em Intervalo
-
-Calcule a soma de todos os números entre dois valores.
-
-```javascript
-// Solução
-let inicio = 5;
-let fim = 15;
-let soma = 0;
-
-for (let i = inicio; i <= fim; i++) {
-    soma += i;
-}
-
-console.log(`A soma de ${inicio} até ${fim} é: ${soma}`);
-```
-
-**Resultado esperado:** A soma de 5 até 15 é: 110
-
-### Exercício 4: Padrões com Asteriscos
-
-Crie diferentes padrões visuais usando asteriscos.
-
-```javascript
-// Padrão 1: Triângulo crescente
-console.log("=== TRIÂNGULO CRESCENTE ===");
-for (let i = 1; i <= 5; i++) {
-    let linha = "";
-    for (let j = 1; j <= i; j++) {
-        linha += "* ";
-    }
-    console.log(linha);
-}
-
-// Padrão 2: Triângulo decrescente
-console.log("\n=== TRIÂNGULO DECRESCENTE ===");
-for (let i = 5; i >= 1; i--) {
-    let linha = "";
-    for (let j = 1; j <= i; j++) {
-        linha += "* ";
-    }
-    console.log(linha);
-}
-
-// Padrão 3: Retângulo
-console.log("\n=== RETÂNGULO ===");
-for (let i = 1; i <= 4; i++) {
-    let linha = "";
-    for (let j = 1; j <= 6; j++) {
-        linha += "* ";
-    }
-    console.log(linha);
-}
-```
-
-### Exercício 5: Números Pares e Ímpares
-
-Separe números pares e ímpares de 1 a 20.
-
-```javascript
-// Solução
-let pares = [];
-let impares = [];
-
-for (let i = 1; i <= 20; i++) {
-    if (i % 2 === 0) {
-        pares.push(i);
-    } else {
-        impares.push(i);
-    }
-}
-
-console.log("Números pares:", pares.join(", "));
-console.log("Números ímpares:", impares.join(", "));
-```
-
-### Exercício 6: Validação com Loop
-
-Peça ao usuário para digitar um número entre 1 e 10.
-
-```javascript
-// Solução
-let numero;
-let tentativas = 0;
-const maxTentativas = 3;
-
-do {
-    numero = parseInt(prompt("Digite um número entre 1 e 10:"));
-    tentativas++;
-    
-    if (numero >= 1 && numero <= 10) {
-        console.log(`Parabéns! Você digitou ${numero} ✓`);
-        break;
-    } else {
-        if (tentativas < maxTentativas) {
-            console.log(`Número inválido. Tentativa ${tentativas} de ${maxTentativas}`);
-        } else {
-            console.log("Número máximo de tentativas atingido.");
-        }
-    }
-} while (tentativas < maxTentativas);
-```
-
-### Exercício 7: Busca de Número Primo
-
-Verifique se um número é primo.
-
-```javascript
-// Solução
-let numero = 17;
-let ehPrimo = true;
-
-if (numero <= 1) {
-    ehPrimo = false;
-} else {
-    for (let i = 2; i < numero; i++) {
-        if (numero % i === 0) {
-            ehPrimo = false;
-            break; // Não é primo, pode parar de verificar
-        }
-    }
-}
-
-if (ehPrimo) {
-    console.log(`${numero} é um número primo`);
-} else {
-    console.log(`${numero} não é um número primo`);
-}
-```
-
-### Exercício 8: Calculadora de Fatorial
-
-Calcule o fatorial de um número.
-
-```javascript
-// Solução
-let numero = 6;
-let fatorial = 1;
-
-console.log(`Calculando fatorial de ${numero}:`);
-
-for (let i = 1; i <= numero; i++) {
-    fatorial *= i;
-    console.log(`${i}! = ${fatorial}`);
-}
-
-console.log(`\nResultado final: ${numero}! = ${fatorial}`);
-```
-
----
 
 ## Aplicações Práticas no Mundo Real
 
@@ -1165,51 +917,6 @@ console.log(`Média: ${media.toFixed(2)}`);
 console.log(`Maior nota: ${maiorNota}`);
 console.log(`Menor nota: ${menorNota}`);
 console.log(`Status: ${media >= 7 ? "APROVADO" : "REPROVADO"}`);
-```
-
-### Aplicação 2: Validação de Senha
-
-```javascript
-function validarSenha(senha) {
-    let temMaiuscula = false;
-    let temMinuscula = false;
-    let temNumero = false;
-    let temEspecial = false;
-    
-    for (let i = 0; i < senha.length; i++) {
-        let caractere = senha[i];
-        
-        if (caractere >= 'A' && caractere <= 'Z') {
-            temMaiuscula = true;
-        } else if (caractere >= 'a' && caractere <= 'z') {
-            temMinuscula = true;
-        } else if (caractere >= '0' && caractere <= '9') {
-            temNumero = true;
-        } else if ("!@#$%^&*".includes(caractere)) {
-            temEspecial = true;
-        }
-    }
-    
-    let requisitos = [];
-    if (!temMaiuscula) requisitos.push("letra maiúscula");
-    if (!temMinuscula) requisitos.push("letra minúscula");
-    if (!temNumero) requisitos.push("número");
-    if (!temEspecial) requisitos.push("caractere especial");
-    if (senha.length < 8) requisitos.push("mínimo 8 caracteres");
-    
-    if (requisitos.length === 0) {
-        return { valida: true, mensagem: "Senha válida!" };
-    } else {
-        return { 
-            valida: false, 
-            mensagem: "Senha inválida. Faltam: " + requisitos.join(", ")
-        };
-    }
-}
-
-// Testando
-let resultado = validarSenha("Abc123!");
-console.log(resultado.mensagem);
 ```
 
 ### Aplicação 3: Gerador de Relatórios
@@ -1277,8 +984,6 @@ if (produtosBaixos === 0) {
     console.log(`Total de produtos com estoque baixo: ${produtosBaixos}`);
 }
 ```
-
----
 
 ## Armadilhas Comuns e Como Evitá-las
 
@@ -1360,63 +1065,14 @@ for (let i = 0; i < numeros.length; i++) {
 }
 ```
 
----
-
-## Conclusão
-
 As estruturas de repetição são ferramentas essenciais no arsenal de qualquer programador. Elas transformam tarefas que seriam impraticáveis manualmente em operações simples e eficientes.
 
-### Conceitos-Chave para Lembrar
+## Próximos Passos
 
-1. **Todos os loops compartilham o mesmo princípio fundamental**: execução repetitiva controlada por uma condição de parada.
+Na próxima aula aprenderemos a criar nossas próprias funções. Você aprenderá:
+- A sitaxe da criação de funções
+- Como passar e retornar valores
+- O que é e como funciona o escopo
+- Boas práticas da criação de funções
 
-2. **Cada tipo de loop é otimizado para diferentes situações**:
-   - `for`: Quando você sabe quantas iterações precisa
-   - `while`: Quando a condição é mais complexa ou dinâmica
-   - `do...while`: Quando precisa executar pelo menos uma vez
-
-3. **`break` e `continue` oferecem controle fino**:
-   - `break`: Sai completamente do loop
-   - `continue`: Pula para a próxima iteração
-
-4. **Boas práticas são essenciais**:
-   - Evite loops infinitos
-   - Use nomes descritivos
-   - Mantenha loops simples
-   - Otimize cálculos repetitivos
-   - Delegue lógica complexa para funções
-
-5. **Os loops são intercambiáveis**: Você pode resolver o mesmo problema com diferentes tipos de loop - escolha o que torna seu código mais claro e expressivo.
-
-### Próximos Passos
-
-Agora que você domina as estruturas de repetição, está pronto para:
-- Trabalhar com **arrays** (listas de dados) de forma eficiente
-- Implementar **algoritmos** mais complexos
-- Processar **grandes volumes de dados**
-- Criar **aplicações interativas** e dinâmicas
-
-As estruturas de repetição são a base para muitos conceitos avançados em programação. Continue praticando, experimentando diferentes abordagens e, principalmente, buscando entender **por que** cada loop funciona da maneira que funciona.
-
-**Lembre-se:** A prática leva à perfeição. Quanto mais você usar loops em situações reais, mais natural será escolher a estrutura certa e escrever código eficiente e elegante.
-
----
-
-## Material Complementar
-
-### Para Praticar Mais
-
-1. Crie um programa que desenhe uma pirâmide de asteriscos
-2. Implemente um jogo de adivinhação de números
-3. Calcule a sequência de Fibonacci até o décimo termo
-4. Crie um verificador de palíndromos
-5. Implemente uma busca binária (desafio avançado)
-
-### Perguntas para Reflexão
-
-1. Por que automatizar tarefas repetitivas é importante na programação?
-2. Em que situações um loop infinito poderia ser útil (com `break` apropriado)?
-3. Como você decidiria entre usar `for` ou `while` em um projeto real?
-4. Que problemas do dia a dia poderiam ser resolvidos com loops?
-
-**Continue sua jornada de aprendizado e lembre-se: cada loop que você escreve está aprimorando suas habilidades de pensamento lógico e resolução de problemas!** 🚀
+*Continue sua jornada de aprendizado e lembre-se: cada loop que você escreve está aprimorando suas habilidades de pensamento lógico e resolução de problemas!* 🚀

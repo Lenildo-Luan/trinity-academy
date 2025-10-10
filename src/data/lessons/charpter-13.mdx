@@ -1,6 +1,4 @@
-# Objetos em JavaScript: Organizando Informações de Forma Inteligente
-
-## Introdução
+# Organizando Informações de Forma Inteligente
 
 Imagine que você precisa representar uma pessoa no seu programa. Você poderia usar variáveis separadas:
 
@@ -13,9 +11,7 @@ let ativaPessoa = true;
 
 Mas e se você precisar representar 100 pessoas? Ou 1000? Rapidamente, seu código se tornaria uma bagunça impossível de gerenciar. É aqui que os **objetos** entram em cena como verdadeiros organizadores de informações!
 
----
-
-## 📦 O Que São Objetos?
+## O Que São Objetos?
 
 **Objetos** são estruturas de dados que permitem agrupar múltiplos valores relacionados em uma única entidade. Pense neles como "caixas organizadas" onde cada compartimento tem um nome (chamamos de **propriedade** ou **chave**) e armazena um valor específico.
 
@@ -28,9 +24,7 @@ Enquanto os tipos primitivos (number, string, boolean) armazenam apenas um valor
 ✅ **Organizar código** de forma mais clara e intuitiva  
 ✅ **Facilitar manutenção** e expansão do programa  
 
----
-
-## 🔨 Criando Objetos
+## Criando Objetos
 
 ### Sintaxe Literal de Objeto (Mais Comum)
 
@@ -75,9 +69,7 @@ usuario.idade = 30;
 
 > **Dica:** Prefira sempre a sintaxe literal `{}` - é mais clara, concisa e amplamente utilizada.
 
----
-
-## 🔍 Acessando Propriedades
+## Acessando Propriedades
 
 Existem duas formas principais de acessar propriedades de um objeto:
 
@@ -138,9 +130,7 @@ console.log(pessoa[chave]);           // "Ana"
 | Não funciona com espaços | Permite propriedades computadas |
 | `objeto.propriedade` | `objeto["propriedade"]` |
 
----
-
-## ✏️ Modificando Objetos
+## Modificando Objetos
 
 ### Alterando Valores
 
@@ -201,9 +191,7 @@ console.log(usuario);
 // { nome: "Pedro", email: "pedro@email.com", ativo: true }
 ```
 
----
-
-## 🎯 Propriedades Computadas
+## Propriedades Computadas
 
 Você pode criar propriedades com nomes dinâmicos durante a criação do objeto:
 
@@ -243,9 +231,7 @@ console.log(produto);
 // }
 ```
 
----
-
-## 🔄 Percorrendo Objetos com for...in
+## Percorrendo Objetos com for...in
 
 Para acessar todas as propriedades de um objeto, use o loop `for...in`:
 
@@ -292,9 +278,7 @@ for (let produto in estoque) {
 // monitor: 8 unidades
 ```
 
----
-
-## 🏗️ Objetos Aninhados
+## Objetos Aninhados
 
 Objetos podem conter outros objetos como propriedades, criando estruturas mais complexas:
 
@@ -358,9 +342,7 @@ pessoa.contato.email = "ana.carolina@email.com";
 pessoa.endereco.complemento = "Apto 47";
 ```
 
----
-
-## 🆚 Objetos vs Arrays: Quando Usar Cada Um?
+## Objetos vs Arrays: Quando Usar Cada Um?
 
 ### Use **Arrays** quando:
 - Você tem uma **lista ordenada** de itens
@@ -389,9 +371,7 @@ let pessoa = {
 console.log(pessoa.nome); // "João"
 ```
 
----
-
-## 💡 Conceitos Fundamentais Sobre Objetos
+## Conceitos Fundamentais Sobre Objetos
 
 ### 1. Objetos São Passados por Referência
 
@@ -427,9 +407,7 @@ usuario.idade = 30;      // ✅ Funciona! (propriedade adicionada)
 
 O `const` protege a **variável**, não o **conteúdo** do objeto.
 
----
-
-## 🛠️ Métodos Úteis para Objetos
+## Métodos Úteis para Objetos
 
 ### Object.keys() - Lista as Chaves
 
@@ -463,81 +441,7 @@ console.log(entradas);
 // ]
 ```
 
----
-
-## 📝 Atividades Práticas
-
-### Atividade 1: Cadastro de Pessoa
-
-Crie um objeto representando uma pessoa com:
-- Nome completo
-- Idade
-- Profissão
-- Cidade onde mora
-- Se está empregada (boolean)
-
-Depois:
-1. Exiba todas as informações
-2. Mude a profissão
-3. Adicione uma propriedade "salario"
-4. Remova a propriedade idade
-
-### Atividade 2: Catálogo de Produtos
-
-Crie três objetos representando produtos de uma loja:
-- Cada produto deve ter: nome, preço, categoria, emEstoque
-- Exiba informações de cada produto
-- Calcule o preço total de todos os produtos
-
-### Atividade 3: Sistema de Pontuação
-
-Crie um objeto representando jogadores e suas pontuações:
-```javascript
-let placar = {
-    jogador1: 0,
-    jogador2: 0,
-    jogador3: 0
-};
-```
-
-- Adicione pontos aos jogadores
-- Use um loop for...in para exibir o placar
-- Encontre quem tem mais pontos
-
-### Atividade 4: Agenda de Contatos
-
-Crie um objeto onde cada propriedade é um contato com objeto aninhado contendo:
-- Nome
-- Telefone
-- Email
-
-```javascript
-let agenda = {
-    contato1: {
-        nome: "João",
-        telefone: "(11) 1234-5678",
-        email: "joao@email.com"
-    },
-    // adicione mais 2 contatos
-};
-```
-
----
-
-## 🎯 Resumo dos Conceitos-Chave
-
-✅ **Objetos agrupam dados relacionados** em uma estrutura organizada  
-✅ **Propriedades são pares chave-valor** que descrevem o objeto  
-✅ **Notação de ponto** é a forma mais comum de acessar propriedades  
-✅ **Notação de colchetes** permite nomes dinâmicos e com espaços  
-✅ **for...in** percorre todas as propriedades de um objeto  
-✅ **Objetos podem conter outros objetos** (aninhamento)  
-✅ **Objetos são passados por referência**, não por valor  
-✅ **const em objetos** protege a variável, não as propriedades  
-
----
-
-## 🚀 Próximos Passos
+## Próximos Passos
 
 Na próxima aula, você aprenderá sobre:
 - **Referências e Cópias** de objetos
@@ -545,13 +449,4 @@ Na próxima aula, você aprenderá sobre:
 - Diferenças entre clonagem superficial e profunda
 - JSON e serialização de dados
 
-Continue praticando e explorando objetos - eles são fundamentais para tudo que você fará em JavaScript!
-
----
-
-## 📚 Recursos Adicionais
-
-- Experimente criar objetos representando coisas do seu dia a dia
-- Tente criar estruturas mais complexas com objetos aninhados
-- Pratique percorrer objetos com for...in
-- Compare quando usar objetos vs arrays em diferentes situações
+*Continue praticando e explorando objetos - eles são fundamentais para tudo que você fará em JavaScript!*

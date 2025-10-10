@@ -1,18 +1,4 @@
-# Aula 7: Tomando Decisões - Estruturas Condicionais em JavaScript
-
-## 🎯 Objetivos da Aula
-
-Ao final desta aula, você será capaz de:
-
-- ✅ Implementar lógica de decisão em seus programas
-- ✅ Usar estruturas `if`, `else` e `else if` corretamente
-- ✅ Aplicar a estrutura `switch` para múltiplas opções
-- ✅ Compreender e utilizar o operador ternário
-- ✅ Aninhar condicionais para decisões complexas
-
----
-
-## 📚 Introdução: Por que Precisamos Tomar Decisões?
+# Tomando Decisões
 
 Imagine um jogo onde seu personagem sempre anda para frente, independentemente do que está acontecendo. Se há um muro na frente? Ele continua andando. Se acabaram as vidas? Ele continua jogando. Absurdo, não é?
 
@@ -25,9 +11,7 @@ Em programação, chamamos isso de **controle de fluxo de execução**. É a cap
 
 Por padrão, um programa JavaScript executa suas instruções **linha por linha, de cima para baixo**. Mas e se quisermos que certas partes do código só executem em situações específicas? É aí que entram as **estruturas condicionais**.
 
----
-
-## 🔑 Conceito Fundamental: O que são Estruturas Condicionais?
+## Conceito Fundamental: O que são Estruturas Condicionais?
 
 **Estruturas condicionais** são blocos de código que executam diferentes caminhos dependendo do resultado de um **teste lógico** (uma condição que pode ser verdadeira ou falsa).
 
@@ -58,9 +42,7 @@ if (corSemaforo === "verde") {
 }
 ```
 
----
-
-## 1️⃣ A Declaração if...else
+## A Declaração if...else
 
 A estrutura condicional mais fundamental em JavaScript (e em praticamente todas as linguagens) é o `if...else`. Ela representa a **tomada de decisão binária**: sim ou não, verdadeiro ou falso.
 
@@ -96,7 +78,7 @@ if (tarefaFeita === true) {
   console.log("Você recebeu R$5. Complete suas tarefas na próxima semana!");
 }
 
-console.log("Mesada recebida: R$" + mesada);
+console.log("Mesada recebida: R$", mesada);
 ```
 
 **O que está acontecendo aqui?**
@@ -117,7 +99,7 @@ if (temperaturaAlta > 30) {
   console.log("⚠️ ALERTA: Temperatura muito alta! Beba água!");
 }
 
-console.log("Temperatura atual: " + temperaturaAlta + "°C");
+console.log("Temperatura atual: ", temperaturaAlta, "°C");
 // Este console.log SEMPRE executa, independente da condição
 ```
 
@@ -184,9 +166,7 @@ if ([]) {
 }
 ```
 
----
-
-## 2️⃣ Múltiplas Condições: else if
+## Múltiplas Condições: else if
 
 E se tivermos **mais de duas** opções? É aí que entra o `else if`, permitindo testar **múltiplas condições em sequência**.
 
@@ -253,13 +233,11 @@ if (nota >= 90) {
   conceito = "F - Insuficiente. Estude mais!";
 }
 
-console.log("Sua nota: " + nota);
-console.log("Conceito: " + conceito);
+console.log("Sua nota: ", nota);
+console.log("Conceito: ", conceito);
 ```
 
----
-
-## 3️⃣ Declarações switch: Para Muitas Opções
+## Declarações switch: Para Muitas Opções
 
 Quando temos **muitas** condições baseadas no **mesmo valor**, usar vários `if...else if` pode ficar confuso. Para esses casos, temos a estrutura `switch`.
 
@@ -411,12 +389,10 @@ switch (prato) {
     preco = 0;
 }
 
-console.log("Total a pagar: R$" + preco);
+console.log("Total a pagar: R$ ", preco);
 ```
 
----
-
-## 4️⃣ Operador Ternário: Decisões Concisas
+## Operador Ternário: Decisões Concisas
 
 O **operador ternário** é uma forma compacta de escrever um `if...else` simples. É chamado "ternário" porque trabalha com **três** partes.
 
@@ -476,9 +452,9 @@ let valorCompra = 150;
 let temDesconto = valorCompra > 100;
 let valorFinal = temDesconto ? valorCompra * 0.9 : valorCompra;
 
-console.log("Valor original: R$" + valorCompra);
-console.log("Desconto aplicado: " + (temDesconto ? "Sim (10%)" : "Não"));
-console.log("Valor final: R$" + valorFinal);
+console.log("Valor original: R$ ", valorCompra);
+console.log("Desconto aplicado: ", (temDesconto ? "Sim (10%)" : "Não"));
+console.log("Valor final: R$ ", valorFinal);
 ```
 
 **Exemplo 3: Mensagem Personalizada**
@@ -505,9 +481,7 @@ console.log(categoria); // "Adulto"
 
 **Regra de Ouro:** Se precisa de mais de 2 níveis de aninhamento, use `if...else if` em vez do operador ternário!
 
----
-
-## 5️⃣ Aninhamento de Condicionais
+## Aninhamento de Condicionais
 
 **Aninhamento** significa colocar uma estrutura condicional **dentro de outra**. Isso nos permite criar **decisões hierárquicas e dependentes**.
 
@@ -602,9 +576,7 @@ if (condicao1) {
 
 **Dica:** Se você tem mais de 3 níveis de aninhamento, considere refatorar usando operadores lógicos (`&&`, `||`) ou reorganizar sua lógica.
 
----
-
-## 6️⃣ Boas Práticas com Condicionais
+## Boas Práticas com Condicionais
 
 ### ✅ 1. Sempre Use Chaves `{}`
 
@@ -722,107 +694,12 @@ if (valor === "5") { // true apenas para "5"
 }
 ```
 
----
+## Próximos passos
 
-## 🎯 Exercícios Práticos
+Na próxima aula iremos nos aprofundar nas Strings. Você aprenderá:
+- Sobre novas formas de trabalhar com strings
+- Como criar templates
+- A usar caracteres com propriedades especiais
+- Sobre as funcionalidades contidas no tipo String
 
-### Exercício 1: Classificador de Idade
-
-Crie um programa que classifica uma pessoa baseada em sua idade:
-- 0-12: Criança
-- 13-17: Adolescente
-- 18-59: Adulto
-- 60+: Idoso
-
-```javascript
-let idade = 25;
-// Seu código aqui
-```
-
-### Exercício 2: Calculadora de Desconto
-
-Crie uma calculadora que aplica desconto baseado no valor da compra:
-- Menos de R$100: sem desconto
-- R$100 a R$499: 10% de desconto
-- R$500 a R$999: 15% de desconto
-- R$1000 ou mais: 20% de desconto
-
-```javascript
-let valorCompra = 750;
-// Seu código aqui
-```
-
-### Exercício 3: Sistema de Login
-
-Crie um sistema que verifica:
-1. Se o usuário existe
-2. Se a senha está correta
-3. Se a conta está ativa
-
-```javascript
-let usuarioExiste = true;
-let senhaCorreta = true;
-let contaAtiva = false;
-// Seu código aqui
-```
-
-### Exercício 4: Menu Interativo
-
-Crie um menu de restaurante que:
-- Mostra o preço do prato escolhido
-- Adiciona taxa de serviço de 10% se o valor for acima de R$50
-- Informa se o prato está disponível
-
-```javascript
-let prato = "lasanha";
-// Seu código aqui
-// Considere: pizza (R$35), lasanha (R$42), sushi (R$65)
-```
-
----
-
-## 📝 Resumo da Aula
-
-Parabéns! Você aprendeu:
-
-✅ **if...else** - A base de todas as decisões em programação  
-✅ **else if** - Para testar múltiplas condições sequencialmente  
-✅ **switch** - Para comparar um valor contra várias opções  
-✅ **Operador ternário** - Para decisões simples e concisas  
-✅ **Aninhamento** - Para decisões hierárquicas e dependentes  
-✅ **Truthy e Falsy** - Como JavaScript converte valores para booleano  
-✅ **Boas práticas** - Como escrever código limpo e maintível  
-
-### 🔑 Conceitos-Chave para Lembrar
-
-1. **Estruturas condicionais permitem que programas tomem decisões**
-2. **if...else representa decisão binária fundamental**
-3. **JavaScript converte valores usando conceitos truthy/falsy**
-4. **else if avalia múltiplas condições quando apenas uma deve executar**
-5. **switch compara uma expressão contra múltiplos valores eficientemente**
-6. **break é crucial no switch para prevenir execução sequencial**
-7. **Operador ternário é ideal para atribuições condicionais simples**
-8. **Aninhamento representa decisões hierárquicas**
-9. **Cada comparação deve ser explícita com operadores lógicos**
-10. **Usar chaves sempre melhora legibilidade e previne erros**
-
----
-
-## 🚀 Próxima Aula
-
-Na **Aula 8**, você aprenderá sobre **Estruturas de Repetição** (loops):
-- Como automatizar tarefas repetitivas
-- Loop `for` tradicional
-- Loops `while` e `do...while`
-- Controle de fluxo com `break` e `continue`
-- Quando usar cada tipo de loop
-
-**Prepare-se para multiplicar o poder dos seus programas!** 💪
-
----
-
-## 💬 Reflexão Final
-
-> *"A programação não é sobre escrever código - é sobre resolver problemas. E problemas do mundo real sempre envolvem decisões. Dominar estruturas condicionais é dominar a arte de ensinar computadores a pensar."*
-
-Continue praticando! Quanto mais você usar essas estruturas, mais natural e intuitivo será o processo de transformar lógica em código.
+*A programação não é sobre escrever código - é sobre resolver problemas. E problemas do mundo real sempre envolvem decisões.*

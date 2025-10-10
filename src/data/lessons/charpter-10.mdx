@@ -1,15 +1,8 @@
-# Arrow Functions e Callbacks
-## Funções Avançadas em JavaScript
-
----
-
-## Introdução
+# Funções Avançadas em JavaScript
 
 Até agora, você aprendeu sobre funções tradicionais em JavaScript - como declará-las, passar parâmetros e retornar valores. Agora, vamos explorar formas mais modernas e flexíveis de trabalhar com funções: as **arrow functions** e o conceito de **callbacks**. Estes conceitos expandirão significativamente suas possibilidades como programador.
 
----
-
-## 1. Arrow Functions: Uma Sintaxe Mais Elegante
+## Arrow Functions: Uma Sintaxe Mais Elegante
 
 ### O Que São Arrow Functions?
 
@@ -110,9 +103,7 @@ console.log(calcularMedia(notas)); // 7.75
 - Você precisa de comportamentos especiais do `this` (conceito avançado)
 - A função precisa ter um nome claro para facilitar depuração
 
----
-
-## 2. Funções Como Valores: Cidadãos de Primeira Classe
+## Funções Como Valores: Cidadãos de Primeira Classe
 
 ### Conceito Fundamental
 
@@ -156,9 +147,7 @@ const calculadora = {
 console.log(calculadora.somar(5, 3)); // 8
 ```
 
----
-
-## 3. Callbacks: Funções Que Esperam Sua Vez
+## Callbacks: Funções Que Esperam Sua Vez
 
 ### O Que São Callbacks?
 
@@ -264,9 +253,7 @@ processarProdutos(produtos, (produto, indice) => {
 // 3. Teclado
 ```
 
----
-
-## 4. Higher-Order Functions: Funções que Trabalham com Funções
+## Higher-Order Functions: Funções que Trabalham com Funções
 
 ### O Que São?
 
@@ -357,7 +344,7 @@ console.log(validarTelefone("12-345"));        // false
 
 ---
 
-## 5. Closures: Memória das Funções
+## Closures: Memória das Funções
 
 ### O Que São Closures?
 
@@ -446,9 +433,7 @@ console.log(minhaCarteira.sacar(30));        // Saque de R$ 30. Saldo atual: R$ 
 console.log(minhaCarteira.sacar(200));       // Saldo insuficiente!
 ```
 
----
-
-## 6. Diferenças Entre Tipos de Função
+## Diferenças Entre Tipos de Função
 
 ### Comparação Rápida
 
@@ -486,9 +471,7 @@ const aplicarDesconto = (valor, desconto) => valor * (1 - desconto);
 // Sintaxe mais limpa e moderna
 ```
 
----
-
-## 7. Exemplos Práticos Integrados
+## Exemplos Práticos Integrados
 
 ### Sistema de Processamento de Pedidos
 
@@ -575,81 +558,12 @@ console.log(filtros.comDesconto());
 console.log(filtros.ordenar((a, b) => a.preco - b.preco));
 ```
 
----
+## Próximmos passos
 
-## 8. Exercícios Práticos
+Na próxima aula nos aprofundaremos no universo dos Arrays. Você aprenderá:
+- Como criar e usar arrays
+- Sobre métodos e propriedades importantes
+- Como percorrer por todos os dados de um array
+- A mutabilidade dos Arrays
 
-### Exercício 1: Conversor de Temperaturas
-
-Crie uma função que retorna conversores de temperatura:
-
-```javascript
-function criarConversor(de, para) {
-    // Implemente aqui
-    // Deve retornar uma função que converte temperatura
-}
-
-const celsiusParaFahrenheit = criarConversor("C", "F");
-const fahrenheitParaCelsius = criarConversor("F", "C");
-
-console.log(celsiusParaFahrenheit(0));   // 32
-console.log(celsiusParaFahrenheit(100)); // 212
-console.log(fahrenheitParaCelsius(32));  // 0
-```
-
-### Exercício 2: Sistema de Notas
-
-Crie um sistema que processa notas de alunos:
-
-```javascript
-const alunos = [
-    { nome: "Ana", nota: 8.5 },
-    { nome: "Bruno", nota: 6.0 },
-    { nome: "Carla", nota: 9.5 }
-];
-
-// Use arrow functions e callbacks para:
-// 1. Filtrar alunos aprovados (nota >= 7)
-// 2. Mapear para mostrar nome e situação
-// 3. Ordenar por nota decrescente
-```
-
-### Exercício 3: Processador de Texto
-
-```javascript
-function criarProcessadorTexto() {
-    return {
-        maiusculas: // função arrow aqui,
-        minusculas: // função arrow aqui,
-        capitalizar: // função arrow aqui,
-        aplicar: // função que recebe um callback
-    };
-}
-```
-
----
-
-## Conceitos-Chave para Memorizar
-
-1. **Arrow Functions** são uma sintaxe mais concisa para escrever funções
-2. **Funções são valores** em JavaScript (cidadãos de primeira classe)
-3. **Callbacks** são funções passadas como argumentos para serem executadas depois
-4. **Higher-order functions** trabalham com outras funções (recebem ou retornam)
-5. **Closures** permitem que funções "lembrem" de variáveis do seu escopo de criação
-6. **Escolha o tipo de função** baseado no contexto e na clareza do código
-
----
-
-## Resumo
-
-Nesta aula, você aprendeu sobre conceitos avançados de funções que tornam JavaScript uma linguagem extremamente flexível e poderosa:
-
-- **Arrow functions** oferecem sintaxe concisa e clara
-- **Callbacks** permitem passar comportamentos como dados
-- **Higher-order functions** criam abstrações poderosas
-- **Closures** preservam contexto e criam encapsulamento
-- **Diferentes tipos de função** servem diferentes propósitos
-
-Esses conceitos são fundamentais para programação moderna em JavaScript e abrem portas para padrões avançados de programação funcional que você usará em frameworks e bibliotecas populares.
-
-**Continue praticando!** A compreensão profunda desses conceitos virá com a aplicação prática em diferentes situações.
+*Continue praticando! A compreensão profunda desses conceitos virá com a aplicação prática em diferentes situações.*

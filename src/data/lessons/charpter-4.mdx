@@ -1,18 +1,16 @@
-# Dominando Operadores Aritméticos e de Atribuição em JavaScript
-
-## Introdução: A Matemática na Programação
+# A Matemática na Programação
 
 Imagine que você está organizando suas finanças pessoais. Você precisa somar suas receitas, subtrair as despesas, calcular percentuais de desconto em compras e determinar quantos meses levará para atingir uma meta de economia. Todas essas tarefas envolvem operações matemáticas que, na programação, são realizadas através dos operadores.
 
 Os operadores são os símbolos especiais que instruem o computador a realizar operações específicas sobre valores, funcionando como as ferramentas matemáticas que já conhecemos, mas adaptadas para o mundo digital. Dominar esses operadores é fundamental para qualquer programador, pois eles formam a base de praticamente todos os cálculos e manipulações de dados que realizamos em nossos programas.
 
-## 1. Fundamentos dos Operadores Aritméticos
+## Fundamentos dos Operadores Aritméticos
 
-### 1.1 O que são Operadores Aritméticos?
+### O que são Operadores Aritméticos?
 
 Operadores aritméticos são símbolos especiais que realizam cálculos matemáticos com números. Assim como você usa +, -, × e ÷ na matemática tradicional, JavaScript possui operadores equivalentes que permitem executar essas operações em seus programas.
 
-### 1.2 Os Seis Operadores Fundamentais
+### Os Seis Operadores Fundamentais
 
 JavaScript oferece seis operadores aritméticos essenciais:
 
@@ -23,7 +21,7 @@ O mais familiar de todos, usado para somar valores:
 let receita1 = 2500;
 let receita2 = 1800;
 let receitaTotal = receita1 + receita2;
-console.log("Receita total: R$ " + receitaTotal); // Receita total: R$ 4300
+console.log("Receita total: R$ ", receitaTotal); // Receita total: R$ 4300
 ```
 
 #### Subtração (`-`)
@@ -33,7 +31,7 @@ Usado para calcular diferenças:
 let saldoInicial = 5000;
 let gasto = 1200;
 let saldoFinal = saldoInicial - gasto;
-console.log("Saldo restante: R$ " + saldoFinal); // Saldo restante: R$ 3800
+console.log("Saldo restante: R$ ", saldoFinal); // Saldo restante: R$ 3800
 ```
 
 #### Multiplicação (`*`)
@@ -43,7 +41,7 @@ Fundamental para cálculos de quantidades:
 let precoUnitario = 45;
 let quantidade = 12;
 let precoTotal = precoUnitario * quantidade;
-console.log("Preço total: R$ " + precoTotal); // Preço total: R$ 540
+console.log("Preço total: R$ ", precoTotal); // Preço total: R$ 540
 ```
 
 #### Divisão (`/`)
@@ -53,7 +51,7 @@ Essencial para calcular médias e proporções:
 let pontuacaoTotal = 450;
 let numeroProvas = 5;
 let media = pontuacaoTotal / numeroProvas;
-console.log("Média: " + media); // Média: 90
+console.log("Média: ", media); // Média: 90
 ```
 
 #### Módulo/Resto (`%`)
@@ -62,12 +60,12 @@ Retorna o resto de uma divisão, útil para verificar divisibilidade:
 ```javascript
 let numero = 17;
 let resto = numero % 5;
-console.log("17 dividido por 5, resto: " + resto); // 17 dividido por 5, resto: 2
+console.log("17 dividido por 5, resto: ", resto); // 17 dividido por 5, resto: 2
 
 // Aplicação prática: verificar se um número é par
 let valor = 8;
 let ehPar = valor % 2 === 0;
-console.log("8 é par? " + ehPar); // 8 é par? true
+console.log("8 é par? ", ehPar); // 8 é par? true
 ```
 
 #### Exponenciação (`**`)
@@ -77,19 +75,19 @@ Calcula potências, introduzido recentemente no JavaScript:
 let base = 3;
 let expoente = 4;
 let resultado = base ** expoente;
-console.log("3 elevado a 4: " + resultado); // 3 elevado a 4: 81
+console.log("3 elevado a 4: ", resultado); // 3 elevado a 4: 81
 
 // Aplicação: calcular juros compostos
 let capital = 1000;
 let taxa = 1.05; // 5% de juros
 let tempo = 3;
 let montante = capital * (taxa ** tempo);
-console.log("Montante após 3 anos: R$ " + montante.toFixed(2)); // Montante após 3 anos: R$ 1157.63
+console.log("Montante após 3 anos: R$ ", montante.toFixed(2)); // Montante após 3 anos: R$ 1157.63
 ```
 
-## 2. A Importância da Precedência
+## A Importância da Precedência
 
-### 2.1 Como JavaScript Resolve Expressões Complexas
+### Como JavaScript Resolve Expressões Complexas
 
 Assim como na matemática tradicional, JavaScript segue regras específicas para determinar a ordem das operações. Esta ordem é chamada de **precedência de operadores**.
 
@@ -101,13 +99,13 @@ let resultado2 = (10 + 5) * 2;
 console.log(resultado2); // 30
 ```
 
-### 2.2 Ordem de Precedência (da maior para a menor)
+### Ordem de Precedência (da maior para a menor)
 
 1. **Exponenciação** (`**`)
 2. **Multiplicação** (`*`), **Divisão** (`/`), **Módulo** (`%`)
 3. **Adição** (`+`), **Subtração** (`-`)
 
-### 2.3 Exemplo Prático: Calculando o Preço Final com Desconto
+### Exemplo Prático: Calculando o Preço Final com Desconto
 
 ```javascript
 // Cenário: Produto de R$ 200, desconto de 15%, mais frete de R$ 25
@@ -117,55 +115,20 @@ let frete = 25;
 
 // Forma incorreta (sem parênteses)
 let precoErrado = precoOriginal - percentualDesconto / 100 * precoOriginal + frete;
-console.log("Preço calculado incorretamente: R$ " + precoErrado); // Resultado inesperado
+console.log("Preço calculado incorretamente: R$ ", precoErrado); // Resultado inesperado
 
 // Forma correta (com parênteses para controlar precedência)
 let desconto = (percentualDesconto / 100) * precoOriginal;
 let precoFinal = precoOriginal - desconto + frete;
-console.log("Preço final correto: R$ " + precoFinal); // Preço final correto: R$ 195
+console.log("Preço final correto: R$ ", precoFinal); // Preço final correto: R$ 195
 
 // Forma alternativa mais clara
 let precoComDesconto = precoOriginal * (1 - percentualDesconto / 100);
 let precoFinalAlternativo = precoComDesconto + frete;
-console.log("Preço final (método alternativo): R$ " + precoFinalAlternativo); // Preço final (método alternativo): R$ 195
+console.log("Preço final (método alternativo): R$ ", precoFinalAlternativo); // Preço final (método alternativo): R$ 195
 ```
 
-## 3. O Operador + e a Concatenação de Strings
-
-### 3.1 Comportamento Dual do Operador +
-
-O operador `+` em JavaScript tem uma característica especial: ele pode tanto somar números quanto concatenar (juntar) strings, dependendo dos tipos de dados envolvidos.
-
-```javascript
-// Soma numérica
-console.log(5 + 3); // 8
-
-// Concatenação de strings
-console.log("Olá" + " mundo"); // "Olá mundo"
-
-// Situação mista: string + número
-console.log("Idade: " + 25); // "Idade: 25"
-
-// Cuidado: comportamento pode ser inesperado
-console.log("10" + 5); // "105" (string!)
-console.log(10 + 5); // 15 (número!)
-```
-
-### 3.2 Exemplo Prático: Sistema de Pedidos
-
-```javascript
-let nomeProduto = "Notebook Dell";
-let quantidade = 2;
-let precoUnitario = 2500;
-let precoTotal = quantidade * precoUnitario;
-
-// Construindo mensagem informativa
-let mensagem = "Pedido: " + quantidade + " x " + nomeProduto + 
-               " = R$ " + precoTotal;
-console.log(mensagem); // Pedido: 2 x Notebook Dell = R$ 5000
-```
-
-### 3.3 Conversão Numérica com Operador + Unário
+### Conversão Numérica com Operador + Unário
 
 O operador `+` pode ser usado de forma unária (com apenas um operando) para converter strings em números:
 
@@ -177,8 +140,8 @@ let alturaTexto = "1.75";
 let idadeNumero = +idadeTexto;
 let alturaNumero = +alturaTexto;
 
-console.log("Idade em dobro: " + idadeNumero * 2); // Idade em dobro: 50
-console.log("Altura em cm: " + alturaNumero * 100); // Altura em cm: 175
+console.log("Idade em dobro: ", idadeNumero * 2); // Idade em dobro: 50
+console.log("Altura em cm: ", alturaNumero * 100); // Altura em cm: 175
 
 // Aplicação prática: somando valores de formulário
 let valor1 = "150"; // vindo de um input
@@ -186,13 +149,13 @@ let valor2 = "200"; // vindo de outro input
 let somaIncorreta = valor1 + valor2; // "150200" (concatenação!)
 let somaCorreta = +valor1 + +valor2; // 350 (soma matemática!)
 
-console.log("Soma incorreta: " + somaIncorreta); // Soma incorreta: 150200
-console.log("Soma correta: " + somaCorreta); // Soma correta: 350
+console.log("Soma incorreta: ", somaIncorreta); // Soma incorreta: 150200
+console.log("Soma correta: ", somaCorreta); // Soma correta: 350
 ```
 
-## 4. Operadores de Atribuição
+## Operadores de Atribuição
 
-### 4.1 Atribuição Simples (`=`)
+### Atribuição Simples (`=`)
 
 O operador mais básico e fundamental, usado para armazenar valores em variáveis:
 
@@ -202,7 +165,7 @@ let nome = "Maria Silva";
 let ativo = true;
 ```
 
-### 4.2 Operadores de Atribuição Composta
+### Operadores de Atribuição Composta
 
 Estes operadores combinam uma operação aritmética com atribuição, tornando o código mais conciso:
 
@@ -217,64 +180,64 @@ let vendasSemana = 0;
 vendasSemana += 850; // Segunda-feira
 vendasSemana += 920; // Terça-feira
 vendasSemana += 780; // Quarta-feira
-console.log("Vendas acumuladas: R$ " + vendasSemana); // Vendas acumuladas: R$ 2550
+console.log("Vendas acumuladas: R$ ", vendasSemana); // Vendas acumuladas: R$ 2550
 ```
 
 #### Subtração e Atribuição (`-=`)
 ```javascript
 let estoque = 100;
 estoque -= 15; // equivale a: estoque = estoque - 15
-console.log("Estoque restante: " + estoque); // Estoque restante: 85
+console.log("Estoque restante: ", estoque); // Estoque restante: 85
 
 // Aplicação prática: controle de inventário
 let produtosDisponiveis = 500;
 produtosDisponiveis -= 25; // Venda manhã
 produtosDisponiveis -= 18; // Venda tarde
-console.log("Produtos disponíveis: " + produtosDisponiveis); // Produtos disponíveis: 457
+console.log("Produtos disponíveis: ", produtosDisponiveis); // Produtos disponíveis: 457
 ```
 
 #### Multiplicação e Atribuição (`*=`)
 ```javascript
 let salario = 3000;
 salario *= 1.1; // aumento de 10%
-console.log("Novo salário: R$ " + salario); // Novo salário: R$ 3300
+console.log("Novo salário: R$ ", salario); // Novo salário: R$ 3300
 
 // Aplicação prática: juros compostos simples
 let investimento = 5000;
 investimento *= 1.08; // 8% ao ano
 investimento *= 1.08; // segundo ano
-console.log("Valor após 2 anos: R$ " + investimento.toFixed(2)); // Valor após 2 anos: R$ 5832.00
+console.log("Valor após 2 anos: R$ ", investimento.toFixed(2)); // Valor após 2 anos: R$ 5832.00
 ```
 
 #### Divisão e Atribuição (`/=`)
 ```javascript
 let total = 1200;
 total /= 4; // dividir por 4 pessoas
-console.log("Valor por pessoa: R$ " + total); // Valor por pessoa: R$ 300
+console.log("Valor por pessoa: R$ ", total); // Valor por pessoa: R$ 300
 
 // Aplicação prática: média móvel simples
 let somaNotas = 450;
 let numeroProvas = 5;
 somaNotas /= numeroProvas;
-console.log("Média geral: " + somaNotas); // Média geral: 90
+console.log("Média geral: ", somaNotas); // Média geral: 90
 ```
 
 #### Módulo e Atribuição (`%=`)
 ```javascript
 let numero = 17;
 numero %= 5; // resto da divisão por 5
-console.log("Resto: " + numero); // Resto: 2
+console.log("Resto: ", numero); // Resto: 2
 
 // Aplicação prática: sistema de turnos
 let funcionarioId = 1247;
 funcionarioId %= 3; // determinar turno (0, 1, ou 2)
 let turnos = ["Manhã", "Tarde", "Noite"];
-console.log("Turno: " + turnos[funcionarioId]); // Resultado baseado no resto
+console.log("Turno: ", turnos[funcionarioId]); // Resultado baseado no resto
 ```
 
-## 5. Incremento e Decremento
+## Incremento e Decremento
 
-### 5.1 Operadores de Incremento (`++`) e Decremento (`--`)
+### Operadores de Incremento (`++`) e Decremento (`--`)
 
 Estes operadores são extremamente úteis para aumentar ou diminuir valores em 1 unidade:
 
@@ -282,23 +245,23 @@ Estes operadores são extremamente úteis para aumentar ou diminuir valores em 1
 let contador = 5;
 
 // Pós-incremento: usa o valor atual, depois incrementa
-console.log("Valor atual: " + contador++); // Valor atual: 5
-console.log("Após incremento: " + contador); // Após incremento: 6
+console.log("Valor atual: ", contador++); // Valor atual: 5
+console.log("Após incremento: ", contador); // Após incremento: 6
 
 // Pré-incremento: incrementa primeiro, depois usa o valor
 contador = 5;
-console.log("Pré-incremento: " + ++contador); // Pré-incremento: 6
-console.log("Valor final: " + contador); // Valor final: 6
+console.log("Pré-incremento: ", ++contador); // Pré-incremento: 6
+console.log("Valor final: ", contador); // Valor final: 6
 ```
 
-### 5.2 Aplicações Práticas
+### Aplicações Práticas
 
 #### Sistema de Curtidas
 ```javascript
 let curtidas = 127;
-console.log("Curtidas antes: " + curtidas); // Curtidas antes: 127
+console.log("Curtidas antes: ", curtidas); // Curtidas antes: 127
 curtidas++;
-console.log("Curtidas após like: " + curtidas); // Curtidas após like: 128
+console.log("Curtidas após like: ", curtidas); // Curtidas após like: 128
 ```
 
 #### Controle de Estoque
@@ -312,13 +275,13 @@ produtosVendidos++; // segunda venda
 produtosVendidos += 5; // venda em lote
 produtosVendidos++; // mais uma venda
 
-console.log("Vendas do dia: " + produtosVendidos); // Vendas do dia: 8
-console.log("Restam " + (metaDiaria - produtosVendidos) + " para atingir a meta"); // Restam 42 para atingir a meta
+console.log("Vendas do dia: ", produtosVendidos); // Vendas do dia: 8
+console.log("Restam ", (metaDiaria - produtosVendidos), " para atingir a meta"); // Restam 42 para atingir a meta
 ```
 
-## 6. Valores Especiais em JavaScript
+## Valores Especiais em JavaScript
 
-### 6.1 Infinity e -Infinity
+### Infinity e -Infinity
 
 JavaScript possui valores especiais para representar infinito:
 
@@ -335,7 +298,7 @@ if (valor === Infinity) {
 }
 ```
 
-### 6.2 NaN (Not a Number)
+### NaN (Not a Number)
 
 Resultado de operações matemáticas inválidas:
 
@@ -356,13 +319,13 @@ let idadeNumerica = +idadeUsuario;
 if (isNaN(idadeNumerica)) {
     console.log("Por favor, digite apenas números para a idade");
 } else {
-    console.log("Idade válida: " + idadeNumerica);
+    console.log("Idade válida: ", idadeNumerica);
 }
 ```
 
-## 7. Exemplos Práticos Integrados
+## Exemplos Práticos
 
-### 7.1 Calculadora de Orçamento Familiar
+### Calculadora de Orçamento Familiar
 
 ```javascript
 // Dados do orçamento
@@ -372,7 +335,7 @@ let rendaExtra = 800;
 
 // Receitas
 let receitaTotal = salario + salarioConjuge + rendaExtra;
-console.log("Receita total: R$ " + receitaTotal);
+console.log("Receita total: R$ ", receitaTotal);
 
 // Despesas fixas
 let aluguel = 1200;
@@ -381,23 +344,23 @@ let transporte = 400;
 let lazer = 300;
 
 let despesasFixas = aluguel + alimentacao + transporte + lazer;
-console.log("Despesas fixas: R$ " + despesasFixas);
+console.log("Despesas fixas: R$ ", despesasFixas);
 
 // Cálculo da sobra
 let sobra = receitaTotal - despesasFixas;
-console.log("Sobra mensal: R$ " + sobra);
+console.log("Sobra mensal: R$ ", sobra);
 
 // Meta de economia (30% da sobra)
 let percentualEconomia = 30;
 let metaEconomia = sobra * (percentualEconomia / 100);
-console.log("Meta de economia (30%): R$ " + metaEconomia.toFixed(2));
+console.log("Meta de economia (30%): R$ ", metaEconomia.toFixed(2));
 
 // Valor disponível para gastos extras
 let gastosExtras = sobra - metaEconomia;
-console.log("Disponível para gastos extras: R$ " + gastosExtras.toFixed(2));
+console.log("Disponível para gastos extras: R$ ", gastosExtras.toFixed(2));
 ```
 
-### 7.2 Sistema de Pontuação de Jogo
+### Sistema de Pontuação de Jogo
 
 ```javascript
 // Sistema de pontuação
@@ -408,20 +371,20 @@ let bonus = 0;
 // Primeira fase
 pontuacaoBase += 150; // coletou 3 itens (50 cada)
 multiplicador *= 2; // power-up de multiplicador
-console.log("Pontos após fase 1: " + pontuacaoBase * multiplicador);
+console.log("Pontos após fase 1: ", pontuacaoBase * multiplicador);
 
 // Segunda fase
 pontuacaoBase += 200; // derrotou chefe (200 pontos)
 bonus = pontuacaoBase * 0.1; // bônus de 10%
 pontuacaoBase += bonus;
-console.log("Pontos com bônus: " + pontuacaoBase.toFixed(0));
+console.log("Pontos com bônus: ", pontuacaoBase.toFixed(0));
 
 // Aplicando multiplicador final
 let pontuacaoFinal = pontuacaoBase * multiplicador;
-console.log("Pontuação final: " + pontuacaoFinal.toFixed(0));
+console.log("Pontuação final: ", pontuacaoFinal.toFixed(0));
 ```
 
-### 7.3 Calculadora de Conversão de Temperatura
+### Calculadora de Conversão de Temperatura
 
 ```javascript
 // Convertendo temperaturas
@@ -432,21 +395,15 @@ let fahrenheit = celsius * 9 / 5 + 32;
 let kelvin = celsius + 273.15;
 let rankine = fahrenheit + 459.67;
 
-console.log("Temperatura em Celsius: " + celsius + "°C");
-console.log("Temperatura em Fahrenheit: " + fahrenheit + "°F");
-console.log("Temperatura em Kelvin: " + kelvin.toFixed(2) + "K");
-console.log("Temperatura em Rankine: " + rankine.toFixed(2) + "°R");
-
-// Verificação de conforto térmico
-let confortoMin = 20;
-let confortoMax = 26;
-let dentroConforto = celsius >= confortoMin && celsius <= confortoMax;
-console.log("Está na zona de conforto? " + (dentroConforto ? "Sim" : "Não"));
+console.log("Temperatura em Celsius: ", celsius, "°C");
+console.log("Temperatura em Fahrenheit: ", fahrenheit, "°F");
+console.log("Temperatura em Kelvin: ", kelvin.toFixed(2), "K");
+console.log("Temperatura em Rankine: ", rankine.toFixed(2), "°R");
 ```
 
-## 8. Boas Práticas e Dicas Importantes
+## Boas Práticas e Dicas Importantes
 
-### 8.1 Clareza e Legibilidade
+### Clareza e Legibilidade
 
 **Sempre prefira clareza à concisão:**
 ```javascript
@@ -460,7 +417,7 @@ let anos = 3;
 let montanteFinal = precoInicial * (1 + taxaJuros/100) ** anos;
 ```
 
-### 8.2 Uso de Parênteses
+### Uso de Parênteses
 
 **Use parênteses para deixar suas intenções claras:**
 ```javascript
@@ -471,9 +428,9 @@ let resultado = a + b * c - d / e;
 let resultado = a + (b * c) - (d / e);
 ```
 
-### 8.3 Validação de Entrada
+    ### 8.3 Validação de Entrada
 
-### 8.4 Precisão com Números Decimais
+### Precisão com Números Decimais
 
 **Cuidado com a precisão de números decimais:**
 ```javascript
@@ -490,27 +447,11 @@ let resultado3 = (0.1 + 0.2).toFixed(2);
 console.log(resultado3); // "0.30"
 ```
 
-## Conclusão
+## Próximos passos
+Na próxima aula, conheceremos novos operadores que possibilitarão realizar tomadas de decisões no código. Você aprenderá:
 
-Os operadores aritméticos e de atribuição são as ferramentas fundamentais que permitem realizar cálculos e manipular dados numéricos em JavaScript. Eles são a ponte entre a matemática que conhecemos e a lógica computacional que precisamos dominar.
+- Como realizar comparações entre dois valores
+- Como criar expreções lógicas que resultam em verdadeiro e falso
+- Como usar essas duas ferramentas para tomar decisões
 
-Dominar estes operadores significa ser capaz de:
-
-- **Realizar cálculos precisos** em aplicações financeiras, científicas e comerciais
-- **Manipular dados** de forma eficiente e clara
-- **Controlar o fluxo de dados** através de atribuições estratégicas
-- **Construir expressões complexas** mantendo a legibilidade do código
-
-Lembre-se sempre de que a programação não é apenas sobre fazer o código funcionar, mas também sobre fazer com que ele seja **compreensível**, **maintível** e **confiável**. Os operadores são suas ferramentas básicas – use-as com sabedoria e precisão.
-
-À medida que você pratica e aplica estes conceitos, você descobrirá que eles se tornam uma segunda natureza, permitindo que você se concentre em resolver problemas cada vez mais interessantes e complexos. A matemática, que talvez parecesse distante da programação, revela-se como uma aliada poderosa na construção de soluções digitais elegantes e eficazes.
-
-## Exercícios Propostos para Prática
-
-1. **Calculadora de IMC**: Crie um programa que calcula o Índice de Massa Corporal
-2. **Sistema de Cashback**: Calcule o valor de volta baseado em diferentes percentuais
-3. **Conversor de Moedas**: Implemente conversões básicas entre moedas
-4. **Calculadora de Juros**: Compare juros simples e compostos
-5. **Sistema de Notas**: Calcule médias ponderadas e situação do aluno
-
-Cada um destes exercícios permitirá que você pratique os conceitos aprendidos em contextos realistas e úteis.
+*A matemática, que talvez parecesse distante da programação, revela-se como uma aliada poderosa na construção de soluções digitais elegantes e eficazes.*

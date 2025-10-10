@@ -1,6 +1,4 @@
-# Funções em JavaScript: Organizando seu Código
-
-## Introdução
+# Organizando seu Código
 
 Você já se perguntou como programadores profissionais conseguem criar aplicações com milhares de linhas de código sem que tudo vire uma bagunça? A resposta está em um dos conceitos mais fundamentais da programação: **funções**. 
 
@@ -8,9 +6,7 @@ Imagine que você está construindo uma casa. Você não mistura todos os materi
 
 Nesta aula, você vai descobrir como as funções transformam código confuso em algo organizado, reutilizável e fácil de entender.
 
----
-
-## 🎯 Por Que Funções São Importantes?
+## Por Que Funções São Importantes?
 
 ### Funções: Os Blocos de Construção da Programação
 
@@ -52,9 +48,7 @@ console.log("Área do retângulo 3:", calcularAreaRetangulo(8, 12));
 
 Qual versão é mais clara? Qual seria mais fácil se você precisasse calcular 100 áreas? A resposta é óbvia!
 
----
-
-## 📦 O Que São Funções?
+## O Que São Funções?
 
 ### Funções Como Valores Especiais
 
@@ -75,11 +69,7 @@ Uma função é um bloco de código projetado para executar uma tarefa específi
 - Pode devolver um resultado (retorno)
 - Pode ser chamada/executada quantas vezes for necessário
 
----
-
-## 🔧 Como Criar Funções
-
-### 1. Declaração de Função (Function Declaration)
+## Como Criar Funções
 
 Esta é a forma mais tradicional e comum de criar funções:
 
@@ -113,83 +103,7 @@ function cumprimentar(pessoa) {
 
 Isso acontece porque durante a fase de compilação do JavaScript, todas as declarações de função são processadas primeiro, ficando disponíveis em todo o escopo.
 
-### 2. Expressão de Função (Function Expression)
-
-Aqui, a função é criada e atribuída a uma variável:
-
-```javascript
-let despedida = function(nome) {
-    console.log("Até logo, " + nome + "!");
-};
-
-despedida("Carlos"); // Até logo, Carlos!
-```
-
-**Diferença importante:** Expressões de função NÃO têm hoisting. Você não pode usá-las antes de serem definidas:
-
-```javascript
-// Isso causará erro!
-// processar([1, 2, 3]); // ❌ Erro!
-
-let processar = function(items) {
-    for (let i = 0; i < items.length; i++) {
-        console.log("Item " + i + ": " + items[i]);
-    }
-};
-
-// Agora funciona
-processar([1, 2, 3]); // ✅ Correto
-```
-
-Por quê? Porque expressões de função são criadas apenas quando a execução do código alcança aquele ponto, seguindo o fluxo normal.
-
-### 3. Arrow Functions (Funções Seta)
-
-Uma forma mais concisa e moderna de escrever funções, introduzida no ES6:
-
-```javascript
-// Sintaxe tradicional
-let multiplicar = function(a, b) {
-    return a * b;
-};
-
-// Arrow function - mais concisa!
-let multiplicarArrow = (a, b) => a * b;
-
-console.log(multiplicarArrow(5, 3)); // 15
-```
-
-**Características das Arrow Functions:**
-
-1. **Para funções simples** (uma linha):
-```javascript
-let dobro = (x) => x * 2;
-let quadrado = (x) => x * x;
-```
-
-2. **Para funções mais complexas** (múltiplas linhas):
-```javascript
-let processar = (arr) => {
-    let resultado = [];
-    
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i] > 0) {
-            resultado.push(arr[i] * 2);
-        }
-    }
-    
-    return resultado;
-};
-
-let numeros = [-1, 2, -3, 4, 5];
-console.log(processar(numeros)); // [4, 8, 10]
-```
-
-**Princípio de Design:** Arrow functions foram criadas para fornecer uma sintaxe mais concisa para expressar funções simples, não para substituir todas as outras formas de função.
-
----
-
-## 📥 Parâmetros e Argumentos
+## Parâmetros e Argumentos
 
 ### Qual é a Diferença?
 
@@ -238,9 +152,7 @@ console.log(criarIntervalo(0, 20, 5));  // [0, 5, 10, 15, 20]
 
 **Por que isso é útil?** Porque permite que a função funcione de forma sensata mesmo quando alguns valores não são fornecidos, tornando-a mais flexível.
 
----
-
-## 🔙 Retornando Valores
+## Retornando Valores
 
 ### O Que é Return?
 
@@ -282,9 +194,7 @@ let resultado = exibirMensagem("Olá!");
 console.log(resultado); // undefined
 ```
 
----
-
-## 🎯 Escopo de Variáveis
+## Escopo de Variáveis
 
 ### O Que é Escopo?
 
@@ -323,9 +233,7 @@ function exemplo() {
 }
 ```
 
----
-
-## 💡 Boas Práticas com Funções
+## Boas Práticas com Funções
 
 ### 1. Nomenclatura Descritiva
 
@@ -412,9 +320,7 @@ meuContador = incrementarPuro(meuContador);
 
 **Por que isso importa?** Funções puras são mais previsíveis, mais fáceis de testar e menos propensas a bugs.
 
----
-
-## 🎓 Exemplos Práticos
+## Exemplos Práticos
 
 ### Exemplo 1: Validador de CPF Simples
 
@@ -548,104 +454,11 @@ console.log("Maior:", analise.maior);   // 9.5
 console.log("Menor:", analise.menor);   // 6.0
 ```
 
----
-
-## 🚀 Exercícios Propostos
-
-### Exercício 1: Conversor de Temperatura
-Crie funções para converter entre Celsius e Fahrenheit:
-
-```javascript
-function celsiusParaFahrenheit(celsius) {
-    // Sua implementação aqui
-}
-
-function fahrenheitParaCelsius(fahrenheit) {
-    // Sua implementação aqui
-}
-
-// Teste
-console.log(celsiusParaFahrenheit(0));   // Deve retornar 32
-console.log(celsiusParaFahrenheit(100)); // Deve retornar 212
-console.log(fahrenheitParaCelsius(32));  // Deve retornar 0
-```
-
-### Exercício 2: Verificador de Palíndromo
-Crie uma função que verifica se uma palavra é um palíndromo:
-
-```javascript
-function ehPalindromo(palavra) {
-    // Sua implementação aqui
-}
-
-// Teste
-console.log(ehPalindromo("arara"));  // true
-console.log(ehPalindromo("ovo"));    // true
-console.log(ehPalindromo("casa"));   // false
-```
-
-### Exercício 3: Calculadora de IMC
-Crie uma função que calcula o IMC e retorna a classificação:
-
-```javascript
-function calcularIMC(peso, altura) {
-    // Sua implementação aqui
-    // IMC = peso / (altura * altura)
-    // Retorne um objeto com imc e classificacao
-}
-
-// Teste
-console.log(calcularIMC(70, 1.75));
-// Deve retornar: { imc: 22.86, classificacao: "Peso normal" }
-```
-
-### Exercício 4: Contador de Vogais
-Crie uma função que conta quantas vogais existem em uma string:
-
-```javascript
-function contarVogais(texto) {
-    // Sua implementação aqui
-}
-
-// Teste
-console.log(contarVogais("JavaScript")); // 3
-console.log(contarVogais("Programação")); // 5
-```
-
----
-
-## 📚 Resumo dos Conceitos
-
-### O Que Aprendemos:
-
-1. **Funções são blocos de construção fundamentais** que permitem reutilização, organização e isolamento de código
-
-2. **Três formas de criar funções**:
-   - Declaração de função (com hoisting)
-   - Expressão de função (sem hoisting)
-   - Arrow function (sintaxe concisa)
-
-3. **Parâmetros vs Argumentos**:
-   - Parâmetros: variáveis na definição
-   - Argumentos: valores na chamada
-
-4. **Return**: Permite que funções devolvam valores
-
-5. **Escopo**: Determina onde variáveis podem ser acessadas
-
-6. **Boas práticas**:
-   - Nomes descritivos
-   - Uma responsabilidade por função
-   - Evitar muitos parâmetros
-   - Preferir funções puras
-
 ### Por Que Isso É Importante?
 
 Funções transformam programação de uma tarefa confusa em algo organizado e gerenciável. Elas são a base para criar código profissional, limpo e manutenível. Dominar funções é o primeiro passo para se tornar um programador de verdade!
 
----
-
-## 🎯 Próximos Passos
+## Próximos Passos
 
 Na próxima aula, vamos explorar:
 - **Arrow Functions** em mais detalhes
@@ -653,12 +466,4 @@ Na próxima aula, vamos explorar:
 - **Closures**: o poder de preservar escopos
 - Aplicações avançadas de funções
 
-Continue praticando! A melhor forma de dominar funções é escrevendo seu próprio código. Tente criar suas próprias funções para resolver problemas do dia a dia.
-
----
-
-## 💭 Reflexão Final
-
 > "Funções são como ferramentas em uma caixa. Quanto mais ferramentas você tiver e melhor souber usá-las, mais complexos serão os projetos que você poderá construir."
-
-Agora você tem as ferramentas. É hora de construir!

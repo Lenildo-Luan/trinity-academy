@@ -1,17 +1,10 @@
-# Métodos Avançados de Arrays em JavaScript
-## Dominando a Busca, Filtragem e Transformação de Dados
-
----
-
-## Introdução
+# Dominando a Busca, Filtragem e Transformação de Dados
 
 Você já aprendeu a criar arrays e manipulá-los com métodos básicos como `push`, `pop`, `shift` e `unshift`. Agora é hora de dar o próximo passo! Nesta aula, você descobrirá métodos poderosos que transformarão a maneira como você trabalha com listas de dados.
 
 Imagine ter uma lista com centenas de produtos e precisar encontrar apenas aqueles que custam menos de R$ 100. Ou transformar uma lista de nomes para que todos fiquem em letras maiúsculas. Os métodos que aprenderemos hoje tornam essas tarefas simples e elegantes!
 
----
-
-## 1. Buscando Elementos: includes(), indexOf() e find()
+## Buscando Elementos: includes(), indexOf() e find()
 
 ### 1.1 O Método includes()
 
@@ -112,9 +105,7 @@ console.log(adulto.nome); // "Ana"
 
 **Quando usar:** Quando você precisa buscar baseado em uma condição mais complexa que simples igualdade.
 
----
-
-## 2. Filtrando Dados: O Método filter()
+## Filtrando Dados: O Método filter()
 
 ### 2.1 Conceito Fundamental
 
@@ -188,9 +179,7 @@ console.log(idades);          // [15, 22, 18, 30, 12, 25] - não mudou
 console.log(maioresDeIdade);  // [22, 18, 30, 25] - novo array
 ```
 
----
-
-## 3. Transformando Dados: O Método map()
+## Transformando Dados: O Método map()
 
 ### 3.1 Conceito de Transformação
 
@@ -274,9 +263,7 @@ console.log(precos);            // [10, 20, 30]
 console.log(precosComDesconto); // [9, 18, 27]
 ```
 
----
-
-## 4. Verificação: some() e every()
+## Verificação: some() e every()
 
 ### 4.1 O Método some()
 
@@ -347,9 +334,7 @@ console.log(numeros.some(n => n % 2 === 0));  // true
 console.log(numeros.every(n => n % 2 === 0)); // true (todos são pares)
 ```
 
----
-
-## 5. Ordenação: O Método sort()
+## Ordenação: O Método sort()
 
 ### 5.1 Ordenação Básica
 
@@ -428,9 +413,7 @@ produtos.sort((a, b) => a.nome.localeCompare(b.nome));
 console.log(produtos);
 ```
 
----
-
-## 6. Combinando Métodos (Encadeamento)
+## Combinando Métodos (Encadeamento)
 
 Uma das características mais poderosas é a possibilidade de **encadear** métodos, aplicando múltiplas operações em sequência!
 
@@ -466,9 +449,7 @@ console.log(produtosFormatados);
 // ["Mouse: R$ 50", "Teclado: R$ 150", "Monitor: R$ 800", "Notebook: R$ 3000"]
 ```
 
----
-
-## 7. Casos de Uso Práticos
+## Casos de Uso Práticos
 
 ### 7.1 Sistema de Busca de Produtos
 
@@ -544,9 +525,7 @@ let vendasGrandes = vendasComTotal.filter(v => v.total > 400);
 console.log(vendasGrandes);
 ```
 
----
-
-## 8. Comparação entre Métodos
+## Comparação entre Métodos
 
 | Método | Retorna | Modifica Original? | Quando Usar |
 |--------|---------|-------------------|-------------|
@@ -559,9 +538,7 @@ console.log(vendasGrandes);
 | `every()` | Boolean | Não | Verificar se TODOS os elementos atendem condição |
 | `sort()` | Array | **SIM** | Ordenar elementos |
 
----
-
-## 9. Conceitos Importantes para Fixar
+## Conceitos Importantes para Fixar
 
 ### 9.1 Imutabilidade
 
@@ -598,74 +575,12 @@ Esses métodos representam um paradigma de programação chamado **programação
 - Evitamos modificar dados existentes
 - Componemos operações simples para criar soluções complexas
 
----
+## Próximos Passos
 
-## 10. Exercícios Práticos
+Na próxima aula nos aprofundaremos nos objetos. Você vai aprender:
+- Novas formas de criar e acessar propriedades de objetos
+- Como alterar, adicionar e deletar propriedades
+- Percorrer todas as propriedades dde um objeto
+- Criar objetos dentro de objetos
 
-### Exercício 1: Sistema de Biblioteca
-
-```javascript
-let livros = [
-    {titulo: "1984", autor: "George Orwell", ano: 1949, disponivel: true},
-    {titulo: "O Hobbit", autor: "J.R.R. Tolkien", ano: 1937, disponivel: false},
-    {titulo: "Harry Potter", autor: "J.K. Rowling", ano: 1997, disponivel: true},
-    {titulo: "Dom Casmurro", autor: "Machado de Assis", ano: 1899, disponivel: true}
-];
-
-// Desafios:
-// 1. Liste apenas livros disponíveis
-// 2. Encontre um livro específico pelo título
-// 3. Crie lista com apenas os títulos
-// 4. Ordene por ano de publicação
-// 5. Verifique se todos os livros foram publicados depois de 1800
-```
-
-### Exercício 2: Análise de E-commerce
-
-```javascript
-let carrinho = [
-    {produto: "Notebook", preco: 3000, quantidade: 1},
-    {produto: "Mouse", preco: 50, quantidade: 2},
-    {produto: "Teclado", preco: 150, quantidade: 1}
-];
-
-// Desafios:
-// 1. Calcule o subtotal de cada item (preco * quantidade)
-// 2. Encontre o item mais caro
-// 3. Verifique se algum item custa mais de R$ 1000
-// 4. Liste os nomes dos produtos em ordem alfabética
-```
-
----
-
-## Conclusão
-
-Os métodos avançados de arrays são ferramentas poderosas que tornam seu código:
-- **Mais legível**: Expressam intenções claramente
-- **Mais conciso**: Menos linhas de código
-- **Mais seguro**: Não modificam dados originais (exceto sort)
-- **Mais profissional**: Seguem padrões modernos de JavaScript
-
-**Próximos Passos:**
-1. Pratique cada método individualmente
-2. Experimente combinar métodos (encadeamento)
-3. Resolva os exercícios propostos
-4. Aplique em projetos reais
-
-**Lembre-se:** A prática leva à perfeição. Quanto mais você usar esses métodos, mais natural se tornará identificar qual usar em cada situação!
-
----
-
-## Resumo dos Conceitos-Chave
-
-✅ **includes()**: Verifica existência (retorna boolean)  
-✅ **indexOf()**: Encontra posição (retorna índice ou -1)  
-✅ **find()**: Busca por condição (retorna elemento ou undefined)  
-✅ **filter()**: Separa elementos por condição (retorna novo array)  
-✅ **map()**: Transforma todos os elementos (retorna novo array)  
-✅ **some()**: Verifica se ALGUM atende (retorna boolean)  
-✅ **every()**: Verifica se TODOS atendem (retorna boolean)  
-✅ **sort()**: Ordena elementos (modifica original!)  
-✅ **Encadeamento**: Combine métodos para operações complexas
-
-Agora você está pronto para manipular arrays como um profissional! 🚀
+*Lembre-se: A prática leva à perfeição. Quanto mais você usar esses métodos, mais natural se tornará identificar qual usar em cada situação!*

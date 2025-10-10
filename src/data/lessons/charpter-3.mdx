@@ -1,20 +1,4 @@
 # Tipos de Dados em JavaScript
-## Material Didático - Aula 3
-
----
-
-## 📚 Objetivos da Aula
-
-Ao final desta aula, você será capaz de:
-- ✅ Identificar os 8 tipos de dados fundamentais do JavaScript
-- ✅ Compreender o conceito de tipagem dinâmica
-- ✅ Usar o operador `typeof` para verificar tipos
-- ✅ Reconhecer conversões automáticas entre tipos
-- ✅ Aplicar os conhecimentos em situações práticas
-
----
-
-## 🌟 Introdução: Por que Tipos de Dados Importam?
 
 Imagine que você está organizando uma caixa de ferramentas. Você não colocaria parafusos junto com líquidos, nem misturaria ferramentas elétricas com materiais frágeis. Cada item tem suas características e precisa ser tratado adequadamente.
 
@@ -27,9 +11,7 @@ let nome = "Maria";      // Texto - posso juntar com outras palavras
 let aprovado = true;     // Verdadeiro/Falso - posso usar em decisões
 ```
 
----
-
-## 🔍 O Conceito Fundamental: Tipagem Dinâmica
+## O Conceito Fundamental: Tipagem Dinâmica
 
 ### O que é Tipagem Dinâmica?
 
@@ -62,7 +44,7 @@ dadoUsuario = "Vinte e cinco"; // Texto - sem problema!
 
 ---
 
-## 🎯 Os 8 Tipos Fundamentais do JavaScript
+## Os 8 Tipos Fundamentais do JavaScript
 
 JavaScript possui **8 tipos de dados** fundamentais, divididos em duas categorias:
 
@@ -78,9 +60,7 @@ JavaScript possui **8 tipos de dados** fundamentais, divididos em duas categoria
 ### 🏗️ Tipo Não-Primitivo (1 tipo)
 8. **Object** - Objetos (coleções de dados)
 
----
-
-## 🔢 Tipo 1: Number (Números)
+## Tipo 1: Number (Números)
 
 O tipo `number` representa tanto números inteiros quanto decimais.
 
@@ -115,13 +95,9 @@ console.log(0 / 0);        // NaN
 console.log(typeof NaN);   // "number" (curiosamente!)
 ```
 
----
-
-## 📝 Tipo 2: String (Texto)
+## 📝Tipo 2: String (Texto)
 
 Strings representam texto e devem estar envolvidas por aspas.
-
-### Três Formas de Criar Strings
 
 ```javascript
 // 1. Aspas duplas
@@ -130,47 +106,9 @@ let nome = "Maria Silva";
 // 2. Aspas simples  
 let cidade = 'São Paulo';
 
-// 3. Crases (template literals) - mais poderosas
-let frase = `Olá, meu nome é ${nome} e moro em ${cidade}`;
-
 console.log(typeof nome);   // "string"
 console.log(typeof cidade); // "string"
-console.log(typeof frase);  // "string"
 ```
-
-### Interpolação com Template Literals
-
-```javascript
-let produto = "Notebook";
-let preco = 2500;
-let parcelas = 12;
-
-// Forma antiga (concatenação)
-let mensagem1 = "O " + produto + " custa R$ " + preco + " em " + parcelas + "x";
-
-// Forma moderna (interpolação)
-let mensagem2 = `O ${produto} custa R$ ${preco} em ${parcelas}x`;
-
-console.log(mensagem1); // "O Notebook custa R$ 2500 em 12x"
-console.log(mensagem2); // "O Notebook custa R$ 2500 em 12x"
-```
-
-### Strings Multilinhas
-
-```javascript
-let endereco = `Rua das Flores, 123
-Bairro Jardim
-São Paulo - SP
-CEP: 01234-567`;
-
-console.log(endereco);
-// Rua das Flores, 123
-// Bairro Jardim  
-// São Paulo - SP
-// CEP: 01234-567
-```
-
----
 
 ## ✅ Tipo 3: Boolean (Verdadeiro/Falso)
 
@@ -187,8 +125,6 @@ console.log(typeof aprovado);   // "boolean"
 console.log(typeof reprovado);  // "boolean"
 console.log(typeof maiorIdade); // "boolean"
 ```
-
----
 
 ## ❌ Tipo 4: Null (Nulo)
 
@@ -215,8 +151,6 @@ let carrinhoCompras = "itens";
 carrinhoCompras = null; // Limpa o carrinho intencionalmente
 ```
 
----
-
 ## ❓ Tipo 5: Undefined (Indefinido)
 
 O valor `undefined` significa "valor não foi atribuído" - acontece automaticamente.
@@ -236,8 +170,6 @@ let esqueci;                      // "Eu esqueci de colocar um valor"
 console.log(intencionalmente);    // null
 console.log(esqueci);             // undefined
 ```
-
----
 
 ## 🔢 Tipo 6: BigInt (Números Muito Grandes)
 
@@ -264,13 +196,9 @@ let idUsuario = 98765432109876543210n;
 let distanciaEstrelas = 946073047258080000n; // metros até Alpha Centauri
 ```
 
----
-
 ## 🔐 Tipo 7: Symbol (Símbolos)
 
-Symbols são identificadores únicos, principalmente usados em programação avançada e veremos em cursos posterriores.
-
----
+Symbols são identificadores únicos, principalmente usados em programação avançada e veremos em cursos posteriores.
 
 ## 📦 Tipo 8: Object (Objetos)
 
@@ -291,7 +219,6 @@ let cores = ["azul", "verde", "vermelho"];
 
 console.log(typeof pessoa);    // "object"
 console.log(typeof cores);     // "object"
-console.log(typeof saudacao);  // "function" (caso especial)
 ```
 
 ### Verificando se é Array
@@ -302,8 +229,6 @@ let numeros = [1, 2, 3, 4, 5];
 console.log(typeof numeros);           // "object"
 console.log(Array.isArray(numeros));  // true (forma correta de verificar)
 ```
-
----
 
 ## 🔍 Verificando Tipos: O Operador typeof
 
@@ -323,57 +248,16 @@ console.log(typeof true);          // "boolean"
 console.log(typeof undefined);     // "undefined"
 console.log(typeof null);          // "object" (erro histórico!)
 console.log(typeof 123n);          // "bigint"
-console.log(typeof Symbol());      // "symbol"
 console.log(typeof {});            // "object"
 console.log(typeof []);            // "object"
-console.log(typeof function(){}); // "function"
 ```
 
----
-
----
-
-## 🧪 Atividades Práticas
-
----
-
-## 💡 Dicas Importantes
-
-### 3. **Arrays são Objetos**
-
-```javascript
-let lista = [1, 2, 3];
-console.log(typeof lista);          // "object"
-console.log(Array.isArray(lista));  // true (forma correta)
-```
----
-
-## 🎯 Resumo da Aula
-
-### Conceitos Principais Aprendidos:
-
-1. **Tipagem Dinâmica**: JavaScript determina o tipo automaticamente
-2. **8 Tipos Fundamentais**: Number, String, Boolean, Null, Undefined, BigInt, Symbol, Object
-3. **Operador typeof**: Para verificar o tipo de um valor
-
-### Por que Isso Importa:
-
-- **Previne Erros**: Entender tipos evita bugs comuns
-- **Melhora a Lógica**: Saber como dados se comportam
-- **Base para o Futuro**: Tipos são fundamentais em toda programação
-- **Debugging**: Facilita encontrar e corrigir problemas
-
----
-
-## 🔍 Prepare-se para a Próxima Aula
+## Próximos passos
 
 Na próxima aula, veremos como **operar** com esses tipos de dados usando operadores aritméticos. Você aprenderá:
 
 - Como fazer cálculos com números
-- Como juntar textos
 - Como usar a precedência de operadores
 - Como converter entre tipos quando necessário
-
----
 
 *Lembre-se: A programação é uma jornada de aprendizado constante. Não se preocupe em memorizar tudo - o importante é entender os conceitos fundamentais. Com a prática, tudo ficará mais natural!*

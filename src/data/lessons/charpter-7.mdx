@@ -1,14 +1,10 @@
-# Strings: Trabalhando com Texto em JavaScript
-
-## Introdução
+# Trabalhando com Texto em JavaScript
 
 Imagine que você está criando um aplicativo de mensagens, um site de notícias ou até mesmo um simples formulário de cadastro. O que todos esses projetos têm em comum? A necessidade de trabalhar com texto! Em programação, chamamos esses textos de **strings**, e elas são um dos tipos de dados mais importantes e utilizados no JavaScript.
 
 Nesta aula, você aprenderá não apenas *como* usar strings, mas *por que* elas funcionam de uma determinada maneira, quais são os diferentes métodos de criá-las e manipulá-las, e quando usar cada abordagem. Vamos transformar você de alguém que simplesmente escreve texto no código para alguém que domina a arte de manipular informações textuais com elegância e eficiência.
 
----
-
-## 1. O que são Strings?
+## O que são Strings?
 
 ### Conceito Fundamental
 
@@ -29,13 +25,11 @@ Strings são a ponte entre humanos e computadores para comunicação textual. Pr
 - **Comunicar com sistemas**: enviar e receber mensagens de servidores
 - **Criar experiências**: construir interfaces dinâmicas e personalizadas
 
----
-
-## 2. Criando Strings: Três Formas Diferentes
+## Criando Strings: Três Formas Diferentes
 
 JavaScript oferece três maneiras de criar strings, cada uma com suas características e usos específicos. Compreender quando usar cada uma é fundamental.
 
-### 2.1 Aspas Simples (`'`)
+### Aspas Simples (`'`)
 
 ```javascript
 let mensagem = 'Olá, pessoal!';
@@ -48,7 +42,7 @@ let cidade = 'São Paulo';
 let frase = 'Ele disse: "Bom dia!"'; // Aspas duplas dentro funcionam
 ```
 
-### 2.2 Aspas Duplas (`"`)
+### Aspas Duplas (`"`)
 
 ```javascript
 let mensagem = "Olá, pessoal!";
@@ -61,7 +55,7 @@ let cidade = "São Paulo";
 let frase = "É um dia maravilhoso!"; // Apóstrofo funciona naturalmente
 ```
 
-### 2.3 Template Literals (Crases `` ` ``)
+### Template Literals (Crases `` ` ``)
 
 ```javascript
 let nome = "Carlos";
@@ -75,11 +69,9 @@ console.log(mensagem); // "Meu nome é Carlos e tenho 25 anos."
 - Criar textos com múltiplas linhas
 - Realizar cálculos dentro do texto
 
----
+## Template Literals: O Poder da Interpolação
 
-## 3. Template Literals: O Poder da Interpolação
-
-### 3.1 Interpolação de Variáveis
+### Interpolação de Variáveis
 
 **Interpolação** significa inserir valores de variáveis diretamente dentro de uma string. É como ter espaços em branco em uma frase que são preenchidos automaticamente.
 
@@ -102,7 +94,7 @@ let mensagem2 = `O ${produto} custa R$ ${preco}`;
 
 A interpolação é mais legível, menos propensa a erros e mais fácil de manter.
 
-### 3.2 Expressões JavaScript dentro de Strings
+### Expressões JavaScript dentro de Strings
 
 Dentro de `${}` você pode colocar qualquer expressão JavaScript válida:
 
@@ -118,7 +110,7 @@ let desconto = `Preço com desconto: R$ ${preco - (preco * 0.1)}`;
 console.log(desconto); // "Preço com desconto: R$ 45"
 ```
 
-### 3.3 Strings Multilinhas
+### Strings Multilinhas
 
 Template literals permitem criar textos com várias linhas naturalmente:
 
@@ -145,9 +137,7 @@ Segunda linha";
 let correto = "Primeira linha\nSegunda linha";
 ```
 
----
-
-## 4. Caracteres Especiais: Sequências de Escape
+## Caracteres Especiais: Sequências de Escape
 
 Às vezes precisamos incluir caracteres especiais em strings. Para isso, usamos a **barra invertida** (`\`) seguida de um código. Chamamos isso de "sequência de escape".
 
@@ -190,13 +180,11 @@ console.log(caminho); // "C:\Users\Documents"
 
 **Conceito importante:** Sequências de escape são necessárias porque alguns caracteres têm significados especiais em strings e precisamos "escapar" desse significado especial para usá-los literalmente.
 
----
-
-## 5. Concatenação: Juntando Strings
+## Concatenação: Juntando Strings
 
 **Concatenação** é o ato de juntar duas ou mais strings para formar uma nova string. É como colar palavras uma após a outra.
 
-### 5.1 Usando o Operador `+`
+### Usando o Operador `+`
 
 ```javascript
 let nome = "Ana";
@@ -205,7 +193,7 @@ let nomeCompleto = nome + " " + sobrenome;
 console.log(nomeCompleto); // "Ana Silva"
 ```
 
-### 5.2 Concatenando com Variáveis de Diferentes Tipos
+### Concatenando com Variáveis de Diferentes Tipos
 
 JavaScript automaticamente converte outros tipos para string durante a concatenação:
 
@@ -216,7 +204,7 @@ let resultado = texto + numero;
 console.log(resultado); // "Capítulo 5"
 ```
 
-### 5.3 Um Comportamento Importante: `+` vs `-`
+### Um Comportamento Importante: `+` vs `-`
 
 Este é um conceito crucial para entender como JavaScript trabalha:
 
@@ -236,13 +224,11 @@ console.log("10" / 2);     // 5 (número)
 
 **Implicação prática:** Tenha cuidado ao trabalhar com valores de formulários HTML, pois eles sempre vêm como strings!
 
----
-
-## 6. Propriedades e Métodos Essenciais
+## Propriedades e Métodos Essenciais
 
 Strings em JavaScript são objetos especiais que vêm com diversas ferramentas integradas. Vamos explorar as mais importantes.
 
-### 6.1 Propriedade `length` - Comprimento da String
+### Propriedade `length` - Comprimento da String
 
 A propriedade `length` retorna quantos caracteres existem na string:
 
@@ -262,7 +248,7 @@ console.log(vazia.length); // 0
 - Limitar caracteres em formulários
 - Contar palavras em textos
 
-### 6.2 Acessando Caracteres Individuais
+### Acessando Caracteres Individuais
 
 Strings funcionam como arrays de caracteres. Cada caractere tem uma posição (índice) começando do zero:
 
@@ -285,7 +271,7 @@ console.log(ultimo); // "o"
 
 **Por que `length - 1`?** Porque os índices começam em 0, então o último caractere está na posição (tamanho - 1).
 
-### 6.3 Método `includes()` - Verificar se Contém Texto
+### Método `includes()` - Verificar se Contém Texto
 
 Verifica se uma string contém outra string dentro dela:
 
@@ -308,7 +294,7 @@ if (produto.toLowerCase().includes(termoBusca.toLowerCase())) {
 }
 ```
 
-### 6.4 Métodos `startsWith()` e `endsWith()`
+### Métodos `startsWith()` e `endsWith()`
 
 Verificam se uma string começa ou termina com determinado texto:
 
@@ -332,7 +318,7 @@ if (nomeArquivo.endsWith(".jpg") || nomeArquivo.endsWith(".png")) {
 }
 ```
 
-### 6.5 Método `indexOf()` - Encontrar Posição
+### Método `indexOf()` - Encontrar Posição
 
 Retorna a posição (índice) da primeira ocorrência de um texto dentro de uma string. Se não encontrar, retorna `-1`:
 
@@ -351,7 +337,7 @@ let texto = "JavaScript é incrível, JavaScript é poderoso";
 console.log(texto.indexOf("JavaScript", 15)); // 23 (segunda ocorrência)
 ```
 
-### 6.6 Método `slice()` - Extrair Parte da String
+### Método `slice()` - Extrair Parte da String
 
 Extrai uma parte da string criando uma nova string:
 
@@ -374,7 +360,7 @@ let primeiraParte = texto.slice(0, 10);
 console.log(primeiraParte + "..."); // "JavaScript..."
 ```
 
-### 6.7 Métodos `toLowerCase()` e `toUpperCase()`
+### Métodos `toLowerCase()` e `toUpperCase()`
 
 Convertem toda a string para minúsculas ou maiúsculas:
 
@@ -396,7 +382,7 @@ if (senha.toLowerCase() === confirmacao.toLowerCase()) {
 }
 ```
 
-### 6.8 Métodos `replace()` e `replaceAll()`
+### Métodos `replace()` e `replaceAll()`
 
 Substituem partes de uma string por outro texto:
 
@@ -420,9 +406,7 @@ console.log(texto.replaceAll("Java", "JavaScript"));
 // "JavaScript é bom, JavaScript é útil"
 ```
 
----
-
-## 7. Conceito Fundamental: Imutabilidade de Strings
+## Conceito Fundamental: Imutabilidade de Strings
 
 Um conceito crucial que você precisa entender:
 
@@ -459,11 +443,9 @@ console.log(nomeOriginal);  // "maria"
 console.log(nomeMaiusculo); // "MARIA"
 ```
 
----
+## Conversão Entre Tipos
 
-## 8. Conversão Entre Tipos
-
-### 8.1 String para Número
+### String para Número
 
 ```javascript
 let textoNumero = "42";
@@ -483,7 +465,7 @@ let invalido = Number("abc");
 console.log(invalido); // NaN (Not a Number)
 ```
 
-### 8.2 Número para String
+### Número para String
 
 ```javascript
 let numero = 123;
@@ -496,9 +478,7 @@ console.log(typeof texto);  // "string"
 let texto2 = numero.toString();
 ```
 
----
-
-## 9. Exemplos Práticos Completos
+## Exemplos Práticos
 
 ### Exemplo 1: Formatação de Nome
 
@@ -582,9 +562,7 @@ let saudacao = `${periodo}, ${nome}! Bem-vinda ao sistema.`;
 console.log(saudacao); // "Boa tarde, Maria! Bem-vinda ao sistema."
 ```
 
----
-
-## 10. Boas Práticas ao Trabalhar com Strings
+## Boas Práticas ao Trabalhar com Strings
 
 ### 1. Escolha Consistente de Aspas
 
@@ -638,42 +616,15 @@ let parte = texto.slice(0, 10);
 let novo = texto.replace("antigo", "novo");
 ```
 
----
+## Próximos passos
 
-## Conclusão
+Na próxima aula você aprenderá sobre Estruturas de Repetição (loops):
+- Como automatizar tarefas repetitivas
+- Loop for tradicional
+- Loops while e do...while
+- Controle de fluxo com break e continue
+- Quando usar cada tipo de loop
 
-Strings são fundamentais no JavaScript e dominar sua manipulação é essencial para qualquer desenvolvedor. Nesta aula, você aprendeu:
+**Prepare-se para multiplicar o poder dos seus programas!** 💪
 
-- **O que são strings** e por que são importantes
-- **Três formas de criar strings**: aspas simples, duplas e template literals
-- **O poder da interpolação** com template literals
-- **Sequências de escape** para caracteres especiais
-- **Concatenação** e seus comportamentos com diferentes tipos
-- **Métodos essenciais** como `includes()`, `slice()`, `replace()` e muitos outros
-- **O conceito de imutabilidade** e suas implicações práticas
-- **Conversão entre tipos** de dados
-- **Exemplos práticos** do mundo real
-
-Lembre-se: programação é prática! Experimente cada conceito, teste os exemplos, crie variações e explore possibilidades. Quanto mais você praticar com strings, mais natural se tornará trabalhar com elas.
-
-### Pontos-Chave para Memorizar:
-
-1. **Strings são imutáveis** - métodos criam novas strings
-2. **Template literals** (``) são mais poderosos que aspas simples/duplas
-3. **Índices começam em 0** - o primeiro caractere está na posição 0
-4. **O operador `+` com strings** realiza concatenação, não soma
-5. **Sempre atribua o resultado** de métodos de string a uma variável
-
-Continue praticando e explorando. Na próxima aula, você aplicará esses conhecimentos em estruturas de decisão, criando programas ainda mais dinâmicos e interativos!
-
----
-
-## Exercícios para Prática
-
-1. Crie uma string com seu nome completo e extraia apenas o primeiro nome
-2. Valide se um texto digitado tem pelo menos 8 caracteres
-3. Converta uma frase toda em maiúsculas para ter apenas a primeira letra maiúscula
-4. Crie um sistema que verifica se um arquivo é uma imagem (termina com .jpg, .png ou .gif)
-5. Faça um programa que conte quantas vezes a letra "a" aparece em um texto
-
-Pratique estes exercícios e você estará preparado para os próximos desafios!
+*Lembre-se: programação é prática! Experimente cada conceito, teste os exemplos, crie variações e explore possibilidades*

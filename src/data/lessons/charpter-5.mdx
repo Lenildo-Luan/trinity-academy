@@ -1,18 +1,10 @@
-# Aula 5: Operadores de Comparação e Lógicos em JavaScript
-
-## Comparações e Lógica: Dando Poder de Decisão aos Programas
-
-# Introdução
+# Dando Poder de Decisão aos Programas
 
 Até este momento, você aprendeu a armazenar informações em variáveis, trabalhar com diferentes tipos de dados e realizar operações matemáticas. Mas como um programa pode tomar decisões? Como ele sabe se um usuário tem idade suficiente para acessar determinado conteúdo? Como verifica se uma senha está correta? Como determina se deve executar uma ação ou outra?
 
 A resposta está nos **operadores de comparação e lógicos** - ferramentas que permitem ao código "pensar" e tomar decisões baseadas em condições. Estes operadores são a ponte entre os dados que manipulamos e a lógica que dá vida aos nossos programas.
 
 Nesta aula, você compreenderá como comparar valores, combinar múltiplas condições e construir a base para criar programas verdadeiramente inteligentes e interativos.
-
----
-
-# Parte 1: Operadores de Comparação
 
 ## O Conceito Fundamental
 
@@ -209,10 +201,6 @@ console.log(isNaN(NaN));           // true
 console.log(isNaN("texto"));       // true
 console.log(Number.isNaN(NaN));    // true
 ```
-
----
-
-# Parte 2: Operadores Lógicos
 
 ## O Poder de Combinar Condições
 
@@ -537,11 +525,9 @@ resultado = (a > b && b > c) || (c === 0);
 console.log(resultado);  // true
 ```
 
----
+## Exemplos Práticos
 
-# Parte 3: Exemplos Práticos Integrados
-
-## Exemplo 1: Sistema de Login
+### Exemplo 1: Sistema de Login
 
 ```javascript
 let usuarioDigitado = "admin";
@@ -565,29 +551,7 @@ loginSucesso = (usuarioDigitado === usuarioCorreto) &&
 console.log("Login permitido:", loginSucesso);  // false
 ```
 
-## Exemplo 2: Validação de Formulário
-
-```javascript
-let nome = "João Silva";
-let email = "joao@email.com";
-let idade = 25;
-let aceitouTermos = true;
-
-// Validações individuais
-let nomeValido = nome.length >= 3;
-let emailValido = email.includes("@") && email.includes(".");
-let idadeValida = idade >= 18;
-
-// Formulário válido SE todas as condições forem atendidas
-let formularioValido = nomeValido && emailValido && idadeValida && aceitouTermos;
-
-console.log("Nome válido:", nomeValido);           // true
-console.log("Email válido:", emailValido);         // true
-console.log("Idade válida:", idadeValida);         // true
-console.log("Formulário válido:", formularioValido); // true
-```
-
-## Exemplo 3: Sistema de Desconto em Loja
+### Exemplo 3: Sistema de Desconto em Loja
 
 ```javascript
 let valorCompra = 150;
@@ -610,7 +574,7 @@ if (temDesconto) {
 }
 ```
 
-## Exemplo 4: Controle de Acesso a Conteúdo
+### Exemplo 3: Controle de Acesso a Conteúdo
 
 ```javascript
 let idadeUsuario = 16;
@@ -625,10 +589,10 @@ console.log("Pode acessar:", podeAcessar);  // false
 // Com autorização dos pais
 temAutorizacaoPais = true;
 podeAcessar = ((idadeUsuario >= 18) || temAutorizacaoPais) && ehAssinante;
-console.log("Pode acessar:", podeAcessar);  // true
+console.log("Pode acessar: ", podeAcessar);  // true
 ```
 
-## Exemplo 5: Sistema de Notas Escolares
+### Exemplo 4: Sistema de Notas Escolares
 
 ```javascript
 let nota1 = 7.5;
@@ -644,15 +608,13 @@ let notaMinima = 7.0;
 let aprovado = (media >= notaMinima) && (frequencia >= frequenciaMinima);
 
 console.log("Média:", media.toFixed(2));
-console.log("Frequência:", frequencia + "%");
+console.log("Frequência:", frequencia. "%");
 console.log("Aprovado:", aprovado);  // true
 ```
 
----
+## Boas Práticas
 
-# Resumo e Boas Práticas
-
-## ✅ Operadores de Comparação
+### ✅ Operadores de Comparação
 
 1. **Use sempre `===` e `!==`** para evitar conversões inesperadas
 2. **Cuidado com `null` e `undefined`** em comparações
@@ -660,7 +622,7 @@ console.log("Aprovado:", aprovado);  // true
 4. **Strings** são comparadas em ordem lexicográfica
 5. **Use parênteses** para deixar comparações complexas mais claras
 
-## ✅ Operadores Lógicos
+### ✅ Operadores Lógicos
 
 1. **`&&` (AND)**: todas as condições devem ser verdadeiras
 2. **`||` (OR)**: pelo menos uma condição deve ser verdadeira
@@ -668,14 +630,14 @@ console.log("Aprovado:", aprovado);  // true
 4. **Entenda valores truthy e falsy** para evitar surpresas
 5. **Use `??`** quando quiser tratar apenas `null` e `undefined`
 
-## ✅ Precedência
+### ✅ Precedência
 
 1. `!` tem a maior precedência
 2. Comparações vêm depois
 3. `&&` antes de `||`
 4. **Use parênteses** quando houver dúvida
 
-## ⚠️ Erros Comuns a Evitar
+### ⚠️ Erros Comuns a Evitar
 
 ```javascript
 // ❌ ERRADO: Usar == em vez de ===
@@ -697,117 +659,12 @@ if (usuario) { }  // undefined é falsy!
 if (usuario !== null && usuario !== undefined) { }
 ```
 
----
+## Próximos passos
 
-# Exercícios Práticos
-
-## Nível Básico
-
-### Exercício 1: Comparações Simples
-```javascript
-let a = 10;
-let b = 20;
-let c = 10;
-
-// Teste estas comparações:
-console.log(a > b);
-console.log(a < b);
-console.log(a === c);
-console.log(a >= c);
-console.log(b !== c);
-```
-
-### Exercício 2: Verificação de Idade
-```javascript
-let idade = 17;
-
-// Complete:
-let ehMaiorDeIdade = // idade >= 18
-let ehMenor = // idade < 18
-let podeVotar = // idade >= 16
-
-console.log("Maior de idade:", ehMaiorDeIdade);
-console.log("É menor:", ehMenor);
-console.log("Pode votar:", podeVotar);
-```
-
-## Nível Intermediário
-
-### Exercício 3: Validação de Senha
-```javascript
-let senha = "abc123";
-
-// A senha deve ter:
-// - Pelo menos 6 caracteres
-// - Conter pelo menos um número
-
-let temTamanhoMinimo = // senha.length >= 6
-let contemNumero = // Dica: use includes() para verificar "1", "2", "3", etc.
-
-let senhaValida = // Combine as duas condições
-
-console.log("Senha válida:", senhaValida);
-```
-
-### Exercício 4: Sistema de Acesso
-```javascript
-let usuario = "admin";
-let senha = "1234";
-let horario = 14; // Hora do dia (0-23)
-
-// Acesso permitido SE:
-// - Usuário é "admin" E senha é "1234"
-// - OU horário está entre 8h e 18h
-
-let acessoPermitido = // Complete a lógica
-
-console.log("Acesso permitido:", acessoPermitido);
-```
-
-## Nível Avançado
-
-### Exercício 5: Calculadora de Desconto
-```javascript
-let valorCompra = 250;
-let ehClienteVIP = true;
-let qtdItens = 5;
-let temCupom = false;
-
-// Desconto de 15% SE:
-// - (Valor >= 200 E qtd >= 3) OU
-// - (É VIP E tem cupom)
-
-let temDesconto = // Complete a lógica
-let valorDesconto = // Calcule 15% se tem desconto, senão 0
-let valorFinal = // Calcule o valor final
-
-console.log("Valor original: R$", valorCompra);
-console.log("Tem desconto:", temDesconto);
-console.log("Valor desconto: R$", valorDesconto);
-console.log("Valor final: R$", valorFinal);
-```
-
----
-
-# Conclusão
-
-Os operadores de comparação e lógicos são ferramentas fundamentais que transformam programas simples em aplicações inteligentes capazes de tomar decisões. Você aprendeu:
-
-✅ Como comparar valores usando operadores relacionais  
-✅ A diferença crucial entre `==` e `===`  
-✅ Como combinar condições com `&&`, `||` e `!`  
-✅ O conceito de valores truthy e falsy  
-✅ Como usar o operador de coalescência nula (`??`)  
-✅ Precedência de operadores e boas práticas  
-
-Na próxima aula, você usará estes operadores para criar **estruturas condicionais** com `if`, `else` e `switch`, dando vida real à lógica de decisão em seus programas!
-
-## 🎯 Prepare-se para a Próxima Aula
-
-Na Aula 6, você aprenderá:
-- Como usar `if` e `else` para executar código condicionalmente
+Na próxima aula você aprenderá sobre como usar esses operadores para mudar o fluxo de execução do código:
+- Como executar código condicionalmente
 - Estruturas `else if` para múltiplas condições
 - O operador ternário para decisões concisas
 - A estrutura `switch` para múltiplas opções
 
-Continue praticando os exercícios e explorando diferentes combinações de operadores. Quanto mais você praticar, mais natural se tornará o processo de criar lógicas complexas!
+*Quanto mais você praticar, mais natural se tornará o processo de criar lógicas complexas!*
