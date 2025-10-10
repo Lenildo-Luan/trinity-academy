@@ -1,0 +1,813 @@
+# Aula 5: Operadores de Comparação e Lógicos em JavaScript
+
+## Comparações e Lógica: Dando Poder de Decisão aos Programas
+
+# Introdução
+
+Até este momento, você aprendeu a armazenar informações em variáveis, trabalhar com diferentes tipos de dados e realizar operações matemáticas. Mas como um programa pode tomar decisões? Como ele sabe se um usuário tem idade suficiente para acessar determinado conteúdo? Como verifica se uma senha está correta? Como determina se deve executar uma ação ou outra?
+
+A resposta está nos **operadores de comparação e lógicos** - ferramentas que permitem ao código "pensar" e tomar decisões baseadas em condições. Estes operadores são a ponte entre os dados que manipulamos e a lógica que dá vida aos nossos programas.
+
+Nesta aula, você compreenderá como comparar valores, combinar múltiplas condições e construir a base para criar programas verdadeiramente inteligentes e interativos.
+
+---
+
+# Parte 1: Operadores de Comparação
+
+## O Conceito Fundamental
+
+Imagine que você está em uma loja e precisa decidir se vai comprar um produto. Você compara o preço com o dinheiro que tem disponível. Se o preço for menor ou igual ao seu dinheiro, você pode comprar. Se for maior, não pode.
+
+Na programação, fazemos exatamente isso - comparamos valores para tomar decisões. Os **operadores de comparação** são ferramentas que comparam dois valores e retornam um resultado booleano: `true` (verdadeiro) ou `false` (falso).
+
+```javascript
+let preco = 50;
+let dinheiro = 100;
+
+console.log(preco <= dinheiro); // true - posso comprar!
+```
+
+## Os Operadores Relacionais
+
+JavaScript oferece seis operadores principais para comparar valores:
+
+### 1. Maior que (`>`)
+
+Verifica se o valor da esquerda é maior que o da direita:
+
+```javascript
+console.log(10 > 5);    // true
+console.log(3 > 8);     // false
+console.log(5 > 5);     // false (não é maior, é igual)
+```
+
+### 2. Menor que (`<`)
+
+Verifica se o valor da esquerda é menor que o da direita:
+
+```javascript
+console.log(3 < 8);     // true
+console.log(10 < 5);    // false
+console.log(5 < 5);     // false (não é menor, é igual)
+```
+
+### 3. Maior ou igual a (`>=`)
+
+Verifica se o valor da esquerda é maior OU igual ao da direita:
+
+```javascript
+console.log(10 >= 5);   // true (10 é maior que 5)
+console.log(5 >= 5);    // true (5 é igual a 5)
+console.log(3 >= 8);    // false
+```
+
+### 4. Menor ou igual a (`<=`)
+
+Verifica se o valor da esquerda é menor OU igual ao da direita:
+
+```javascript
+console.log(3 <= 8);    // true (3 é menor que 8)
+console.log(5 <= 5);    // true (5 é igual a 5)
+console.log(10 <= 5);   // false
+```
+
+### Exemplo Prático: Sistema de Idade
+
+```javascript
+let idadeUsuario = 16;
+let idadeMinima = 18;
+
+console.log(idadeUsuario >= idadeMinima); // false
+// O usuário NÃO tem idade suficiente
+
+idadeUsuario = 20;
+console.log(idadeUsuario >= idadeMinima); // true
+// Agora o usuário tem idade suficiente
+```
+
+## Comparando Strings
+
+JavaScript pode comparar textos usando a ordem "lexicográfica" (ordem do dicionário):
+
+```javascript
+console.log("A" < "Z");           // true
+console.log("gato" < "zebra");    // true
+console.log("maçã" < "banana");   // false (m vem depois de b)
+```
+
+**Importante:** Letras maiúsculas são consideradas "menores" que minúsculas:
+
+```javascript
+console.log("A" < "a");    // true
+console.log("Z" < "a");    // true
+```
+
+### Exemplo Prático: Ordenação Alfabética
+
+```javascript
+let nome1 = "Ana";
+let nome2 = "Bruno";
+
+console.log(nome1 < nome2);  // true - Ana vem antes de Bruno
+```
+
+## Os Operadores de Igualdade
+
+Aqui está um dos conceitos mais importantes e que mais confunde iniciantes: JavaScript tem DOIS tipos de igualdade!
+
+### Igualdade Simples (`==`)
+
+O operador `==` compara valores fazendo conversões automáticas de tipo quando necessário:
+
+```javascript
+console.log(5 == "5");      // true (converte string para número)
+console.log(1 == true);     // true (converte boolean para número)
+console.log(0 == false);    // true (converte boolean para número)
+console.log("" == false);   // true (ambos viram 0)
+```
+
+**Por que isso acontece?** JavaScript tenta "ajudar" convertendo os valores para que possam ser comparados. Mas isso pode causar surpresas!
+
+### Igualdade Estrita (`===`)
+
+O operador `===` compara valores SEM fazer conversões. Para ser true, os valores devem ser idênticos em valor E tipo:
+
+```javascript
+console.log(5 === "5");     // false (número diferente de string)
+console.log(1 === true);    // false (número diferente de boolean)
+console.log(0 === false);   // false (número diferente de boolean)
+console.log(5 === 5);       // true (mesmo valor e mesmo tipo)
+```
+
+### Desigualdade (`!=` e `!==`)
+
+Funcionam de forma oposta aos operadores de igualdade:
+
+```javascript
+// Desigualdade simples (com conversão)
+console.log(5 != "5");      // false
+console.log(5 != 6);        // true
+
+// Desigualdade estrita (sem conversão)
+console.log(5 !== "5");     // true (tipos diferentes)
+console.log(5 !== 5);       // false (idênticos)
+```
+
+### ⚠️ Regra de Ouro: Use `===` e `!==`
+
+**Recomendação:** Sempre prefira os operadores estritos (`===` e `!==`) para evitar comportamentos inesperados:
+
+```javascript
+// ❌ Evite
+if (idade == "18") {
+    console.log("Maior de idade");
+}
+
+// ✅ Prefira
+if (idade === 18) {
+    console.log("Maior de idade");
+}
+```
+
+## Casos Especiais: null e undefined
+
+Estes valores têm comportamentos únicos em comparações:
+
+### Com Igualdade
+
+```javascript
+console.log(null == undefined);     // true (caso especial!)
+console.log(null === undefined);    // false (tipos diferentes)
+console.log(null == 0);             // false
+console.log(undefined == 0);        // false
+```
+
+### Com Operadores Relacionais
+
+```javascript
+console.log(null > 0);      // false
+console.log(null == 0);     // false
+console.log(null >= 0);     // true (!!) - null vira 0 na comparação
+
+console.log(undefined > 0);  // false (undefined vira NaN)
+console.log(undefined < 0);  // false (undefined vira NaN)
+console.log(undefined == 0); // false
+```
+
+**Lição:** Tenha cuidado especial ao comparar `null` e `undefined`!
+
+## O Valor Especial: NaN
+
+`NaN` ("Not a Number") tem uma característica única - ele NÃO é igual a nada, nem a si mesmo:
+
+```javascript
+console.log(NaN == NaN);    // false (!!)
+console.log(NaN === NaN);   // false (!!)
+
+// Para verificar se algo é NaN, use:
+console.log(isNaN(NaN));           // true
+console.log(isNaN("texto"));       // true
+console.log(Number.isNaN(NaN));    // true
+```
+
+---
+
+# Parte 2: Operadores Lógicos
+
+## O Poder de Combinar Condições
+
+Na vida real, raramente tomamos decisões baseadas em apenas uma condição. Por exemplo:
+
+- "Vou à praia SE estiver sol E for fim de semana"
+- "Aceito o emprego SE o salário for bom OU a localização for conveniente"
+- "NÃO vou sair se estiver chovendo"
+
+Os **operadores lógicos** permitem combinar múltiplas condições para criar lógicas mais complexas e realistas.
+
+## Operador AND (`&&`)
+
+O operador `&&` (E lógico) retorna `true` apenas quando TODAS as condições forem verdadeiras:
+
+```javascript
+console.log(true && true);      // true
+console.log(true && false);     // false
+console.log(false && true);     // false
+console.log(false && false);    // false
+```
+
+### Exemplo Prático: Validação de Acesso
+
+```javascript
+let temIngresso = true;
+let temIdade = true;
+
+let podeEntrar = temIngresso && temIdade;
+console.log(podeEntrar);  // true - tem AMBOS os requisitos
+
+temIdade = false;
+podeEntrar = temIngresso && temIdade;
+console.log(podeEntrar);  // false - falta um requisito
+```
+
+### Exemplo: Validação de Senha
+
+```javascript
+let senha = "abc123";
+let temTamanhoMinimo = senha.length >= 6;
+let temNumero = senha.includes("1") || senha.includes("2") || senha.includes("3");
+
+let senhaValida = temTamanhoMinimo && temNumero;
+console.log(senhaValida);  // true - atende todos os critérios
+```
+
+## Operador OR (`||`)
+
+O operador `||` (OU lógico) retorna `true` se PELO MENOS UMA condição for verdadeira:
+
+```javascript
+console.log(true || true);      // true
+console.log(true || false);     // true
+console.log(false || true);     // true
+console.log(false || false);    // false
+```
+
+### Exemplo Prático: Múltiplas Formas de Pagamento
+
+```javascript
+let temDinheiro = false;
+let temCartao = true;
+let temPix = false;
+
+let podeComprar = temDinheiro || temCartao || temPix;
+console.log(podeComprar);  // true - tem pelo menos uma forma de pagamento
+```
+
+### Exemplo: Sistema de Desconto
+
+```javascript
+let ehEstudante = true;
+let ehIdoso = false;
+let ehFuncionario = false;
+
+let temDesconto = ehEstudante || ehIdoso || ehFuncionario;
+console.log(temDesconto);  // true - pelo menos um critério atendido
+```
+
+## Operador NOT (`!`)
+
+O operador `!` (NÃO lógico) inverte o valor booleano:
+
+```javascript
+console.log(!true);     // false
+console.log(!false);    // true
+console.log(!!true);    // true (dupla negação)
+```
+
+### Exemplo Prático: Negação de Condições
+
+```javascript
+let estaLogado = false;
+let precisaLogar = !estaLogado;
+console.log(precisaLogar);  // true - usuário precisa fazer login
+
+let temPermissao = false;
+let acessoNegado = !temPermissao;
+console.log(acessoNegado);  // true - acesso deve ser negado
+```
+
+## Combinando Múltiplos Operadores
+
+Podemos criar lógicas complexas combinando diferentes operadores:
+
+```javascript
+let idade = 25;
+let temCarteira = true;
+let temCarro = true;
+
+// Pode dirigir SE tem idade >= 18 E tem carteira E tem carro
+let podeDirigir = (idade >= 18) && temCarteira && temCarro;
+console.log(podeDirigir);  // true
+
+// Precisa de transporte SE NÃO pode dirigir OU NÃO tem carro
+let precisaTransporte = !podeDirigir || !temCarro;
+console.log(precisaTransporte);  // false
+```
+
+### Exemplo: Sistema de Aprovação Escolar
+
+```javascript
+let notaFinal = 7.5;
+let frequencia = 80;
+let trabalhoEntregue = true;
+
+// Aprovado SE (nota >= 7 E frequência >= 75) E trabalho entregue
+let aprovado = (notaFinal >= 7 && frequencia >= 75) && trabalhoEntregue;
+console.log(aprovado);  // true
+```
+
+## Valores Truthy e Falsy
+
+JavaScript converte automaticamente valores para booleano quando necessário. Isso é fundamental para entender o comportamento dos operadores lógicos.
+
+### Valores Falsy (considerados false)
+
+Existem exatamente 6 valores falsy em JavaScript:
+
+```javascript
+console.log(!false);        // true - false é falsy
+console.log(!0);            // true - 0 é falsy
+console.log(!"");           // true - string vazia é falsy
+console.log(!null);         // true - null é falsy
+console.log(!undefined);    // true - undefined é falsy
+console.log(!NaN);          // true - NaN é falsy
+```
+
+### Valores Truthy (considerados true)
+
+TODOS os outros valores são truthy:
+
+```javascript
+console.log(!42);           // false - número diferente de 0 é truthy
+console.log(!"texto");      // false - string não-vazia é truthy
+console.log(!true);         // false - true é truthy
+console.log(![]);           // false - array é truthy
+console.log(!{});           // false - objeto é truthy
+console.log(!-1);           // false - número negativo é truthy
+```
+
+## Operadores Lógicos com Valores Não-Booleanos
+
+Os operadores `&&` e `||` não apenas retornam `true` ou `false` - eles retornam um dos valores originais!
+
+### Comportamento do OR (`||`)
+
+O operador `||` retorna o **primeiro valor truthy** ou o último valor:
+
+```javascript
+console.log(null || "usuário");         // "usuário"
+console.log("Ana" || "visitante");      // "Ana"
+console.log(0 || 100);                  // 100
+console.log("" || "texto padrão");      // "texto padrão"
+console.log(false || false || "oi");    // "oi"
+```
+
+### Uso Prático: Valores Padrão
+
+```javascript
+let nomeUsuario = "";
+let nomeExibicao = nomeUsuario || "Visitante";
+console.log(nomeExibicao);  // "Visitante"
+
+nomeUsuario = "Maria";
+nomeExibicao = nomeUsuario || "Visitante";
+console.log(nomeExibicao);  // "Maria"
+```
+
+### Comportamento do AND (`&&`)
+
+O operador `&&` retorna o **primeiro valor falsy** ou o último valor:
+
+```javascript
+console.log(true && "oi");              // "oi"
+console.log(1 && 2 && 3);               // 3
+console.log(0 && "qualquer coisa");     // 0
+console.log(null && true);              // null
+```
+
+### Uso Prático: Execução Condicional
+
+```javascript
+let usuario = { nome: "João", premium: true };
+
+// Executa segunda parte apenas se primeira for truthy
+let mensagem = usuario.premium && "Acesso Premium Ativo";
+console.log(mensagem);  // "Acesso Premium Ativo"
+
+usuario.premium = false;
+mensagem = usuario.premium && "Acesso Premium Ativo";
+console.log(mensagem);  // false
+```
+
+## Operador de Coalescência Nula (`??`)
+
+Este é um operador moderno que trata especificamente `null` e `undefined`:
+
+```javascript
+// OR tradicional trata todos os falsy
+console.log(0 || 100);          // 100 (0 é falsy)
+console.log("" || "texto");     // "texto" (string vazia é falsy)
+
+// ?? trata apenas null e undefined
+console.log(0 ?? 100);          // 0 (0 não é null nem undefined)
+console.log("" ?? "texto");     // "" (string vazia não é null nem undefined)
+console.log(null ?? 100);       // 100 (null é tratado)
+console.log(undefined ?? 50);   // 50 (undefined é tratado)
+```
+
+### Quando Usar `??` vs `||`
+
+```javascript
+let contador = 0;
+
+// ❌ Problema com ||
+let resultado1 = contador || 10;
+console.log(resultado1);  // 10 (mas 0 era um valor válido!)
+
+// ✅ Solução com ??
+let resultado2 = contador ?? 10;
+console.log(resultado2);  // 0 (preserva valores válidos como 0)
+```
+
+## Avaliação de Curto-Circuito
+
+Os operadores `&&` e `||` usam **avaliação de curto-circuito** - param assim que o resultado é determinado:
+
+### Com OR (`||`)
+
+```javascript
+// Se a primeira parte é true, a segunda NÃO é avaliada
+console.log(true || console.log("Não executado"));  // true (não imprime nada)
+
+// Se a primeira parte é false, a segunda É avaliada
+console.log(false || console.log("Executado"));     // undefined (imprime "Executado")
+```
+
+### Com AND (`&&`)
+
+```javascript
+// Se a primeira parte é false, a segunda NÃO é avaliada
+console.log(false && console.log("Não executado")); // false (não imprime nada)
+
+// Se a primeira parte é true, a segunda É avaliada
+console.log(true && console.log("Executado"));      // undefined (imprime "Executado")
+```
+
+### Por Que Isso É Útil?
+
+```javascript
+let usuario = null;
+
+// Evita erro ao acessar propriedade de null
+let nome = usuario && usuario.nome;
+console.log(nome);  // null (não tenta acessar usuario.nome)
+
+usuario = { nome: "Carlos" };
+nome = usuario && usuario.nome;
+console.log(nome);  // "Carlos"
+```
+
+## Precedência de Operadores
+
+Quando múltiplos operadores aparecem juntos, há uma ordem de avaliação:
+
+1. `!` (NOT) - maior precedência
+2. Operadores de comparação (`>`, `<`, `==`, `===`, etc.)
+3. `&&` (AND)
+4. `||` (OR) - menor precedência
+
+```javascript
+// Como JavaScript avalia:
+console.log(true || false && false);
+// 1. Avalia false && false = false
+// 2. Avalia true || false = true
+// Resultado: true
+
+// Use parênteses para clareza:
+console.log((true || false) && false);  // false
+console.log(true || (false && false));  // true
+```
+
+### Exemplo Complexo
+
+```javascript
+let a = 10;
+let b = 5;
+let c = 0;
+
+let resultado = a > b && b > c || c === 0;
+// 1. a > b = true
+// 2. b > c = true
+// 3. true && true = true
+// 4. c === 0 = true
+// 5. true || true = true
+console.log(resultado);  // true
+
+// Com parênteses para clareza:
+resultado = (a > b && b > c) || (c === 0);
+console.log(resultado);  // true
+```
+
+---
+
+# Parte 3: Exemplos Práticos Integrados
+
+## Exemplo 1: Sistema de Login
+
+```javascript
+let usuarioDigitado = "admin";
+let senhaDigitada = "1234";
+let usuarioCorreto = "admin";
+let senhaCorreta = "1234";
+
+// Login bem-sucedido SE usuário correto E senha correta
+let loginSucesso = (usuarioDigitado === usuarioCorreto) && 
+                   (senhaDigitada === senhaCorreta);
+
+console.log("Login permitido:", loginSucesso);  // true
+
+// Testando com dados incorretos
+usuarioDigitado = "admin";
+senhaDigitada = "errada";
+
+loginSucesso = (usuarioDigitado === usuarioCorreto) && 
+               (senhaDigitada === senhaCorreta);
+
+console.log("Login permitido:", loginSucesso);  // false
+```
+
+## Exemplo 2: Validação de Formulário
+
+```javascript
+let nome = "João Silva";
+let email = "joao@email.com";
+let idade = 25;
+let aceitouTermos = true;
+
+// Validações individuais
+let nomeValido = nome.length >= 3;
+let emailValido = email.includes("@") && email.includes(".");
+let idadeValida = idade >= 18;
+
+// Formulário válido SE todas as condições forem atendidas
+let formularioValido = nomeValido && emailValido && idadeValida && aceitouTermos;
+
+console.log("Nome válido:", nomeValido);           // true
+console.log("Email válido:", emailValido);         // true
+console.log("Idade válida:", idadeValida);         // true
+console.log("Formulário válido:", formularioValido); // true
+```
+
+## Exemplo 3: Sistema de Desconto em Loja
+
+```javascript
+let valorCompra = 150;
+let ehClienteVIP = false;
+let ehPrimeiraCompra = true;
+let temCupom = false;
+
+// Desconto de 20% SE valor >= 100 E (é VIP OU primeira compra OU tem cupom)
+let temDesconto = (valorCompra >= 100) && 
+                  (ehClienteVIP || ehPrimeiraCompra || temCupom);
+
+console.log("Tem desconto:", temDesconto);  // true
+
+if (temDesconto) {
+    let desconto = valorCompra * 0.20;
+    let valorFinal = valorCompra - desconto;
+    console.log("Valor original: R$", valorCompra);
+    console.log("Desconto: R$", desconto);
+    console.log("Valor final: R$", valorFinal);
+}
+```
+
+## Exemplo 4: Controle de Acesso a Conteúdo
+
+```javascript
+let idadeUsuario = 16;
+let temAutorizacaoPais = false;
+let ehAssinante = true;
+
+// Pode acessar SE (idade >= 18 OU tem autorização dos pais) E é assinante
+let podeAcessar = ((idadeUsuario >= 18) || temAutorizacaoPais) && ehAssinante;
+
+console.log("Pode acessar:", podeAcessar);  // false
+
+// Com autorização dos pais
+temAutorizacaoPais = true;
+podeAcessar = ((idadeUsuario >= 18) || temAutorizacaoPais) && ehAssinante;
+console.log("Pode acessar:", podeAcessar);  // true
+```
+
+## Exemplo 5: Sistema de Notas Escolares
+
+```javascript
+let nota1 = 7.5;
+let nota2 = 8.0;
+let nota3 = 6.5;
+let frequencia = 85;
+
+let media = (nota1 + nota2 + nota3) / 3;
+let frequenciaMinima = 75;
+let notaMinima = 7.0;
+
+// Aprovado SE média >= 7 E frequência >= 75
+let aprovado = (media >= notaMinima) && (frequencia >= frequenciaMinima);
+
+console.log("Média:", media.toFixed(2));
+console.log("Frequência:", frequencia + "%");
+console.log("Aprovado:", aprovado);  // true
+```
+
+---
+
+# Resumo e Boas Práticas
+
+## ✅ Operadores de Comparação
+
+1. **Use sempre `===` e `!==`** para evitar conversões inesperadas
+2. **Cuidado com `null` e `undefined`** em comparações
+3. **Lembre-se:** `NaN` não é igual a nada, nem a si mesmo
+4. **Strings** são comparadas em ordem lexicográfica
+5. **Use parênteses** para deixar comparações complexas mais claras
+
+## ✅ Operadores Lógicos
+
+1. **`&&` (AND)**: todas as condições devem ser verdadeiras
+2. **`||` (OR)**: pelo menos uma condição deve ser verdadeira
+3. **`!` (NOT)**: inverte o valor booleano
+4. **Entenda valores truthy e falsy** para evitar surpresas
+5. **Use `??`** quando quiser tratar apenas `null` e `undefined`
+
+## ✅ Precedência
+
+1. `!` tem a maior precedência
+2. Comparações vêm depois
+3. `&&` antes de `||`
+4. **Use parênteses** quando houver dúvida
+
+## ⚠️ Erros Comuns a Evitar
+
+```javascript
+// ❌ ERRADO: Usar == em vez de ===
+if (idade == "18") { }  // Compara número com string
+
+// ✅ CORRETO: Usar ===
+if (idade === 18) { }
+
+// ❌ ERRADO: Esquecer parênteses em lógicas complexas
+if (a > b && c > d || e > f) { }  // Confuso!
+
+// ✅ CORRETO: Usar parênteses
+if ((a > b && c > d) || e > f) { }  // Claro!
+
+// ❌ ERRADO: Assumir que valores são booleanos
+if (usuario) { }  // undefined é falsy!
+
+// ✅ CORRETO: Verificar explicitamente
+if (usuario !== null && usuario !== undefined) { }
+```
+
+---
+
+# Exercícios Práticos
+
+## Nível Básico
+
+### Exercício 1: Comparações Simples
+```javascript
+let a = 10;
+let b = 20;
+let c = 10;
+
+// Teste estas comparações:
+console.log(a > b);
+console.log(a < b);
+console.log(a === c);
+console.log(a >= c);
+console.log(b !== c);
+```
+
+### Exercício 2: Verificação de Idade
+```javascript
+let idade = 17;
+
+// Complete:
+let ehMaiorDeIdade = // idade >= 18
+let ehMenor = // idade < 18
+let podeVotar = // idade >= 16
+
+console.log("Maior de idade:", ehMaiorDeIdade);
+console.log("É menor:", ehMenor);
+console.log("Pode votar:", podeVotar);
+```
+
+## Nível Intermediário
+
+### Exercício 3: Validação de Senha
+```javascript
+let senha = "abc123";
+
+// A senha deve ter:
+// - Pelo menos 6 caracteres
+// - Conter pelo menos um número
+
+let temTamanhoMinimo = // senha.length >= 6
+let contemNumero = // Dica: use includes() para verificar "1", "2", "3", etc.
+
+let senhaValida = // Combine as duas condições
+
+console.log("Senha válida:", senhaValida);
+```
+
+### Exercício 4: Sistema de Acesso
+```javascript
+let usuario = "admin";
+let senha = "1234";
+let horario = 14; // Hora do dia (0-23)
+
+// Acesso permitido SE:
+// - Usuário é "admin" E senha é "1234"
+// - OU horário está entre 8h e 18h
+
+let acessoPermitido = // Complete a lógica
+
+console.log("Acesso permitido:", acessoPermitido);
+```
+
+## Nível Avançado
+
+### Exercício 5: Calculadora de Desconto
+```javascript
+let valorCompra = 250;
+let ehClienteVIP = true;
+let qtdItens = 5;
+let temCupom = false;
+
+// Desconto de 15% SE:
+// - (Valor >= 200 E qtd >= 3) OU
+// - (É VIP E tem cupom)
+
+let temDesconto = // Complete a lógica
+let valorDesconto = // Calcule 15% se tem desconto, senão 0
+let valorFinal = // Calcule o valor final
+
+console.log("Valor original: R$", valorCompra);
+console.log("Tem desconto:", temDesconto);
+console.log("Valor desconto: R$", valorDesconto);
+console.log("Valor final: R$", valorFinal);
+```
+
+---
+
+# Conclusão
+
+Os operadores de comparação e lógicos são ferramentas fundamentais que transformam programas simples em aplicações inteligentes capazes de tomar decisões. Você aprendeu:
+
+✅ Como comparar valores usando operadores relacionais  
+✅ A diferença crucial entre `==` e `===`  
+✅ Como combinar condições com `&&`, `||` e `!`  
+✅ O conceito de valores truthy e falsy  
+✅ Como usar o operador de coalescência nula (`??`)  
+✅ Precedência de operadores e boas práticas  
+
+Na próxima aula, você usará estes operadores para criar **estruturas condicionais** com `if`, `else` e `switch`, dando vida real à lógica de decisão em seus programas!
+
+## 🎯 Prepare-se para a Próxima Aula
+
+Na Aula 6, você aprenderá:
+- Como usar `if` e `else` para executar código condicionalmente
+- Estruturas `else if` para múltiplas condições
+- O operador ternário para decisões concisas
+- A estrutura `switch` para múltiplas opções
+
+Continue praticando os exercícios e explorando diferentes combinações de operadores. Quanto mais você praticar, mais natural se tornará o processo de criar lógicas complexas!

@@ -1,0 +1,828 @@
+# Aula 7: Tomando Decisões - Estruturas Condicionais em JavaScript
+
+## 🎯 Objetivos da Aula
+
+Ao final desta aula, você será capaz de:
+
+- ✅ Implementar lógica de decisão em seus programas
+- ✅ Usar estruturas `if`, `else` e `else if` corretamente
+- ✅ Aplicar a estrutura `switch` para múltiplas opções
+- ✅ Compreender e utilizar o operador ternário
+- ✅ Aninhar condicionais para decisões complexas
+
+---
+
+## 📚 Introdução: Por que Precisamos Tomar Decisões?
+
+Imagine um jogo onde seu personagem sempre anda para frente, independentemente do que está acontecendo. Se há um muro na frente? Ele continua andando. Se acabaram as vidas? Ele continua jogando. Absurdo, não é?
+
+**Na vida real, tomamos decisões o tempo todo:**
+- **SE** está chovendo, **ENTÃO** levo guarda-chuva
+- **SE** está frio, **ENTÃO** uso casaco, **CASO CONTRÁRIO** uso camiseta
+- **SE** tenho dinheiro suficiente, **ENTÃO** compro o produto
+
+Em programação, chamamos isso de **controle de fluxo de execução**. É a capacidade do programa de tomar decisões e executar diferentes ações baseadas em condições específicas.
+
+Por padrão, um programa JavaScript executa suas instruções **linha por linha, de cima para baixo**. Mas e se quisermos que certas partes do código só executem em situações específicas? É aí que entram as **estruturas condicionais**.
+
+---
+
+## 🔑 Conceito Fundamental: O que são Estruturas Condicionais?
+
+**Estruturas condicionais** são blocos de código que executam diferentes caminhos dependendo do resultado de um **teste lógico** (uma condição que pode ser verdadeira ou falsa).
+
+Elas permitem que nossos programas:
+- 📊 Avaliem situações
+- 🤔 Tomem decisões inteligentes
+- 🔀 Escolham diferentes caminhos de execução
+
+**Analogia do Mundo Real:**
+
+Pense em um semáforo:
+```
+SE a luz está VERDE → Pode passar
+SE a luz está AMARELA → Reduza a velocidade
+SE a luz está VERMELHA → PARE
+```
+
+Essa lógica em JavaScript seria:
+```javascript
+let corSemaforo = "verde";
+
+if (corSemaforo === "verde") {
+  console.log("Pode passar!");
+} else if (corSemaforo === "amarelo") {
+  console.log("Reduza a velocidade!");
+} else if (corSemaforo === "vermelho") {
+  console.log("PARE!");
+}
+```
+
+---
+
+## 1️⃣ A Declaração if...else
+
+A estrutura condicional mais fundamental em JavaScript (e em praticamente todas as linguagens) é o `if...else`. Ela representa a **tomada de decisão binária**: sim ou não, verdadeiro ou falso.
+
+### 📝 Sintaxe Básica
+
+```javascript
+if (condição) {
+  // código executado SE a condição for verdadeira
+} else {
+  // código executado SE a condição for falsa
+}
+```
+
+### 🧩 Componentes da Estrutura
+
+1. **A palavra-chave `if`** - indica o início da condicional
+2. **Parênteses `()`** - contêm a condição a ser testada
+3. **Condição** - uma expressão que resulta em `true` ou `false`
+4. **Chaves `{}`** - delimitam o bloco de código a executar
+5. **`else` (opcional)** - define o que fazer se a condição for falsa
+
+### 💡 Exemplo Prático: Mesada da Criança
+
+```javascript
+let tarefaFeita = true;
+let mesada;
+
+if (tarefaFeita === true) {
+  mesada = 10;
+  console.log("Parabéns! Você ganhou R$10 de mesada.");
+} else {
+  mesada = 5;
+  console.log("Você recebeu R$5. Complete suas tarefas na próxima semana!");
+}
+
+console.log("Mesada recebida: R$" + mesada);
+```
+
+**O que está acontecendo aqui?**
+
+1. Verificamos se a variável `tarefaFeita` é verdadeira
+2. **SE** sim, a mesada é 10 reais
+3. **SE NÃO**, a mesada é 5 reais
+4. O programa escolhe automaticamente o caminho correto
+
+### ⚡ if Sem else
+
+Nem sempre precisamos da parte `else`. Se só queremos executar código quando algo é verdadeiro, podemos usar apenas `if`:
+
+```javascript
+let temperaturaAlta = 35;
+
+if (temperaturaAlta > 30) {
+  console.log("⚠️ ALERTA: Temperatura muito alta! Beba água!");
+}
+
+console.log("Temperatura atual: " + temperaturaAlta + "°C");
+// Este console.log SEMPRE executa, independente da condição
+```
+
+### 🎭 Conversão Automática para Boolean
+
+Uma característica importante do JavaScript é que ele **converte automaticamente** valores para booleano quando necessário. Isso é chamado de **coerção de tipo**.
+
+```javascript
+let queijo = "Cheddar";
+
+if (queijo) {
+  console.log("Oba! Queijo disponível para fazer torrada.");
+} else {
+  console.log("Sem torrada de queijo para você hoje.");
+}
+```
+
+**Por que isso funciona?**
+
+JavaScript considera certos valores como **"falsy"** (que se tornam `false`) e outros como **"truthy"** (que se tornam `true`):
+
+**Valores FALSY (tornam-se false):**
+- `0` - número zero
+- `""` - string vazia
+- `null` - valor nulo
+- `undefined` - indefinido
+- `NaN` - Not a Number (não é um número)
+- `false` - o próprio false
+
+**Valores TRUTHY (tornam-se true):**
+- Todos os outros valores!
+- Qualquer número diferente de zero (incluindo negativos)
+- Qualquer string não-vazia
+- Arrays e objetos (mesmo vazios)
+- `true` - o próprio true
+
+### 📋 Exemplos de Truthy e Falsy
+
+```javascript
+// Exemplos FALSY
+if (0) {
+  console.log("Não executa"); // 0 é falsy
+}
+
+if ("") {
+  console.log("Não executa"); // string vazia é falsy
+}
+
+// Exemplos TRUTHY
+if ("texto") {
+  console.log("✅ Executa!"); // qualquer string não-vazia é truthy
+}
+
+if (42) {
+  console.log("✅ Executa!"); // qualquer número diferente de zero é truthy
+}
+
+if (-1) {
+  console.log("✅ Executa!"); // números negativos também são truthy
+}
+
+if ([]) {
+  console.log("✅ Executa!"); // array vazio é truthy
+}
+```
+
+---
+
+## 2️⃣ Múltiplas Condições: else if
+
+E se tivermos **mais de duas** opções? É aí que entra o `else if`, permitindo testar **múltiplas condições em sequência**.
+
+### 📝 Sintaxe
+
+```javascript
+if (condição1) {
+  // código para condição1
+} else if (condição2) {
+  // código para condição2
+} else if (condição3) {
+  // código para condição3
+} else {
+  // código se nenhuma condição for verdadeira
+}
+```
+
+### 🌤️ Exemplo: Sistema de Recomendação de Clima
+
+```javascript
+let clima = "ensolarado";
+let mensagem;
+
+if (clima === "ensolarado") {
+  mensagem = "🌞 Está lindo e ensolarado lá fora. Use shorts e protetor solar!";
+} else if (clima === "chuvoso") {
+  mensagem = "🌧️ Está chovendo; leve uma capa de chuva e um guarda-chuva.";
+} else if (clima === "nevando") {
+  mensagem = "❄️ Está nevando — está congelando! Melhor ficar em casa com chocolate quente.";
+} else if (clima === "nublado") {
+  mensagem = "☁️ Está nublado. Leve um casaco leve, por precaução.";
+} else {
+  mensagem = "🤔 Clima desconhecido. Verifique a janela antes de sair!";
+}
+
+console.log(mensagem);
+```
+
+### 🔍 Como Funciona o Fluxo?
+
+1. JavaScript testa a primeira condição (`clima === "ensolarado"`)
+2. Se for verdadeira, executa esse bloco e **pula todo o resto**
+3. Se for falsa, passa para o próximo `else if`
+4. Continua testando até encontrar uma condição verdadeira
+5. Se nenhuma for verdadeira, executa o bloco `else` (se houver)
+
+**⚠️ IMPORTANTE:** Apenas **UM** dos blocos será executado! Depois que uma condição é verdadeira, o JavaScript pula todas as outras verificações.
+
+### 🎓 Exemplo Prático: Sistema de Notas Escolares
+
+```javascript
+let nota = 75;
+let conceito;
+
+if (nota >= 90) {
+  conceito = "A - Excelente!";
+} else if (nota >= 80) {
+  conceito = "B - Muito bom!";
+} else if (nota >= 70) {
+  conceito = "C - Bom";
+} else if (nota >= 60) {
+  conceito = "D - Suficiente";
+} else {
+  conceito = "F - Insuficiente. Estude mais!";
+}
+
+console.log("Sua nota: " + nota);
+console.log("Conceito: " + conceito);
+```
+
+---
+
+## 3️⃣ Declarações switch: Para Muitas Opções
+
+Quando temos **muitas** condições baseadas no **mesmo valor**, usar vários `if...else if` pode ficar confuso. Para esses casos, temos a estrutura `switch`.
+
+### 📝 Sintaxe
+
+```javascript
+switch (expressão) {
+  case valor1:
+    // código para valor1
+    break;
+  case valor2:
+    // código para valor2
+    break;
+  case valor3:
+    // código para valor3
+    break;
+  default:
+    // código se nenhum valor corresponder
+    break;
+}
+```
+
+### 🧩 Componentes do Switch
+
+1. **`switch`** - palavra-chave inicial
+2. **Expressão** - o valor que será comparado
+3. **`case`** - cada possível valor
+4. **`break`** - para sair do switch após executar um caso
+5. **`default`** - executado se nenhum caso corresponder (opcional)
+
+### 🌤️ Exemplo: Sistema de Clima com Switch
+
+Vamos reescrever nosso exemplo de clima usando `switch`:
+
+```javascript
+let clima = "ensolarado";
+let mensagem;
+
+switch (clima) {
+  case "ensolarado":
+    mensagem = "🌞 Está lindo e ensolarado lá fora. Use shorts!";
+    break;
+  case "chuvoso":
+    mensagem = "🌧️ Está chovendo; leve uma capa de chuva.";
+    break;
+  case "nevando":
+    mensagem = "❄️ Está nevando — está congelando!";
+    break;
+  case "nublado":
+    mensagem = "☁️ Está nublado. Leve um casaco leve.";
+    break;
+  default:
+    mensagem = "🤔 Clima desconhecido!";
+    break;
+}
+
+console.log(mensagem);
+```
+
+### ⚠️ A Importância Crítica do `break`
+
+O `break` é **FUNDAMENTAL** no `switch`. Sem ele, ocorre o "fall-through" - o código continua executando os casos seguintes mesmo após encontrar uma correspondência!
+
+**Exemplo SEM break (comportamento indesejado):**
+
+```javascript
+let dia = "segunda";
+
+switch (dia) {
+  case "segunda":
+    console.log("Hoje é segunda-feira");
+  case "terça":
+    console.log("Hoje é terça-feira");
+  case "quarta":
+    console.log("Hoje é quarta-feira");
+  default:
+    console.log("É um dia da semana");
+}
+
+// SAÍDA:
+// Hoje é segunda-feira
+// Hoje é terça-feira
+// Hoje é quarta-feira
+// É um dia da semana
+// ❌ TUDO foi executado!
+```
+
+**Exemplo COM break (comportamento correto):**
+
+```javascript
+let dia = "segunda";
+
+switch (dia) {
+  case "segunda":
+    console.log("Hoje é segunda-feira");
+    break; // ✅ Para aqui
+  case "terça":
+    console.log("Hoje é terça-feira");
+    break;
+  case "quarta":
+    console.log("Hoje é quarta-feira");
+    break;
+  default:
+    console.log("É um dia da semana");
+}
+
+// SAÍDA:
+// Hoje é segunda-feira
+// ✅ Apenas isso foi executado!
+```
+
+### 🎯 Quando Usar Switch vs If/Else?
+
+**Use `switch` quando:**
+- ✅ Você está comparando a **mesma variável** contra **múltiplos valores**
+- ✅ Tem 3 ou mais condições baseadas no mesmo valor
+- ✅ Os valores são **específicos e exatos** (não faixas)
+
+**Use `if/else` quando:**
+- ✅ Você tem condições **complexas** (`&&`, `||`)
+- ✅ Está comparando **diferentes variáveis**
+- ✅ Usa operadores de comparação (`>`, `<`, `>=`, etc.)
+
+### 💼 Exemplo: Menu de Restaurante
+
+```javascript
+let prato = "hamburguer";
+let preco;
+
+switch (prato) {
+  case "pizza":
+    preco = 35.00;
+    console.log("🍕 Pizza - R$" + preco);
+    break;
+  case "hamburguer":
+    preco = 28.00;
+    console.log("🍔 Hambúrguer - R$" + preco);
+    break;
+  case "salada":
+    preco = 22.00;
+    console.log("🥗 Salada - R$" + preco);
+    break;
+  case "sushi":
+    preco = 45.00;
+    console.log("🍣 Sushi - R$" + preco);
+    break;
+  default:
+    console.log("❌ Prato não disponível no menu");
+    preco = 0;
+}
+
+console.log("Total a pagar: R$" + preco);
+```
+
+---
+
+## 4️⃣ Operador Ternário: Decisões Concisas
+
+O **operador ternário** é uma forma compacta de escrever um `if...else` simples. É chamado "ternário" porque trabalha com **três** partes.
+
+### 📝 Sintaxe
+
+```javascript
+let resultado = condição ? valorSeVerdadeiro : valorSeFalso;
+```
+
+Lê-se como: **"Se condição é verdadeira, use valorSeVerdadeiro, caso contrário, use valorSeFalso"**
+
+### 💡 Exemplo Básico
+
+```javascript
+let idade = 20;
+let acesso = idade >= 18 ? "permitido" : "negado";
+console.log(acesso); // "permitido"
+```
+
+Isso é equivalente a:
+
+```javascript
+let idade = 20;
+let acesso;
+
+if (idade >= 18) {
+  acesso = "permitido";
+} else {
+  acesso = "negado";
+}
+```
+
+### 🎯 Quando Usar o Operador Ternário?
+
+**✅ Use para:**
+- Atribuições simples baseadas em uma condição
+- Retornos condicionais em funções
+- Valores condicionais em expressões
+
+**❌ Evite para:**
+- Lógica complexa com múltiplas linhas
+- Quando a legibilidade for prejudicada
+- Decisões que executam ações (não apenas retornam valores)
+
+### 📊 Exemplos Práticos
+
+**Exemplo 1: Status de Matrícula**
+```javascript
+let nota = 75;
+let status = nota >= 60 ? "Aprovado ✅" : "Reprovado ❌";
+console.log(status);
+```
+
+**Exemplo 2: Desconto**
+```javascript
+let valorCompra = 150;
+let temDesconto = valorCompra > 100;
+let valorFinal = temDesconto ? valorCompra * 0.9 : valorCompra;
+
+console.log("Valor original: R$" + valorCompra);
+console.log("Desconto aplicado: " + (temDesconto ? "Sim (10%)" : "Não"));
+console.log("Valor final: R$" + valorFinal);
+```
+
+**Exemplo 3: Mensagem Personalizada**
+```javascript
+let horario = 14;
+let saudacao = horario < 12 ? "Bom dia! ☀️" : 
+               horario < 18 ? "Boa tarde! 🌤️" : 
+               "Boa noite! 🌙";
+console.log(saudacao);
+```
+
+### ⚠️ Operadores Ternários Aninhados
+
+Você pode aninhar operadores ternários, mas **cuidado com a legibilidade**:
+
+```javascript
+let idade = 25;
+let categoria = idade < 13 ? "Criança" :
+                idade < 18 ? "Adolescente" :
+                idade < 60 ? "Adulto" :
+                "Idoso";
+console.log(categoria); // "Adulto"
+```
+
+**Regra de Ouro:** Se precisa de mais de 2 níveis de aninhamento, use `if...else if` em vez do operador ternário!
+
+---
+
+## 5️⃣ Aninhamento de Condicionais
+
+**Aninhamento** significa colocar uma estrutura condicional **dentro de outra**. Isso nos permite criar **decisões hierárquicas e dependentes**.
+
+### 📝 Sintaxe
+
+```javascript
+if (condição1) {
+  // Se condição1 for verdadeira
+  
+  if (condição2) {
+    // Se condição1 E condição2 forem verdadeiras
+  } else {
+    // Se condição1 for verdadeira, mas condição2 for falsa
+  }
+  
+} else {
+  // Se condição1 for falsa
+}
+```
+
+### 🌡️ Exemplo: Sistema de Recomendação de Atividades
+
+```javascript
+let clima = "ensolarado";
+let temperatura = 35;
+
+if (clima === "ensolarado") {
+  console.log("🌞 O dia está ensolarado!");
+  
+  if (temperatura < 30) {
+    console.log("✅ Temperatura perfeita para atividades ao ar livre!");
+    console.log("Sugestão: Praia, parque ou caminhada");
+  } else {
+    console.log("🔥 Muito quente! Use protetor solar e beba muita água.");
+    console.log("Sugestão: Atividades na sombra ou piscina");
+  }
+  
+} else if (clima === "chuvoso") {
+  console.log("🌧️ Está chovendo!");
+  console.log("Sugestão: Cinema, leitura ou jogos em casa");
+} else {
+  console.log("☁️ Clima incerto. Verifique a previsão!");
+}
+```
+
+### 🎮 Exemplo: Sistema de Acesso a Jogo
+
+```javascript
+let idade = 16;
+let temPermissaoResponsavel = true;
+let possuiConta = true;
+
+if (possuiConta) {
+  console.log("✅ Conta verificada");
+  
+  if (idade >= 18) {
+    console.log("🎮 Acesso total liberado!");
+  } else {
+    console.log("⚠️ Você é menor de idade");
+    
+    if (temPermissaoResponsavel) {
+      console.log("✅ Permissão dos responsáveis verificada");
+      console.log("🎮 Acesso restrito liberado (modo infantil)");
+    } else {
+      console.log("❌ Acesso negado: necessária permissão dos responsáveis");
+    }
+  }
+  
+} else {
+  console.log("❌ Acesso negado: você precisa criar uma conta");
+}
+```
+
+### ⚠️ Cuidados com Aninhamento Excessivo
+
+Aninhamentos profundos demais tornam o código **difícil de ler e manter**. Veja este exemplo exagerado:
+
+```javascript
+// ❌ Evite isso!
+if (condicao1) {
+  if (condicao2) {
+    if (condicao3) {
+      if (condicao4) {
+        if (condicao5) {
+          // código muito aninhado!
+        }
+      }
+    }
+  }
+}
+```
+
+**Dica:** Se você tem mais de 3 níveis de aninhamento, considere refatorar usando operadores lógicos (`&&`, `||`) ou reorganizar sua lógica.
+
+---
+
+## 6️⃣ Boas Práticas com Condicionais
+
+### ✅ 1. Sempre Use Chaves `{}`
+
+Mesmo para instruções únicas, sempre use chaves:
+
+```javascript
+// ❌ Evite (funciona, mas é arriscado)
+if (idade >= 18)
+  console.log("Adulto");
+
+// ✅ Recomendado
+if (idade >= 18) {
+  console.log("Adulto");
+}
+```
+
+**Por quê?** Facilita manutenção e previne erros ao adicionar código posteriormente.
+
+### ✅ 2. Evite Comparações Desnecessárias
+
+```javascript
+// ❌ Redundante
+if (condicao === true) {
+  // código
+}
+
+// ✅ Melhor
+if (condicao) {
+  // código
+}
+
+// ❌ Redundante
+if (condicao === false) {
+  // código
+}
+
+// ✅ Melhor
+if (!condicao) {
+  // código
+}
+```
+
+### ✅ 3. Use Operadores Lógicos Corretamente
+
+Um erro comum é tentar abreviar comparações:
+
+```javascript
+// ❌ ERRADO - sempre será true!
+if (x === 5 || 7 || 10 || 20) {
+  console.log("x é um dos números");
+}
+```
+
+**Por que está errado?**
+- JavaScript avalia: `(x === 5) || 7 || 10 || 20`
+- Números diferentes de zero são "truthy"
+- Resultado sempre será `true`!
+
+```javascript
+// ✅ CORRETO - cada comparação deve ser explícita
+if (x === 5 || x === 7 || x === 10 || x === 20) {
+  console.log("x é um dos números");
+}
+```
+
+### ✅ 4. Ordem das Condições Importa
+
+Coloque as condições **mais específicas** primeiro:
+
+```javascript
+// ❌ Problema: nunca chega nas outras condições
+if (idade > 0) {
+  console.log("Pessoa");
+} else if (idade > 12) {
+  console.log("Adolescente");
+} else if (idade > 18) {
+  console.log("Adulto");
+}
+
+// ✅ Correto: da mais específica para a mais geral
+if (idade > 18) {
+  console.log("Adulto");
+} else if (idade > 12) {
+  console.log("Adolescente");
+} else if (idade > 0) {
+  console.log("Criança");
+}
+```
+
+### ✅ 5. Seja Claro e Explícito
+
+```javascript
+// ❌ Confuso
+if (!(!ativo)) {
+  // código
+}
+
+// ✅ Claro
+if (ativo) {
+  // código
+}
+```
+
+### ✅ 6. Use `===` em vez de `==`
+
+```javascript
+// ❌ Evite == (comparação com conversão)
+if (valor == "5") { // true para 5 ou "5"
+  // código
+}
+
+// ✅ Use === (comparação estrita)
+if (valor === "5") { // true apenas para "5"
+  // código
+}
+```
+
+---
+
+## 🎯 Exercícios Práticos
+
+### Exercício 1: Classificador de Idade
+
+Crie um programa que classifica uma pessoa baseada em sua idade:
+- 0-12: Criança
+- 13-17: Adolescente
+- 18-59: Adulto
+- 60+: Idoso
+
+```javascript
+let idade = 25;
+// Seu código aqui
+```
+
+### Exercício 2: Calculadora de Desconto
+
+Crie uma calculadora que aplica desconto baseado no valor da compra:
+- Menos de R$100: sem desconto
+- R$100 a R$499: 10% de desconto
+- R$500 a R$999: 15% de desconto
+- R$1000 ou mais: 20% de desconto
+
+```javascript
+let valorCompra = 750;
+// Seu código aqui
+```
+
+### Exercício 3: Sistema de Login
+
+Crie um sistema que verifica:
+1. Se o usuário existe
+2. Se a senha está correta
+3. Se a conta está ativa
+
+```javascript
+let usuarioExiste = true;
+let senhaCorreta = true;
+let contaAtiva = false;
+// Seu código aqui
+```
+
+### Exercício 4: Menu Interativo
+
+Crie um menu de restaurante que:
+- Mostra o preço do prato escolhido
+- Adiciona taxa de serviço de 10% se o valor for acima de R$50
+- Informa se o prato está disponível
+
+```javascript
+let prato = "lasanha";
+// Seu código aqui
+// Considere: pizza (R$35), lasanha (R$42), sushi (R$65)
+```
+
+---
+
+## 📝 Resumo da Aula
+
+Parabéns! Você aprendeu:
+
+✅ **if...else** - A base de todas as decisões em programação  
+✅ **else if** - Para testar múltiplas condições sequencialmente  
+✅ **switch** - Para comparar um valor contra várias opções  
+✅ **Operador ternário** - Para decisões simples e concisas  
+✅ **Aninhamento** - Para decisões hierárquicas e dependentes  
+✅ **Truthy e Falsy** - Como JavaScript converte valores para booleano  
+✅ **Boas práticas** - Como escrever código limpo e maintível  
+
+### 🔑 Conceitos-Chave para Lembrar
+
+1. **Estruturas condicionais permitem que programas tomem decisões**
+2. **if...else representa decisão binária fundamental**
+3. **JavaScript converte valores usando conceitos truthy/falsy**
+4. **else if avalia múltiplas condições quando apenas uma deve executar**
+5. **switch compara uma expressão contra múltiplos valores eficientemente**
+6. **break é crucial no switch para prevenir execução sequencial**
+7. **Operador ternário é ideal para atribuições condicionais simples**
+8. **Aninhamento representa decisões hierárquicas**
+9. **Cada comparação deve ser explícita com operadores lógicos**
+10. **Usar chaves sempre melhora legibilidade e previne erros**
+
+---
+
+## 🚀 Próxima Aula
+
+Na **Aula 8**, você aprenderá sobre **Estruturas de Repetição** (loops):
+- Como automatizar tarefas repetitivas
+- Loop `for` tradicional
+- Loops `while` e `do...while`
+- Controle de fluxo com `break` e `continue`
+- Quando usar cada tipo de loop
+
+**Prepare-se para multiplicar o poder dos seus programas!** 💪
+
+---
+
+## 💬 Reflexão Final
+
+> *"A programação não é sobre escrever código - é sobre resolver problemas. E problemas do mundo real sempre envolvem decisões. Dominar estruturas condicionais é dominar a arte de ensinar computadores a pensar."*
+
+Continue praticando! Quanto mais você usar essas estruturas, mais natural e intuitivo será o processo de transformar lógica em código.

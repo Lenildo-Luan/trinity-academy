@@ -1,0 +1,424 @@
+# Aula 2: Variáveis - Os Primeiros Blocos da Programação
+
+## Introdução
+
+Imagine que você está organizando sua casa e precisa guardar diferentes objetos em caixas. Cada caixa recebe uma etiqueta com um nome descritivo: "Livros", "Roupas de Inverno", "Documentos Importantes". Sempre que precisar de algo, você sabe exatamente onde encontrar olhando a etiqueta da caixa.
+
+Na programação, as **variáveis** funcionam exatamente como essas caixas etiquetadas. Elas são contêineres especiais onde guardamos informações (dados) que nossos programas precisam usar, e cada uma tem um nome único que nos permite encontrar e usar essas informações sempre que necessário.
+
+Nesta aula, você vai descobrir como criar essas "caixas digitais" e entender por que elas são fundamentais para qualquer programa que você venha a escrever.
+
+## O que São Variáveis?
+
+### Conceito Fundamental
+
+Uma **variável** é um espaço nomeado na memória do computador onde podemos armazenar um valor. Pense nela como uma caixa que:
+
+- Tem um **nome** (etiqueta) para identificá-la
+- Pode **guardar um valor** dentro dela
+- Permite **acessar** esse valor sempre que precisarmos
+- Possibilita **alterar** o conteúdo quando necessário
+
+### Analogia do Mundo Real
+
+Vamos usar uma analogia simples para entender melhor:
+
+```
+🏠 Casa = Programa
+📦 Caixa = Variável
+🏷️ Etiqueta = Nome da variável
+📚 Conteúdo = Valor armazenado
+```
+
+Se você tem uma caixa etiquetada como "Livros Favoritos" e coloca dentro dela o livro "Dom Casmurro", sempre que alguém perguntar "Qual livro está na caixa 'Livros Favoritos'?", você saberá responder: "Dom Casmurro".
+
+## Por que Precisamos de Variáveis?
+
+### 1. Armazenamento de Informações
+
+Programas precisam lembrar de informações. Por exemplo:
+- O nome do usuário que fez login
+- A pontuação atual em um jogo
+- O preço de um produto
+- A temperatura atual
+
+### 2. Reutilização de Dados
+
+Em vez de escrever o mesmo valor várias vezes no código, guardamos na variável e usamos quantas vezes precisar:
+
+```javascript
+// Sem variável (repetitivo e difícil de manter)
+console.log("João tem 25 anos");
+console.log("João está estudando programação");
+console.log("João mora em São Paulo");
+
+// Com variável (limpo e fácil de alterar)
+let nome = "João";
+console.log(nome + " tem 25 anos");
+console.log(nome + " está estudando programação");
+console.log(nome + " mora em São Paulo");
+```
+
+### 3. Facilidade de Manutenção
+
+Se precisarmos mudar um valor, alteramos apenas na variável:
+
+```javascript
+let precoProduto = 100;
+let desconto = 10;
+let precoFinal = precoProduto - desconto;
+
+console.log("Preço final: " + precoFinal); // 90
+```
+
+## Criando Suas Primeiras Variáveis
+
+### Declaração vs. Inicialização
+
+Existem dois passos distintos no trabalho com variáveis:
+
+1. **Declaração**: Criar a variável (preparar a caixa e colar a etiqueta)
+2. **Inicialização**: Colocar um valor inicial na variável (colocar algo dentro da caixa)
+
+### Exemplos Práticos
+
+```javascript
+// 1. Apenas declaração (caixa vazia)
+let idade;
+console.log(idade); // undefined (nada dentro da caixa)
+
+// 2. Declaração com inicialização (caixa com conteúdo)
+let nome = "Maria";
+console.log(nome); // "Maria"
+
+// 3. Inicializando depois
+let cidade;
+cidade = "Rio de Janeiro";
+console.log(cidade); // "Rio de Janeiro"
+```
+
+## As Três Palavras-Chave: let, const e var
+
+JavaScript oferece três formas de criar variáveis, cada uma com características específicas:
+
+### 1. let - A Escolha Moderna
+
+**Use let quando o valor da variável pode mudar:**
+
+```javascript
+let pontuacao = 0;
+console.log(pontuacao); // 0
+
+pontuacao = 100;
+console.log(pontuacao); // 100
+
+pontuacao = pontuacao + 50;
+console.log(pontuacao); // 150
+```
+
+**Características do let:**
+- ✅ Permite alterar o valor
+- ✅ Não permite redeclarar no mesmo escopo
+- ✅ Comportamento previsível
+- ✅ Recomendado para iniciantes
+
+### 2. const - Para Valores Constantes
+
+**Use const quando o valor NÃO deve mudar:**
+
+```javascript
+const pi = 3.14159;
+const nomeEmpresa = "TechCorp";
+const dataFundacao = "2020-01-15";
+
+console.log(pi); // 3.14159
+
+// Isso geraria erro:
+// pi = 3.14; // Erro! Não pode alterar uma constante
+```
+
+**Características do const:**
+- ✅ Valor não pode ser alterado
+- ✅ Deve ser inicializada na declaração
+- ✅ Expressa intenção de imutabilidade
+- ✅ Previne erros acidentais
+
+### 3. var - O Método Antigo
+
+**var é a forma antiga de declarar variáveis:**
+
+```javascript
+var sobrenome = "Silva";
+console.log(sobrenome); // "Silva"
+```
+
+**Por que evitar var:**
+- ❌ Comportamento confuso com escopo
+- ❌ Permite redeclaração acidental
+- ❌ Pode causar bugs difíceis de encontrar
+- ❌ Substituído por let e const
+
+### Comparação Prática
+
+```javascript
+// ✅ BOM: Usando let e const apropriadamente
+const valorFixo = 100;        // Não vai mudar
+let contadorVariavel = 0;     // Vai mudar
+contadorVariavel = contadorVariavel + 1;
+
+// ❌ EVITAR: Usando var
+var minhaVariavel = "teste";
+var minhaVariavel = "outro teste"; // Redeclaração permitida (confuso!)
+```
+
+## Regras para Nomes de Variáveis
+
+### Regras Obrigatórias (Não seguir = Erro)
+
+1. **Deve começar com letra, $ ou _**
+```javascript
+// ✅ Válidos
+let nome = "João";
+let $preco = 100;
+let _contador = 0;
+
+// ❌ Inválidos
+let 1nome = "João";     // Não pode começar com número
+let meu-nome = "João";  // Não pode ter hífen
+```
+
+2. **Pode conter letras, números, $ e _**
+```javascript
+// ✅ Válidos
+let idade25 = 25;
+let nota_final = 8.5;
+let $valor2023 = 1000;
+
+// ❌ Inválidos
+let nota final = 8.5;    // Não pode ter espaço
+let preço = 100;         // Não pode ter acentos
+```
+
+3. **Não pode ser palavra reservada**
+```javascript
+// ❌ Palavras reservadas (não use como nomes)
+let if = 10;        // 'if' é palavra reservada
+let function = 20;  // 'function' é palavra reservada
+let return = 30;    // 'return' é palavra reservada
+```
+
+### Boas Práticas de Nomenclatura
+
+#### 1. Use Nomes Descritivos
+
+```javascript
+// ❌ Nomes ruins (muito genéricos)
+let a = 25;
+let x = "João";
+let temp = 36.5;
+
+// ✅ Nomes bons (descritivos)
+let idade = 25;
+let nomeUsuario = "João";
+let temperaturaCorporal = 36.5;
+```
+
+#### 2. Siga a Convenção camelCase
+
+**camelCase**: primeira palavra minúscula, demais palavras com primeira letra maiúscula
+
+```javascript
+// ✅ camelCase correto
+let nomeCompleto = "Ana Silva";
+let enderecoEmail = "ana@email.com";
+let dataDeNascimento = "1990-05-15";
+let numeroTelefone = "(11) 99999-9999";
+```
+
+#### 3. Seja Específico
+
+```javascript
+// ❌ Muito genérico
+let dados = "Ana";
+let numero = 25;
+let valor = 1500;
+
+// ✅ Específico e claro
+let nomeCliente = "Ana";
+let idadeCliente = 25;
+let salarioMensal = 1500;
+```
+
+#### 4. Use Padrões Consistentes
+
+```javascript
+// ✅ Padrão consistente para informações do usuário
+let usuarioNome = "Carlos";
+let usuarioIdade = 30;
+let usuarioEmail = "carlos@email.com";
+let usuarioTelefone = "(11) 88888-8888";
+```
+
+## Trabalhando com Variáveis na Prática
+
+### Exemplo 1: Informações Pessoais
+
+```javascript
+// Criando variáveis para informações pessoais
+const nome = "Ana Carolina";
+const sobrenome = "Santos";
+let idade = 28;
+let profissao = "Desenvolvedora";
+
+// Usando as variáveis
+console.log("Nome completo: " + nome + " " + sobrenome);
+console.log("Idade: " + idade + " anos");
+console.log("Profissão: " + profissao);
+
+// Alterando valores que podem mudar
+idade = 29; // Aniversário!
+profissao = "Desenvolvedora Sênior"; // Promoção!
+
+console.log("Informações atualizadas:");
+console.log("Idade: " + idade + " anos");
+console.log("Nova profissão: " + profissao);
+```
+
+## Conceitos Importantes
+
+### 1. JavaScript é Case-Sensitive
+
+JavaScript diferencia maiúsculas de minúsculas:
+
+```javascript
+let nome = "João";
+let Nome = "Maria";
+let NOME = "Pedro";
+
+console.log(nome); // "João"
+console.log(Nome); // "Maria"
+console.log(NOME); // "Pedro"
+
+// São três variáveis diferentes!
+```
+
+### 2. Valores Padrão
+
+Variáveis declaradas sem valor inicial têm o valor `undefined`:
+
+```javascript
+let minhaVariavel;
+console.log(minhaVariavel); // undefined
+
+// É melhor sempre inicializar
+let minhaVariavelComValor = 0;
+console.log(minhaVariavelComValor); // 0
+```
+
+### 3. Reatribuição vs. Redeclaração
+
+```javascript
+// ✅ Reatribuição (mudar o valor) - PERMITIDO
+let contador = 0;
+contador = 1;
+contador = 2;
+
+// ❌ Redeclaração (criar novamente) - ERRO
+let contador = 0;
+let contador = 1; // Erro! Já existe uma variável chamada 'contador'
+```
+
+## Exercícios Práticos
+
+### Exercício 1: Criando Variáveis Pessoais
+
+Crie variáveis para armazenar suas informações pessoais e exiba-as:
+
+```javascript
+// Suas informações pessoais
+const meuNome = "SEU_NOME_AQUI";
+const minhaIdade = "SUA_IDADE_AQUI";
+const minhaCidade = "SUA_CIDADE_AQUI";
+const meuHobby = "SEU_HOBBY_AQUI";
+
+// Exiba as informações
+console.log("Meu nome é: " + meuNome);
+console.log("Tenho " + minhaIdade + " anos");
+console.log("Moro em: " + minhaCidade);
+console.log("Gosto de: " + meuHobby);
+```
+
+## Erros Comuns e Como Evitá-los
+
+### 1. Tentar usar variável antes de declarar
+
+```javascript
+// ❌ ERRO
+console.log(minhaVariavel); // Erro! Variável não foi declarada
+let minhaVariavel = "teste";
+
+// ✅ CORRETO
+let minhaVariavel = "teste";
+console.log(minhaVariavel); // "teste"
+```
+
+### 2. Tentar alterar uma constante
+
+```javascript
+// ❌ ERRO
+const pi = 3.14;
+pi = 3.14159; // Erro! const não pode ser alterada
+
+// ✅ CORRETO
+let aproximacaoPi = 3.14;
+aproximacaoPi = 3.14159; // OK! let pode ser alterada
+```
+
+### 3. Nomes de variáveis confusos
+
+```javascript
+// ❌ CONFUSO
+let a = "João";
+let b = 25;
+let c = "Desenvolvedor";
+
+// ✅ CLARO
+let nome = "João";
+let idade = 25;
+let profissao = "Desenvolvedor";
+```
+
+## Resumo da Aula
+
+### Conceitos Principais Aprendidos:
+
+1. **Variáveis são contêineres nomeados** para armazenar dados
+2. **let** para valores que podem mudar
+3. **const** para valores constantes
+4. **var** deve ser evitado (método antigo)
+5. **Nomes descritivos** tornam o código mais legível
+6. **camelCase** é a convenção de nomenclatura
+7. **Declaração** cria a variável, **inicialização** coloca um valor
+
+### Checklist de Boas Práticas:
+
+- ✅ Use `let` para valores que mudam
+- ✅ Use `const` para valores que não mudam
+- ✅ Evite `var`
+- ✅ Escolha nomes descritivos
+- ✅ Siga a convenção camelCase
+- ✅ Inicialize variáveis quando possível
+- ✅ Seja consistente na nomenclatura
+
+### Próximos Passos:
+
+Na próxima aula, você aprenderá sobre **tipos de dados** - os diferentes tipos de informações que podem ser armazenados em variáveis: números, textos, valores verdadeiro/falso e muito mais!
+
+## Exercícios para Casa
+
+1. **Crie um "perfil pessoal"** usando variáveis para nome, idade, cidade, profissão e hobby
+2. **Simule uma conta de energia elétrica** calculando o valor total com base no consumo e tarifa
+3. **Faça uma lista de suas 5 músicas favoritas** usando variáveis descritivas
+4. **Pratique nomenclatura** criando 10 variáveis com nomes bem descritivos para diferentes contextos
+
+Lembre-se: a programação se aprende praticando! Quanto mais você experimentar com variáveis, mais natural se tornará usar esse conceito fundamental.
