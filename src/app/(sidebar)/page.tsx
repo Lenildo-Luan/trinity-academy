@@ -17,9 +17,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Compass - The Ultimate Guide to Navigating Uncertainty",
+  title: "Introdução a Programação",
   description:
-    "A comprehensive journey that helps you navigate uncertainty and make choices aligned with your values and goals.",
+    "Uma jornada no universo da programação que te fará entender os conceitos fundamentais da programação utilizando a linguagem mais popular do mundo: JavaScript.",
 };
 
 function formatDuration(seconds: number): string {
@@ -43,7 +43,7 @@ export default async function Page() {
         <Breadcrumbs>
           <BreadcrumbHome />
           <BreadcrumbSeparator />
-          <Breadcrumb>Overview</Breadcrumb>
+          <Breadcrumb>Conteúdo</Breadcrumb>
         </Breadcrumbs>
       }
     >
@@ -60,22 +60,23 @@ export default async function Page() {
           <div className="relative">
             <div className="px-4 pt-48 pb-12 lg:py-24">
               <Logo className="h-8 fill-gray-950 dark:fill-white" />
-              <h1 className="sr-only">Course overview</h1>
+              <h1 className="sr-only">Introdução a Programação</h1>
               <p className="mt-7 max-w-lg text-base/7 text-pretty text-gray-600 dark:text-gray-400">
-                A comprehensive journey that helps you navigate uncertainty and
-                make choices aligned with your values and goals.
+                Uma jornada no universo da programação que te fará entender os
+                conceitos fundamentais da programação utilizando a linguagem mais
+                popular do mundo: JavaScript.
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3 text-sm/7 font-semibold text-gray-950 sm:gap-3 dark:text-white">
                 <div className="flex items-center gap-1.5">
                   <BookIcon className="stroke-gray-950/40 dark:stroke-white/40" />
-                  {modules.length} modules
+                  {modules.length} modulos  
                 </div>
                 <span className="hidden text-gray-950/25 sm:inline dark:text-white/25">
                   &middot;
                 </span>
                 <div className="flex items-center gap-1.5">
                   <LessonsIcon className="stroke-gray-950/40 dark:stroke-white/40" />
-                  {lessons.length} lessons
+                  {lessons.length} aulas
                 </div>
                 <span className="hidden text-gray-950/25 sm:inline dark:text-white/25">
                   &middot;
@@ -91,7 +92,7 @@ export default async function Page() {
                   className="inline-flex items-center gap-x-2 rounded-full bg-gray-950 px-3 py-0.5 text-sm/7 font-semibold text-white hover:bg-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600"
                 >
                   <PlayIcon className="fill-white" />
-                  Start the course
+                  Começar
                 </Link>
               </div>
             </div>

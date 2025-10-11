@@ -3,7 +3,7 @@ import { TextInput } from "@/components/input";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Login - Compass",
+  title: "Login - Trinity Academy",
 };
 
 export default function Page() {
@@ -21,7 +21,7 @@ export default function Page() {
           <TextInput type="email" id="email" required className="mt-2" />
         </div>
         <Button type="submit" className="mt-6 w-full">
-          Send one-time password
+          Enviar senha de utiliação única
         </Button>
       </form>
     </>

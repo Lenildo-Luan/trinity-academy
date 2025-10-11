@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className="flex min-h-dvh flex-col items-center justify-center px-6 py-12">
       <div className="w-full max-w-xs">
         <div className="flex justify-center">
-          <Link href="/" aria-label="Compass">
+          <Link href="/" aria-label="trinity-academy">
             <Logo className="h-6 fill-gray-950 dark:fill-white" />
           </Link>
         </div>

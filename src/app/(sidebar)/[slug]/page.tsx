@@ -20,7 +20,7 @@ export async function generateMetadata({
   let lesson = await getLesson((await params).slug);
 
   return {
-    title: `${lesson?.title} - Compass`,
+    title: `${lesson?.title} - Introdução a Programação`,
     description: lesson?.description,
   };
 }
