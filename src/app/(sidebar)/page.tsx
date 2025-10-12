@@ -51,7 +51,7 @@ export default async function Page() {
         <div className="absolute -inset-x-2 top-0 -z-10 h-80 overflow-hidden rounded-t-2xl mask-b-from-60% sm:h-88 md:h-112 lg:-inset-x-4 lg:h-128">
           <img
             alt=""
-            src="https://assets.tailwindcss.com/templates/compass/hero-background.png"
+            src="https://ik.imagekit.io/qfmgarse7/js-background.avif?updatedAt=1760284705415"
             className="absolute inset-0 h-full w-full mask-l-from-60% object-cover object-center opacity-40"
           />
           <div className="absolute inset-0 rounded-t-2xl outline-1 -outline-offset-1 outline-gray-950/10 dark:outline-white/10" />

@@ -47,7 +47,7 @@ export async function getLessonContent(slug: string) {
 const lessons = [
   {
     id: "introduction",
-    title: "Introdução a programação com JavaScript",
+    title: "Fundamentos",
     description:
       "Uma introdução ao JavaScript, a linguagem de programação mais popular do mundo.",
     lessons: [
@@ -83,7 +83,7 @@ const lessons = [
   },
   {
     id: "code-flow",
-    title: "Mudando o fluxo de execução do código",
+    title: "Mudando o fluxo de execução",
     description:
       "Aprenda a mudar o fluxo de execução do código usando estruturas condicionais e loops.",
     lessons: [
@@ -126,7 +126,7 @@ const lessons = [
   },
   {
     id: "basic-data-structures",
-    title: "Estruturas de dados básicas do JavaScript",
+    title: "Estruturas de dados básicas",
     description:
       "Vamos nos aprofundar nas estruturas de dados mais comuns em JavaScript: arrays, objetos e strings.",
     lessons: [
