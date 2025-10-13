@@ -51,13 +51,22 @@ function OTPSlot({ isActive, char, hasFakeCaret }: BaseOTPSlotProps) {
 export function OTPInput({
   className,
   maxLength,
+  name = "otp",
+  value,
+  onChange,
 }: {
   className?: string;
   maxLength: number;
+  name?: string;
+  value?: string;
+  onChange?: (value: string) => void;
 }) {
   return (
     <BaseOTPInput
       required
+      name={name}
+      value={value}
+      onChange={onChange}
       containerClassName={className}
       maxLength={maxLength}
       spellCheck={false}

@@ -15,6 +15,7 @@ export default function Page() {
   const [success, setSuccess] = useState<string | null>(null);
   const [resendCooldown, setResendCooldown] = useState(0);
   const [isResending, setIsResending] = useState(false);
+  const [otpValue, setOtpValue] = useState('');
   const otpInputRef = useRef<HTMLFormElement>(null);
 
   // Get email from URL params
@@ -40,9 +41,7 @@ export default function Page() {
     setError(null);
     setSuccess(null);
 
-    const formData = new FormData(e.currentTarget);
-    const otpInput = e.currentTarget.querySelector('input[type="text"]');
-    const token = otpInput instanceof HTMLInputElement ? otpInput.value : '';
+    const token = otpValue.trim();
 
     if (!token || token.length !== 6) {
       setError('Por favor, insira o código de 6 dígitos.');
@@ -95,7 +94,12 @@ export default function Page() {
         <span className="font-semibold">{email}</span>.
       </p>
       <form ref={otpInputRef} onSubmit={handleSubmit} className="mt-6">
-        <OTPInput maxLength={6} />
+        <OTPInput
+          maxLength={6}
+          name="otp"
+          value={otpValue}
+          onChange={(value) => setOtpValue(value)}
+        />
 
         {error && (
           <div className="mt-4 rounded-md bg-red-50 dark:bg-red-900/20 p-3 text-sm text-red-800 dark:text-red-200">
