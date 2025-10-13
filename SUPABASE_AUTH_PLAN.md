@@ -28,14 +28,14 @@
   - `verifyOTP(email, token)` - Verify OTP code
   - `signOut()` - Sign out user
   - `resendOTP(email)` - Resend OTP code
-- [ ] Add middleware to protect routes and handle auth redirects
+- [x] Add middleware to protect routes and handle auth redirects
   - `middleware.ts` at root
   - Protect all routes except `/login`, `/otp`, and public assets
   - Redirect unauthenticated users to `/login`
   - Redirect authenticated users away from `/login`
 
 ### 3. Login Flow
-- [ ] Update `/login` page (`src/app/(auth)/login/page.tsx`):
+- [x] Update `/login` page (`src/app/(auth)/login/page.tsx`):
   - Convert form to use server action
   - Add loading state during OTP send
   - Handle errors (invalid email, rate limiting, etc.)
