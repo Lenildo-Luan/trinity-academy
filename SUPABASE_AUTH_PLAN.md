@@ -12,17 +12,17 @@
 - [x] Create `.env.local` with Supabase credentials:
   - `NEXT_PUBLIC_SUPABASE_URL`
   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- [ ] Create Supabase client utilities for server/client components:
+- [x] Create Supabase client utilities for server/client components:
   - `src/lib/supabase/client.ts` - Browser client
   - `src/lib/supabase/server.ts` - Server client
   - `src/lib/supabase/middleware.ts` - Middleware helper
 
 ### 2. Authentication Infrastructure
-- [ ] Create auth context provider for client-side user state
+- [x] Create auth context provider for client-side user state
   - `src/contexts/auth-context.tsx`
   - Export `useAuth()` hook
   - Provide user state and loading state
-- [ ] Create server actions for OTP operations:
+- [x] Create server actions for OTP operations:
   - `src/app/(auth)/actions.ts`
   - `sendOTP(email)` - Send OTP to email
   - `verifyOTP(email, token)` - Verify OTP code
