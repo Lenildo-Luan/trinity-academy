@@ -16,6 +16,7 @@ const nextConfig = {
       new URL("https://assets.tailwindcss.com/templates/compass/**"),
     ],
   },
+  serverExternalPackages: ["@supabase/ssr", "@supabase/supabase-js"],
 };
 
 export default withMDX(nextConfig);
