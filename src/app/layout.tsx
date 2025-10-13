@@ -3,6 +3,7 @@ import { GeistMono } from "geist/font/mono";
 import localFont from "next/font/local";
 import type React from "react";
 import "./globals.css";
+import { AuthProvider } from "@/contexts/auth-context";
 
 const InterVariable = localFont({
   variable: "--font-inter",
@@ -27,7 +28,9 @@ export default function RootLayout({
       )}
     >
       <body>
-        <div className="isolate">{children}</div>
+        <AuthProvider>
+          <div className="isolate">{children}</div>
+        </AuthProvider>
       </body>
     </html>
   );

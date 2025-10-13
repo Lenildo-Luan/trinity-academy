@@ -43,7 +43,7 @@
   - Show success message after sending OTP
 
 ### 4. OTP Verification
-- [ ] Update `/otp` page (`src/app/(auth)/otp/page.tsx`):
+- [x] Update `/otp` page (`src/app/(auth)/otp/page.tsx`):
   - Get email from URL params or session
   - Display actual user email (not hardcoded)
   - Add server action to verify OTP
@@ -53,17 +53,17 @@
   - Add loading state during verification
 
 ### 5. Protected Routes & User State
-- [ ] Add middleware (`middleware.ts`):
+- [x] Add middleware (`middleware.ts`):
   - Refresh Supabase session on each request
   - Protect routes (redirect to `/login` if not authenticated)
   - Allow public routes: `/login`, `/otp`
-- [ ] Update navbar (`src/components/navbar.tsx`):
+- [x] Update navbar (`src/components/navbar.tsx`):
   - Use auth context to get user state
   - Show user email or name when authenticated
   - Show "Sign in" link when not authenticated
   - Implement working sign out functionality
   - Add loading state while checking auth
-- [ ] Wrap app with auth provider:
+- [x] Wrap app with auth provider:
   - Update root layout or create provider wrapper
   - Initialize auth state on mount
 

@@ -33,19 +33,30 @@ export function DropdownMenu({
 
 export function DropdownItem({
   href,
+  onClick,
   children,
 }: {
-  href: string;
+  href?: string;
+  onClick?: () => void;
   children: React.ReactNode;
 }) {
   return (
     <MenuItem>
-      <Link
-        href={href}
-        className="block rounded-md px-3 py-0.5 text-sm/7 text-gray-950 focus:outline-none data-focus:bg-blue-500 data-focus:text-white dark:text-white"
-      >
-        {children}
-      </Link>
+      {href ? (
+        <Link
+          href={href}
+          className="block rounded-md px-3 py-0.5 text-sm/7 text-gray-950 focus:outline-none data-focus:bg-blue-500 data-focus:text-white dark:text-white"
+        >
+          {children}
+        </Link>
+      ) : (
+        <button
+          onClick={onClick}
+          className="block w-full rounded-md px-3 py-0.5 text-left text-sm/7 text-gray-950 focus:outline-none data-focus:bg-blue-500 data-focus:text-white dark:text-white"
+        >
+          {children}
+        </button>
+      )}
     </MenuItem>
   );
 }

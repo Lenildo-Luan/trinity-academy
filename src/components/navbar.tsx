@@ -20,6 +20,8 @@ import { clsx } from "clsx";
 import Link from "next/link";
 import type React from "react";
 import { useState } from "react";
+import { useAuth } from "@/contexts/auth-context";
+import { useRouter } from "next/navigation";
 
 export function Navbar({ children, ...props }: React.ComponentProps<"div">) {
   return (
@@ -43,6 +45,19 @@ function MobileNavigation({
   open: boolean;
   onClose: () => void;
 }) {
+  const { user, loading, signOut } = useAuth();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      onClose();
+      router.push("/login");
+    } catch (error) {
+      console.error("Failed to sign out:", error);
+    }
+  };
+
   return (
     <Dialog open={open} onClose={onClose} className="lg:hidden">
       <DialogBackdrop className="fixed inset-0 bg-gray-950/25" />
@@ -70,23 +85,46 @@ function MobileNavigation({
                 </CloseButton>
               ))}
             </div>
-            <div className="mt-6 flex flex-col gap-y-2">
-              <h3 className="px-4 py-1 text-sm/7 text-gray-500">Account</h3>
-              {[
-                ["Settings", "#"],
-                ["Support", "#"],
-                ["Sign out", "/login"],
-              ].map(([title, href], index) => (
+            {loading ? (
+              <div className="mt-6 px-4 py-1 text-sm/7 text-gray-500">
+                Loading...
+              </div>
+            ) : user ? (
+              <div className="mt-6 flex flex-col gap-y-2">
+                <h3 className="px-4 py-1 text-sm/7 text-gray-500">
+                  {user.email || "Account"}
+                </h3>
+                {[
+                  ["Settings", "#"],
+                  ["Support", "#"],
+                ].map(([title, href], index) => (
+                  <CloseButton
+                    as={Link}
+                    key={index}
+                    href={href}
+                    className="rounded-md px-4 py-1 text-sm/7 font-semibold text-gray-950 hover:bg-gray-950/5 dark:text-white dark:hover:bg-white/5"
+                  >
+                    {title}
+                  </CloseButton>
+                ))}
+                <button
+                  onClick={handleSignOut}
+                  className="rounded-md px-4 py-1 text-left text-sm/7 font-semibold text-gray-950 hover:bg-gray-950/5 dark:text-white dark:hover:bg-white/5"
+                >
+                  Sign out
+                </button>
+              </div>
+            ) : (
+              <div className="mt-6 flex flex-col gap-y-2">
                 <CloseButton
                   as={Link}
-                  key={index}
-                  href={href}
+                  href="/login"
                   className="rounded-md px-4 py-1 text-sm/7 font-semibold text-gray-950 hover:bg-gray-950/5 dark:text-white dark:hover:bg-white/5"
                 >
-                  {title}
+                  Sign in
                 </CloseButton>
-              ))}
-            </div>
+              </div>
+            )}
           </div>
         </DialogPanel>
       </div>
@@ -96,6 +134,17 @@ function MobileNavigation({
 
 function SiteNavigation() {
   let [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user, loading, signOut } = useAuth();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      router.push("/login");
+    } catch (error) {
+      console.error("Failed to sign out:", error);
+    }
+  };
 
   return (
     <nav className="flex items-center">
@@ -110,17 +159,23 @@ function SiteNavigation() {
         <Link href="/">Course</Link>
         {/* <Link href="/interviews">Interviews</Link>
         <Link href="/resources">Resources</Link> */}
-        <Dropdown>
-          <DropdownButton className="inline-flex items-center gap-x-2 focus:not-data-focus:outline-none">
-            Account
-            <ChevronDownIcon className="stroke-gray-950 dark:stroke-white" />
-          </DropdownButton>
-          <DropdownMenu anchor="bottom end">
-            <DropdownItem href="#">Settings</DropdownItem>
-            <DropdownItem href="#">Support</DropdownItem>
-            <DropdownItem href="/login">Sign out</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+        {loading ? (
+          <span className="text-gray-500">Loading...</span>
+        ) : user ? (
+          <Dropdown>
+            <DropdownButton className="inline-flex items-center gap-x-2 focus:not-data-focus:outline-none">
+              {user.email || "Account"}
+              <ChevronDownIcon className="stroke-gray-950 dark:stroke-white" />
+            </DropdownButton>
+            <DropdownMenu anchor="bottom end">
+              <DropdownItem href="#">Settings</DropdownItem>
+              <DropdownItem href="#">Support</DropdownItem>
+              <DropdownItem onClick={handleSignOut}>Sign out</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        ) : (
+          <Link href="/login">Sign in</Link>
+        )}
       </div>
     </nav>
   );
