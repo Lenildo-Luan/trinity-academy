@@ -4,10 +4,10 @@ import { Button } from "@/components/button";
 import { OTPInput } from "@/components/input";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState, useTransition, useEffect, useRef } from "react";
+import { useState, useTransition, useEffect, useRef, Suspense } from "react";
 import { verifyOTP, resendOTP } from "../actions";
 
-export default function Page() {
+function OTPForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
@@ -141,5 +141,17 @@ export default function Page() {
         </Link>
       </p>
     </>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={
+      <div className="text-center">
+        <p className="text-sm/7 text-gray-950 dark:text-white">Carregando...</p>
+      </div>
+    }>
+      <OTPForm />
+    </Suspense>
   );
 }
