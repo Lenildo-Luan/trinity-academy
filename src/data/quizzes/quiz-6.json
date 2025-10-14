@@ -1,0 +1,246 @@
+{
+  "aula": 6,
+  "totalQuestoes": 10,
+  "questoes": [
+    {
+      "numero": 1,
+      "pergunta": "O que significa dizer que strings são \"imutáveis\" em JavaScript?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Strings não podem ser criadas"
+        },
+        {
+          "letra": "b",
+          "texto": "Uma vez criadas, strings não podem ser alteradas diretamente - operações criam novas strings",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Strings ocupam menos memória"
+        },
+        {
+          "letra": "d",
+          "texto": "Strings são mais rápidas que números"
+        }
+      ],
+      "explicacao": "Strings são imutáveis, o que significa que qualquer operação que parece modificar uma string na verdade cria uma nova string."
+    },
+    {
+      "numero": 2,
+      "pergunta": "Por que JavaScript oferece três formas diferentes de declarar strings?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para confundir programadores"
+        },
+        {
+          "letra": "b",
+          "texto": "Para atender diferentes necessidades como interpolação, aspas internas e texto multilinha",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Para economizar memória"
+        },
+        {
+          "letra": "d",
+          "texto": "São formas idênticas sem diferença prática"
+        }
+      ],
+      "explicacao": "As três formas (aspas simples, duplas e crases) atendem diferentes necessidades práticas no desenvolvimento."
+    },
+    {
+      "numero": 3,
+      "pergunta": "Qual é o conceito fundamental por trás dos template literals (crases)?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Apenas uma sintaxe alternativa para strings"
+        },
+        {
+          "letra": "b",
+          "texto": "Permitir interpolação de variáveis e expressões diretamente no texto",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Tornar strings mais rápidas"
+        },
+        {
+          "letra": "d",
+          "texto": "Criar strings mais curtas"
+        }
+      ],
+      "explicacao": "Template literals permitem incorporar variáveis e expressões diretamente no texto usando ${}, tornando o código mais legível."
+    },
+    {
+      "numero": 4,
+      "pergunta": "Por que existem sequências de escape (\\n, \\t, etc.) em strings?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para decorar o código"
+        },
+        {
+          "letra": "b",
+          "texto": "Para incluir caracteres especiais que não podem ser digitados diretamente",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Para economizar espaço"
+        },
+        {
+          "letra": "d",
+          "texto": "Para tornar strings mais legíveis"
+        }
+      ],
+      "explicacao": "Sequências de escape permitem incluir caracteres especiais como quebras de linha, tabulações e aspas dentro de strings."
+    },
+    {
+      "numero": 5,
+      "pergunta": "O que o comportamento diferente de \"5\" + 1 vs \"5\" - 1 revela sobre JavaScript?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Que é uma linguagem mal projetada"
+        },
+        {
+          "letra": "b",
+          "texto": "Que JavaScript trata o operador + de forma especial para concatenação com strings",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Que strings são superiores a números"
+        },
+        {
+          "letra": "d",
+          "texto": "Que operadores são desnecessários"
+        }
+      ],
+      "explicacao": "O operador + tem comportamento dual: concatena strings ou soma números, dependendo dos operandos."
+    },
+    {
+      "numero": 6,
+      "pergunta": "Por que métodos de string sempre retornam novos valores em vez de modificar a string original?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para usar mais memória"
+        },
+        {
+          "letra": "b",
+          "texto": "Porque strings são imutáveis, então modificações criam novos valores",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Para tornar o código mais lento"
+        },
+        {
+          "letra": "d",
+          "texto": "É um erro de design da linguagem"
+        }
+      ],
+      "explicacao": "A imutabilidade das strings garante que o valor original seja preservado, criando previsibilidade no código."
+    },
+    {
+      "numero": 7,
+      "pergunta": "Qual é o propósito fundamental de métodos como includes() e indexOf()?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Modificar strings"
+        },
+        {
+          "letra": "b",
+          "texto": "Verificar padrões e conteúdo sem modificar a string original",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Criar novas strings"
+        },
+        {
+          "letra": "d",
+          "texto": "Converter tipos de dados"
+        }
+      ],
+      "explicacao": "Esses métodos permitem buscar e verificar conteúdo nas strings de forma não-destrutiva."
+    },
+    {
+      "numero": 8,
+      "pergunta": "Por que a propriedade length e o acesso por índice [0] são importantes para strings?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para decoração do código"
+        },
+        {
+          "letra": "b",
+          "texto": "Para tratar strings como sequências indexadas de caracteres",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Para economizar memória"
+        },
+        {
+          "letra": "d",
+          "texto": "Para tornar strings mais rápidas"
+        }
+      ],
+      "explicacao": "Strings são tratadas como arrays de caracteres, permitindo acesso posicional e medição de comprimento."
+    },
+    {
+      "numero": 9,
+      "pergunta": "Qual conceito explica por que devemos ser consistentes na escolha de aspas?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Performance do código"
+        },
+        {
+          "letra": "b",
+          "texto": "Legibilidade, manutenibilidade e padrões de codificação",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Compatibilidade entre navegadores"
+        },
+        {
+          "letra": "d",
+          "texto": "Tamanho do arquivo"
+        }
+      ],
+      "explicacao": "Consistência no código facilita leitura, manutenção e colaboração entre desenvolvedores."
+    },
+    {
+      "numero": 10,
+      "pergunta": "Por que compreender conversão entre strings e números é fundamental?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para impressionar outros programadores"
+        },
+        {
+          "letra": "b",
+          "texto": "Para manipular dados de entrada (formulários) e realizar operações corretas",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Para usar menos memória"
+        },
+        {
+          "letra": "d",
+          "texto": "Para escrever código mais curto"
+        }
+      ],
+      "explicacao": "Dados de formulários sempre chegam como strings, então saber converter é essencial para processá-los corretamente."
+    }
+  ]
+}

@@ -1,0 +1,246 @@
+{
+  "aula": 13,
+  "totalQuestoes": 10,
+  "questoes": [
+    {
+      "numero": 1,
+      "pergunta": "Por que funções são consideradas 'blocos de construção fundamentais' da programação?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Porque permitem navegar na Internet mais rapidamente"
+        },
+        {
+          "letra": "b",
+          "texto": "Porque permitem reutilização de código, organização e isolamento de funcionalidades",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Porque são obrigatórias em todo código JavaScript"
+        },
+        {
+          "letra": "d",
+          "texto": "Porque substituem completamente a necessidade de variáveis"
+        }
+      ],
+      "explicacao": "As funções são fundamentais porque transformam código repetitivo e desorganizado em blocos reutilizáveis e bem estruturados. Como receitas culinárias, elas encapsulam procedimentos que podem ser executados múltiplas vezes sem reescrita."
+    },
+    {
+      "numero": 2,
+      "pergunta": "O que significa dizer que funções em JavaScript são 'first-class citizens' (cidadãos de primeira classe)?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "São mais importantes que outras estruturas de código"
+        },
+        {
+          "letra": "b",
+          "texto": "Podem ser atribuídas a variáveis, passadas como argumentos e manipuladas como dados",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Foram criadas antes de outras funcionalidades da linguagem"
+        },
+        {
+          "letra": "d",
+          "texto": "Apenas podem ser usadas por programadores avançados"
+        }
+      ],
+      "explicacao": "Em JavaScript, funções são 'first-class citizens', o que significa que podem ser tratadas como qualquer outro valor: armazenadas em variáveis, passadas para outras funções e retornadas como resultados."
+    },
+    {
+      "numero": 3,
+      "pergunta": "O que é 'hoisting' no contexto de declarações de função?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Funções são processadas durante a fase de compilação, ficando disponíveis em todo o escopo",
+          "correta": true
+        },
+        {
+          "letra": "b",
+          "texto": "Funções ficam mais rápidas quando usadas repetidamente"
+        },
+        {
+          "letra": "c",
+          "texto": "Funções podem ser deletadas automaticamente quando não são mais usadas"
+        },
+        {
+          "letra": "d",
+          "texto": "Funções só podem ser chamadas depois de serem declaradas"
+        }
+      ],
+      "explicacao": "O hoisting é um comportamento exclusivo das declarações de função. Durante a fase de compilação, o JavaScript 'eleva' essas declarações, tornando-as disponíveis em todo o escopo, mesmo antes da linha onde foram escritas."
+    },
+    {
+      "numero": 4,
+      "pergunta": "Qual é a diferença principal entre declarações de função e expressões de função em relação ao momento de criação?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Declarações são mais rápidas que expressões"
+        },
+        {
+          "letra": "b",
+          "texto": "Expressões são criadas apenas quando a execução as alcança, seguindo o fluxo normal do código",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Expressões não podem ter parâmetros"
+        },
+        {
+          "letra": "d",
+          "texto": "Não há diferença entre elas"
+        }
+      ],
+      "explicacao": "Diferente das declarações, expressões de função seguem o fluxo temporal do código. São criadas no momento exato em que a execução alcança aquela linha, como qualquer outra atribuição de variável."
+    },
+    {
+      "numero": 5,
+      "pergunta": "Por que a capacidade de tratar funções como valores é importante em JavaScript?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para economizar memória durante a execução"
+        },
+        {
+          "letra": "b",
+          "texto": "Possibilita padrões de programação flexíveis como callbacks, composição de funções e programação funcional",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "É obrigatório por regras da linguagem"
+        },
+        {
+          "letra": "d",
+          "texto": "Apenas para compatibilidade com outras linguagens"
+        }
+      ],
+      "explicacao": "Essa flexibilidade torna JavaScript extremamente poderoso e é fundamental para muitos padrões de programação modernos, incluindo callbacks, higher-order functions e programação funcional."
+    },
+    {
+      "numero": 6,
+      "pergunta": "Qual é a diferença entre parâmetros e argumentos?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "São sinônimos e significam exatamente a mesma coisa"
+        },
+        {
+          "letra": "b",
+          "texto": "Parâmetros são as variáveis definidas na função, argumentos são os valores passados na chamada",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Parâmetros são usados em Python, argumentos em JavaScript"
+        },
+        {
+          "letra": "d",
+          "texto": "Argumentos são sempre números, parâmetros podem ser textos"
+        }
+      ],
+      "explicacao": "Esta distinção é importante para comunicação precisa: parâmetros são os 'espaços reservados' na definição da função, enquanto argumentos são os valores concretos fornecidos quando chamamos a função."
+    },
+    {
+      "numero": 7,
+      "pergunta": "Por que valores padrão (default) para parâmetros são úteis?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para economizar memória durante a execução"
+        },
+        {
+          "letra": "b",
+          "texto": "Para tornar funções mais flexíveis e tolerantes a diferentes formas de uso",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Para acelerar a execução do código"
+        },
+        {
+          "letra": "d",
+          "texto": "São obrigatórios em JavaScript moderno"
+        }
+      ],
+      "explicacao": "Valores padrão tornam funções mais robustas e fáceis de usar, permitindo que funcionem corretamente mesmo quando alguns argumentos não são fornecidos. Aumentam a flexibilidade sem comprometer a funcionalidade."
+    },
+    {
+      "numero": 8,
+      "pergunta": "O que o conceito de 'escopo' representa na programação?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "A velocidade de execução de uma função"
+        },
+        {
+          "letra": "b",
+          "texto": "A região do código onde variáveis são acessíveis",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "O tamanho em bytes de uma função"
+        },
+        {
+          "letra": "d",
+          "texto": "O número de parâmetros que uma função pode ter"
+        }
+      ],
+      "explicacao": "O escopo define as 'fronteiras de visibilidade' de variáveis. É como ter cômodos em uma casa - o que está dentro de um cômodo (função) não é necessariamente visível de fora."
+    },
+    {
+      "numero": 9,
+      "pergunta": "Por que a nomenclatura descritiva é importante para funções?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para impressionar outros programadores"
+        },
+        {
+          "letra": "b",
+          "texto": "Funções são ações - nomes devem indicar claramente o que fazem",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Para usar mais caracteres no código"
+        },
+        {
+          "letra": "d",
+          "texto": "É obrigatório por lei na maioria dos países"
+        }
+      ],
+      "explicacao": "Bons nomes de função são essenciais para código legível. Como funções representam ações, seus nomes devem ser verbos descritivos que comunicam claramente sua intenção e comportamento."
+    },
+    {
+      "numero": 10,
+      "pergunta": "Qual é a diferença entre funções puras e funções com efeitos colaterais?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Funções puras são sempre melhores em todos os casos"
+        },
+        {
+          "letra": "b",
+          "texto": "Funções puras sempre retornam o mesmo resultado para as mesmas entradas e não modificam estado externo",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Efeitos colaterais são completamente proibidos em JavaScript"
+        },
+        {
+          "letra": "d",
+          "texto": "Não há diferença prática entre elas"
+        }
+      ],
+      "explicacao": "Funções puras são previsíveis e fáceis de testar porque sempre produzem o mesmo resultado para as mesmas entradas e não causam surpresas ao modificar estado externo. São a base da programação funcional."
+    }
+  ]
+}

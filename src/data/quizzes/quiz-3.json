@@ -1,0 +1,246 @@
+{
+  "aula": 3,
+  "totalQuestoes": 10,
+  "questoes": [
+    {
+      "numero": 1,
+      "pergunta": "O que significa dizer que JavaScript é uma linguagem \"dinamicamente tipada\"?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Os tipos de dados são definidos pelo programador explicitamente na declaração"
+        },
+        {
+          "letra": "b",
+          "texto": "A linguagem determina automaticamente o tipo baseado no valor atribuído à variável",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "JavaScript não possui tipos de dados"
+        },
+        {
+          "letra": "d",
+          "texto": "Todos os valores têm o mesmo tipo em JavaScript"
+        }
+      ],
+      "explicacao": "JavaScript é dinamicamente tipada, o que significa que você não precisa declarar o tipo de uma variável antecipadamente - a linguagem identifica o tipo automaticamente baseado no valor que você atribui."
+    },
+    {
+      "numero": 2,
+      "pergunta": "Qual é a diferença conceitual fundamental entre tipos primitivos e não-primitivos em JavaScript?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Tipos primitivos são mais rápidos que tipos não-primitivos"
+        },
+        {
+          "letra": "b",
+          "texto": "Tipos primitivos representam valores básicos únicos, não-primitivos podem conter coleções",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Tipos primitivos são mais modernos"
+        },
+        {
+          "letra": "d",
+          "texto": "Não há diferença prática entre eles"
+        }
+      ],
+      "explicacao": "Tipos primitivos representam valores básicos e simples, enquanto tipos não-primitivos (objetos) podem armazenar coleções de dados e estruturas mais complexas."
+    },
+    {
+      "numero": 3,
+      "pergunta": "Por que JavaScript possui os tipos Number e BigInt separadamente?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para confundir programadores iniciantes"
+        },
+        {
+          "letra": "b",
+          "texto": "Para atender diferentes necessidades de precisão e tamanho numérico",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "BigInt é mais rápido que Number"
+        },
+        {
+          "letra": "d",
+          "texto": "Não há diferença real entre eles"
+        }
+      ],
+      "explicacao": "Number tem limitações para números muito grandes, enquanto BigInt foi criado para trabalhar com inteiros extremamente grandes que excedem o limite seguro do tipo Number."
+    },
+    {
+      "numero": 4,
+      "pergunta": "Qual é o propósito principal das template literals (crases) em JavaScript?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Apenas uma alternativa às aspas simples e duplas"
+        },
+        {
+          "letra": "b",
+          "texto": "Permitir interpolação de variáveis e expressões dentro do texto",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Tornar o código mais lento"
+        },
+        {
+          "letra": "d",
+          "texto": "Funcionar apenas com números"
+        }
+      ],
+      "explicacao": "Template literals permitem a interpolação de variáveis e expressões diretamente dentro de strings usando a sintaxe ${}, tornando o código mais legível e expressivo."
+    },
+    {
+      "numero": 5,
+      "pergunta": "Qual é a diferença conceitual fundamental entre null e undefined?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "São valores idênticos com nomes diferentes"
+        },
+        {
+          "letra": "b",
+          "texto": "null é ausência intencional, undefined é ausência não-intencional",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "undefined é mais moderno que null"
+        },
+        {
+          "letra": "d",
+          "texto": "null é usado apenas para números, undefined para texto"
+        }
+      ],
+      "explicacao": "null representa a ausência intencional de valor (você define explicitamente), enquanto undefined indica que uma variável foi declarada mas não recebeu valor (ausência não-intencional)."
+    },
+    {
+      "numero": 6,
+      "pergunta": "O que o comportamento de conversão automática de tipos do JavaScript revela sobre o design da linguagem?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "JavaScript foi mal projetado"
+        },
+        {
+          "letra": "b",
+          "texto": "Que prioriza flexibilidade, mas pode causar comportamentos inesperados",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Que é mais lenta que outras linguagens"
+        },
+        {
+          "letra": "d",
+          "texto": "Que não possui tipos de dados reais"
+        }
+      ],
+      "explicacao": "A conversão automática (coerção) de tipos em JavaScript demonstra a filosofia de design que prioriza flexibilidade e conveniência, embora isso possa levar a comportamentos inesperados se não for bem compreendido."
+    },
+    {
+      "numero": 7,
+      "pergunta": "Por que usar operadores de comparação estrita (=== e !==) é considerado uma boa prática?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "São mais rápidos que == e !="
+        },
+        {
+          "letra": "b",
+          "texto": "Previnem conversões automáticas indesejadas durante comparações",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Fazem o código parecer mais profissional"
+        },
+        {
+          "letra": "d",
+          "texto": "São obrigatórios em JavaScript moderno"
+        }
+      ],
+      "explicacao": "Operadores estritos (===, !==) comparam tanto o valor quanto o tipo, evitando conversões automáticas que podem levar a comparações inesperadas e bugs sutis."
+    },
+    {
+      "numero": 8,
+      "pergunta": "Por que typeof retorna \"object\" para arrays e funções?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "É um erro que será corrigido"
+        },
+        {
+          "letra": "b",
+          "texto": "Em JavaScript, arrays e funções são tipos especiais de objetos",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "typeof não funciona corretamente"
+        },
+        {
+          "letra": "d",
+          "texto": "Arrays e funções não existem realmente"
+        }
+      ],
+      "explicacao": "Em JavaScript, arrays e funções são implementados como objetos especiais, herdando características de objetos enquanto adicionam funcionalidades específicas."
+    },
+    {
+      "numero": 9,
+      "pergunta": "Por que a mutabilidade vs. imutabilidade é importante nos tipos de dados?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para economizar memória"
+        },
+        {
+          "letra": "b",
+          "texto": "Determina se valores podem ser alterados após criação, afetando previsibilidade",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Para tornar o código mais rápido"
+        },
+        {
+          "letra": "d",
+          "texto": "Não há diferença prática"
+        }
+      ],
+      "explicacao": "A mutabilidade determina se um valor pode ser modificado após sua criação. Tipos primitivos são imutáveis (operações criam novos valores), enquanto objetos são mutáveis (podem ter suas propriedades alteradas), afetando como trabalhamos com esses dados."
+    },
+    {
+      "numero": 10,
+      "pergunta": "Qual princípio orienta a escolha entre usar arrays ou objetos para armazenar dados?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Arrays são sempre melhores"
+        },
+        {
+          "letra": "b",
+          "texto": "Use arrays para listas ordenadas, objetos para associações chave-valor",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Objetos são mais modernos"
+        },
+        {
+          "letra": "d",
+          "texto": "A escolha é puramente estética"
+        }
+      ],
+      "explicacao": "Arrays são ideais para coleções ordenadas de itens similares (lista de frutas, números), enquanto objetos são melhores para representar entidades com propriedades nomeadas (pessoa com nome, idade, cidade)."
+    }
+  ]
+}

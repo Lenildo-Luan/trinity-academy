@@ -1,0 +1,246 @@
+{
+  "aula": 11,
+  "totalQuestoes": 10,
+  "questoes": [
+    {
+      "numero": 1,
+      "pergunta": "Por que objetos são mais adequados que tipos primitivos para representar entidades complexas?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Objetos ocupam menos memória que primitivos"
+        },
+        {
+          "letra": "b",
+          "texto": "Objetos permitem agrupar múltiplos valores relacionados em uma única estrutura de dados",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Objetos são mais rápidos que primitivos"
+        },
+        {
+          "letra": "d",
+          "texto": "Objetos funcionam apenas com strings"
+        }
+      ],
+      "explicacao": "Objetos são ideais para representar entidades complexas porque permitem organizar dados relacionados (como nome, idade, profissão de uma pessoa) em uma única estrutura, ao contrário dos primitivos que armazenam apenas um valor."
+    },
+    {
+      "numero": 2,
+      "pergunta": "Qual conceito fundamental diferencia a notação de ponto da notação de colchetes para acessar propriedades?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "A notação de ponto é mais rápida que a de colchetes"
+        },
+        {
+          "letra": "b",
+          "texto": "A notação de colchetes permite propriedades com nomes dinâmicos e caracteres especiais",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "A notação de ponto é mais moderna que a de colchetes"
+        },
+        {
+          "letra": "d",
+          "texto": "Não há diferença prática entre as duas notações"
+        }
+      ],
+      "explicacao": "A notação de colchetes é necessária quando o nome da propriedade contém espaços, caracteres especiais ou quando o nome está armazenado em uma variável (dinâmico). Já a notação de ponto só funciona com nomes fixos e válidos como identificadores."
+    },
+    {
+      "numero": 3,
+      "pergunta": "O que o conceito de \"propriedades computadas\" permite fazer durante a criação de um objeto?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Calcular valores automaticamente para todas as propriedades"
+        },
+        {
+          "letra": "b",
+          "texto": "Definir nomes de propriedades dinamicamente usando expressões dentro de colchetes",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Acelerar o acesso às propriedades do objeto"
+        },
+        {
+          "letra": "d",
+          "texto": "Criar propriedades que se modificam sozinhas ao longo do tempo"
+        }
+      ],
+      "explicacao": "Propriedades computadas (usando `[expressão]`) permitem criar propriedades cujos nomes são determinados dinamicamente durante a criação do objeto, através de expressões que são avaliadas."
+    },
+    {
+      "numero": 4,
+      "pergunta": "Por que objetos são copiados \"por referência\" enquanto primitivos são copiados \"por valor\"?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para economizar memória e refletir que objetos são entidades mutáveis",
+          "correta": true
+        },
+        {
+          "letra": "b",
+          "texto": "Para complicar a programação e confundir iniciantes"
+        },
+        {
+          "letra": "c",
+          "texto": "Por limitações técnicas do JavaScript"
+        },
+        {
+          "letra": "d",
+          "texto": "Não há diferença real no tratamento de objetos e primitivos"
+        }
+      ],
+      "explicacao": "Objetos são estruturas complexas que podem ocupar muita memória. Copiá-los por referência economiza recursos e permite que múltiplas variáveis trabalhem com a mesma entidade, refletindo mudanças compartilhadas - comportamento útil para entidades mutáveis."
+    },
+    {
+      "numero": 5,
+      "pergunta": "Qual princípio explica por que dois objetos vazios `{}` não são considerados iguais quando comparados com `==`?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Objetos vazios são sempre diferentes por questões de segurança"
+        },
+        {
+          "letra": "b",
+          "texto": "JavaScript compara a identidade dos objetos (referências na memória), não seu conteúdo",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "É um bug conhecido do JavaScript que não foi corrigido"
+        },
+        {
+          "letra": "d",
+          "texto": "Objetos vazios são iguais, mas apenas com o operador `===`"
+        }
+      ],
+      "explicacao": "Cada objeto tem uma identidade única na memória, mesmo quando possui conteúdo idêntico. O JavaScript compara se dois objetos são o mesmo objeto (mesma referência), não se têm o mesmo conteúdo."
+    },
+    {
+      "numero": 6,
+      "pergunta": "O que diferencia clonagem superficial de clonagem profunda de objetos?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Clonagem superficial é mais rápida, mas ambas fazem a mesma coisa"
+        },
+        {
+          "letra": "b",
+          "texto": "Na clonagem superficial, objetos internos aninhados ainda compartilham referências entre o original e a cópia",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Clonagem profunda só funciona com objetos pequenos"
+        },
+        {
+          "letra": "d",
+          "texto": "Não há diferença prática entre as duas abordagens"
+        }
+      ],
+      "explicacao": "Na clonagem superficial (spread operator, Object.assign), apenas o primeiro nível de propriedades é copiado. Objetos aninhados ainda compartilham referências. Já a clonagem profunda copia todos os níveis recursivamente, criando uma cópia completamente independente."
+    },
+    {
+      "numero": 7,
+      "pergunta": "O que o comportamento de `const` com objetos demonstra sobre a linguagem JavaScript?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Que `const` não funciona corretamente com objetos"
+        },
+        {
+          "letra": "b",
+          "texto": "Que `const` protege a referência da variável, não o conteúdo do objeto",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Que objetos são imutáveis quando declarados com `const`"
+        },
+        {
+          "letra": "d",
+          "texto": "Que é melhor usar `var` para objetos ao invés de `const`"
+        }
+      ],
+      "explicacao": "`const` impede a reatribuição da variável, mas não impede modificações no conteúdo do objeto. Você não pode fazer `objeto = {}` (nova referência), mas pode modificar suas propriedades livremente."
+    },
+    {
+      "numero": 8,
+      "pergunta": "Por que JSON é fundamental no desenvolvimento web moderno?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "É a única forma de criar objetos em JavaScript"
+        },
+        {
+          "letra": "b",
+          "texto": "JSON fornece um formato padrão para serialização e comunicação de dados entre sistemas",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "JSON substitui completamente os objetos JavaScript"
+        },
+        {
+          "letra": "d",
+          "texto": "É apenas uma moda passageira sem importância real"
+        }
+      ],
+      "explicacao": "JSON (JavaScript Object Notation) é um formato de texto universal para representar dados estruturados. É amplamente usado para comunicação entre cliente e servidor, armazenamento de configurações e troca de dados entre diferentes sistemas e linguagens."
+    },
+    {
+      "numero": 9,
+      "pergunta": "Quando devemos usar objetos ao invés de arrays para organizar dados?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Quando a ordem dos dados importa"
+        },
+        {
+          "letra": "b",
+          "texto": "Quando precisamos de propriedades nomeadas significativas e a ordem não importa",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Apenas quando temos mais de 100 itens"
+        },
+        {
+          "letra": "d",
+          "texto": "Arrays são sempre melhores que objetos"
+        }
+      ],
+      "explicacao": "Use objetos quando você tem dados relacionados que formam uma entidade, as propriedades têm nomes significativos e a ordem não importa. Use arrays para listas ordenadas onde a ordem é importante e você acessa por índice numérico."
+    },
+    {
+      "numero": 10,
+      "pergunta": "O que acontece no código: `let obj1 = {x: 1}; let obj2 = obj1; obj2.x = 2;`?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "obj1.x permanece 1, obj2.x vira 2"
+        },
+        {
+          "letra": "b",
+          "texto": "Ambos obj1.x e obj2.x viram 2, pois compartilham a mesma referência",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Ocorre um erro de execução"
+        },
+        {
+          "letra": "d",
+          "texto": "obj1 é deletado da memória"
+        }
+      ],
+      "explicacao": "Quando atribuímos obj1 a obj2, não criamos uma cópia do objeto, mas uma nova referência ao mesmo objeto na memória. Portanto, modificar obj2.x também afeta obj1.x, pois ambos apontam para o mesmo objeto."
+    }
+  ]
+}

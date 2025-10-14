@@ -1,0 +1,246 @@
+{
+  "aula": 14,
+  "totalQuestoes": 10,
+  "questoes": [
+    {
+      "numero": 1,
+      "pergunta": "Por que as arrow functions foram introduzidas no JavaScript?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para substituir completamente as funções tradicionais"
+        },
+        {
+          "letra": "b",
+          "texto": "Para fornecer uma sintaxe mais concisa e clara para escrever funções",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Para tornar o JavaScript mais difícil de aprender"
+        },
+        {
+          "letra": "d",
+          "texto": "Apenas por questões estéticas"
+        }
+      ],
+      "explicacao": "Arrow functions foram criadas para oferecer uma sintaxe mais limpa e moderna, especialmente útil para funções curtas e callbacks."
+    },
+    {
+      "numero": 2,
+      "pergunta": "Qual é a principal diferença sintática entre uma função tradicional e uma arrow function?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Arrow functions são sempre mais rápidas"
+        },
+        {
+          "letra": "b",
+          "texto": "Arrow functions usam => em vez da palavra-chave function e podem ter sintaxe mais concisa",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Arrow functions não podem ter parâmetros"
+        },
+        {
+          "letra": "d",
+          "texto": "Não há diferença, são apenas nomes diferentes"
+        }
+      ],
+      "explicacao": "A arrow function usa a sintaxe => e permite omitir chaves e return quando há apenas uma expressão, tornando o código mais conciso."
+    },
+    {
+      "numero": 3,
+      "pergunta": "Quando podemos omitir os parênteses em torno do parâmetro de uma arrow function?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Sempre podemos omitir"
+        },
+        {
+          "letra": "b",
+          "texto": "Nunca podemos omitir"
+        },
+        {
+          "letra": "c",
+          "texto": "Apenas quando a função tem exatamente um parâmetro",
+          "correta": true
+        },
+        {
+          "letra": "d",
+          "texto": "Apenas quando não há return"
+        }
+      ],
+      "explicacao": "Parênteses podem ser omitidos somente quando há um único parâmetro. Com zero ou múltiplos parâmetros, os parênteses são obrigatórios."
+    },
+    {
+      "numero": 4,
+      "pergunta": "O que é um callback em JavaScript?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Uma função que retorna outra função"
+        },
+        {
+          "letra": "b",
+          "texto": "Uma função passada como argumento para ser executada em momento específico",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Uma função que sempre retorna true"
+        },
+        {
+          "letra": "d",
+          "texto": "Um erro de programação"
+        }
+      ],
+      "explicacao": "Callback é uma função passada como argumento que será 'chamada de volta' (called back) em algum momento específico, permitindo comportamento assíncrono e customização."
+    },
+    {
+      "numero": 5,
+      "pergunta": "Por que funções são consideradas 'cidadãos de primeira classe' em JavaScript?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Porque são mais importantes que variáveis"
+        },
+        {
+          "letra": "b",
+          "texto": "Porque podem ser tratadas como valores: atribuídas a variáveis, passadas como argumentos e retornadas",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Porque executam mais rapidamente"
+        },
+        {
+          "letra": "d",
+          "texto": "Porque são obrigatórias em todo código"
+        }
+      ],
+      "explicacao": "Em JavaScript, funções são valores que podem ser manipulados como qualquer outro dado, tornando a linguagem muito flexível e poderosa."
+    },
+    {
+      "numero": 6,
+      "pergunta": "O que são Higher-Order Functions?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Funções que executam mais rapidamente"
+        },
+        {
+          "letra": "b",
+          "texto": "Funções que recebem outras funções como argumentos ou retornam funções",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Funções com prioridade de execução maior"
+        },
+        {
+          "letra": "d",
+          "texto": "Funções que só podem ser usadas em bibliotecas"
+        }
+      ],
+      "explicacao": "Higher-order functions são funções que operam sobre outras funções, seja recebendo-as como parâmetros ou retornando-as, criando abstração e reutilização poderosas."
+    },
+    {
+      "numero": 7,
+      "pergunta": "O que é um closure em JavaScript?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Um tipo de loop especial"
+        },
+        {
+          "letra": "b",
+          "texto": "Uma função que 'lembra' das variáveis do escopo onde foi criada",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Uma forma de fechar o navegador"
+        },
+        {
+          "letra": "d",
+          "texto": "Um erro de memória"
+        }
+      ],
+      "explicacao": "Closure permite que uma função acesse variáveis de seu escopo exterior mesmo após esse escopo ter sido executado, como se a função carregasse uma 'mochila' com essas variáveis."
+    },
+    {
+      "numero": 8,
+      "pergunta": "Quando devemos usar arrow functions em vez de funções tradicionais?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Sempre, em todos os casos"
+        },
+        {
+          "letra": "b",
+          "texto": "Para funções simples, curtas e especialmente callbacks",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Nunca, são apenas uma moda passageira"
+        },
+        {
+          "letra": "d",
+          "texto": "Apenas em programação avançada"
+        }
+      ],
+      "explicacao": "Arrow functions são ideais para código conciso e callbacks, mas funções tradicionais ainda são preferíveis para funções complexas ou quando precisamos de comportamentos específicos."
+    },
+    {
+      "numero": 9,
+      "pergunta": "Por que callbacks são fundamentais na programação moderna com JavaScript?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Apenas para impressionar outros programadores"
+        },
+        {
+          "letra": "b",
+          "texto": "Permitem comportamento assíncrono, customização e padrões de programação flexíveis",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Para tornar o código mais lento"
+        },
+        {
+          "letra": "d",
+          "texto": "Não são importantes, são opcionais"
+        }
+      ],
+      "explicacao": "Callbacks são essenciais para operações assíncronas, manipulação de eventos e para criar código modular e reutilizável."
+    },
+    {
+      "numero": 10,
+      "pergunta": "Qual princípio de design as arrow functions demonstram na evolução do JavaScript?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Tornar a linguagem mais complexa"
+        },
+        {
+          "letra": "b",
+          "texto": "Melhorar a expressividade e legibilidade do código com sintaxe mais concisa",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Remover funcionalidades antigas"
+        },
+        {
+          "letra": "d",
+          "texto": "Copiar outras linguagens sem propósito"
+        }
+      ],
+      "explicacao": "Arrow functions representam a evolução do JavaScript em direção a código mais expressivo, legível e conciso, mantendo compatibilidade com recursos anteriores."
+    }
+  ]
+}

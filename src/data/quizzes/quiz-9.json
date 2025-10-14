@@ -1,0 +1,246 @@
+{
+  "aula": 9,
+  "totalQuestoes": 10,
+  "questoes": [
+    {
+      "numero": 1,
+      "pergunta": "Por que arrays são considerados ideais para sequências ordenadas enquanto objetos são melhores para propriedades nomeadas?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Arrays são mais rápidos"
+        },
+        {
+          "letra": "b",
+          "texto": "Cada estrutura é otimizada para diferentes padrões de acesso e organização de dados",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Objetos ocupam mais memória"
+        },
+        {
+          "letra": "d",
+          "texto": "Arrays podem armazenar apenas números"
+        }
+      ],
+      "explicacao": "Arrays são projetados para acesso sequencial e indexação, enquanto objetos são otimizados para propriedades nomeadas."
+    },
+    {
+      "numero": 2,
+      "pergunta": "Qual conceito fundamental explica por que a indexação de arrays começa em zero?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para economizar memória"
+        },
+        {
+          "letra": "b",
+          "texto": "É uma convenção estabelecida na tecnologia de computação",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Porque zero é menor"
+        },
+        {
+          "letra": "d",
+          "texto": "Para confundir programadores iniciantes"
+        }
+      ],
+      "explicacao": "A indexação baseada em zero está relacionada com cálculos de endereços de memória e é uma convenção histórica da programação."
+    },
+    {
+      "numero": 3,
+      "pergunta": "Por que métodos como push/pop são mais eficientes que shift/unshift?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Usam menos memória"
+        },
+        {
+          "letra": "b",
+          "texto": "Trabalhar no final do array evita renumeração de índices de outros elementos",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "São métodos mais novos"
+        },
+        {
+          "letra": "d",
+          "texto": "Funcionam apenas com números"
+        }
+      ],
+      "explicacao": "push/pop apenas adicionam/removem no final. shift/unshift precisam renumerar todos os elementos restantes, o que é mais custoso."
+    },
+    {
+      "numero": 4,
+      "pergunta": "Qual é a diferença fundamental entre métodos mutadores e não-mutadores de arrays?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Métodos mutadores são mais rápidos que não-mutadores"
+        },
+        {
+          "letra": "b",
+          "texto": "Mutadores modificam o array original, enquanto não-mutadores retornam novos arrays",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Não-mutadores funcionam apenas com números"
+        },
+        {
+          "letra": "d",
+          "texto": "Mutadores foram descontinuados em versões modernas do JavaScript"
+        }
+      ],
+      "explicacao": "Esta é a diferença fundamental entre métodos mutadores (que alteram o array diretamente) e não-mutadores (que preservam o original)."
+    },
+    {
+      "numero": 5,
+      "pergunta": "Dado o código let frutas = [\"maçã\", \"banana\", \"uva\"];, qual é o valor de frutas[frutas.length - 1]?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "\"maçã\""
+        },
+        {
+          "letra": "b",
+          "texto": "\"banana\""
+        },
+        {
+          "letra": "c",
+          "texto": "\"uva\"",
+          "correta": true
+        },
+        {
+          "letra": "d",
+          "texto": "undefined"
+        }
+      ],
+      "explicacao": "length - 1 nos dá o índice do último elemento. Com length = 3, temos índice 2, que contém \"uva\"."
+    },
+    {
+      "numero": 6,
+      "pergunta": "Qual é a principal diferença entre o loop for tradicional e o for...of ao trabalhar com arrays?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "for tradicional é mais rápido"
+        },
+        {
+          "letra": "b",
+          "texto": "for...of oferece sintaxe mais simples para acessar valores diretamente",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Não há diferença prática"
+        },
+        {
+          "letra": "d",
+          "texto": "for...of só funciona com strings"
+        }
+      ],
+      "explicacao": "for...of itera diretamente sobre os valores, enquanto o for tradicional usa índices, tornando o código mais limpo quando você precisa apenas dos valores."
+    },
+    {
+      "numero": 7,
+      "pergunta": "Por que Array.isArray() é necessário em JavaScript?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para tornar o código mais lento"
+        },
+        {
+          "letra": "b",
+          "texto": "Porque typeof retorna 'object' para arrays, não distinguindo de outros objetos",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "É uma função decorativa sem uso prático"
+        },
+        {
+          "letra": "d",
+          "texto": "Apenas para arrays multidimensionais"
+        }
+      ],
+      "explicacao": "typeof array retorna 'object', então precisamos de Array.isArray() para verificar especificamente se um valor é um array."
+    },
+    {
+      "numero": 8,
+      "pergunta": "Por que comparar arrays com == ou === geralmente retorna false mesmo quando têm o mesmo conteúdo?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "É um bug do JavaScript"
+        },
+        {
+          "letra": "b",
+          "texto": "Arrays são comparados por referência, não por conteúdo",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Apenas arrays numéricos podem ser comparados"
+        },
+        {
+          "letra": "d",
+          "texto": "Comparação de arrays não é suportada em JavaScript"
+        }
+      ],
+      "explicacao": "Arrays são objetos e a comparação verifica se apontam para o mesmo local na memória, não se têm o mesmo conteúdo."
+    },
+    {
+      "numero": 9,
+      "pergunta": "Qual é a vantagem de arrays poderem armazenar elementos de diferentes tipos em JavaScript?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Torna o código mais rápido"
+        },
+        {
+          "letra": "b",
+          "texto": "Oferece flexibilidade para estruturas de dados complexas",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Economiza memória"
+        },
+        {
+          "letra": "d",
+          "texto": "Não há vantagem, é considerado má prática"
+        }
+      ],
+      "explicacao": "A flexibilidade de tipos permite criar estruturas de dados variadas e adaptáveis, embora deva ser usada com cuidado para manter o código previsível."
+    },
+    {
+      "numero": 10,
+      "pergunta": "Por que a propriedade length é importante para trabalhar com arrays?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Apenas para mostrar informações ao usuário"
+        },
+        {
+          "letra": "b",
+          "texto": "Permite controlar loops, acessar último elemento e verificar se array está vazio",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "É necessária apenas para arrays grandes"
+        },
+        {
+          "letra": "d",
+          "texto": "Serve apenas para arrays de números"
+        }
+      ],
+      "explicacao": "A propriedade length é fundamental para muitas operações: iterar sobre elementos, acessar o último item (length - 1), verificar se está vazio (length === 0), entre outras."
+    }
+  ]
+}

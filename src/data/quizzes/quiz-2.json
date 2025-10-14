@@ -1,0 +1,246 @@
+{
+  "aula": 2,
+  "totalQuestoes": 10,
+  "questoes": [
+    {
+      "numero": 1,
+      "pergunta": "Qual é o conceito fundamental de uma variável na programação?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Um comando para executar operações matemáticas"
+        },
+        {
+          "letra": "b",
+          "texto": "Um contêiner nomeado para armazenar dados",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Uma função que retorna valores"
+        },
+        {
+          "letra": "d",
+          "texto": "Um tipo específico de dado numérico"
+        }
+      ],
+      "explicacao": "Variáveis são contêineres nomeados que armazenam dados, permitindo que informações sejam guardadas, acessadas e modificadas durante a execução do programa."
+    },
+    {
+      "numero": 2,
+      "pergunta": "Por que a declaração e inicialização de variáveis são conceitos distintos?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para tornar a programação mais complicada"
+        },
+        {
+          "letra": "b",
+          "texto": "Porque permitem controle sobre quando uma variável existe vs. quando tem valor",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Para economizar memória do computador"
+        },
+        {
+          "letra": "d",
+          "texto": "Porque são processos que acontecem em momentos diferentes automaticamente"
+        }
+      ],
+      "explicacao": "A separação entre declaração (criar a variável) e inicialização (atribuir valor) permite maior controle sobre o ciclo de vida das variáveis no código."
+    },
+    {
+      "numero": 3,
+      "pergunta": "Qual princípio de design motivou a criação de let para substituir var?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "let é mais rápido que var"
+        },
+        {
+          "letra": "b",
+          "texto": "Resolver problemas de comportamento confuso e propenso a erros do var",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "let usa menos memória"
+        },
+        {
+          "letra": "d",
+          "texto": "let funciona melhor com números"
+        }
+      ],
+      "explicacao": "O let foi criado para resolver problemas de comportamento confuso e propenso a erros do var, oferecendo um comportamento mais previsível e seguro."
+    },
+    {
+      "numero": 4,
+      "pergunta": "Observe o código abaixo. O que será exibido no console e por que isso acontece?\n\nlet temperatura = 20;\ntemperatura = 25;\ntemperatura = 30;\nconsole.log(temperatura);",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "20, porque variáveis declaradas com let não podem ter seu valor alterado"
+        },
+        {
+          "letra": "b",
+          "texto": "25, porque apenas a última atribuição antes do console.log é considerada"
+        },
+        {
+          "letra": "c",
+          "texto": "30, porque cada operação de atribuição atualiza o valor armazenado na variável",
+          "correta": true
+        },
+        {
+          "letra": "d",
+          "texto": "Erro, porque não é possível atribuir um novo valor a uma variável já declarada"
+        }
+      ],
+      "explicacao": "Cada operação de atribuição substitui o valor anterior da variável. O último valor atribuído (30) é o que será exibido."
+    },
+    {
+      "numero": 5,
+      "pergunta": "Por que a redeclaração de variáveis pode ser problemática no desenvolvimento?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Usa mais memória do computador"
+        },
+        {
+          "letra": "b",
+          "texto": "Torna o código mais lento"
+        },
+        {
+          "letra": "c",
+          "texto": "Pode causar confusão e sobrescrever valores inadvertidamente",
+          "correta": true
+        },
+        {
+          "letra": "d",
+          "texto": "É incompatível com navegadores antigos"
+        }
+      ],
+      "explicacao": "A redeclaração de variáveis pode causar confusão e sobrescrever valores inadvertidamente, gerando bugs difíceis de identificar no código."
+    },
+    {
+      "numero": 6,
+      "pergunta": "Qual é o princípio por trás do uso de const em vez de let?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "const é mais rápido"
+        },
+        {
+          "letra": "b",
+          "texto": "Expressar intenção de imutabilidade e tornar o código mais previsível",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "const ocupa menos espaço"
+        },
+        {
+          "letra": "d",
+          "texto": "É obrigatório para números"
+        }
+      ],
+      "explicacao": "Usar const expressa a intenção de que o valor não mudará, tornando o código mais previsível e fácil de entender."
+    },
+    {
+      "numero": 7,
+      "pergunta": "Por que boas práticas de nomenclatura são importantes para variáveis?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para impressionar outros programadores"
+        },
+        {
+          "letra": "b",
+          "texto": "Facilitar compreensão, manutenção e colaboração no código",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Para tornar o código mais rápido"
+        },
+        {
+          "letra": "d",
+          "texto": "Para reduzir o tamanho dos arquivos"
+        }
+      ],
+      "explicacao": "Boas práticas de nomenclatura facilitam a compreensão do código, sua manutenção e colaboração entre desenvolvedores."
+    },
+    {
+      "numero": 8,
+      "pergunta": "O que o conceito de 'zona morta temporal' com let pretende prevenir?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Uso de muita memória"
+        },
+        {
+          "letra": "b",
+          "texto": "Execução lenta do programa"
+        },
+        {
+          "letra": "c",
+          "texto": "Uso acidental de variáveis antes de serem propriamente inicializadas",
+          "correta": true
+        },
+        {
+          "letra": "d",
+          "texto": "Conflitos entre diferentes navegadores"
+        }
+      ],
+      "explicacao": "A zona morta temporal previne o uso acidental de variáveis antes de serem inicializadas, evitando comportamentos imprevisíveis."
+    },
+    {
+      "numero": 9,
+      "pergunta": "Qual princípio guia a escolha entre usar let e const?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Sempre usar let para simplicidade"
+        },
+        {
+          "letra": "b",
+          "texto": "Usar const quando possível para expressar imutabilidade, let quando necessário",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Usar const apenas para números"
+        },
+        {
+          "letra": "d",
+          "texto": "A escolha não faz diferença na prática"
+        }
+      ],
+      "explicacao": "A melhor prática é usar const por padrão para expressar imutabilidade, e let apenas quando for necessário reatribuir o valor."
+    },
+    {
+      "numero": 10,
+      "pergunta": "Por que a sensibilidade a maiúsculas e minúsculas nas variáveis é um conceito importante?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para economizar memória"
+        },
+        {
+          "letra": "b",
+          "texto": "Porque aumenta as possibilidades de nomes disponíveis"
+        },
+        {
+          "letra": "c",
+          "texto": "Porque trata nomes similares como entidades completamente distintas",
+          "correta": true
+        },
+        {
+          "letra": "d",
+          "texto": "Para compatibilidade com outras linguagens"
+        }
+      ],
+      "explicacao": "JavaScript é case-sensitive, ou seja, trata nomes com letras maiúsculas e minúsculas como variáveis completamente diferentes, o que pode causar confusão se não for compreendido."
+    }
+  ]
+}

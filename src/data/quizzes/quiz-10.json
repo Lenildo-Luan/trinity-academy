@@ -1,0 +1,246 @@
+{
+  "aula": 10,
+  "totalQuestoes": 10,
+  "questoes": [
+    {
+      "numero": 1,
+      "pergunta": "Qual conceito fundamental o método filter() implementa?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Modificar elementos existentes do array original"
+        },
+        {
+          "letra": "b",
+          "texto": "Criar um novo array contendo apenas elementos que atendem a um critério específico",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Ordenar elementos por ordem alfabética"
+        },
+        {
+          "letra": "d",
+          "texto": "Contar quantos elementos existem no array"
+        }
+      ],
+      "explicacao": "O método filter() implementa o conceito de seleção ou filtragem. Ele não modifica elementos nem ordena, apenas separa os elementos que atendem a um critério específico, criando um novo array."
+    },
+    {
+      "numero": 2,
+      "pergunta": "Por que o método map() é considerado um método de transformação?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Porque modifica diretamente o array original"
+        },
+        {
+          "letra": "b",
+          "texto": "Porque aplica uma função a cada elemento criando um novo array com os resultados transformados",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Porque funciona apenas com números"
+        },
+        {
+          "letra": "d",
+          "texto": "Porque é mais rápido que loops tradicionais"
+        }
+      ],
+      "explicacao": "O map() é chamado de método de transformação porque aplica uma função a cada elemento e retorna um novo array com os resultados. O array original nunca é modificado."
+    },
+    {
+      "numero": 3,
+      "pergunta": "Qual é a diferença conceitual entre os métodos some() e every()?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "São métodos idênticos com nomes diferentes"
+        },
+        {
+          "letra": "b",
+          "texto": "some() verifica se pelo menos um elemento atende à condição, every() verifica se todos atendem",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "some() é mais rápido que every()"
+        },
+        {
+          "letra": "d",
+          "texto": "every() funciona apenas com valores booleanos"
+        }
+      ],
+      "explicacao": "some() precisa de apenas um match para retornar true, enquanto every() precisa que todos os elementos atendam à condição para retornar true."
+    },
+    {
+      "numero": 4,
+      "pergunta": "O que o método find() representa em termos de busca?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Encontra todos os elementos que satisfazem uma condição"
+        },
+        {
+          "letra": "b",
+          "texto": "Retorna o primeiro elemento que satisfaz a condição ou undefined se nenhum for encontrado",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Sempre retorna um array, mesmo que vazio"
+        },
+        {
+          "letra": "d",
+          "texto": "Modifica o elemento encontrado automaticamente"
+        }
+      ],
+      "explicacao": "O método find() retorna o primeiro elemento que satisfaz a condição de teste fornecida. Se nenhum elemento passar no teste, retorna undefined."
+    },
+    {
+      "numero": 5,
+      "pergunta": "Por que o método indexOf() pode retornar o valor -1?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "É um erro interno do método"
+        },
+        {
+          "letra": "b",
+          "texto": "É uma convenção estabelecida para indicar que o elemento não foi encontrado",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Para economizar memória durante a busca"
+        },
+        {
+          "letra": "d",
+          "texto": "O valor -1 sempre significa o primeiro elemento"
+        }
+      ],
+      "explicacao": "-1 é a convenção estabelecida para \"não encontrado\" porque índices válidos começam em 0. Retornar -1 permite distinguir claramente entre \"elemento não existe\" e \"elemento está no índice 0\"."
+    },
+    {
+      "numero": 6,
+      "pergunta": "Qual conceito o método includes() simplifica em comparação com outros métodos de busca?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Busca complexa com múltiplas transformações"
+        },
+        {
+          "letra": "b",
+          "texto": "Verificação simples e direta de existência de um elemento",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Modificação de elementos durante a busca"
+        },
+        {
+          "letra": "d",
+          "texto": "Ordenação automática de arrays"
+        }
+      ],
+      "explicacao": "includes() retorna apenas true ou false para verificar se um elemento existe no array, tornando o código mais limpo e legível quando você só precisa saber se algo está presente."
+    },
+    {
+      "numero": 7,
+      "pergunta": "Por que o método sort() pode produzir resultados inesperados ao ordenar números?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Porque não foi projetado para trabalhar com números"
+        },
+        {
+          "letra": "b",
+          "texto": "Por padrão, converte elementos para strings e compara lexicograficamente",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "É um método com defeito de implementação"
+        },
+        {
+          "letra": "d",
+          "texto": "Funciona apenas com arrays pequenos"
+        }
+      ],
+      "explicacao": "O sort() converte elementos para string por padrão, fazendo com que \"10\" seja considerado menor que \"2\" lexicograficamente. Para ordenar números corretamente, é necessário fornecer uma função de comparação."
+    },
+    {
+      "numero": 8,
+      "pergunta": "O que torna o método reduce() mais poderoso que outros métodos de arrays?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "É sempre mais rápido em termos de performance"
+        },
+        {
+          "letra": "b",
+          "texto": "Pode reduzir um array a qualquer tipo de valor através de acumulação",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Funciona exclusivamente com números"
+        },
+        {
+          "letra": "d",
+          "texto": "É mais fácil de usar que outros métodos"
+        }
+      ],
+      "explicacao": "reduce() pode transformar um array em qualquer valor (número, string, objeto, outro array) através de acumulação iterativa, tornando-o extremamente versátil."
+    },
+    {
+      "numero": 9,
+      "pergunta": "Qual princípio orienta o uso de métodos encadeados (chaining) em arrays?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Tornar o código mais longo e verboso"
+        },
+        {
+          "letra": "b",
+          "texto": "Combinar múltiplas operações de forma fluente em uma única sequência",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "É obrigatório em JavaScript moderno"
+        },
+        {
+          "letra": "d",
+          "texto": "Usar mais memória para melhorar a performance"
+        }
+      ],
+      "explicacao": "O encadeamento permite operações fluentes como array.filter().map().sort(), tornando o código mais expressivo e fácil de ler ao combinar múltiplas transformações."
+    },
+    {
+      "numero": 10,
+      "pergunta": "Por que compreender esses métodos avançados é importante para a programação moderna em JavaScript?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "São obrigatórios por regulamentação legal"
+        },
+        {
+          "letra": "b",
+          "texto": "Representam paradigmas de programação funcional e tornam o código mais expressivo",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Substituem completamente a necessidade de loops"
+        },
+        {
+          "letra": "d",
+          "texto": "São sempre mais rápidos que qualquer alternativa"
+        }
+      ],
+      "explicacao": "Os métodos funcionais de arrays seguem boas práticas de programação moderna, tornando o código mais legível, manutenível e expressivo ao trabalhar com coleções de dados."
+    }
+  ]
+}

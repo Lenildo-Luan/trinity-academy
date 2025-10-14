@@ -1,0 +1,246 @@
+{
+  "aula": 7,
+  "totalQuestoes": 10,
+  "questoes": [
+    {
+      "numero": 1,
+      "pergunta": "Qual é o propósito fundamental das estruturas condicionais na programação?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Executar código mais rapidamente"
+        },
+        {
+          "letra": "b",
+          "texto": "Permitir que programas tomem decisões e executem diferentes caminhos baseados em condições",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Economizar linhas de código"
+        },
+        {
+          "letra": "d",
+          "texto": "Criar loops infinitos"
+        }
+      ],
+      "explicacao": "As estruturas condicionais permitem que programas avaliem situações, tomem decisões inteligentes e escolham diferentes caminhos de execução baseados em condições específicas, assim como fazemos no dia a dia."
+    },
+    {
+      "numero": 2,
+      "pergunta": "Por que a estrutura if...else é considerada fundamental em programação?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "É a mais rápida entre as estruturas"
+        },
+        {
+          "letra": "b",
+          "texto": "Representa o conceito básico de tomada de decisão binária (sim/não)",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "É a única forma de criar condições"
+        },
+        {
+          "letra": "d",
+          "texto": "Usa menos memória"
+        }
+      ],
+      "explicacao": "O if...else é a estrutura mais básica porque representa uma decisão binária: verdadeiro ou falso, sim ou não. É o bloco construtor fundamental de toda lógica condicional."
+    },
+    {
+      "numero": 3,
+      "pergunta": "Qual conceito explica por que if (queijo) funciona mesmo quando queijo não é um booleano?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "É um erro de sintaxe"
+        },
+        {
+          "letra": "b",
+          "texto": "JavaScript converte automaticamente valores para booleano usando conceitos de truthy/falsy",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Queijo é sempre verdadeiro"
+        },
+        {
+          "letra": "d",
+          "texto": "Strings não funcionam em condições"
+        }
+      ],
+      "explicacao": "JavaScript possui um sistema de conversão automática de tipos (coerção). Valores são classificados como truthy (comportam-se como true) ou falsy (comportam-se como false). Uma string não-vazia como 'queijo' é truthy."
+    },
+    {
+      "numero": 4,
+      "pergunta": "Por que existe a estrutura else if além do simples if...else?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para economizar espaço no código"
+        },
+        {
+          "letra": "b",
+          "texto": "Para avaliar múltiplas condições sequenciais quando apenas uma deve ser executada",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Para tornar o código mais elegante"
+        },
+        {
+          "letra": "d",
+          "texto": "Para substituir completamente o switch"
+        }
+      ],
+      "explicacao": "O else if permite testar várias condições em sequência, executando apenas o bloco correspondente à primeira condição verdadeira encontrada, ideal para situações com múltiplas alternativas exclusivas."
+    },
+    {
+      "numero": 5,
+      "pergunta": "Qual é o conceito fundamental por trás da declaração switch?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Substituir todos os tipos de condicionais"
+        },
+        {
+          "letra": "b",
+          "texto": "Comparar uma expressão contra múltiplos valores de forma eficiente",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Criar loops"
+        },
+        {
+          "letra": "d",
+          "texto": "Executar código mais rapidamente"
+        }
+      ],
+      "explicacao": "O switch é especialmente eficiente para comparar uma única expressão contra vários valores possíveis. É mais legível que múltiplos if...else if quando temos muitas opções baseadas no mesmo valor."
+    },
+    {
+      "numero": 6,
+      "pergunta": "Por que a palavra-chave break é crucial em declarações switch?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para economizar memória"
+        },
+        {
+          "letra": "b",
+          "texto": "Para prevenir execução sequencial indesejada através de múltiplos casos",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Para tornar o código mais legível"
+        },
+        {
+          "letra": "d",
+          "texto": "É opcional e decorativa"
+        }
+      ],
+      "explicacao": "Sem o break, o JavaScript continua executando os casos seguintes mesmo após encontrar uma correspondência (fenômeno chamado fall-through). O break é essencial para interromper a execução após o caso correto."
+    },
+    {
+      "numero": 7,
+      "pergunta": "Qual princípio orienta o uso do operador ternário em vez de if...else?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "É sempre melhor que if...else"
+        },
+        {
+          "letra": "b",
+          "texto": "Para atribuições condicionais simples onde a concisão é vantajosa",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Para substituir todas as estruturas condicionais"
+        },
+        {
+          "letra": "d",
+          "texto": "Para criar condições mais complexas"
+        }
+      ],
+      "explicacao": "O operador ternário é ideal para atribuições condicionais simples e concisas. Para lógica complexa ou múltiplas instruções, o if...else tradicional é mais apropriado e legível."
+    },
+    {
+      "numero": 8,
+      "pergunta": "Por que o aninhamento de condicionais é uma técnica importante?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para tornar o código mais difícil"
+        },
+        {
+          "letra": "b",
+          "texto": "Para representar decisões hierárquicas e dependentes",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Para usar mais memória"
+        },
+        {
+          "letra": "d",
+          "texto": "É uma prática desencorajada"
+        }
+      ],
+      "explicacao": "Aninhamento permite criar decisões dependentes: uma segunda decisão que só faz sentido dentro do contexto de uma primeira decisão. Exemplo: 'SE está ensolarado, ENTÃO SE está quente, ENTÃO...'"
+    },
+    {
+      "numero": 9,
+      "pergunta": "Qual conceito explica por que if (x === 5 || 7 || 10) não funciona como esperado?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Operadores lógicos não funcionam em JavaScript"
+        },
+        {
+          "letra": "b",
+          "texto": "Cada comparação deve ser explícita - OR avalia expressões, não implica comparações",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "É a sintaxe correta"
+        },
+        {
+          "letra": "d",
+          "texto": "Apenas números pares funcionam"
+        }
+      ],
+      "explicacao": "O operador || avalia cada expressão separadamente. Em x === 5 || 7, o JavaScript avalia (x === 5) e depois avalia 7 (que é truthy). A forma correta é: x === 5 || x === 7 || x === 10."
+    },
+    {
+      "numero": 10,
+      "pergunta": "Por que usar chaves {} mesmo para declarações únicas é considerada boa prática?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para ocupar mais espaço no código"
+        },
+        {
+          "letra": "b",
+          "texto": "Melhora a legibilidade e previne erros ao adicionar mais código posteriormente",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "É obrigatório pela sintaxe do JavaScript"
+        },
+        {
+          "letra": "d",
+          "texto": "Para o código executar mais rapidamente"
+        }
+      ],
+      "explicacao": "Usar chaves sempre, mesmo para uma única instrução, torna o código mais legível e evita erros comuns quando você adiciona mais linhas posteriormente e esquece de adicionar as chaves."
+    }
+  ]
+}

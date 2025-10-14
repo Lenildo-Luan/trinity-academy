@@ -1,0 +1,246 @@
+{
+  "aula": 1,
+  "totalQuestoes": 10,
+  "questoes": [
+    {
+      "numero": 1,
+      "pergunta": "Por que estudar a história da computação é importante para programadores iniciantes?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para memorizar datas e nomes importantes"
+        },
+        {
+          "letra": "b",
+          "texto": "Para entender a evolução do pensamento computacional e apreciar as ferramentas modernas",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Para impressionar outros programadores"
+        },
+        {
+          "letra": "d",
+          "texto": "Não é importante, apenas o código atual importa"
+        }
+      ],
+      "explicacao": "Conhecer a história nos ajuda a compreender por que as coisas funcionam como funcionam hoje e valorizar as conquistas tecnológicas."
+    },
+    {
+      "numero": 2,
+      "pergunta": "Qual foi a principal contribuição de Ada Lovelace para a computação?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Inventou o primeiro computador eletrônico"
+        },
+        {
+          "letra": "b",
+          "texto": "Criou a primeira linguagem de programação moderna"
+        },
+        {
+          "letra": "c",
+          "texto": "Escreveu o primeiro algoritmo destinado a ser processado por uma máquina",
+          "correta": true
+        },
+        {
+          "letra": "d",
+          "texto": "Desenvolveu a internet"
+        }
+      ],
+      "explicacao": "Ada Lovelace é reconhecida como a primeira programadora da história por seus trabalhos com a Máquina Analítica de Charles Babbage."
+    },
+    {
+      "numero": 3,
+      "pergunta": "O que diferenciava os primeiros computadores (como ENIAC) dos computadores modernos?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Eram mais rápidos e eficientes"
+        },
+        {
+          "letra": "b",
+          "texto": "Ocupavam salas inteiras, consumiam muita energia e tinham capacidade limitada",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Eram portáteis e fáceis de usar"
+        },
+        {
+          "letra": "d",
+          "texto": "Não tinham diferenças significativas"
+        }
+      ],
+      "explicacao": "Os primeiros computadores eram máquinas gigantescas que contrastam drasticamente com a miniaturização e eficiência dos dispositivos atuais."
+    },
+    {
+      "numero": 4,
+      "pergunta": "Por que a transição de válvulas para transistores foi revolucionária?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Apenas mudou o visual dos computadores"
+        },
+        {
+          "letra": "b",
+          "texto": "Tornou os computadores menores, mais rápidos, confiáveis e eficientes energeticamente",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Não fez diferença real na evolução"
+        },
+        {
+          "letra": "d",
+          "texto": "Apenas reduziu custos"
+        }
+      ],
+      "explicacao": "A invenção do transistor possibilitou a miniaturização e o aumento dramático da confiabilidade dos computadores."
+    },
+    {
+      "numero": 5,
+      "pergunta": "O que a Lei de Moore prevê e por que é relevante?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "A velocidade da internet dobra a cada ano"
+        },
+        {
+          "letra": "b",
+          "texto": "O número de transistores em chips dobra aproximadamente a cada dois anos, impulsionando o progresso tecnológico",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Os computadores ficarão obsoletos em 10 anos"
+        },
+        {
+          "letra": "d",
+          "texto": "Não tem relevância prática"
+        }
+      ],
+      "explicacao": "A Lei de Moore descreveu com precisão o crescimento exponencial da capacidade computacional por décadas."
+    },
+    {
+      "numero": 6,
+      "pergunta": "Como a invenção da World Wide Web (WWW) transformou a computação?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Apenas criou mais uma ferramenta técnica"
+        },
+        {
+          "letra": "b",
+          "texto": "Democratizou o acesso à informação e conectou pessoas globalmente",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Substituiu completamente os livros"
+        },
+        {
+          "letra": "d",
+          "texto": "Não teve impacto significativo"
+        }
+      ],
+      "explicacao": "A WWW revolucionou a forma como compartilhamos informação e nos comunicamos, sendo um dos pilares da era digital."
+    },
+    {
+      "numero": 7,
+      "pergunta": "Qual foi o principal motivo para a criação do JavaScript?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Competir com outras linguagens de programação"
+        },
+        {
+          "letra": "b",
+          "texto": "Substituir HTML e CSS"
+        },
+        {
+          "letra": "c",
+          "texto": "Dar interatividade e dinamismo às páginas web",
+          "correta": true
+        },
+        {
+          "letra": "d",
+          "texto": "Criar aplicativos mobile"
+        }
+      ],
+      "explicacao": "JavaScript nasceu da necessidade de tornar as páginas web interativas, que antes eram apenas documentos estáticos."
+    },
+    {
+      "numero": 8,
+      "pergunta": "Por que JavaScript se tornou a linguagem de programação mais importante para a web?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "É a linguagem mais antiga da internet"
+        },
+        {
+          "letra": "b",
+          "texto": "Combina integração total com HTML/CSS, simplicidade para iniciantes e suporte universal",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "É a única linguagem que existe para web"
+        },
+        {
+          "letra": "d",
+          "texto": "Por acaso histórico sem razão técnica"
+        }
+      ],
+      "explicacao": "JavaScript é único por ser a única tecnologia que combina essas três características essenciais para desenvolvimento web."
+    },
+    {
+      "numero": 9,
+      "pergunta": "O que significa 'programar' em essência?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Digitar códigos complexos aleatoriamente"
+        },
+        {
+          "letra": "b",
+          "texto": "Dar instruções precisas e completas para um computador realizar uma tarefa",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Memorizar sintaxe de linguagens"
+        },
+        {
+          "letra": "d",
+          "texto": "Trabalhar apenas com matemática avançada"
+        }
+      ],
+      "explicacao": "Programar é essencialmente comunicar-se com computadores através de instruções sistemáticas e precisas."
+    },
+    {
+      "numero": 10,
+      "pergunta": "Por que aprender a programar é considerado uma habilidade poderosa atualmente?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Apenas para conseguir empregos bem remunerados"
+        },
+        {
+          "letra": "b",
+          "texto": "Para impressionar amigos com conhecimento técnico"
+        },
+        {
+          "letra": "c",
+          "texto": "Porque permite automação, precisão, velocidade e resolução sistemática de problemas",
+          "correta": true
+        },
+        {
+          "letra": "d",
+          "texto": "Não é tão importante assim"
+        }
+      ],
+      "explicacao": "A programação é poderosa porque oferece ferramentas para resolver problemas de forma eficiente e escalável."
+    }
+  ]
+}

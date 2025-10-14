@@ -1,0 +1,246 @@
+{
+  "aula": 12,
+  "totalQuestoes": 10,
+  "questoes": [
+    {
+      "numero": 1,
+      "pergunta": "Qual é a diferença fundamental entre erros de sintaxe e erros de execução?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Erros de sintaxe são mais graves"
+        },
+        {
+          "letra": "b",
+          "texto": "Erros de sintaxe são detectados pelo parser antes da execução, erros de execução ocorrem durante a execução",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Não há diferença prática entre eles"
+        },
+        {
+          "letra": "d",
+          "texto": "Erros de execução são mais fáceis de corrigir"
+        }
+      ],
+      "explicacao": "Erros de sintaxe são identificados pelo interpretador antes mesmo do código começar a executar, enquanto erros de execução só aparecem quando uma linha específica do código é executada."
+    },
+    {
+      "numero": 2,
+      "pergunta": "Por que erros lógicos são considerados os mais difíceis de detectar?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Geram mensagens de erro confusas"
+        },
+        {
+          "letra": "b",
+          "texto": "O código executa sem gerar erros, mas produz resultados incorretos",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Só aparecem em produção"
+        },
+        {
+          "letra": "d",
+          "texto": "São raros de acontecer"
+        }
+      ],
+      "explicacao": "Erros lógicos são silenciosos - o programa roda normalmente mas não faz o que deveria fazer, exigindo análise cuidadosa para identificá-los."
+    },
+    {
+      "numero": 3,
+      "pergunta": "Qual é o propósito fundamental do bloco finally em try-catch?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Capturar erros adicionais"
+        },
+        {
+          "letra": "b",
+          "texto": "Executar código de limpeza que deve rodar independente de sucesso ou falha",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Melhorar a performance"
+        },
+        {
+          "letra": "d",
+          "texto": "Substituir o bloco catch"
+        }
+      ],
+      "explicacao": "O bloco finally garante que código importante (como fechar conexões ou arquivos) seja executado sempre, independente de ter ocorrido erro ou não."
+    },
+    {
+      "numero": 4,
+      "pergunta": "Por que criar classes de erro customizadas é uma boa prática?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para impressionar outros desenvolvedores"
+        },
+        {
+          "letra": "b",
+          "texto": "Permite tratamento específico e mais informações contextuais para diferentes tipos de erro",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "É obrigatório em JavaScript moderno"
+        },
+        {
+          "letra": "d",
+          "texto": "Para reduzir o tamanho do código"
+        }
+      ],
+      "explicacao": "Erros customizados permitem adicionar informações relevantes ao contexto e tratá-los de forma específica, melhorando o debugging e o tratamento de problemas."
+    },
+    {
+      "numero": 5,
+      "pergunta": "O que o conceito de \"Global Error Handling\" implementa?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Prevenir todos os erros possíveis"
+        },
+        {
+          "letra": "b",
+          "texto": "Capturar erros não tratados em nível de aplicação como última linha de defesa",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Acelerar a execução do código"
+        },
+        {
+          "letra": "d",
+          "texto": "Substituir try-catch locais"
+        }
+      ],
+      "explicacao": "Global Error Handling funciona como uma rede de segurança, capturando erros que escaparam de outros tratamentos e evitando que a aplicação quebre completamente."
+    },
+    {
+      "numero": 6,
+      "pergunta": "Qual é a importância do logging estruturado no desenvolvimento?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Apenas para decoração do código"
+        },
+        {
+          "letra": "b",
+          "texto": "Facilita debugging, monitoramento e análise de problemas em produção",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "É obrigatório em todas as linguagens"
+        },
+        {
+          "letra": "d",
+          "texto": "Para usar menos memória"
+        }
+      ],
+      "explicacao": "Logging estruturado registra informações importantes sobre a execução do programa, permitindo identificar e resolver problemas tanto durante o desenvolvimento quanto em produção."
+    },
+    {
+      "numero": 7,
+      "pergunta": "Por que diferentes níveis de log (DEBUG, INFO, WARN, ERROR) são úteis?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para colorir o console"
+        },
+        {
+          "letra": "b",
+          "texto": "Permitem filtrar informações por importância e controlar verbosidade",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "São apenas convenções sem utilidade prática"
+        },
+        {
+          "letra": "d",
+          "texto": "Para compatibilidade entre navegadores"
+        }
+      ],
+      "explicacao": "Níveis de log permitem categorizar mensagens por importância, facilitando filtrar apenas o que é relevante em cada situação (desenvolvimento, testes ou produção)."
+    },
+    {
+      "numero": 8,
+      "pergunta": "Qual conceito o padrão Circuit Breaker implementa?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Acelerar operações"
+        },
+        {
+          "letra": "b",
+          "texto": "Interromper tentativas quando um serviço está consistentemente falhando",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Quebrar código em partes menores"
+        },
+        {
+          "letra": "d",
+          "texto": "Melhorar a interface do usuário"
+        }
+      ],
+      "explicacao": "Circuit Breaker previne que o sistema continue tentando operações que estão falhando repetidamente, economizando recursos e evitando sobrecarga."
+    },
+    {
+      "numero": 9,
+      "pergunta": "Por que sistemas de retry com backoff exponencial são importantes?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Para tornar o código mais complexo"
+        },
+        {
+          "letra": "b",
+          "texto": "Permitem recuperação automática de falhas temporárias sem sobrecarregar recursos",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "São mais rápidos que tentativas normais"
+        },
+        {
+          "letra": "d",
+          "texto": "Funcionam apenas com APIs"
+        }
+      ],
+      "explicacao": "Retry com backoff exponencial tenta novamente após falhas temporárias, mas aumenta progressivamente o tempo entre tentativas para não sobrecarregar o sistema."
+    },
+    {
+      "numero": 10,
+      "pergunta": "Qual é o valor principal das ferramentas de debugging avançadas?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Tornar o código mais bonito"
+        },
+        {
+          "letra": "b",
+          "texto": "Facilitar identificação rápida de problemas e compreensão do fluxo de execução",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "São apenas para desenvolvedores experientes"
+        },
+        {
+          "letra": "d",
+          "texto": "Substituir testes automatizados"
+        }
+      ],
+      "explicacao": "Ferramentas de debugging avançadas permitem pausar a execução, inspecionar variáveis e acompanhar o fluxo do programa, tornando muito mais fácil entender e corrigir problemas."
+    }
+  ]
+}

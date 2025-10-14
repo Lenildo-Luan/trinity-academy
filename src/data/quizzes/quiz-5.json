@@ -1,0 +1,246 @@
+{
+  "aula": 5,
+  "totalQuestoes": 10,
+  "questoes": [
+    {
+      "numero": 1,
+      "pergunta": "Qual é a principal diferença entre os operadores `==` e `===` em JavaScript?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "O operador `==` é mais rápido que `===`"
+        },
+        {
+          "letra": "b",
+          "texto": "O operador `===` compara valor e tipo, enquanto `==` faz conversão automática de tipos",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "O operador `==` só funciona com números, e `===` funciona com todos os tipos"
+        },
+        {
+          "letra": "d",
+          "texto": "Não há diferença prática entre eles"
+        }
+      ],
+      "explicacao": "O `===` é chamado de igualdade estrita e não faz conversão de tipos. O `==` faz coerção de tipos antes de comparar, o que pode levar a resultados inesperados."
+    },
+    {
+      "numero": 2,
+      "pergunta": "Qual será o resultado da seguinte expressão: `5 > 3 && 2 < 4`?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "`5`"
+        },
+        {
+          "letra": "b",
+          "texto": "`true`",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "`false`"
+        },
+        {
+          "letra": "d",
+          "texto": "`undefined`"
+        }
+      ],
+      "explicacao": "Ambas as comparações são verdadeiras (5 > 3 é true E 2 < 4 é true), então o operador `&&` retorna `true`."
+    },
+    {
+      "numero": 3,
+      "pergunta": "Considere o código: `let idade = 15; let resultado = idade >= 18 || idade >= 16;` Qual é o valor de `resultado`?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "`15`"
+        },
+        {
+          "letra": "b",
+          "texto": "`16`"
+        },
+        {
+          "letra": "c",
+          "texto": "`true`",
+          "correta": true
+        },
+        {
+          "letra": "d",
+          "texto": "`false`"
+        }
+      ],
+      "explicacao": "Embora `idade >= 18` seja false, `idade >= 16` é true. O operador `||` retorna true quando pelo menos uma das condições é verdadeira."
+    },
+    {
+      "numero": 4,
+      "pergunta": "Qual dos seguintes valores é considerado \"falsy\" em JavaScript?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "`\"false\"`"
+        },
+        {
+          "letra": "b",
+          "texto": "`[]` (array vazio)"
+        },
+        {
+          "letra": "c",
+          "texto": "`0` (número zero)",
+          "correta": true
+        },
+        {
+          "letra": "d",
+          "texto": "`{}` (objeto vazio)"
+        }
+      ],
+      "explicacao": "O número zero é um dos valores falsy em JavaScript. A string \"false\", arrays vazios e objetos vazios são todos considerados truthy."
+    },
+    {
+      "numero": 5,
+      "pergunta": "Qual expressão retorna `true`?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "`\"10\" === 10`"
+        },
+        {
+          "letra": "b",
+          "texto": "`\"10\" == 10`",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "`null === undefined`"
+        },
+        {
+          "letra": "d",
+          "texto": "`NaN === NaN`"
+        }
+      ],
+      "explicacao": "O operador `==` faz conversão de tipos, então a string \"10\" é convertida para o número 10 antes da comparação. As outras opções retornam false."
+    },
+    {
+      "numero": 6,
+      "pergunta": "O que o operador `!` (NOT lógico) faz?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Multiplica valores por -1"
+        },
+        {
+          "letra": "b",
+          "texto": "Inverte o valor booleano (true vira false e vice-versa)",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Verifica se dois valores são diferentes"
+        },
+        {
+          "letra": "d",
+          "texto": "Remove espaços em branco de strings"
+        }
+      ],
+      "explicacao": "O operador `!` é o operador de negação lógica. Ele inverte valores booleanos: `!true` resulta em `false` e `!false` resulta em `true`."
+    },
+    {
+      "numero": 7,
+      "pergunta": "Qual será o resultado de: `10 > 5 && 3 < 2`?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "`true`"
+        },
+        {
+          "letra": "b",
+          "texto": "`false`",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "`10`"
+        },
+        {
+          "letra": "d",
+          "texto": "`2`"
+        }
+      ],
+      "explicacao": "Embora `10 > 5` seja true, `3 < 2` é false. O operador `&&` retorna true apenas quando ambas as condições são verdadeiras."
+    },
+    {
+      "numero": 8,
+      "pergunta": "Em qual situação o operador `||` (OR) retorna `true`?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "Apenas quando ambas as condições são verdadeiras"
+        },
+        {
+          "letra": "b",
+          "texto": "Quando pelo menos uma das condições é verdadeira",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "Apenas quando a primeira condição é verdadeira"
+        },
+        {
+          "letra": "d",
+          "texto": "Quando todas as condições são falsas"
+        }
+      ],
+      "explicacao": "O operador `||` (OR lógico) retorna true quando pelo menos uma das condições é verdadeira. Só retorna false quando todas as condições são falsas."
+    },
+    {
+      "numero": 9,
+      "pergunta": "Qual é o resultado da expressão: `!\"\"`?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "`false`"
+        },
+        {
+          "letra": "b",
+          "texto": "`true`",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "`\"\"`"
+        },
+        {
+          "letra": "d",
+          "texto": "`undefined`"
+        }
+      ],
+      "explicacao": "A string vazia `\"\"` é um valor falsy. O operador `!` inverte esse valor, transformando falsy em true."
+    },
+    {
+      "numero": 10,
+      "pergunta": "Considere: `let x = 5; let y = \"5\"; console.log(x !== y);` O que será exibido no console?",
+      "alternativas": [
+        {
+          "letra": "a",
+          "texto": "`false`"
+        },
+        {
+          "letra": "b",
+          "texto": "`true`",
+          "correta": true
+        },
+        {
+          "letra": "c",
+          "texto": "`5`"
+        },
+        {
+          "letra": "d",
+          "texto": "`\"5\"`"
+        }
+      ],
+      "explicacao": "O operador `!==` verifica desigualdade estrita (valor e tipo). Como `x` é um número e `y` é uma string, eles são diferentes em tipo, retornando true."
+    }
+  ]
+}
