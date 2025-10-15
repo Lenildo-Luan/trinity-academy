@@ -24,6 +24,8 @@ const config: StorybookConfig = {
       config.resolve.alias = {
         ...config.resolve.alias,
         '@': path.resolve(__dirname, '../src'),
+        // Mock auth context for Storybook
+        '@/contexts/auth-context': path.resolve(__dirname, './mocks/auth-context.tsx'),
       };
     }
     return config;

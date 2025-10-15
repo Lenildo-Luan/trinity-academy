@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Navbar } from './navbar'
 import { Logo } from './logo'
+import { withAuth, mockUsers } from '../../.storybook/decorators/auth-decorator'
 
 const meta = {
   title: 'Components/Navbar',
@@ -10,6 +11,7 @@ const meta = {
   },
   tags: ['autodocs'],
   decorators: [
+    withAuth,
     (Story) => (
       <div>
         <Story />
@@ -36,33 +38,63 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
+export const Unauthenticated: Story = {
+  parameters: {
+    mockUser: null,
+  },
   render: () => (
     <Navbar>
-      <Logo />
+      <Logo className="h-8 w-auto text-gray-950 dark:text-white" />
+    </Navbar>
+  ),
+}
+
+export const Authenticated: Story = {
+  parameters: {
+    mockUser: mockUsers.authenticated,
+  },
+  render: () => (
+    <Navbar>
+      <Logo className="h-8 w-auto text-gray-950 dark:text-white" />
+    </Navbar>
+  ),
+}
+
+export const AuthenticatedAdmin: Story = {
+  parameters: {
+    mockUser: mockUsers.admin,
+  },
+  render: () => (
+    <Navbar>
+      <Logo className="h-8 w-auto text-gray-950 dark:text-white" />
+    </Navbar>
+  ),
+}
+
+export const Loading: Story = {
+  parameters: {
+    mockUser: null,
+    mockAuthLoading: true,
+  },
+  render: () => (
+    <Navbar>
+      <Logo className="h-8 w-auto text-gray-950 dark:text-white" />
     </Navbar>
   ),
 }
 
 export const WithTitle: Story = {
+  parameters: {
+    mockUser: mockUsers.authenticated,
+  },
   render: () => (
     <Navbar>
       <div className="flex items-center gap-x-4">
-        <Logo />
+        <Logo className="h-8 w-auto text-gray-950 dark:text-white" />
         <span className="text-lg font-semibold text-gray-950 dark:text-white">
           Introdução a Programação
         </span>
       </div>
-    </Navbar>
-  ),
-}
-
-export const Minimal: Story = {
-  render: () => (
-    <Navbar>
-      <span className="text-sm font-medium text-gray-950 dark:text-white">
-        My App
-      </span>
     </Navbar>
   ),
 }
