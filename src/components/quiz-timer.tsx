@@ -17,10 +17,10 @@ export function QuizTimer({ timeRemaining, onTimeExpired }: QuizTimerProps) {
   return (
     <div className="flex items-center gap-2">
       <svg
-        className={`h-5 w-5 ${
+        className={`h-4 w-4 sm:h-5 sm:w-5 ${
           isLowTime
             ? 'text-red-600 dark:text-red-400'
-            : 'text-zinc-600 dark:text-zinc-400'
+            : 'text-gray-600 dark:text-gray-400'
         }`}
         fill="none"
         stroke="currentColor"
@@ -35,19 +35,19 @@ export function QuizTimer({ timeRemaining, onTimeExpired }: QuizTimerProps) {
       </svg>
 
       <div
-        className={`font-mono text-sm font-semibold transition-all ${
+        className={`font-mono text-sm font-bold transition-all sm:text-base ${
           isCriticalTime
             ? 'text-red-600 dark:text-red-400'
             : isLowTime
               ? 'text-orange-600 dark:text-orange-400'
-              : 'text-zinc-900 dark:text-white'
+              : 'text-gray-900 dark:text-white'
         } ${shouldBlink ? 'opacity-50' : 'opacity-100'}`}
       >
         {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
       </div>
 
       {isLowTime && (
-        <span className="text-xs font-medium text-red-600 dark:text-red-400">
+        <span className="hidden text-xs font-medium text-red-600 sm:inline dark:text-red-400">
           {isCriticalTime ? '!' : 'Tempo baixo'}
         </span>
       )}

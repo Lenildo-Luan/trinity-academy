@@ -148,35 +148,38 @@ export function QuizSection({ quizId }: QuizSectionProps) {
 
   return (
     <>
-      <div className="mt-16">
-        {quizState.state === 'inactive' && (
-          <QuizInitialView quiz={quiz} onStart={quizState.startQuiz} />
-        )}
+      {/* Seção do Quiz com separação visual clara */}
+      <div className="mt-16 border-t border-gray-950/10 pt-16 dark:border-white/10">
+        <div className="animate-fade-in">
+          {quizState.state === 'inactive' && (
+            <QuizInitialView quiz={quiz} onStart={quizState.startQuiz} />
+          )}
 
-        {quizState.state === 'active' && quizState.currentQuestion && (
-          <QuizActiveView
-            currentQuestion={quizState.currentQuestion}
-            currentQuestionIndex={quizState.currentQuestionIndex}
-            totalQuestions={quizState.totalQuestions}
-            answeredQuestionsCount={quizState.answeredQuestionsCount}
-            selectedAlternativeId={quizState.getCurrentAnswer(
-              quizState.currentQuestion.id,
-            )}
-            timeRemaining={quizState.timeRemaining}
-            isCurrentQuestionAnswered={quizState.isCurrentQuestionAnswered}
-            onSelectAlternative={handleSelectAlternative}
-            onNext={handleNext}
-            onFinish={quizState.finishQuiz}
-          />
-        )}
+          {quizState.state === 'active' && quizState.currentQuestion && (
+            <QuizActiveView
+              currentQuestion={quizState.currentQuestion}
+              currentQuestionIndex={quizState.currentQuestionIndex}
+              totalQuestions={quizState.totalQuestions}
+              answeredQuestionsCount={quizState.answeredQuestionsCount}
+              selectedAlternativeId={quizState.getCurrentAnswer(
+                quizState.currentQuestion.id,
+              )}
+              timeRemaining={quizState.timeRemaining}
+              isCurrentQuestionAnswered={quizState.isCurrentQuestionAnswered}
+              onSelectAlternative={handleSelectAlternative}
+              onNext={handleNext}
+              onFinish={quizState.finishQuiz}
+            />
+          )}
 
-        {quizState.state === 'finished' && quizState.result && (
-          <QuizResultView
-            quiz={quiz}
-            result={quizState.result}
-            onReset={quizState.resetQuiz}
-          />
-        )}
+          {quizState.state === 'finished' && quizState.result && (
+            <QuizResultView
+              quiz={quiz}
+              result={quizState.result}
+              onReset={quizState.resetQuiz}
+            />
+          )}
+        </div>
       </div>
 
       {/* Modal de bloqueio de navegação */}

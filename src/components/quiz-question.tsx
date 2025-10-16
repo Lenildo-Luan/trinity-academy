@@ -14,38 +14,67 @@ export function QuizQuestion({
   onSelectAlternative,
 }: QuizQuestionProps) {
   return (
-    <div>
-      <div className="mb-6">
-        <span className="text-sm font-medium text-cyan-600 dark:text-cyan-400">
+    <div className="animate-fade-in">
+      <div className="mb-8">
+        <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700 dark:bg-cyan-950/30 dark:text-cyan-400">
+          <svg
+            className="h-3.5 w-3.5"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fillRule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+              clipRule="evenodd"
+            />
+          </svg>
           Questão {questionNumber}
-        </span>
-        <h3 className="mt-1 text-lg font-semibold text-zinc-950 dark:text-white">
+        </div>
+        <h3 className="text-xl font-bold leading-tight text-gray-950 sm:text-2xl dark:text-white">
           {question.question}
         </h3>
       </div>
 
       {/* Alternativas */}
       <div className="space-y-3">
-        {question.alternatives.map((alternative) => {
+        {question.alternatives.map((alternative, index) => {
           const isSelected = selectedAlternativeId === alternative.id
+          const letters = ['A', 'B', 'C', 'D', 'E', 'F']
 
           return (
             <label
               key={alternative.id}
-              className={`flex cursor-pointer items-start gap-3 rounded-lg border p-4 transition-colors ${
+              className={`group flex cursor-pointer items-start gap-4 rounded-xl border-2 p-4 transition-all hover:shadow-md ${
                 isSelected
-                  ? 'border-cyan-500 bg-cyan-50 dark:border-cyan-500 dark:bg-cyan-950/20'
-                  : 'border-zinc-200 hover:border-zinc-300 dark:border-zinc-700 dark:hover:border-zinc-600'
+                  ? 'border-cyan-500 bg-cyan-50 shadow-md dark:border-cyan-500 dark:bg-cyan-950/30'
+                  : 'border-gray-200 hover:border-gray-300 dark:border-gray-700 dark:hover:border-gray-600'
               }`}
             >
-              <input
-                type="radio"
-                name={`question-${question.id}`}
-                checked={isSelected}
-                onChange={() => onSelectAlternative(alternative.id)}
-                className="mt-1 h-4 w-4 text-cyan-500 focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 dark:focus:ring-offset-zinc-900"
-              />
-              <span className="flex-1 text-sm text-zinc-700 dark:text-zinc-300">
+              <div className="flex items-start gap-3">
+                <input
+                  type="radio"
+                  name={`question-${question.id}`}
+                  checked={isSelected}
+                  onChange={() => onSelectAlternative(alternative.id)}
+                  className="mt-0.5 h-5 w-5 cursor-pointer border-gray-300 text-cyan-600 transition focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 dark:border-gray-600 dark:bg-gray-800 dark:focus:ring-offset-gray-900"
+                />
+                <div
+                  className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold transition-colors ${
+                    isSelected
+                      ? 'bg-cyan-600 text-white dark:bg-cyan-500'
+                      : 'bg-gray-200 text-gray-600 group-hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:group-hover:bg-gray-600'
+                  }`}
+                >
+                  {letters[index]}
+                </div>
+              </div>
+              <span
+                className={`flex-1 text-base leading-relaxed transition-colors ${
+                  isSelected
+                    ? 'font-medium text-gray-900 dark:text-white'
+                    : 'text-gray-700 dark:text-gray-300'
+                }`}
+              >
                 {alternative.text}
               </span>
             </label>

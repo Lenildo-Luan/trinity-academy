@@ -5,10 +5,12 @@ import {
   BreadcrumbSeparator,
 } from "@/components/breadcrumbs";
 import { NextPageLink } from "@/components/next-page-link";
+import { QuizSection } from "@/components/quiz-section";
 import { SidebarLayoutContent } from "@/components/sidebar-layout";
 import TableOfContents from "@/components/table-of-contents";
 import { Video } from "@/components/video-player";
 import { getLesson, getLessonContent } from "@/data/lessons";
+import { getQuiz } from "@/data/quizzes";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -38,6 +40,7 @@ export default async function Page({
   }
 
   let Content = await getLessonContent(slug);
+  let quiz = lesson.quizId ? await getQuiz(lesson.quizId) : null;
 
   return (
     <SidebarLayoutContent
@@ -68,6 +71,11 @@ export default async function Page({
             <div id="content" className="prose">
               <Content />
             </div>
+            {quiz && (
+              <div className="mt-16">
+                <QuizSection quiz={quiz} />
+              </div>
+            )}
             <div className="mt-16 border-t border-gray-200 pt-8 dark:border-white/10">
               {lesson.next ? (
                 <NextPageLink

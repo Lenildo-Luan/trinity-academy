@@ -36,6 +36,9 @@
   --text-9xl--line-height: 1; /* 128px */
 
   --animate-caret-blink: caret-blink 1.1s infinite;
+  --animate-fade-in: fade-in 0.3s ease-out;
+  --animate-fade-out: fade-out 0.3s ease-out;
+  --animate-slide-up: slide-up 0.4s ease-out;
 
   @keyframes caret-blink {
     0% {
@@ -44,6 +47,35 @@
     50%,
     100% {
       visibility: hidden;
+    }
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes slide-up {
+    0% {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }

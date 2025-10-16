@@ -32,21 +32,21 @@ export function QuizActiveView({
   const isLastQuestion = currentQuestionIndex === totalQuestions - 1
 
   return (
-    <div className="rounded-lg border border-zinc-950/10 bg-white dark:border-white/10 dark:bg-white/2.5">
+    <div className="animate-slide-up overflow-hidden rounded-2xl border border-gray-950/10 bg-white shadow-sm dark:border-white/10 dark:bg-white/2.5">
       {/* Header com timer e progresso */}
-      <div className="flex items-center justify-between border-b border-zinc-950/10 p-4 dark:border-white/10">
-        <div className="text-sm text-zinc-600 dark:text-zinc-400">
-          Questão {currentQuestionIndex + 1} de {totalQuestions}
-          <span className="ml-2 text-zinc-400 dark:text-zinc-500">
-            ({answeredQuestionsCount} respondidas)
-          </span>
+      <div className="border-b border-gray-950/10 bg-gradient-to-r from-gray-50 to-white p-4 dark:border-white/10 dark:from-gray-950/50 dark:to-gray-950/30">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center justify-between sm:justify-start">
+            <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              Questão {currentQuestionIndex + 1} de {totalQuestions}
+            </div>
+            <QuizTimer timeRemaining={timeRemaining} />
+          </div>
         </div>
-
-        <QuizTimer timeRemaining={timeRemaining} />
       </div>
 
       {/* Barra de progresso */}
-      <div className="px-4 pt-4">
+      <div className="border-b border-gray-950/10 bg-white px-4 py-3 dark:border-white/10 dark:bg-gray-950/30">
         <QuizProgressBar
           current={answeredQuestionsCount}
           total={totalQuestions}
@@ -54,7 +54,7 @@ export function QuizActiveView({
       </div>
 
       {/* Questão */}
-      <div className="p-6">
+      <div className="bg-white p-6 sm:p-8 dark:bg-gray-950/20">
         <QuizQuestion
           question={currentQuestion}
           questionNumber={currentQuestionIndex + 1}

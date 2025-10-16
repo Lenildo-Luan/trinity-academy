@@ -8,16 +8,23 @@ export function QuizProgressBar({ current, total }: QuizProgressBarProps) {
 
   return (
     <div className="w-full">
-      <div className="mb-2 flex items-center justify-between text-xs text-zinc-600 dark:text-zinc-400">
+      <div className="mb-2 flex items-center justify-between text-xs font-medium text-gray-700 sm:text-sm dark:text-gray-300">
         <span>
-          {current} de {total} questões respondidas
+          <span className="hidden sm:inline">
+            {current} de {total} questões respondidas
+          </span>
+          <span className="sm:hidden">
+            {current}/{total} respondidas
+          </span>
         </span>
-        <span className="font-semibold">{percentage}%</span>
+        <span className="rounded-full bg-cyan-100 px-2 py-0.5 text-xs font-bold text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400">
+          {percentage}%
+        </span>
       </div>
 
-      <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
+      <div className="relative h-2.5 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
         <div
-          className="h-full rounded-full bg-cyan-500 transition-all duration-300 ease-out"
+          className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-500 ease-out"
           style={{ width: `${percentage}%` }}
           role="progressbar"
           aria-valuenow={current}
@@ -25,6 +32,7 @@ export function QuizProgressBar({ current, total }: QuizProgressBarProps) {
           aria-valuemax={total}
           aria-label={`${current} de ${total} questões respondidas`}
         />
+        <div className="absolute inset-0 rounded-full bg-gradient-to-t from-transparent to-white/20" />
       </div>
     </div>
   )
