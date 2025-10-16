@@ -1,246 +1,308 @@
 {
-  "aula": 10,
-  "totalQuestoes": 10,
-  "questoes": [
+  "id": "quiz-10",
+  "title": "Quiz - Funções Avançadas em JavaScript",
+  "description": "Teste seus conhecimentos sobre funções anônimas, arrow functions e closures em JavaScript.",
+  "timeLimit": 900,
+  "questions": [
     {
-      "numero": 1,
-      "pergunta": "Qual conceito fundamental o método filter() implementa?",
-      "alternativas": [
+      "id": "q1",
+      "question": "O que é uma função anônima em JavaScript?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Modificar elementos existentes do array original"
+          "id": "a1",
+          "text": "Uma função que não pode ser executada",
+          "isCorrect": false,
+          "explanation": "Funções anônimas podem ser executadas normalmente."
         },
         {
-          "letra": "b",
-          "texto": "Criar um novo array contendo apenas elementos que atendem a um critério específico",
-          "correta": true
+          "id": "a2",
+          "text": "Uma função sem nome que pode ser atribuída a uma variável ou passada como argumento",
+          "isCorrect": true,
+          "explanation": "Correto! Funções anônimas não têm nome e são frequentemente usadas como callbacks ou atribuídas a variáveis."
         },
         {
-          "letra": "c",
-          "texto": "Ordenar elementos por ordem alfabética"
+          "id": "a3",
+          "text": "Uma função que sempre retorna undefined",
+          "isCorrect": false,
+          "explanation": "Funções anônimas podem retornar qualquer valor."
         },
         {
-          "letra": "d",
-          "texto": "Contar quantos elementos existem no array"
+          "id": "a4",
+          "text": "Uma função que só pode ser declarada no escopo global",
+          "isCorrect": false,
+          "explanation": "Funções anônimas podem ser declaradas em qualquer escopo."
         }
-      ],
-      "explicacao": "O método filter() implementa o conceito de seleção ou filtragem. Ele não modifica elementos nem ordena, apenas separa os elementos que atendem a um critério específico, criando um novo array."
+      ]
     },
     {
-      "numero": 2,
-      "pergunta": "Por que o método map() é considerado um método de transformação?",
-      "alternativas": [
+      "id": "q2",
+      "question": "Qual é a sintaxe correta de uma arrow function?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Porque modifica diretamente o array original"
+          "id": "a1",
+          "text": "function => (x) { return x * 2 }",
+          "isCorrect": false,
+          "explanation": "Arrow functions não usam a palavra-chave 'function'."
         },
         {
-          "letra": "b",
-          "texto": "Porque aplica uma função a cada elemento criando um novo array com os resultados transformados",
-          "correta": true
+          "id": "a2",
+          "text": "(x) => x * 2",
+          "isCorrect": true,
+          "explanation": "Correto! Arrow functions usam a sintaxe (parâmetros) => expressão ou corpo."
         },
         {
-          "letra": "c",
-          "texto": "Porque funciona apenas com números"
+          "id": "a3",
+          "text": "x -> x * 2",
+          "isCorrect": false,
+          "explanation": "JavaScript usa =>, não -> para arrow functions."
         },
         {
-          "letra": "d",
-          "texto": "Porque é mais rápido que loops tradicionais"
+          "id": "a4",
+          "text": "func(x) => x * 2",
+          "isCorrect": false,
+          "explanation": "Arrow functions não usam a palavra 'func'."
         }
-      ],
-      "explicacao": "O map() é chamado de método de transformação porque aplica uma função a cada elemento e retorna um novo array com os resultados. O array original nunca é modificado."
+      ]
     },
     {
-      "numero": 3,
-      "pergunta": "Qual é a diferença conceitual entre os métodos some() e every()?",
-      "alternativas": [
+      "id": "q3",
+      "question": "Quando você pode omitir as chaves {} em uma arrow function?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "São métodos idênticos com nomes diferentes"
+          "id": "a1",
+          "text": "Sempre, as chaves são opcionais",
+          "isCorrect": false,
+          "explanation": "Chaves são necessárias quando há múltiplas instruções."
         },
         {
-          "letra": "b",
-          "texto": "some() verifica se pelo menos um elemento atende à condição, every() verifica se todos atendem",
-          "correta": true
+          "id": "a2",
+          "text": "Quando a função tem apenas uma expressão que será retornada implicitamente",
+          "isCorrect": true,
+          "explanation": "Correto! Para uma única expressão, as chaves e o return são opcionais: x => x * 2"
         },
         {
-          "letra": "c",
-          "texto": "some() é mais rápido que every()"
+          "id": "a3",
+          "text": "Apenas quando a função não tem parâmetros",
+          "isCorrect": false,
+          "explanation": "A omissão de chaves depende do corpo, não dos parâmetros."
         },
         {
-          "letra": "d",
-          "texto": "every() funciona apenas com valores booleanos"
+          "id": "a4",
+          "text": "Nunca, as chaves são sempre obrigatórias",
+          "isCorrect": false,
+          "explanation": "Chaves podem ser omitidas para expressões únicas."
         }
-      ],
-      "explicacao": "some() precisa de apenas um match para retornar true, enquanto every() precisa que todos os elementos atendam à condição para retornar true."
+      ]
     },
     {
-      "numero": 4,
-      "pergunta": "O que o método find() representa em termos de busca?",
-      "alternativas": [
+      "id": "q4",
+      "question": "Qual é a principal diferença entre arrow functions e funções tradicionais em relação ao 'this'?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Encontra todos os elementos que satisfazem uma condição"
+          "id": "a1",
+          "text": "Arrow functions não podem usar 'this'",
+          "isCorrect": false,
+          "explanation": "Arrow functions podem usar 'this', mas o comportamento é diferente."
         },
         {
-          "letra": "b",
-          "texto": "Retorna o primeiro elemento que satisfaz a condição ou undefined se nenhum for encontrado",
-          "correta": true
+          "id": "a2",
+          "text": "Arrow functions herdam 'this' do escopo onde foram criadas (lexical this)",
+          "isCorrect": true,
+          "explanation": "Correto! Arrow functions não têm seu próprio 'this', elas herdam do escopo externo."
         },
         {
-          "letra": "c",
-          "texto": "Sempre retorna um array, mesmo que vazio"
+          "id": "a3",
+          "text": "Arrow functions sempre definem 'this' como undefined",
+          "isCorrect": false,
+          "explanation": "Arrow functions herdam 'this' do contexto externo."
         },
         {
-          "letra": "d",
-          "texto": "Modifica o elemento encontrado automaticamente"
+          "id": "a4",
+          "text": "Não há diferença no comportamento de 'this'",
+          "isCorrect": false,
+          "explanation": "O comportamento de 'this' é significativamente diferente."
         }
-      ],
-      "explicacao": "O método find() retorna o primeiro elemento que satisfaz a condição de teste fornecida. Se nenhum elemento passar no teste, retorna undefined."
+      ]
     },
     {
-      "numero": 5,
-      "pergunta": "Por que o método indexOf() pode retornar o valor -1?",
-      "alternativas": [
+      "id": "q5",
+      "question": "O que é um closure em JavaScript?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "É um erro interno do método"
+          "id": "a1",
+          "text": "Uma função que encerra a execução do programa",
+          "isCorrect": false,
+          "explanation": "Closures não encerram programas."
         },
         {
-          "letra": "b",
-          "texto": "É uma convenção estabelecida para indicar que o elemento não foi encontrado",
-          "correta": true
+          "id": "a2",
+          "text": "Uma função que tem acesso a variáveis do escopo externo mesmo após esse escopo ter sido executado",
+          "isCorrect": true,
+          "explanation": "Correto! Closures permitem que funções 'lembrem' do ambiente onde foram criadas."
         },
         {
-          "letra": "c",
-          "texto": "Para economizar memória durante a busca"
+          "id": "a3",
+          "text": "Uma função que não pode acessar variáveis externas",
+          "isCorrect": false,
+          "explanation": "Closures são justamente sobre acessar variáveis externas."
         },
         {
-          "letra": "d",
-          "texto": "O valor -1 sempre significa o primeiro elemento"
+          "id": "a4",
+          "text": "Um tipo especial de loop",
+          "isCorrect": false,
+          "explanation": "Closures não são loops, são funções com acesso ao escopo externo."
         }
-      ],
-      "explicacao": "-1 é a convenção estabelecida para \"não encontrado\" porque índices válidos começam em 0. Retornar -1 permite distinguir claramente entre \"elemento não existe\" e \"elemento está no índice 0\"."
+      ]
     },
     {
-      "numero": 6,
-      "pergunta": "Qual conceito o método includes() simplifica em comparação com outros métodos de busca?",
-      "alternativas": [
+      "id": "q6",
+      "question": "Quando os parênteses podem ser omitidos em arrow functions?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Busca complexa com múltiplas transformações"
+          "id": "a1",
+          "text": "Sempre, independente do número de parâmetros",
+          "isCorrect": false,
+          "explanation": "Parênteses não podem ser omitidos em todos os casos."
         },
         {
-          "letra": "b",
-          "texto": "Verificação simples e direta de existência de um elemento",
-          "correta": true
+          "id": "a2",
+          "text": "Quando há exatamente um parâmetro",
+          "isCorrect": true,
+          "explanation": "Correto! x => x * 2 funciona, mas () => 5 e (x, y) => x + y precisam de parênteses."
         },
         {
-          "letra": "c",
-          "texto": "Modificação de elementos durante a busca"
+          "id": "a3",
+          "text": "Quando não há parâmetros",
+          "isCorrect": false,
+          "explanation": "Sem parâmetros, os parênteses vazios () são obrigatórios."
         },
         {
-          "letra": "d",
-          "texto": "Ordenação automática de arrays"
+          "id": "a4",
+          "text": "Nunca, parênteses são sempre obrigatórios",
+          "isCorrect": false,
+          "explanation": "Com um parâmetro, os parênteses são opcionais."
         }
-      ],
-      "explicacao": "includes() retorna apenas true ou false para verificar se um elemento existe no array, tornando o código mais limpo e legível quando você só precisa saber se algo está presente."
+      ]
     },
     {
-      "numero": 7,
-      "pergunta": "Por que o método sort() pode produzir resultados inesperados ao ordenar números?",
-      "alternativas": [
+      "id": "q7",
+      "question": "Qual é uma vantagem de usar closures?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Porque não foi projetado para trabalhar com números"
+          "id": "a1",
+          "text": "Tornar o código mais rápido",
+          "isCorrect": false,
+          "explanation": "Closures não necessariamente melhoram performance."
         },
         {
-          "letra": "b",
-          "texto": "Por padrão, converte elementos para strings e compara lexicograficamente",
-          "correta": true
+          "id": "a2",
+          "text": "Criar dados privados e encapsulamento",
+          "isCorrect": true,
+          "explanation": "Correto! Closures permitem criar variáveis privadas que só podem ser acessadas por funções específicas."
         },
         {
-          "letra": "c",
-          "texto": "É um método com defeito de implementação"
+          "id": "a3",
+          "text": "Eliminar a necessidade de parâmetros",
+          "isCorrect": false,
+          "explanation": "Closures não eliminam parâmetros."
         },
         {
-          "letra": "d",
-          "texto": "Funciona apenas com arrays pequenos"
+          "id": "a4",
+          "text": "Converter funções em strings",
+          "isCorrect": false,
+          "explanation": "Closures não fazem conversão de tipos."
         }
-      ],
-      "explicacao": "O sort() converte elementos para string por padrão, fazendo com que \"10\" seja considerado menor que \"2\" lexicograficamente. Para ordenar números corretamente, é necessário fornecer uma função de comparação."
+      ]
     },
     {
-      "numero": 8,
-      "pergunta": "O que torna o método reduce() mais poderoso que outros métodos de arrays?",
-      "alternativas": [
+      "id": "q8",
+      "question": "O que são callbacks em JavaScript?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "É sempre mais rápido em termos de performance"
+          "id": "a1",
+          "text": "Funções que retornam múltiplos valores",
+          "isCorrect": false,
+          "explanation": "Callbacks não são sobre retornar múltiplos valores."
         },
         {
-          "letra": "b",
-          "texto": "Pode reduzir um array a qualquer tipo de valor através de acumulação",
-          "correta": true
+          "id": "a2",
+          "text": "Funções passadas como argumentos para outras funções",
+          "isCorrect": true,
+          "explanation": "Correto! Callbacks são funções passadas como argumentos que são executadas posteriormente."
         },
         {
-          "letra": "c",
-          "texto": "Funciona exclusivamente com números"
+          "id": "a3",
+          "text": "Funções que só podem ser declaradas uma vez",
+          "isCorrect": false,
+          "explanation": "Callbacks podem ser reutilizadas múltiplas vezes."
         },
         {
-          "letra": "d",
-          "texto": "É mais fácil de usar que outros métodos"
+          "id": "a4",
+          "text": "Funções que sempre retornam undefined",
+          "isCorrect": false,
+          "explanation": "Callbacks podem retornar qualquer valor."
         }
-      ],
-      "explicacao": "reduce() pode transformar um array em qualquer valor (número, string, objeto, outro array) através de acumulação iterativa, tornando-o extremamente versátil."
+      ]
     },
     {
-      "numero": 9,
-      "pergunta": "Qual princípio orienta o uso de métodos encadeados (chaining) em arrays?",
-      "alternativas": [
+      "id": "q9",
+      "question": "Qual é a forma mais concisa de escrever uma arrow function que retorna um objeto?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Tornar o código mais longo e verboso"
+          "id": "a1",
+          "text": "() => {nome: 'João'}",
+          "isCorrect": false,
+          "explanation": "Isso seria interpretado como um bloco de código, não um objeto."
         },
         {
-          "letra": "b",
-          "texto": "Combinar múltiplas operações de forma fluente em uma única sequência",
-          "correta": true
+          "id": "a2",
+          "text": "() => ({nome: 'João'})",
+          "isCorrect": true,
+          "explanation": "Correto! Parênteses em torno do objeto literal indicam que é um valor de retorno, não um bloco."
         },
         {
-          "letra": "c",
-          "texto": "É obrigatório em JavaScript moderno"
+          "id": "a3",
+          "text": "() => [nome: 'João']",
+          "isCorrect": false,
+          "explanation": "Colchetes criam arrays, não objetos."
         },
         {
-          "letra": "d",
-          "texto": "Usar mais memória para melhorar a performance"
+          "id": "a4",
+          "text": "() -> {nome: 'João'}",
+          "isCorrect": false,
+          "explanation": "JavaScript usa =>, não -> para arrow functions."
         }
-      ],
-      "explicacao": "O encadeamento permite operações fluentes como array.filter().map().sort(), tornando o código mais expressivo e fácil de ler ao combinar múltiplas transformações."
+      ]
     },
     {
-      "numero": 10,
-      "pergunta": "Por que compreender esses métodos avançados é importante para a programação moderna em JavaScript?",
-      "alternativas": [
+      "id": "q10",
+      "question": "Por que arrow functions são úteis em programação funcional?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "São obrigatórios por regulamentação legal"
+          "id": "a1",
+          "text": "São sempre mais rápidas que funções tradicionais",
+          "isCorrect": false,
+          "explanation": "A performance é similar entre os dois tipos."
         },
         {
-          "letra": "b",
-          "texto": "Representam paradigmas de programação funcional e tornam o código mais expressivo",
-          "correta": true
+          "id": "a2",
+          "text": "Oferecem sintaxe concisa para funções de uma linha e callbacks",
+          "isCorrect": true,
+          "explanation": "Correto! Arrow functions tornam código mais legível, especialmente ao usar map, filter, reduce, etc."
         },
         {
-          "letra": "c",
-          "texto": "Substituem completamente a necessidade de loops"
+          "id": "a3",
+          "text": "Eliminam a necessidade de closures",
+          "isCorrect": false,
+          "explanation": "Arrow functions não eliminam closures, elas também criam closures."
         },
         {
-          "letra": "d",
-          "texto": "São sempre mais rápidos que qualquer alternativa"
+          "id": "a4",
+          "text": "Só podem ser usadas em programação funcional",
+          "isCorrect": false,
+          "explanation": "Arrow functions podem ser usadas em qualquer paradigma."
         }
-      ],
-      "explicacao": "Os métodos funcionais de arrays seguem boas práticas de programação moderna, tornando o código mais legível, manutenível e expressivo ao trabalhar com coleções de dados."
+      ]
     }
   ]
 }

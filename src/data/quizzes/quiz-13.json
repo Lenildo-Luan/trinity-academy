@@ -1,246 +1,308 @@
 {
-  "aula": 13,
-  "totalQuestoes": 10,
-  "questoes": [
+  "id": "quiz-13",
+  "title": "Quiz - Organizando Informações com Objetos",
+  "description": "Teste seus conhecimentos sobre objetos em JavaScript e como usá-los para armazenar dados estruturados.",
+  "timeLimit": 900,
+  "questions": [
     {
-      "numero": 1,
-      "pergunta": "Por que funções são consideradas 'blocos de construção fundamentais' da programação?",
-      "alternativas": [
+      "id": "q1",
+      "question": "O que é um objeto em JavaScript?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Porque permitem navegar na Internet mais rapidamente"
+          "id": "a1",
+          "text": "Um tipo primitivo de dados",
+          "isCorrect": false,
+          "explanation": "Objetos não são tipos primitivos, são estruturas complexas."
         },
         {
-          "letra": "b",
-          "texto": "Porque permitem reutilização de código, organização e isolamento de funcionalidades",
-          "correta": true
+          "id": "a2",
+          "text": "Uma coleção de propriedades organizadas em pares chave-valor",
+          "isCorrect": true,
+          "explanation": "Correto! Objetos armazenam dados estruturados como pares de chave (nome) e valor."
         },
         {
-          "letra": "c",
-          "texto": "Porque são obrigatórias em todo código JavaScript"
+          "id": "a3",
+          "text": "Uma função especial",
+          "isCorrect": false,
+          "explanation": "Objetos não são funções, embora possam conter funções."
         },
         {
-          "letra": "d",
-          "texto": "Porque substituem completamente a necessidade de variáveis"
+          "id": "a4",
+          "text": "Um array ordenado de elementos",
+          "isCorrect": false,
+          "explanation": "Arrays são ordenados, objetos usam chaves nomeadas."
         }
-      ],
-      "explicacao": "As funções são fundamentais porque transformam código repetitivo e desorganizado em blocos reutilizáveis e bem estruturados. Como receitas culinárias, elas encapsulam procedimentos que podem ser executados múltiplas vezes sem reescrita."
+      ]
     },
     {
-      "numero": 2,
-      "pergunta": "O que significa dizer que funções em JavaScript são 'first-class citizens' (cidadãos de primeira classe)?",
-      "alternativas": [
+      "id": "q2",
+      "question": "Como você cria um objeto vazio em JavaScript?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "São mais importantes que outras estruturas de código"
+          "id": "a1",
+          "text": "let obj = []",
+          "isCorrect": false,
+          "explanation": "Colchetes [] criam arrays, não objetos."
         },
         {
-          "letra": "b",
-          "texto": "Podem ser atribuídas a variáveis, passadas como argumentos e manipuladas como dados",
-          "correta": true
+          "id": "a2",
+          "text": "let obj = {}",
+          "isCorrect": true,
+          "explanation": "Correto! Chaves {} são usadas para criar objetos."
         },
         {
-          "letra": "c",
-          "texto": "Foram criadas antes de outras funcionalidades da linguagem"
+          "id": "a3",
+          "text": "let obj = ()",
+          "isCorrect": false,
+          "explanation": "Parênteses não criam objetos em JavaScript."
         },
         {
-          "letra": "d",
-          "texto": "Apenas podem ser usadas por programadores avançados"
+          "id": "a4",
+          "text": "let obj = \"\"",
+          "isCorrect": false,
+          "explanation": "Aspas criam strings, não objetos."
         }
-      ],
-      "explicacao": "Em JavaScript, funções são 'first-class citizens', o que significa que podem ser tratadas como qualquer outro valor: armazenadas em variáveis, passadas para outras funções e retornadas como resultados."
+      ]
     },
     {
-      "numero": 3,
-      "pergunta": "O que é 'hoisting' no contexto de declarações de função?",
-      "alternativas": [
+      "id": "q3",
+      "question": "Como você acessa uma propriedade de um objeto?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Funções são processadas durante a fase de compilação, ficando disponíveis em todo o escopo",
-          "correta": true
+          "id": "a1",
+          "text": "Usando notação de ponto ou colchetes",
+          "isCorrect": true,
+          "explanation": "Correto! Você pode usar obj.nome ou obj['nome'] para acessar propriedades."
         },
         {
-          "letra": "b",
-          "texto": "Funções ficam mais rápidas quando usadas repetidamente"
+          "id": "a2",
+          "text": "Apenas com parênteses",
+          "isCorrect": false,
+          "explanation": "Parênteses não são usados para acessar propriedades."
         },
         {
-          "letra": "c",
-          "texto": "Funções podem ser deletadas automaticamente quando não são mais usadas"
+          "id": "a3",
+          "text": "Apenas por índice numérico",
+          "isCorrect": false,
+          "explanation": "Objetos usam chaves nomeadas, não índices numéricos."
         },
         {
-          "letra": "d",
-          "texto": "Funções só podem ser chamadas depois de serem declaradas"
+          "id": "a4",
+          "text": "Com o método get()",
+          "isCorrect": false,
+          "explanation": "Não existe método get() padrão para objetos simples."
         }
-      ],
-      "explicacao": "O hoisting é um comportamento exclusivo das declarações de função. Durante a fase de compilação, o JavaScript 'eleva' essas declarações, tornando-as disponíveis em todo o escopo, mesmo antes da linha onde foram escritas."
+      ]
     },
     {
-      "numero": 4,
-      "pergunta": "Qual é a diferença principal entre declarações de função e expressões de função em relação ao momento de criação?",
-      "alternativas": [
+      "id": "q4",
+      "question": "Qual é a diferença entre notação de ponto e notação de colchetes?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Declarações são mais rápidas que expressões"
+          "id": "a1",
+          "text": "Não há diferença, são completamente intercambiáveis",
+          "isCorrect": false,
+          "explanation": "Há diferenças importantes entre as duas notações."
         },
         {
-          "letra": "b",
-          "texto": "Expressões são criadas apenas quando a execução as alcança, seguindo o fluxo normal do código",
-          "correta": true
+          "id": "a2",
+          "text": "Colchetes permitem usar variáveis e nomes com caracteres especiais",
+          "isCorrect": true,
+          "explanation": "Correto! obj[variavel] e obj['nome com espaço'] funcionam, mas obj.variavel e obj.nome com espaço não."
         },
         {
-          "letra": "c",
-          "texto": "Expressões não podem ter parâmetros"
+          "id": "a3",
+          "text": "Notação de ponto é mais rápida",
+          "isCorrect": false,
+          "explanation": "A performance é essencialmente a mesma."
         },
         {
-          "letra": "d",
-          "texto": "Não há diferença entre elas"
+          "id": "a4",
+          "text": "Colchetes só funcionam com números",
+          "isCorrect": false,
+          "explanation": "Colchetes funcionam com qualquer expressão que resulte em string."
         }
-      ],
-      "explicacao": "Diferente das declarações, expressões de função seguem o fluxo temporal do código. São criadas no momento exato em que a execução alcança aquela linha, como qualquer outra atribuição de variável."
+      ]
     },
     {
-      "numero": 5,
-      "pergunta": "Por que a capacidade de tratar funções como valores é importante em JavaScript?",
-      "alternativas": [
+      "id": "q5",
+      "question": "Como você adiciona uma nova propriedade a um objeto existente?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para economizar memória durante a execução"
+          "id": "a1",
+          "text": "obj.push(novaProp)",
+          "isCorrect": false,
+          "explanation": "push() é um método de arrays, não de objetos."
         },
         {
-          "letra": "b",
-          "texto": "Possibilita padrões de programação flexíveis como callbacks, composição de funções e programação funcional",
-          "correta": true
+          "id": "a2",
+          "text": "obj.novaPropriedade = valor ou obj['novaPropriedade'] = valor",
+          "isCorrect": true,
+          "explanation": "Correto! Basta atribuir um valor à nova propriedade."
         },
         {
-          "letra": "c",
-          "texto": "É obrigatório por regras da linguagem"
+          "id": "a3",
+          "text": "obj.add('novaPropriedade', valor)",
+          "isCorrect": false,
+          "explanation": "Não existe método add() padrão para objetos."
         },
         {
-          "letra": "d",
-          "texto": "Apenas para compatibilidade com outras linguagens"
+          "id": "a4",
+          "text": "Não é possível adicionar propriedades após criar o objeto",
+          "isCorrect": false,
+          "explanation": "Objetos em JavaScript são dinâmicos e podem ser modificados."
         }
-      ],
-      "explicacao": "Essa flexibilidade torna JavaScript extremamente poderoso e é fundamental para muitos padrões de programação modernos, incluindo callbacks, higher-order functions e programação funcional."
+      ]
     },
     {
-      "numero": 6,
-      "pergunta": "Qual é a diferença entre parâmetros e argumentos?",
-      "alternativas": [
+      "id": "q6",
+      "question": "Como você remove uma propriedade de um objeto?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "São sinônimos e significam exatamente a mesma coisa"
+          "id": "a1",
+          "text": "obj.remove('propriedade')",
+          "isCorrect": false,
+          "explanation": "Não existe método remove() para objetos."
         },
         {
-          "letra": "b",
-          "texto": "Parâmetros são as variáveis definidas na função, argumentos são os valores passados na chamada",
-          "correta": true
+          "id": "a2",
+          "text": "delete obj.propriedade",
+          "isCorrect": true,
+          "explanation": "Correto! O operador delete remove propriedades de objetos."
         },
         {
-          "letra": "c",
-          "texto": "Parâmetros são usados em Python, argumentos em JavaScript"
+          "id": "a3",
+          "text": "obj.propriedade = null",
+          "isCorrect": false,
+          "explanation": "Isso define a propriedade como null, mas não a remove."
         },
         {
-          "letra": "d",
-          "texto": "Argumentos são sempre números, parâmetros podem ser textos"
+          "id": "a4",
+          "text": "obj.pop('propriedade')",
+          "isCorrect": false,
+          "explanation": "pop() é um método de arrays, não de objetos."
         }
-      ],
-      "explicacao": "Esta distinção é importante para comunicação precisa: parâmetros são os 'espaços reservados' na definição da função, enquanto argumentos são os valores concretos fornecidos quando chamamos a função."
+      ]
     },
     {
-      "numero": 7,
-      "pergunta": "Por que valores padrão (default) para parâmetros são úteis?",
-      "alternativas": [
+      "id": "q7",
+      "question": "O que são métodos em um objeto?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para economizar memória durante a execução"
+          "id": "a1",
+          "text": "Propriedades que armazenam números",
+          "isCorrect": false,
+          "explanation": "Métodos não são limitados a números."
         },
         {
-          "letra": "b",
-          "texto": "Para tornar funções mais flexíveis e tolerantes a diferentes formas de uso",
-          "correta": true
+          "id": "a2",
+          "text": "Propriedades que armazenam funções",
+          "isCorrect": true,
+          "explanation": "Correto! Métodos são funções armazenadas como propriedades de objetos."
         },
         {
-          "letra": "c",
-          "texto": "Para acelerar a execução do código"
+          "id": "a3",
+          "text": "Uma forma de deletar objetos",
+          "isCorrect": false,
+          "explanation": "Métodos não são usados para deletar objetos."
         },
         {
-          "letra": "d",
-          "texto": "São obrigatórios em JavaScript moderno"
+          "id": "a4",
+          "text": "Arrays dentro de objetos",
+          "isCorrect": false,
+          "explanation": "Métodos são funções, não arrays."
         }
-      ],
-      "explicacao": "Valores padrão tornam funções mais robustas e fáceis de usar, permitindo que funcionem corretamente mesmo quando alguns argumentos não são fornecidos. Aumentam a flexibilidade sem comprometer a funcionalidade."
+      ]
     },
     {
-      "numero": 8,
-      "pergunta": "O que o conceito de 'escopo' representa na programação?",
-      "alternativas": [
+      "id": "q8",
+      "question": "Como você itera sobre as propriedades de um objeto?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "A velocidade de execução de uma função"
+          "id": "a1",
+          "text": "Usando for...of",
+          "isCorrect": false,
+          "explanation": "for...of é usado para arrays e iteráveis, não objetos diretamente."
         },
         {
-          "letra": "b",
-          "texto": "A região do código onde variáveis são acessíveis",
-          "correta": true
+          "id": "a2",
+          "text": "Usando for...in ou Object.keys()",
+          "isCorrect": true,
+          "explanation": "Correto! for...in itera sobre chaves, Object.keys() retorna um array de chaves."
         },
         {
-          "letra": "c",
-          "texto": "O tamanho em bytes de uma função"
+          "id": "a3",
+          "text": "Usando forEach() diretamente no objeto",
+          "isCorrect": false,
+          "explanation": "forEach() não existe diretamente em objetos simples."
         },
         {
-          "letra": "d",
-          "texto": "O número de parâmetros que uma função pode ter"
+          "id": "a4",
+          "text": "Não é possível iterar sobre objetos",
+          "isCorrect": false,
+          "explanation": "É possível iterar sobre objetos de várias formas."
         }
-      ],
-      "explicacao": "O escopo define as 'fronteiras de visibilidade' de variáveis. É como ter cômodos em uma casa - o que está dentro de um cômodo (função) não é necessariamente visível de fora."
+      ]
     },
     {
-      "numero": 9,
-      "pergunta": "Por que a nomenclatura descritiva é importante para funções?",
-      "alternativas": [
+      "id": "q9",
+      "question": "O que Object.keys() retorna?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para impressionar outros programadores"
+          "id": "a1",
+          "text": "Um array com os valores das propriedades",
+          "isCorrect": false,
+          "explanation": "Object.keys() retorna chaves, não valores."
         },
         {
-          "letra": "b",
-          "texto": "Funções são ações - nomes devem indicar claramente o que fazem",
-          "correta": true
+          "id": "a2",
+          "text": "Um array com os nomes das propriedades (chaves)",
+          "isCorrect": true,
+          "explanation": "Correto! Object.keys(obj) retorna um array com todas as chaves do objeto."
         },
         {
-          "letra": "c",
-          "texto": "Para usar mais caracteres no código"
+          "id": "a3",
+          "text": "Um objeto com as propriedades invertidas",
+          "isCorrect": false,
+          "explanation": "Object.keys() não inverte propriedades."
         },
         {
-          "letra": "d",
-          "texto": "É obrigatório por lei na maioria dos países"
+          "id": "a4",
+          "text": "O número de propriedades",
+          "isCorrect": false,
+          "explanation": "Para contar, você usaria Object.keys(obj).length."
         }
-      ],
-      "explicacao": "Bons nomes de função são essenciais para código legível. Como funções representam ações, seus nomes devem ser verbos descritivos que comunicam claramente sua intenção e comportamento."
+      ]
     },
     {
-      "numero": 10,
-      "pergunta": "Qual é a diferença entre funções puras e funções com efeitos colaterais?",
-      "alternativas": [
+      "id": "q10",
+      "question": "Qual é a vantagem de usar objetos ao invés de variáveis separadas?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Funções puras são sempre melhores em todos os casos"
+          "id": "a1",
+          "text": "Objetos são sempre mais rápidos",
+          "isCorrect": false,
+          "explanation": "Objetos não são necessariamente mais rápidos."
         },
         {
-          "letra": "b",
-          "texto": "Funções puras sempre retornam o mesmo resultado para as mesmas entradas e não modificam estado externo",
-          "correta": true
+          "id": "a2",
+          "text": "Organizam dados relacionados em uma única estrutura lógica",
+          "isCorrect": true,
+          "explanation": "Correto! Objetos agrupam informações relacionadas, tornando o código mais organizado e fácil de manter."
         },
         {
-          "letra": "c",
-          "texto": "Efeitos colaterais são completamente proibidos em JavaScript"
+          "id": "a3",
+          "text": "Ocupam menos memória",
+          "isCorrect": false,
+          "explanation": "Objetos não necessariamente ocupam menos memória."
         },
         {
-          "letra": "d",
-          "texto": "Não há diferença prática entre elas"
+          "id": "a4",
+          "text": "Eliminam a necessidade de funções",
+          "isCorrect": false,
+          "explanation": "Objetos não eliminam a necessidade de funções, podem até contê-las."
         }
-      ],
-      "explicacao": "Funções puras são previsíveis e fáceis de testar porque sempre produzem o mesmo resultado para as mesmas entradas e não causam surpresas ao modificar estado externo. São a base da programação funcional."
+      ]
     }
   ]
 }

@@ -1,246 +1,308 @@
 {
-  "aula": 6,
-  "totalQuestoes": 10,
-  "questoes": [
+  "id": "quiz-6",
+  "title": "Quiz - Tomando Decisões",
+  "description": "Teste seus conhecimentos sobre estruturas condicionais em JavaScript.",
+  "timeLimit": 900,
+  "questions": [
     {
-      "numero": 1,
-      "pergunta": "O que significa dizer que strings são \"imutáveis\" em JavaScript?",
-      "alternativas": [
+      "id": "q1",
+      "question": "Qual é a estrutura básica de um if em JavaScript?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Strings não podem ser criadas"
+          "id": "a1",
+          "text": "if (condição) { código }",
+          "isCorrect": true,
+          "explanation": "Correto! A sintaxe básica do if é: if (condição) seguido do bloco de código entre chaves."
         },
         {
-          "letra": "b",
-          "texto": "Uma vez criadas, strings não podem ser alteradas diretamente - operações criam novas strings",
-          "correta": true
+          "id": "a2",
+          "text": "if condição then { código }",
+          "isCorrect": false,
+          "explanation": "JavaScript não usa a palavra 'then' em estruturas condicionais."
         },
         {
-          "letra": "c",
-          "texto": "Strings ocupam menos memória"
+          "id": "a3",
+          "text": "if [condição] { código }",
+          "isCorrect": false,
+          "explanation": "A condição deve estar entre parênteses (), não colchetes []."
         },
         {
-          "letra": "d",
-          "texto": "Strings são mais rápidas que números"
+          "id": "a4",
+          "text": "if: condição { código }",
+          "isCorrect": false,
+          "explanation": "JavaScript não usa : após if, usa parênteses para a condição."
         }
-      ],
-      "explicacao": "Strings são imutáveis, o que significa que qualquer operação que parece modificar uma string na verdade cria uma nova string."
+      ]
     },
     {
-      "numero": 2,
-      "pergunta": "Por que JavaScript oferece três formas diferentes de declarar strings?",
-      "alternativas": [
+      "id": "q2",
+      "question": "O que acontece quando a condição de um if é falsa?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para confundir programadores"
+          "id": "a1",
+          "text": "O código dentro do if é executado",
+          "isCorrect": false,
+          "explanation": "O código dentro do if só é executado se a condição for verdadeira."
         },
         {
-          "letra": "b",
-          "texto": "Para atender diferentes necessidades como interpolação, aspas internas e texto multilinha",
-          "correta": true
+          "id": "a2",
+          "text": "O código dentro do if é pulado",
+          "isCorrect": true,
+          "explanation": "Correto! Quando a condição é falsa, o código dentro do if é ignorado."
         },
         {
-          "letra": "c",
-          "texto": "Para economizar memória"
+          "id": "a3",
+          "text": "O programa gera um erro",
+          "isCorrect": false,
+          "explanation": "Condição falsa não gera erro, apenas não executa o bloco."
         },
         {
-          "letra": "d",
-          "texto": "São formas idênticas sem diferença prática"
+          "id": "a4",
+          "text": "O programa para de executar",
+          "isCorrect": false,
+          "explanation": "O programa continua executando após o bloco if."
         }
-      ],
-      "explicacao": "As três formas (aspas simples, duplas e crases) atendem diferentes necessidades práticas no desenvolvimento."
+      ]
     },
     {
-      "numero": 3,
-      "pergunta": "Qual é o conceito fundamental por trás dos template literals (crases)?",
-      "alternativas": [
+      "id": "q3",
+      "question": "Para que serve a cláusula else?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Apenas uma sintaxe alternativa para strings"
+          "id": "a1",
+          "text": "Para executar código quando o if é verdadeiro",
+          "isCorrect": false,
+          "explanation": "O código do if já executa quando é verdadeiro. else é para quando é falso."
         },
         {
-          "letra": "b",
-          "texto": "Permitir interpolação de variáveis e expressões diretamente no texto",
-          "correta": true
+          "id": "a2",
+          "text": "Para executar código quando o if é falso",
+          "isCorrect": true,
+          "explanation": "Correto! else executa um bloco alternativo quando a condição do if é falsa."
         },
         {
-          "letra": "c",
-          "texto": "Tornar strings mais rápidas"
+          "id": "a3",
+          "text": "Para adicionar mais condições",
+          "isCorrect": false,
+          "explanation": "Para adicionar mais condições, usa-se else if, não else."
         },
         {
-          "letra": "d",
-          "texto": "Criar strings mais curtas"
+          "id": "a4",
+          "text": "Para repetir o código",
+          "isCorrect": false,
+          "explanation": "Repetição é feita com loops, não com else."
         }
-      ],
-      "explicacao": "Template literals permitem incorporar variáveis e expressões diretamente no texto usando ${}, tornando o código mais legível."
+      ]
     },
     {
-      "numero": 4,
-      "pergunta": "Por que existem sequências de escape (\\n, \\t, etc.) em strings?",
-      "alternativas": [
+      "id": "q4",
+      "question": "Qual é a diferença entre if...else e else if?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para decorar o código"
+          "id": "a1",
+          "text": "Não há diferença",
+          "isCorrect": false,
+          "explanation": "Há diferença importante entre else e else if."
         },
         {
-          "letra": "b",
-          "texto": "Para incluir caracteres especiais que não podem ser digitados diretamente",
-          "correta": true
+          "id": "a2",
+          "text": "else if permite testar uma nova condição, else não",
+          "isCorrect": true,
+          "explanation": "Correto! else if testa uma nova condição, enquanto else executa quando todas as condições anteriores falharam."
         },
         {
-          "letra": "c",
-          "texto": "Para economizar espaço"
+          "id": "a3",
+          "text": "else é mais rápido que else if",
+          "isCorrect": false,
+          "explanation": "A performance não é o diferencial, mas sim a funcionalidade."
         },
         {
-          "letra": "d",
-          "texto": "Para tornar strings mais legíveis"
+          "id": "a4",
+          "text": "else if só funciona com números",
+          "isCorrect": false,
+          "explanation": "else if funciona com qualquer tipo de condição booleana."
         }
-      ],
-      "explicacao": "Sequências de escape permitem incluir caracteres especiais como quebras de linha, tabulações e aspas dentro de strings."
+      ]
     },
     {
-      "numero": 5,
-      "pergunta": "O que o comportamento diferente de \"5\" + 1 vs \"5\" - 1 revela sobre JavaScript?",
-      "alternativas": [
+      "id": "q5",
+      "question": "Quantas cláusulas else if você pode ter em uma estrutura condicional?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Que é uma linguagem mal projetada"
+          "id": "a1",
+          "text": "Apenas uma",
+          "isCorrect": false,
+          "explanation": "Você pode ter múltiplas cláusulas else if."
         },
         {
-          "letra": "b",
-          "texto": "Que JavaScript trata o operador + de forma especial para concatenação com strings",
-          "correta": true
+          "id": "a2",
+          "text": "Até 10",
+          "isCorrect": false,
+          "explanation": "Não há limite fixo de 10."
         },
         {
-          "letra": "c",
-          "texto": "Que strings são superiores a números"
+          "id": "a3",
+          "text": "Quantas forem necessárias",
+          "isCorrect": true,
+          "explanation": "Correto! Você pode encadear quantas cláusulas else if forem necessárias."
         },
         {
-          "letra": "d",
-          "texto": "Que operadores são desnecessários"
+          "id": "a4",
+          "text": "Nenhuma, else if não existe",
+          "isCorrect": false,
+          "explanation": "else if é uma estrutura válida em JavaScript."
         }
-      ],
-      "explicacao": "O operador + tem comportamento dual: concatena strings ou soma números, dependendo dos operandos."
+      ]
     },
     {
-      "numero": 6,
-      "pergunta": "Por que métodos de string sempre retornam novos valores em vez de modificar a string original?",
-      "alternativas": [
+      "id": "q6",
+      "question": "O que é o operador ternário em JavaScript?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para usar mais memória"
+          "id": "a1",
+          "text": "Um operador de três partes: condição ? verdadeiro : falso",
+          "isCorrect": true,
+          "explanation": "Correto! O operador ternário é uma forma compacta de if-else: condição ? valorSeVerdadeiro : valorSeFalso."
         },
         {
-          "letra": "b",
-          "texto": "Porque strings são imutáveis, então modificações criam novos valores",
-          "correta": true
+          "id": "a2",
+          "text": "Um operador que trabalha com três números",
+          "isCorrect": false,
+          "explanation": "Ternário se refere a três partes (condição, caso verdadeiro, caso falso), não três números."
         },
         {
-          "letra": "c",
-          "texto": "Para tornar o código mais lento"
+          "id": "a3",
+          "text": "Um operador para comparar três valores",
+          "isCorrect": false,
+          "explanation": "O operador ternário é para executar código condicional, não comparar três valores."
         },
         {
-          "letra": "d",
-          "texto": "É um erro de design da linguagem"
+          "id": "a4",
+          "text": "Um tipo de loop",
+          "isCorrect": false,
+          "explanation": "O operador ternário não é um loop, é uma expressão condicional."
         }
-      ],
-      "explicacao": "A imutabilidade das strings garante que o valor original seja preservado, criando previsibilidade no código."
+      ]
     },
     {
-      "numero": 7,
-      "pergunta": "Qual é o propósito fundamental de métodos como includes() e indexOf()?",
-      "alternativas": [
+      "id": "q7",
+      "question": "Qual é a sintaxe correta do operador ternário?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Modificar strings"
+          "id": "a1",
+          "text": "condição ? valorSeVerdadeiro : valorSeFalso",
+          "isCorrect": true,
+          "explanation": "Correto! A sintaxe é: condição ? (se verdadeiro) : (se falso)."
         },
         {
-          "letra": "b",
-          "texto": "Verificar padrões e conteúdo sem modificar a string original",
-          "correta": true
+          "id": "a2",
+          "text": "condição : valorSeVerdadeiro ? valorSeFalso",
+          "isCorrect": false,
+          "explanation": "A ordem está incorreta. O ? vem após a condição."
         },
         {
-          "letra": "c",
-          "texto": "Criar novas strings"
+          "id": "a3",
+          "text": "condição && valorSeVerdadeiro || valorSeFalso",
+          "isCorrect": false,
+          "explanation": "Esta não é a sintaxe do operador ternário, embora tenha efeito similar em alguns casos."
         },
         {
-          "letra": "d",
-          "texto": "Converter tipos de dados"
+          "id": "a4",
+          "text": "if condição then valorSeVerdadeiro else valorSeFalso",
+          "isCorrect": false,
+          "explanation": "Esta sintaxe não é válida em JavaScript."
         }
-      ],
-      "explicacao": "Esses métodos permitem buscar e verificar conteúdo nas strings de forma não-destrutiva."
+      ]
     },
     {
-      "numero": 8,
-      "pergunta": "Por que a propriedade length e o acesso por índice [0] são importantes para strings?",
-      "alternativas": [
+      "id": "q8",
+      "question": "Para que serve a estrutura switch?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para decoração do código"
+          "id": "a1",
+          "text": "Para trocar valores entre variáveis",
+          "isCorrect": false,
+          "explanation": "switch não troca valores, é uma estrutura condicional."
         },
         {
-          "letra": "b",
-          "texto": "Para tratar strings como sequências indexadas de caracteres",
-          "correta": true
+          "id": "a2",
+          "text": "Para testar múltiplos valores possíveis de uma variável",
+          "isCorrect": true,
+          "explanation": "Correto! switch compara uma expressão com múltiplos casos possíveis."
         },
         {
-          "letra": "c",
-          "texto": "Para economizar memória"
+          "id": "a3",
+          "text": "Para criar loops",
+          "isCorrect": false,
+          "explanation": "switch é para condicionais, não para loops."
         },
         {
-          "letra": "d",
-          "texto": "Para tornar strings mais rápidas"
+          "id": "a4",
+          "text": "Para declarar variáveis",
+          "isCorrect": false,
+          "explanation": "switch não é usado para declarar variáveis."
         }
-      ],
-      "explicacao": "Strings são tratadas como arrays de caracteres, permitindo acesso posicional e medição de comprimento."
+      ]
     },
     {
-      "numero": 9,
-      "pergunta": "Qual conceito explica por que devemos ser consistentes na escolha de aspas?",
-      "alternativas": [
+      "id": "q9",
+      "question": "Por que é importante usar break dentro dos cases de um switch?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Performance do código"
+          "id": "a1",
+          "text": "Para melhorar a performance",
+          "isCorrect": false,
+          "explanation": "break não é principalmente sobre performance."
         },
         {
-          "letra": "b",
-          "texto": "Legibilidade, manutenibilidade e padrões de codificação",
-          "correta": true
+          "id": "a2",
+          "text": "Para evitar que os próximos cases sejam executados",
+          "isCorrect": true,
+          "explanation": "Correto! Sem break, ocorre 'fall-through' e os cases seguintes também são executados."
         },
         {
-          "letra": "c",
-          "texto": "Compatibilidade entre navegadores"
+          "id": "a3",
+          "text": "Porque o código não funciona sem break",
+          "isCorrect": false,
+          "explanation": "O código funciona, mas pode executar cases não desejados."
         },
         {
-          "letra": "d",
-          "texto": "Tamanho do arquivo"
+          "id": "a4",
+          "text": "break não é necessário em switch",
+          "isCorrect": false,
+          "explanation": "break é importante para controlar o fluxo dentro do switch."
         }
-      ],
-      "explicacao": "Consistência no código facilita leitura, manutenção e colaboração entre desenvolvedores."
+      ]
     },
     {
-      "numero": 10,
-      "pergunta": "Por que compreender conversão entre strings e números é fundamental?",
-      "alternativas": [
+      "id": "q10",
+      "question": "O que faz o caso default em um switch?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para impressionar outros programadores"
+          "id": "a1",
+          "text": "Define o primeiro caso a ser testado",
+          "isCorrect": false,
+          "explanation": "default não define a ordem, é executado quando nenhum case combina."
         },
         {
-          "letra": "b",
-          "texto": "Para manipular dados de entrada (formulários) e realizar operações corretas",
-          "correta": true
+          "id": "a2",
+          "text": "É executado quando nenhum case corresponde ao valor",
+          "isCorrect": true,
+          "explanation": "Correto! default é como o else de um switch, executado quando nenhum case é verdadeiro."
         },
         {
-          "letra": "c",
-          "texto": "Para usar menos memória"
+          "id": "a3",
+          "text": "Retorna ao valor padrão da variável",
+          "isCorrect": false,
+          "explanation": "default não altera valores, apenas executa código."
         },
         {
-          "letra": "d",
-          "texto": "Para escrever código mais curto"
+          "id": "a4",
+          "text": "É obrigatório em todo switch",
+          "isCorrect": false,
+          "explanation": "default é opcional, mas é uma boa prática incluí-lo."
         }
-      ],
-      "explicacao": "Dados de formulários sempre chegam como strings, então saber converter é essencial para processá-los corretamente."
+      ]
     }
   ]
 }

@@ -1,246 +1,308 @@
 {
-  "aula": 8,
-  "totalQuestoes": 10,
-  "questoes": [
+  "id": "quiz-8",
+  "title": "Quiz - O Poder da Repetição",
+  "description": "Teste seus conhecimentos sobre loops e estruturas de repetição em JavaScript.",
+  "timeLimit": 900,
+  "questions": [
     {
-      "numero": 1,
-      "pergunta": "Qual é o propósito fundamental dos loops na programação?",
-      "alternativas": [
+      "id": "q1",
+      "question": "Qual é o propósito fundamental dos loops na programação?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Tornar o código mais complexo"
+          "id": "a1",
+          "text": "Tornar o código mais complexo",
+          "isCorrect": false,
+          "explanation": "Loops não existem para adicionar complexidade, mas para simplificar tarefas repetitivas."
         },
         {
-          "letra": "b",
-          "texto": "Automatizar a execução repetitiva de código de forma eficiente",
-          "correta": true
+          "id": "a2",
+          "text": "Automatizar a execução repetitiva de código de forma eficiente",
+          "isCorrect": true,
+          "explanation": "Correto! Loops são fundamentais porque permitem automatizar tarefas repetitivas, executando o mesmo código múltiplas vezes de forma eficiente."
         },
         {
-          "letra": "c",
-          "texto": "Criar variáveis automáticas"
+          "id": "a3",
+          "text": "Criar variáveis automáticas",
+          "isCorrect": false,
+          "explanation": "Loops não criam variáveis automáticas, eles executam código repetidamente."
         },
         {
-          "letra": "d",
-          "texto": "Acelerar a execução de programas"
+          "id": "a4",
+          "text": "Acelerar a execução de programas",
+          "isCorrect": false,
+          "explanation": "Loops não aceleram programas por si só, eles automatizam tarefas repetitivas."
         }
-      ],
-      "explicacao": "Loops são fundamentais porque permitem automatizar tarefas repetitivas, executando o mesmo código múltiplas vezes de forma eficiente. Sem eles, seria necessário escrever código repetido manualmente."
+      ]
     },
     {
-      "numero": 2,
-      "pergunta": "Qual conceito diferencia principalmente o loop `while` do `do...while`?",
-      "alternativas": [
+      "id": "q2",
+      "question": "Qual conceito diferencia principalmente o loop 'while' do 'do...while'?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "A velocidade de execução"
+          "id": "a1",
+          "text": "A velocidade de execução",
+          "isCorrect": false,
+          "explanation": "A performance é praticamente a mesma entre os dois tipos de loop."
         },
         {
-          "letra": "b",
-          "texto": "O momento da verificação da condição (antes vs. depois da primeira execução)",
-          "correta": true
+          "id": "a2",
+          "text": "O momento da verificação da condição (antes vs. depois da primeira execução)",
+          "isCorrect": true,
+          "explanation": "Correto! while verifica a condição antes de executar (pode nunca executar), enquanto do...while verifica depois (sempre executa pelo menos uma vez)."
         },
         {
-          "letra": "c",
-          "texto": "O tipo de variáveis que podem usar"
+          "id": "a3",
+          "text": "O tipo de variáveis que podem usar",
+          "isCorrect": false,
+          "explanation": "Ambos os loops podem usar os mesmos tipos de variáveis."
         },
         {
-          "letra": "d",
-          "texto": "A complexidade das operações permitidas"
+          "id": "a4",
+          "text": "A complexidade das operações permitidas",
+          "isCorrect": false,
+          "explanation": "Ambos permitem as mesmas operações dentro do loop."
         }
-      ],
-      "explicacao": "A diferença fundamental é que `while` verifica a condição antes de executar o bloco (pode nunca executar), enquanto `do...while` verifica depois (sempre executa pelo menos uma vez)."
+      ]
     },
     {
-      "numero": 3,
-      "pergunta": "Por que o loop `for` é considerado mais \"concentrado\" que o `while`?",
-      "alternativas": [
+      "id": "q3",
+      "question": "Por que o loop 'for' é considerado mais compacto que o 'while'?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "É mais rápido"
+          "id": "a1",
+          "text": "É mais rápido na execução",
+          "isCorrect": false,
+          "explanation": "A performance é similar entre for e while."
         },
         {
-          "letra": "b",
-          "texto": "Reúne inicialização, condição e incremento em uma única declaração",
-          "correta": true
+          "id": "a2",
+          "text": "Reúne inicialização, condição e incremento em uma única declaração",
+          "isCorrect": true,
+          "explanation": "Correto! O loop for concentra os três componentes essenciais (inicialização, condição e atualização) em uma única linha."
         },
         {
-          "letra": "c",
-          "texto": "Usa menos memória"
+          "id": "a3",
+          "text": "Usa menos memória",
+          "isCorrect": false,
+          "explanation": "O uso de memória é similar entre os diferentes tipos de loop."
         },
         {
-          "letra": "d",
-          "texto": "É mais fácil de entender"
+          "id": "a4",
+          "text": "É mais fácil de entender para iniciantes",
+          "isCorrect": false,
+          "explanation": "A facilidade de entendimento é subjetiva e depende do contexto."
         }
-      ],
-      "explicacao": "O loop `for` concentra os três componentes essenciais (inicialização, condição e atualização) em uma única linha, tornando o código mais compacto e facilitando a visualização da estrutura de repetição."
+      ]
     },
     {
-      "numero": 4,
-      "pergunta": "Qual princípio explica por que loops infinitos devem ser evitados?",
-      "alternativas": [
+      "id": "q4",
+      "question": "Qual princípio explica por que loops infinitos devem ser evitados?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Usam mais memória que o necessário"
+          "id": "a1",
+          "text": "Usam mais memória que o necessário",
+          "isCorrect": false,
+          "explanation": "O problema principal não é o uso de memória, mas a execução indefinida."
         },
         {
-          "letra": "b",
-          "texto": "Podem travar o programa ao nunca satisfazer a condição de parada",
-          "correta": true
+          "id": "a2",
+          "text": "Podem travar o programa ao nunca satisfazer a condição de parada",
+          "isCorrect": true,
+          "explanation": "Correto! Loops infinitos são problemáticos porque nunca satisfazem a condição de parada, fazendo o programa executar indefinidamente."
         },
         {
-          "letra": "c",
-          "texto": "São incompatíveis com navegadores"
+          "id": "a3",
+          "text": "São incompatíveis com navegadores modernos",
+          "isCorrect": false,
+          "explanation": "Navegadores executam loops infinitos, mas isso pode travá-los."
         },
         {
-          "letra": "d",
-          "texto": "Causam erros de sintaxe"
+          "id": "a4",
+          "text": "Causam erros de sintaxe",
+          "isCorrect": false,
+          "explanation": "Loops infinitos não causam erros de sintaxe, eles são sintaticamente corretos."
         }
-      ],
-      "explicacao": "Loops infinitos são problemáticos porque nunca satisfazem a condição de parada, fazendo o programa executar indefinidamente e potencialmente travando o navegador ou aplicação."
+      ]
     },
     {
-      "numero": 5,
-      "pergunta": "Por que a escolha entre diferentes tipos de loop depende do contexto do problema?",
-      "alternativas": [
+      "id": "q5",
+      "question": "Por que a escolha entre diferentes tipos de loop depende do contexto do problema?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para mostrar conhecimento técnico"
+          "id": "a1",
+          "text": "Para mostrar conhecimento técnico avançado",
+          "isCorrect": false,
+          "explanation": "A escolha deve ser baseada na clareza e adequação ao problema."
         },
         {
-          "letra": "b",
-          "texto": "Cada tipo é otimizado para diferentes padrões de controle de iteração",
-          "correta": true
+          "id": "a2",
+          "text": "Cada tipo é otimizado para diferentes padrões de controle de iteração",
+          "isCorrect": true,
+          "explanation": "Correto! for é melhor quando você sabe o número de iterações, while para condições complexas, e do...while quando precisa executar pelo menos uma vez."
         },
         {
-          "letra": "c",
-          "texto": "Para compatibilidade com versões antigas"
+          "id": "a3",
+          "text": "Para compatibilidade com versões antigas do JavaScript",
+          "isCorrect": false,
+          "explanation": "Todos os tipos de loop são suportados em todas as versões do JavaScript."
         },
         {
-          "letra": "d",
-          "texto": "Para economizar linhas de código"
+          "id": "a4",
+          "text": "Para economizar linhas de código",
+          "isCorrect": false,
+          "explanation": "A economia de código não é o principal motivo da escolha."
         }
-      ],
-      "explicacao": "Diferentes loops são adequados para diferentes situações: `for` quando você sabe o número de iterações, `while` para condições mais complexas, e `do...while` quando precisa executar pelo menos uma vez. Cada um expressa melhor uma intenção específica."
+      ]
     },
     {
-      "numero": 6,
-      "pergunta": "Qual conceito fundamental todos os loops compartilham?",
-      "alternativas": [
+      "id": "q6",
+      "question": "Qual conceito fundamental todos os loops compartilham?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Devem usar a mesma sintaxe"
+          "id": "a1",
+          "text": "Devem usar a mesma sintaxe exata",
+          "isCorrect": false,
+          "explanation": "Cada tipo de loop tem sua própria sintaxe específica."
         },
         {
-          "letra": "b",
-          "texto": "Execução repetitiva controlada por uma condição de parada",
-          "correta": true
+          "id": "a2",
+          "text": "Execução repetitiva controlada por uma condição de parada",
+          "isCorrect": true,
+          "explanation": "Correto! Todos os loops executam código repetidamente até que uma condição de parada seja satisfeita."
         },
         {
-          "letra": "c",
-          "texto": "Sempre usam números"
+          "id": "a3",
+          "text": "Sempre usam números como contadores",
+          "isCorrect": false,
+          "explanation": "Loops podem usar qualquer tipo de condição, não apenas números."
         },
         {
-          "letra": "d",
-          "texto": "Executam exatamente 10 vezes"
+          "id": "a4",
+          "text": "Executam exatamente 10 vezes",
+          "isCorrect": false,
+          "explanation": "Loops podem executar qualquer número de vezes, dependendo da condição."
         }
-      ],
-      "explicacao": "Todos os loops, independente do tipo, compartilham o conceito fundamental de executar código repetidamente até que uma condição de parada seja satisfeita. Isso é a essência da repetição controlada."
+      ]
     },
     {
-      "numero": 7,
-      "pergunta": "Por que usar nomes descritivos para variáveis de controle de loop é importante?",
-      "alternativas": [
+      "id": "q7",
+      "question": "Por que usar nomes descritivos para variáveis de controle de loop é importante?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para impressionar outros programadores"
+          "id": "a1",
+          "text": "Para impressionar outros programadores",
+          "isCorrect": false,
+          "explanation": "Nomes descritivos são sobre clareza, não sobre impressionar."
         },
         {
-          "letra": "b",
-          "texto": "Para melhorar legibilidade e manutenibilidade do código",
-          "correta": true
+          "id": "a2",
+          "text": "Para melhorar legibilidade e manutenibilidade do código",
+          "isCorrect": true,
+          "explanation": "Correto! Nomes descritivos tornam o código mais legível e fácil de manter, facilitando entendimento futuro."
         },
         {
-          "letra": "c",
-          "texto": "Para usar mais memória"
+          "id": "a3",
+          "text": "Para usar mais memória do sistema",
+          "isCorrect": false,
+          "explanation": "Nomes de variáveis não afetam significativamente o uso de memória."
         },
         {
-          "letra": "d",
-          "texto": "É obrigatório em JavaScript"
+          "id": "a4",
+          "text": "É obrigatório em JavaScript moderno",
+          "isCorrect": false,
+          "explanation": "Não é obrigatório, mas é uma boa prática recomendada."
         }
-      ],
-      "explicacao": "Nomes descritivos tornam o código mais legível e fácil de manter. Quando você ou outra pessoa revisitar o código no futuro, ficará claro o propósito de cada variável, facilitando entendimento e modificações."
+      ]
     },
     {
-      "numero": 8,
-      "pergunta": "Qual princípio orienta a otimização de performance em loops?",
-      "alternativas": [
+      "id": "q8",
+      "question": "Qual princípio orienta a otimização de performance em loops?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Sempre usar o loop mais curto"
+          "id": "a1",
+          "text": "Sempre usar o loop com menos caracteres",
+          "isCorrect": false,
+          "explanation": "O tamanho do código não determina a performance."
         },
         {
-          "letra": "b",
-          "texto": "Minimizar cálculos repetitivos desnecessários dentro do loop",
-          "correta": true
+          "id": "a2",
+          "text": "Minimizar cálculos repetitivos desnecessários dentro do loop",
+          "isCorrect": true,
+          "explanation": "Correto! A principal otimização é evitar cálculos desnecessários que são repetidos em cada iteração."
         },
         {
-          "letra": "c",
-          "texto": "Usar apenas variáveis globais"
+          "id": "a3",
+          "text": "Usar apenas variáveis globais",
+          "isCorrect": false,
+          "explanation": "Variáveis globais não melhoram performance e podem causar problemas."
         },
         {
-          "letra": "d",
-          "texto": "Evitar usar qualquer função"
+          "id": "a4",
+          "text": "Evitar usar qualquer função dentro do loop",
+          "isCorrect": false,
+          "explanation": "Funções podem ser usadas dentro de loops quando necessário."
         }
-      ],
-      "explicacao": "A principal otimização em loops é evitar cálculos desnecessários que são repetidos em cada iteração. Por exemplo, calcular `array.length` uma vez antes do loop ao invés de a cada iteração economiza processamento."
+      ]
     },
     {
-      "numero": 9,
-      "pergunta": "Qual conceito fundamental explica por que loops aninhados devem ser usados com cautela, especialmente com grandes conjuntos de dados?",
-      "alternativas": [
+      "id": "q9",
+      "question": "Qual conceito fundamental explica por que loops aninhados devem ser usados com cautela?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Loops aninhados são proibidos em JavaScript moderno"
+          "id": "a1",
+          "text": "Loops aninhados são proibidos em JavaScript moderno",
+          "isCorrect": false,
+          "explanation": "Loops aninhados são perfeitamente permitidos em JavaScript."
         },
         {
-          "letra": "b",
-          "texto": "Loops aninhados criam complexidade multiplicativa no número de iterações",
-          "correta": true
+          "id": "a2",
+          "text": "Loops aninhados criam complexidade multiplicativa no número de iterações",
+          "isCorrect": true,
+          "explanation": "Correto! Um loop de 100 iterações dentro de outro de 100 resulta em 10.000 execuções, impactando performance."
         },
         {
-          "letra": "c",
-          "texto": "Loops aninhados sempre causam erros de sintaxe"
+          "id": "a3",
+          "text": "Loops aninhados sempre causam erros de sintaxe",
+          "isCorrect": false,
+          "explanation": "Loops aninhados são sintaticamente válidos quando bem escritos."
         },
         {
-          "letra": "d",
-          "texto": "Loops aninhados ocupam mais espaço no disco rígido"
+          "id": "a4",
+          "text": "Loops aninhados ocupam mais espaço no disco rígido",
+          "isCorrect": false,
+          "explanation": "O tamanho do código é irrelevante para o problema de performance."
         }
-      ],
-      "explicacao": "Loops aninhados criam uma complexidade multiplicativa. Um loop de 100 iterações dentro de outro de 100 iterações resulta em 10.000 execuções do código interno, o que pode impactar significativamente a performance."
+      ]
     },
     {
-      "numero": 10,
-      "pergunta": "Qual princípio fundamental explica a intercambialidade entre diferentes tipos de loops?",
-      "alternativas": [
+      "id": "q10",
+      "question": "Qual princípio fundamental explica a intercambialidade entre diferentes tipos de loops?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Todos resolvem o mesmo problema fundamental: repetição controlada",
-          "correta": true
+          "id": "a1",
+          "text": "Todos resolvem o mesmo problema fundamental: repetição controlada",
+          "isCorrect": true,
+          "explanation": "Correto! Os diferentes tipos de loops são ferramentas intercambiáveis para repetição controlada. A escolha é sobre clareza de código."
         },
         {
-          "letra": "b",
-          "texto": "Todos executam na mesma velocidade em qualquer situação"
+          "id": "a2",
+          "text": "Todos executam na mesma velocidade em qualquer situação",
+          "isCorrect": false,
+          "explanation": "A performance pode variar dependendo da situação específica."
         },
         {
-          "letra": "c",
-          "texto": "Todos são processados da mesma forma pelo JavaScript"
+          "id": "a3",
+          "text": "Todos são processados da mesma forma internamente pelo JavaScript",
+          "isCorrect": false,
+          "explanation": "JavaScript pode otimizar diferentes tipos de loop de formas diferentes."
         },
         {
-          "letra": "d",
-          "texto": "Todos devem ser evitados em código de produção"
+          "id": "a4",
+          "text": "Todos devem ser evitados em código de produção",
+          "isCorrect": false,
+          "explanation": "Loops são essenciais e amplamente usados em código de produção."
         }
-      ],
-      "explicacao": "Os diferentes tipos de loops são ferramentas intercambiáveis para resolver o mesmo problema fundamental: repetição controlada. A escolha entre eles é mais sobre clareza de código e expressão de intenção do que sobre capacidades técnicas diferentes."
+      ]
     }
   ]
 }

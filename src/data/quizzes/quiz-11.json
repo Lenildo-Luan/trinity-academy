@@ -1,246 +1,308 @@
 {
-  "aula": 11,
-  "totalQuestoes": 10,
-  "questoes": [
+  "id": "quiz-11",
+  "title": "Quiz - O Poder das Listas em Programação",
+  "description": "Teste seus conhecimentos sobre arrays e como usá-los para armazenar e manipular coleções de dados.",
+  "timeLimit": 900,
+  "questions": [
     {
-      "numero": 1,
-      "pergunta": "Por que objetos são mais adequados que tipos primitivos para representar entidades complexas?",
-      "alternativas": [
+      "id": "q1",
+      "question": "O que é um array em JavaScript?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Objetos ocupam menos memória que primitivos"
+          "id": "a1",
+          "text": "Um tipo de variável que armazena apenas números",
+          "isCorrect": false,
+          "explanation": "Arrays podem armazenar qualquer tipo de dado, não apenas números."
         },
         {
-          "letra": "b",
-          "texto": "Objetos permitem agrupar múltiplos valores relacionados em uma única estrutura de dados",
-          "correta": true
+          "id": "a2",
+          "text": "Uma estrutura de dados que armazena uma coleção ordenada de elementos",
+          "isCorrect": true,
+          "explanation": "Correto! Arrays são estruturas que armazenam múltiplos valores em uma ordem específica."
         },
         {
-          "letra": "c",
-          "texto": "Objetos são mais rápidos que primitivos"
+          "id": "a3",
+          "text": "Uma função especial do JavaScript",
+          "isCorrect": false,
+          "explanation": "Arrays não são funções, são estruturas de dados."
         },
         {
-          "letra": "d",
-          "texto": "Objetos funcionam apenas com strings"
+          "id": "a4",
+          "text": "Um tipo primitivo de dados",
+          "isCorrect": false,
+          "explanation": "Arrays são objetos, não tipos primitivos."
         }
-      ],
-      "explicacao": "Objetos são ideais para representar entidades complexas porque permitem organizar dados relacionados (como nome, idade, profissão de uma pessoa) em uma única estrutura, ao contrário dos primitivos que armazenam apenas um valor."
+      ]
     },
     {
-      "numero": 2,
-      "pergunta": "Qual conceito fundamental diferencia a notação de ponto da notação de colchetes para acessar propriedades?",
-      "alternativas": [
+      "id": "q2",
+      "question": "Como você cria um array vazio em JavaScript?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "A notação de ponto é mais rápida que a de colchetes"
+          "id": "a1",
+          "text": "let arr = {}",
+          "isCorrect": false,
+          "explanation": "Chaves {} criam objetos, não arrays."
         },
         {
-          "letra": "b",
-          "texto": "A notação de colchetes permite propriedades com nomes dinâmicos e caracteres especiais",
-          "correta": true
+          "id": "a2",
+          "text": "let arr = []",
+          "isCorrect": true,
+          "explanation": "Correto! Colchetes [] são usados para criar arrays."
         },
         {
-          "letra": "c",
-          "texto": "A notação de ponto é mais moderna que a de colchetes"
+          "id": "a3",
+          "text": "let arr = ()",
+          "isCorrect": false,
+          "explanation": "Parênteses não criam arrays em JavaScript."
         },
         {
-          "letra": "d",
-          "texto": "Não há diferença prática entre as duas notações"
+          "id": "a4",
+          "text": "let arr = \"\"",
+          "isCorrect": false,
+          "explanation": "Aspas criam strings, não arrays."
         }
-      ],
-      "explicacao": "A notação de colchetes é necessária quando o nome da propriedade contém espaços, caracteres especiais ou quando o nome está armazenado em uma variável (dinâmico). Já a notação de ponto só funciona com nomes fixos e válidos como identificadores."
+      ]
     },
     {
-      "numero": 3,
-      "pergunta": "O que o conceito de \"propriedades computadas\" permite fazer durante a criação de um objeto?",
-      "alternativas": [
+      "id": "q3",
+      "question": "Como você acessa o primeiro elemento de um array?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Calcular valores automaticamente para todas as propriedades"
+          "id": "a1",
+          "text": "arr[1]",
+          "isCorrect": false,
+          "explanation": "Índice 1 retorna o segundo elemento. Arrays começam em 0."
         },
         {
-          "letra": "b",
-          "texto": "Definir nomes de propriedades dinamicamente usando expressões dentro de colchetes",
-          "correta": true
+          "id": "a2",
+          "text": "arr[0]",
+          "isCorrect": true,
+          "explanation": "Correto! O primeiro elemento está no índice 0."
         },
         {
-          "letra": "c",
-          "texto": "Acelerar o acesso às propriedades do objeto"
+          "id": "a3",
+          "text": "arr.first()",
+          "isCorrect": false,
+          "explanation": "Não existe método first() para arrays."
         },
         {
-          "letra": "d",
-          "texto": "Criar propriedades que se modificam sozinhas ao longo do tempo"
+          "id": "a4",
+          "text": "arr.get(0)",
+          "isCorrect": false,
+          "explanation": "Não existe método get() para arrays em JavaScript."
         }
-      ],
-      "explicacao": "Propriedades computadas (usando `[expressão]`) permitem criar propriedades cujos nomes são determinados dinamicamente durante a criação do objeto, através de expressões que são avaliadas."
+      ]
     },
     {
-      "numero": 4,
-      "pergunta": "Por que objetos são copiados \"por referência\" enquanto primitivos são copiados \"por valor\"?",
-      "alternativas": [
+      "id": "q4",
+      "question": "O que a propriedade 'length' retorna em um array?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para economizar memória e refletir que objetos são entidades mutáveis",
-          "correta": true
+          "id": "a1",
+          "text": "O índice do último elemento",
+          "isCorrect": false,
+          "explanation": "O índice do último elemento é length - 1."
         },
         {
-          "letra": "b",
-          "texto": "Para complicar a programação e confundir iniciantes"
+          "id": "a2",
+          "text": "O número total de elementos no array",
+          "isCorrect": true,
+          "explanation": "Correto! length retorna a quantidade de elementos no array."
         },
         {
-          "letra": "c",
-          "texto": "Por limitações técnicas do JavaScript"
+          "id": "a3",
+          "text": "O tamanho em bytes do array",
+          "isCorrect": false,
+          "explanation": "length retorna a contagem de elementos, não bytes."
         },
         {
-          "letra": "d",
-          "texto": "Não há diferença real no tratamento de objetos e primitivos"
+          "id": "a4",
+          "text": "O tipo de dados do primeiro elemento",
+          "isCorrect": false,
+          "explanation": "length não retorna informações sobre tipos de dados."
         }
-      ],
-      "explicacao": "Objetos são estruturas complexas que podem ocupar muita memória. Copiá-los por referência economiza recursos e permite que múltiplas variáveis trabalhem com a mesma entidade, refletindo mudanças compartilhadas - comportamento útil para entidades mutáveis."
+      ]
     },
     {
-      "numero": 5,
-      "pergunta": "Qual princípio explica por que dois objetos vazios `{}` não são considerados iguais quando comparados com `==`?",
-      "alternativas": [
+      "id": "q5",
+      "question": "O que o método push() faz em um array?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Objetos vazios são sempre diferentes por questões de segurança"
+          "id": "a1",
+          "text": "Remove o último elemento",
+          "isCorrect": false,
+          "explanation": "Remover o último elemento é feito com pop()."
         },
         {
-          "letra": "b",
-          "texto": "JavaScript compara a identidade dos objetos (referências na memória), não seu conteúdo",
-          "correta": true
+          "id": "a2",
+          "text": "Adiciona um ou mais elementos no final do array",
+          "isCorrect": true,
+          "explanation": "Correto! push() adiciona elementos ao final e retorna o novo length."
         },
         {
-          "letra": "c",
-          "texto": "É um bug conhecido do JavaScript que não foi corrigido"
+          "id": "a3",
+          "text": "Adiciona um elemento no início do array",
+          "isCorrect": false,
+          "explanation": "Adicionar no início é feito com unshift()."
         },
         {
-          "letra": "d",
-          "texto": "Objetos vazios são iguais, mas apenas com o operador `===`"
+          "id": "a4",
+          "text": "Limpa todos os elementos do array",
+          "isCorrect": false,
+          "explanation": "push() não limpa elementos, ele adiciona."
         }
-      ],
-      "explicacao": "Cada objeto tem uma identidade única na memória, mesmo quando possui conteúdo idêntico. O JavaScript compara se dois objetos são o mesmo objeto (mesma referência), não se têm o mesmo conteúdo."
+      ]
     },
     {
-      "numero": 6,
-      "pergunta": "O que diferencia clonagem superficial de clonagem profunda de objetos?",
-      "alternativas": [
+      "id": "q6",
+      "question": "Qual é a diferença entre pop() e shift()?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Clonagem superficial é mais rápida, mas ambas fazem a mesma coisa"
+          "id": "a1",
+          "text": "Não há diferença, são sinônimos",
+          "isCorrect": false,
+          "explanation": "pop() e shift() removem elementos de posições diferentes."
         },
         {
-          "letra": "b",
-          "texto": "Na clonagem superficial, objetos internos aninhados ainda compartilham referências entre o original e a cópia",
-          "correta": true
+          "id": "a2",
+          "text": "pop() remove do final, shift() remove do início",
+          "isCorrect": true,
+          "explanation": "Correto! pop() remove o último elemento, shift() remove o primeiro."
         },
         {
-          "letra": "c",
-          "texto": "Clonagem profunda só funciona com objetos pequenos"
+          "id": "a3",
+          "text": "pop() é mais rápido que shift()",
+          "isCorrect": false,
+          "explanation": "Embora seja verdade, a diferença principal é a posição de remoção."
         },
         {
-          "letra": "d",
-          "texto": "Não há diferença prática entre as duas abordagens"
+          "id": "a4",
+          "text": "shift() só funciona com números",
+          "isCorrect": false,
+          "explanation": "shift() funciona com qualquer tipo de elemento."
         }
-      ],
-      "explicacao": "Na clonagem superficial (spread operator, Object.assign), apenas o primeiro nível de propriedades é copiado. Objetos aninhados ainda compartilham referências. Já a clonagem profunda copia todos os níveis recursivamente, criando uma cópia completamente independente."
+      ]
     },
     {
-      "numero": 7,
-      "pergunta": "O que o comportamento de `const` com objetos demonstra sobre a linguagem JavaScript?",
-      "alternativas": [
+      "id": "q7",
+      "question": "Como você verifica quantos elementos existem em um array?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Que `const` não funciona corretamente com objetos"
+          "id": "a1",
+          "text": "arr.size",
+          "isCorrect": false,
+          "explanation": "Arrays não têm propriedade size."
         },
         {
-          "letra": "b",
-          "texto": "Que `const` protege a referência da variável, não o conteúdo do objeto",
-          "correta": true
+          "id": "a2",
+          "text": "arr.length",
+          "isCorrect": true,
+          "explanation": "Correto! A propriedade length retorna o número de elementos."
         },
         {
-          "letra": "c",
-          "texto": "Que objetos são imutáveis quando declarados com `const`"
+          "id": "a3",
+          "text": "arr.count()",
+          "isCorrect": false,
+          "explanation": "Não existe método count() para arrays."
         },
         {
-          "letra": "d",
-          "texto": "Que é melhor usar `var` para objetos ao invés de `const`"
+          "id": "a4",
+          "text": "arr.total()",
+          "isCorrect": false,
+          "explanation": "Não existe método total() para arrays."
         }
-      ],
-      "explicacao": "`const` impede a reatribuição da variável, mas não impede modificações no conteúdo do objeto. Você não pode fazer `objeto = {}` (nova referência), mas pode modificar suas propriedades livremente."
+      ]
     },
     {
-      "numero": 8,
-      "pergunta": "Por que JSON é fundamental no desenvolvimento web moderno?",
-      "alternativas": [
+      "id": "q8",
+      "question": "Arrays podem armazenar diferentes tipos de dados ao mesmo tempo?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "É a única forma de criar objetos em JavaScript"
+          "id": "a1",
+          "text": "Não, todos os elementos devem ser do mesmo tipo",
+          "isCorrect": false,
+          "explanation": "JavaScript permite arrays com tipos mistos."
         },
         {
-          "letra": "b",
-          "texto": "JSON fornece um formato padrão para serialização e comunicação de dados entre sistemas",
-          "correta": true
+          "id": "a2",
+          "text": "Sim, arrays podem conter números, strings, objetos, etc.",
+          "isCorrect": true,
+          "explanation": "Correto! JavaScript permite arrays com elementos de diferentes tipos."
         },
         {
-          "letra": "c",
-          "texto": "JSON substitui completamente os objetos JavaScript"
+          "id": "a3",
+          "text": "Apenas em arrays multidimensionais",
+          "isCorrect": false,
+          "explanation": "Qualquer array pode ter tipos mistos."
         },
         {
-          "letra": "d",
-          "texto": "É apenas uma moda passageira sem importância real"
+          "id": "a4",
+          "text": "Apenas strings e números",
+          "isCorrect": false,
+          "explanation": "Arrays podem conter qualquer tipo de dado."
         }
-      ],
-      "explicacao": "JSON (JavaScript Object Notation) é um formato de texto universal para representar dados estruturados. É amplamente usado para comunicação entre cliente e servidor, armazenamento de configurações e troca de dados entre diferentes sistemas e linguagens."
+      ]
     },
     {
-      "numero": 9,
-      "pergunta": "Quando devemos usar objetos ao invés de arrays para organizar dados?",
-      "alternativas": [
+      "id": "q9",
+      "question": "O que é um array multidimensional?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Quando a ordem dos dados importa"
+          "id": "a1",
+          "text": "Um array que só pode ter números",
+          "isCorrect": false,
+          "explanation": "Arrays multidimensionais podem ter qualquer tipo."
         },
         {
-          "letra": "b",
-          "texto": "Quando precisamos de propriedades nomeadas significativas e a ordem não importa",
-          "correta": true
+          "id": "a2",
+          "text": "Um array que contém outros arrays como elementos",
+          "isCorrect": true,
+          "explanation": "Correto! Arrays multidimensionais são arrays de arrays, como matrizes."
         },
         {
-          "letra": "c",
-          "texto": "Apenas quando temos mais de 100 itens"
+          "id": "a3",
+          "text": "Um array com mais de 10 elementos",
+          "isCorrect": false,
+          "explanation": "O número de elementos não define se é multidimensional."
         },
         {
-          "letra": "d",
-          "texto": "Arrays são sempre melhores que objetos"
+          "id": "a4",
+          "text": "Um tipo especial de objeto",
+          "isCorrect": false,
+          "explanation": "São arrays normais que contêm outros arrays."
         }
-      ],
-      "explicacao": "Use objetos quando você tem dados relacionados que formam uma entidade, as propriedades têm nomes significativos e a ordem não importa. Use arrays para listas ordenadas onde a ordem é importante e você acessa por índice numérico."
+      ]
     },
     {
-      "numero": 10,
-      "pergunta": "O que acontece no código: `let obj1 = {x: 1}; let obj2 = obj1; obj2.x = 2;`?",
-      "alternativas": [
+      "id": "q10",
+      "question": "Qual é a principal vantagem de usar arrays?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "obj1.x permanece 1, obj2.x vira 2"
+          "id": "a1",
+          "text": "Tornar o código mais rápido automaticamente",
+          "isCorrect": false,
+          "explanation": "Arrays não aceleram código automaticamente."
         },
         {
-          "letra": "b",
-          "texto": "Ambos obj1.x e obj2.x viram 2, pois compartilham a mesma referência",
-          "correta": true
+          "id": "a2",
+          "text": "Armazenar e organizar coleções de dados relacionados de forma eficiente",
+          "isCorrect": true,
+          "explanation": "Correto! Arrays permitem gerenciar múltiplos valores relacionados em uma única estrutura."
         },
         {
-          "letra": "c",
-          "texto": "Ocorre um erro de execução"
+          "id": "a3",
+          "text": "Economizar memória do computador",
+          "isCorrect": false,
+          "explanation": "Arrays não necessariamente economizam memória."
         },
         {
-          "letra": "d",
-          "texto": "obj1 é deletado da memória"
+          "id": "a4",
+          "text": "Eliminar a necessidade de variáveis",
+          "isCorrect": false,
+          "explanation": "Arrays não eliminam variáveis, eles próprios são variáveis."
         }
-      ],
-      "explicacao": "Quando atribuímos obj1 a obj2, não criamos uma cópia do objeto, mas uma nova referência ao mesmo objeto na memória. Portanto, modificar obj2.x também afeta obj1.x, pois ambos apontam para o mesmo objeto."
+      ]
     }
   ]
 }

@@ -1,246 +1,308 @@
 {
-  "aula": 14,
-  "totalQuestoes": 10,
-  "questoes": [
+  "id": "quiz-14",
+  "title": "Quiz - O Problema das Cópias de Objetos",
+  "description": "Teste seus conhecimentos sobre referências, cópias de objetos e como evitar armadilhas comuns em JavaScript.",
+  "timeLimit": 900,
+  "questions": [
     {
-      "numero": 1,
-      "pergunta": "Por que as arrow functions foram introduzidas no JavaScript?",
-      "alternativas": [
+      "id": "q1",
+      "question": "O que acontece quando você atribui um objeto a outra variável?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para substituir completamente as funções tradicionais"
+          "id": "a1",
+          "text": "Uma cópia independente do objeto é criada",
+          "isCorrect": false,
+          "explanation": "Objetos não são copiados, apenas a referência é copiada."
         },
         {
-          "letra": "b",
-          "texto": "Para fornecer uma sintaxe mais concisa e clara para escrever funções",
-          "correta": true
+          "id": "a2",
+          "text": "Ambas as variáveis passam a referenciar o mesmo objeto na memória",
+          "isCorrect": true,
+          "explanation": "Correto! Em JavaScript, objetos são copiados por referência, não por valor."
         },
         {
-          "letra": "c",
-          "texto": "Para tornar o JavaScript mais difícil de aprender"
+          "id": "a3",
+          "text": "O objeto original é deletado",
+          "isCorrect": false,
+          "explanation": "O objeto original continua existindo na memória."
         },
         {
-          "letra": "d",
-          "texto": "Apenas por questões estéticas"
+          "id": "a4",
+          "text": "Ocorre um erro de sintaxe",
+          "isCorrect": false,
+          "explanation": "Atribuir objetos a variáveis é perfeitamente válido."
         }
-      ],
-      "explicacao": "Arrow functions foram criadas para oferecer uma sintaxe mais limpa e moderna, especialmente útil para funções curtas e callbacks."
+      ]
     },
     {
-      "numero": 2,
-      "pergunta": "Qual é a principal diferença sintática entre uma função tradicional e uma arrow function?",
-      "alternativas": [
+      "id": "q2",
+      "question": "O que significa dizer que objetos são passados 'por referência'?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Arrow functions são sempre mais rápidas"
+          "id": "a1",
+          "text": "Uma cópia completa do objeto é feita",
+          "isCorrect": false,
+          "explanation": "Por referência significa que não há cópia, apenas um novo ponteiro."
         },
         {
-          "letra": "b",
-          "texto": "Arrow functions usam => em vez da palavra-chave function e podem ter sintaxe mais concisa",
-          "correta": true
+          "id": "a2",
+          "text": "Múltiplas variáveis podem apontar para o mesmo objeto na memória",
+          "isCorrect": true,
+          "explanation": "Correto! Referência significa que a variável armazena o endereço do objeto, não o objeto em si."
         },
         {
-          "letra": "c",
-          "texto": "Arrow functions não podem ter parâmetros"
+          "id": "a3",
+          "text": "Objetos não podem ser modificados",
+          "isCorrect": false,
+          "explanation": "Objetos podem ser modificados normalmente."
         },
         {
-          "letra": "d",
-          "texto": "Não há diferença, são apenas nomes diferentes"
+          "id": "a4",
+          "text": "Objetos são mais lentos que tipos primitivos",
+          "isCorrect": false,
+          "explanation": "Isso não está relacionado ao conceito de referência."
         }
-      ],
-      "explicacao": "A arrow function usa a sintaxe => e permite omitir chaves e return quando há apenas uma expressão, tornando o código mais conciso."
+      ]
     },
     {
-      "numero": 3,
-      "pergunta": "Quando podemos omitir os parênteses em torno do parâmetro de uma arrow function?",
-      "alternativas": [
+      "id": "q3",
+      "question": "Como você cria uma cópia superficial (shallow copy) de um objeto?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Sempre podemos omitir"
+          "id": "a1",
+          "text": "let copia = objeto",
+          "isCorrect": false,
+          "explanation": "Isso apenas cria outra referência ao mesmo objeto."
         },
         {
-          "letra": "b",
-          "texto": "Nunca podemos omitir"
+          "id": "a2",
+          "text": "let copia = {...objeto} ou Object.assign({}, objeto)",
+          "isCorrect": true,
+          "explanation": "Correto! Spread operator e Object.assign() criam cópias superficiais."
         },
         {
-          "letra": "c",
-          "texto": "Apenas quando a função tem exatamente um parâmetro",
-          "correta": true
+          "id": "a3",
+          "text": "let copia = objeto.copy()",
+          "isCorrect": false,
+          "explanation": "Não existe método copy() nativo em objetos."
         },
         {
-          "letra": "d",
-          "texto": "Apenas quando não há return"
+          "id": "a4",
+          "text": "Não é possível copiar objetos em JavaScript",
+          "isCorrect": false,
+          "explanation": "É possível copiar objetos de várias formas."
         }
-      ],
-      "explicacao": "Parênteses podem ser omitidos somente quando há um único parâmetro. Com zero ou múltiplos parâmetros, os parênteses são obrigatórios."
+      ]
     },
     {
-      "numero": 4,
-      "pergunta": "O que é um callback em JavaScript?",
-      "alternativas": [
+      "id": "q4",
+      "question": "Qual é a limitação de uma cópia superficial (shallow copy)?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Uma função que retorna outra função"
+          "id": "a1",
+          "text": "Não funciona com objetos grandes",
+          "isCorrect": false,
+          "explanation": "O tamanho não é a limitação."
         },
         {
-          "letra": "b",
-          "texto": "Uma função passada como argumento para ser executada em momento específico",
-          "correta": true
+          "id": "a2",
+          "text": "Objetos aninhados ainda compartilham referências",
+          "isCorrect": true,
+          "explanation": "Correto! Shallow copy copia apenas o primeiro nível; objetos internos continuam sendo referências."
         },
         {
-          "letra": "c",
-          "texto": "Uma função que sempre retorna true"
+          "id": "a3",
+          "text": "É muito lenta para uso prático",
+          "isCorrect": false,
+          "explanation": "Performance não é a principal limitação."
         },
         {
-          "letra": "d",
-          "texto": "Um erro de programação"
+          "id": "a4",
+          "text": "Só funciona com números",
+          "isCorrect": false,
+          "explanation": "Shallow copy funciona com qualquer tipo de propriedade."
         }
-      ],
-      "explicacao": "Callback é uma função passada como argumento que será 'chamada de volta' (called back) em algum momento específico, permitindo comportamento assíncrono e customização."
+      ]
     },
     {
-      "numero": 5,
-      "pergunta": "Por que funções são consideradas 'cidadãos de primeira classe' em JavaScript?",
-      "alternativas": [
+      "id": "q5",
+      "question": "Como você cria uma cópia profunda (deep copy) de um objeto?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Porque são mais importantes que variáveis"
+          "id": "a1",
+          "text": "let copia = {...objeto}",
+          "isCorrect": false,
+          "explanation": "Spread operator cria apenas shallow copy."
         },
         {
-          "letra": "b",
-          "texto": "Porque podem ser tratadas como valores: atribuídas a variáveis, passadas como argumentos e retornadas",
-          "correta": true
+          "id": "a2",
+          "text": "JSON.parse(JSON.stringify(objeto)) ou structuredClone(objeto)",
+          "isCorrect": true,
+          "explanation": "Correto! Esses métodos criam cópias profundas, copiando todos os níveis de aninhamento."
         },
         {
-          "letra": "c",
-          "texto": "Porque executam mais rapidamente"
+          "id": "a3",
+          "text": "Object.assign({}, objeto)",
+          "isCorrect": false,
+          "explanation": "Object.assign() cria apenas shallow copy."
         },
         {
-          "letra": "d",
-          "texto": "Porque são obrigatórias em todo código"
+          "id": "a4",
+          "text": "let copia = objeto",
+          "isCorrect": false,
+          "explanation": "Isso não cria cópia, apenas uma nova referência."
         }
-      ],
-      "explicacao": "Em JavaScript, funções são valores que podem ser manipulados como qualquer outro dado, tornando a linguagem muito flexível e poderosa."
+      ]
     },
     {
-      "numero": 6,
-      "pergunta": "O que são Higher-Order Functions?",
-      "alternativas": [
+      "id": "q6",
+      "question": "O que acontece no código: let obj1 = {x: 1}; let obj2 = obj1; obj2.x = 2;?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Funções que executam mais rapidamente"
+          "id": "a1",
+          "text": "obj1.x permanece 1, obj2.x fica 2",
+          "isCorrect": false,
+          "explanation": "obj1 e obj2 referenciam o mesmo objeto."
         },
         {
-          "letra": "b",
-          "texto": "Funções que recebem outras funções como argumentos ou retornam funções",
-          "correta": true
+          "id": "a2",
+          "text": "Ambos obj1.x e obj2.x ficam 2",
+          "isCorrect": true,
+          "explanation": "Correto! obj1 e obj2 apontam para o mesmo objeto, então mudanças em um afetam o outro."
         },
         {
-          "letra": "c",
-          "texto": "Funções com prioridade de execução maior"
+          "id": "a3",
+          "text": "Ocorre um erro",
+          "isCorrect": false,
+          "explanation": "Não há erro, é comportamento normal de referências."
         },
         {
-          "letra": "d",
-          "texto": "Funções que só podem ser usadas em bibliotecas"
+          "id": "a4",
+          "text": "obj1 é deletado",
+          "isCorrect": false,
+          "explanation": "Nenhum objeto é deletado nessa operação."
         }
-      ],
-      "explicacao": "Higher-order functions são funções que operam sobre outras funções, seja recebendo-as como parâmetros ou retornando-as, criando abstração e reutilização poderosas."
+      ]
     },
     {
-      "numero": 7,
-      "pergunta": "O que é um closure em JavaScript?",
-      "alternativas": [
+      "id": "q7",
+      "question": "Por que const não impede modificações em objetos?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Um tipo de loop especial"
+          "id": "a1",
+          "text": "É um bug do JavaScript",
+          "isCorrect": false,
+          "explanation": "É comportamento intencional e documentado."
         },
         {
-          "letra": "b",
-          "texto": "Uma função que 'lembra' das variáveis do escopo onde foi criada",
-          "correta": true
+          "id": "a2",
+          "text": "const protege a referência, não o conteúdo do objeto",
+          "isCorrect": true,
+          "explanation": "Correto! const impede reatribuição da variável, mas não mutação do objeto."
         },
         {
-          "letra": "c",
-          "texto": "Uma forma de fechar o navegador"
+          "id": "a3",
+          "text": "const só funciona com números",
+          "isCorrect": false,
+          "explanation": "const funciona com todos os tipos de dados."
         },
         {
-          "letra": "d",
-          "texto": "Um erro de memória"
+          "id": "a4",
+          "text": "Objetos são sempre mutáveis",
+          "isCorrect": false,
+          "explanation": "É possível criar objetos imutáveis com Object.freeze()."
         }
-      ],
-      "explicacao": "Closure permite que uma função acesse variáveis de seu escopo exterior mesmo após esse escopo ter sido executado, como se a função carregasse uma 'mochila' com essas variáveis."
+      ]
     },
     {
-      "numero": 8,
-      "pergunta": "Quando devemos usar arrow functions em vez de funções tradicionais?",
-      "alternativas": [
+      "id": "q8",
+      "question": "O que Object.freeze() faz?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Sempre, em todos os casos"
+          "id": "a1",
+          "text": "Cria uma cópia do objeto",
+          "isCorrect": false,
+          "explanation": "Object.freeze() não cria cópias."
         },
         {
-          "letra": "b",
-          "texto": "Para funções simples, curtas e especialmente callbacks",
-          "correta": true
+          "id": "a2",
+          "text": "Torna o objeto imutável, impedindo adição, remoção ou alteração de propriedades",
+          "isCorrect": true,
+          "explanation": "Correto! Object.freeze() congela o objeto, prevenindo qualquer modificação."
         },
         {
-          "letra": "c",
-          "texto": "Nunca, são apenas uma moda passageira"
+          "id": "a3",
+          "text": "Deleta o objeto da memória",
+          "isCorrect": false,
+          "explanation": "Object.freeze() não remove objetos."
         },
         {
-          "letra": "d",
-          "texto": "Apenas em programação avançada"
+          "id": "a4",
+          "text": "Converte o objeto em string",
+          "isCorrect": false,
+          "explanation": "Object.freeze() não converte tipos."
         }
-      ],
-      "explicacao": "Arrow functions são ideais para código conciso e callbacks, mas funções tradicionais ainda são preferíveis para funções complexas ou quando precisamos de comportamentos específicos."
+      ]
     },
     {
-      "numero": 9,
-      "pergunta": "Por que callbacks são fundamentais na programação moderna com JavaScript?",
-      "alternativas": [
+      "id": "q9",
+      "question": "Qual é a desvantagem de usar JSON.parse(JSON.stringify()) para deep copy?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Apenas para impressionar outros programadores"
+          "id": "a1",
+          "text": "É muito lento",
+          "isCorrect": false,
+          "explanation": "Embora não seja o mais rápido, a principal limitação é outra."
         },
         {
-          "letra": "b",
-          "texto": "Permitem comportamento assíncrono, customização e padrões de programação flexíveis",
-          "correta": true
+          "id": "a2",
+          "text": "Perde funções, undefined, Symbol e outras propriedades não serializáveis",
+          "isCorrect": true,
+          "explanation": "Correto! JSON não suporta todos os tipos do JavaScript, então eles são perdidos na conversão."
         },
         {
-          "letra": "c",
-          "texto": "Para tornar o código mais lento"
+          "id": "a3",
+          "text": "Só funciona em navegadores modernos",
+          "isCorrect": false,
+          "explanation": "JSON é suportado em todos os ambientes JavaScript."
         },
         {
-          "letra": "d",
-          "texto": "Não são importantes, são opcionais"
+          "id": "a4",
+          "text": "Não tem desvantagens",
+          "isCorrect": false,
+          "explanation": "Há limitações importantes nesse método."
         }
-      ],
-      "explicacao": "Callbacks são essenciais para operações assíncronas, manipulação de eventos e para criar código modular e reutilizável."
+      ]
     },
     {
-      "numero": 10,
-      "pergunta": "Qual princípio de design as arrow functions demonstram na evolução do JavaScript?",
-      "alternativas": [
+      "id": "q10",
+      "question": "Por que entender referências e cópias é importante?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Tornar a linguagem mais complexa"
+          "id": "a1",
+          "text": "Apenas para passar em entrevistas",
+          "isCorrect": false,
+          "explanation": "É importante para o desenvolvimento prático."
         },
         {
-          "letra": "b",
-          "texto": "Melhorar a expressividade e legibilidade do código com sintaxe mais concisa",
-          "correta": true
+          "id": "a2",
+          "text": "Evita bugs difíceis de rastrear causados por mutações inesperadas",
+          "isCorrect": true,
+          "explanation": "Correto! Muitos bugs vêm de não entender que objetos compartilham referências."
         },
         {
-          "letra": "c",
-          "texto": "Remover funcionalidades antigas"
+          "id": "a3",
+          "text": "Para usar menos memória",
+          "isCorrect": false,
+          "explanation": "Embora relevante, não é o principal motivo."
         },
         {
-          "letra": "d",
-          "texto": "Copiar outras linguagens sem propósito"
+          "id": "a4",
+          "text": "Não é realmente importante",
+          "isCorrect": false,
+          "explanation": "É um conceito fundamental em JavaScript."
         }
-      ],
-      "explicacao": "Arrow functions representam a evolução do JavaScript em direção a código mais expressivo, legível e conciso, mantendo compatibilidade com recursos anteriores."
+      ]
     }
   ]
 }

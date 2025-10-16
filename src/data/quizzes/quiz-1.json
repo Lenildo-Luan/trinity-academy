@@ -1,246 +1,308 @@
 {
-  "aula": 1,
-  "totalQuestoes": 10,
-  "questoes": [
+  "id": "quiz-1",
+  "title": "Quiz - Bem-vindos ao Futuro",
+  "description": "Teste seus conhecimentos sobre a história e fundamentos do JavaScript.",
+  "timeLimit": 900,
+  "questions": [
     {
-      "numero": 1,
-      "pergunta": "Por que estudar a história da computação é importante para programadores iniciantes?",
-      "alternativas": [
+      "id": "q1",
+      "question": "O JavaScript foi criado originalmente para qual finalidade?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para memorizar datas e nomes importantes"
+          "id": "a1",
+          "text": "Criar aplicativos mobile",
+          "isCorrect": false,
+          "explanation": "JavaScript foi criado para adicionar interatividade a páginas web, não para mobile."
         },
         {
-          "letra": "b",
-          "texto": "Para entender a evolução do pensamento computacional e apreciar as ferramentas modernas",
-          "correta": true
+          "id": "a2",
+          "text": "Adicionar interatividade a páginas web",
+          "isCorrect": true,
+          "explanation": "Correto! JavaScript foi criado para tornar páginas web mais dinâmicas e interativas."
         },
         {
-          "letra": "c",
-          "texto": "Para impressionar outros programadores"
+          "id": "a3",
+          "text": "Desenvolver sistemas operacionais",
+          "isCorrect": false,
+          "explanation": "JavaScript não foi criado para sistemas operacionais."
         },
         {
-          "letra": "d",
-          "texto": "Não é importante, apenas o código atual importa"
+          "id": "a4",
+          "text": "Criar bancos de dados",
+          "isCorrect": false,
+          "explanation": "JavaScript não foi projetado para criar bancos de dados."
         }
-      ],
-      "explicacao": "Conhecer a história nos ajuda a compreender por que as coisas funcionam como funcionam hoje e valorizar as conquistas tecnológicas."
+      ]
     },
     {
-      "numero": 2,
-      "pergunta": "Qual foi a principal contribuição de Ada Lovelace para a computação?",
-      "alternativas": [
+      "id": "q2",
+      "question": "Qual das seguintes afirmações sobre JavaScript é verdadeira?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Inventou o primeiro computador eletrônico"
+          "id": "a1",
+          "text": "JavaScript só funciona em navegadores",
+          "isCorrect": false,
+          "explanation": "JavaScript também pode ser executado em servidores (Node.js) e outros ambientes."
         },
         {
-          "letra": "b",
-          "texto": "Criou a primeira linguagem de programação moderna"
+          "id": "a2",
+          "text": "JavaScript é a linguagem de programação mais popular do mundo",
+          "isCorrect": true,
+          "explanation": "Correto! JavaScript é amplamente utilizada e considerada a linguagem mais popular."
         },
         {
-          "letra": "c",
-          "texto": "Escreveu o primeiro algoritmo destinado a ser processado por uma máquina",
-          "correta": true
+          "id": "a3",
+          "text": "JavaScript é uma linguagem compilada",
+          "isCorrect": false,
+          "explanation": "JavaScript é uma linguagem interpretada, não compilada."
         },
         {
-          "letra": "d",
-          "texto": "Desenvolveu a internet"
+          "id": "a4",
+          "text": "JavaScript não pode manipular dados",
+          "isCorrect": false,
+          "explanation": "JavaScript é excelente para manipular e processar dados."
         }
-      ],
-      "explicacao": "Ada Lovelace é reconhecida como a primeira programadora da história por seus trabalhos com a Máquina Analítica de Charles Babbage."
+      ]
     },
     {
-      "numero": 3,
-      "pergunta": "O que diferenciava os primeiros computadores (como ENIAC) dos computadores modernos?",
-      "alternativas": [
+      "id": "q3",
+      "question": "Por que JavaScript é importante para a programação moderna?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Eram mais rápidos e eficientes"
+          "id": "a1",
+          "text": "É a única linguagem que funciona em navegadores",
+          "isCorrect": false,
+          "explanation": "Embora seja a linguagem principal para navegadores, existem outras tecnologias que também funcionam."
         },
         {
-          "letra": "b",
-          "texto": "Ocupavam salas inteiras, consumiam muita energia e tinham capacidade limitada",
-          "correta": true
+          "id": "a2",
+          "text": "Permite criar experiências web interativas e dinâmicas",
+          "isCorrect": true,
+          "explanation": "Correto! JavaScript permite criar aplicações web ricas e interativas."
         },
         {
-          "letra": "c",
-          "texto": "Eram portáteis e fáceis de usar"
+          "id": "a3",
+          "text": "É a linguagem mais antiga",
+          "isCorrect": false,
+          "explanation": "JavaScript não é a linguagem mais antiga. Existem muitas linguagens criadas antes dela."
         },
         {
-          "letra": "d",
-          "texto": "Não tinham diferenças significativas"
+          "id": "a4",
+          "text": "Só pode ser usada por grandes empresas",
+          "isCorrect": false,
+          "explanation": "JavaScript é uma linguagem aberta e pode ser usada por qualquer pessoa."
         }
-      ],
-      "explicacao": "Os primeiros computadores eram máquinas gigantescas que contrastam drasticamente com a miniaturização e eficiência dos dispositivos atuais."
+      ]
     },
     {
-      "numero": 4,
-      "pergunta": "Por que a transição de válvulas para transistores foi revolucionária?",
-      "alternativas": [
+      "id": "q4",
+      "question": "Onde o JavaScript pode ser executado atualmente?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Apenas mudou o visual dos computadores"
+          "id": "a1",
+          "text": "Apenas em navegadores web",
+          "isCorrect": false,
+          "explanation": "JavaScript pode ser executado em diversos ambientes, não apenas navegadores."
         },
         {
-          "letra": "b",
-          "texto": "Tornou os computadores menores, mais rápidos, confiáveis e eficientes energeticamente",
-          "correta": true
+          "id": "a2",
+          "text": "Em navegadores, servidores e dispositivos móveis",
+          "isCorrect": true,
+          "explanation": "Correto! JavaScript é versátil e funciona em múltiplas plataformas."
         },
         {
-          "letra": "c",
-          "texto": "Não fez diferença real na evolução"
+          "id": "a3",
+          "text": "Apenas em servidores",
+          "isCorrect": false,
+          "explanation": "JavaScript não se limita apenas a servidores."
         },
         {
-          "letra": "d",
-          "texto": "Apenas reduziu custos"
+          "id": "a4",
+          "text": "Apenas em aplicativos desktop",
+          "isCorrect": false,
+          "explanation": "JavaScript vai além de aplicativos desktop."
         }
-      ],
-      "explicacao": "A invenção do transistor possibilitou a miniaturização e o aumento dramático da confiabilidade dos computadores."
+      ]
     },
     {
-      "numero": 5,
-      "pergunta": "O que a Lei de Moore prevê e por que é relevante?",
-      "alternativas": [
+      "id": "q5",
+      "question": "Qual é o papel principal do JavaScript em uma página web?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "A velocidade da internet dobra a cada ano"
+          "id": "a1",
+          "text": "Definir a estrutura da página",
+          "isCorrect": false,
+          "explanation": "A estrutura é definida pelo HTML, não pelo JavaScript."
         },
         {
-          "letra": "b",
-          "texto": "O número de transistores em chips dobra aproximadamente a cada dois anos, impulsionando o progresso tecnológico",
-          "correta": true
+          "id": "a2",
+          "text": "Estilizar a aparência da página",
+          "isCorrect": false,
+          "explanation": "A estilização é feita principalmente com CSS."
         },
         {
-          "letra": "c",
-          "texto": "Os computadores ficarão obsoletos em 10 anos"
+          "id": "a3",
+          "text": "Adicionar comportamento e interatividade",
+          "isCorrect": true,
+          "explanation": "Correto! JavaScript adiciona comportamento dinâmico e interatividade às páginas."
         },
         {
-          "letra": "d",
-          "texto": "Não tem relevância prática"
+          "id": "a4",
+          "text": "Hospedar a página na internet",
+          "isCorrect": false,
+          "explanation": "A hospedagem é feita por servidores web, não pelo JavaScript."
         }
-      ],
-      "explicacao": "A Lei de Moore descreveu com precisão o crescimento exponencial da capacidade computacional por décadas."
+      ]
     },
     {
-      "numero": 6,
-      "pergunta": "Como a invenção da World Wide Web (WWW) transformou a computação?",
-      "alternativas": [
+      "id": "q6",
+      "question": "Quem criou a linguagem JavaScript?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Apenas criou mais uma ferramenta técnica"
+          "id": "a1",
+          "text": "Bill Gates",
+          "isCorrect": false,
+          "explanation": "Bill Gates fundou a Microsoft, mas não criou o JavaScript."
         },
         {
-          "letra": "b",
-          "texto": "Democratizou o acesso à informação e conectou pessoas globalmente",
-          "correta": true
+          "id": "a2",
+          "text": "Brendan Eich",
+          "isCorrect": true,
+          "explanation": "Correto! Brendan Eich criou o JavaScript em 1995 enquanto trabalhava na Netscape."
         },
         {
-          "letra": "c",
-          "texto": "Substituiu completamente os livros"
+          "id": "a3",
+          "text": "Steve Jobs",
+          "isCorrect": false,
+          "explanation": "Steve Jobs foi co-fundador da Apple, não criou o JavaScript."
         },
         {
-          "letra": "d",
-          "texto": "Não teve impacto significativo"
+          "id": "a4",
+          "text": "Mark Zuckerberg",
+          "isCorrect": false,
+          "explanation": "Mark Zuckerberg fundou o Facebook, mas não criou o JavaScript."
         }
-      ],
-      "explicacao": "A WWW revolucionou a forma como compartilhamos informação e nos comunicamos, sendo um dos pilares da era digital."
+      ]
     },
     {
-      "numero": 7,
-      "pergunta": "Qual foi o principal motivo para a criação do JavaScript?",
-      "alternativas": [
+      "id": "q7",
+      "question": "Em que ano o JavaScript foi criado?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Competir com outras linguagens de programação"
+          "id": "a1",
+          "text": "1989",
+          "isCorrect": false,
+          "explanation": "1989 foi quando a World Wide Web foi inventada, não o JavaScript."
         },
         {
-          "letra": "b",
-          "texto": "Substituir HTML e CSS"
+          "id": "a2",
+          "text": "1995",
+          "isCorrect": true,
+          "explanation": "Correto! JavaScript foi criado em 1995, em apenas 10 dias."
         },
         {
-          "letra": "c",
-          "texto": "Dar interatividade e dinamismo às páginas web",
-          "correta": true
+          "id": "a3",
+          "text": "2000",
+          "isCorrect": false,
+          "explanation": "Em 2000 o JavaScript já estava em uso há 5 anos."
         },
         {
-          "letra": "d",
-          "texto": "Criar aplicativos mobile"
+          "id": "a4",
+          "text": "2010",
+          "isCorrect": false,
+          "explanation": "JavaScript foi criado muito antes de 2010."
         }
-      ],
-      "explicacao": "JavaScript nasceu da necessidade de tornar as páginas web interativas, que antes eram apenas documentos estáticos."
+      ]
     },
     {
-      "numero": 8,
-      "pergunta": "Por que JavaScript se tornou a linguagem de programação mais importante para a web?",
-      "alternativas": [
+      "id": "q8",
+      "question": "Qual era o nome original do JavaScript quando foi criado?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "É a linguagem mais antiga da internet"
+          "id": "a1",
+          "text": "LiveScript",
+          "isCorrect": true,
+          "explanation": "Correto! JavaScript foi originalmente chamado de LiveScript, mas foi renomeado para JavaScript."
         },
         {
-          "letra": "b",
-          "texto": "Combina integração total com HTML/CSS, simplicidade para iniciantes e suporte universal",
-          "correta": true
+          "id": "a2",
+          "text": "WebScript",
+          "isCorrect": false,
+          "explanation": "WebScript não foi o nome original do JavaScript."
         },
         {
-          "letra": "c",
-          "texto": "É a única linguagem que existe para web"
+          "id": "a3",
+          "text": "ECMAScript",
+          "isCorrect": false,
+          "explanation": "ECMAScript é o nome da especificação padrão, não o nome original da linguagem."
         },
         {
-          "letra": "d",
-          "texto": "Por acaso histórico sem razão técnica"
+          "id": "a4",
+          "text": "NetScript",
+          "isCorrect": false,
+          "explanation": "NetScript não foi o nome original do JavaScript."
         }
-      ],
-      "explicacao": "JavaScript é único por ser a única tecnologia que combina essas três características essenciais para desenvolvimento web."
+      ]
     },
     {
-      "numero": 9,
-      "pergunta": "O que significa 'programar' em essência?",
-      "alternativas": [
+      "id": "q9",
+      "question": "O que é Node.js?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Digitar códigos complexos aleatoriamente"
+          "id": "a1",
+          "text": "Um navegador web",
+          "isCorrect": false,
+          "explanation": "Node.js não é um navegador, é um ambiente de execução."
         },
         {
-          "letra": "b",
-          "texto": "Dar instruções precisas e completas para um computador realizar uma tarefa",
-          "correta": true
+          "id": "a2",
+          "text": "Um ambiente que permite executar JavaScript no servidor",
+          "isCorrect": true,
+          "explanation": "Correto! Node.js permite executar JavaScript fora do navegador, especialmente em servidores."
         },
         {
-          "letra": "c",
-          "texto": "Memorizar sintaxe de linguagens"
+          "id": "a3",
+          "text": "Uma biblioteca de JavaScript",
+          "isCorrect": false,
+          "explanation": "Node.js é um ambiente de execução, não apenas uma biblioteca."
         },
         {
-          "letra": "d",
-          "texto": "Trabalhar apenas com matemática avançada"
+          "id": "a4",
+          "text": "Um editor de código",
+          "isCorrect": false,
+          "explanation": "Node.js não é um editor de código."
         }
-      ],
-      "explicacao": "Programar é essencialmente comunicar-se com computadores através de instruções sistemáticas e precisas."
+      ]
     },
     {
-      "numero": 10,
-      "pergunta": "Por que aprender a programar é considerado uma habilidade poderosa atualmente?",
-      "alternativas": [
+      "id": "q10",
+      "question": "Qual das seguintes NÃO é uma aplicação comum do JavaScript hoje em dia?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Apenas para conseguir empregos bem remunerados"
+          "id": "a1",
+          "text": "Desenvolvimento web front-end",
+          "isCorrect": false,
+          "explanation": "JavaScript é amplamente usado para desenvolvimento web front-end."
         },
         {
-          "letra": "b",
-          "texto": "Para impressionar amigos com conhecimento técnico"
+          "id": "a2",
+          "text": "Desenvolvimento de aplicativos mobile",
+          "isCorrect": false,
+          "explanation": "JavaScript pode ser usado para criar apps mobile com frameworks como React Native."
         },
         {
-          "letra": "c",
-          "texto": "Porque permite automação, precisão, velocidade e resolução sistemática de problemas",
-          "correta": true
+          "id": "a3",
+          "text": "Desenvolvimento de servidores back-end",
+          "isCorrect": false,
+          "explanation": "JavaScript é usado em servidores com Node.js."
         },
         {
-          "letra": "d",
-          "texto": "Não é tão importante assim"
+          "id": "a4",
+          "text": "Criação de drivers de hardware",
+          "isCorrect": true,
+          "explanation": "Correto! JavaScript geralmente NÃO é usado para criar drivers de hardware, que são escritos em linguagens de baixo nível como C/C++."
         }
-      ],
-      "explicacao": "A programação é poderosa porque oferece ferramentas para resolver problemas de forma eficiente e escalável."
+      ]
     }
   ]
 }

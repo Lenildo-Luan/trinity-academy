@@ -1,246 +1,308 @@
 {
-  "aula": 2,
-  "totalQuestoes": 10,
-  "questoes": [
+  "id": "quiz-2",
+  "title": "Quiz - Os Primeiros Blocos da Programação",
+  "description": "Teste seus conhecimentos sobre variáveis em JavaScript.",
+  "timeLimit": 900,
+  "questions": [
     {
-      "numero": 1,
-      "pergunta": "Qual é o conceito fundamental de uma variável na programação?",
-      "alternativas": [
+      "id": "q1",
+      "question": "O que é uma variável em programação?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Um comando para executar operações matemáticas"
+          "id": "a1",
+          "text": "Um tipo de função",
+          "isCorrect": false,
+          "explanation": "Variáveis não são funções. Funções são blocos de código reutilizáveis."
         },
         {
-          "letra": "b",
-          "texto": "Um contêiner nomeado para armazenar dados",
-          "correta": true
+          "id": "a2",
+          "text": "Um espaço na memória para armazenar dados",
+          "isCorrect": true,
+          "explanation": "Correto! Variáveis são como caixas digitais que guardam informações na memória."
         },
         {
-          "letra": "c",
-          "texto": "Uma função que retorna valores"
+          "id": "a3",
+          "text": "Um loop de repetição",
+          "isCorrect": false,
+          "explanation": "Loops são estruturas de repetição, não variáveis."
         },
         {
-          "letra": "d",
-          "texto": "Um tipo específico de dado numérico"
+          "id": "a4",
+          "text": "Um operador matemático",
+          "isCorrect": false,
+          "explanation": "Operadores matemáticos são símbolos usados para fazer cálculos."
         }
-      ],
-      "explicacao": "Variáveis são contêineres nomeados que armazenam dados, permitindo que informações sejam guardadas, acessadas e modificadas durante a execução do programa."
+      ]
     },
     {
-      "numero": 2,
-      "pergunta": "Por que a declaração e inicialização de variáveis são conceitos distintos?",
-      "alternativas": [
+      "id": "q2",
+      "question": "Qual palavra-chave é recomendada para declarar variáveis que NÃO mudarão de valor?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para tornar a programação mais complicada"
+          "id": "a1",
+          "text": "var",
+          "isCorrect": false,
+          "explanation": "var é antiga e não indica que o valor é constante."
         },
         {
-          "letra": "b",
-          "texto": "Porque permitem controle sobre quando uma variável existe vs. quando tem valor",
-          "correta": true
+          "id": "a2",
+          "text": "let",
+          "isCorrect": false,
+          "explanation": "let é usado para variáveis que podem mudar de valor."
         },
         {
-          "letra": "c",
-          "texto": "Para economizar memória do computador"
+          "id": "a3",
+          "text": "const",
+          "isCorrect": true,
+          "explanation": "Correto! const é usado para valores constantes que não mudarão."
         },
         {
-          "letra": "d",
-          "texto": "Porque são processos que acontecem em momentos diferentes automaticamente"
+          "id": "a4",
+          "text": "function",
+          "isCorrect": false,
+          "explanation": "function é usado para declarar funções, não variáveis."
         }
-      ],
-      "explicacao": "A separação entre declaração (criar a variável) e inicialização (atribuir valor) permite maior controle sobre o ciclo de vida das variáveis no código."
+      ]
     },
     {
-      "numero": 3,
-      "pergunta": "Qual princípio de design motivou a criação de let para substituir var?",
-      "alternativas": [
+      "id": "q3",
+      "question": "Qual é a sintaxe correta para declarar uma variável chamada 'nome' com o valor 'João'?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "let é mais rápido que var"
+          "id": "a1",
+          "text": "let nome = João",
+          "isCorrect": false,
+          "explanation": "Faltam aspas ao redor do texto João. Textos devem estar entre aspas."
         },
         {
-          "letra": "b",
-          "texto": "Resolver problemas de comportamento confuso e propenso a erros do var",
-          "correta": true
+          "id": "a2",
+          "text": "let nome = 'João'",
+          "isCorrect": true,
+          "explanation": "Correto! Esta é a sintaxe correta com aspas ao redor do texto."
         },
         {
-          "letra": "c",
-          "texto": "let usa menos memória"
+          "id": "a3",
+          "text": "nome let = 'João'",
+          "isCorrect": false,
+          "explanation": "A ordem está incorreta. A palavra-chave 'let' deve vir antes do nome."
         },
         {
-          "letra": "d",
-          "texto": "let funciona melhor com números"
+          "id": "a4",
+          "text": "let 'nome' = João",
+          "isCorrect": false,
+          "explanation": "O nome da variável não deve estar entre aspas."
         }
-      ],
-      "explicacao": "O let foi criado para resolver problemas de comportamento confuso e propenso a erros do var, oferecendo um comportamento mais previsível e seguro."
+      ]
     },
     {
-      "numero": 4,
-      "pergunta": "Observe o código abaixo. O que será exibido no console e por que isso acontece?\n\nlet temperatura = 20;\ntemperatura = 25;\ntemperatura = 30;\nconsole.log(temperatura);",
-      "alternativas": [
+      "id": "q4",
+      "question": "Qual das seguintes NÃO é uma regra válida para nomear variáveis em JavaScript?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "20, porque variáveis declaradas com let não podem ter seu valor alterado"
+          "id": "a1",
+          "text": "Pode começar com letra, $ ou _",
+          "isCorrect": false,
+          "explanation": "Esta é uma regra válida para nomes de variáveis."
         },
         {
-          "letra": "b",
-          "texto": "25, porque apenas a última atribuição antes do console.log é considerada"
+          "id": "a2",
+          "text": "Pode conter números, mas não no início",
+          "isCorrect": false,
+          "explanation": "Esta é uma regra válida para nomes de variáveis."
         },
         {
-          "letra": "c",
-          "texto": "30, porque cada operação de atribuição atualiza o valor armazenado na variável",
-          "correta": true
+          "id": "a3",
+          "text": "Pode começar com números",
+          "isCorrect": true,
+          "explanation": "Correto! Esta NÃO é válida. Variáveis não podem começar com números."
         },
         {
-          "letra": "d",
-          "texto": "Erro, porque não é possível atribuir um novo valor a uma variável já declarada"
+          "id": "a4",
+          "text": "Diferencia maiúsculas de minúsculas",
+          "isCorrect": false,
+          "explanation": "JavaScript é case-sensitive, então esta é uma característica válida."
         }
-      ],
-      "explicacao": "Cada operação de atribuição substitui o valor anterior da variável. O último valor atribuído (30) é o que será exibido."
+      ]
     },
     {
-      "numero": 5,
-      "pergunta": "Por que a redeclaração de variáveis pode ser problemática no desenvolvimento?",
-      "alternativas": [
+      "id": "q5",
+      "question": "O que acontece quando você tenta mudar o valor de uma variável declarada com 'const'?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Usa mais memória do computador"
+          "id": "a1",
+          "text": "O valor é alterado normalmente",
+          "isCorrect": false,
+          "explanation": "const não permite alteração de valor."
         },
         {
-          "letra": "b",
-          "texto": "Torna o código mais lento"
+          "id": "a2",
+          "text": "Gera um erro",
+          "isCorrect": true,
+          "explanation": "Correto! Tentar reatribuir um valor a const gera um erro."
         },
         {
-          "letra": "c",
-          "texto": "Pode causar confusão e sobrescrever valores inadvertidamente",
-          "correta": true
+          "id": "a3",
+          "text": "O valor é alterado mas gera um aviso",
+          "isCorrect": false,
+          "explanation": "const não permite alteração, gera erro, não apenas aviso."
         },
         {
-          "letra": "d",
-          "texto": "É incompatível com navegadores antigos"
+          "id": "a4",
+          "text": "A variável é automaticamente convertida para let",
+          "isCorrect": false,
+          "explanation": "const não é convertida automaticamente para let."
         }
-      ],
-      "explicacao": "A redeclaração de variáveis pode causar confusão e sobrescrever valores inadvertidamente, gerando bugs difíceis de identificar no código."
+      ]
     },
     {
-      "numero": 6,
-      "pergunta": "Qual é o princípio por trás do uso de const em vez de let?",
-      "alternativas": [
+      "id": "q6",
+      "question": "Qual é a diferença principal entre 'let' e 'var'?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "const é mais rápido"
+          "id": "a1",
+          "text": "let tem escopo de bloco, var tem escopo de função",
+          "isCorrect": true,
+          "explanation": "Correto! let respeita o escopo de bloco (dentro de {}), enquanto var tem escopo de função."
         },
         {
-          "letra": "b",
-          "texto": "Expressar intenção de imutabilidade e tornar o código mais previsível",
-          "correta": true
+          "id": "a2",
+          "text": "Não há diferença, são exatamente iguais",
+          "isCorrect": false,
+          "explanation": "Há diferenças importantes entre let e var, principalmente no escopo."
         },
         {
-          "letra": "c",
-          "texto": "const ocupa menos espaço"
+          "id": "a3",
+          "text": "var é mais moderno que let",
+          "isCorrect": false,
+          "explanation": "Na verdade, let é mais moderno que var."
         },
         {
-          "letra": "d",
-          "texto": "É obrigatório para números"
+          "id": "a4",
+          "text": "let só pode armazenar números",
+          "isCorrect": false,
+          "explanation": "let pode armazenar qualquer tipo de dado, não apenas números."
         }
-      ],
-      "explicacao": "Usar const expressa a intenção de que o valor não mudará, tornando o código mais previsível e fácil de entender."
+      ]
     },
     {
-      "numero": 7,
-      "pergunta": "Por que boas práticas de nomenclatura são importantes para variáveis?",
-      "alternativas": [
+      "id": "q7",
+      "question": "Qual dos seguintes é um nome VÁLIDO para uma variável em JavaScript?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para impressionar outros programadores"
+          "id": "a1",
+          "text": "2nomes",
+          "isCorrect": false,
+          "explanation": "Nomes de variáveis não podem começar com números."
         },
         {
-          "letra": "b",
-          "texto": "Facilitar compreensão, manutenção e colaboração no código",
-          "correta": true
+          "id": "a2",
+          "text": "_nome",
+          "isCorrect": true,
+          "explanation": "Correto! Variáveis podem começar com underscore (_)."
         },
         {
-          "letra": "c",
-          "texto": "Para tornar o código mais rápido"
+          "id": "a3",
+          "text": "nome-completo",
+          "isCorrect": false,
+          "explanation": "Hífens não são permitidos em nomes de variáveis. Use camelCase: nomeCompleto."
         },
         {
-          "letra": "d",
-          "texto": "Para reduzir o tamanho dos arquivos"
+          "id": "a4",
+          "text": "let",
+          "isCorrect": false,
+          "explanation": "let é uma palavra reservada do JavaScript e não pode ser usada como nome de variável."
         }
-      ],
-      "explicacao": "Boas práticas de nomenclatura facilitam a compreensão do código, sua manutenção e colaboração entre desenvolvedores."
+      ]
     },
     {
-      "numero": 8,
-      "pergunta": "O que o conceito de 'zona morta temporal' com let pretende prevenir?",
-      "alternativas": [
+      "id": "q8",
+      "question": "O que significa 'declarar' uma variável?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Uso de muita memória"
+          "id": "a1",
+          "text": "Deletar a variável da memória",
+          "isCorrect": false,
+          "explanation": "Declarar não é deletar. É criar a variável."
         },
         {
-          "letra": "b",
-          "texto": "Execução lenta do programa"
+          "id": "a2",
+          "text": "Criar e dar um nome à variável",
+          "isCorrect": true,
+          "explanation": "Correto! Declarar uma variável significa criá-la e dar um nome a ela usando let, const ou var."
         },
         {
-          "letra": "c",
-          "texto": "Uso acidental de variáveis antes de serem propriamente inicializadas",
-          "correta": true
+          "id": "a3",
+          "text": "Imprimir o valor da variável no console",
+          "isCorrect": false,
+          "explanation": "Imprimir no console é feito com console.log(), não é declaração."
         },
         {
-          "letra": "d",
-          "texto": "Conflitos entre diferentes navegadores"
+          "id": "a4",
+          "text": "Converter a variável em texto",
+          "isCorrect": false,
+          "explanation": "Conversão de tipo é diferente de declaração."
         }
-      ],
-      "explicacao": "A zona morta temporal previne o uso acidental de variáveis antes de serem inicializadas, evitando comportamentos imprevisíveis."
+      ]
     },
     {
-      "numero": 9,
-      "pergunta": "Qual princípio guia a escolha entre usar let e const?",
-      "alternativas": [
+      "id": "q9",
+      "question": "O que acontece se você usar uma variável sem declará-la primeiro?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Sempre usar let para simplicidade"
+          "id": "a1",
+          "text": "O JavaScript cria automaticamente com let",
+          "isCorrect": false,
+          "explanation": "JavaScript não cria automaticamente variáveis com let."
         },
         {
-          "letra": "b",
-          "texto": "Usar const quando possível para expressar imutabilidade, let quando necessário",
-          "correta": true
+          "id": "a2",
+          "text": "Gera um erro (em modo strict)",
+          "isCorrect": true,
+          "explanation": "Correto! No modo strict, usar uma variável não declarada gera um erro ReferenceError."
         },
         {
-          "letra": "c",
-          "texto": "Usar const apenas para números"
+          "id": "a3",
+          "text": "A variável sempre tem valor 0",
+          "isCorrect": false,
+          "explanation": "Variáveis não declaradas não têm valor padrão de 0."
         },
         {
-          "letra": "d",
-          "texto": "A escolha não faz diferença na prática"
+          "id": "a4",
+          "text": "O código funciona normalmente sem problemas",
+          "isCorrect": false,
+          "explanation": "Usar variáveis não declaradas pode causar erros ou comportamentos inesperados."
         }
-      ],
-      "explicacao": "A melhor prática é usar const por padrão para expressar imutabilidade, e let apenas quando for necessário reatribuir o valor."
+      ]
     },
     {
-      "numero": 10,
-      "pergunta": "Por que a sensibilidade a maiúsculas e minúsculas nas variáveis é um conceito importante?",
-      "alternativas": [
+      "id": "q10",
+      "question": "Qual é o valor de uma variável declarada com 'let' mas não inicializada?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para economizar memória"
+          "id": "a1",
+          "text": "0",
+          "isCorrect": false,
+          "explanation": "Variáveis não inicializadas não têm valor 0."
         },
         {
-          "letra": "b",
-          "texto": "Porque aumenta as possibilidades de nomes disponíveis"
+          "id": "a2",
+          "text": "null",
+          "isCorrect": false,
+          "explanation": "null é um valor específico que precisa ser atribuído explicitamente."
         },
         {
-          "letra": "c",
-          "texto": "Porque trata nomes similares como entidades completamente distintas",
-          "correta": true
+          "id": "a3",
+          "text": "undefined",
+          "isCorrect": true,
+          "explanation": "Correto! Variáveis declaradas mas não inicializadas têm o valor undefined."
         },
         {
-          "letra": "d",
-          "texto": "Para compatibilidade com outras linguagens"
+          "id": "a4",
+          "text": "Texto vazio ''",
+          "isCorrect": false,
+          "explanation": "String vazia é um valor específico, não o padrão para variáveis não inicializadas."
         }
-      ],
-      "explicacao": "JavaScript é case-sensitive, ou seja, trata nomes com letras maiúsculas e minúsculas como variáveis completamente diferentes, o que pode causar confusão se não for compreendido."
+      ]
     }
   ]
 }

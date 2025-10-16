@@ -14,6 +14,7 @@ export type Lesson = {
     duration: number;
     url: string;
   } | null;
+  quizId: string | null;
 };
 
 export function getModules(): Module[] {
@@ -57,6 +58,7 @@ const lessons = [
         description:
           "Vamos viajar no tempo para entender como chegamos até aqui.",
         video: null,
+        quizId: "quiz-1",
       },
       {
         id: "charpter-2",
@@ -64,6 +66,7 @@ const lessons = [
         description:
           "Nesta aula, você vai descobrir como criar essas 'caixas digitais'.",
         video: null,
+        quizId: "quiz-2",
       },
       {
         id: "charpter-3",
@@ -71,6 +74,7 @@ const lessons = [
         description:
           "Vamos explorar os diferentes tipos de dados que você pode usar para armazenar informações em JavaScript.",
         video: null,
+        quizId: "quiz-3",
       },
       {
         id: "charpter-4",
@@ -78,6 +82,7 @@ const lessons = [
         description:
           "Vamos explorar como os operadores matemáticos são usados para manipular dados em JavaScript.",
         video: null,
+        quizId: "quiz-4",
       },
     ],
   },
@@ -93,6 +98,7 @@ const lessons = [
         description:
           "Vamos aprender a usar operadores de comparação e lógicos para criar condições mais complexas em nossos programas.",
         video: null,
+        quizId: "quiz-5",
       },
       {
         id: "charpter-6",
@@ -100,6 +106,7 @@ const lessons = [
         description:
           "Vamos aprender a usar estruturas condicionais para que nossos programas possam tomar decisões com base em diferentes condições.",
         video: null,
+        quizId: "quiz-6",
       },
       {
         id: "charpter-8",
@@ -107,6 +114,7 @@ const lessons = [
         description:
           "Vamos aprender a usar loops para repetir ações em nossos programas, tornando-os mais eficientes e poderosos.",
         video: null,
+        quizId: "quiz-8",
       },
       {
         id: "charpter-9",
@@ -114,6 +122,7 @@ const lessons = [
         description:
           "Vamos aprender a criar e usar funções para organizar nosso código, tornando-o mais modular e reutilizável.",
         video: null,
+        quizId: "quiz-9",
       },
       {
         id: "charpter-10",
@@ -121,6 +130,7 @@ const lessons = [
         description:
           "Vamos explorar conceitos avançados de funções em JavaScript, como funções anônimas, funções de flecha e closures.",
         video: null,
+        quizId: "quiz-10",
       },
     ],
   },
@@ -136,6 +146,7 @@ const lessons = [
         description:
           "Vamos aprender a manipular strings em JavaScript, incluindo métodos comuns para modificar e analisar texto.",
         video: null,
+        quizId: "quiz-7",
       },
       {
         id: "charpter-11",
@@ -143,6 +154,7 @@ const lessons = [
         description:
           "Vamos aprender a usar arrays para armazenar e manipular coleções de dados em JavaScript.",
         video: null,
+        quizId: "quiz-11",
       },
       {
         id: "charpter-12",
@@ -150,6 +162,7 @@ const lessons = [
         description:
           "Vamos explorar métodos avançados de arrays, como map, filter e reduce, para processar dados de forma eficiente.",
         video: null,
+        quizId: "quiz-12",
       },
       {
         id: "charpter-13",
@@ -157,6 +170,7 @@ const lessons = [
         description:
           "Vamos aprender a usar objetos para armazenar dados estruturados em JavaScript.",
         video: null,
+        quizId: "quiz-13",
       },
       {
         id: "charpter-14",
@@ -164,6 +178,7 @@ const lessons = [
         description:
           "Vamos entender como a atribuição e cópia de objetos funcionam em JavaScript, e como evitar armadilhas comuns.",
         video: null,
+        quizId: "quiz-14",
       },
     ],
   },

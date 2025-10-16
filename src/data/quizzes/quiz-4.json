@@ -1,246 +1,308 @@
 {
-  "aula": 4,
-  "totalQuestoes": 10,
-  "questoes": [
+  "id": "quiz-4",
+  "title": "Quiz - A Matemática na Programação",
+  "description": "Teste seus conhecimentos sobre operadores matemáticos em JavaScript.",
+  "timeLimit": 900,
+  "questions": [
     {
-      "numero": 1,
-      "pergunta": "Por que JavaScript segue regras de precedência de operadores?",
-      "alternativas": [
+      "id": "q1",
+      "question": "Qual é o resultado da expressão: 10 + 5?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para tornar a linguagem mais complexa"
+          "id": "a1",
+          "text": "105",
+          "isCorrect": false,
+          "explanation": "Isso seria se fossem strings concatenadas, mas são números."
         },
         {
-          "letra": "b",
-          "texto": "Para garantir que expressões matemáticas sejam avaliadas de forma consistente e previsível",
-          "correta": true
+          "id": "a2",
+          "text": "15",
+          "isCorrect": true,
+          "explanation": "Correto! O operador + realiza a adição de dois números."
         },
         {
-          "letra": "c",
-          "texto": "Para economizar memória do computador"
+          "id": "a3",
+          "text": "5",
+          "isCorrect": false,
+          "explanation": "Esse seria o resultado de uma subtração."
         },
         {
-          "letra": "d",
-          "texto": "Para ser diferente de outras linguagens"
+          "id": "a4",
+          "text": "50",
+          "isCorrect": false,
+          "explanation": "Esse seria o resultado de uma multiplicação."
         }
-      ],
-      "explicacao": "A precedência de operadores garante que cálculos complexos sejam avaliados de forma consistente, seguindo regras matemáticas universais."
+      ]
     },
     {
-      "numero": 2,
-      "pergunta": "Qual é o conceito fundamental por trás do operador módulo/resto (%)?",
-      "alternativas": [
+      "id": "q2",
+      "question": "Qual operador é usado para calcular o resto de uma divisão?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Dividir números normalmente"
+          "id": "a1",
+          "text": "/",
+          "isCorrect": false,
+          "explanation": "/ é o operador de divisão, não de resto."
         },
         {
-          "letra": "b",
-          "texto": "Retornar o que sobra após uma divisão inteira",
-          "correta": true
+          "id": "a2",
+          "text": "%",
+          "isCorrect": true,
+          "explanation": "Correto! O operador % (módulo) retorna o resto da divisão."
         },
         {
-          "letra": "c",
-          "texto": "Calcular percentuais"
+          "id": "a3",
+          "text": "//",
+          "isCorrect": false,
+          "explanation": "// não é um operador matemático em JavaScript (é usado para comentários)."
         },
         {
-          "letra": "d",
-          "texto": "Multiplicar números pequenos"
+          "id": "a4",
+          "text": "mod",
+          "isCorrect": false,
+          "explanation": "JavaScript usa o símbolo %, não a palavra 'mod'."
         }
-      ],
-      "explicacao": "O operador módulo retorna o resto de uma divisão inteira. Por exemplo, 10 % 3 = 1 (10 dividido por 3 é 3, resto 1)."
+      ]
     },
     {
-      "numero": 3,
-      "pergunta": "Por que o operador + tem comportamentos diferentes dependendo dos operandos?",
-      "alternativas": [
+      "id": "q3",
+      "question": "Qual é o resultado de 10 % 3 em JavaScript?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "É um erro de design do JavaScript"
+          "id": "a1",
+          "text": "3",
+          "isCorrect": false,
+          "explanation": "3 é o divisor, não o resto."
         },
         {
-          "letra": "b",
-          "texto": "Para fornecer funcionalidade tanto aritmética quanto de concatenação de texto",
-          "correta": true
+          "id": "a2",
+          "text": "3.33",
+          "isCorrect": false,
+          "explanation": "Esse seria o resultado de 10 / 3, não 10 % 3."
         },
         {
-          "letra": "c",
-          "texto": "Para confundir programadores"
+          "id": "a3",
+          "text": "1",
+          "isCorrect": true,
+          "explanation": "Correto! 10 dividido por 3 dá 3 com resto 1, então 10 % 3 = 1."
         },
         {
-          "letra": "d",
-          "texto": "Para economizar símbolos na linguagem"
+          "id": "a4",
+          "text": "0",
+          "isCorrect": false,
+          "explanation": "O resto seria 0 apenas se 10 fosse divisível por 3."
         }
-      ],
-      "explicacao": "O operador + serve tanto para adição numérica (5 + 3 = 8) quanto para concatenação de strings ('5' + 3 = '53'), fornecendo funcionalidades múltiplas."
+      ]
     },
     {
-      "numero": 4,
-      "pergunta": "Qual princípio matemático o operador de exponenciação (**) implementa?",
-      "alternativas": [
+      "id": "q4",
+      "question": "Qual é o operador de exponenciação em JavaScript?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Multiplicação repetida"
+          "id": "a1",
+          "text": "^",
+          "isCorrect": false,
+          "explanation": "^ é o operador XOR bitwise, não de exponenciação."
         },
         {
-          "letra": "b",
-          "texto": "Elevar um número à potência de outro",
-          "correta": true
+          "id": "a2",
+          "text": "**",
+          "isCorrect": true,
+          "explanation": "Correto! ** é o operador de exponenciação. Ex: 2 ** 3 = 8."
         },
         {
-          "letra": "c",
-          "texto": "Cálculo de raízes apenas"
+          "id": "a3",
+          "text": "pow",
+          "isCorrect": false,
+          "explanation": "Math.pow() é uma função, não um operador."
         },
         {
-          "letra": "d",
-          "texto": "Divisão avançada"
+          "id": "a4",
+          "text": "exp",
+          "isCorrect": false,
+          "explanation": "exp não é um operador válido em JavaScript."
         }
-      ],
-      "explicacao": "O operador ** eleva um número à potência de outro. Exemplo: 2 ** 3 = 8 (2 elevado ao cubo)."
+      ]
     },
     {
-      "numero": 5,
-      "pergunta": "Por que a expressão 2 + 3 + '1' resulta em '51' e não '61'?",
-      "alternativas": [
+      "id": "q5",
+      "question": "Qual é o resultado de 2 ** 3?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "JavaScript sempre prioriza strings sobre números"
+          "id": "a1",
+          "text": "6",
+          "isCorrect": false,
+          "explanation": "6 seria o resultado de 2 * 3, não de exponenciação."
         },
         {
-          "letra": "b",
-          "texto": "Porque operações são executadas sequencialmente e o tipo do resultado influencia operações subsequentes",
-          "correta": true
+          "id": "a2",
+          "text": "8",
+          "isCorrect": true,
+          "explanation": "Correto! 2 elevado à 3ª potência é 2 × 2 × 2 = 8."
         },
         {
-          "letra": "c",
-          "texto": "É um bug conhecido do JavaScript"
+          "id": "a3",
+          "text": "5",
+          "isCorrect": false,
+          "explanation": "5 seria o resultado de 2 + 3, não de exponenciação."
         },
         {
-          "letra": "d",
-          "texto": "Strings numéricas sempre vencem em operações"
+          "id": "a4",
+          "text": "9",
+          "isCorrect": false,
+          "explanation": "9 seria 3 elevado a 2, não 2 elevado a 3."
         }
-      ],
-      "explicacao": "As operações são executadas da esquerda para direita: primeiro 2 + 3 = 5 (número), depois 5 + '1' = '51' (concatenação de string)."
+      ]
     },
     {
-      "numero": 6,
-      "pergunta": "Qual é o propósito dos parênteses em expressões aritméticas?",
-      "alternativas": [
+      "id": "q6",
+      "question": "O que faz o operador ++ quando usado após uma variável (ex: x++)?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Apenas decoração para facilitar leitura"
+          "id": "a1",
+          "text": "Multiplica o valor por 2",
+          "isCorrect": false,
+          "explanation": "++ não multiplica, apenas incrementa em 1."
         },
         {
-          "letra": "b",
-          "texto": "Forçar uma ordem específica de avaliação diferente da precedência padrão",
-          "correta": true
+          "id": "a2",
+          "text": "Incrementa o valor em 1",
+          "isCorrect": true,
+          "explanation": "Correto! O operador ++ incrementa a variável em 1. x++ é equivalente a x = x + 1."
         },
         {
-          "letra": "c",
-          "texto": "Diminuir a velocidade de execução do código"
+          "id": "a3",
+          "text": "Decrementa o valor em 1",
+          "isCorrect": false,
+          "explanation": "Decrementar é feito com --, não ++."
         },
         {
-          "letra": "d",
-          "texto": "Evitar erros de sintaxe"
+          "id": "a4",
+          "text": "Eleva ao quadrado",
+          "isCorrect": false,
+          "explanation": "++ não eleva ao quadrado, apenas adiciona 1."
         }
-      ],
-      "explicacao": "Parênteses alteram a ordem de avaliação. Por exemplo: (1 + 2) * 3 = 9, enquanto 1 + 2 * 3 = 7."
+      ]
     },
     {
-      "numero": 7,
-      "pergunta": "O que o operador + unário faz quando aplicado a uma string numérica?",
-      "alternativas": [
+      "id": "q7",
+      "question": "Qual é a ordem de precedência correta dos operadores (do maior para o menor)?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Dobra o valor da string"
+          "id": "a1",
+          "text": "+ - * /",
+          "isCorrect": false,
+          "explanation": "Adição e subtração têm precedência menor que multiplicação e divisão."
         },
         {
-          "letra": "b",
-          "texto": "Converte a string para o tipo numérico",
-          "correta": true
+          "id": "a2",
+          "text": "* / + -",
+          "isCorrect": true,
+          "explanation": "Correto! Multiplicação e divisão têm precedência sobre adição e subtração."
         },
         {
-          "letra": "c",
-          "texto": "Adiciona +1 ao valor"
+          "id": "a3",
+          "text": "Todos têm a mesma precedência",
+          "isCorrect": false,
+          "explanation": "Operadores têm precedências diferentes em JavaScript."
         },
         {
-          "letra": "d",
-          "texto": "Remove o sinal de menos"
+          "id": "a4",
+          "text": "- + / *",
+          "isCorrect": false,
+          "explanation": "Esta ordem está incorreta."
         }
-      ],
-      "explicacao": "O operador + unário força conversão para número. Exemplo: +'5' resulta em 5 (número), permitindo operações aritméticas."
+      ]
     },
     {
-      "numero": 8,
-      "pergunta": "O que o comportamento de conversão automática de tipos em operações aritméticas demonstra sobre JavaScript?",
-      "alternativas": [
+      "id": "q8",
+      "question": "Qual é o resultado da expressão: 10 + 5 * 2?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Que é uma linguagem mal projetada"
+          "id": "a1",
+          "text": "30",
+          "isCorrect": false,
+          "explanation": "Isso seria se a adição fosse feita primeiro: (10 + 5) * 2."
         },
         {
-          "letra": "b",
-          "texto": "Que JavaScript prioriza flexibilidade e inferência de contexto",
-          "correta": true
+          "id": "a2",
+          "text": "20",
+          "isCorrect": true,
+          "explanation": "Correto! Multiplicação tem precedência: 5 * 2 = 10, depois 10 + 10 = 20."
         },
         {
-          "letra": "c",
-          "texto": "Que strings são superiores a números"
+          "id": "a3",
+          "text": "15",
+          "isCorrect": false,
+          "explanation": "Este resultado não corresponde à expressão."
         },
         {
-          "letra": "d",
-          "texto": "Que operadores são desnecessários"
+          "id": "a4",
+          "text": "25",
+          "isCorrect": false,
+          "explanation": "Este resultado não corresponde à expressão."
         }
-      ],
-      "explicacao": "JavaScript prioriza flexibilidade, tentando inferir a intenção do programador através de conversões automáticas de tipo."
+      ]
     },
     {
-      "numero": 9,
-      "pergunta": "Por que compreender precedência de operadores é fundamental para programação?",
-      "alternativas": [
+      "id": "q9",
+      "question": "Para que serve o operador -= em JavaScript?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para escrever código mais rápido"
+          "id": "a1",
+          "text": "Comparar se dois valores são diferentes",
+          "isCorrect": false,
+          "explanation": "Comparação é feita com != ou !==."
         },
         {
-          "letra": "b",
-          "texto": "Para prevenir erros lógicos e garantir que cálculos sejam executados conforme a intenção",
-          "correta": true
+          "id": "a2",
+          "text": "Subtrair e atribuir o resultado à variável",
+          "isCorrect": true,
+          "explanation": "Correto! x -= 5 é equivalente a x = x - 5."
         },
         {
-          "letra": "c",
-          "texto": "Para usar menos parênteses"
+          "id": "a3",
+          "text": "Dividir e atribuir o resultado",
+          "isCorrect": false,
+          "explanation": "Divisão e atribuição é feita com /=."
         },
         {
-          "letra": "d",
-          "texto": "Para economizar memória"
+          "id": "a4",
+          "text": "Decrementar em 1",
+          "isCorrect": false,
+          "explanation": "Decrementar em 1 é feito com --."
         }
-      ],
-      "explicacao": "Entender precedência previne bugs sutis onde cálculos produzem resultados inesperados devido à ordem de avaliação incorreta."
+      ]
     },
     {
-      "numero": 10,
-      "pergunta": "Qual conceito explica por que +valor1 + +valor2 funciona para somar strings numéricas?",
-      "alternativas": [
+      "id": "q10",
+      "question": "Qual é o resultado de 15 / 2 em JavaScript?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Strings são automaticamente números"
+          "id": "a1",
+          "text": "7",
+          "isCorrect": false,
+          "explanation": "JavaScript não arredonda automaticamente para inteiro."
         },
         {
-          "letra": "b",
-          "texto": "Conversão explícita de tipo usando operador unário antes da operação binária",
-          "correta": true
+          "id": "a2",
+          "text": "7.5",
+          "isCorrect": true,
+          "explanation": "Correto! JavaScript sempre retorna resultado decimal quando necessário na divisão."
         },
         {
-          "letra": "c",
-          "texto": "JavaScript sempre soma strings"
+          "id": "a3",
+          "text": "8",
+          "isCorrect": false,
+          "explanation": "JavaScript não arredonda para cima automaticamente."
         },
         {
-          "letra": "d",
-          "texto": "É um comportamento aleatório"
+          "id": "a4",
+          "text": "1 (resto)",
+          "isCorrect": false,
+          "explanation": "O resto seria obtido com %, não com /."
         }
-      ],
-      "explicacao": "Os operadores + unários convertem as strings para números antes da operação de adição binária. Exemplo: +'10' + +'20' = 10 + 20 = 30."
+      ]
     }
   ]
 }

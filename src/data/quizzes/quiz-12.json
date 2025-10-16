@@ -1,246 +1,308 @@
 {
-  "aula": 12,
-  "totalQuestoes": 10,
-  "questoes": [
+  "id": "quiz-12",
+  "title": "Quiz - Dominando a Busca, Filtragem e Transformação de Dados",
+  "description": "Teste seus conhecimentos sobre métodos avançados de arrays como map, filter e reduce.",
+  "timeLimit": 900,
+  "questions": [
     {
-      "numero": 1,
-      "pergunta": "Qual é a diferença fundamental entre erros de sintaxe e erros de execução?",
-      "alternativas": [
+      "id": "q1",
+      "question": "O que o método map() faz em um array?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Erros de sintaxe são mais graves"
+          "id": "a1",
+          "text": "Remove elementos do array",
+          "isCorrect": false,
+          "explanation": "map() não remove elementos, ele transforma cada um."
         },
         {
-          "letra": "b",
-          "texto": "Erros de sintaxe são detectados pelo parser antes da execução, erros de execução ocorrem durante a execução",
-          "correta": true
+          "id": "a2",
+          "text": "Cria um novo array aplicando uma função a cada elemento",
+          "isCorrect": true,
+          "explanation": "Correto! map() transforma cada elemento e retorna um novo array com os resultados."
         },
         {
-          "letra": "c",
-          "texto": "Não há diferença prática entre eles"
+          "id": "a3",
+          "text": "Ordena os elementos do array",
+          "isCorrect": false,
+          "explanation": "Ordenar é feito com sort(), não map()."
         },
         {
-          "letra": "d",
-          "texto": "Erros de execução são mais fáceis de corrigir"
+          "id": "a4",
+          "text": "Busca um elemento específico",
+          "isCorrect": false,
+          "explanation": "Buscar elementos é feito com find() ou filter()."
         }
-      ],
-      "explicacao": "Erros de sintaxe são identificados pelo interpretador antes mesmo do código começar a executar, enquanto erros de execução só aparecem quando uma linha específica do código é executada."
+      ]
     },
     {
-      "numero": 2,
-      "pergunta": "Por que erros lógicos são considerados os mais difíceis de detectar?",
-      "alternativas": [
+      "id": "q2",
+      "question": "O que o método filter() retorna?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Geram mensagens de erro confusas"
+          "id": "a1",
+          "text": "O primeiro elemento que atende à condição",
+          "isCorrect": false,
+          "explanation": "Retornar o primeiro elemento é feito com find()."
         },
         {
-          "letra": "b",
-          "texto": "O código executa sem gerar erros, mas produz resultados incorretos",
-          "correta": true
+          "id": "a2",
+          "text": "Um novo array com todos os elementos que atendem à condição",
+          "isCorrect": true,
+          "explanation": "Correto! filter() retorna um array com os elementos que passam no teste."
         },
         {
-          "letra": "c",
-          "texto": "Só aparecem em produção"
+          "id": "a3",
+          "text": "Um valor booleano true ou false",
+          "isCorrect": false,
+          "explanation": "filter() retorna um array, não um booleano."
         },
         {
-          "letra": "d",
-          "texto": "São raros de acontecer"
+          "id": "a4",
+          "text": "O número de elementos que atendem à condição",
+          "isCorrect": false,
+          "explanation": "filter() retorna os elementos, não a contagem."
         }
-      ],
-      "explicacao": "Erros lógicos são silenciosos - o programa roda normalmente mas não faz o que deveria fazer, exigindo análise cuidadosa para identificá-los."
+      ]
     },
     {
-      "numero": 3,
-      "pergunta": "Qual é o propósito fundamental do bloco finally em try-catch?",
-      "alternativas": [
+      "id": "q3",
+      "question": "O que o método reduce() faz?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Capturar erros adicionais"
+          "id": "a1",
+          "text": "Remove elementos duplicados do array",
+          "isCorrect": false,
+          "explanation": "reduce() não remove duplicados, ele acumula valores."
         },
         {
-          "letra": "b",
-          "texto": "Executar código de limpeza que deve rodar independente de sucesso ou falha",
-          "correta": true
+          "id": "a2",
+          "text": "Reduz o array a um único valor através de uma função acumuladora",
+          "isCorrect": true,
+          "explanation": "Correto! reduce() processa cada elemento e acumula em um único resultado."
         },
         {
-          "letra": "c",
-          "texto": "Melhorar a performance"
+          "id": "a3",
+          "text": "Diminui o tamanho do array pela metade",
+          "isCorrect": false,
+          "explanation": "reduce() acumula valores, não necessariamente reduz o tamanho."
         },
         {
-          "letra": "d",
-          "texto": "Substituir o bloco catch"
+          "id": "a4",
+          "text": "Ordena os elementos em ordem decrescente",
+          "isCorrect": false,
+          "explanation": "Ordenar é feito com sort(), não reduce()."
         }
-      ],
-      "explicacao": "O bloco finally garante que código importante (como fechar conexões ou arquivos) seja executado sempre, independente de ter ocorrido erro ou não."
+      ]
     },
     {
-      "numero": 4,
-      "pergunta": "Por que criar classes de erro customizadas é uma boa prática?",
-      "alternativas": [
+      "id": "q4",
+      "question": "Qual é a diferença entre find() e filter()?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para impressionar outros desenvolvedores"
+          "id": "a1",
+          "text": "Não há diferença, são sinônimos",
+          "isCorrect": false,
+          "explanation": "find() e filter() têm comportamentos diferentes."
         },
         {
-          "letra": "b",
-          "texto": "Permite tratamento específico e mais informações contextuais para diferentes tipos de erro",
-          "correta": true
+          "id": "a2",
+          "text": "find() retorna o primeiro elemento que atende, filter() retorna todos",
+          "isCorrect": true,
+          "explanation": "Correto! find() retorna um único elemento (ou undefined), filter() retorna um array."
         },
         {
-          "letra": "c",
-          "texto": "É obrigatório em JavaScript moderno"
+          "id": "a3",
+          "text": "find() é mais rápido que filter()",
+          "isCorrect": false,
+          "explanation": "Embora find() pare na primeira correspondência, a diferença principal é o retorno."
         },
         {
-          "letra": "d",
-          "texto": "Para reduzir o tamanho do código"
+          "id": "a4",
+          "text": "filter() só funciona com números",
+          "isCorrect": false,
+          "explanation": "filter() funciona com qualquer tipo de elemento."
         }
-      ],
-      "explicacao": "Erros customizados permitem adicionar informações relevantes ao contexto e tratá-los de forma específica, melhorando o debugging e o tratamento de problemas."
+      ]
     },
     {
-      "numero": 5,
-      "pergunta": "O que o conceito de \"Global Error Handling\" implementa?",
-      "alternativas": [
+      "id": "q5",
+      "question": "O que o método some() verifica?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Prevenir todos os erros possíveis"
+          "id": "a1",
+          "text": "Se todos os elementos atendem à condição",
+          "isCorrect": false,
+          "explanation": "Verificar se todos atendem é feito com every()."
         },
         {
-          "letra": "b",
-          "texto": "Capturar erros não tratados em nível de aplicação como última linha de defesa",
-          "correta": true
+          "id": "a2",
+          "text": "Se pelo menos um elemento atende à condição",
+          "isCorrect": true,
+          "explanation": "Correto! some() retorna true se ao menos um elemento passar no teste."
         },
         {
-          "letra": "c",
-          "texto": "Acelerar a execução do código"
+          "id": "a3",
+          "text": "Quantos elementos atendem à condição",
+          "isCorrect": false,
+          "explanation": "some() retorna booleano, não uma contagem."
         },
         {
-          "letra": "d",
-          "texto": "Substituir try-catch locais"
+          "id": "a4",
+          "text": "Se o array está vazio",
+          "isCorrect": false,
+          "explanation": "Verificar se está vazio é feito com length === 0."
         }
-      ],
-      "explicacao": "Global Error Handling funciona como uma rede de segurança, capturando erros que escaparam de outros tratamentos e evitando que a aplicação quebre completamente."
+      ]
     },
     {
-      "numero": 6,
-      "pergunta": "Qual é a importância do logging estruturado no desenvolvimento?",
-      "alternativas": [
+      "id": "q6",
+      "question": "O que o método every() retorna?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Apenas para decoração do código"
+          "id": "a1",
+          "text": "Todos os elementos do array",
+          "isCorrect": false,
+          "explanation": "every() retorna um booleano, não elementos."
         },
         {
-          "letra": "b",
-          "texto": "Facilita debugging, monitoramento e análise de problemas em produção",
-          "correta": true
+          "id": "a2",
+          "text": "true se todos os elementos atendem à condição, false caso contrário",
+          "isCorrect": true,
+          "explanation": "Correto! every() verifica se todos os elementos passam no teste."
         },
         {
-          "letra": "c",
-          "texto": "É obrigatório em todas as linguagens"
+          "id": "a3",
+          "text": "O número de elementos que atendem à condição",
+          "isCorrect": false,
+          "explanation": "every() retorna booleano, não um número."
         },
         {
-          "letra": "d",
-          "texto": "Para usar menos memória"
+          "id": "a4",
+          "text": "Um novo array com os elementos válidos",
+          "isCorrect": false,
+          "explanation": "Retornar um novo array é feito com filter() ou map()."
         }
-      ],
-      "explicacao": "Logging estruturado registra informações importantes sobre a execução do programa, permitindo identificar e resolver problemas tanto durante o desenvolvimento quanto em produção."
+      ]
     },
     {
-      "numero": 7,
-      "pergunta": "Por que diferentes níveis de log (DEBUG, INFO, WARN, ERROR) são úteis?",
-      "alternativas": [
+      "id": "q7",
+      "question": "O que o método includes() verifica?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para colorir o console"
+          "id": "a1",
+          "text": "Se o array contém um valor específico",
+          "isCorrect": true,
+          "explanation": "Correto! includes() retorna true se o valor existe no array."
         },
         {
-          "letra": "b",
-          "texto": "Permitem filtrar informações por importância e controlar verbosidade",
-          "correta": true
+          "id": "a2",
+          "text": "Se o array está vazio",
+          "isCorrect": false,
+          "explanation": "Verificar se está vazio é feito com length === 0."
         },
         {
-          "letra": "c",
-          "texto": "São apenas convenções sem utilidade prática"
+          "id": "a3",
+          "text": "Quantas vezes um valor aparece",
+          "isCorrect": false,
+          "explanation": "includes() apenas verifica existência, não conta ocorrências."
         },
         {
-          "letra": "d",
-          "texto": "Para compatibilidade entre navegadores"
+          "id": "a4",
+          "text": "O índice de um elemento",
+          "isCorrect": false,
+          "explanation": "Obter o índice é feito com indexOf() ou findIndex()."
         }
-      ],
-      "explicacao": "Níveis de log permitem categorizar mensagens por importância, facilitando filtrar apenas o que é relevante em cada situação (desenvolvimento, testes ou produção)."
+      ]
     },
     {
-      "numero": 8,
-      "pergunta": "Qual conceito o padrão Circuit Breaker implementa?",
-      "alternativas": [
+      "id": "q8",
+      "question": "Qual método você usaria para transformar um array de números em suas raízes quadradas?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Acelerar operações"
+          "id": "a1",
+          "text": "filter()",
+          "isCorrect": false,
+          "explanation": "filter() seleciona elementos, não os transforma."
         },
         {
-          "letra": "b",
-          "texto": "Interromper tentativas quando um serviço está consistentemente falhando",
-          "correta": true
+          "id": "a2",
+          "text": "map()",
+          "isCorrect": true,
+          "explanation": "Correto! map() é ideal para transformar cada elemento: numeros.map(x => Math.sqrt(x))"
         },
         {
-          "letra": "c",
-          "texto": "Quebrar código em partes menores"
+          "id": "a3",
+          "text": "reduce()",
+          "isCorrect": false,
+          "explanation": "reduce() acumula valores, não é ideal para transformações 1-para-1."
         },
         {
-          "letra": "d",
-          "texto": "Melhorar a interface do usuário"
+          "id": "a4",
+          "text": "find()",
+          "isCorrect": false,
+          "explanation": "find() busca um elemento, não transforma todos."
         }
-      ],
-      "explicacao": "Circuit Breaker previne que o sistema continue tentando operações que estão falhando repetidamente, economizando recursos e evitando sobrecarga."
+      ]
     },
     {
-      "numero": 9,
-      "pergunta": "Por que sistemas de retry com backoff exponencial são importantes?",
-      "alternativas": [
+      "id": "q9",
+      "question": "Como você obteria apenas os números pares de um array?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para tornar o código mais complexo"
+          "id": "a1",
+          "text": "map(n => n % 2 === 0)",
+          "isCorrect": false,
+          "explanation": "map() retornaria booleanos, não os números pares."
         },
         {
-          "letra": "b",
-          "texto": "Permitem recuperação automática de falhas temporárias sem sobrecarregar recursos",
-          "correta": true
+          "id": "a2",
+          "text": "filter(n => n % 2 === 0)",
+          "isCorrect": true,
+          "explanation": "Correto! filter() seleciona apenas elementos que atendem à condição."
         },
         {
-          "letra": "c",
-          "texto": "São mais rápidos que tentativas normais"
+          "id": "a3",
+          "text": "reduce(n => n % 2 === 0)",
+          "isCorrect": false,
+          "explanation": "reduce() precisa de uma função acumuladora mais complexa."
         },
         {
-          "letra": "d",
-          "texto": "Funcionam apenas com APIs"
+          "id": "a4",
+          "text": "find(n => n % 2 === 0)",
+          "isCorrect": false,
+          "explanation": "find() retornaria apenas o primeiro número par."
         }
-      ],
-      "explicacao": "Retry com backoff exponencial tenta novamente após falhas temporárias, mas aumenta progressivamente o tempo entre tentativas para não sobrecarregar o sistema."
+      ]
     },
     {
-      "numero": 10,
-      "pergunta": "Qual é o valor principal das ferramentas de debugging avançadas?",
-      "alternativas": [
+      "id": "q10",
+      "question": "Qual é a vantagem de encadear métodos como map() e filter()?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Tornar o código mais bonito"
+          "id": "a1",
+          "text": "Torna o código mais rápido",
+          "isCorrect": false,
+          "explanation": "Encadeamento não necessariamente melhora performance."
         },
         {
-          "letra": "b",
-          "texto": "Facilitar identificação rápida de problemas e compreensão do fluxo de execução",
-          "correta": true
+          "id": "a2",
+          "text": "Permite combinar múltiplas operações de forma legível e funcional",
+          "isCorrect": true,
+          "explanation": "Correto! Encadeamento torna o código mais expressivo: arr.filter(x => x > 0).map(x => x * 2)"
         },
         {
-          "letra": "c",
-          "texto": "São apenas para desenvolvedores experientes"
+          "id": "a3",
+          "text": "Reduz o uso de memória",
+          "isCorrect": false,
+          "explanation": "Cada método cria um novo array intermediário."
         },
         {
-          "letra": "d",
-          "texto": "Substituir testes automatizados"
+          "id": "a4",
+          "text": "É obrigatório em JavaScript moderno",
+          "isCorrect": false,
+          "explanation": "Encadeamento é opcional, mas recomendado para clareza."
         }
-      ],
-      "explicacao": "Ferramentas de debugging avançadas permitem pausar a execução, inspecionar variáveis e acompanhar o fluxo do programa, tornando muito mais fácil entender e corrigir problemas."
+      ]
     }
   ]
 }

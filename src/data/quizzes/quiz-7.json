@@ -1,246 +1,308 @@
 {
-  "aula": 7,
-  "totalQuestoes": 10,
-  "questoes": [
+  "id": "quiz-7",
+  "title": "Quiz - Trabalhando com Texto em JavaScript",
+  "description": "Teste seus conhecimentos sobre manipulação de strings em JavaScript.",
+  "timeLimit": 900,
+  "questions": [
     {
-      "numero": 1,
-      "pergunta": "Qual é o propósito fundamental das estruturas condicionais na programação?",
-      "alternativas": [
+      "id": "q1",
+      "question": "Como você declara uma string em JavaScript?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Executar código mais rapidamente"
+          "id": "a1",
+          "text": "Usando aspas simples, duplas ou crases",
+          "isCorrect": true,
+          "explanation": "Correto! Strings podem ser declaradas com aspas simples ('texto'), duplas (\"texto\") ou crases (`texto`)."
         },
         {
-          "letra": "b",
-          "texto": "Permitir que programas tomem decisões e executem diferentes caminhos baseados em condições",
-          "correta": true
+          "id": "a2",
+          "text": "Apenas com aspas duplas",
+          "isCorrect": false,
+          "explanation": "Strings podem usar aspas simples, duplas ou crases."
         },
         {
-          "letra": "c",
-          "texto": "Economizar linhas de código"
+          "id": "a3",
+          "text": "Apenas com crases",
+          "isCorrect": false,
+          "explanation": "Crases são uma opção, mas não a única."
         },
         {
-          "letra": "d",
-          "texto": "Criar loops infinitos"
+          "id": "a4",
+          "text": "Usando colchetes []",
+          "isCorrect": false,
+          "explanation": "Colchetes são usados para arrays, não strings."
         }
-      ],
-      "explicacao": "As estruturas condicionais permitem que programas avaliem situações, tomem decisões inteligentes e escolham diferentes caminhos de execução baseados em condições específicas, assim como fazemos no dia a dia."
+      ]
     },
     {
-      "numero": 2,
-      "pergunta": "Por que a estrutura if...else é considerada fundamental em programação?",
-      "alternativas": [
+      "id": "q2",
+      "question": "O que são template strings (template literals)?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "É a mais rápida entre as estruturas"
+          "id": "a1",
+          "text": "Strings declaradas com crases que permitem interpolação",
+          "isCorrect": true,
+          "explanation": "Correto! Template strings usam crases (``) e permitem inserir variáveis com ${variavel}."
         },
         {
-          "letra": "b",
-          "texto": "Representa o conceito básico de tomada de decisão binária (sim/não)",
-          "correta": true
+          "id": "a2",
+          "text": "Strings que servem como modelo para outras strings",
+          "isCorrect": false,
+          "explanation": "O nome pode sugerir isso, mas template strings são sobre interpolação."
         },
         {
-          "letra": "c",
-          "texto": "É a única forma de criar condições"
+          "id": "a3",
+          "text": "Strings pré-definidas no JavaScript",
+          "isCorrect": false,
+          "explanation": "Não existem strings pré-definidas chamadas template strings."
         },
         {
-          "letra": "d",
-          "texto": "Usa menos memória"
+          "id": "a4",
+          "text": "Strings que não podem ser modificadas",
+          "isCorrect": false,
+          "explanation": "Todas as strings em JavaScript são imutáveis, não apenas template strings."
         }
-      ],
-      "explicacao": "O if...else é a estrutura mais básica porque representa uma decisão binária: verdadeiro ou falso, sim ou não. É o bloco construtor fundamental de toda lógica condicional."
+      ]
     },
     {
-      "numero": 3,
-      "pergunta": "Qual conceito explica por que if (queijo) funciona mesmo quando queijo não é um booleano?",
-      "alternativas": [
+      "id": "q3",
+      "question": "Como você acessa o primeiro caractere de uma string?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "É um erro de sintaxe"
+          "id": "a1",
+          "text": "string[0]",
+          "isCorrect": true,
+          "explanation": "Correto! Strings podem ser acessadas por índice, começando em 0."
         },
         {
-          "letra": "b",
-          "texto": "JavaScript converte automaticamente valores para booleano usando conceitos de truthy/falsy",
-          "correta": true
+          "id": "a2",
+          "text": "string[1]",
+          "isCorrect": false,
+          "explanation": "Índice 1 retorna o segundo caractere. O primeiro é índice 0."
         },
         {
-          "letra": "c",
-          "texto": "Queijo é sempre verdadeiro"
+          "id": "a3",
+          "text": "string.first()",
+          "isCorrect": false,
+          "explanation": "Não existe método first() para strings."
         },
         {
-          "letra": "d",
-          "texto": "Strings não funcionam em condições"
+          "id": "a4",
+          "text": "string.charAt(1)",
+          "isCorrect": false,
+          "explanation": "charAt(1) retorna o segundo caractere. Para o primeiro, use charAt(0)."
         }
-      ],
-      "explicacao": "JavaScript possui um sistema de conversão automática de tipos (coerção). Valores são classificados como truthy (comportam-se como true) ou falsy (comportam-se como false). Uma string não-vazia como 'queijo' é truthy."
+      ]
     },
     {
-      "numero": 4,
-      "pergunta": "Por que existe a estrutura else if além do simples if...else?",
-      "alternativas": [
+      "id": "q4",
+      "question": "Qual método retorna o tamanho (número de caracteres) de uma string?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para economizar espaço no código"
+          "id": "a1",
+          "text": "string.size",
+          "isCorrect": false,
+          "explanation": "Strings não têm propriedade size."
         },
         {
-          "letra": "b",
-          "texto": "Para avaliar múltiplas condições sequenciais quando apenas uma deve ser executada",
-          "correta": true
+          "id": "a2",
+          "text": "string.length",
+          "isCorrect": true,
+          "explanation": "Correto! A propriedade length retorna o número de caracteres da string."
         },
         {
-          "letra": "c",
-          "texto": "Para tornar o código mais elegante"
+          "id": "a3",
+          "text": "string.count()",
+          "isCorrect": false,
+          "explanation": "Não existe método count() para strings."
         },
         {
-          "letra": "d",
-          "texto": "Para substituir completamente o switch"
+          "id": "a4",
+          "text": "string.getLength()",
+          "isCorrect": false,
+          "explanation": "Não existe método getLength() para strings."
         }
-      ],
-      "explicacao": "O else if permite testar várias condições em sequência, executando apenas o bloco correspondente à primeira condição verdadeira encontrada, ideal para situações com múltiplas alternativas exclusivas."
+      ]
     },
     {
-      "numero": 5,
-      "pergunta": "Qual é o conceito fundamental por trás da declaração switch?",
-      "alternativas": [
+      "id": "q5",
+      "question": "Como você concatena (junta) duas strings?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Substituir todos os tipos de condicionais"
+          "id": "a1",
+          "text": "Usando o operador + ou o método concat()",
+          "isCorrect": true,
+          "explanation": "Correto! Você pode usar + ('Olá' + ' Mundo') ou concat() ('Olá'.concat(' Mundo'))."
         },
         {
-          "letra": "b",
-          "texto": "Comparar uma expressão contra múltiplos valores de forma eficiente",
-          "correta": true
+          "id": "a2",
+          "text": "Apenas com o operador &",
+          "isCorrect": false,
+          "explanation": "& é um operador bitwise, não de concatenação."
         },
         {
-          "letra": "c",
-          "texto": "Criar loops"
+          "id": "a3",
+          "text": "Usando o método join()",
+          "isCorrect": false,
+          "explanation": "join() é um método de arrays, não de strings."
         },
         {
-          "letra": "d",
-          "texto": "Executar código mais rapidamente"
+          "id": "a4",
+          "text": "Não é possível concatenar strings em JavaScript",
+          "isCorrect": false,
+          "explanation": "É perfeitamente possível concatenar strings em JavaScript."
         }
-      ],
-      "explicacao": "O switch é especialmente eficiente para comparar uma única expressão contra vários valores possíveis. É mais legível que múltiplos if...else if quando temos muitas opções baseadas no mesmo valor."
+      ]
     },
     {
-      "numero": 6,
-      "pergunta": "Por que a palavra-chave break é crucial em declarações switch?",
-      "alternativas": [
+      "id": "q6",
+      "question": "O que faz o método toUpperCase()?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para economizar memória"
+          "id": "a1",
+          "text": "Converte todos os caracteres para maiúsculas",
+          "isCorrect": true,
+          "explanation": "Correto! toUpperCase() retorna a string com todos os caracteres em maiúsculas."
         },
         {
-          "letra": "b",
-          "texto": "Para prevenir execução sequencial indesejada através de múltiplos casos",
-          "correta": true
+          "id": "a2",
+          "text": "Converte todos os caracteres para minúsculas",
+          "isCorrect": false,
+          "explanation": "Converter para minúsculas é feito com toLowerCase()."
         },
         {
-          "letra": "c",
-          "texto": "Para tornar o código mais legível"
+          "id": "a3",
+          "text": "Converte apenas o primeiro caractere para maiúscula",
+          "isCorrect": false,
+          "explanation": "toUpperCase() converte TODOS os caracteres, não apenas o primeiro."
         },
         {
-          "letra": "d",
-          "texto": "É opcional e decorativa"
+          "id": "a4",
+          "text": "Remove espaços da string",
+          "isCorrect": false,
+          "explanation": "Remover espaços é feito com trim(), não toUpperCase()."
         }
-      ],
-      "explicacao": "Sem o break, o JavaScript continua executando os casos seguintes mesmo após encontrar uma correspondência (fenômeno chamado fall-through). O break é essencial para interromper a execução após o caso correto."
+      ]
     },
     {
-      "numero": 7,
-      "pergunta": "Qual princípio orienta o uso do operador ternário em vez de if...else?",
-      "alternativas": [
+      "id": "q7",
+      "question": "O que o método trim() faz em uma string?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "É sempre melhor que if...else"
+          "id": "a1",
+          "text": "Remove espaços do início e do fim",
+          "isCorrect": true,
+          "explanation": "Correto! trim() remove espaços em branco (whitespace) do início e fim da string."
         },
         {
-          "letra": "b",
-          "texto": "Para atribuições condicionais simples onde a concisão é vantajosa",
-          "correta": true
+          "id": "a2",
+          "text": "Remove todos os espaços da string",
+          "isCorrect": false,
+          "explanation": "trim() só remove espaços do início e fim, não do meio."
         },
         {
-          "letra": "c",
-          "texto": "Para substituir todas as estruturas condicionais"
+          "id": "a3",
+          "text": "Corta a string ao meio",
+          "isCorrect": false,
+          "explanation": "trim() não corta a string, apenas remove espaços."
         },
         {
-          "letra": "d",
-          "texto": "Para criar condições mais complexas"
+          "id": "a4",
+          "text": "Converte a string para minúsculas",
+          "isCorrect": false,
+          "explanation": "Conversão para minúsculas é feita com toLowerCase()."
         }
-      ],
-      "explicacao": "O operador ternário é ideal para atribuições condicionais simples e concisas. Para lógica complexa ou múltiplas instruções, o if...else tradicional é mais apropriado e legível."
+      ]
     },
     {
-      "numero": 8,
-      "pergunta": "Por que o aninhamento de condicionais é uma técnica importante?",
-      "alternativas": [
+      "id": "q8",
+      "question": "Como você verifica se uma string contém um determinado texto?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para tornar o código mais difícil"
+          "id": "a1",
+          "text": "Usando o método includes()",
+          "isCorrect": true,
+          "explanation": "Correto! includes('texto') retorna true se a string contiver o texto especificado."
         },
         {
-          "letra": "b",
-          "texto": "Para representar decisões hierárquicas e dependentes",
-          "correta": true
+          "id": "a2",
+          "text": "Usando o método has()",
+          "isCorrect": false,
+          "explanation": "Não existe método has() para strings."
         },
         {
-          "letra": "c",
-          "texto": "Para usar mais memória"
+          "id": "a3",
+          "text": "Usando o método contains()",
+          "isCorrect": false,
+          "explanation": "Não existe método contains() para strings em JavaScript."
         },
         {
-          "letra": "d",
-          "texto": "É uma prática desencorajada"
+          "id": "a4",
+          "text": "Usando o operador in",
+          "isCorrect": false,
+          "explanation": "O operador in é usado para verificar propriedades em objetos."
         }
-      ],
-      "explicacao": "Aninhamento permite criar decisões dependentes: uma segunda decisão que só faz sentido dentro do contexto de uma primeira decisão. Exemplo: 'SE está ensolarado, ENTÃO SE está quente, ENTÃO...'"
+      ]
     },
     {
-      "numero": 9,
-      "pergunta": "Qual conceito explica por que if (x === 5 || 7 || 10) não funciona como esperado?",
-      "alternativas": [
+      "id": "q9",
+      "question": "O que o método slice(início, fim) faz?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Operadores lógicos não funcionam em JavaScript"
+          "id": "a1",
+          "text": "Extrai uma parte da string",
+          "isCorrect": true,
+          "explanation": "Correto! slice() extrai uma seção da string e retorna uma nova string."
         },
         {
-          "letra": "b",
-          "texto": "Cada comparação deve ser explícita - OR avalia expressões, não implica comparações",
-          "correta": true
+          "id": "a2",
+          "text": "Divide a string em um array",
+          "isCorrect": false,
+          "explanation": "Dividir em array é feito com split(), não slice()."
         },
         {
-          "letra": "c",
-          "texto": "É a sintaxe correta"
+          "id": "a3",
+          "text": "Remove caracteres da string",
+          "isCorrect": false,
+          "explanation": "slice() não modifica a string original, apenas retorna uma parte."
         },
         {
-          "letra": "d",
-          "texto": "Apenas números pares funcionam"
+          "id": "a4",
+          "text": "Inverte a ordem dos caracteres",
+          "isCorrect": false,
+          "explanation": "Inverter caracteres não é feito com slice()."
         }
-      ],
-      "explicacao": "O operador || avalia cada expressão separadamente. Em x === 5 || 7, o JavaScript avalia (x === 5) e depois avalia 7 (que é truthy). A forma correta é: x === 5 || x === 7 || x === 10."
+      ]
     },
     {
-      "numero": 10,
-      "pergunta": "Por que usar chaves {} mesmo para declarações únicas é considerada boa prática?",
-      "alternativas": [
+      "id": "q10",
+      "question": "Como você transforma uma string em um array de caracteres?",
+      "alternatives": [
         {
-          "letra": "a",
-          "texto": "Para ocupar mais espaço no código"
+          "id": "a1",
+          "text": "Usando split('') ou Array.from()",
+          "isCorrect": true,
+          "explanation": "Correto! split('') divide cada caractere, e Array.from() também converte string em array."
         },
         {
-          "letra": "b",
-          "texto": "Melhora a legibilidade e previne erros ao adicionar mais código posteriormente",
-          "correta": true
+          "id": "a2",
+          "text": "Usando toArray()",
+          "isCorrect": false,
+          "explanation": "Não existe método toArray() para strings."
         },
         {
-          "letra": "c",
-          "texto": "É obrigatório pela sintaxe do JavaScript"
+          "id": "a3",
+          "text": "Usando slice()",
+          "isCorrect": false,
+          "explanation": "slice() retorna uma string, não um array."
         },
         {
-          "letra": "d",
-          "texto": "Para o código executar mais rapidamente"
+          "id": "a4",
+          "text": "Não é possível converter string em array",
+          "isCorrect": false,
+          "explanation": "É possível converter strings em arrays de várias formas."
         }
-      ],
-      "explicacao": "Usar chaves sempre, mesmo para uma única instrução, torna o código mais legível e evita erros comuns quando você adiciona mais linhas posteriormente e esquece de adicionar as chaves."
+      ]
     }
   ]
 }
