@@ -252,16 +252,29 @@ fr
 - Permitir retomar quiz incompleto ao recarregar página
 - Exibir opção "Continuar Quiz" ou "Iniciar Novo Quiz"
 
-## 7. Documentação
+## 7. Documentação ✅
 
-**7.1 Atualizar CLAUDE.md**
+**7.1 Atualizar CLAUDE.md** ✅
 
-- Documentar estrutura de quizzes (tipos, funções, JSON)
-- Explicar como associar quiz a lesson (campo quizId)
-- Formato dos arquivos JSON de quiz (exemplo completo)
-- Documentar componente QuizSection (props, estados, comportamento)
-- Explicar bloqueio de navegação durante quiz ativo
-- Notas sobre scroll livre na página vs navegação bloqueada
+- ✅ Documentar estrutura de quizzes (tipos, funções, JSON)
+- ✅ Explicar como associar quiz a lesson (campo quizId)
+- ✅ Formato dos arquivos JSON de quiz (exemplo completo)
+- ✅ Documentar componente QuizSection (props, estados, comportamento)
+- ✅ Explicar bloqueio de navegação durante quiz ativo
+- ✅ Notas sobre scroll livre na página vs navegação bloqueada
+
+**Implementação:**
+- Adicionada seção completa de **Quizzes** em CLAUDE.md após seção de Interviews
+- Documentados tipos TypeScript: `Quiz`, `Question`, `Alternative`
+- Incluído exemplo completo de JSON do quiz com estrutura e validações
+- Documentado processo de associação quiz-lesson via campo `quizId`
+- Explicadas regras de validação automática via `validateQuizData()`
+- Documentado componente `QuizSection` com seus três estados (inactive, active, finished)
+- Listados todos os sub-componentes do quiz com suas responsabilidades
+- Explicado mecanismo de bloqueio de navegação com três interceptadores
+- Destacadas notas importantes: scroll livre vs navegação bloqueada, timer contínuo
+- Adicionada seção de componentes quiz na lista de Key Components
+- Adicionadas notas importantes sobre quizzes na seção Important Notes
 
 ---
 

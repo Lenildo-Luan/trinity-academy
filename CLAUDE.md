@@ -47,6 +47,158 @@ The application has two primary content types, both defined in `/src/data/`:
    - Includes video URLs (SD/HD), thumbnails, and duration
    - Content functions: `getInterviews()`, `getInterview(slug)`, `getInterviewTranscript(slug)`
 
+3. **Quizzes** (`quizzes.ts` and `quizzes/` folder)
+   - Interactive quizzes rendered at the end of lesson pages
+   - Quiz data stored as JSON files in `/src/data/quizzes/`
+   - Each quiz includes multiple questions with alternatives
+   - Quizzes are associated with lessons via the `quizId` field in lesson metadata
+   - Content functions: `getQuiz(quizId)`, `getAllQuizzes()`, `validateQuizData(data)`
+
+#### Quiz Structure
+
+Quizzes use the following TypeScript types:
+
+```typescript
+type Alternative = {
+  id: string;                // Unique ID (e.g., "a1", "a2")
+  text: string;              // Alternative text
+  isCorrect: boolean;        // Whether this is the correct answer
+  explanation?: string;      // Optional explanation shown in results
+};
+
+type Question = {
+  id: string;                // Unique ID (e.g., "q1", "q2")
+  question: string;          // Question text
+  alternatives: Alternative[]; // Must have at least 2 alternatives
+};
+
+type Quiz = {
+  id: string;                // Quiz ID (e.g., "quiz-1")
+  title: string;             // Quiz title
+  description: string;       // Quiz description
+  timeLimit: number;         // Time limit in seconds (900 = 15 minutes)
+  questions: Question[];     // Array of questions
+};
+```
+
+#### Quiz JSON Format
+
+Quizzes are stored as JSON files in `/src/data/quizzes/`. Example structure:
+
+```json
+{
+  "id": "quiz-1",
+  "title": "Quiz - Bem-vindos ao Futuro",
+  "description": "Teste seus conhecimentos sobre JavaScript.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "O JavaScript foi criado para qual finalidade?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Criar aplicativos mobile",
+          "isCorrect": false,
+          "explanation": "JavaScript foi criado para web."
+        },
+        {
+          "id": "a2",
+          "text": "Adicionar interatividade a páginas web",
+          "isCorrect": true,
+          "explanation": "Correto! JavaScript foi criado para tornar páginas web interativas."
+        }
+      ]
+    }
+  ]
+}
+```
+
+**Validation Rules:**
+- All fields (id, title, description, timeLimit, questions) are required
+- Each question must have a unique ID
+- Each question must have at least 2 alternatives
+- Each question must have at least one correct alternative
+- Alternative IDs must be unique within each question
+- The `validateQuizData()` function checks these rules automatically
+
+#### Associating Quizzes with Lessons
+
+To add a quiz to a lesson:
+
+1. Create a quiz JSON file in `/src/data/quizzes/` (e.g., `quiz-1.json`)
+2. Add the quiz ID to the lesson's `quizId` field in `lessons.ts`:
+
+```typescript
+{
+  slug: 'charpter-1',
+  title: 'Bem-vindos ao Futuro',
+  description: '...',
+  quizId: 'quiz-1',  // Associate quiz with lesson
+  // ... other fields
+}
+```
+
+3. The quiz will automatically render at the end of the lesson page
+
+#### QuizSection Component
+
+The `<QuizSection>` component (`src/components/quiz-section.tsx`) is the main quiz container with three internal states:
+
+**States:**
+- `inactive` - Initial state showing "Iniciar Quiz" button
+- `active` - Quiz in progress with timer, questions, and navigation
+- `finished` - Results view showing score and explanations
+
+**Props:**
+```typescript
+type QuizSectionProps = {
+  quiz: Quiz;  // Quiz data loaded from JSON
+}
+```
+
+**Key Features:**
+- **Timer Management**: 15-minute countdown timer that auto-finishes quiz when time expires
+- **State Management**: Uses `useQuizState` hook to manage current question, answers, and scoring
+- **Navigation Blocking**: Prevents users from leaving the page during active quiz
+
+**Sub-components:**
+- `QuizInitialView` - Shows quiz info and start button
+- `QuizActiveView` - Displays current question with timer and progress
+- `QuizTimer` - Countdown timer with visual alerts (orange <2min, red pulsing <1min)
+- `QuizProgressBar` - Shows "X of Y questions answered"
+- `QuizQuestion` - Displays question with radio button alternatives
+- `QuizNavigation` - "Próxima Questão" and "Encerrar Prova" buttons
+- `QuizResultView` - Shows final score, correct/incorrect answers, and explanations
+- `QuizNavigationBlockerModal` - Confirmation modal when user tries to leave
+
+#### Navigation Blocking During Active Quiz
+
+When a quiz is active, the `useNavigationBlocker` hook prevents users from accidentally leaving:
+
+**Intercepted Actions:**
+- Clicking sidebar links or breadcrumb navigation
+- Browser back/forward buttons
+- Attempting to close or reload the page
+- Direct URL changes
+
+**Behavior:**
+- Shows confirmation modal: "Ao sair desta página, o quiz será finalizado. Deseja continuar?"
+- If user confirms: Quiz is finalized and navigation proceeds
+- If user cancels: Stays on page and quiz continues
+- **Page scrolling is always allowed** - users can scroll to view lesson content while quiz is active
+
+**Technical Implementation:**
+- Uses three event listeners: `beforeunload`, `popstate`, and `click` (capture phase)
+- Click handler traverses up to 5 DOM levels to find clicked links
+- Intelligently ignores external links, anchors, mailto/tel links
+- Stores pending destination and navigates after confirmation
+
+**Timer Behavior:**
+- Timer continues counting even if user switches tabs or minimizes window
+- No pause functionality - runs continuously until time expires or quiz is finished
+- Visual alerts when time is low (< 2 minutes) or critical (< 1 minute)
+
 ### Route Structure
 
 The app uses Next.js App Router with three distinct layout groups:
@@ -84,6 +236,18 @@ Component organization in `/src/components/`:
 - `navbar.tsx` - Top navigation
 - `breadcrumbs.tsx` - Navigation breadcrumbs
 
+**Quiz Components:**
+- `quiz-section.tsx` - Main quiz container managing three states (inactive, active, finished)
+- `quiz-initial-view.tsx` - Initial view with quiz info and start button
+- `quiz-active-view.tsx` - Active quiz view with timer, progress, question, and navigation
+- `quiz-result-view.tsx` - Results view with score and explanations
+- `quiz-timer.tsx` - Countdown timer with visual alerts
+- `quiz-progress-bar.tsx` - Progress indicator showing answered questions
+- `quiz-question.tsx` - Question display with radio button alternatives
+- `quiz-navigation.tsx` - Navigation buttons (next question, finish quiz)
+- `quiz-navigation-blocker-modal.tsx` - Confirmation modal for navigation attempts
+- `quiz-error-view.tsx` - Error display for invalid quiz data
+
 ### Styling
 
 - Tailwind CSS v4 via PostCSS
@@ -105,3 +269,6 @@ import { getLesson } from '@/data/lessons'
 - All lesson IDs currently have the typo "charpter" instead of "chapter" - maintain consistency
 - Remote images are configured for `assets.tailwindcss.com/templates/compass/**`
 - Transcripts use WebVTT format with speaker annotations: `<v Speaker Name>`
+- Quiz JSON files must follow validation rules (see Quiz Structure section)
+- Quizzes automatically render at the end of lesson pages when `quizId` is set
+- Navigation blocking is active only during quiz state 'active' - users can freely scroll the page
