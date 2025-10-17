@@ -54,6 +54,10 @@ export const WithLongContent: Story = {
 }
 
 export const MultipleMarkers: Story = {
+  args: {
+    time: '00:00',
+    title: 'Multiple Markers Example',
+  },
   render: () => (
     <div className="space-y-6">
       <Marker time="00:00" title="Introduction">

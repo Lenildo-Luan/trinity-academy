@@ -140,6 +140,10 @@ export const TimestampHours: TimestampStory = {
 }
 
 export const MultipleTimestamps: TimestampStory = {
+  args: {
+    start: 0,
+    videoId: 'demo-video',
+  },
   render: () => (
     <div className="flex flex-wrap gap-2">
       <TimestampButton start={0} videoId="demo-video" />

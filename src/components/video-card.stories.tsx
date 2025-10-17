@@ -79,6 +79,13 @@ export const ExternalLink: Story = {
 }
 
 export const Grid: Story = {
+  args: {
+    url: '/video/1',
+    thumbnailUrl: 'https://assets.tailwindcss.com/templates/compass/video-placeholder.png',
+    duration: 1845,
+    title: 'Introdução a Programação',
+    subtitle: 'Módulo 1',
+  },
   render: () => (
     <div className="grid grid-cols-2 gap-6">
       <VideoCard

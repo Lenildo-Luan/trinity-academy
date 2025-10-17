@@ -104,6 +104,9 @@ export const WithRichContent: Story = {
 }
 
 export const MultipleSections: Story = {
+  args: {
+    title: 'Multiple Sections Example',
+  },
   render: () => (
     <div className="space-y-8">
       <PageSection title="Introdução">
