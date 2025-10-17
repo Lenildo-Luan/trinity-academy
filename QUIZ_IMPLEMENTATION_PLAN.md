@@ -149,7 +149,7 @@ O quiz será implementado como um **componente ao final da página da lesson**. 
 - ✅ Container com padding e margem adequados (rounded-2xl, shadow-sm)
 - ✅ Border ou background diferenciado para destacar seção do quiz (gradientes, borders)
 - ✅ Estados visuais distintos para cada view (inicial, ativo, resultado)
-
+fr
 **Implementações de Design:**
 
 - **quiz-section.tsx**: Separação visual com border-t, animação fade-in
@@ -164,29 +164,87 @@ O quiz será implementado como um **componente ao final da página da lesson**. 
 
 ## 6. Validações e Edge Cases
 
-**6.1 Tratamento de erros**
+**6.1 Tratamento de erros** ✅
 
-- Quiz não encontrado (quizId inválido)
-- Dados do quiz corrompidos ou inválidos (validar estrutura JSON)
-- Exibir mensagem de erro amigável dentro do componente
+- ✅ Quiz não encontrado (quizId inválido)
+- ✅ Dados do quiz corrompidos ou inválidos (validar estrutura JSON)
+- ✅ Exibir mensagem de erro amigável dentro do componente
 
-**6.2 Navegação e Bloqueio**
+**Implementação:**
+- **validateQuizData()** em `quizzes.ts`: Função robusta de validação que verifica:
+  - Campos obrigatórios (id, title, description, timeLimit, questions)
+  - Estrutura de questões (id, question, alternatives)
+  - Estrutura de alternativas (id, text, isCorrect)
+  - IDs duplicados em questões e alternativas
+  - Pelo menos uma alternativa correta por questão
+  - Mínimo de 2 alternativas por questão
+- **getQuiz()**: Integração com validação, retorna null e loga erros detalhados se dados inválidos
+- **QuizErrorView**: Componente amigável para exibir erros com:
+  - Ícone visual de erro
+  - Mensagem principal clara
+  - Detalhes técnicos expansíveis (opcional)
+  - Sugestões de ação
+  - Botão para recarregar página
 
-- **Scroll permitido**: Usuário pode rolar a página e ver conteúdo da lesson
-- **Navegação bloqueada**: Durante quiz ativo, interceptar tentativas de sair da página:
-  - Cliques em links da sidebar
-  - Cliques em links do breadcrumb
-  - Navegação via botão voltar/avançar do browser
-  - Mudanças de URL diretas
-- Exibir modal de confirmação em todas as tentativas de saída
-- Finalizar quiz automaticamente ao confirmar saída
-- Permitir navegação livre quando quiz está inativo ou finalizado
+**6.2 Navegação e Bloqueio** ✅
 
-**6.3 Comportamento do Timer**
+- ✅ **Scroll permitido**: Usuário pode rolar a página e ver conteúdo da lesson
+- ✅ **Navegação bloqueada**: Durante quiz ativo, interceptar tentativas de sair da página:
+  - ✅ Cliques em links da sidebar
+  - ✅ Cliques em links do breadcrumb
+  - ✅ Navegação via botão voltar/avançar do browser
+  - ✅ Mudanças de URL diretas
+- ✅ Exibir modal de confirmação em todas as tentativas de saída
+- ✅ Finalizar quiz automaticamente ao confirmar saída
+- ✅ Permitir navegação livre quando quiz está inativo ou finalizado
 
-- Timer visível apenas durante quiz ativo
-- Pausar timer se usuário minimizar/trocar de aba (opcional)
-- Salvar tempo restante em estado do componente
+**Implementação:**
+- **use-navigation-blocker.ts** (src/hooks/use-navigation-blocker.ts:23-187):
+  - Hook completo de bloqueio de navegação com três mecanismos:
+    1. **beforeunload**: Captura tentativas de fechar aba, recarregar página
+    2. **popstate**: Captura navegação back/forward do browser
+    3. **click (capture phase)**: Intercepta cliques em links antes do Next.js processar
+  - Lógica inteligente para:
+    - Ignorar links externos (target="_blank", mailto:, tel:, downloads)
+    - Ignorar âncoras da mesma página (#)
+    - Detectar origem externa vs interna
+    - Percorrer até 5 níveis de ancestrais para encontrar links clicados
+  - Gerenciamento de destino pendente (pendingDestination):
+    - Armazena URL do link clicado ou "__back__" para navegação back/forward
+    - Permite navegação após confirmação do usuário
+  - Retorna funções:
+    - `confirmNavigation()`: Permite navegação e navega para destino pendente
+    - `cancelNavigation()`: Cancela navegação e limpa destino pendente
+- **quiz-section.tsx** (src/components/quiz-section.tsx:22-28):
+  - Integração do hook `useNavigationBlocker`
+  - Ativo apenas quando `quizState.state === 'active'`
+  - Exibe modal de confirmação ao detectar tentativa de navegação
+  - Handlers:
+    - `handleNavigationBlock()`: Fecha modal e cancela navegação
+    - `handleNavigationConfirm()`: Finaliza quiz, permite navegação e navega
+
+**6.3 Comportamento do Timer** ✅
+
+- ✅ Timer visível apenas durante quiz ativo
+- ✅ Salvar tempo restante em estado do componente
+- ✅ Timer continua contando mesmo quando usuário troca de aba (não pausa)
+
+**Implementação:**
+- **quiz-section.tsx** (src/components/quiz-section.tsx:29-45):
+  - Timer implementado com `setInterval` que decrementa `timeRemaining` a cada segundo
+  - Auto-finalização quando timer chega a zero
+  - Timer continua executando independente da visibilidade da aba
+  - Cleanup adequado ao desmontar componente ou trocar de estado
+- **quiz-timer.tsx** (src/components/quiz-timer.tsx:1-57):
+  - Componente visual do timer com formatação MM:SS
+  - Estados visuais:
+    - **Normal**: texto cinza, ícone cinza
+    - **Tempo baixo** (< 2 min): texto laranja, ícone laranja, label "Tempo baixo"
+    - **Tempo crítico** (< 1 min): texto vermelho piscante, ícone vermelho, label "!"
+  - Alertas visuais progressivos conforme tempo diminui
+- **quiz-active-view.tsx** (src/components/quiz-active-view.tsx:7-18):
+  - Recebe e repassa `timeRemaining` para o `QuizTimer`
+  - Integração simples e direta
 
 **6.4 Persistência (Opcional - Fase 2)**
 

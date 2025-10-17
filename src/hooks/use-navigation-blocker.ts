@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect, useCallback, useRef } from 'react'
+import { useEffect, useCallback, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 
 export interface UseNavigationBlockerOptions {
   isActive: boolean
-  onNavigationAttempt: () => void
+  onNavigationAttempt: (destination?: string) => void
   message?: string
 }
 
@@ -29,6 +29,7 @@ export function useNavigationBlocker({
   const router = useRouter()
   const isBlockingRef = useRef(false)
   const currentPathnameRef = useRef(pathname)
+  const [pendingDestination, setPendingDestination] = useState<string | null>(null)
 
   // Atualiza pathname atual
   useEffect(() => {
@@ -59,8 +60,67 @@ export function useNavigationBlocker({
       e.preventDefault()
       window.history.pushState(null, '', currentPathnameRef.current)
 
+      // Armazena que foi uma navegação back
+      setPendingDestination('__back__')
+
       // Notifica o componente para exibir modal
-      onNavigationAttempt()
+      onNavigationAttempt('__back__')
+    },
+    [isActive, onNavigationAttempt],
+  )
+
+  // Handler para cliques em links
+  const handleLinkClick = useCallback(
+    (e: MouseEvent) => {
+      if (!isActive || isBlockingRef.current) return
+
+      // Encontra o link clicado (pode ser o próprio elemento ou um ancestral)
+      let target = e.target as HTMLElement
+      let link: HTMLAnchorElement | null = null
+
+      // Percorre até 5 níveis para encontrar um link
+      for (let i = 0; i < 5 && target; i++) {
+        if (target.tagName === 'A') {
+          link = target as HTMLAnchorElement
+          break
+        }
+        target = target.parentElement as HTMLElement
+      }
+
+      // Se não é um link, ignora
+      if (!link) return
+
+      // Ignora links para a mesma página (âncoras)
+      const href = link.getAttribute('href')
+      if (!href || href.startsWith('#')) return
+
+      // Ignora links externos (target="_blank", download, etc)
+      if (
+        link.getAttribute('target') === '_blank' ||
+        link.hasAttribute('download') ||
+        href.startsWith('mailto:') ||
+        href.startsWith('tel:')
+      ) {
+        return
+      }
+
+      // Ignora se é um link externo (diferente origem)
+      try {
+        const linkUrl = new URL(href, window.location.origin)
+        if (linkUrl.origin !== window.location.origin) {
+          return
+        }
+      } catch {
+        // Se falhar ao parsear URL, assume que é relativa e continua
+      }
+
+      // Armazena o destino da navegação
+      setPendingDestination(href)
+
+      // Previne a navegação e exibe modal
+      e.preventDefault()
+      e.stopPropagation()
+      onNavigationAttempt(href)
     },
     [isActive, onNavigationAttempt],
   )
@@ -77,6 +137,8 @@ export function useNavigationBlocker({
     // Adiciona listeners
     window.addEventListener('beforeunload', handleBeforeUnload)
     window.addEventListener('popstate', handlePopState)
+    // Captura cliques em links durante a fase de captura para interceptar antes do Next.js
+    document.addEventListener('click', handleLinkClick, true)
 
     // Adiciona entrada no histórico para capturar back/forward
     window.history.pushState(null, '', pathname)
@@ -85,17 +147,41 @@ export function useNavigationBlocker({
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload)
       window.removeEventListener('popstate', handlePopState)
+      document.removeEventListener('click', handleLinkClick, true)
       isBlockingRef.current = false
     }
-  }, [isActive, handleBeforeUnload, handlePopState, pathname])
+  }, [isActive, handleBeforeUnload, handlePopState, handleLinkClick, pathname])
 
-  // Função para confirmar navegação (desabilita bloqueio temporariamente)
+  // Função para confirmar navegação (desabilita bloqueio e navega)
   const confirmNavigation = useCallback(() => {
     isBlockingRef.current = false
+
+    // Se há um destino pendente, navega para ele
+    if (pendingDestination) {
+      if (pendingDestination === '__back__') {
+        // Navegação back/forward
+        setTimeout(() => {
+          window.history.back()
+        }, 0)
+      } else {
+        // Navegação para link específico
+        setTimeout(() => {
+          router.push(pendingDestination)
+        }, 0)
+      }
+      setPendingDestination(null)
+    }
+  }, [pendingDestination, router])
+
+  // Função para cancelar navegação
+  const cancelNavigation = useCallback(() => {
+    setPendingDestination(null)
   }, [])
 
   return {
     confirmNavigation,
+    cancelNavigation,
     isBlocking: isActive,
+    pendingDestination,
   }
 }
