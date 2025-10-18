@@ -73,7 +73,7 @@ export default async function Page({
             </div>
             {quiz && (
               <div className="mt-16">
-                <QuizSection quiz={quiz} />
+                <QuizSection quiz={quiz} lessonId={lesson.id} />
               </div>
             )}
             <div className="mt-16 border-t border-gray-200 pt-8 dark:border-white/10">

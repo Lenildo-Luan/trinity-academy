@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import type { Quiz } from '@/data/quizzes'
 import { useQuizState } from '@/hooks/use-quiz-state'
 import { useNavigationBlocker } from '@/hooks/use-navigation-blocker'
+import { useQuizPersistence } from '@/hooks/use-quiz-persistence'
 import { QuizInitialView } from './quiz-initial-view'
 import { QuizActiveView } from './quiz-active-view'
 import { QuizResultView } from './quiz-result-view'
@@ -11,12 +12,22 @@ import { QuizNavigationBlockerModal } from './quiz-navigation-blocker-modal'
 
 type QuizSectionProps = {
   quiz: Quiz
+  lessonId: string
 }
 
-export function QuizSection({ quiz }: QuizSectionProps) {
+export function QuizSection({ quiz, lessonId }: QuizSectionProps) {
   const [showNavigationBlocker, setShowNavigationBlocker] = useState(false)
 
   const quizState = useQuizState(quiz)
+
+  // Hook de persistência - salva automaticamente no Supabase
+  useQuizPersistence({
+    quiz,
+    lessonId,
+    state: quizState.state,
+    userAnswers: quizState.userAnswers,
+    result: quizState.result,
+  })
 
   // Hook de bloqueio de navegação
   const { confirmNavigation, cancelNavigation } = useNavigationBlocker({

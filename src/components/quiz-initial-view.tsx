@@ -1,4 +1,5 @@
 import type { Quiz } from '@/data/quizzes'
+import { QuizBestAttempt } from './quiz-best-attempt'
 
 type QuizInitialViewProps = {
   quiz: Quiz
@@ -76,6 +77,9 @@ export function QuizInitialView({ quiz, onStart }: QuizInitialViewProps) {
             <span className="font-medium">{timeInMinutes} minutos</span>
           </div>
         </div>
+
+        {/* Melhor tentativa anterior */}
+        <QuizBestAttempt quizId={quiz.id} />
 
         <div className="mt-6 flex justify-center">
           <button

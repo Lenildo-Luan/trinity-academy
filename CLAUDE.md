@@ -247,6 +247,35 @@ Component organization in `/src/components/`:
 - `quiz-navigation.tsx` - Navigation buttons (next question, finish quiz)
 - `quiz-navigation-blocker-modal.tsx` - Confirmation modal for navigation attempts
 - `quiz-error-view.tsx` - Error display for invalid quiz data
+- `quiz-best-attempt.tsx` - Displays user's best previous attempt with score
+
+### Quiz Persistence System
+
+The application uses Supabase to persist quiz attempts and answers across devices.
+
+**Database Schema:**
+- See `supabase-quiz-schema.md` for complete SQL schema
+- Tables: `quiz_attempts`, `quiz_answers`
+- Views: `user_progress`, `quiz_statistics`, `completed_lessons`, `quiz_attempt_details`
+- Row Level Security (RLS) enabled for all tables
+
+**Architecture:**
+- `src/types/database.ts` - TypeScript types for database tables
+- `src/lib/quiz-service.ts` - Service functions for Supabase operations
+- `src/hooks/use-quiz-persistence.ts` - Hook that auto-saves quiz state
+
+**Automatic Saving:**
+- Quiz attempts are created when quiz starts (status: 'in_progress')
+- Each answer is saved immediately when user selects an alternative
+- Attempt is updated when quiz finishes (status: 'completed')
+- All data is associated with authenticated user via `auth.uid()`
+
+**User Experience:**
+- Best previous attempt is shown in `QuizInitialView`
+- Progress syncs automatically across devices
+- Lessons are marked complete when score >= 70%
+
+For detailed documentation, see `QUIZ_PERSISTENCE.md`.
 
 ### Styling
 
