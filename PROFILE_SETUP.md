@@ -2,7 +2,7 @@
 
 Este documento descreve como configurar o sistema de perfil de usuário no Supabase.
 
-## 1. Executar o Schema SQL
+## 1. Executar o Schema SQL de Perfil
 
 1. Acesse seu projeto no [Supabase Dashboard](https://app.supabase.com)
 2. Vá em **SQL Editor** no menu lateral
@@ -34,7 +34,22 @@ As políticas de storage já foram criadas pelo script SQL e permitirão:
 - ✅ Qualquer pessoa pode visualizar fotos (bucket público)
 - ✅ Usuários podem atualizar/deletar apenas suas próprias fotos
 
-## 3. Verificar Instalação
+## 3. Executar o Schema SQL de Estatísticas
+
+1. No Supabase Dashboard, vá em **SQL Editor** novamente
+2. Clique em **New Query**
+3. Copie e cole todo o conteúdo do arquivo `supabase-stats-functions.sql`
+4. Clique em **Run** para executar
+
+O script irá criar:
+- Função `get_user_streak()` - Calcula dias consecutivos de estudo
+- Função `get_total_study_time()` - Soma tempo total de estudo
+- Função `get_user_statistics()` - Retorna todas as estatísticas de uma vez
+- Grants para usuários autenticados executarem as funções
+
+**Importante:** Execute este script APÓS o `supabase-quiz-schema.md`, pois ele depende das tabelas de quiz.
+
+## 4. Verificar Instalação
 
 Execute estas queries para verificar se tudo foi criado corretamente:
 
@@ -50,9 +65,13 @@ SELECT * FROM storage.buckets WHERE id = 'profile-photos';
 
 -- Verificar políticas do storage
 SELECT * FROM storage.policies WHERE bucket_id = 'profile-photos';
+
+-- Verificar se as funções de estatísticas foram criadas
+SELECT proname FROM pg_proc WHERE proname LIKE 'get_user_%';
+-- Deve retornar: get_user_streak, get_total_study_time, get_user_statistics
 ```
 
-## 4. Testar Funcionalidade
+## 5. Testar Funcionalidade
 
 1. Acesse a aplicação em modo desenvolvimento:
    ```bash
@@ -68,35 +87,49 @@ SELECT * FROM storage.policies WHERE bucket_id = 'profile-photos';
    - ✅ Editar nome completo
    - ✅ Fazer upload de foto (JPG, PNG ou WebP até 2MB)
    - ✅ Remover foto
+   - ✅ Ver estatísticas (progresso, nota média, tempo de estudo, streak)
 
-## 5. Estrutura de Arquivos Criados
+## 6. Estrutura de Arquivos Criados
 
 ```
 src/
 ├── app/
 │   └── (centered)/
 │       └── perfil/
-│           └── page.tsx              # Página de perfil
+│           └── page.tsx              # Página de perfil com estatísticas
 ├── components/
 │   ├── profile-header.tsx            # Seção de header do perfil
-│   └── profile-photo-upload.tsx      # Upload de foto
+│   ├── profile-photo-upload.tsx      # Upload de foto
+│   └── profile-stats-cards.tsx       # Cards de estatísticas
 ├── hooks/
-│   └── use-user-profile.ts           # Hook de gerenciamento de perfil
+│   ├── use-user-profile.ts           # Hook de gerenciamento de perfil
+│   └── use-user-stats.ts             # Hook de estatísticas
 ├── lib/
-│   └── profile-service.ts            # Serviços de API do Supabase
+│   ├── profile-service.ts            # Serviços de perfil
+│   └── stats-service.ts              # Serviços de estatísticas
 └── types/
     └── database.ts                   # Tipos TypeScript (atualizado)
+
+Arquivos SQL:
+├── supabase-profile-schema.sql       # Schema de perfil e storage
+└── supabase-stats-functions.sql      # Funções de estatísticas
 ```
 
-## 6. Próximas Fases
+## 7. Próximas Fases
 
 Conforme o `PROFILE_PAGE_PLAN.md`, as próximas implementações serão:
 
-### Fase 2: Estatísticas Avançadas
+### ~~Fase 2: Estatísticas Principais~~ ✅ IMPLEMENTADO
+- ✅ Cards de estatísticas (5 cards)
+- ✅ Progresso geral
+- ✅ Lições completadas
+- ✅ Nota média
+- ✅ Tempo total de estudo
+- ✅ Streak de dias consecutivos
+
+### Fase 2.2: Estatísticas Avançadas (Próximo)
 - Progresso por módulo
 - Feed de atividade recente
-- Cálculo de streak de dias
-- Card de tempo total de estudo
 
 ### Fase 3: Sistema de Conquistas
 - Tabelas de conquistas

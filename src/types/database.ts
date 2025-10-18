@@ -116,3 +116,14 @@ export type UserProfileInsert = {
 }
 
 export type UserProfileUpdate = Partial<Pick<UserProfile, 'full_name' | 'photo_url'>>
+
+// Tipos para estatísticas do usuário
+
+export type UserStatistics = {
+  total_lessons: number
+  completed_lessons: number
+  completion_percentage: number
+  average_score: number
+  total_study_time_seconds: number
+  current_streak: number
+}

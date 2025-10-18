@@ -8,7 +8,9 @@ import {
 } from '@/components/breadcrumbs'
 import { CenteredPageLayout } from '@/components/centered-layout'
 import { ProfileHeader } from '@/components/profile-header'
+import { ProfileStatsCards } from '@/components/profile-stats-cards'
 import { useUserProfile } from '@/hooks/use-user-profile'
+import { useUserStats } from '@/hooks/use-user-stats'
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 
@@ -23,6 +25,12 @@ export default function ProfilePage() {
     removePhoto,
     updateProfile,
   } = useUserProfile()
+
+  const {
+    stats,
+    loading: statsLoading,
+    error: statsError,
+  } = useUserStats()
 
   const [userEmail, setUserEmail] = useState<string | null>(null)
 
@@ -145,9 +153,24 @@ export default function ProfilePage() {
         />
       </div>
 
-      {/* Placeholder para futuras seções (estatísticas, progresso, etc.) */}
+      {/* Estatísticas */}
       <div className="mt-16 space-y-16">
-        {/* Aqui virão os cards de estatísticas nas próximas fases */}
+        {statsError ? (
+          <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4 dark:border-yellow-800 dark:bg-yellow-900/20">
+            <p className="text-sm text-yellow-700 dark:text-yellow-300">
+              Não foi possível carregar as estatísticas: {statsError.message}
+            </p>
+            <p className="mt-2 text-xs text-yellow-600 dark:text-yellow-400">
+              Verifique se você executou o script{' '}
+              <code className="rounded bg-yellow-100 px-1 dark:bg-yellow-900">
+                supabase-stats-functions.sql
+              </code>{' '}
+              no Supabase.
+            </p>
+          </div>
+        ) : (
+          <ProfileStatsCards stats={stats} loading={statsLoading} />
+        )}
       </div>
     </CenteredPageLayout>
   )
