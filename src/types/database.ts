@@ -98,3 +98,21 @@ export type QuizAttemptDetail = {
   correct_answers: number
   incorrect_answers: number
 }
+
+// Tipos para perfil de usuário
+
+export type UserProfile = {
+  id: string
+  full_name: string | null
+  photo_url: string | null
+  created_at: string
+  updated_at: string
+}
+
+export type UserProfileInsert = {
+  id: string
+  full_name?: string | null
+  photo_url?: string | null
+}
+
+export type UserProfileUpdate = Partial<Pick<UserProfile, 'full_name' | 'photo_url'>>
