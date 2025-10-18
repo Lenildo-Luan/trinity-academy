@@ -42,9 +42,9 @@ BEGIN
 
     UNION ALL
 
-    -- Buscar dia anterior
+    -- Buscar dia anterior (usar aritmética de datas para manter tipo DATE)
     SELECT
-      ds.activity_date - INTERVAL '1 day',
+      ds.activity_date - 1,
       ds.streak_count + 1
     FROM date_series ds
     WHERE EXISTS (
@@ -52,7 +52,7 @@ BEGIN
       FROM quiz_attempts qa
       WHERE qa.user_id = p_user_id
         AND qa.status = 'completed'
-        AND DATE(qa.finished_at) = DATE(ds.activity_date - INTERVAL '1 day')
+        AND DATE(qa.finished_at) = ds.activity_date - 1
     )
     -- Limitar recursão para evitar loops infinitos (máximo 365 dias)
     AND ds.streak_count < 365

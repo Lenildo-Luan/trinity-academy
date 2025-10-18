@@ -49,6 +49,18 @@ O script irá criar:
 
 **Importante:** Execute este script APÓS o `supabase-quiz-schema.md`, pois ele depende das tabelas de quiz.
 
+### Erro de "recursive query column has type date"?
+
+Se você recebeu este erro ao acessar `/perfil`:
+```
+recursive query "date_series" column 1 has type date in non-recursive term
+but type timestamp without time zone overall
+```
+
+**Solução:** Execute o arquivo `supabase-stats-functions-fix.sql` no SQL Editor.
+
+Isso atualiza a função `get_user_streak()` para corrigir incompatibilidade de tipos.
+
 ## 4. Verificar Instalação
 
 Execute estas queries para verificar se tudo foi criado corretamente:
