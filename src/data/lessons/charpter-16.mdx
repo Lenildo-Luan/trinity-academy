@@ -1,0 +1,551 @@
+# Implementação do Sistema
+
+Agora vamos construir o sistema passo a passo, explicando cada decisão.
+
+## Iniciando o Acervo
+
+```javascript
+// Estado global do sistema
+let acervo = [];
+let proximoId = 1; // Contador para IDs únicos
+```
+
+**Conceito aplicado:** Usamos `let` porque essas variáveis serão modificadas. O acervo começa vazio e será populado com livros.
+
+## Funções de Validação
+
+Antes de implementar funcionalidades, precisamos garantir que os dados sejam válidos.
+
+```javascript
+/**
+ * Valida os dados de um livro antes de adicioná-lo ao acervo
+ * @param {Object} livro - Objeto contendo dados do livro
+ * @returns {Object} - { valido: boolean, erros: Array }
+ */
+function validarLivro(livro) {
+    const erros = [];
+    
+    // Valida título
+    if (!livro.titulo || livro.titulo.trim().length < 2) {
+        erros.push("Título deve ter pelo menos 2 caracteres");
+    }
+    
+    // Valida autor
+    if (!livro.autor || livro.autor.trim().length < 3) {
+        erros.push("Autor deve ter pelo menos 3 caracteres");
+    }
+    
+    // Valida categoria
+    const categoriasValidas = ["Romance", "Ficção", "Biografia", "Técnico", "História"];
+    if (!livro.categoria || !categoriasValidas.includes(livro.categoria)) {
+        erros.push("Categoria inválida. Use: " + categoriasValidas.join(", "));
+    }
+    
+    // Valida ISBN (formato básico: 10 ou 13 dígitos)
+    if (livro.isbn && !/^\d{10}(\d{3})?$/.test(livro.isbn.replace(/-/g, ""))) {
+        erros.push("ISBN deve ter 10 ou 13 dígitos");
+    }
+    
+    // Valida ano
+    const anoAtual = new Date().getFullYear();
+    if (livro.ano && (livro.ano < 1000 || livro.ano > anoAtual)) {
+        erros.push(`Ano deve estar entre 1000 e ${anoAtual}`);
+    }
+    
+    return {
+        valido: erros.length === 0,
+        erros: erros
+    };
+}
+```
+
+**Conceitos aplicados:**
+- **Funções puras**: Recebe dados, retorna resultado, sem efeitos colaterais
+- **Validação múltipla**: Coleta todos os erros antes de retornar
+- **Strings**: Métodos como `trim()` e `includes()`
+- **Condicionais**: Verificações complexas com operadores lógicos
+- **Arrays**: Armazenamento de erros e categorias válidas
+
+## Funções de Cadastro
+
+### Adicionar Livro
+
+```javascript
+/**
+ * Adiciona um novo livro ao acervo
+ * @param {Object} dadosLivro - Dados do livro (sem ID)
+ * @returns {Object} - Resultado da operação
+ */
+function adicionarLivro(dadosLivro) {
+    // Validação
+    const validacao = validarLivro(dadosLivro);
+    
+    if (!validacao.valido) {
+        return {
+            sucesso: false,
+            mensagem: "Erro ao adicionar livro",
+            erros: validacao.erros
+        };
+    }
+    
+    // Verifica duplicação por ISBN
+    if (dadosLivro.isbn) {
+        const livroExistente = acervo.find(livro => livro.isbn === dadosLivro.isbn);
+        if (livroExistente) {
+            return {
+                sucesso: false,
+                mensagem: "Já existe um livro com este ISBN no acervo"
+            };
+        }
+    }
+    
+    // Cria o objeto livro completo
+    const novoLivro = {
+        id: proximoId++,
+        titulo: dadosLivro.titulo.trim(),
+        autor: dadosLivro.autor.trim(),
+        categoria: dadosLivro.categoria,
+        isbn: dadosLivro.isbn || null,
+        ano: dadosLivro.ano || null,
+        disponivel: true,
+        emprestadoPara: null
+    };
+    
+    // Adiciona ao acervo
+    acervo.push(novoLivro);
+    
+    return {
+        sucesso: true,
+        mensagem: "Livro adicionado com sucesso",
+        livro: novoLivro
+    };
+}
+```
+
+**Conceitos aplicados:**
+- **Validação de entrada**: Sempre validar antes de processar
+- **Busca em array**: Método `find()` para verificar duplicação
+- **Incremento de ID**: `proximoId++` para garantir unicidade
+- **Objeto de retorno estruturado**: Facilita tratamento de resultados
+- **Valores padrão**: Usando `||` para propriedades opcionais
+
+### Remover Livro
+
+```javascript
+/**
+ * Remove um livro do acervo
+ * @param {number} id - ID do livro a ser removido
+ * @returns {Object} - Resultado da operação
+ */
+function removerLivro(id) {
+    const indice = acervo.findIndex(livro => livro.id === id);
+    
+    if (indice === -1) {
+        return {
+            sucesso: false,
+            mensagem: "Livro não encontrado"
+        };
+    }
+    
+    const livroRemovido = acervo[indice];
+    
+    // Verifica se o livro está emprestado
+    if (!livroRemovido.disponivel) {
+        return {
+            sucesso: false,
+            mensagem: "Não é possível remover livro emprestado. Registre a devolução primeiro."
+        };
+    }
+    
+    // Remove do acervo
+    acervo.splice(indice, 1);
+    
+    return {
+        sucesso: true,
+        mensagem: "Livro removido com sucesso",
+        livro: livroRemovido
+    };
+}
+```
+
+**Conceitos aplicados:**
+- **Busca de índice**: `findIndex()` para localizar posição
+- **Remoção de array**: `splice()` para remover elemento específico
+- **Lógica de negócio**: Impedir remoção de livros emprestados
+- **Retorno de informações**: Devolver o livro removido para confirmação
+
+### Atualizar Livro
+
+```javascript
+/**
+ * Atualiza informações de um livro existente
+ * @param {number} id - ID do livro
+ * @param {Object} novosdados - Dados a serem atualizados
+ * @returns {Object} - Resultado da operação
+ */
+function atualizarLivro(id, novosData) {
+    const livro = acervo.find(l => l.id === id);
+    
+    if (!livro) {
+        return {
+            sucesso: false,
+            mensagem: "Livro não encontrado"
+        };
+    }
+    
+    // Cria objeto com dados atualizados
+    const dadosAtualizados = { ...livro, ...novosData, id: livro.id };
+    
+    // Valida os novos dados
+    const validacao = validarLivro(dadosAtualizados);
+    
+    if (!validacao.valido) {
+        return {
+            sucesso: false,
+            mensagem: "Dados inválidos",
+            erros: validacao.erros
+        };
+    }
+    
+    // Atualiza propriedades permitidas
+    const propriedadesEditaveis = ["titulo", "autor", "categoria", "isbn", "ano"];
+    
+    propriedadesEditaveis.forEach(prop => {
+        if (novosData.hasOwnProperty(prop)) {
+            livro[prop] = novosData[prop];
+        }
+    });
+    
+    return {
+        sucesso: true,
+        mensagem: "Livro atualizado com sucesso",
+        livro: livro
+    };
+}
+```
+
+**Conceitos aplicados:**
+- **Spread operator**: `{ ...livro, ...novosData }` para mesclar objetos
+- **Proteção de ID**: Garante que o ID não seja alterado
+- **Atualização seletiva**: Apenas propriedades editáveis são modificadas
+- **Validação pós-mesclagem**: Valida o objeto final antes de salvar
+
+## Funções de Busca
+
+### Buscar por Título
+
+```javascript
+/**
+ * Busca livros por título (busca parcial, case-insensitive)
+ * @param {string} titulo - Termo de busca
+ * @returns {Array} - Livros encontrados
+ */
+function buscarPorTitulo(titulo) {
+    if (!titulo || titulo.trim().length === 0) {
+        return [];
+    }
+    
+    const termoBusca = titulo.toLowerCase().trim();
+    
+    return acervo.filter(livro => 
+        livro.titulo.toLowerCase().includes(termoBusca)
+    );
+}
+```
+
+**Conceitos aplicados:**
+- **Busca case-insensitive**: `toLowerCase()` para ignorar maiúsculas/minúsculas
+- **Busca parcial**: `includes()` permite encontrar matches parciais
+- **Filtro de array**: `filter()` retorna todos os livros que correspondem
+
+### Buscar por Autor
+
+```javascript
+/**
+ * Busca livros por autor
+ * @param {string} autor - Nome do autor
+ * @returns {Array} - Livros do autor
+ */
+function buscarPorAutor(autor) {
+    if (!autor || autor.trim().length === 0) {
+        return [];
+    }
+    
+    const termoBusca = autor.toLowerCase().trim();
+    
+    return acervo.filter(livro => 
+        livro.autor.toLowerCase().includes(termoBusca)
+    );
+}
+```
+
+### Filtrar por Categoria
+
+```javascript
+/**
+ * Filtra livros por categoria
+ * @param {string} categoria - Categoria desejada
+ * @returns {Array} - Livros da categoria
+ */
+function filtrarPorCategoria(categoria) {
+    return acervo.filter(livro => livro.categoria === categoria);
+}
+```
+
+### Listar Disponíveis
+
+```javascript
+/**
+ * Lista todos os livros disponíveis para empréstimo
+ * @returns {Array} - Livros disponíveis
+ */
+function listarDisponiveis() {
+    return acervo.filter(livro => livro.disponivel);
+}
+```
+
+**Conceito fundamental:** Todas essas funções usam `filter()` - um dos métodos mais poderosos de arrays. Ele cria um novo array com todos os elementos que passam no teste (função callback).
+
+## Funções de Empréstimo
+
+### Emprestar Livro
+
+```javascript
+/**
+ * Registra empréstimo de um livro
+ * @param {number} id - ID do livro
+ * @param {string} nomeUsuario - Nome de quem está pegando emprestado
+ * @returns {Object} - Resultado da operação
+ */
+function emprestarLivro(id, nomeUsuario) {
+    // Validações
+    if (!nomeUsuario || nomeUsuario.trim().length < 3) {
+        return {
+            sucesso: false,
+            mensagem: "Nome do usuário inválido (mínimo 3 caracteres)"
+        };
+    }
+    
+    const livro = acervo.find(l => l.id === id);
+    
+    if (!livro) {
+        return {
+            sucesso: false,
+            mensagem: "Livro não encontrado"
+        };
+    }
+    
+    if (!livro.disponivel) {
+        return {
+            sucesso: false,
+            mensagem: `Livro já está emprestado para ${livro.emprestadoPara}`
+        };
+    }
+    
+    // Registra empréstimo
+    livro.disponivel = false;
+    livro.emprestadoPara = nomeUsuario.trim();
+    
+    return {
+        sucesso: true,
+        mensagem: `Livro "${livro.titulo}" emprestado para ${nomeUsuario}`,
+        livro: livro
+    };
+}
+```
+
+**Conceitos aplicados:**
+- **Validação de negócio**: Verifica disponibilidade antes de emprestar
+- **Atualização de estado**: Modifica propriedades do livro
+- **Mensagens informativas**: Feedback claro sobre o resultado
+
+### Devolver Livro
+
+```javascript
+/**
+ * Registra devolução de um livro
+ * @param {number} id - ID do livro
+ * @returns {Object} - Resultado da operação
+ */
+function devolverLivro(id) {
+    const livro = acervo.find(l => l.id === id);
+    
+    if (!livro) {
+        return {
+            sucesso: false,
+            mensagem: "Livro não encontrado"
+        };
+    }
+    
+    if (livro.disponivel) {
+        return {
+            sucesso: false,
+            mensagem: "Este livro não está emprestado"
+        };
+    }
+    
+    const usuarioAnterior = livro.emprestadoPara;
+    
+    // Registra devolução
+    livro.disponivel = true;
+    livro.emprestadoPara = null;
+    
+    return {
+        sucesso: true,
+        mensagem: `Livro "${livro.titulo}" devolvido por ${usuarioAnterior}`,
+        livro: livro
+    };
+}
+```
+
+### Listar Emprestados
+
+```javascript
+/**
+ * Lista todos os livros atualmente emprestados
+ * @returns {Array} - Livros emprestados com informações do usuário
+ */
+function listarEmprestados() {
+    return acervo
+        .filter(livro => !livro.disponivel)
+        .map(livro => ({
+            id: livro.id,
+            titulo: livro.titulo,
+            autor: livro.autor,
+            emprestadoPara: livro.emprestadoPara
+        }));
+}
+```
+
+**Conceito aplicado:** Encadeamento de métodos (`filter` + `map`) para filtrar e transformar dados em uma única operação.
+
+## Funções de Relatório
+
+### Contar Total
+
+```javascript
+/**
+ * Retorna o total de livros no acervo
+ * @returns {number} - Total de livros
+ */
+function contarTotal() {
+    return acervo.length;
+}
+```
+
+### Contar por Categoria
+
+```javascript
+/**
+ * Conta livros agrupados por categoria
+ * @returns {Object} - Objeto com contagem por categoria
+ */
+function contarPorCategoria() {
+    return acervo.reduce((contador, livro) => {
+        contador[livro.categoria] = (contador[livro.categoria] || 0) + 1;
+        return contador;
+    }, {});
+}
+```
+
+**Conceito aplicado:** `reduce()` - o método mais poderoso de arrays, capaz de transformar um array em qualquer estrutura de dados.
+
+### Calcular Disponibilidade
+
+```javascript
+/**
+ * Calcula estatísticas de disponibilidade
+ * @returns {Object} - Estatísticas do acervo
+ */
+function calcularDisponibilidade() {
+    const total = acervo.length;
+    const disponiveis = acervo.filter(l => l.disponivel).length;
+    const emprestados = total - disponiveis;
+    
+    return {
+        total: total,
+        disponiveis: disponiveis,
+        emprestados: emprestados,
+        taxaDisponibilidade: total > 0 ? ((disponiveis / total) * 100).toFixed(2) + "%" : "0%"
+    };
+}
+```
+
+### Listar Autores
+
+```javascript
+/**
+ * Lista todos os autores únicos no acervo
+ * @returns {Array} - Array de autores únicos, ordenados
+ */
+function listarAutores() {
+    const autoresUnicos = [...new Set(acervo.map(livro => livro.autor))];
+    return autoresUnicos.sort();
+}
+```
+
+**Conceito aplicado:** `Set` - estrutura de dados que elimina automaticamente duplicatas. Usamos `...` (spread) para converter de volta em array.
+
+## Funções de Persistência
+
+### Salvar Acervo
+
+```javascript
+/**
+ * Converte o acervo para JSON para salvar
+ * @returns {string} - Acervo em formato JSON
+ */
+function salvarAcervo() {
+    const dados = {
+        acervo: acervo,
+        proximoId: proximoId,
+        dataBackup: new Date().toISOString()
+    };
+    
+    return JSON.stringify(dados, null, 2);
+}
+```
+
+**Conceito aplicado:** `JSON.stringify()` converte objetos JavaScript em texto JSON. O parâmetro `2` formata com indentação para legibilidade.
+
+### Carregar Acervo
+
+```javascript
+/**
+ * Carrega acervo de string JSON
+ * @param {string} jsonString - String JSON contendo os dados
+ * @returns {Object} - Resultado da operação
+ */
+function carregarAcervo(jsonString) {
+    try {
+        const dados = JSON.parse(jsonString);
+        
+        if (!dados.acervo || !Array.isArray(dados.acervo)) {
+            return {
+                sucesso: false,
+                mensagem: "Formato de dados inválido"
+            };
+        }
+        
+        acervo = dados.acervo;
+        proximoId = dados.proximoId || acervo.length + 1;
+        
+        return {
+            sucesso: true,
+            mensagem: `Acervo carregado: ${acervo.length} livros`,
+            quantidadeLivros: acervo.length
+        };
+        
+    } catch (erro) {
+        return {
+            sucesso: false,
+            mensagem: "Erro ao processar JSON: " + erro.message
+        };
+    }
+}
+```
+
+**Conceitos aplicados:**
+- **Try-catch**: Tratamento de erros para operações que podem falhar
+- **JSON.parse()**: Converte texto JSON em objetos JavaScript
+- **Validação de estrutura**: Verifica se os dados carregados são válidos

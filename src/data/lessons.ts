@@ -182,66 +182,44 @@ const lessons = [
       },
     ],
   },
-  // {
-  //   id: "final-project",
-  //   title: "Sistema de gerenciamento de bibliotecas",
-  //   description:
-  //     "Construa um sistema simples de gerenciamento de bibliotecas usando JavaScript para praticar o que você aprendeu.",
-  //   lessons: [
-  //     {
-  //       id: "reframing-achievement",
-  //       title: "Reframing Achievement and Failure",
-  //       description:
-  //         "Pride and regret are just psychological coping mechanisms.",
-  //       video: null,
-  //     },
-  //     {
-  //       id: "surrendering-to-success",
-  //       title: "Surrendering to Success",
-  //       description:
-  //         "Achievements reveal capabilities that were always present rather than self development.",
-  //       video: {
-  //         duration: 1247,
-  //         thumbnail:
-  //           "https://assets.tailwindcss.com/templates/compass/lesson-video-thumbnail-02.png",
-  //         url: "https://assets.tailwindcss.com/templates/compass/surrendering-to-success.mp4",
-  //       },
-  //     },
-  //     {
-  //       id: "giving-credit",
-  //       title: "Giving Credit Where it's Due",
-  //       description:
-  //         "Recognize the broader system that produced your achievement.",
-  //       video: {
-  //         duration: 967,
-  //         thumbnail:
-  //           "https://assets.tailwindcss.com/templates/compass/lesson-video-thumbnail-04.png",
-  //         url: "https://assets.tailwindcss.com/templates/compass/giving-credit.mp4",
-  //       },
-  //     },
-  //     {
-  //       id: "unburden-accountability",
-  //       title: "Unburden Yourself from Accountability",
-  //       description:
-  //         "When things haven't gone your way, it literally couldn't have been your fault.",
-  //       video: {
-  //         duration: 1123,
-  //         thumbnail:
-  //           "https://assets.tailwindcss.com/templates/compass/lesson-video-thumbnail-05.png",
-  //         url: "https://assets.tailwindcss.com/templates/compass/unburden-accountability.mp4",
-  //       },
-  //     },
-  //     {
-  //       id: "writing-autobiography",
-  //       title: "Exercise: Writing your autobiography",
-  //       description: "A way to come to grips with your inconsequence.",
-  //       video: {
-  //         duration: 1486,
-  //         thumbnail:
-  //           "https://assets.tailwindcss.com/templates/compass/lesson-video-thumbnail-01.png",
-  //         url: "https://assets.tailwindcss.com/templates/compass/writing-autobiography.mp4",
-  //       },
-  //     },
-  //   ],
-  // },
+  {
+    id: "final-project",
+    title: "Projeto Final",
+    description:
+      "Vamos aplicar tudo o que aprendemos em um projeto prático.",
+    lessons: [
+      {
+        id: "charpter-15",
+        title: "Planejamento do Projeto",
+        description:
+          "Vamos planejar nosso projeto final, definindo os requisitos e funcionalidades que queremos implementar.",
+        video: null,
+        quizId: null,
+      },
+      {
+        id: "charpter-16",
+        title: "Implementação do Sistema",
+        description:
+          "Vamos começar a implementar nosso projeto final, colocando em prática tudo o que aprendemos até agora.",
+        video: null,
+        quizId: null,
+      },
+      {
+        id: "charpter-17",
+        title: "Testando o Sistema",
+        description:
+          "Vamos testar nosso projeto final para garantir que tudo esteja funcionando.",
+        video: null,
+        quizId: null,
+      },
+      {
+        id: "charpter-18",
+        title: "Conclusão",
+        description:
+          "Vamos revisar o que aprendemos e discutir os próximos passos para continuar sua jornada na programação.",
+        video: null,
+        quizId: null,
+      },
+    ],
+  },
 ];
