@@ -7,6 +7,7 @@ import {
   DropdownMenu,
 } from "@/components/dropdown";
 import { IconButton } from "@/components/icon-button";
+import { SubscriptionStatus } from "@/components/subscription-status";
 import { ChevronDownIcon } from "@/icons/chevron-down-icon";
 import { CloseIcon } from "@/icons/close-icon";
 import { MenuIcon } from "@/icons/menu-icon";
@@ -85,6 +86,9 @@ function MobileNavigation({
                 </CloseButton>
               ))}
             </div>
+            <div className="mt-4 px-4">
+              <SubscriptionStatus />
+            </div>
             {loading ? (
               <div className="mt-6 px-4 py-1 text-sm/7 text-gray-500">
                 Loading...
@@ -155,10 +159,11 @@ function SiteNavigation() {
         open={mobileMenuOpen}
         onClose={() => setMobileMenuOpen(false)}
       />
-      <div className="flex gap-x-6 text-sm/6 text-gray-950 max-lg:hidden dark:text-white">
+      <div className="flex items-center gap-x-6 text-sm/6 text-gray-950 max-lg:hidden dark:text-white">
         <Link href="/">Course</Link>
         {/* <Link href="/interviews">Interviews</Link>
         <Link href="/resources">Resources</Link> */}
+        <SubscriptionStatus />
         {loading ? (
           <span className="text-gray-500">Loading...</span>
         ) : user ? (
