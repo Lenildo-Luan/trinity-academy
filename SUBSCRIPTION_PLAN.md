@@ -72,7 +72,9 @@ end;
 $$ language plpgsql security definer;
 
 -- Trigger para criar período de teste automaticamente
-create trigger on_auth_user_created
+drop trigger if exists on_auth_user_trial_init on auth.users;
+
+create trigger on_auth_user_trial_init
   after insert on auth.users
   for each row execute function public.initialize_trial();
 ```

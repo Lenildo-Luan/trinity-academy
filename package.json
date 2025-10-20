@@ -18,10 +18,12 @@
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15",
     "@shikijs/colorized-brackets": "^3.8.1",
+    "@stripe/stripe-js": "^8.1.0",
     "@supabase/ssr": "^0.7.0",
     "@supabase/supabase-js": "^2.75.0",
     "@tailwindcss/postcss": "^4.1.11",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "geist": "^1.4.2",
     "input-otp": "^1.4.2",
     "next": "^15",
@@ -30,6 +32,7 @@
     "react": "^19",
     "react-dom": "^19",
     "shiki": "^3.8.1",
+    "stripe": "^19.1.0",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
