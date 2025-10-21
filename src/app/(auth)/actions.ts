@@ -26,11 +26,35 @@ export async function sendOTP(email: string): Promise<ActionResult> {
       email,
       options: {
         shouldCreateUser: true,
+        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/auth/callback`,
       },
     })
 
     if (error) {
       console.error('Error sending OTP:', error)
+
+      // Provide more specific error messages
+      if (error.message.includes('rate limit')) {
+        return {
+          success: false,
+          error: 'Muitas tentativas. Por favor, aguarde alguns minutos antes de tentar novamente.',
+        }
+      }
+
+      if (error.message.includes('email') || error.message.includes('Email')) {
+        return {
+          success: false,
+          error: 'Não foi possível enviar o email. Verifique se o endereço está correto.',
+        }
+      }
+
+      if (error.message.includes('signups not allowed')) {
+        return {
+          success: false,
+          error: 'Cadastros não permitidos no momento. Entre em contato com o suporte.',
+        }
+      }
+
       return {
         success: false,
         error: 'Falha ao enviar código. Tente novamente.',
