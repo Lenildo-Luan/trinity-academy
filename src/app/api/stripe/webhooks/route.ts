@@ -4,10 +4,12 @@ import { stripe } from '@/lib/stripe'
 import { createClient } from '@supabase/supabase-js'
 import Stripe from 'stripe'
 
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+function getSupabaseAdmin() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+}
 
 export async function POST(request: Request) {
   const body = await request.text()
@@ -63,14 +65,18 @@ async function handleSubscriptionUpdate(subscription: Stripe.Subscription) {
 
   if (!userId) return
 
+  const periodStart = (subscription as any).current_period_start
+  const periodEnd = (subscription as any).current_period_end
+  const supabaseAdmin = getSupabaseAdmin()
+
   await supabaseAdmin
     .from('subscriptions')
     .update({
       status: subscription.status === 'active' ? 'active' : subscription.status,
       stripe_subscription_id: subscription.id,
       stripe_price_id: subscription.items.data[0].price.id,
-      current_period_start: new Date(subscription.current_period_start * 1000).toISOString(),
-      current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
+      current_period_start: periodStart ? new Date(periodStart * 1000).toISOString() : null,
+      current_period_end: periodEnd ? new Date(periodEnd * 1000).toISOString() : null,
       cancel_at_period_end: subscription.cancel_at_period_end,
       updated_at: new Date().toISOString(),
     })
@@ -81,6 +87,8 @@ async function handleSubscriptionCanceled(subscription: Stripe.Subscription) {
   const userId = subscription.metadata.user_id
 
   if (!userId) return
+
+  const supabaseAdmin = getSupabaseAdmin()
 
   await supabaseAdmin
     .from('subscriptions')
@@ -93,6 +101,7 @@ async function handleSubscriptionCanceled(subscription: Stripe.Subscription) {
 
 async function handlePaymentFailed(invoice: Stripe.Invoice) {
   const customerId = invoice.customer as string
+  const supabaseAdmin = getSupabaseAdmin()
 
   const { data } = await supabaseAdmin
     .from('subscriptions')

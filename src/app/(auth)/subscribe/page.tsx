@@ -1,14 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { getStripe } from '@/lib/stripe-client'
 import { useSubscription } from '@/hooks/use-subscription'
 
 export default function SubscribePage() {
   const [loading, setLoading] = useState(false)
   const { status } = useSubscription()
-  const router = useRouter()
 
   const handleCheckout = async () => {
     setLoading(true)
@@ -18,11 +15,10 @@ export default function SubscribePage() {
         method: 'POST',
       })
 
-      const { sessionId } = await response.json()
-      const stripe = await getStripe()
+      const { url } = await response.json()
 
-      if (stripe) {
-        await stripe.redirectToCheckout({ sessionId })
+      if (url) {
+        window.location.href = url
       }
     } catch (error) {
       console.error('Error:', error)
