@@ -72,7 +72,7 @@ function MobileNavigation({
           <div className="mt-4">
             <div className="flex flex-col gap-y-2">
               {[
-                ["Course", "/"],
+                ["Curso", "/"],
                 // ["Interviews", "/interviews"],
                 // ["Resources", "/resources"],
               ].map(([title, href]) => (
@@ -91,7 +91,7 @@ function MobileNavigation({
             </div>
             {loading ? (
               <div className="mt-6 px-4 py-1 text-sm/7 text-gray-500">
-                Loading...
+                Baixar...
               </div>
             ) : user ? (
               <div className="mt-6 flex flex-col gap-y-2">
@@ -115,7 +115,7 @@ function MobileNavigation({
                   onClick={handleSignOut}
                   className="rounded-md px-4 py-1 text-left text-sm/7 font-semibold text-gray-950 hover:bg-gray-950/5 dark:text-white dark:hover:bg-white/5"
                 >
-                  Sign out
+                  Sair
                 </button>
               </div>
             ) : (
@@ -125,7 +125,7 @@ function MobileNavigation({
                   href="/login"
                   className="rounded-md px-4 py-1 text-sm/7 font-semibold text-gray-950 hover:bg-gray-950/5 dark:text-white dark:hover:bg-white/5"
                 >
-                  Sign in
+                  Entrar
                 </CloseButton>
               </div>
             )}
@@ -160,12 +160,12 @@ function SiteNavigation() {
         onClose={() => setMobileMenuOpen(false)}
       />
       <div className="flex items-center gap-x-6 text-sm/6 text-gray-950 max-lg:hidden dark:text-white">
-        <Link href="/">Course</Link>
-        {/* <Link href="/interviews">Interviews</Link>
-        <Link href="/resources">Resources</Link> */}
+        {/* <Link href="/">Course</Link> */}
+        {/* <Link href="/interviews">Interviews</Link> */}
+        {/* <Link href="/resources">Resources</Link> */}
         <SubscriptionStatus />
         {loading ? (
-          <span className="text-gray-500">Loading...</span>
+          <span className="text-gray-500">Baixando...</span>
         ) : user ? (
           <Dropdown>
             <DropdownButton className="inline-flex items-center gap-x-2 focus:not-data-focus:outline-none">
@@ -173,13 +173,13 @@ function SiteNavigation() {
               <ChevronDownIcon className="stroke-gray-950 dark:stroke-white" />
             </DropdownButton>
             <DropdownMenu anchor="bottom end">
-              <DropdownItem href="#">Settings</DropdownItem>
-              <DropdownItem href="#">Support</DropdownItem>
-              <DropdownItem onClick={handleSignOut}>Sign out</DropdownItem>
+              <DropdownItem href="https://trinity-academy.vercel.app/perfil">Perfil</DropdownItem>
+              <DropdownItem href="https://wa.me/5583986954994">Suporte</DropdownItem>
+              <DropdownItem onClick={handleSignOut}>Sair</DropdownItem>
             </DropdownMenu>
           </Dropdown>
         ) : (
-          <Link href="/login">Sign in</Link>
+          <Link href="/login">Entrar</Link>
         )}
       </div>
     </nav>
