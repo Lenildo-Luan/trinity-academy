@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import type React from "react";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/auth-context";
+import { Analytics } from "@vercel/analytics/next"
 
 const InterVariable = localFont({
   variable: "--font-inter",
@@ -31,6 +32,7 @@ export default function RootLayout({
         <AuthProvider>
           <div className="isolate">{children}</div>
         </AuthProvider>
+        <Analytics/>
       </body>
     </html>
   );
