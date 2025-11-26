@@ -40,20 +40,12 @@ export async function middleware(request) {
   console.log('[MIDDLEWARE] User:', user ? `${user.email} (${user.id})` : 'null');
   console.log('[MIDDLEWARE] Error:', error?.message || 'none');
 
-  // Protect routes - redirect to login if not authenticated
+  // Only redirect authenticated users away from auth pages
   const isAuthRoute = request.nextUrl.pathname.startsWith("/login") ||
                       request.nextUrl.pathname.startsWith("/otp");
 
   console.log('[MIDDLEWARE] isAuthRoute:', isAuthRoute);
 
-  if (!user && !isAuthRoute) {
-    console.log('[MIDDLEWARE] Redirecting to /login - no user');
-    const url = request.nextUrl.clone();
-    url.pathname = "/login";
-    return NextResponse.redirect(url);
-  }
-
-  // Redirect authenticated users away from auth pages
   if (user && isAuthRoute) {
     console.log('[MIDDLEWARE] Redirecting to / - user on auth page');
     const url = request.nextUrl.clone();
