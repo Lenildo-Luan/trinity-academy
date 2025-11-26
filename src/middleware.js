@@ -1,21 +1,8 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse } from "next/server";
 
-// Rotas públicas que não precisam de assinatura ativa
-const PUBLIC_ROUTES = ['/login', '/otp', '/subscribe', '/subscription-expired'];
-
-// Rotas de API que não precisam de verificação
-const API_ROUTES = ['/api/stripe/webhooks'];
-
 export async function middleware(request) {
   console.log('[MIDDLEWARE] Processing request:', request.nextUrl.pathname);
-
-  const { pathname } = request.nextUrl;
-
-  // Não verificar rotas de API específicas
-  if (API_ROUTES.some(route => pathname.startsWith(route))) {
-    return NextResponse.next();
-  }
 
   let supabaseResponse = NextResponse.next({
     request,
@@ -72,28 +59,6 @@ export async function middleware(request) {
     const url = request.nextUrl.clone();
     url.pathname = "/";
     return NextResponse.redirect(url);
-  }
-
-  // Verificar assinatura apenas para rotas protegidas
-  const isPublicRoute = PUBLIC_ROUTES.some(route => pathname.startsWith(route));
-
-  if (user && !isPublicRoute) {
-    console.log('[MIDDLEWARE] Checking subscription status');
-
-    const { data: accessStatus } = await supabase
-      .from('user_access_status')
-      .select('has_access')
-      .eq('user_id', user.id)
-      .single();
-
-    console.log('[MIDDLEWARE] Access status:', accessStatus);
-
-    if (!accessStatus?.has_access) {
-      console.log('[MIDDLEWARE] Redirecting to /subscription-expired - no access');
-      const url = request.nextUrl.clone();
-      url.pathname = '/subscription-expired';
-      return NextResponse.redirect(url);
-    }
   }
 
   console.log('[MIDDLEWARE] Allowing request to proceed');
