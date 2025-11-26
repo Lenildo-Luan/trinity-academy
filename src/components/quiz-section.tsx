@@ -5,10 +5,12 @@ import type { Quiz } from '@/data/quizzes'
 import { useQuizState } from '@/hooks/use-quiz-state'
 import { useNavigationBlocker } from '@/hooks/use-navigation-blocker'
 import { useQuizPersistence } from '@/hooks/use-quiz-persistence'
+import { useAuth } from '@/contexts/auth-context'
 import { QuizInitialView } from './quiz-initial-view'
 import { QuizActiveView } from './quiz-active-view'
 import { QuizResultView } from './quiz-result-view'
 import { QuizNavigationBlockerModal } from './quiz-navigation-blocker-modal'
+import { QuizAuthRequired } from './quiz-auth-required'
 
 type QuizSectionProps = {
   quiz: Quiz
@@ -17,6 +19,7 @@ type QuizSectionProps = {
 
 export function QuizSection({ quiz, lessonId }: QuizSectionProps) {
   const [showNavigationBlocker, setShowNavigationBlocker] = useState(false)
+  const { user, loading } = useAuth()
 
   const quizState = useQuizState(quiz)
 
@@ -86,6 +89,26 @@ export function QuizSection({ quiz, lessonId }: QuizSectionProps) {
 
     // Permite a navegação e navega para o destino
     confirmNavigation()
+  }
+
+  // Mostra loading enquanto verifica autenticação
+  if (loading) {
+    return (
+      <div className="mt-16 border-t border-gray-950/10 pt-16 dark:border-white/10">
+        <div className="flex items-center justify-center py-12">
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600 dark:border-gray-700 dark:border-t-blue-400" />
+        </div>
+      </div>
+    )
+  }
+
+  // Se não estiver autenticado, mostra aviso
+  if (!user) {
+    return (
+      <div className="mt-16 border-t border-gray-950/10 pt-16 dark:border-white/10">
+        <QuizAuthRequired />
+      </div>
+    )
   }
 
   return (
