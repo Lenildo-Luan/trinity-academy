@@ -3,6 +3,7 @@ import { GeistMono } from "geist/font/mono";
 import localFont from "next/font/local";
 import type React from "react";
 import "./globals.css";
+import "katex/dist/katex.min.css";
 import { AuthProvider } from "@/contexts/auth-context";
 import { Analytics } from "@vercel/analytics/next"
 

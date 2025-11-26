@@ -1,0 +1,245 @@
+# Visualizações Interativas com p5.js
+
+Esta lição demonstra como usar visualizações interativas criadas com p5.js para tornar o aprendizado de programação mais visual e envolvente.
+
+## O que é p5.js?
+
+p5.js é uma biblioteca JavaScript para programação criativa, facilitando a criação de gráficos e interações visuais. É perfeita para ensinar conceitos de programação de forma visual.
+
+## 1. Animação Simples - Bola Saltitante
+
+Este exemplo demonstra conceitos básicos de animação: posição, velocidade e detecção de colisão.
+
+<BouncingBall />
+
+**Conceitos demonstrados:**
+- Variáveis para armazenar posição (`x`, `y`) e velocidade (`xSpeed`, `ySpeed`)
+- Loop de animação (a função `draw` é chamada continuamente)
+- Condicionais (`if`) para detectar colisão com as bordas
+- Operador de multiplicação para inverter direção (`*= -1`)
+
+```javascript
+let x = 200;
+let y = 200;
+let xSpeed = 3;
+let ySpeed = 2;
+
+function draw() {
+  // Desenhar a bola
+  circle(x, y, 30);
+
+  // Atualizar posição
+  x += xSpeed;
+  y += ySpeed;
+
+  // Inverter direção nas bordas
+  if (x > width - 15 || x < 15) {
+    xSpeed *= -1;
+  }
+  if (y > height - 15 || y < 15) {
+    ySpeed *= -1;
+  }
+}
+```
+
+## 2. Interação - Seguir o Mouse
+
+Este exemplo mostra como criar interatividade e usar matemática para calcular distâncias.
+
+<FollowMouse />
+
+**Tente:** Mova o mouse sobre a área cinza!
+
+**Conceitos demonstrados:**
+- Coordenadas do mouse (`mouseX`, `mouseY`)
+- Cálculo de distância usando o Teorema de Pitágoras: $d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$
+- Desenho de linhas e formas
+- Exibição de texto dinâmico
+
+```javascript
+function draw() {
+  // Calcular distância do centro até o mouse
+  const dx = mouseX - width / 2;
+  const dy = mouseY - height / 2;
+  const distance = Math.sqrt(dx * dx + dy * dy);
+
+  // Desenhar linha do centro até o mouse
+  line(width / 2, height / 2, mouseX, mouseY);
+
+  // Mostrar distância
+  text(`Distância: ${Math.round(distance)}px`, width / 2, 30);
+}
+```
+
+## 3. Funções Matemáticas - Onda Senoidal
+
+Demonstração de como funções matemáticas criam animações suaves e naturais.
+
+<SineWave />
+
+**Conceitos demonstrados:**
+- Função seno ($\sin(x)$) para criar movimento ondulatório
+- Loop `for` para desenhar múltiplos pontos
+- Animação através de incremento de ângulo
+
+```javascript
+let angle = 0;
+
+function draw() {
+  // Desenhar onda
+  for (let x = 0; x < width; x += 5) {
+    const y = height / 2 + Math.sin(x * 0.02 + angle) * 100;
+    vertex(x, y);
+  }
+
+  angle += 0.05; // Animar a onda
+}
+```
+
+## 4. Loops - Padrão de Círculos
+
+Este exemplo mostra o poder dos loops para criar padrões complexos.
+
+<CirclePattern />
+
+**Conceitos demonstrados:**
+- Loop `for` para repetir ações
+- Uso da variável de controle (`i`) para criar variações
+- Cores e animação baseadas no tempo
+
+```javascript
+function draw() {
+  const time = frameCount * 0.02;
+
+  // Desenhar 8 círculos concêntricos
+  for (let i = 1; i <= 8; i++) {
+    const radius = i * 30;
+    const hue = (i * 30 + time * 50) % 360;
+
+    circle(width / 2, height / 2, radius * 2);
+  }
+}
+```
+
+## 5. Arrays - Sistema de Partículas
+
+Demonstração de como arrays armazenam e gerenciam múltiplos objetos.
+
+<Particles />
+
+**Conceitos demonstrados:**
+- Array para armazenar múltiplas partículas
+- Objetos para agrupar propriedades relacionadas (posição e velocidade)
+- Método `forEach` para iterar sobre o array
+- Efeito de rastro com transparência
+
+```javascript
+const particles = [];
+
+// Criar 50 partículas
+for (let i = 0; i < 50; i++) {
+  particles.push({
+    x: Math.random() * width,
+    y: Math.random() * height,
+    vx: (Math.random() - 0.5) * 2,
+    vy: (Math.random() - 0.5) * 2
+  });
+}
+
+function draw() {
+  // Atualizar e desenhar cada partícula
+  particles.forEach(particle => {
+    particle.x += particle.vx;
+    particle.y += particle.vy;
+
+    // Verificar colisão com bordas
+    if (particle.x < 0 || particle.x > width) {
+      particle.vx *= -1;
+    }
+    if (particle.y < 0 || particle.y > height) {
+      particle.vy *= -1;
+    }
+
+    circle(particle.x, particle.y, 8);
+  });
+}
+```
+
+## 6. Condicionais - Semáforo
+
+Uma simulação prática de um semáforo usando estruturas condicionais.
+
+<TrafficLight />
+
+**Conceitos demonstrados:**
+- Variável de estado (`state`) para controlar qual luz está acesa
+- Timer para controlar transições
+- Condicionais encadeadas (`if-else if-else`)
+- Array de objetos para dados das luzes
+
+```javascript
+let state = 0; // 0 = vermelho, 1 = amarelo, 2 = verde
+let timer = 0;
+
+function draw() {
+  timer++;
+
+  // Trocar de estado baseado no timer
+  if (state === 0 && timer > 120) {
+    state = 1; // Vermelho -> Amarelo
+    timer = 0;
+  } else if (state === 1 && timer > 30) {
+    state = 2; // Amarelo -> Verde
+    timer = 0;
+  } else if (state === 2 && timer > 120) {
+    state = 0; // Verde -> Vermelho
+    timer = 0;
+  }
+
+  // Desenhar as luzes (vermelho, amarelo, verde)
+  const lights = [
+    { active: state === 0, color: [255, 0, 0] },
+    { active: state === 1, color: [255, 200, 0] },
+    { active: state === 2, color: [0, 255, 0] }
+  ];
+
+  lights.forEach(light => {
+    if (light.active) {
+      fill(light.color[0], light.color[1], light.color[2]);
+    } else {
+      fill(80); // Luz apagada
+    }
+    circle(200, light.y, 60);
+  });
+}
+```
+
+## Como Criar Seus Próprios Sketches
+
+Você pode criar visualizações customizadas usando o componente `P5Sketch`:
+
+```javascript
+<P5Sketch
+  setup={(p) => {
+    p.background(240);
+  }}
+  draw={(p) => {
+    // Seu código aqui
+    p.circle(p.mouseX, p.mouseY, 50);
+  }}
+  width={400}
+  height={400}
+/>
+```
+
+## Recursos para Aprender Mais
+
+- [Referência oficial p5.js](https://p5js.org/reference/)
+- [Tutoriais p5.js](https://p5js.org/learn/)
+- [The Coding Train](https://thecodingtrain.com/) - Excelentes vídeos tutoriais
+
+## Conclusão
+
+As visualizações interativas tornam o aprendizado de programação muito mais intuitivo e divertido. Você pode ver imediatamente o resultado do seu código e experimentar com diferentes valores para entender como cada parte funciona.
+
+Nos próximos exemplos, você verá como esses conceitos visuais se aplicam a problemas de programação do mundo real!

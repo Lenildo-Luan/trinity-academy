@@ -1,0 +1,157 @@
+# Notações Matemáticas em Programação
+
+Este é um exemplo de como usar notações matemáticas nas lições.
+
+## Matemática Inline
+
+A fórmula de Bhaskara é usada para resolver equações do segundo grau: $ax^2 + bx + c = 0$, onde $a \neq 0$.
+
+A solução é dada por: $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$
+
+## Equações em Bloco
+
+A fórmula quadrática completa:
+
+$$
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+$$
+
+## Somatórios e Produtórios
+
+O somatório dos primeiros $n$ números naturais:
+
+$$
+\sum_{i=1}^{n} i = \frac{n(n+1)}{2}
+$$
+
+O fatorial de $n$:
+
+$$
+n! = \prod_{i=1}^{n} i
+$$
+
+## Limites e Derivadas
+
+O limite fundamental do cálculo:
+
+$$
+\lim_{x \to 0} \frac{\sin(x)}{x} = 1
+$$
+
+A derivada de uma função $f(x)$:
+
+$$
+f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
+$$
+
+## Matrizes e Vetores
+
+Uma matriz 2x2:
+
+$$
+A = \begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}
+$$
+
+O determinante de uma matriz 2x2: $\det(A) = ad - bc$
+
+## Notação de Big O
+
+A complexidade de algoritmos em ciência da computação:
+
+- Busca linear: $O(n)$
+- Busca binária: $O(\log n)$
+- Ordenação por bolha: $O(n^2)$
+- Ordenação eficiente: $O(n \log n)$
+
+A notação Big O representa o crescimento assintótico:
+
+$$
+f(n) = O(g(n)) \iff \exists c > 0, n_0 \in \mathbb{N} : \forall n \geq n_0, f(n) \leq c \cdot g(n)
+$$
+
+## Lógica e Conjuntos
+
+Operações de conjuntos:
+
+- União: $A \cup B$
+- Interseção: $A \cap B$
+- Diferença: $A \setminus B$
+- Pertence: $x \in A$
+- Não pertence: $x \notin A$
+
+Quantificadores lógicos:
+
+- Para todo: $\forall x \in A, P(x)$
+- Existe: $\exists x \in A, P(x)$
+
+## Exponenciais e Logaritmos
+
+Propriedades importantes em algoritmos:
+
+$$
+\log_b(xy) = \log_b(x) + \log_b(y)
+$$
+
+$$
+\log_b(x^n) = n \cdot \log_b(x)
+$$
+
+$$
+b^{\log_b(x)} = x
+$$
+
+## Código JavaScript com Matemática
+
+Implementação da fórmula de Bhaskara:
+
+```javascript
+function bhaskara(a, b, c) {
+  // Calcular o discriminante: Δ = b² - 4ac
+  const delta = b ** 2 - 4 * a * c;
+
+  if (delta < 0) {
+    return null; // Sem raízes reais
+  }
+
+  if (delta === 0) {
+    // Uma raiz: x = -b / 2a
+    return [-b / (2 * a)];
+  }
+
+  // Duas raízes: x = (-b ± √Δ) / 2a
+  const x1 = (-b + Math.sqrt(delta)) / (2 * a);
+  const x2 = (-b - Math.sqrt(delta)) / (2 * a);
+
+  return [x1, x2];
+}
+
+// Teste: resolver x² - 5x + 6 = 0
+console.log(bhaskara(1, -5, 6)); // [3, 2]
+```
+
+## Probabilidade
+
+A probabilidade de um evento $A$:
+
+$$
+P(A) = \frac{\text{casos favoráveis}}{\text{casos possíveis}}
+$$
+
+Probabilidade condicional:
+
+$$
+P(A|B) = \frac{P(A \cap B)}{P(B)}
+$$
+
+Teorema de Bayes:
+
+$$
+P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}
+$$
+
+## Conclusão
+
+Agora você pode usar notações matemáticas ricas em suas lições! Use `$...$` para matemática inline e `$$...$$` para equações em bloco.

@@ -225,6 +225,16 @@ MDX content is rendered with custom components defined in `mdx-components.tsx`:
 - Syntax highlighting via Shiki with custom theme (`src/app/syntax-theme.json`)
 - Supports image dimensions in alt text: `![Alt text|1000x500](image.png)`
 - Colorized bracket matching for code blocks
+- **Mathematical notation support via KaTeX**:
+  - Inline math: `$x = y^2$` renders as $x = y^2$
+  - Block math: `$$\sum_{i=1}^{n} i = \frac{n(n+1)}{2}$$` renders as display equation
+  - Full LaTeX syntax support for equations, matrices, symbols, etc.
+  - Configured with `remark-math` and `rehype-katex` plugins in `next.config.mjs`
+- **Interactive visualizations with p5.js**:
+  - Pre-built components: `<BouncingBall />`, `<FollowMouse />`, `<SineWave />`, `<CirclePattern />`, `<Particles />`, `<TrafficLight />`
+  - Custom sketches using `<P5Sketch setup={...} draw={...} width={400} height={400} />`
+  - Components defined in `src/components/p5-sketch.tsx` and `src/components/p5-examples.tsx`
+  - Great for visualizing programming concepts like loops, arrays, conditionals, and animation
 
 ### Key Components
 

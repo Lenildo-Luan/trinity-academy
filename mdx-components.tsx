@@ -4,6 +4,15 @@ import Image from "next/image";
 import React, { ReactNode } from "react";
 import { createHighlighter, Highlighter } from "shiki";
 import theme from "./src/app/syntax-theme.json";
+import { P5Sketch } from "./src/components/p5-sketch";
+import {
+  BouncingBall,
+  FollowMouse,
+  SineWave,
+  CirclePattern,
+  Particles,
+  TrafficLight,
+} from "./src/components/p5-examples";
 
 function getTextContent(node: ReactNode): string {
   if (typeof node === "string") return node;
@@ -43,26 +52,35 @@ async function getHighlighter() {
 }
 
 async function CodeBlock({ code, lang }: { code: string; lang: string }) {
-  let out = (await getHighlighter()).codeToHtml(code, {
-    lang,
-    theme: theme.name,
-    transformers: [
-      transformerColorizedBrackets({
-        themes: {
-          "Tailwind CSS": [
-            "var(--color-purple-200)",
-            "var(--color-cyan-300)",
-            "var(--color-blue-300)",
-            "var(--color-emerald-300)",
-            "var(--color-pink-300)",
-            "var(--color-amber-200)",
-          ],
-        },
-      }),
-    ],
-  });
+  if (!code || typeof code !== 'string') {
+    return <pre><code>{code}</code></pre>;
+  }
 
-  return <div dangerouslySetInnerHTML={{ __html: out }} />;
+  try {
+    let out = (await getHighlighter()).codeToHtml(code, {
+      lang: lang || 'text',
+      theme: theme.name,
+      transformers: [
+        transformerColorizedBrackets({
+          themes: {
+            "Tailwind CSS": [
+              "var(--color-purple-200)",
+              "var(--color-cyan-300)",
+              "var(--color-blue-300)",
+              "var(--color-emerald-300)",
+              "var(--color-pink-300)",
+              "var(--color-amber-200)",
+            ],
+          },
+        }),
+      ],
+    });
+
+    return <div dangerouslySetInnerHTML={{ __html: out }} />;
+  } catch (error) {
+    // Fallback if syntax highlighting fails
+    return <pre><code className={lang ? `language-${lang}` : ''}>{code}</code></pre>;
+  }
 }
 
 const IMAGE_DIMENSION_REGEX = /^[^|]+\|\d+x\d+$/;
@@ -125,6 +143,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 
       return <CodeBlock code={code} lang={lang} />;
     },
+    P5Sketch,
+    BouncingBall,
+    FollowMouse,
+    SineWave,
+    CirclePattern,
+    Particles,
+    TrafficLight,
     ...components,
   };
 }
