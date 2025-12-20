@@ -222,28 +222,4 @@ const lessons = [
       },
     ],
   },
-  {
-    id: "math-notation-test",
-    title: "Testes e Exemplos",
-    description:
-      "Módulo de demonstração de recursos avançados da plataforma.",
-    lessons: [
-      {
-        id: "math-test",
-        title: "Notações Matemáticas",
-        description:
-          "Demonstração de como usar notações matemáticas nas lições.",
-        video: null,
-        quizId: null,
-      },
-      {
-        id: "p5js-test",
-        title: "Visualizações com p5.js",
-        description:
-          "Demonstração de visualizações interativas usando p5.js.",
-        video: null,
-        quizId: null,
-      },
-    ],
-  },
 ];
