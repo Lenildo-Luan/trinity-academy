@@ -7,7 +7,7 @@
     color: var(--color-gray-400);
   }
 
-  * + * {
+ * + *:not(.katex):not(.katex *) {
     margin-top: --spacing(6);
   }
 
