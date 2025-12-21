@@ -15,7 +15,7 @@ function useTableOfContents(contentId: string) {
     if (!root) return;
 
     setHeadings(
-      Array.from(root.querySelectorAll("h2, h3")).map((heading) => ({
+      Array.from(root.querySelectorAll("h2")).map((heading) => ({
         id: heading.id,
         text: heading.textContent || "",
         level: parseInt(heading.tagName[1]),
@@ -29,7 +29,7 @@ function useTableOfContents(contentId: string) {
     Array.from(root.children).forEach((element) => {
       if (
         element.id &&
-        (element.tagName === "H2" || element.tagName === "H3")
+        (element.tagName === "H2")
       ) {
         currentHeadingId = element.id;
       }

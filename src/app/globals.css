@@ -80,3 +80,7 @@
     }
   }
 }
+
+* {
+  scroll-behavior: smooth;
+}
