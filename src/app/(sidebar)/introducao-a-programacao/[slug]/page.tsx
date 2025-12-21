@@ -46,12 +46,8 @@ export default async function Page({
     <SidebarLayoutContent
       breadcrumbs={
         <Breadcrumbs>
-          <BreadcrumbHome />
+          <BreadcrumbHome href={'/introducao-a-programacao'}>Introdução a Programação</BreadcrumbHome>
           <BreadcrumbSeparator className="max-md:hidden" />
-          <Breadcrumb href={`/#${lesson.module.id}`} className="max-md:hidden">
-            {lesson.module.title}
-          </Breadcrumb>
-          <BreadcrumbSeparator />
           <Breadcrumb>{lesson.title}</Breadcrumb>
         </Breadcrumbs>
       }

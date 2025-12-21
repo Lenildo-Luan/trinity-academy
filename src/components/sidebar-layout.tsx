@@ -57,9 +57,9 @@ function CourseNavigation({
                 )}
               >
                 <Link
-                  href={`${pathname}/${lesson.id}`}
+                  href={`/${pathname.split('/')[1]}/${lesson.id}`}
                   aria-current={
-                    `/${lesson.id}` === pathname ? "page" : undefined
+                    `/${pathname.split('/')[1]}/${lesson.id}` === pathname ? "page" : undefined
                   }
                   onNavigate={onNavigate}
                   className="aria-[current=page]:font-medium aria-[current=page]:text-gray-950 dark:aria-[current=page]:text-white"

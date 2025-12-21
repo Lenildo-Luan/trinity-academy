@@ -41,7 +41,7 @@ export default async function Page() {
     <SidebarLayoutContent
       breadcrumbs={
         <Breadcrumbs>
-          <BreadcrumbHome />
+          <BreadcrumbHome href={'/introducao-a-programacao'}>Introdução a Programação</BreadcrumbHome>
           <BreadcrumbSeparator />
           <Breadcrumb>Conteúdo</Breadcrumb>
         </Breadcrumbs>
