@@ -57,7 +57,7 @@ function CourseNavigation({
                 )}
               >
                 <Link
-                  href={`/${lesson.id}`}
+                  href={`${pathname}/${lesson.id}`}
                   aria-current={
                     `/${lesson.id}` === pathname ? "page" : undefined
                   }
