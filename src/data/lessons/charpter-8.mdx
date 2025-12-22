@@ -1,1078 +1,630 @@
-# O Poder da Repetição
+# Trabalhando com Texto em JavaScript
 
-Imagine que você precisa exibir na tela todos os números de 1 até 100. Sem o conhecimento de estruturas de repetição, você precisaria escrever 100 linhas de código, algo como:
+Imagine que você está criando um aplicativo de mensagens, um site de notícias ou até mesmo um simples formulário de cadastro. O que todos esses projetos têm em comum? A necessidade de trabalhar com texto! Em programação, chamamos esses textos de **strings**, e elas são um dos tipos de dados mais importantes e utilizados no JavaScript.
 
-```javascript
-console.log(1);
-console.log(2);
-console.log(3);
-// ... 97 linhas depois...
-console.log(100);
-```
+Nesta aula, você aprenderá não apenas *como* usar strings, mas *por que* elas funcionam de uma determinada maneira, quais são os diferentes métodos de criá-las e manipulá-las, e quando usar cada abordagem. Vamos transformar você de alguém que simplesmente escreve texto no código para alguém que domina a arte de manipular informações textuais com elegância e eficiência.
 
-Além de entediante e demorado, esse código seria extremamente difícil de manter. E se você precisasse mudar para 1000 números? Ou se quisesse alterar o formato de exibição?
+## O que são Strings?
 
-**É aqui que entram as estruturas de repetição - os loops.** Eles são fundamentais na programação porque permitem executar o mesmo código múltiplas vezes de forma eficiente, automatizando tarefas repetitivas que seriam impraticáveis de fazer manualmente.
+### Conceito Fundamental
 
-Com loops, aquelas 100 linhas se tornam apenas 3:
+**String** é uma sequência de caracteres usada para representar texto. Pense em uma string como um colar de contas, onde cada conta é um caractere (letra, número, símbolo ou espaço). Assim como um colar tem contas em uma ordem específica, uma string tem caracteres em uma ordem específica.
 
 ```javascript
-for (let i = 1; i <= 100; i++) {
-    console.log(i);
-}
+let saudacao = "Olá, mundo!";
+let nome = "Maria";
+let numero = "123"; // Atenção: isso é texto, não número!
 ```
 
-Muito mais elegante, não é?
+### Por que strings são importantes?
 
-## Por Que Usar Loops?
+Strings são a ponte entre humanos e computadores para comunicação textual. Praticamente tudo que você vê em uma tela — mensagens, nomes, descrições, artigos — é representado por strings. Dominar strings é essencial para:
 
-Linguagens de programação são extremamente úteis para completar rapidamente tarefas repetitivas. Os loops resolvem o problema fundamental da repetição de código, tornando nossos programas:
+- **Interagir com usuários**: capturar e exibir informações
+- **Processar dados**: validar emails, formatar nomes, buscar palavras
+- **Comunicar com sistemas**: enviar e receber mensagens de servidores
+- **Criar experiências**: construir interfaces dinâmicas e personalizadas
 
-### 1. **Mais Concisos**
-Menos código para escrever e manter significa menos oportunidades para erros e mais facilidade de compreensão.
+## Criando Strings: Três Formas Diferentes
 
-### 2. **Mais Flexíveis**
-É fácil modificar o número de repetições ou o comportamento do loop. Quer processar 10 ou 10.000 itens? Basta mudar um número!
+JavaScript oferece três maneiras de criar strings, cada uma com suas características e usos específicos. Compreender quando usar cada uma é fundamental.
 
-### 3. **Mais Eficientes**
-Evitamos duplicação desnecessária de código. Uma única lógica bem escrita pode ser executada quantas vezes necessário.
-
-### 4. **Menos Propensos a Erros**
-Uma única implementação correta elimina a possibilidade de erros de cópia e cola que poderiam surgir ao duplicar código manualmente.
-
-## O Conceito Fundamental: Repetição Controlada
-
-Todos os loops, independentemente de sua sintaxe específica, compartilham um conceito fundamental: **execução repetitiva controlada por uma condição de parada**.
-
-Pense nos loops como um conjunto de instruções que você segue repetidamente até que uma condição específica seja satisfeita. É como uma receita que diz "continue batendo os ovos até que a mistura fique homogênea" - você repete a ação até alcançar o resultado desejado.
-
-### Componentes Essenciais de Todo Loop
-
-Embora a sintaxe varie, todos os loops precisam de três elementos:
-
-1. **Inicialização**: Configurar o ponto de partida
-2. **Condição**: Determinar quando parar
-3. **Atualização**: Modificar algo para eventualmente satisfazer a condição de parada
-
-Vamos explorar como cada tipo de loop implementa esses conceitos.
-
----
-
-## Os Três Tipos Principais de Loops em JavaScript
-
-JavaScript oferece três estruturas principais de repetição, cada uma adequada para situações específicas. Embora sejam amplamente intercambiáveis, entender suas particularidades ajuda a escolher a ferramenta certa para cada trabalho.
-
-## 1. Loop `while` - Repetição Baseada em Condição
-
-O loop `while` é o mais simples conceitualmente. Ele diz: "**enquanto** esta condição for verdadeira, continue executando este código."
-
-### Sintaxe Básica
+### Aspas Simples (`'`)
 
 ```javascript
-while (condição) {
-    // código a ser executado
-}
+let mensagem = 'Olá, pessoal!';
+let cidade = 'São Paulo';
 ```
 
-### Estrutura Completa
+**Quando usar:** Para strings simples e diretas, especialmente quando o texto contém aspas duplas naturalmente.
 
 ```javascript
-// 1. INICIALIZAÇÃO (antes do loop)
-let contador = 0;
-
-// 2. CONDIÇÃO (testada antes de cada execução)
-while (contador < 5) {
-    console.log("Número: " + contador);
-    
-    // 3. ATUALIZAÇÃO (dentro do loop)
-    contador++;
-}
+let frase = 'Ele disse: "Bom dia!"'; // Aspas duplas dentro funcionam
 ```
 
-**Saída:**
-```
-Número: 0
-Número: 1
-Número: 2
-Número: 3
-Número: 4
-```
-
-### Como o `while` Funciona
-
-O loop `while` verifica a condição **antes** de cada iteração. Se a condição for verdadeira, o código é executado. Se for falsa, o loop termina imediatamente.
-
-**Fluxograma mental:**
-1. Verificar condição
-2. Se verdadeira → executar código → voltar ao passo 1
-3. Se falsa → sair do loop
-
-### Quando Usar `while`
-
-O `while` é ideal quando:
-- Você não sabe exatamente quantas iterações serão necessárias
-- A condição de parada depende de algo que acontece durante a execução
-- A lógica é mais clara expressando "enquanto isso for verdade"
-
-### Exemplo Prático: Validação de Entrada
+### Aspas Duplas (`"`)
 
 ```javascript
-let senha = "";
-let tentativas = 0;
-const senhaCorreta = "javascript123";
-
-while (senha !== senhaCorreta && tentativas < 3) {
-    senha = prompt("Digite a senha:");
-    tentativas++;
-    
-    if (senha === senhaCorreta) {
-        console.log("Acesso permitido!");
-    } else if (tentativas < 3) {
-        console.log("Senha incorreta. Tente novamente.");
-    } else {
-        console.log("Número máximo de tentativas excedido.");
-    }
-}
+let mensagem = "Olá, pessoal!";
+let cidade = "São Paulo";
 ```
 
-### ⚠️ Cuidado com Loops Infinitos!
-
-Um dos erros mais comuns ao usar `while` é esquecer de atualizar a condição, criando um **loop infinito** que nunca termina:
+**Quando usar:** Funciona exatamente como aspas simples. A escolha entre aspas simples e duplas é geralmente uma questão de preferência pessoal ou padrão do projeto.
 
 ```javascript
-// ❌ EVITE ISSO - Loop infinito!
-let i = 0;
-while (i < 5) {
-    console.log(i);
-    // Esqueceu de incrementar i!
-}
+let frase = "É um dia maravilhoso!"; // Apóstrofo funciona naturalmente
 ```
 
-**Por que loops infinitos são problemáticos?** Eles podem travar completamente seu programa ou navegador, pois o código nunca satisfaz a condição de parada. O programa fica "preso" executando o mesmo código indefinidamente.
-
-**Solução:** Sempre certifique-se de que algo dentro do loop eventualmente tornará a condição falsa:
+### Template Literals (Crases `` ` ``)
 
 ```javascript
-// ✅ CORRETO
-let i = 0;
-while (i < 5) {
-    console.log(i);
-    i++; // Incrementa i, aproximando-se da condição de parada
-}
+let nome = "Carlos";
+let idade = 25;
+let mensagem = `Meu nome é ${nome} e tenho ${idade} anos.`;
+console.log(mensagem); // "Meu nome é Carlos e tenho 25 anos."
 ```
 
-## Loop `do...while` - Execute Primeiro, Pergunte Depois
+**Quando usar:** Template literals são a forma moderna e mais poderosa. Use quando precisar:
+- Inserir variáveis no texto (interpolação)
+- Criar textos com múltiplas linhas
+- Realizar cálculos dentro do texto
 
-O `do...while` é uma variação do `while` com uma diferença crucial: ele **garante que o código seja executado pelo menos uma vez**, pois a verificação da condição acontece no final, não no início.
+## Template Literals: O Poder da Interpolação
 
-### Sintaxe Básica
+### Interpolação de Variáveis
+
+**Interpolação** significa inserir valores de variáveis diretamente dentro de uma string. É como ter espaços em branco em uma frase que são preenchidos automaticamente.
 
 ```javascript
-do {
-    // código a ser executado
-} while (condição);
+let produto = "Notebook";
+let preco = 3500;
+let mensagem = `O ${produto} custa R$ ${preco}`;
+console.log(mensagem); // "O Notebook custa R$ 3500"
 ```
 
-### Estrutura Completa
+**Por que isso é melhor que concatenação?**
 
 ```javascript
-let contador = 0;
+// Forma antiga (concatenação)
+let mensagem1 = "O " + produto + " custa R$ " + preco;
 
-do {
-    console.log("Número: " + contador);
-    contador++;
-} while (contador < 5);
+// Forma moderna (interpolação)
+let mensagem2 = `O ${produto} custa R$ ${preco}`;
 ```
 
-### A Diferença Fundamental
+A interpolação é mais legível, menos propensa a erros e mais fácil de manter.
 
-**`while`**: Testa a condição **antes** da primeira execução
-- Se a condição for falsa desde o início, o código nunca executa
+### Expressões JavaScript dentro de Strings
 
-**`do...while`**: Testa a condição **depois** da primeira execução
-- O código sempre executa pelo menos uma vez, mesmo se a condição for falsa
-
-### Comparação Prática
+Dentro de `${}` você pode colocar qualquer expressão JavaScript válida:
 
 ```javascript
-// Exemplo 1: while
-let x = 10;
-while (x < 5) {
-    console.log("Este código nunca será executado");
-}
-// Saída: (nada)
+let produto = "Mouse";
+let preco = 50;
+let quantidade = 3;
 
-// Exemplo 2: do...while
-let y = 10;
-do {
-    console.log("Este código será executado uma vez");
-} while (y < 5);
-// Saída: Este código será executado uma vez
+let total = `Total: R$ ${preco * quantidade}`;
+console.log(total); // "Total: R$ 150"
+
+let desconto = `Preço com desconto: R$ ${preco - (preco * 0.1)}`;
+console.log(desconto); // "Preço com desconto: R$ 45"
 ```
 
-### Quando Usar `do...while`
+### Strings Multilinhas
 
-O `do...while` é perfeito para situações onde você precisa:
-- Executar o código pelo menos uma vez antes de verificar se deve continuar
-- Coletar entrada do usuário e validá-la depois
-- Garantir uma primeira execução independente da condição
-
-### Exemplo Prático: Menu Interativo
+Template literals permitem criar textos com várias linhas naturalmente:
 
 ```javascript
-let opcao;
+let email = `
+Olá, ${nome}!
 
-do {
-    console.log("\n=== MENU PRINCIPAL ===");
-    console.log("1. Ver saldo");
-    console.log("2. Fazer depósito");
-    console.log("3. Fazer saque");
-    console.log("4. Sair");
-    
-    opcao = prompt("Escolha uma opção:");
-    
-    // Processar opção escolhida
-    switch(opcao) {
-        case "1":
-            console.log("Saldo: R$ 1.500,00");
-            break;
-        case "2":
-            console.log("Depósito realizado");
-            break;
-        case "3":
-            console.log("Saque realizado");
-            break;
-        case "4":
-            console.log("Até logo!");
-            break;
-        default:
-            console.log("Opção inválida");
-    }
-    
-} while (opcao !== "4");
+Bem-vindo ao nosso sistema.
+Estamos felizes em tê-lo conosco.
+
+Atenciosamente,
+Equipe de Suporte
+`;
 ```
 
-Neste exemplo, queremos mostrar o menu pelo menos uma vez, independentemente de qualquer condição prévia. O `do...while` é perfeito para isso.
-
-## Loop `for` - O Loop Mais Concentrado
-
-O loop `for` é considerado o mais "concentrado" porque reúne todos os três componentes essenciais (inicialização, condição e atualização) em uma única declaração. É o loop mais comumente usado, especialmente quando você sabe exatamente quantas iterações precisa.
-
-### Sintaxe Básica
+**Importante:** Aspas simples e duplas não suportam múltiplas linhas naturalmente!
 
 ```javascript
-for (inicialização; condição; expressão-final) {
-    // código a ser executado
-}
+// Isso causará ERRO:
+let errado = "Primeira linha
+Segunda linha";
+
+// Forma correta com aspas (usando \n):
+let correto = "Primeira linha\nSegunda linha";
 ```
 
-### Estrutura Detalhada
+## Caracteres Especiais: Sequências de Escape
+
+Às vezes precisamos incluir caracteres especiais em strings. Para isso, usamos a **barra invertida** (`\`) seguida de um código. Chamamos isso de "sequência de escape".
+
+### Principais Sequências de Escape
 
 ```javascript
-for (let i = 0; i < 5; i++) {
-    console.log("Iteração: " + i);
-}
+// Nova linha
+let texto1 = "Primeira linha\nSegunda linha";
+console.log(texto1);
+/* Saída:
+Primeira linha
+Segunda linha
+*/
+
+// Tabulação
+let texto2 = "Nome:\tJoão";
+console.log(texto2); // "Nome:    João"
+
+// Aspas dentro de aspas
+let texto3 = "Ela disse: \"Olá!\"";
+console.log(texto3); // 'Ela disse: "Olá!"'
+
+let texto4 = 'It\'s a beautiful day';
+console.log(texto4); // "It's a beautiful day"
+
+// Barra invertida
+let caminho = "C:\\Users\\Documents";
+console.log(caminho); // "C:\Users\Documents"
 ```
 
-Vamos dissecar cada parte:
+### Tabela de Sequências de Escape
 
-1. **`let i = 0`** (Inicialização)
-   - Executado **uma única vez** antes do loop começar
-   - Define o ponto de partida
-   - Normalmente cria a variável de controle
+| Sequência | Significado | Exemplo |
+|-----------|-------------|---------|
+| `\n` | Nova linha | `"Linha 1\nLinha 2"` |
+| `\t` | Tabulação (tab) | `"Nome\tIdade"` |
+| `\"` | Aspas duplas | `"Disse: \"Oi\""` |
+| `\'` | Aspas simples | `'It\'s ok'` |
+| `\\` | Barra invertida | `"C:\\pasta"` |
 
-2. **`i < 5`** (Condição)
-   - Testada **antes de cada iteração**
-   - Se verdadeira, o código executa
-   - Se falsa, o loop termina
+**Conceito importante:** Sequências de escape são necessárias porque alguns caracteres têm significados especiais em strings e precisamos "escapar" desse significado especial para usá-los literalmente.
 
-3. **`i++`** (Expressão Final)
-   - Executada **depois de cada iteração**
-   - Normalmente atualiza a variável de controle
-   - Aproxima a condição do ponto de término
+## Concatenação: Juntando Strings
 
-### Como o `for` Funciona - Passo a Passo
+**Concatenação** é o ato de juntar duas ou mais strings para formar uma nova string. É como colar palavras uma após a outra.
 
-Vamos acompanhar em detalhes a execução de um loop `for`:
+### Usando o Operador `+`
 
 ```javascript
-for (let i = 0; i < 3; i++) {
-    console.log("Valor de i: " + i);
-}
+let nome = "Ana";
+let sobrenome = "Silva";
+let nomeCompleto = nome + " " + sobrenome;
+console.log(nomeCompleto); // "Ana Silva"
 ```
 
-**Execução:**
+### Concatenando com Variáveis de Diferentes Tipos
 
-1. **Antes do loop**: `let i = 0` → i recebe 0
-2. **Iteração 1**:
-   - Verificar: `i < 3`? (0 < 3?) → Sim ✓
-   - Executar: `console.log("Valor de i: 0")`
-   - Atualizar: `i++` → i se torna 1
-
-3. **Iteração 2**:
-   - Verificar: `i < 3`? (1 < 3?) → Sim ✓
-   - Executar: `console.log("Valor de i: 1")`
-   - Atualizar: `i++` → i se torna 2
-
-4. **Iteração 3**:
-   - Verificar: `i < 3`? (2 < 3?) → Sim ✓
-   - Executar: `console.log("Valor de i: 2")`
-   - Atualizar: `i++` → i se torna 3
-
-5. **Tentativa de Iteração 4**:
-   - Verificar: `i < 3`? (3 < 3?) → Não ✗
-   - **Loop termina**
-
-**Saída:**
-```
-Valor de i: 0
-Valor de i: 1
-Valor de i: 2
-```
-
-### Variações do Loop `for`
-
-Uma característica interessante do `for` é que qualquer uma de suas partes pode ser omitida (embora isso seja raro na prática):
+JavaScript automaticamente converte outros tipos para string durante a concatenação:
 
 ```javascript
-// Inicializador externo
-let i = 0;
-for (; i < 3; i++) {
-    console.log(i);
-}
-
-// Sem incremento automático
-let j = 0;
-for (; j < 3;) {
-    console.log(j);
-    j++;
-}
-
-// Loop infinito (use com MUITO cuidado!)
-for (;;) {
-    console.log("Este é um loop infinito");
-    break; // necessário para sair!
-}
-```
-
-### Quando Usar `for`
-
-O `for` é ideal quando:
-- Você sabe exatamente quantas iterações são necessárias
-- Precisa de um contador explícito
-- Trabalha com arrays e índices numéricos
-- Quer toda a lógica de controle visível em um só lugar
-
-### Exemplos Práticos
-
-#### Exemplo 1: Contagem Regressiva
-
-```javascript
-console.log("Iniciando contagem regressiva:");
-
-for (let i = 10; i >= 1; i--) {
-    console.log(i);
-}
-
-console.log("Lançamento! 🚀");
-```
-
-**Saída:**
-```
-Iniciando contagem regressiva:
-10
-9
-8
-7
-6
-5
-4
-3
-2
-1
-Lançamento! 🚀
-```
-
-#### Exemplo 2: Calculando Fatorial
-
-```javascript
+let texto = "Capítulo ";
 let numero = 5;
-let fatorial = 1;
-
-for (let i = 1; i <= numero; i++) {
-    fatorial = fatorial * i;
-    console.log(`${i}! = ${fatorial}`);
-}
-
-console.log(`\nO fatorial de ${numero} é ${fatorial}`);
+let resultado = texto + numero;
+console.log(resultado); // "Capítulo 5"
 ```
 
-**Saída:**
-```
-1! = 1
-2! = 2
-3! = 6
-4! = 24
-5! = 120
+### Um Comportamento Importante: `+` vs `-`
 
-O fatorial de 5 é 120
-```
-
-#### Exemplo 3: Criando Padrões Visuais
+Este é um conceito crucial para entender como JavaScript trabalha:
 
 ```javascript
-// Criando um triângulo de asteriscos
-let altura = 5;
-
-for (let i = 1; i <= altura; i++) {
-    let linha = "";
-    
-    for (let j = 1; j <= i; j++) {
-        linha += "* ";
-    }
-    
-    console.log(linha);
-}
+console.log("5" + 1);  // "51" (concatenação)
+console.log("5" - 1);  // 4 (subtração numérica)
 ```
 
-**Saída:**
-```
-* 
-* * 
-* * * 
-* * * * 
-* * * * * 
-```
-
-Este exemplo demonstra **loops aninhados** - um loop dentro de outro. O loop externo controla as linhas, enquanto o loop interno controla quantos asteriscos em cada linha.
-
-#### Exemplo 4: Soma de Números em Intervalo
+**Por quê?** O operador `+` tem um significado especial com strings (concatenação), mas o operador `-` não. Quando JavaScript vê `-`, ele tenta converter tudo para números.
 
 ```javascript
-let inicio = 1;
-let fim = 10;
-let soma = 0;
-
-for (let i = inicio; i <= fim; i++) {
-    soma += i;
-}
-
-console.log(`A soma dos números de ${inicio} a ${fim} é: ${soma}`);
+console.log("10" + 5);     // "105" (string)
+console.log("10" - 5);     // 5 (número)
+console.log("10" * 2);     // 20 (número)
+console.log("10" / 2);     // 5 (número)
 ```
 
-**Saída:**
-```
-A soma dos números de 1 a 10 é: 55
-```
+**Implicação prática:** Tenha cuidado ao trabalhar com valores de formulários HTML, pois eles sempre vêm como strings!
 
----
+## Propriedades e Métodos Essenciais
 
-## Controlando o Fluxo: `break` e `continue`
+Strings em JavaScript são objetos especiais que vêm com diversas ferramentas integradas. Vamos explorar as mais importantes.
 
-Às vezes, você precisa de controle mais fino sobre a execução do loop. JavaScript fornece duas instruções especiais para isso: `break` e `continue`.
+### Propriedade `length` - Comprimento da String
 
-### Instrução `break` - Sair Completamente
-
-A instrução `break` permite sair de um loop **imediatamente**, independentemente da condição. É como encontrar o que você procura e não precisar continuar procurando.
-
-#### Sintaxe
+A propriedade `length` retorna quantos caracteres existem na string:
 
 ```javascript
-for (let i = 0; i < 10; i++) {
-    if (i === 5) {
-        break; // Para o loop quando i for igual a 5
-    }
-    console.log(i);
-}
+let palavra = "JavaScript";
+console.log(palavra.length); // 10
+
+let frase = "Olá, mundo!";
+console.log(frase.length); // 11 (espaços e pontuação contam!)
+
+let vazia = "";
+console.log(vazia.length); // 0
 ```
 
-**Saída:**
-```
-0
-1
-2
-3
-4
-```
+**Por que é útil?**
+- Validar tamanho de senhas
+- Limitar caracteres em formulários
+- Contar palavras em textos
 
-Note que 5 e os números seguintes não são exibidos - o loop terminou quando `i` chegou a 5.
+### Acessando Caracteres Individuais
 
-#### Exemplo Prático: Busca em Lista
+Strings funcionam como arrays de caracteres. Cada caractere tem uma posição (índice) começando do zero:
 
 ```javascript
-let numeros = [2, 8, 15, 23, 42, 7, 13];
-let numeroProcurado = 23;
-let encontrado = false;
-let posicao = -1;
+let nome = "Maria";
+//         01234  (posições/índices)
 
-for (let i = 0; i < numeros.length; i++) {
-    if (numeros[i] === numeroProcurado) {
-        encontrado = true;
-        posicao = i;
-        break; // Encontrou, não precisa continuar procurando
-    }
+console.log(nome[0]); // "M"
+console.log(nome[1]); // "a"
+console.log(nome[4]); // "a"
+```
+
+**Acessando o último caractere:**
+
+```javascript
+let palavra = "Programação";
+let ultimo = palavra[palavra.length - 1];
+console.log(ultimo); // "o"
+```
+
+**Por que `length - 1`?** Porque os índices começam em 0, então o último caractere está na posição (tamanho - 1).
+
+### Método `includes()` - Verificar se Contém Texto
+
+Verifica se uma string contém outra string dentro dela:
+
+```javascript
+let frase = "Eu adoro programar em JavaScript";
+
+console.log(frase.includes("JavaScript")); // true
+console.log(frase.includes("Python"));      // false
+console.log(frase.includes("programar"));   // true
+```
+
+**Caso prático: Sistema de busca**
+
+```javascript
+let produto = "Notebook Dell Inspiron 15";
+let termoBusca = "dell";
+
+if (produto.toLowerCase().includes(termoBusca.toLowerCase())) {
+    console.log("Produto encontrado!");
 }
+```
 
-if (encontrado) {
-    console.log(`Número ${numeroProcurado} encontrado na posição ${posicao}`);
+### Métodos `startsWith()` e `endsWith()`
+
+Verificam se uma string começa ou termina com determinado texto:
+
+```javascript
+let arquivo = "relatorio.pdf";
+
+console.log(arquivo.startsWith("relatorio")); // true
+console.log(arquivo.endsWith(".pdf"));        // true
+console.log(arquivo.endsWith(".doc"));        // false
+```
+
+**Caso prático: Validação de tipos de arquivo**
+
+```javascript
+let nomeArquivo = "imagem.jpg";
+
+if (nomeArquivo.endsWith(".jpg") || nomeArquivo.endsWith(".png")) {
+    console.log("Arquivo de imagem válido!");
 } else {
-    console.log(`Número ${numeroProcurado} não encontrado`);
+    console.log("Tipo de arquivo não suportado.");
 }
 ```
 
-**Por que usar `break` aqui?** Uma vez que encontramos o número, não há razão para continuar verificando o resto da lista. O `break` torna o código mais eficiente.
+### Método `indexOf()` - Encontrar Posição
 
-#### Exemplo: Primeiro Número Maior que um Valor
+Retorna a posição (índice) da primeira ocorrência de um texto dentro de uma string. Se não encontrar, retorna `-1`:
 
 ```javascript
-let numeros = [2, 8, 15, 23, 42, 7, 13];
-let limite = 20;
+let frase = "JavaScript é incrível, JavaScript é poderoso";
 
-console.log(`Procurando o primeiro número maior que ${limite}:`);
-
-for (let i = 0; i < numeros.length; i++) {
-    if (numeros[i] > limite) {
-        console.log(`Encontrado: ${numeros[i]} na posição ${i}`);
-        break;
-    }
-}
+console.log(frase.indexOf("JavaScript"));    // 0 (primeira ocorrência)
+console.log(frase.indexOf("Python"));        // -1 (não encontrado)
+console.log(frase.indexOf("é"));             // 11
 ```
 
-**Saída:**
-```
-Procurando o primeiro número maior que 20:
-Encontrado: 23 na posição 3
-```
-
-### Instrução `continue` - Pular para a Próxima Iteração
-
-Ao contrário do `break`, que sai completamente do loop, o `continue` **pula apenas a iteração atual** e vai direto para a próxima. É como dizer "ignore este item e vá para o próximo".
-
-#### Sintaxe
+**Buscar a partir de uma posição:**
 
 ```javascript
-for (let i = 0; i < 10; i++) {
-    if (i % 2 === 0) {
-        continue; // Pula números pares
-    }
-    console.log(i);
-}
+let texto = "JavaScript é incrível, JavaScript é poderoso";
+console.log(texto.indexOf("JavaScript", 15)); // 23 (segunda ocorrência)
 ```
 
-**Saída:**
-```
-1
-3
-5
-7
-9
-```
+### Método `slice()` - Extrair Parte da String
 
-Os números pares (0, 2, 4, 6, 8) foram pulados - quando a condição `i % 2 === 0` foi verdadeira, o `continue` fez o loop pular direto para a próxima iteração.
-
-#### Exemplo Prático: Processando Apenas Elementos Válidos
+Extrai uma parte da string criando uma nova string:
 
 ```javascript
-let temperaturas = [20, -5, 30, 150, 25, -10, 35];
-let tempMin = 0;
-let tempMax = 50;
+let palavra = "Programação";
+//            0123456789...
 
-console.log(`Temperaturas válidas (entre ${tempMin}°C e ${tempMax}°C):`);
-
-for (let i = 0; i < temperaturas.length; i++) {
-    // Pula temperaturas fora do intervalo válido
-    if (temperaturas[i] < tempMin || temperaturas[i] > tempMax) {
-        continue;
-    }
-    
-    console.log(temperaturas[i] + "°C");
-}
+console.log(palavra.slice(0, 8));  // "Programa"
+console.log(palavra.slice(8));      // "ção"
+console.log(palavra.slice(-4));     // "ação" (conta de trás pra frente)
 ```
 
-**Saída:**
-```
-Temperaturas válidas (entre 0°C e 50°C):
-20°C
-30°C
-25°C
-35°C
-```
+**Sintaxe:** `slice(início, fim)` - extrai do início até fim (não incluindo o fim)
 
-As temperaturas -5, 150 e -10 foram ignoradas por estarem fora do intervalo válido.
-
-#### Exemplo: Filtrando Dados ao Processar
+**Caso prático: Pegar primeiras palavras**
 
 ```javascript
-let usuarios = [
-    { nome: "Ana", idade: 25, ativo: true },
-    { nome: "Bruno", idade: 17, ativo: true },
-    { nome: "Carlos", idade: 30, ativo: false },
-    { nome: "Diana", idade: 22, ativo: true }
-];
-
-console.log("Usuários ativos maiores de 18 anos:");
-
-for (let i = 0; i < usuarios.length; i++) {
-    // Pula usuários inativos
-    if (!usuarios[i].ativo) {
-        continue;
-    }
-    
-    // Pula menores de idade
-    if (usuarios[i].idade < 18) {
-        continue;
-    }
-    
-    console.log(`- ${usuarios[i].nome} (${usuarios[i].idade} anos)`);
-}
+let texto = "JavaScript é uma linguagem incrível";
+let primeiraParte = texto.slice(0, 10);
+console.log(primeiraParte + "..."); // "JavaScript..."
 ```
 
-**Saída:**
-```
-Usuários ativos maiores de 18 anos:
-- Ana (25 anos)
-- Diana (22 anos)
-```
+### Métodos `toLowerCase()` e `toUpperCase()`
 
-### Quando Usar `break` vs `continue`
-
-**Use `break` quando:**
-- Você encontrou o que procura e não precisa continuar
-- Uma condição de erro exige encerramento imediato
-- Você quer otimizar saindo do loop mais cedo
-
-**Use `continue` quando:**
-- Quer pular elementos que não atendem critérios específicos
-- Precisa filtrar dados durante o processamento
-- Quer evitar aninhamento excessivo de `if`
-
-## Loops Aninhados - Loops Dentro de Loops
-
-Loops podem conter outros loops dentro deles. Isso é chamado de **aninhamento** (nesting) e é extremamente útil para trabalhar com estruturas bidimensionais ou realizar operações complexas.
-
-### Conceito Básico
+Convertem toda a string para minúsculas ou maiúsculas:
 
 ```javascript
-for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 3; j++) {
-        console.log(`i = ${i}, j = ${j}`);
-    }
-}
+let nome = "JavaScript";
+
+console.log(nome.toLowerCase()); // "javascript"
+console.log(nome.toUpperCase()); // "JAVASCRIPT"
 ```
 
-**Saída:**
-```
-i = 0, j = 0
-i = 0, j = 1
-i = 0, j = 2
-i = 1, j = 0
-i = 1, j = 1
-i = 1, j = 2
-i = 2, j = 0
-i = 2, j = 1
-i = 2, j = 2
-```
-
-**Como funciona:**
-- O loop externo (i) executa uma vez
-- Para cada execução do loop externo, o loop interno (j) executa completamente
-- Quando o loop interno termina, o loop externo avança para a próxima iteração
-
-### Exemplo Prático: Tabuada Completa
+**Por que é importante?** Para comparações sem diferenciar maiúsculas/minúsculas:
 
 ```javascript
-console.log("=== TABUADA DO 1 AO 5 ===\n");
+let senha = "SenhaSecreta123";
+let confirmacao = "senhasecreta123";
 
-for (let i = 1; i <= 5; i++) {
-    console.log(`Tabuada do ${i}:`);
-    
-    for (let j = 1; j <= 10; j++) {
-        console.log(`${i} x ${j} = ${i * j}`);
-    }
-    
-    console.log(""); // Linha em branco entre tabuadas
+if (senha.toLowerCase() === confirmacao.toLowerCase()) {
+    console.log("Senhas coincidem!");
 }
 ```
 
-### Exemplo: Matriz de Números
+### Métodos `replace()` e `replaceAll()`
+
+Substituem partes de uma string por outro texto:
 
 ```javascript
-let linhas = 4;
-let colunas = 5;
-
-for (let i = 0; i < linhas; i++) {
-    let linha = "";
-    
-    for (let j = 0; j < colunas; j++) {
-        let numero = (i * colunas) + j + 1;
-        linha += numero.toString().padStart(3, " ") + " ";
-    }
-    
-    console.log(linha);
-}
+let frase = "Eu gosto de café";
+let novaFrase = frase.replace("café", "chá");
+console.log(novaFrase); // "Eu gosto de chá"
 ```
 
-**Saída:**
-```
-  1   2   3   4   5 
-  6   7   8   9  10 
- 11  12  13  14  15 
- 16  17  18  19  20
-```
-
-## Qual Loop Escolher?
-
-Para muitos problemas, os loops `for`, `while` e `do...while` são **amplamente intercambiáveis**. Todos podem resolver os mesmos problemas - a escolha depende principalmente do contexto e da clareza do código.
-
-### Princípio da Escolha
-
-Cada tipo de loop é otimizado para diferentes **padrões de controle de iteração**. Escolher o loop certo torna seu código mais legível e expressa melhor sua intenção.
-
-### Diretrizes Práticas
-
-#### Use `for` quando:
-- ✓ Você souber o número exato de iterações
-- ✓ Trabalhar com índices de arrays
-- ✓ Precisar de um contador explícito
+**Diferença entre `replace()` e `replaceAll()`:**
 
 ```javascript
-// Processar todos os elementos de um array
-for (let i = 0; i < array.length; i++) {
-    ++array[i]
-}
+let texto = "Java é bom, Java é útil";
+
+// replace() substitui apenas a primeira ocorrência
+console.log(texto.replace("Java", "JavaScript"));
+// "JavaScript é bom, Java é útil"
+
+// replaceAll() substitui todas as ocorrências
+console.log(texto.replaceAll("Java", "JavaScript"));
+// "JavaScript é bom, JavaScript é útil"
 ```
 
-#### Use `while` quando:
-- ✓ A condição de parada for mais complexa
-- ✓ O número de iterações depender de algo que acontece durante a execução
-- ✓ A lógica for mais clara expressando "enquanto isso for verdade"
+## Conceito Fundamental: Imutabilidade de Strings
+
+Um conceito crucial que você precisa entender:
+
+### Strings são IMUTÁVEIS
+
+Isso significa que uma vez criada, uma string não pode ser modificada. Todos os métodos que "modificam" uma string na verdade criam e retornam uma NOVA string.
 
 ```javascript
-// Continuar até o jogador decidir sair
-while (jogadorQuerContinuar && vidasRestantes > 0) {
-    // Código
-}
+let original = "JavaScript";
+let modificada = original.toUpperCase();
+
+console.log(original);   // "JavaScript" (permanece inalterada!)
+console.log(modificada); // "JAVASCRIPT" (nova string)
 ```
 
-#### Use `do...while` quando:
-- ✓ Precisar executar o código pelo menos uma vez
-- ✓ Coletar entrada do usuário antes de validar
-- ✓ Garantir uma primeira execução independente
+**Por que isso importa?**
 
 ```javascript
-// Mostrar menu e pedir opção pelo menos uma vez
-do {
-    // Código para mostrar menu e obter opção
-} while (opcao !== "sair");
+let nome = "maria";
+nome.toUpperCase(); // Isso NÃO modifica nome!
+console.log(nome); // Ainda é "maria"
+
+// Forma correta:
+nome = nome.toUpperCase();
+console.log(nome); // Agora é "MARIA"
 ```
 
-### Exemplo de Intercambiabilidade
-
-O mesmo problema resolvido com diferentes loops:
+**Ou usando outra variável:**
 
 ```javascript
-// Problema: Somar números de 1 a 10
-
-// Solução 1: for
-let soma1 = 0;
-for (let i = 1; i <= 10; i++) {
-    soma1 += i;
-}
-
-// Solução 2: while
-let soma2 = 0;
-let i = 1;
-while (i <= 10) {
-    soma2 += i;
-    i++;
-}
-
-// Solução 3: do...while
-let soma3 = 0;
-let j = 1;
-do {
-    soma3 += j;
-    j++;
-} while (j <= 10);
-
-// Todas as soluções produzem: 55
+let nomeOriginal = "maria";
+let nomeMaiusculo = nomeOriginal.toUpperCase();
+console.log(nomeOriginal);  // "maria"
+console.log(nomeMaiusculo); // "MARIA"
 ```
 
-Neste caso, o `for` é provavelmente a escolha mais clara porque expressa diretamente a intenção: "repetir 10 vezes".
+## Conversão Entre Tipos
 
-## Boas Práticas com Loops
+### String para Número
 
-### 1. Sempre Evite Loops Infinitos
-
-**Problema:**
 ```javascript
-// ❌ INCORRETO - Loop infinito
-for (let i = 0; i < 10; /* esqueceu i++ */) {
-    console.log(i);
-}
+let textoNumero = "42";
+let numero = Number(textoNumero);
+
+console.log(typeof textoNumero); // "string"
+console.log(typeof numero);      // "number"
+
+// Agora pode fazer operações matemáticas
+console.log(numero + 8); // 50
 ```
 
-**Solução:**
+**Cuidado com valores inválidos:**
+
 ```javascript
-// ✅ CORRETO
-for (let i = 0; i < 10; i++) {
-    console.log(i);
-}
+let invalido = Number("abc");
+console.log(invalido); // NaN (Not a Number)
 ```
 
-**Por quê?** Loops infinitos podem travar completamente seu programa ao nunca satisfazer a condição de parada. Sempre certifique-se de que a condição eventualmente se tornará falsa.
+### Número para String
 
-### 2. Use Nomes Descritivos para Variáveis de Controle
-
-**Ruim:**
 ```javascript
-// ❌ Nomes genéricos não comunicam intenção
-for (let i = 0; i < estudantes.length; i++) {
-    console.log(estudantes[i]);
-}
+let numero = 123;
+let texto = String(numero);
+
+console.log(typeof numero); // "number"
+console.log(typeof texto);  // "string"
+
+// Ou usando toString()
+let texto2 = numero.toString();
 ```
 
-**Melhor:**
+## Exemplos Práticos
+
+### Exemplo 1: Formatação de Nome
+
 ```javascript
-// ✅ Nomes descritivos melhoram legibilidade
-for (let indiceEstudante = 0; indiceEstudante < estudantes.length; indiceEstudante++) {
-    console.log(estudantes[indiceEstudante]);
-}
+// Problema: Usuário digitou nome todo em maiúsculas
+let nomeUsuario = "JOÃO DA SILVA";
+
+// Solução: Primeira letra maiúscula, resto minúscula
+let nomeMinusculo = nomeUsuario.toLowerCase();
+let primeiraLetra = nomeMinusculo[0].toUpperCase();
+let restoDoNome = nomeMinusculo.slice(1);
+let nomeFormatado = primeiraLetra + restoDoNome;
+
+console.log(nomeFormatado); // "João da silva"
 ```
 
-**Por quê?** Nomes descritivos **melhoram legibilidade e manutenibilidade do código**. Quando você ou outra pessoa ler o código meses depois, ficará claro o que cada variável representa.
-
-**Exceção:** Em loops simples e curtos, `i`, `j`, `k` são aceitáveis por convenção:
+### Exemplo 2: Validação Simples de Email
 
 ```javascript
-// ✅ OK para loops simples
-for (let i = 0; i < 10; i++) {
-    console.log(i);
-}
-```
+let email = "usuario@email.com";
 
-### 4. Otimize Cálculos Repetitivos
+// Verificar se contém @ e .
+let temArroba = email.includes("@");
+let temPonto = email.includes(".");
+let posicaoArroba = email.indexOf("@");
+let posicaoPonto = email.lastIndexOf(".");
 
-**Menos Eficiente:**
-```javascript
-// ❌ array.length é calculado a cada iteração
-for (let i = 0; i < array.length; i++) {
-    ++array[i]
-}
-```
+// Email válido se:
+// - Tem @ e .
+// - @ vem antes do .
+// - Tem pelo menos 1 caractere antes do @
+let emailValido = temArroba && 
+                  temPonto && 
+                  posicaoArroba > 0 && 
+                  posicaoPonto > posicaoArroba;
 
-**Mais Eficiente:**
-```javascript
-// ✅ tamanho é calculado apenas uma vez
-let tamanho = array.length;
-for (let i = 0; i < tamanho; i++) {
-    ++array[i]
-}
-```
-
-**Por quê?** O princípio que orienta a otimização de performance em loops é **minimizar cálculos repetitivos desnecessários dentro do loop**. Embora JavaScript moderno otimize muitos casos automaticamente, é boa prática evitar trabalho redundante.
-
-### 5. Use `break` e `continue` com Moderação
-
-```javascript
-// Bom uso de continue - filtragem clara
-for (let i = 0; i < usuarios.length; i++) {
-    if (!usuarios[i].ativo) continue;
-    ++usuarios[i];
-}
-
-// Uso excessivo pode prejudicar legibilidade
-// Se você tem muitos continue/break, considere refatorar
-```
-
-## Aplicações Práticas no Mundo Real
-
-Vamos ver como loops são usados em situações reais de programação.
-
-### Aplicação 1: Sistema de Notas
-
-```javascript
-let notas = [7.5, 8.0, 6.5, 9.0, 7.0];
-let soma = 0;
-let maiorNota = notas[0];
-let menorNota = notas[0];
-
-// Calcular média e encontrar maior/menor nota
-for (let i = 0; i < notas.length; i++) {
-    soma += notas[i];
-    
-    if (notas[i] > maiorNota) {
-        maiorNota = notas[i];
-    }
-    
-    if (notas[i] < menorNota) {
-        menorNota = notas[i];
-    }
-}
-
-let media = soma / notas.length;
-
-console.log("=== ANÁLISE DE NOTAS ===");
-console.log(`Média: ${media.toFixed(2)}`);
-console.log(`Maior nota: ${maiorNota}`);
-console.log(`Menor nota: ${menorNota}`);
-console.log(`Status: ${media >= 7 ? "APROVADO" : "REPROVADO"}`);
-```
-
-### Aplicação 3: Gerador de Relatórios
-
-```javascript
-let vendas = [
-    { produto: "Notebook", valor: 3500, quantidade: 2 },
-    { produto: "Mouse", valor: 50, quantidade: 10 },
-    { produto: "Teclado", valor: 150, quantidade: 5 },
-    { produto: "Monitor", valor: 800, quantidade: 3 }
-];
-
-console.log("=== RELATÓRIO DE VENDAS ===\n");
-console.log("PRODUTO".padEnd(15) + "QTD".padEnd(8) + "VALOR UNIT.".padEnd(15) + "TOTAL");
-console.log("-".repeat(50));
-
-let totalGeral = 0;
-
-for (let i = 0; i < vendas.length; i++) {
-    let venda = vendas[i];
-    let totalItem = venda.valor * venda.quantidade;
-    totalGeral += totalItem;
-    
-    console.log(
-        venda.produto.padEnd(15) + 
-        venda.quantidade.toString().padEnd(8) + 
-        `R$ ${venda.valor.toFixed(2)}`.padEnd(15) + 
-        `R$ ${totalItem.toFixed(2)}`
-    );
-}
-
-console.log("-".repeat(50));
-console.log(`TOTAL GERAL: R$ ${totalGeral.toFixed(2)}`);
-```
-
-### Aplicação 4: Processamento de Estoque
-
-```javascript
-let estoque = [
-    { codigo: 101, nome: "Produto A", quantidade: 5, minimo: 10 },
-    { codigo: 102, nome: "Produto B", quantidade: 15, minimo: 10 },
-    { codigo: 103, nome: "Produto C", quantidade: 3, minimo: 5 },
-    { codigo: 104, nome: "Produto D", quantidade: 20, minimo: 15 }
-];
-
-console.log("=== ALERTA DE ESTOQUE BAIXO ===\n");
-
-let produtosBaixos = 0;
-
-for (let i = 0; i < estoque.length; i++) {
-    if (estoque[i].quantidade < estoque[i].minimo) {
-        produtosBaixos++;
-        let diferenca = estoque[i].minimo - estoque[i].quantidade;
-        
-        console.log(`⚠️  ${estoque[i].nome} (Cód: ${estoque[i].codigo})`);
-        console.log(`   Quantidade atual: ${estoque[i].quantidade}`);
-        console.log(`   Quantidade mínima: ${estoque[i].minimo}`);
-        console.log(`   Necessário repor: ${diferenca} unidades\n`);
-    }
-}
-
-if (produtosBaixos === 0) {
-    console.log("✓ Todos os produtos estão com estoque adequado!");
+if (emailValido) {
+    console.log("Email parece válido!");
 } else {
-    console.log(`Total de produtos com estoque baixo: ${produtosBaixos}`);
+    console.log("Email inválido!");
 }
 ```
 
-## Armadilhas Comuns e Como Evitá-las
-
-### Armadilha 1: Modificar o Contador Incorretamente
+### Exemplo 3: Extrair Extensão de Arquivo
 
 ```javascript
-// ❌ ERRADO - Pula números
-for (let i = 0; i < 10; i += 2) {
-    console.log(i);
-    // Saída: 0, 2, 4, 6, 8 (pulou os ímpares)
-}
+let nomeArquivo = "documento.pdf";
 
-// ✅ CORRETO - Para todos os números
-for (let i = 0; i < 10; i++) {
-    console.log(i);
+// Encontrar a posição do último ponto
+let posicaoUltimoPonto = nomeArquivo.lastIndexOf(".");
+
+// Extrair a extensão
+let extensao = nomeArquivo.slice(posicaoUltimoPonto + 1);
+
+console.log(`Extensão: ${extensao}`); // "Extensão: pdf"
+
+// Verificar tipo de arquivo
+if (extensao === "pdf" || extensao === "doc") {
+    console.log("Documento de texto");
+} else if (extensao === "jpg" || extensao === "png") {
+    console.log("Arquivo de imagem");
 }
 ```
 
-### Armadilha 2: Condição Que Nunca É Satisfeita
+### Exemplo 4: Criando uma Saudação Personalizada
 
 ```javascript
-// ❌ ERRADO - Loop infinito
-let i = 10;
-while (i < 5) {
-    console.log(i);
-    i++; // i nunca será menor que 5
+let nome = "Maria";
+let hora = 14; // 14:00 (2 da tarde)
+
+let periodo;
+if (hora < 12) {
+    periodo = "Bom dia";
+} else if (hora < 18) {
+    periodo = "Boa tarde";
+} else {
+    periodo = "Boa noite";
 }
 
-// ✅ CORRETO
-let i = 0;
-while (i < 5) {
-    console.log(i);
-    i++;
-}
+let saudacao = `${periodo}, ${nome}! Bem-vinda ao sistema.`;
+console.log(saudacao); // "Boa tarde, Maria! Bem-vinda ao sistema."
 ```
 
-### Armadilha 3: Acessar Índices Fora do Array
+## Boas Práticas ao Trabalhar com Strings
+
+### 1. Escolha Consistente de Aspas
 
 ```javascript
-let numeros = [10, 20, 30];
+// Escolha um estilo e mantenha em todo o projeto
+let opcao1 = 'Usando aspas simples';
+let opcao2 = "Usando aspas duplas";
 
-// ❌ ERRADO - Tenta acessar índice que não existe
-for (let i = 0; i <= numeros.length; i++) {
-    console.log(numeros[i]); // numeros[3] é undefined
-}
-
-// ✅ CORRETO - Para antes do limite
-for (let i = 0; i < numeros.length; i++) {
-    console.log(numeros[i]);
-}
+// Use template literals quando precisar de interpolação
+let nome = "João";
+let mensagem = `Olá, ${nome}!`; // Melhor que "Olá, " + nome + "!"
 ```
 
-### Armadilha 4: Modificar Array Durante Iteração
+### 2. Use Template Literals para Clareza
 
 ```javascript
-let numeros = [1, 2, 3, 4, 5];
+// ❌ Evite concatenação complexa
+let msg1 = "O " + produto + " custa R$ " + preco + " e está em " + status;
 
-// ❌ PERIGOSO - Modificar array durante iteração
-for (let i = 0; i < numeros.length; i++) {
-    if (numeros[i] % 2 === 0) {
-        numeros.splice(i, 1); // Remove elemento
-        // Isso desloca todos os elementos seguintes!
-    }
-}
-
-// ✅ MELHOR - Iterar de trás para frente
-for (let i = numeros.length - 1; i >= 0; i--) {
-    if (numeros[i] % 2 === 0) {
-        numeros.splice(i, 1);
-    }
-}
-
-// ✅ AINDA MELHOR - Criar novo array
-let impares = [];
-for (let i = 0; i < numeros.length; i++) {
-    if (numeros[i] % 2 !== 0) {
-        impares.push(numeros[i]);
-    }
-}
+// ✅ Prefira template literals
+let msg2 = `O ${produto} custa R$ ${preco} e está em ${status}`;
 ```
 
-As estruturas de repetição são ferramentas essenciais no arsenal de qualquer programador. Elas transformam tarefas que seriam impraticáveis manualmente em operações simples e eficientes.
+### 3. Lembre-se da Imutabilidade
 
-## Próximos Passos
+```javascript
+// ❌ Errado: modificação não é salva
+let texto = "javascript";
+texto.toUpperCase();
+console.log(texto); // Ainda é "javascript"
 
-Na próxima aula aprenderemos a criar nossas próprias funções. Você aprenderá:
-- A sitaxe da criação de funções
-- Como passar e retornar valores
-- O que é e como funciona o escopo
-- Boas práticas da criação de funções
+// ✅ Correto: salvar o resultado
+let texto = "javascript";
+texto = texto.toUpperCase();
+console.log(texto); // "JAVASCRIPT"
+```
 
-*Continue sua jornada de aprendizado e lembre-se: cada loop que você escreve está aprimorando suas habilidades de pensamento lógico e resolução de problemas!* 🚀
+### 4. Use Métodos Apropriados para Cada Tarefa
+
+```javascript
+// Para verificar se contém
+if (texto.includes("palavra")) { }
+
+// Para verificar início/fim
+if (arquivo.endsWith(".pdf")) { }
+
+// Para extrair partes
+let parte = texto.slice(0, 10);
+
+// Para substituir
+let novo = texto.replace("antigo", "novo");
+```
+
+## Próximos passos
+
+Na próxima aula você aprenderá sobre Estruturas de Repetição (loops):
+- Como automatizar tarefas repetitivas
+- Loop for tradicional
+- Loops while e do...while
+- Controle de fluxo com break e continue
+- Quando usar cada tipo de loop
+
+**Prepare-se para multiplicar o poder dos seus programas!** 💪
+
+*Lembre-se: programação é prática! Experimente cada conceito, teste os exemplos, crie variações e explore possibilidades*

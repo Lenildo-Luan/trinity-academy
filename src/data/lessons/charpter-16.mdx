@@ -1,551 +1,135 @@
-# Implementação do Sistema
+# Desenvolvendo um Sistema Completo em JavaScript
 
-Agora vamos construir o sistema passo a passo, explicando cada decisão.
+Parabéns por chegar até aqui! Ao longo das últimas 14 aulas, você construiu uma base sólida de conhecimentos em JavaScript: aprendeu sobre variáveis, tipos de dados, operadores, estruturas condicionais, loops, arrays, objetos e funções. Agora é hora de reunir todos esses conceitos em um projeto real e completo.
 
-## Iniciando o Acervo
+Nesse módulo, você vai desenvolver um **Sistema de Gerenciamento de Biblioteca**. Não se trata apenas de escrever código — você vai experimentar o processo completo de desenvolvimento de software: planejamento, implementação, testes e refinamento.
 
-```javascript
-// Estado global do sistema
-let acervo = [];
-let proximoId = 1; // Contador para IDs únicos
-```
+Ao final projeto, você será capaz de:
 
-**Conceito aplicado:** Usamos `let` porque essas variáveis serão modificadas. O acervo começa vazio e será populado com livros.
+1. **Integrar múltiplos conceitos** de JavaScript em um sistema coeso
+2. **Planejar a arquitetura** de uma aplicação antes de programar
+3. **Implementar funcionalidades completas** com validação de dados
+4. **Organizar código** em funções modulares e reutilizáveis
+5. **Tratar erros e casos especiais** para criar aplicações robustas
+6. **Persistir dados** usando JSON
+7. **Aplicar boas práticas** de nomenclatura e estruturação de código
 
-## Funções de Validação
+## Planejamento do Projeto
 
-Antes de implementar funcionalidades, precisamos garantir que os dados sejam válidos.
+Antes de escrever uma única linha de código, precisamos entender **o que vamos construir** e **por quê**.
 
-```javascript
-/**
- * Valida os dados de um livro antes de adicioná-lo ao acervo
- * @param {Object} livro - Objeto contendo dados do livro
- * @returns {Object} - { valido: boolean, erros: Array }
- */
-function validarLivro(livro) {
-    const erros = [];
-    
-    // Valida título
-    if (!livro.titulo || livro.titulo.trim().length < 2) {
-        erros.push("Título deve ter pelo menos 2 caracteres");
-    }
-    
-    // Valida autor
-    if (!livro.autor || livro.autor.trim().length < 3) {
-        erros.push("Autor deve ter pelo menos 3 caracteres");
-    }
-    
-    // Valida categoria
-    const categoriasValidas = ["Romance", "Ficção", "Biografia", "Técnico", "História"];
-    if (!livro.categoria || !categoriasValidas.includes(livro.categoria)) {
-        erros.push("Categoria inválida. Use: " + categoriasValidas.join(", "));
-    }
-    
-    // Valida ISBN (formato básico: 10 ou 13 dígitos)
-    if (livro.isbn && !/^\d{10}(\d{3})?$/.test(livro.isbn.replace(/-/g, ""))) {
-        erros.push("ISBN deve ter 10 ou 13 dígitos");
-    }
-    
-    // Valida ano
-    const anoAtual = new Date().getFullYear();
-    if (livro.ano && (livro.ano < 1000 || livro.ano > anoAtual)) {
-        erros.push(`Ano deve estar entre 1000 e ${anoAtual}`);
-    }
-    
-    return {
-        valido: erros.length === 0,
-        erros: erros
-    };
-}
-```
+**Cenário Real:**
+Uma pequena biblioteca comunitária precisa de um sistema para gerenciar seu acervo. Atualmente, tudo é feito em papel: cadastro de livros, controle de empréstimos, busca de títulos. Isso gera problemas:
+- Livros são perdidos ou duplicados no cadastro
+- Não há forma rápida de buscar livros por autor ou categoria
+- O controle de empréstimos é desorganizado
+- Relatórios estatísticos são impossíveis de gerar
 
-**Conceitos aplicados:**
-- **Funções puras**: Recebe dados, retorna resultado, sem efeitos colaterais
-- **Validação múltipla**: Coleta todos os erros antes de retornar
-- **Strings**: Métodos como `trim()` e `includes()`
-- **Condicionais**: Verificações complexas com operadores lógicos
-- **Arrays**: Armazenamento de erros e categorias válidas
+**Nossa Solução:**
+Criaremos um sistema que permita:
+- Cadastrar livros com todas as informações necessárias
+- Buscar livros por diferentes critérios
+- Gerenciar empréstimos e devoluções
+- Gerar relatórios sobre o acervo
 
-## Funções de Cadastro
+### Definindo Estruturas de Dados
 
-### Adicionar Livro
+O primeiro passo no planejamento é decidir **como representaremos as informações**.
+
+#### Estrutura de um Livro
+
+Que informações precisamos sobre cada livro?
 
 ```javascript
-/**
- * Adiciona um novo livro ao acervo
- * @param {Object} dadosLivro - Dados do livro (sem ID)
- * @returns {Object} - Resultado da operação
- */
-function adicionarLivro(dadosLivro) {
-    // Validação
-    const validacao = validarLivro(dadosLivro);
-    
-    if (!validacao.valido) {
-        return {
-            sucesso: false,
-            mensagem: "Erro ao adicionar livro",
-            erros: validacao.erros
-        };
-    }
-    
-    // Verifica duplicação por ISBN
-    if (dadosLivro.isbn) {
-        const livroExistente = acervo.find(livro => livro.isbn === dadosLivro.isbn);
-        if (livroExistente) {
-            return {
-                sucesso: false,
-                mensagem: "Já existe um livro com este ISBN no acervo"
-            };
-        }
-    }
-    
-    // Cria o objeto livro completo
-    const novoLivro = {
-        id: proximoId++,
-        titulo: dadosLivro.titulo.trim(),
-        autor: dadosLivro.autor.trim(),
-        categoria: dadosLivro.categoria,
-        isbn: dadosLivro.isbn || null,
-        ano: dadosLivro.ano || null,
-        disponivel: true,
-        emprestadoPara: null
-    };
-    
-    // Adiciona ao acervo
-    acervo.push(novoLivro);
-    
-    return {
-        sucesso: true,
-        mensagem: "Livro adicionado com sucesso",
-        livro: novoLivro
-    };
-}
+const livro = {
+    id: 1,                      // Identificador único
+    titulo: "Dom Casmurro",     // Nome do livro
+    autor: "Machado de Assis",  // Quem escreveu
+    categoria: "Romance",        // Tipo/gênero
+    isbn: "978-8535911664",     // Código internacional
+    ano: 1899,                  // Ano de publicação
+    disponivel: true,           // Está disponível para empréstimo?
+    emprestadoPara: null        // Nome de quem pegou emprestado
+};
 ```
 
-**Conceitos aplicados:**
-- **Validação de entrada**: Sempre validar antes de processar
-- **Busca em array**: Método `find()` para verificar duplicação
-- **Incremento de ID**: `proximoId++` para garantir unicidade
-- **Objeto de retorno estruturado**: Facilita tratamento de resultados
-- **Valores padrão**: Usando `||` para propriedades opcionais
+**Por que essas propriedades?**
+- `id`: Garante que cada livro seja único no sistema
+- `titulo` e `autor`: Essenciais para identificação e busca
+- `categoria`: Permite filtrar livros por tipo
+- `isbn`: Padrão mundial para identificar edições
+- `ano`: Útil para filtros e estatísticas
+- `disponivel`: Controle de empréstimo
+- `emprestadoPara`: Rastreabilidade de quem está com o livro
 
-### Remover Livro
+#### Estrutura do Acervo
+
+Como armazenaremos múltiplos livros? Um **array** é perfeito para listas ordenadas:
 
 ```javascript
-/**
- * Remove um livro do acervo
- * @param {number} id - ID do livro a ser removido
- * @returns {Object} - Resultado da operação
- */
-function removerLivro(id) {
-    const indice = acervo.findIndex(livro => livro.id === id);
-    
-    if (indice === -1) {
-        return {
-            sucesso: false,
-            mensagem: "Livro não encontrado"
-        };
-    }
-    
-    const livroRemovido = acervo[indice];
-    
-    // Verifica se o livro está emprestado
-    if (!livroRemovido.disponivel) {
-        return {
-            sucesso: false,
-            mensagem: "Não é possível remover livro emprestado. Registre a devolução primeiro."
-        };
-    }
-    
-    // Remove do acervo
-    acervo.splice(indice, 1);
-    
-    return {
-        sucesso: true,
-        mensagem: "Livro removido com sucesso",
-        livro: livroRemovido
-    };
-}
+const acervo = [
+    { id: 1, titulo: "Dom Casmurro", autor: "Machado de Assis", ... },
+    { id: 2, titulo: "1984", autor: "George Orwell", ... },
+    { id: 3, titulo: "O Cortiço", autor: "Aluísio Azevedo", ... }
+];
 ```
 
-**Conceitos aplicados:**
-- **Busca de índice**: `findIndex()` para localizar posição
-- **Remoção de array**: `splice()` para remover elemento específico
-- **Lógica de negócio**: Impedir remoção de livros emprestados
-- **Retorno de informações**: Devolver o livro removido para confirmação
+### Mapeando Funcionalidades
 
-### Atualizar Livro
+Agora vamos listar **o que o sistema deve fazer**:
 
-```javascript
-/**
- * Atualiza informações de um livro existente
- * @param {number} id - ID do livro
- * @param {Object} novosdados - Dados a serem atualizados
- * @returns {Object} - Resultado da operação
- */
-function atualizarLivro(id, novosData) {
-    const livro = acervo.find(l => l.id === id);
-    
-    if (!livro) {
-        return {
-            sucesso: false,
-            mensagem: "Livro não encontrado"
-        };
-    }
-    
-    // Cria objeto com dados atualizados
-    const dadosAtualizados = { ...livro, ...novosData, id: livro.id };
-    
-    // Valida os novos dados
-    const validacao = validarLivro(dadosAtualizados);
-    
-    if (!validacao.valido) {
-        return {
-            sucesso: false,
-            mensagem: "Dados inválidos",
-            erros: validacao.erros
-        };
-    }
-    
-    // Atualiza propriedades permitidas
-    const propriedadesEditaveis = ["titulo", "autor", "categoria", "isbn", "ano"];
-    
-    propriedadesEditaveis.forEach(prop => {
-        if (novosData.hasOwnProperty(prop)) {
-            livro[prop] = novosData[prop];
-        }
-    });
-    
-    return {
-        sucesso: true,
-        mensagem: "Livro atualizado com sucesso",
-        livro: livro
-    };
-}
+**Operações de Cadastro:**
+1. Adicionar novo livro ao acervo
+2. Remover livro do acervo
+3. Atualizar informações de um livro
+
+**Operações de Busca:**
+4. Buscar livro por título
+5. Buscar livros por autor
+6. Filtrar livros por categoria
+7. Listar todos os livros disponíveis
+
+**Operações de Empréstimo:**
+8. Registrar empréstimo de livro
+9. Registrar devolução de livro
+10. Listar livros emprestados
+
+**Operações de Relatório:**
+11. Contar total de livros
+12. Contar livros por categoria
+13. Calcular taxa de disponibilidade
+14. Listar autores no acervo
+
+**Persistência:**
+15. Salvar acervo em arquivo JSON
+16. Carregar acervo de arquivo JSON
+
+### Organizando em Módulos
+
+Para manter o código organizado, vamos agrupar funcionalidades relacionadas:
+
 ```
-
-**Conceitos aplicados:**
-- **Spread operator**: `{ ...livro, ...novosData }` para mesclar objetos
-- **Proteção de ID**: Garante que o ID não seja alterado
-- **Atualização seletiva**: Apenas propriedades editáveis são modificadas
-- **Validação pós-mesclagem**: Valida o objeto final antes de salvar
-
-## Funções de Busca
-
-### Buscar por Título
-
-```javascript
-/**
- * Busca livros por título (busca parcial, case-insensitive)
- * @param {string} titulo - Termo de busca
- * @returns {Array} - Livros encontrados
- */
-function buscarPorTitulo(titulo) {
-    if (!titulo || titulo.trim().length === 0) {
-        return [];
-    }
-    
-    const termoBusca = titulo.toLowerCase().trim();
-    
-    return acervo.filter(livro => 
-        livro.titulo.toLowerCase().includes(termoBusca)
-    );
-}
+📦 Sistema de Biblioteca
+├── 📄 Dados do Acervo (array de livros)
+├── 🔧 Funções de Cadastro
+│   ├── adicionarLivro()
+│   ├── removerLivro()
+│   └── atualizarLivro()
+├── 🔍 Funções de Busca
+│   ├── buscarPorTitulo()
+│   ├── buscarPorAutor()
+│   ├── filtrarPorCategoria()
+│   └── listarDisponiveis()
+├── 📚 Funções de Empréstimo
+│   ├── emprestarLivro()
+│   ├── devolverLivro()
+│   └── listarEmprestados()
+├── 📊 Funções de Relatório
+│   ├── contarTotal()
+│   ├── contarPorCategoria()
+│   ├── calcularDisponibilidade()
+│   └── listarAutores()
+└── 💾 Funções de Persistência
+    ├── salvarAcervo()
+    └── carregarAcervo()
 ```
-
-**Conceitos aplicados:**
-- **Busca case-insensitive**: `toLowerCase()` para ignorar maiúsculas/minúsculas
-- **Busca parcial**: `includes()` permite encontrar matches parciais
-- **Filtro de array**: `filter()` retorna todos os livros que correspondem
-
-### Buscar por Autor
-
-```javascript
-/**
- * Busca livros por autor
- * @param {string} autor - Nome do autor
- * @returns {Array} - Livros do autor
- */
-function buscarPorAutor(autor) {
-    if (!autor || autor.trim().length === 0) {
-        return [];
-    }
-    
-    const termoBusca = autor.toLowerCase().trim();
-    
-    return acervo.filter(livro => 
-        livro.autor.toLowerCase().includes(termoBusca)
-    );
-}
-```
-
-### Filtrar por Categoria
-
-```javascript
-/**
- * Filtra livros por categoria
- * @param {string} categoria - Categoria desejada
- * @returns {Array} - Livros da categoria
- */
-function filtrarPorCategoria(categoria) {
-    return acervo.filter(livro => livro.categoria === categoria);
-}
-```
-
-### Listar Disponíveis
-
-```javascript
-/**
- * Lista todos os livros disponíveis para empréstimo
- * @returns {Array} - Livros disponíveis
- */
-function listarDisponiveis() {
-    return acervo.filter(livro => livro.disponivel);
-}
-```
-
-**Conceito fundamental:** Todas essas funções usam `filter()` - um dos métodos mais poderosos de arrays. Ele cria um novo array com todos os elementos que passam no teste (função callback).
-
-## Funções de Empréstimo
-
-### Emprestar Livro
-
-```javascript
-/**
- * Registra empréstimo de um livro
- * @param {number} id - ID do livro
- * @param {string} nomeUsuario - Nome de quem está pegando emprestado
- * @returns {Object} - Resultado da operação
- */
-function emprestarLivro(id, nomeUsuario) {
-    // Validações
-    if (!nomeUsuario || nomeUsuario.trim().length < 3) {
-        return {
-            sucesso: false,
-            mensagem: "Nome do usuário inválido (mínimo 3 caracteres)"
-        };
-    }
-    
-    const livro = acervo.find(l => l.id === id);
-    
-    if (!livro) {
-        return {
-            sucesso: false,
-            mensagem: "Livro não encontrado"
-        };
-    }
-    
-    if (!livro.disponivel) {
-        return {
-            sucesso: false,
-            mensagem: `Livro já está emprestado para ${livro.emprestadoPara}`
-        };
-    }
-    
-    // Registra empréstimo
-    livro.disponivel = false;
-    livro.emprestadoPara = nomeUsuario.trim();
-    
-    return {
-        sucesso: true,
-        mensagem: `Livro "${livro.titulo}" emprestado para ${nomeUsuario}`,
-        livro: livro
-    };
-}
-```
-
-**Conceitos aplicados:**
-- **Validação de negócio**: Verifica disponibilidade antes de emprestar
-- **Atualização de estado**: Modifica propriedades do livro
-- **Mensagens informativas**: Feedback claro sobre o resultado
-
-### Devolver Livro
-
-```javascript
-/**
- * Registra devolução de um livro
- * @param {number} id - ID do livro
- * @returns {Object} - Resultado da operação
- */
-function devolverLivro(id) {
-    const livro = acervo.find(l => l.id === id);
-    
-    if (!livro) {
-        return {
-            sucesso: false,
-            mensagem: "Livro não encontrado"
-        };
-    }
-    
-    if (livro.disponivel) {
-        return {
-            sucesso: false,
-            mensagem: "Este livro não está emprestado"
-        };
-    }
-    
-    const usuarioAnterior = livro.emprestadoPara;
-    
-    // Registra devolução
-    livro.disponivel = true;
-    livro.emprestadoPara = null;
-    
-    return {
-        sucesso: true,
-        mensagem: `Livro "${livro.titulo}" devolvido por ${usuarioAnterior}`,
-        livro: livro
-    };
-}
-```
-
-### Listar Emprestados
-
-```javascript
-/**
- * Lista todos os livros atualmente emprestados
- * @returns {Array} - Livros emprestados com informações do usuário
- */
-function listarEmprestados() {
-    return acervo
-        .filter(livro => !livro.disponivel)
-        .map(livro => ({
-            id: livro.id,
-            titulo: livro.titulo,
-            autor: livro.autor,
-            emprestadoPara: livro.emprestadoPara
-        }));
-}
-```
-
-**Conceito aplicado:** Encadeamento de métodos (`filter` + `map`) para filtrar e transformar dados em uma única operação.
-
-## Funções de Relatório
-
-### Contar Total
-
-```javascript
-/**
- * Retorna o total de livros no acervo
- * @returns {number} - Total de livros
- */
-function contarTotal() {
-    return acervo.length;
-}
-```
-
-### Contar por Categoria
-
-```javascript
-/**
- * Conta livros agrupados por categoria
- * @returns {Object} - Objeto com contagem por categoria
- */
-function contarPorCategoria() {
-    return acervo.reduce((contador, livro) => {
-        contador[livro.categoria] = (contador[livro.categoria] || 0) + 1;
-        return contador;
-    }, {});
-}
-```
-
-**Conceito aplicado:** `reduce()` - o método mais poderoso de arrays, capaz de transformar um array em qualquer estrutura de dados.
-
-### Calcular Disponibilidade
-
-```javascript
-/**
- * Calcula estatísticas de disponibilidade
- * @returns {Object} - Estatísticas do acervo
- */
-function calcularDisponibilidade() {
-    const total = acervo.length;
-    const disponiveis = acervo.filter(l => l.disponivel).length;
-    const emprestados = total - disponiveis;
-    
-    return {
-        total: total,
-        disponiveis: disponiveis,
-        emprestados: emprestados,
-        taxaDisponibilidade: total > 0 ? ((disponiveis / total) * 100).toFixed(2) + "%" : "0%"
-    };
-}
-```
-
-### Listar Autores
-
-```javascript
-/**
- * Lista todos os autores únicos no acervo
- * @returns {Array} - Array de autores únicos, ordenados
- */
-function listarAutores() {
-    const autoresUnicos = [...new Set(acervo.map(livro => livro.autor))];
-    return autoresUnicos.sort();
-}
-```
-
-**Conceito aplicado:** `Set` - estrutura de dados que elimina automaticamente duplicatas. Usamos `...` (spread) para converter de volta em array.
-
-## Funções de Persistência
-
-### Salvar Acervo
-
-```javascript
-/**
- * Converte o acervo para JSON para salvar
- * @returns {string} - Acervo em formato JSON
- */
-function salvarAcervo() {
-    const dados = {
-        acervo: acervo,
-        proximoId: proximoId,
-        dataBackup: new Date().toISOString()
-    };
-    
-    return JSON.stringify(dados, null, 2);
-}
-```
-
-**Conceito aplicado:** `JSON.stringify()` converte objetos JavaScript em texto JSON. O parâmetro `2` formata com indentação para legibilidade.
-
-### Carregar Acervo
-
-```javascript
-/**
- * Carrega acervo de string JSON
- * @param {string} jsonString - String JSON contendo os dados
- * @returns {Object} - Resultado da operação
- */
-function carregarAcervo(jsonString) {
-    try {
-        const dados = JSON.parse(jsonString);
-        
-        if (!dados.acervo || !Array.isArray(dados.acervo)) {
-            return {
-                sucesso: false,
-                mensagem: "Formato de dados inválido"
-            };
-        }
-        
-        acervo = dados.acervo;
-        proximoId = dados.proximoId || acervo.length + 1;
-        
-        return {
-            sucesso: true,
-            mensagem: `Acervo carregado: ${acervo.length} livros`,
-            quantidadeLivros: acervo.length
-        };
-        
-    } catch (erro) {
-        return {
-            sucesso: false,
-            mensagem: "Erro ao processar JSON: " + erro.message
-        };
-    }
-}
-```
-
-**Conceitos aplicados:**
-- **Try-catch**: Tratamento de erros para operações que podem falhar
-- **JSON.parse()**: Converte texto JSON em objetos JavaScript
-- **Validação de estrutura**: Verifica se os dados carregados são válidos

@@ -94,14 +94,22 @@ const lessons = [
     lessons: [
       {
         id: "charpter-5",
-        title: "Operadores de comparação e lógicos",
+        title: "Operadores de comparação",
         description:
-          "Vamos aprender a usar operadores de comparação e lógicos para criar condições mais complexas em nossos programas.",
+          "Vamos aprender a usar operadores de comparação para criar condições em nossos programas.",
         video: null,
         quizId: "quiz-5",
       },
       {
         id: "charpter-6",
+        title: "Operadores lógicos",
+        description:
+          "Vamos aprender a usar operadores lógicos para criar condições mais complexas.",
+        video: null,
+        quizId: "quiz-5", // Note: quiz-5 is reused here
+      },
+      {
+        id: "charpter-7",
         title: "Tomando Decisões",
         description:
           "Vamos aprender a usar estruturas condicionais para que nossos programas possam tomar decisões com base em diferentes condições.",
@@ -109,7 +117,7 @@ const lessons = [
         quizId: "quiz-6",
       },
       {
-        id: "charpter-8",
+        id: "charpter-9",
         title: "O Poder da Repetição",
         description:
           "Vamos aprender a usar loops para repetir ações em nossos programas, tornando-os mais eficientes e poderosos.",
@@ -117,7 +125,7 @@ const lessons = [
         quizId: "quiz-8",
       },
       {
-        id: "charpter-9",
+        id: "charpter-10",
         title: "Organizando seu Código com funções",
         description:
           "Vamos aprender a criar e usar funções para organizar nosso código, tornando-o mais modular e reutilizável.",
@@ -125,7 +133,7 @@ const lessons = [
         quizId: "quiz-9",
       },
       {
-        id: "charpter-10",
+        id: "charpter-11",
         title: "Funções Avançadas em JavaScript",
         description:
           "Vamos explorar conceitos avançados de funções em JavaScript, como funções anônimas, funções de flecha e closures.",
@@ -141,7 +149,7 @@ const lessons = [
       "Vamos nos aprofundar nas estruturas de dados mais comuns em JavaScript: arrays, objetos e strings.",
     lessons: [
       {
-        id: "charpter-7",
+        id: "charpter-8",
         title: "Trabalhando com Texto em JavaScript",
         description:
           "Vamos aprender a manipular strings em JavaScript, incluindo métodos comuns para modificar e analisar texto.",
@@ -149,7 +157,7 @@ const lessons = [
         quizId: "quiz-7",
       },
       {
-        id: "charpter-11",
+        id: "charpter-12",
         title: "O Poder das Listas em Programação",
         description:
           "Vamos aprender a usar arrays para armazenar e manipular coleções de dados em JavaScript.",
@@ -157,7 +165,7 @@ const lessons = [
         quizId: "quiz-11",
       },
       {
-        id: "charpter-12",
+        id: "charpter-13",
         title: "Dominando a Busca, Filtragem e Transformação de Dados",
         description:
           "Vamos explorar métodos avançados de arrays, como map, filter e reduce, para processar dados de forma eficiente.",
@@ -165,7 +173,7 @@ const lessons = [
         quizId: "quiz-12",
       },
       {
-        id: "charpter-13",
+        id: "charpter-14",
         title: "Organizando Informações com Objetos",
         description:
           "Vamos aprender a usar objetos para armazenar dados estruturados em JavaScript.",
@@ -173,7 +181,7 @@ const lessons = [
         quizId: "quiz-13",
       },
       {
-        id: "charpter-14",
+        id: "charpter-15",
         title: "O Problema das Cópias de Objetos",
         description:
           "Vamos entender como a atribuição e cópia de objetos funcionam em JavaScript, e como evitar armadilhas comuns.",
@@ -189,7 +197,7 @@ const lessons = [
       "Vamos aplicar tudo o que aprendemos em um projeto prático.",
     lessons: [
       {
-        id: "charpter-15",
+        id: "charpter-16",
         title: "Planejamento do Projeto",
         description:
           "Vamos planejar nosso projeto final, definindo os requisitos e funcionalidades que queremos implementar.",
@@ -197,7 +205,7 @@ const lessons = [
         quizId: null,
       },
       {
-        id: "charpter-16",
+        id: "charpter-17",
         title: "Implementação do Sistema",
         description:
           "Vamos começar a implementar nosso projeto final, colocando em prática tudo o que aprendemos até agora.",
@@ -205,7 +213,7 @@ const lessons = [
         quizId: null,
       },
       {
-        id: "charpter-17",
+        id: "charpter-18",
         title: "Testando o Sistema",
         description:
           "Vamos testar nosso projeto final para garantir que tudo esteja funcionando.",
@@ -213,7 +221,7 @@ const lessons = [
         quizId: null,
       },
       {
-        id: "charpter-18",
+        id: "charpter-19",
         title: "Conclusão",
         description:
           "Vamos revisar o que aprendemos e discutir os próximos passos para continuar sua jornada na programação.",

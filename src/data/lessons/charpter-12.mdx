@@ -1,586 +1,471 @@
-# Dominando a Busca, Filtragem e Transformação de Dados
+# O Poder das Listas em Programação
 
-Você já aprendeu a criar arrays e manipulá-los com métodos básicos como `push`, `pop`, `shift` e `unshift`. Agora é hora de dar o próximo passo! Nesta aula, você descobrirá métodos poderosos que transformarão a maneira como você trabalha com listas de dados.
+Imagine que você precisa gerenciar uma lista de compras, um catálogo de produtos ou os nomes de todos os alunos de uma turma. Como você organizaria essas informações no código? A resposta está em uma das estruturas de dados mais fundamentais da programação: os **arrays**.
 
-Imagine ter uma lista com centenas de produtos e precisar encontrar apenas aqueles que custam menos de R$ 100. Ou transformar uma lista de nomes para que todos fiquem em letras maiúsculas. Os métodos que aprenderemos hoje tornam essas tarefas simples e elegantes!
+Arrays são como armários organizados com gavetas numeradas. Cada gaveta pode guardar um item, e você sempre sabe exatamente onde encontrá-lo através do seu número. Esta estrutura torna o gerenciamento de coleções de dados não apenas possível, mas extremamente eficiente.
 
-## Buscando Elementos: includes(), indexOf() e find()
+## O que são Arrays?
 
-### 1.1 O Método includes()
+**Arrays** são estruturas de dados especiais projetadas para armazenar **coleções ordenadas** de elementos. Em JavaScript, eles permitem agrupar múltiplos valores em uma única variável, facilitando imensamente o gerenciamento de listas de dados.
 
-O `includes()` é o método mais simples para verificar se um elemento existe no array. Ele retorna `true` se o elemento for encontrado e `false` caso contrário.
+### Por que Arrays são Especiais?
 
-**Sintaxe:**
+Enquanto objetos são otimizados para armazenar propriedades nomeadas (como `pessoa.nome`), **arrays são ideais quando precisamos de sequências ordenadas**. Eles são otimizados para:
+
+- **Acesso sequencial**: Percorrer elementos um após o outro
+- **Indexação rápida**: Encontrar elementos pela sua posição
+- **Operações em lote**: Processar múltiplos elementos de uma vez
+- **Ordem garantida**: Manter elementos na sequência desejada
+
+### Analogia do Mundo Real
+
+Pense em um array como:
+- **Uma fila de cinema**: Cada pessoa tem uma posição (primeira, segunda, terceira...)
+- **Uma estante de livros**: Cada prateleira tem um número e guarda um item
+- **Um calendário**: Cada dia do mês tem uma posição específica
+
+## Criando Arrays
+
+Existem duas formas principais de criar arrays em JavaScript:
+
+### 1. Sintaxe Literal (Recomendada)
+
 ```javascript
-array.includes(elemento)
+// Array de frutas
+let frutas = ["Maçã", "Banana", "Laranja"];
+
+// Array de números
+let pontuacoes = [95, 87, 92, 78, 100];
+
+// Array vazio (para preencher depois)
+let listaCompras = [];
+
+// Arrays podem conter diferentes tipos
+let misto = ["João", 25, true, 175.5];
 ```
 
-**Exemplo Prático:**
-```javascript
-let frutas = ["maçã", "banana", "uva", "laranja"];
+### 2. Construtor Array (Menos Comum)
 
-console.log(frutas.includes("banana")); // true
-console.log(frutas.includes("morango")); // false
+```javascript
+// Usando o construtor Array
+let numeros = new Array(1, 2, 3, 4, 5);
+
+// Criando array com tamanho específico
+let espacos = new Array(10); // Array com 10 posições vazias
 ```
 
-**Quando usar:** Sempre que você precisar apenas saber SE um elemento existe, sem se importar com sua posição.
+**💡 Dica Importante:** A sintaxe com colchetes `[]` é quase sempre preferida por ser mais concisa, clara e menos propensa a erros.
 
-**Caso Real:**
+## Indexação: O Sistema de Endereçamento
+
+### A Contagem Começa do Zero
+
+Um dos conceitos mais importantes sobre arrays é que **a indexação começa em zero**. Isso significa que:
+
+- O **primeiro elemento** está na posição **0**
+- O **segundo elemento** está na posição **1**
+- O **terceiro elemento** está na posição **2**
+- E assim por diante...
+
 ```javascript
-let produtosNoCarrinho = ["notebook", "mouse", "teclado"];
+let cores = ["vermelho", "verde", "azul"];
 
-if (produtosNoCarrinho.includes("mouse")) {
-    console.log("O mouse já está no carrinho!");
-} else {
-    console.log("Adicione o mouse ao carrinho.");
+console.log(cores[0]); // "vermelho" - primeiro elemento
+console.log(cores[1]); // "verde"    - segundo elemento
+console.log(cores[2]); // "azul"     - terceiro elemento
+```
+
+### Por que Começar do Zero?
+
+Esta não é uma escolha arbitrária! A indexação baseada em zero é uma **convenção estabelecida na tecnologia de computação** que vem dos primórdios da programação. Ela está relacionada com:
+
+- **Cálculos de endereços de memória**: O primeiro elemento está a zero posições de distância do início
+- **Eficiência computacional**: Simplifica operações matemáticas internas
+- **Consistência**: Praticamente todas as linguagens modernas adotam esta convenção
+
+### Acessando Elementos Fora do Limite
+
+```javascript
+let animais = ["gato", "cachorro", "pássaro"];
+
+console.log(animais[10]); // undefined - índice não existe
+console.log(animais[-1]); // undefined - índices negativos não funcionam
+```
+
+Quando tentamos acessar um índice que não existe, JavaScript retorna `undefined` em vez de gerar um erro.
+
+## A Propriedade Length
+
+Todo array possui uma propriedade especial chamada **`length`** que indica quantos elementos o array contém:
+
+```javascript
+let animais = ["gato", "cachorro", "pássaro", "peixe"];
+console.log(animais.length); // 4
+
+// Útil para acessar o último elemento
+let ultimoAnimal = animais[animais.length - 1];
+console.log(ultimoAnimal); // "peixe"
+```
+
+### Por que `length - 1` para o Último Elemento?
+
+Como a indexação começa em zero, um array com 4 elementos tem índices de 0 a 3. Portanto:
+- Primeiro elemento: `array[0]`
+- Último elemento: `array[length - 1]` → `array[4 - 1]` → `array[3]`
+
+## Modificando Arrays
+
+### Alterando Elementos Existentes
+
+Podemos modificar qualquer elemento do array atribuindo um novo valor ao seu índice:
+
+```javascript
+let frutas = ["maçã", "banana", "uva"];
+console.log(frutas); // ["maçã", "banana", "uva"]
+
+// Substituindo o segundo elemento
+frutas[1] = "pêra";
+console.log(frutas); // ["maçã", "pêra", "uva"]
+
+// Modificando o primeiro elemento
+frutas[0] = "morango";
+console.log(frutas); // ["morango", "pêra", "uva"]
+```
+
+## Métodos Fundamentais de Arrays
+
+Arrays em JavaScript vêm equipados com métodos poderosos que facilitam operações comuns. Vamos explorar os mais importantes para iniciantes.
+
+### 📌 Métodos que Trabalham no FINAL do Array
+
+#### push() - Adicionar ao Final
+
+O método **`push()`** adiciona um ou mais elementos ao **final** do array:
+
+```javascript
+let numeros = [1, 2, 3];
+console.log(numeros); // [1, 2, 3]
+
+numeros.push(4);
+console.log(numeros); // [1, 2, 3, 4]
+
+// Podemos adicionar múltiplos elementos de uma vez
+numeros.push(5, 6, 7);
+console.log(numeros); // [1, 2, 3, 4, 5, 6, 7]
+```
+
+**Retorno:** O método `push()` retorna o novo comprimento do array.
+
+```javascript
+let tamanho = numeros.push(8);
+console.log(tamanho); // 8
+```
+
+#### pop() - Remover do Final
+
+O método **`pop()`** remove e **retorna** o último elemento do array:
+
+```javascript
+let frutas = ["maçã", "banana", "uva", "pêra"];
+console.log(frutas); // ["maçã", "banana", "uva", "pêra"]
+
+let removida = frutas.pop();
+console.log(removida); // "pêra"
+console.log(frutas);   // ["maçã", "banana", "uva"]
+
+// Podemos continuar removendo
+frutas.pop();
+console.log(frutas); // ["maçã", "banana"]
+```
+
+### 📌 Métodos que Trabalham no INÍCIO do Array
+
+#### unshift() - Adicionar ao Início
+
+O método **`unshift()`** adiciona um ou mais elementos ao **início** do array:
+
+```javascript
+let cores = ["verde", "azul"];
+console.log(cores); // ["verde", "azul"]
+
+cores.unshift("vermelho");
+console.log(cores); // ["vermelho", "verde", "azul"]
+
+// Múltiplos elementos
+cores.unshift("preto", "branco");
+console.log(cores); // ["preto", "branco", "vermelho", "verde", "azul"]
+```
+
+#### shift() - Remover do Início
+
+O método **`shift()`** remove e **retorna** o primeiro elemento do array:
+
+```javascript
+let numeros = [1, 2, 3, 4, 5];
+console.log(numeros); // [1, 2, 3, 4, 5]
+
+let primeiro = numeros.shift();
+console.log(primeiro); // 1
+console.log(numeros);  // [2, 3, 4, 5]
+```
+
+### ⚡ Performance: Push/Pop vs Unshift/Shift
+
+**Conceito Importante:** Os métodos `push()` e `pop()` são **mais rápidos** que `unshift()` e `shift()`.
+
+**Por quê?**
+
+Quando trabalhamos no **final do array**:
+- Apenas adicionamos ou removemos um elemento
+- Os outros elementos mantêm seus índices
+- **Nenhuma renumeração é necessária**
+
+Quando trabalhamos no **início do array**:
+- Precisamos adicionar/remover o primeiro elemento
+- **TODOS os outros elementos precisam ser renumerados**
+- Elemento que estava no índice 1 vai para 0, o que estava em 2 vai para 1, etc.
+
+```javascript
+// Exemplo visual do que acontece com shift()
+// Antes: [10, 20, 30, 40]
+//         ↑   ↑   ↑   ↑
+//         0   1   2   3
+
+array.shift(); // Remove 10
+
+// Depois: [20, 30, 40]
+//          ↑   ↑   ↑
+//          0   1   2  ← TODOS foram renumerados!
+```
+
+Esta renumeração tem um custo computacional, especialmente em arrays grandes.
+
+## Percorrendo Arrays: Diferentes Formas de Iteração
+
+Percorrer (ou iterar) significa **visitar cada elemento do array**, um por um, para realizar alguma operação.
+
+### 1. Loop For Tradicional
+
+A forma clássica de percorrer arrays:
+
+```javascript
+let frutas = ["maçã", "banana", "laranja", "uva"];
+
+for (let i = 0; i < frutas.length; i++) {
+    console.log(`Fruta ${i + 1}: ${frutas[i]}`);
 }
+
+// Saída:
+// Fruta 1: maçã
+// Fruta 2: banana
+// Fruta 3: laranja
+// Fruta 4: uva
 ```
 
-### 1.2 O Método indexOf()
+**Quando usar:**
+- Quando você precisa do **índice** do elemento
+- Quando precisa de **controle total** sobre a iteração
+- Quando pode precisar de `break` ou `continue`
 
-Enquanto o `includes()` apenas verifica existência, o `indexOf()` nos diz ONDE o elemento está. Ele retorna o índice (posição) do primeiro elemento encontrado, ou `-1` se não encontrar nada.
+### 2. Loop for...of (Moderno)
 
-**Sintaxe:**
+Uma forma mais limpa e legível de percorrer arrays:
+
 ```javascript
-array.indexOf(elemento)
-```
+let animais = ["gato", "cachorro", "pássaro"];
 
-**Por que retorna -1?** Esta é uma convenção clássica em programação para indicar "não encontrado", já que índices válidos começam em 0.
-
-**Exemplo Prático:**
-```javascript
-let animais = ["gato", "cachorro", "pássaro", "cachorro"];
-
-console.log(animais.indexOf("cachorro")); // 1 (primeira ocorrência)
-console.log(animais.indexOf("peixe"));    // -1 (não encontrado)
-```
-
-**Diferença importante:** O `indexOf()` retorna apenas a posição da PRIMEIRA ocorrência.
-
-**Caso Real:**
-```javascript
-let tarefas = ["estudar", "exercitar", "ler", "programar"];
-let posicao = tarefas.indexOf("exercitar");
-
-if (posicao !== -1) {
-    console.log(`A tarefa está na posição ${posicao}`);
-    tarefas[posicao] = "exercitar ✓"; // Marcar como concluída
+for (let animal of animais) {
+    console.log(`Eu tenho um ${animal}`);
 }
+
+// Saída:
+// Eu tenho um gato
+// Eu tenho um cachorro
+// Eu tenho um pássaro
 ```
 
-### 1.3 O Método find()
+**Quando usar:**
+- Quando você só precisa do **valor** do elemento
+- Quando quer código **mais legível**
+- Quando não precisa modificar o array durante a iteração
 
-O `find()` é o mais poderoso dos três. Ele procura o primeiro elemento que satisfaz uma **condição** (não apenas igualdade exata). Retorna o elemento encontrado ou `undefined` se nenhum satisfizer a condição.
+### 3. Método forEach()
 
-**Sintaxe:**
-```javascript
-array.find(funcao)
-```
-
-**Exemplo Prático:**
-```javascript
-let numeros = [5, 12, 8, 130, 44];
-
-// Encontrar o primeiro número maior que 10
-let resultado = numeros.find(numero => numero > 10);
-console.log(resultado); // 12
-```
-
-**Buscando em Arrays de Objetos:**
-```javascript
-let usuarios = [
-    {id: 1, nome: "Ana", idade: 25},
-    {id: 2, nome: "Bruno", idade: 30},
-    {id: 3, nome: "Carla", idade: 22}
-];
-
-// Encontrar usuário com id específico
-let usuario = usuarios.find(u => u.id === 2);
-console.log(usuario.nome); // "Bruno"
-
-// Encontrar primeiro usuário maior de idade
-let adulto = usuarios.find(u => u.idade >= 18);
-console.log(adulto.nome); // "Ana"
-```
-
-**Quando usar:** Quando você precisa buscar baseado em uma condição mais complexa que simples igualdade.
-
-## Filtrando Dados: O Método filter()
-
-### 2.1 Conceito Fundamental
-
-Enquanto o `find()` retorna apenas o PRIMEIRO elemento que satisfaz a condição, o `filter()` retorna TODOS os elementos que atendem ao critério. Ele cria um novo array com os elementos filtrados.
-
-**Princípio:** Filtrar significa "separar o que queremos do que não queremos".
-
-**Sintaxe:**
-```javascript
-array.filter(funcao)
-```
-
-### 2.2 Exemplos Práticos
-
-**Filtrando Números:**
-```javascript
-let numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-// Apenas números pares
-let pares = numeros.filter(n => n % 2 === 0);
-console.log(pares); // [2, 4, 6, 8, 10]
-
-// Números maiores que 5
-let maioresQue5 = numeros.filter(n => n > 5);
-console.log(maioresQue5); // [6, 7, 8, 9, 10]
-```
-
-**Filtrando Objetos:**
-```javascript
-let produtos = [
-    {nome: "Notebook", preco: 3000, categoria: "eletrônicos"},
-    {nome: "Mouse", preco: 50, categoria: "eletrônicos"},
-    {nome: "Livro", preco: 40, categoria: "livros"},
-    {nome: "Teclado", preco: 150, categoria: "eletrônicos"}
-];
-
-// Produtos baratos (menos de R$ 100)
-let baratos = produtos.filter(p => p.preco < 100);
-console.log(baratos);
-// [{nome: "Mouse"...}, {nome: "Livro"...}]
-
-// Apenas eletrônicos
-let eletronicos = produtos.filter(p => p.categoria === "eletrônicos");
-console.log(eletronicos.length); // 3
-```
-
-**Filtrando Strings:**
-```javascript
-let palavras = ["JavaScript", "Python", "Java", "Ruby", "PHP"];
-
-// Palavras com mais de 4 letras
-let longas = palavras.filter(palavra => palavra.length > 4);
-console.log(longas); // ["JavaScript", "Python"]
-
-// Palavras que contêm "Java"
-let comJava = palavras.filter(palavra => palavra.includes("Java"));
-console.log(comJava); // ["JavaScript", "Java"]
-```
-
-### 2.3 Características Importantes
-
-1. **Não modifica o array original** - Sempre retorna um novo array
-2. **Pode retornar array vazio** - Se nenhum elemento satisfizer a condição
-3. **Mantém a ordem** - Os elementos filtrados aparecem na mesma ordem do array original
+Um método específico de arrays para executar uma função em cada elemento:
 
 ```javascript
-let idades = [15, 22, 18, 30, 12, 25];
-let maioresDeIdade = idades.filter(idade => idade >= 18);
+let pontuacoes = [85, 92, 78, 95, 88];
 
-console.log(idades);          // [15, 22, 18, 30, 12, 25] - não mudou
-console.log(maioresDeIdade);  // [22, 18, 30, 25] - novo array
+pontuacoes.forEach(function(pontuacao, indice) {
+    console.log(`Prova ${indice + 1}: ${pontuacao} pontos`);
+});
+
+// Ou com arrow function (mais moderno)
+pontuacoes.forEach((pontuacao, indice) => {
+    console.log(`Prova ${indice + 1}: ${pontuacao} pontos`);
+});
 ```
 
-## Transformando Dados: O Método map()
+**Quando usar:**
+- Quando você quer um estilo **funcional**
+- Quando não precisa usar `break` ou `continue`
+- Quando quer deixar claro que está **processando cada elemento**
 
-### 3.1 Conceito de Transformação
+### Comparação das Três Formas
 
-O `map()` é um dos métodos mais poderosos e utilizados. Ele aplica uma função a CADA elemento do array e retorna um NOVO array com os resultados transformados.
-
-**Princípio:** Transformar significa "pegar cada elemento e convertê-lo em algo novo".
-
-**Sintaxe:**
-```javascript
-array.map(funcao)
-```
-
-### 3.2 Exemplos Práticos
-
-**Transformando Números:**
 ```javascript
 let numeros = [1, 2, 3, 4, 5];
 
-// Dobrar cada número
-let dobrados = numeros.map(n => n * 2);
-console.log(dobrados); // [2, 4, 6, 8, 10]
-
-// Elevar ao quadrado
-let quadrados = numeros.map(n => n * n);
-console.log(quadrados); // [1, 4, 9, 16, 25]
-
-// Converter para strings
-let strings = numeros.map(n => `Número ${n}`);
-console.log(strings); // ["Número 1", "Número 2", ...]
-```
-
-**Transformando Objetos:**
-```javascript
-let pessoas = [
-    {nome: "Ana", idade: 25},
-    {nome: "Bruno", idade: 30},
-    {nome: "Carla", idade: 22}
-];
-
-// Extrair apenas os nomes
-let nomes = pessoas.map(pessoa => pessoa.nome);
-console.log(nomes); // ["Ana", "Bruno", "Carla"]
-
-// Criar saudações personalizadas
-let saudacoes = pessoas.map(pessoa => `Olá, ${pessoa.nome}!`);
-console.log(saudacoes);
-// ["Olá, Ana!", "Olá, Bruno!", "Olá, Carla!"]
-
-// Adicionar nova propriedade
-let pessoasComCategoria = pessoas.map(pessoa => ({
-    ...pessoa,
-    categoria: pessoa.idade >= 25 ? "adulto" : "jovem"
-}));
-console.log(pessoasComCategoria);
-```
-
-**Transformando Strings:**
-```javascript
-let nomes = ["ana", "bruno", "carla"];
-
-// Primeira letra maiúscula
-let capitalizados = nomes.map(nome => 
-    nome.charAt(0).toUpperCase() + nome.slice(1)
-);
-console.log(capitalizados); // ["Ana", "Bruno", "Carla"]
-```
-
-### 3.3 Características Importantes
-
-1. **Sempre retorna array do mesmo tamanho** - Se entrar 5 elementos, sai 5 elementos
-2. **Não modifica o array original**
-3. **Pode transformar tipos** - Entrar números, sair strings
-
-```javascript
-let precos = [10, 20, 30];
-
-// Array original não muda
-let precosComDesconto = precos.map(p => p * 0.9);
-
-console.log(precos);            // [10, 20, 30]
-console.log(precosComDesconto); // [9, 18, 27]
-```
-
-## Verificação: some() e every()
-
-### 4.1 O Método some()
-
-O `some()` verifica se **PELO MENOS UM** elemento satisfaz a condição. Retorna `true` ou `false`.
-
-**Sintaxe:**
-```javascript
-array.some(funcao)
-```
-
-**Exemplos:**
-```javascript
-let numeros = [1, 3, 5, 8, 9];
-
-// Existe algum número par?
-console.log(numeros.some(n => n % 2 === 0)); // true (8 é par)
-
-// Existe algum número negativo?
-console.log(numeros.some(n => n < 0)); // false
-
-let produtos = [
-    {nome: "Mouse", preco: 50},
-    {nome: "Teclado", preco: 150},
-    {nome: "Monitor", preco: 800}
-];
-
-// Existe algum produto barato (menos de R$ 100)?
-console.log(produtos.some(p => p.preco < 100)); // true
-```
-
-### 4.2 O Método every()
-
-O `every()` verifica se **TODOS** os elementos satisfazem a condição. Retorna `true` ou `false`.
-
-**Sintaxe:**
-```javascript
-array.every(funcao)
-```
-
-**Exemplos:**
-```javascript
-let idades = [20, 25, 30, 35];
-
-// Todos são maiores de idade?
-console.log(idades.every(idade => idade >= 18)); // true
-
-// Todos são maiores de 25?
-console.log(idades.every(idade => idade > 25)); // false
-
-let notas = [7, 8, 6, 9];
-
-// Todos foram aprovados (nota >= 6)?
-console.log(notas.every(nota => nota >= 6)); // true
-```
-
-### 4.3 Diferença Conceitual
-
-- **some()**: "Existe PELO MENOS UM?"
-- **every()**: "São TODOS?"
-
-```javascript
-let numeros = [2, 4, 6, 8, 10];
-
-console.log(numeros.some(n => n > 5));  // true (existe algum)
-console.log(numeros.every(n => n > 5)); // false (não são todos)
-
-console.log(numeros.some(n => n % 2 === 0));  // true
-console.log(numeros.every(n => n % 2 === 0)); // true (todos são pares)
-```
-
-## Ordenação: O Método sort()
-
-### 5.1 Ordenação Básica
-
-O `sort()` ordena os elementos do array. **ATENÇÃO:** Ele modifica o array original!
-
-**Sintaxe:**
-```javascript
-array.sort()
-array.sort(funcaoDeComparacao)
-```
-
-### 5.2 O Problema da Ordenação Padrão
-
-Por padrão, o `sort()` converte elementos para strings e compara lexicograficamente (como em um dicionário). Isso causa resultados inesperados com números!
-
-```javascript
-let numeros = [10, 5, 40, 25, 1000, 1];
-
-// Ordenação padrão (ERRADA para números!)
-numeros.sort();
-console.log(numeros); // [1, 10, 1000, 25, 40, 5] 😱
-// Ordena como texto: "1" < "10" < "1000" < "25"...
-```
-
-### 5.3 Ordenação Numérica Correta
-
-Para ordenar números, precisamos fornecer uma função de comparação:
-
-```javascript
-let numeros = [10, 5, 40, 25, 1000, 1];
-
-// Ordem crescente
-numeros.sort((a, b) => a - b);
-console.log(numeros); // [1, 5, 10, 25, 40, 1000] ✓
-
-// Ordem decrescente
-numeros.sort((a, b) => b - a);
-console.log(numeros); // [1000, 40, 25, 10, 5, 1] ✓
-```
-
-**Como funciona:**
-- Se `a - b` for negativo, `a` vem antes de `b`
-- Se `a - b` for positivo, `b` vem antes de `a`
-- Se for zero, mantém a ordem
-
-### 5.4 Ordenando Strings
-
-Para strings, a ordenação padrão funciona bem:
-
-```javascript
-let frutas = ["banana", "maçã", "uva", "abacaxi"];
-
-frutas.sort();
-console.log(frutas); // ["abacaxi", "banana", "maçã", "uva"]
-
-// Ordem inversa
-frutas.sort().reverse();
-console.log(frutas); // ["uva", "maçã", "banana", "abacaxi"]
-```
-
-### 5.5 Ordenando Objetos
-
-```javascript
-let produtos = [
-    {nome: "Mouse", preco: 50},
-    {nome: "Teclado", preco: 150},
-    {nome: "Monitor", preco: 800}
-];
-
-// Ordenar por preço (crescente)
-produtos.sort((a, b) => a.preco - b.preco);
-console.log(produtos);
-
-// Ordenar por nome (alfabética)
-produtos.sort((a, b) => a.nome.localeCompare(b.nome));
-console.log(produtos);
-```
-
-## Combinando Métodos (Encadeamento)
-
-Uma das características mais poderosas é a possibilidade de **encadear** métodos, aplicando múltiplas operações em sequência!
-
-### 6.1 Exemplos de Encadeamento
-
-```javascript
-let numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-// Filtrar pares, dobrar valores, somar tudo
-let resultado = numeros
-    .filter(n => n % 2 === 0)    // [2, 4, 6, 8, 10]
-    .map(n => n * 2);              // [4, 8, 12, 16, 20]
-
-console.log(resultado);
-```
-
-**Exemplo Real - Sistema de Produtos:**
-```javascript
-let produtos = [
-    {nome: "Notebook", preco: 3000, estoque: 5},
-    {nome: "Mouse", preco: 50, estoque: 0},
-    {nome: "Teclado", preco: 150, estoque: 10},
-    {nome: "Monitor", preco: 800, estoque: 3}
-];
-
-// Encontrar produtos disponíveis, ordenar por preço e formatar
-let produtosFormatados = produtos
-    .filter(p => p.estoque > 0)           // Apenas disponíveis
-    .sort((a, b) => a.preco - b.preco)    // Ordenar por preço
-    .map(p => `${p.nome}: R$ ${p.preco}`); // Formatar
-
-console.log(produtosFormatados);
-// ["Mouse: R$ 50", "Teclado: R$ 150", "Monitor: R$ 800", "Notebook: R$ 3000"]
-```
-
-## Casos de Uso Práticos
-
-### 7.1 Sistema de Busca de Produtos
-
-```javascript
-let produtos = [
-    {id: 1, nome: "Notebook Dell", preco: 3000, categoria: "eletrônicos"},
-    {id: 2, nome: "Mouse Logitech", preco: 50, categoria: "eletrônicos"},
-    {id: 3, nome: "Livro JavaScript", preco: 40, categoria: "livros"},
-    {id: 4, nome: "Teclado Mecânico", preco: 300, categoria: "eletrônicos"}
-];
-
-function buscarProdutos(termo, precoMaximo) {
-    return produtos
-        .filter(p => p.nome.toLowerCase().includes(termo.toLowerCase()))
-        .filter(p => p.preco <= precoMaximo)
-        .sort((a, b) => a.preco - b.preco);
+// 1. For tradicional - máximo controle
+for (let i = 0; i < numeros.length; i++) {
+    if (numeros[i] === 3) break; // Podemos parar quando quiser
+    console.log(numeros[i]);
 }
 
-console.log(buscarProdutos("mouse", 100));
-// [{id: 2, nome: "Mouse Logitech", preco: 50, ...}]
+// 2. for...of - código limpo
+for (let numero of numeros) {
+    if (numero === 3) break; // Também permite break
+    console.log(numero);
+}
+
+// 3. forEach - estilo funcional
+numeros.forEach(numero => {
+    // NÃO permite break ou continue!
+    console.log(numero);
+});
 ```
 
-### 7.2 Análise de Notas de Alunos
+## Conceito Fundamental: Mutabilidade
+
+Os métodos que vimos se dividem em duas categorias importantes:
+
+### Métodos Mutadores (Modificam o Array Original)
 
 ```javascript
-let alunos = [
-    {nome: "Ana", nota: 8.5},
-    {nome: "Bruno", nota: 6.0},
-    {nome: "Carla", nota: 9.0},
-    {nome: "Diego", nota: 5.5},
-    {nome: "Elena", nota: 7.5}
-];
+let lista = [1, 2, 3];
 
-// Alunos aprovados (nota >= 6)
-let aprovados = alunos.filter(a => a.nota >= 6);
-console.log(`${aprovados.length} alunos aprovados`);
-
-// Todos foram aprovados?
-let todosAprovados = alunos.every(a => a.nota >= 6);
-console.log(`Todos aprovados: ${todosAprovados}`);
-
-// Alguém tirou nota máxima?
-let temNotaMaxima = alunos.some(a => a.nota === 10);
-console.log(`Tem nota 10: ${temNotaMaxima}`);
-
-// Nomes dos aprovados em ordem alfabética
-let nomesAprovados = alunos
-    .filter(a => a.nota >= 6)
-    .map(a => a.nome)
-    .sort();
-console.log(nomesAprovados);
+// push, pop, shift, unshift MODIFICAM o array original
+lista.push(4);
+console.log(lista); // [1, 2, 3, 4] - array modificado!
 ```
 
-### 7.3 Processamento de Dados de Vendas
+Métodos mutadores que vimos:
+- `push()` - adiciona ao final
+- `pop()` - remove do final
+- `shift()` - remove do início
+- `unshift()` - adiciona ao início
+
+**⚠️ Importante:** Quando um método é mutador, ele altera o array diretamente. Não há como "desfazer" essa operação!
+
+## Exemplos Práticos Completos
+
+### Exemplo 1: Lista de Compras Interativa
 
 ```javascript
-let vendas = [
-    {produto: "Mouse", quantidade: 5, precoUnitario: 50},
-    {produto: "Teclado", quantidade: 3, precoUnitario: 150},
-    {produto: "Monitor", quantidade: 2, precoUnitario: 800}
-];
+// Criando a lista
+let listaCompras = ["arroz", "feijão", "macarrão"];
 
-// Calcular valor total de cada venda
-let vendasComTotal = vendas.map(v => ({
-    ...v,
-    total: v.quantidade * v.precoUnitario
-}));
+// Adicionando itens
+console.log("=== Adicionando itens ===");
+listaCompras.push("açúcar");
+listaCompras.push("café");
+console.log("Lista atual:", listaCompras);
 
-console.log(vendasComTotal);
+// Removendo o último item (comprei!)
+console.log("\n=== Comprando último item ===");
+let itemComprado = listaCompras.pop();
+console.log(`Comprei: ${itemComprado}`);
+console.log("Lista restante:", listaCompras);
 
-// Vendas acima de R$ 400
-let vendasGrandes = vendasComTotal.filter(v => v.total > 400);
-console.log(vendasGrandes);
-```
+// Adicionando item urgente no início
+console.log("\n=== Item urgente ===");
+listaCompras.unshift("leite"); // Preciso urgente!
+console.log("Lista atualizada:", listaCompras);
 
-## Comparação entre Métodos
-
-| Método | Retorna | Modifica Original? | Quando Usar |
-|--------|---------|-------------------|-------------|
-| `includes()` | Boolean | Não | Verificar se elemento existe |
-| `indexOf()` | Number (índice) | Não | Encontrar posição de elemento |
-| `find()` | Elemento ou undefined | Não | Buscar primeiro elemento que atende condição |
-| `filter()` | Array | Não | Obter todos os elementos que atendem condição |
-| `map()` | Array | Não | Transformar todos os elementos |
-| `some()` | Boolean | Não | Verificar se ALGUM elemento atende condição |
-| `every()` | Boolean | Não | Verificar se TODOS os elementos atendem condição |
-| `sort()` | Array | **SIM** | Ordenar elementos |
-
-## Conceitos Importantes para Fixar
-
-### 9.1 Imutabilidade
-
-A maioria desses métodos **não modifica** o array original. Eles criam e retornam um novo array:
-
-```javascript
-let original = [1, 2, 3];
-let dobrado = original.map(n => n * 2);
-
-console.log(original); // [1, 2, 3] - não mudou!
-console.log(dobrado);  // [2, 4, 6]
-```
-
-**Exceção:** O `sort()` modifica o array original!
-
-### 9.2 Funções de Callback
-
-Todos esses métodos recebem uma **função** como argumento. Essa função é chamada para cada elemento do array:
-
-```javascript
-array.map(function(elemento, indice, arrayCompleto) {
-    // Esta função é executada para cada elemento
-    return elemento; // Retorna o valor transformado
+// Exibindo todos os itens
+console.log("\n=== Minha lista completa ===");
+listaCompras.forEach((item, indice) => {
+    console.log(`${indice + 1}. ${item}`);
 });
 
-// Forma mais comum com arrow function
-array.map(elemento => elemento * 2);
+console.log(`\nTotal de itens: ${listaCompras.length}`);
 ```
 
-### 9.3 Programação Funcional
+### Exemplo 2: Gerenciador de Notas
 
-Esses métodos representam um paradigma de programação chamado **programação funcional**, onde:
-- Trabalhamos com transformações de dados
-- Evitamos modificar dados existentes
-- Componemos operações simples para criar soluções complexas
+```javascript
+let notas = [7.5, 8.0, 6.5, 9.0, 8.5];
+
+// Calculando a média
+let soma = 0;
+for (let nota of notas) {
+    soma += nota;
+}
+let media = soma / notas.length;
+
+console.log("=== Sistema de Notas ===");
+console.log(`Notas: ${notas.join(", ")}`);
+console.log(`Média: ${media.toFixed(2)}`);
+
+// Verificando situação de cada nota
+console.log("\n=== Análise Individual ===");
+notas.forEach((nota, indice) => {
+    let situacao = nota >= 7.0 ? "Aprovado" : "Recuperação";
+    console.log(`Prova ${indice + 1}: ${nota} - ${situacao}`);
+});
+```
+
+### Exemplo 3: Cadastro de Nomes
+
+```javascript
+let alunos = [];
+
+// Função para adicionar aluno
+function adicionarAluno(nome) {
+    alunos.push(nome);
+    console.log(`✓ ${nome} foi adicionado à turma`);
+}
+
+// Função para remover último aluno
+function removerUltimoAluno() {
+    if (alunos.length > 0) {
+        let removido = alunos.pop();
+        console.log(`✗ ${removido} foi removido da turma`);
+    } else {
+        console.log("Não há alunos para remover!");
+    }
+}
+
+// Função para listar todos
+function listarAlunos() {
+    console.log("\n=== Lista de Alunos ===");
+    if (alunos.length === 0) {
+        console.log("Turma vazia");
+    } else {
+        alunos.forEach((aluno, indice) => {
+            console.log(`${indice + 1}. ${aluno}`);
+        });
+        console.log(`Total: ${alunos.length} alunos`);
+    }
+}
+
+// Testando o sistema
+adicionarAluno("João");
+adicionarAluno("Maria");
+adicionarAluno("Pedro");
+listarAlunos();
+
+removerUltimoAluno();
+listarAlunos();
+```
 
 ## Próximos Passos
 
-Na próxima aula nos aprofundaremos nos objetos. Você vai aprender:
-- Novas formas de criar e acessar propriedades de objetos
-- Como alterar, adicionar e deletar propriedades
-- Percorrer todas as propriedades dde um objeto
-- Criar objetos dentro de objetos
+Na próxima aula, exploraremos **métodos avançados de arrays** como:
+- Busca de elementos (`includes`, `indexOf`, `find`)
+- Filtragem de dados (`filter`)
+- Transformação de arrays (`map`)
+- Verificações (`some`, `every`)
+- Ordenação (`sort`)
 
-*Lembre-se: A prática leva à perfeição. Quanto mais você usar esses métodos, mais natural se tornará identificar qual usar em cada situação!*
+*Com este conhecimento fundamental, você está preparado para construir aplicações que gerenciam listas de dados de forma eficiente e profissional.*

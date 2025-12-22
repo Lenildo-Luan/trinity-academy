@@ -1,526 +1,452 @@
-# O Problema das Cópias
+# Organizando Informações de Forma Inteligente
 
-Imagine que você está trabalhando em um sistema de cadastro de usuários. Você tem um usuário registrado e precisa criar uma cópia dele para fazer algumas alterações de teste. Você faz o seguinte:
+Imagine que você precisa representar uma pessoa no seu programa. Você poderia usar variáveis separadas:
 
 ```javascript
-let usuarioOriginal = {
-  nome: "Maria Silva",
-  email: "maria@email.com",
-  idade: 28
+let nomePessoa = "Maria";
+let idadePessoa = 28;
+let profissaoPessoa = "Desenvolvedora";
+let ativaPessoa = true;
+```
+
+Mas e se você precisar representar 100 pessoas? Ou 1000? Rapidamente, seu código se tornaria uma bagunça impossível de gerenciar. É aqui que os **objetos** entram em cena como verdadeiros organizadores de informações!
+
+## O Que São Objetos?
+
+**Objetos** são estruturas de dados que permitem agrupar múltiplos valores relacionados em uma única entidade. Pense neles como "caixas organizadas" onde cada compartimento tem um nome (chamamos de **propriedade** ou **chave**) e armazena um valor específico.
+
+### Por Que Objetos São Importantes?
+
+Enquanto os tipos primitivos (number, string, boolean) armazenam apenas um valor, objetos permitem:
+
+✅ **Agrupar dados relacionados** em uma única estrutura  
+✅ **Representar entidades do mundo real** (pessoas, produtos, carros)  
+✅ **Organizar código** de forma mais clara e intuitiva  
+✅ **Facilitar manutenção** e expansão do programa  
+
+## Criando Objetos
+
+### Sintaxe Literal de Objeto (Mais Comum)
+
+A forma mais simples e comum de criar objetos é usando chaves `{}`:
+
+```javascript
+// Objeto vazio
+let usuario = {};
+
+// Objeto com propriedades
+let pessoa = {
+    nome: "Maria",
+    idade: 28,
+    profissao: "Desenvolvedora",
+    ativa: true
 };
-
-let usuarioTeste = usuarioOriginal;
-usuarioTeste.nome = "Maria Santos"; // Modificando o teste
-
-console.log(usuarioOriginal.nome); // O que você espera ver aqui?
 ```
 
-**Surpresa!** O resultado é `"Maria Santos"`. Mas por quê? Você modificou apenas o `usuarioTeste`, certo?
-
-Este é um dos conceitos mais importantes e, ao mesmo tempo, mais confusos do JavaScript: **referências de objetos**. Vamos desvendar esse mistério!
-
-## Conceito Fundamental: Referências vs Valores
-
-### Tipos Primitivos: Cópia por Valor
-
-Primeiro, vamos entender como funcionam os tipos primitivos (numbers, strings, booleans):
+### Anatomia de um Objeto
 
 ```javascript
-let a = 10;
-let b = a; // Copia o VALOR de a para b
-
-a = 20;
-console.log(a); // 20
-console.log(b); // 10 (não foi afetado!)
+let produto = {
+    nome: "Notebook",      // propriedade: valor
+    preco: 3500,          // propriedade: valor
+    emEstoque: true       // propriedade: valor
+};
 ```
 
-Quando copiamos um valor primitivo, criamos uma **cópia independente**. Modificar uma variável não afeta a outra.
+Cada linha dentro do objeto segue o padrão:
+- **Chave** (ou nome da propriedade): identifica a informação
+- **Dois pontos** `:` separam chave e valor
+- **Valor**: a informação armazenada
+- **Vírgula** `,` separa as propriedades (exceto a última)
 
-**Por quê?** Primitivos são armazenados diretamente na memória. Cada variável tem sua própria cópia do valor.
-
-### Objetos: Cópia por Referência
-
-Agora, veja o que acontece com objetos:
+### Sintaxe com Construtor (Menos Comum)
 
 ```javascript
-let objetoA = { valor: 10 };
-let objetoB = objetoA; // Copia a REFERÊNCIA, não o objeto!
-
-objetoA.valor = 20;
-console.log(objetoA.valor); // 20
-console.log(objetoB.valor); // 20 (foi afetado!)
+let usuario = new Object();
+usuario.nome = "João";
+usuario.idade = 30;
 ```
 
-**Por quê essa diferença?**
+> **Dica:** Prefira sempre a sintaxe literal `{}` - é mais clara, concisa e amplamente utilizada.
 
-Objetos em JavaScript são armazenados na memória de forma diferente. Quando você cria um objeto, o JavaScript armazena o objeto em um local da memória e a variável guarda apenas um **"endereço"** (referência) para esse local.
+## Acessando Propriedades
 
-**Analogia do Mundo Real:**
+Existem duas formas principais de acessar propriedades de um objeto:
 
-Pense em um objeto como uma **casa** e a variável como um **endereço**:
-
-- **Primitivos**: Quando você copia um número, é como tirar uma fotografia. Você tem duas fotos independentes.
-- **Objetos**: Quando você copia um objeto, é como anotar o endereço de uma casa. Você tem dois papéis com o mesmo endereço, mas ainda é **a mesma casa**. Se você pintar a casa usando um endereço, ela estará pintada quando você for lá usando o outro endereço também!
-
-## Entendendo Referências na Prática
-
-### Exemplo 1: Múltiplas Variáveis, Mesmo Objeto
+### 1. Notação de Ponto (Mais Comum)
 
 ```javascript
 let pessoa = {
-  nome: "João",
-  idade: 30
+    nome: "Carlos",
+    idade: 35,
+    cidade: "São Paulo"
 };
 
-let usuario = pessoa;
-let admin = pessoa;
+// Lendo propriedades
+console.log(pessoa.nome);     // "Carlos"
+console.log(pessoa.idade);    // 35
+console.log(pessoa.cidade);   // "São Paulo"
 
-// Todas as três variáveis apontam para o MESMO objeto
-admin.nome = "Carlos";
+// Modificando propriedades
+pessoa.idade = 36;
+console.log(pessoa.idade);    // 36
 
-console.log(pessoa.nome);  // "Carlos"
-console.log(usuario.nome); // "Carlos"
-console.log(admin.nome);   // "Carlos"
+// Adicionando novas propriedades
+pessoa.profissao = "Engenheiro";
+console.log(pessoa.profissao); // "Engenheiro"
 ```
 
-### Exemplo 2: Comparação de Objetos
+### 2. Notação de Colchetes (Para Casos Especiais)
+
+A notação de colchetes é necessária quando:
+- O nome da propriedade tem espaços ou caracteres especiais
+- O nome da propriedade é dinâmico (está em uma variável)
 
 ```javascript
-let a = { nome: "Ana" };
-let b = { nome: "Ana" };
+let pessoa = {
+    nome: "Ana",
+    "nome completo": "Ana Silva Santos",
+    idade: 25
+};
 
-console.log(a === b); // false
+// Com espaços - PRECISA de colchetes
+console.log(pessoa["nome completo"]); // "Ana Silva Santos"
 
-let c = a;
-console.log(a === c); // true
+// Propriedade dinâmica
+let propriedade = "idade";
+console.log(pessoa[propriedade]);     // 25
+
+// Propriedade calculada
+let chave = "nom" + "e";
+console.log(pessoa[chave]);           // "Ana"
 ```
 
-**Por que `a === b` é `false`?**
+### Diferenças Entre as Notações
 
-Mesmo que os objetos tenham exatamente as mesmas propriedades e valores, eles são **objetos diferentes** na memória. O operador `===` compara as **referências**, não o conteúdo.
+| Notação de Ponto | Notação de Colchetes |
+|------------------|----------------------|
+| Mais limpa e legível | Funciona com espaços e caracteres especiais |
+| Nome fixo | Nome pode ser dinâmico (em variável) |
+| Não funciona com espaços | Permite propriedades computadas |
+| `objeto.propriedade` | `objeto["propriedade"]` |
 
-É como ter duas casas idênticas em endereços diferentes. São casas diferentes, mesmo que sejam iguais por dentro!
+## Modificando Objetos
 
-**Por que `a === c` é `true`?**
+### Alterando Valores
 
-Porque `c` recebeu a **referência** de `a`. Eles apontam para o **mesmo objeto** na memória.
+```javascript
+let carro = {
+    marca: "Toyota",
+    modelo: "Corolla",
+    ano: 2020
+};
 
-## Clonagem de Objetos: Criando Cópias Independentes
+// Modificando valores existentes
+carro.ano = 2021;
+carro["modelo"] = "Corolla XEi";
 
-Agora que entendemos o problema, como criamos uma cópia verdadeiramente independente de um objeto?
+console.log(carro);
+// { marca: "Toyota", modelo: "Corolla XEi", ano: 2021 }
+```
 
-### Método 1: Clonagem Manual
+### Adicionando Propriedades
 
-A forma mais básica é copiar propriedade por propriedade:
+```javascript
+let livro = {
+    titulo: "JavaScript Descomplicado",
+    autor: "Maria Silva"
+};
+
+// Adicionando novas propriedades
+livro.paginas = 350;
+livro.editora = "Tech Books";
+livro["ano de publicacao"] = 2024;
+
+console.log(livro);
+// {
+//   titulo: "JavaScript Descomplicado",
+//   autor: "Maria Silva",
+//   paginas: 350,
+//   editora: "Tech Books",
+//   "ano de publicacao": 2024
+// }
+```
+
+### Removendo Propriedades
+
+Use o operador `delete` para remover propriedades:
 
 ```javascript
 let usuario = {
-  nome: "João",
-  idade: 30,
-  ativo: true
+    nome: "Pedro",
+    email: "pedro@email.com",
+    senha: "123456",
+    ativo: true
 };
 
-let clone = {}; // Novo objeto vazio
+// Removendo propriedade
+delete usuario.senha;
 
-// Copiando todas as propriedades
-for (let chave in usuario) {
-  clone[chave] = usuario[chave];
+console.log(usuario);
+// { nome: "Pedro", email: "pedro@email.com", ativo: true }
+```
+
+## Propriedades Computadas
+
+Você pode criar propriedades com nomes dinâmicos durante a criação do objeto:
+
+```javascript
+let tipo = "animal";
+let nome = "Rex";
+
+let pet = {
+    [tipo]: "cachorro",
+    ["nome do " + tipo]: nome,
+    idade: 5
+};
+
+console.log(pet);
+// { animal: "cachorro", "nome do animal": "Rex", idade: 5 }
+```
+
+### Exemplo Prático
+
+```javascript
+function criarProduto(nome, valor) {
+    let tipoPropriedade = "preco";
+    
+    return {
+        nome: nome,
+        [tipoPropriedade]: valor,
+        ["desconto_" + nome.toLowerCase()]: valor * 0.1
+    };
 }
 
-clone.nome = "Pedro";
-console.log(usuario.nome); // "João" (não foi afetado!)
-console.log(clone.nome);   // "Pedro"
+let produto = criarProduto("Notebook", 3000);
+console.log(produto);
+// {
+//   nome: "Notebook",
+//   preco: 3000,
+//   desconto_notebook: 300
+// }
 ```
 
-**Vantagem:** Você tem controle total sobre o que está copiando.
-**Desvantagem:** Trabalhoso e propenso a erros.
+## Percorrendo Objetos com for...in
 
-### Método 2: Object.assign()
-
-O JavaScript oferece um método mais elegante:
+Para acessar todas as propriedades de um objeto, use o loop `for...in`:
 
 ```javascript
-let usuario = {
-  nome: "João",
-  idade: 30
+let estudante = {
+    nome: "Lucas",
+    idade: 20,
+    curso: "Engenharia",
+    semestre: 4
 };
 
-let clone = Object.assign({}, usuario);
+// Percorrendo todas as propriedades
+for (let chave in estudante) {
+    console.log(chave + ": " + estudante[chave]);
+}
 
-clone.nome = "Pedro";
-console.log(usuario.nome); // "João"
-console.log(clone.nome);   // "Pedro"
+// Saída:
+// nome: Lucas
+// idade: 20
+// curso: Engenharia
+// semestre: 4
 ```
 
-**Como funciona:**
-- `Object.assign(destino, fonte1, fonte2, ...)`
-- Copia todas as propriedades das fontes para o destino
-- Retorna o objeto destino
-
-**Mesclando objetos:**
+### Exemplo Prático: Listando Produtos
 
 ```javascript
-let usuario = { nome: "João" };
-let permissoes1 = { podeVer: true };
-let permissoes2 = { podeEditar: true };
-
-let usuarioCompleto = Object.assign({}, usuario, permissoes1, permissoes2);
-
-console.log(usuarioCompleto);
-// { nome: "João", podeVer: true, podeEditar: true }
-```
-
-### Método 3: Spread Operator (...)
-
-A forma mais moderna e concisa:
-
-```javascript
-let usuario = {
-  nome: "João",
-  idade: 30
+let estoque = {
+    notebook: 15,
+    mouse: 50,
+    teclado: 30,
+    monitor: 8
 };
 
-let clone = { ...usuario };
+console.log("📦 Estoque Atual:");
+for (let produto in estoque) {
+    console.log(`${produto}: ${estoque[produto]} unidades`);
+}
 
-clone.nome = "Pedro";
-console.log(usuario.nome); // "João"
-console.log(clone.nome);   // "Pedro"
+// Saída:
+// 📦 Estoque Atual:
+// notebook: 15 unidades
+// mouse: 50 unidades
+// teclado: 30 unidades
+// monitor: 8 unidades
 ```
 
-**O operador spread `...`** "espalha" todas as propriedades do objeto original no novo objeto.
+## Objetos Aninhados
 
-**Vantagem:** Sintaxe limpa e moderna.
-
-## O Problema da Clonagem Superficial
-
-Todos os métodos acima realizam **clonagem superficial** (shallow cloning). Isso significa que copiam apenas o primeiro nível de propriedades.
-
-**E qual é o problema?**
+Objetos podem conter outros objetos como propriedades, criando estruturas mais complexas:
 
 ```javascript
-let usuario = {
-  nome: "João",
-  endereco: {
-    rua: "Rua Principal",
-    numero: 123
-  }
-};
-
-let clone = { ...usuario };
-
-clone.endereco.rua = "Rua Secundária";
-
-console.log(usuario.endereco.rua); // "Rua Secundária" (foi afetado!)
-```
-
-**O que aconteceu?**
-
-A propriedade `endereco` é um **objeto**. Ao copiar superficialmente, copiamos apenas a **referência** ao objeto `endereco`, não o objeto em si!
-
-**Visualizando:**
-
-```
-usuario ──┐
-          ├─→ nome: "João"
-          ├─→ endereco ──┐
-                         ├─→ rua: "Rua Principal"
-                         └─→ numero: 123
-                         ↑
-clone ────┤              │
-          ├─→ nome: "João"
-          └─→ endereco ──┘
-```
-
-Ambos os objetos (`usuario` e `clone`) compartilham o **mesmo** objeto `endereco`!
-
-## Clonagem Profunda: A Solução Completa
-
-Para copiar objetos aninhados, precisamos de **clonagem profunda** (deep cloning).
-
-### Método 1: structuredClone() (Moderno e Recomendado)
-
-```javascript
-let usuario = {
-  nome: "João",
-  endereco: {
-    rua: "Rua Principal",
-    numero: 123,
-    cidade: {
-      nome: "São Paulo",
-      estado: "SP"
+let empresa = {
+    nome: "Tech Solutions",
+    fundacao: 2015,
+    endereco: {
+        rua: "Av. Paulista",
+        numero: 1000,
+        cidade: "São Paulo",
+        estado: "SP"
+    },
+    funcionarios: {
+        total: 50,
+        departamentos: {
+            TI: 20,
+            Vendas: 15,
+            RH: 5
+        }
     }
-  }
 };
 
-let cloneProfundo = structuredClone(usuario);
-
-cloneProfundo.endereco.rua = "Rua Secundária";
-cloneProfundo.endereco.cidade.nome = "Rio de Janeiro";
-
-console.log(usuario.endereco.rua);         // "Rua Principal" (não afetado!)
-console.log(usuario.endereco.cidade.nome); // "São Paulo" (não afetado!)
+// Acessando propriedades aninhadas
+console.log(empresa.nome);                        // "Tech Solutions"
+console.log(empresa.endereco.cidade);            // "São Paulo"
+console.log(empresa.funcionarios.total);         // 50
+console.log(empresa.funcionarios.departamentos.TI); // 20
 ```
 
-**Vantagens do structuredClone():**
-- Faz clonagem profunda completa
-- Funciona com estruturas complexas
-- Preserva tipos especiais (Date, Map, Set, etc.)
-
-**Quando usar:** Sempre que você precisar copiar objetos com propriedades aninhadas!
-
-### Método 2: JSON.parse(JSON.stringify())
-
-Uma técnica antiga, mas ainda útil:
+### Exemplo Completo: Cadastro de Pessoa
 
 ```javascript
-let usuario = {
-  nome: "João",
-  endereco: {
-    rua: "Rua Principal"
-  }
+let pessoa = {
+    nome: "Ana Carolina",
+    idade: 32,
+    contato: {
+        email: "ana@email.com",
+        telefones: {
+            residencial: "(11) 1234-5678",
+            celular: "(11) 98765-4321"
+        }
+    },
+    endereco: {
+        rua: "Rua das Flores",
+        numero: 123,
+        complemento: "Apto 45",
+        cidade: "Rio de Janeiro",
+        estado: "RJ"
+    }
 };
 
-let clone = JSON.parse(JSON.stringify(usuario));
+// Acessando dados aninhados
+console.log(pessoa.nome);                           // "Ana Carolina"
+console.log(pessoa.contato.email);                 // "ana@email.com"
+console.log(pessoa.contato.telefones.celular);     // "(11) 98765-4321"
+console.log(pessoa.endereco.cidade);               // "Rio de Janeiro"
 
-clone.endereco.rua = "Rua Secundária";
-console.log(usuario.endereco.rua); // "Rua Principal"
+// Modificando dados aninhados
+pessoa.contato.email = "ana.carolina@email.com";
+pessoa.endereco.complemento = "Apto 47";
 ```
 
-**Como funciona:**
-1. `JSON.stringify(usuario)`: Converte o objeto em texto JSON
-2. `JSON.parse(...)`: Reconstrói um novo objeto a partir do texto
+## Objetos vs Arrays: Quando Usar Cada Um?
 
-**⚠️ Limitações importantes:**
-- Perde **funções**
-- Perde **undefined**
-- Perde **símbolos**
-- Não funciona com **referências circulares**
-- Perde tipos especiais (Date vira string)
+### Use **Arrays** quando:
+- Você tem uma **lista ordenada** de itens
+- A **ordem importa**
+- Você acessa por **posição/índice numérico**
+- Exemplo: lista de compras, notas de alunos, histórico
 
 ```javascript
-let objeto = {
-  data: new Date(),
-  funcao: function() { return "oi"; },
-  indefinido: undefined
-};
-
-let clone = JSON.parse(JSON.stringify(objeto));
-
-console.log(clone.data);       // String, não Date!
-console.log(clone.funcao);     // undefined (perdido!)
-console.log(clone.indefinido); // undefined (perdido!)
+let frutas = ["maçã", "banana", "laranja"];
+console.log(frutas[0]); // "maçã"
 ```
 
-**Quando usar:** Apenas para objetos simples com dados primitivos.
+### Use **Objetos** quando:
+- Você tem **dados relacionados** que formam uma entidade
+- As propriedades têm **nomes significativos**
+- A **ordem não importa**
+- Você acessa por **nome da propriedade**
+- Exemplo: informações de pessoa, configurações, produto
 
-## Mutabilidade e Objetos const
+```javascript
+let pessoa = {
+    nome: "João",
+    idade: 25,
+    cidade: "Salvador"
+};
+console.log(pessoa.nome); // "João"
+```
 
-Um conceito importante relacionado a referências é a mutabilidade com `const`:
+## Conceitos Fundamentais Sobre Objetos
+
+### 1. Objetos São Passados por Referência
+
+```javascript
+let objeto1 = { valor: 10 };
+let objeto2 = objeto1;      // objeto2 aponta para o mesmo objeto
+let objeto3 = { valor: 10 }; // objeto3 é um objeto diferente
+
+console.log(objeto1 == objeto2);  // true (mesma referência)
+console.log(objeto1 == objeto3);  // false (objetos diferentes)
+
+objeto1.valor = 15;
+console.log(objeto2.valor);       // 15 (afetado!)
+console.log(objeto3.valor);       // 10 (não afetado)
+```
+
+**Importante:** Quando você atribui um objeto a outra variável, você está copiando a **referência**, não o objeto em si. Mudanças em uma variável afetam a outra!
+
+### 2. Objetos Declarados com const
+
+Mesmo objetos `const` podem ter suas propriedades modificadas:
 
 ```javascript
 const usuario = {
-  nome: "João",
-  idade: 30
+    nome: "João"
 };
 
-// Isso funciona! 
-usuario.nome = "Pedro";
-usuario.idade = 35;
-console.log(usuario); // { nome: "Pedro", idade: 35 }
+usuario.nome = "Pedro";  // ✅ Funciona! (propriedade modificada)
+usuario.idade = 30;      // ✅ Funciona! (propriedade adicionada)
 
-// Isso NÃO funciona!
-usuario = { nome: "Carlos" }; // TypeError: Assignment to constant variable
+// usuario = {};         // ❌ ERRO! (não pode reatribuir a variável)
 ```
 
-**Por quê?**
+O `const` protege a **variável**, não o **conteúdo** do objeto.
 
-O `const` protege a **referência**, não o **conteúdo** do objeto.
+## Métodos Úteis para Objetos
 
-**Analogia:** É como ter um endereço escrito com caneta permanente. Você não pode mudar o endereço escrito, mas pode reformar a casa naquele endereço!
-
-```javascript
-const endereco = "Rua A, 123"; // Não pode mudar o endereço
-// Mas a casa no endereço pode ser pintada, reformada, etc.
-```
-
-## Quando Usar Cada Técnica
-
-### Use Spread Operator ou Object.assign() quando:
-- O objeto tem apenas um nível de propriedades
-- As propriedades são valores primitivos
-- Você precisa mesclar objetos
+### Object.keys() - Lista as Chaves
 
 ```javascript
-let config = { tema: "escuro", idioma: "pt" };
-let novaSessao = { ...config, usuario: "João" };
-```
-
-### Use structuredClone() quando:
-- O objeto tem propriedades aninhadas
-- Você quer uma cópia completamente independente
-- O objeto contém tipos especiais (Date, Map, Set)
-
-```javascript
-let perfil = {
-  dados: { nome: "Ana" },
-  configuracoes: { tema: { cor: "azul" } }
-};
-let copia = structuredClone(perfil);
-```
-
-### Use JSON.parse/stringify quando:
-- Você tem certeza que o objeto contém apenas dados serializáveis
-- Você está trabalhando com APIs que usam JSON
-- Você precisa compatibilidade com navegadores antigos
-
-```javascript
-let dadosAPI = { nome: "João", idade: 30, cidade: "SP" };
-let backup = JSON.parse(JSON.stringify(dadosAPI));
-```
-
-## Exemplos Práticos
-
-### Exemplo 1: Sistema de Carrinho de Compras
-
-```javascript
-// Estado inicial do carrinho
-let carrinhoOriginal = {
-  itens: [
-    { produto: "Notebook", preco: 3000, quantidade: 1 },
-    { produto: "Mouse", preco: 50, quantidade: 2 }
-  ],
-  total: 3100
+let produto = {
+    nome: "Mouse",
+    preco: 50,
+    estoque: 100
 };
 
-// Usuário quer simular adicionar um item sem modificar o carrinho real
-let carrinhoSimulacao = structuredClone(carrinhoOriginal);
-
-carrinhoSimulacao.itens.push({ 
-  produto: "Teclado", 
-  preco: 200, 
-  quantidade: 1 
-});
-carrinhoSimulacao.total += 200;
-
-console.log(carrinhoOriginal.itens.length);  // 2 (não foi afetado)
-console.log(carrinhoSimulacao.itens.length); // 3
+let chaves = Object.keys(produto);
+console.log(chaves); // ["nome", "preco", "estoque"]
 ```
 
-### Exemplo 2: Histórico de Alterações
+### Object.values() - Lista os Valores
 
 ```javascript
-let documento = {
-  titulo: "Meu Documento",
-  conteudo: "Texto inicial",
-  versao: 1
-};
-
-// Salvando versão anterior antes de modificar
-let historico = [structuredClone(documento)];
-
-documento.conteudo = "Texto modificado";
-documento.versao = 2;
-
-historico.push(structuredClone(documento));
-
-// Posso acessar versões anteriores
-console.log(historico[0].conteudo); // "Texto inicial"
-console.log(historico[1].conteudo); // "Texto modificado"
+let valores = Object.values(produto);
+console.log(valores); // ["Mouse", 50, 100]
 ```
 
-### Exemplo 3: Configurações Padrão
+### Object.entries() - Lista Pares [Chave, Valor]
 
 ```javascript
-const configPadrao = {
-  tema: "claro",
-  notificacoes: true,
-  idioma: "pt-BR"
-};
-
-function criarPerfilUsuario(personalizacoes) {
-  // Mescla configurações padrão com personalizações
-  return {
-    ...configPadrao,
-    ...personalizacoes
-  };
-}
-
-let perfil1 = criarPerfilUsuario({ tema: "escuro" });
-let perfil2 = criarPerfilUsuario({ idioma: "en-US" });
-
-console.log(perfil1); // { tema: "escuro", notificacoes: true, idioma: "pt-BR" }
-console.log(perfil2); // { tema: "claro", notificacoes: true, idioma: "en-US" }
+let entradas = Object.entries(produto);
+console.log(entradas);
+// [
+//   ["nome", "Mouse"],
+//   ["preco", 50],
+//   ["estoque", 100]
+// ]
 ```
 
-## Armadilhas Comuns e Como Evitá-las
+## Próximos Passos
 
-### Armadilha 1: Modificação Acidental
+Na próxima aula, você aprenderá sobre:
+- **Referências e Cópias** de objetos
+- Como clonar objetos corretamente
+- Diferenças entre clonagem superficial e profunda
+- JSON e serialização de dados
 
-```javascript
-// ❌ ERRADO
-function adicionarDesconto(produto) {
-  produto.preco = produto.preco * 0.9;
-  return produto;
-}
-
-let produtoOriginal = { nome: "Notebook", preco: 3000 };
-let produtoComDesconto = adicionarDesconto(produtoOriginal);
-
-console.log(produtoOriginal.preco); // 2700 (foi modificado!)
-```
-
-```javascript
-// ✅ CORRETO
-function adicionarDesconto(produto) {
-  let produtoNovo = { ...produto };
-  produtoNovo.preco = produtoNovo.preco * 0.9;
-  return produtoNovo;
-}
-
-let produtoOriginal = { nome: "Notebook", preco: 3000 };
-let produtoComDesconto = adicionarDesconto(produtoOriginal);
-
-console.log(produtoOriginal.preco); // 3000 (não foi modificado!)
-```
-
-### Armadilha 2: Clonagem Superficial Inadequada
-
-```javascript
-// ❌ ERRADO para objetos aninhados
-let configuracao = {
-  usuario: { nome: "Ana" },
-  preferencias: { tema: "escuro" }
-};
-
-let copia = { ...configuracao };
-copia.preferencias.tema = "claro";
-
-console.log(configuracao.preferencias.tema); // "claro" (foi modificado!)
-```
-
-```javascript
-// ✅ CORRETO
-let copia = structuredClone(configuracao);
-copia.preferencias.tema = "claro";
-
-console.log(configuracao.preferencias.tema); // "escuro" (não foi modificado!)
-```
-
-## Por Que Isso É Importante?
-
-Entender referências e cópias é crucial porque:
-
-1. **Previne Bugs Difíceis de Detectar:** Modificações inesperadas são uma fonte comum de bugs
-2. **Gerenciamento de Estado:** Essencial para frameworks modernos (React, Vue)
-3. **Performance:** Saber quando copiar vs quando compartilhar referências
-4. **Código Previsível:** Funções que não modificam seus parâmetros são mais confiáveis
-5. **Programação Funcional:** Base para imutabilidade e programação funcional
-
-## Próximos passos
-
-Na próxima aula começaremos nosso projeto final! Nele iremos:
-- Fazer um projeto completo de gestão de livros de uma biblioteca
-- Aplicar todos os conceitos aprendidos em um projeto real
-- Ver como é organiado um projeto real
-
-*Lembre-se: na dúvida sobre se uma modificação vai afetar o original, faça um teste rápido no console ou use `structuredClone()` para garantir uma cópia independente!*
+*Continue praticando e explorando objetos - eles são fundamentais para tudo que você fará em JavaScript!*

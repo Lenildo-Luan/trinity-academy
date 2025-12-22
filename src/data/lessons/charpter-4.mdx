@@ -21,7 +21,9 @@ O mais familiar de todos, usado para somar valores:
 let receita1 = 2500;
 let receita2 = 1800;
 let receitaTotal = receita1 + receita2;
-console.log("Receita total: R$ ", receitaTotal); // Receita total: R$ 4300
+
+console.log("Receita total: R$ ", receitaTotal);
+// Receita total: R$ 4300
 ```
 
 #### Subtração (`-`)
@@ -31,7 +33,8 @@ Usado para calcular diferenças:
 let saldoInicial = 5000;
 let gasto = 1200;
 let saldoFinal = saldoInicial - gasto;
-console.log("Saldo restante: R$ ", saldoFinal); // Saldo restante: R$ 3800
+console.log("Saldo restante: R$ ", saldoFinal); 
+// Saldo restante: R$ 3800
 ```
 
 #### Multiplicação (`*`)
@@ -41,7 +44,8 @@ Fundamental para cálculos de quantidades:
 let precoUnitario = 45;
 let quantidade = 12;
 let precoTotal = precoUnitario * quantidade;
-console.log("Preço total: R$ ", precoTotal); // Preço total: R$ 540
+console.log("Preço total: R$ ", precoTotal); 
+// Preço total: R$ 540
 ```
 
 #### Divisão (`/`)
@@ -51,7 +55,8 @@ Essencial para calcular médias e proporções:
 let pontuacaoTotal = 450;
 let numeroProvas = 5;
 let media = pontuacaoTotal / numeroProvas;
-console.log("Média: ", media); // Média: 90
+console.log("Média: ", media); 
+// Média: 90
 ```
 
 #### Módulo/Resto (`%`)
@@ -60,12 +65,14 @@ Retorna o resto de uma divisão, útil para verificar divisibilidade:
 ```javascript
 let numero = 17;
 let resto = numero % 5;
-console.log("17 dividido por 5, resto: ", resto); // 17 dividido por 5, resto: 2
+console.log("17 dividido por 5, resto: ", resto); 
+// 17 dividido por 5, resto: 2
 
 // Aplicação prática: verificar se um número é par
 let valor = 8;
 let ehPar = valor % 2 === 0;
-console.log("8 é par? ", ehPar); // 8 é par? true
+console.log("8 é par? ", ehPar); 
+// 8 é par? true
 ```
 
 #### Exponenciação (`**`)
@@ -75,14 +82,16 @@ Calcula potências, introduzido recentemente no JavaScript:
 let base = 3;
 let expoente = 4;
 let resultado = base ** expoente;
-console.log("3 elevado a 4: ", resultado); // 3 elevado a 4: 81
+console.log("3 elevado a 4: ", resultado); 
+// 3 elevado a 4: 81
 
 // Aplicação: calcular juros compostos
 let capital = 1000;
 let taxa = 1.05; // 5% de juros
 let tempo = 3;
 let montante = capital * (taxa ** tempo);
-console.log("Montante após 3 anos: R$ ", montante.toFixed(2)); // Montante após 3 anos: R$ 1157.63
+console.log("Montante após 3 anos: R$ ", montante.toFixed(2)); 
+// Montante após 3 anos: R$ 1157.63
 ```
 
 ## A Importância da Precedência
@@ -93,10 +102,12 @@ Assim como na matemática tradicional, JavaScript segue regras específicas para
 
 ```javascript
 let resultado1 = 10 + 5 * 2;
-console.log(resultado1); // 20 (não 30!)
+console.log(resultado1); 
+// 20 (não 30!)
 
 let resultado2 = (10 + 5) * 2;
-console.log(resultado2); // 30
+console.log(resultado2); 
+// 30
 ```
 
 ### Ordem de Precedência (da maior para a menor)
@@ -115,17 +126,20 @@ let frete = 25;
 
 // Forma incorreta (sem parênteses)
 let precoErrado = precoOriginal - percentualDesconto / 100 * precoOriginal + frete;
-console.log("Preço calculado incorretamente: R$ ", precoErrado); // Resultado inesperado
+console.log("Preço calculado incorretamente: R$ ", precoErrado); 
+// Resultado inesperado
 
 // Forma correta (com parênteses para controlar precedência)
 let desconto = (percentualDesconto / 100) * precoOriginal;
 let precoFinal = precoOriginal - desconto + frete;
-console.log("Preço final correto: R$ ", precoFinal); // Preço final correto: R$ 195
+console.log("Preço final correto: R$ ", precoFinal); 
+// Preço final correto: R$ 195
 
 // Forma alternativa mais clara
 let precoComDesconto = precoOriginal * (1 - percentualDesconto / 100);
 let precoFinalAlternativo = precoComDesconto + frete;
-console.log("Preço final (método alternativo): R$ ", precoFinalAlternativo); // Preço final (método alternativo): R$ 195
+console.log("Preço final (método alternativo): R$ ", precoFinalAlternativo); 
+// Preço final (método alternativo): R$ 195
 ```
 
 ### Conversão Numérica com Operador + Unário
@@ -140,8 +154,10 @@ let alturaTexto = "1.75";
 let idadeNumero = +idadeTexto;
 let alturaNumero = +alturaTexto;
 
-console.log("Idade em dobro: ", idadeNumero * 2); // Idade em dobro: 50
-console.log("Altura em cm: ", alturaNumero * 100); // Altura em cm: 175
+console.log("Idade em dobro: ", idadeNumero * 2); 
+// Idade em dobro: 50
+console.log("Altura em cm: ", alturaNumero * 100); 
+// Altura em cm: 175
 
 // Aplicação prática: somando valores de formulário
 let valor1 = "150"; // vindo de um input
@@ -149,8 +165,10 @@ let valor2 = "200"; // vindo de outro input
 let somaIncorreta = valor1 + valor2; // "150200" (concatenação!)
 let somaCorreta = +valor1 + +valor2; // 350 (soma matemática!)
 
-console.log("Soma incorreta: ", somaIncorreta); // Soma incorreta: 150200
-console.log("Soma correta: ", somaCorreta); // Soma correta: 350
+console.log("Soma incorreta: ", somaIncorreta);
+ // Soma incorreta: 150200
+console.log("Soma correta: ", somaCorreta); 
+// Soma correta: 350
 ```
 
 ## Operadores de Atribuição
@@ -173,66 +191,75 @@ Estes operadores combinam uma operação aritmética com atribuição, tornando 
 ```javascript
 let pontuacao = 100;
 pontuacao += 50; // equivale a: pontuacao = pontuacao + 50
-console.log(pontuacao); // 150
+console.log(pontuacao); 
+// 150
 
 // Aplicação prática: acumulando vendas diárias
 let vendasSemana = 0;
 vendasSemana += 850; // Segunda-feira
 vendasSemana += 920; // Terça-feira
 vendasSemana += 780; // Quarta-feira
-console.log("Vendas acumuladas: R$ ", vendasSemana); // Vendas acumuladas: R$ 2550
+console.log("Vendas acumuladas: R$ ", vendasSemana); 
+// Vendas acumuladas: R$ 2550
 ```
 
 #### Subtração e Atribuição (`-=`)
 ```javascript
 let estoque = 100;
 estoque -= 15; // equivale a: estoque = estoque - 15
-console.log("Estoque restante: ", estoque); // Estoque restante: 85
+console.log("Estoque restante: ", estoque); 
+// Estoque restante: 85
 
 // Aplicação prática: controle de inventário
 let produtosDisponiveis = 500;
 produtosDisponiveis -= 25; // Venda manhã
 produtosDisponiveis -= 18; // Venda tarde
-console.log("Produtos disponíveis: ", produtosDisponiveis); // Produtos disponíveis: 457
+console.log("Produtos disponíveis: ", produtosDisponiveis); 
+// Produtos disponíveis: 457
 ```
 
 #### Multiplicação e Atribuição (`*=`)
 ```javascript
 let salario = 3000;
 salario *= 1.1; // aumento de 10%
-console.log("Novo salário: R$ ", salario); // Novo salário: R$ 3300
+console.log("Novo salário: R$ ", salario);// Novo salário: R$ 3300
 
 // Aplicação prática: juros compostos simples
 let investimento = 5000;
 investimento *= 1.08; // 8% ao ano
 investimento *= 1.08; // segundo ano
-console.log("Valor após 2 anos: R$ ", investimento.toFixed(2)); // Valor após 2 anos: R$ 5832.00
+console.log("Valor após 2 anos: R$ ", investimento.toFixed(2)); 
+// Valor após 2 anos: R$ 5832.00
 ```
 
 #### Divisão e Atribuição (`/=`)
 ```javascript
 let total = 1200;
 total /= 4; // dividir por 4 pessoas
-console.log("Valor por pessoa: R$ ", total); // Valor por pessoa: R$ 300
+console.log("Valor por pessoa: R$ ", total); 
+// Valor por pessoa: R$ 300
 
 // Aplicação prática: média móvel simples
 let somaNotas = 450;
 let numeroProvas = 5;
 somaNotas /= numeroProvas;
-console.log("Média geral: ", somaNotas); // Média geral: 90
+console.log("Média geral: ", somaNotas); 
+// Média geral: 90
 ```
 
 #### Módulo e Atribuição (`%=`)
 ```javascript
 let numero = 17;
 numero %= 5; // resto da divisão por 5
-console.log("Resto: ", numero); // Resto: 2
+console.log("Resto: ", numero); 
+// Resto: 2
 
 // Aplicação prática: sistema de turnos
 let funcionarioId = 1247;
 funcionarioId %= 3; // determinar turno (0, 1, ou 2)
 let turnos = ["Manhã", "Tarde", "Noite"];
-console.log("Turno: ", turnos[funcionarioId]); // Resultado baseado no resto
+console.log("Turno: ", turnos[funcionarioId]); 
+// Resultado baseado no resto
 ```
 
 ## Incremento e Decremento
@@ -245,13 +272,17 @@ Estes operadores são extremamente úteis para aumentar ou diminuir valores em 1
 let contador = 5;
 
 // Pós-incremento: usa o valor atual, depois incrementa
-console.log("Valor atual: ", contador++); // Valor atual: 5
-console.log("Após incremento: ", contador); // Após incremento: 6
+console.log("Valor atual: ", contador++); 
+// Valor atual: 5
+console.log("Após incremento: ", contador); 
+// Após incremento: 6
 
 // Pré-incremento: incrementa primeiro, depois usa o valor
 contador = 5;
-console.log("Pré-incremento: ", ++contador); // Pré-incremento: 6
-console.log("Valor final: ", contador); // Valor final: 6
+console.log("Pré-incremento: ", ++contador); 
+// Pré-incremento: 6
+console.log("Valor final: ", contador); 
+// Valor final: 6
 ```
 
 ### Aplicações Práticas
@@ -259,9 +290,11 @@ console.log("Valor final: ", contador); // Valor final: 6
 #### Sistema de Curtidas
 ```javascript
 let curtidas = 127;
-console.log("Curtidas antes: ", curtidas); // Curtidas antes: 127
+console.log("Curtidas antes: ", curtidas); 
+// Curtidas antes: 127
 curtidas++;
-console.log("Curtidas após like: ", curtidas); // Curtidas após like: 128
+console.log("Curtidas após like: ", curtidas); 
+// Curtidas após like: 128
 ```
 
 #### Controle de Estoque
@@ -275,8 +308,10 @@ produtosVendidos++; // segunda venda
 produtosVendidos += 5; // venda em lote
 produtosVendidos++; // mais uma venda
 
-console.log("Vendas do dia: ", produtosVendidos); // Vendas do dia: 8
-console.log("Restam ", (metaDiaria - produtosVendidos), " para atingir a meta"); // Restam 42 para atingir a meta
+console.log("Vendas do dia: ", produtosVendidos); 
+// Vendas do dia: 8
+console.log("Restam ", (metaDiaria - produtosVendidos), " para atingir a meta"); 
+// Restam 42 para atingir a meta
 ```
 
 ## Valores Especiais em JavaScript
@@ -286,9 +321,12 @@ console.log("Restam ", (metaDiaria - produtosVendidos), " para atingir a meta");
 JavaScript possui valores especiais para representar infinito:
 
 ```javascript
-console.log(1 / 0); // Infinity
-console.log(-1 / 0); // -Infinity
-console.log(Infinity > 1000000); // true
+console.log(1 / 0); 
+// Infinity
+console.log(-1 / 0); 
+// -Infinity
+console.log(Infinity > 1000000); 
+// true
 
 // Aplicação prática: verificação de limites
 let limite = 1000;
@@ -303,9 +341,12 @@ if (valor === Infinity) {
 Resultado de operações matemáticas inválidas:
 
 ```javascript
-console.log(0 / 0); // NaN
-console.log("texto" * 2); // NaN
-console.log(Math.sqrt(-1)); // NaN
+console.log(0 / 0); 
+// NaN
+console.log("texto" * 2); 
+// NaN
+console.log(Math.sqrt(-1)); 
+// NaN
 
 // Verificando se um valor é NaN
 let resultado = "abc" / 2;
@@ -436,15 +477,18 @@ let resultado = a + (b * c) - (d / e);
 ```javascript
 // Problema de precisão
 let resultado1 = 0.1 + 0.2;
-console.log(resultado1); // 0.30000000000000004
+console.log(resultado1); 
+// 0.30000000000000004
 
 // Solução: arredondar quando necessário
 let resultado2 = Math.round((0.1 + 0.2) * 100) / 100;
-console.log(resultado2); // 0.3
+console.log(resultado2); 
+// 0.3
 
 // Ou usar toFixed() para exibição
 let resultado3 = (0.1 + 0.2).toFixed(2);
-console.log(resultado3); // "0.30"
+console.log(resultado3); 
+// "0.30"
 ```
 
 ## Próximos passos
