@@ -9,8 +9,8 @@ import { Analytics } from "@vercel/analytics/next"
 const InterVariable = localFont({
   variable: "--font-inter",
   src: [
-    { path: "./InterVariable.woff2", style: "normal" },
-    { path: "./InterVariable-Italic.woff2", style: "italic" },
+    { path: "./CabinetGrotesk-Variable.ttf", style: "normal" },
+    { path: "./CabinetGrotesk-Variable.ttf", style: "italic" },
   ],
 });
 

@@ -1,6 +1,7 @@
 .prose {
   color: var(--color-gray-700);
-  font-size: var(--text-sm);
+  font-size: var(--text-md);
+    font-weight: var(--font-weight-medium);
   line-height: --spacing(7);
 
   @variant dark {
@@ -25,30 +26,30 @@
   }
 
   h1 {
-    font-size: var(--text-3xl);
-    line-height: var(--text-3xl--line-height);
+    font-size: var(--text-4xl);
+    line-height: var(--text-4xl--line-height);
     letter-spacing: -0.025em;
   }
 
   h2 {
-    font-size: var(--text-xl);
+    font-size: var(--text-2xl);
     line-height: --spacing(7);
     letter-spacing: -0.025em;
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-semibold);
     margin-top: --spacing(15);
   }
 
   h3 {
-    font-size: var(--text-lg);
+    font-size: var(--text-xl);
     line-height: --spacing(7);
     letter-spacing: -0.025em;
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-semibold);
     margin-top: --spacing(10);
   }
 
   a {
     color: var(--color-gray-950);
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-bold);
     text-decoration: underline;
     text-underline-offset: 3px;
     text-decoration-color: --alpha(var(--color-gray-950) / 25%);
@@ -128,7 +129,7 @@
   }
 
   strong {
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-bold);
     color: var(--color-gray-950);
 
     @variant dark {
@@ -139,7 +140,7 @@
   code:where(:not(pre > code)) {
     font-size: var(--text-sm);
     line-height: var(--text-sm--line-height);
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-semibold);
     color: var(--color-gray-950);
 
     @variant dark {

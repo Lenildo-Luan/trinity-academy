@@ -1,6 +1,7 @@
 # Trinity platform
 
 Trinity is a free platform to learn about the computer science universe
+
 ## Getting started
 
 First install the npm dependencies:
@@ -50,8 +51,7 @@ To learn more about the technologies used in this site template, see the followi
 - [MDX](https://mdxjs.com/) - the official MDX documentation
 
 ## TODO
-- [ ] Ajustar estilos para a identidade visual da Trinity
-- [ ] Mudar logo para a da trinity
 - [ ] Criar página inicial com cursos
+- [ ] Estilizar página de login
 - [ ] Mudar estrutura dos conteúdos da pasta data para suportar diferentes cursos
 - [ ] Iniciar versionamento 1.0.0_alpha
