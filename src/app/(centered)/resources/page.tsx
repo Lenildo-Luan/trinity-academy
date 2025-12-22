@@ -22,7 +22,7 @@ export default function Page() {
     <CenteredPageLayout
       breadcrumbs={
         <Breadcrumbs>
-          <BreadcrumbHome />
+          <BreadcrumbHome href={'/introducao-a-programacao'}>Introdução a Programação</BreadcrumbHome>
           <BreadcrumbSeparator />
           <Breadcrumb>Resources</Breadcrumb>
         </Breadcrumbs>

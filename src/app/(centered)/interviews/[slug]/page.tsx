@@ -49,7 +49,7 @@ export default async function Page({
     <CenteredPageLayout
       breadcrumbs={
         <Breadcrumbs>
-          <BreadcrumbHome />
+          <BreadcrumbHome href={'/introducao-a-programacao'}>Introdução a Programação</BreadcrumbHome>
           <BreadcrumbSeparator />
           <Breadcrumb href="/interviews">Interviews</Breadcrumb>
           <BreadcrumbSeparator />

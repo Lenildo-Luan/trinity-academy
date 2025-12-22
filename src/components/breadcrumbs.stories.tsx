@@ -21,7 +21,7 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   render: () => (
     <Breadcrumbs>
-      <BreadcrumbHome />
+      <BreadcrumbHome href={'/introducao-a-programacao'}>Introdução a Programação</BreadcrumbHome>
       <BreadcrumbSeparator />
       <Breadcrumb href="/module1">Módulo 1</Breadcrumb>
       <BreadcrumbSeparator />
@@ -33,7 +33,7 @@ export const Default: Story = {
 export const TwoLevels: Story = {
   render: () => (
     <Breadcrumbs>
-      <BreadcrumbHome />
+      <BreadcrumbHome href={'/introducao-a-programacao'}>Introdução a Programação</BreadcrumbHome>
       <BreadcrumbSeparator />
       <Breadcrumb>Módulo Atual</Breadcrumb>
     </Breadcrumbs>
@@ -43,7 +43,7 @@ export const TwoLevels: Story = {
 export const DeepNesting: Story = {
   render: () => (
     <Breadcrumbs>
-      <BreadcrumbHome />
+      <BreadcrumbHome href={'/introducao-a-programacao'}>Introdução a Programação</BreadcrumbHome>
       <BreadcrumbSeparator />
       <Breadcrumb href="/module1">Módulo 1: Introdução</Breadcrumb>
       <BreadcrumbSeparator />
@@ -59,7 +59,7 @@ export const DeepNesting: Story = {
 export const LongText: Story = {
   render: () => (
     <Breadcrumbs>
-      <BreadcrumbHome />
+      <BreadcrumbHome href={'/introducao-a-programacao'}>Introdução a Programação</BreadcrumbHome>
       <BreadcrumbSeparator />
       <Breadcrumb href="/module">
         Módulo com um título extremamente longo que pode ser truncado
@@ -75,7 +75,7 @@ export const LongText: Story = {
 export const OnlyHome: Story = {
   render: () => (
     <Breadcrumbs>
-      <BreadcrumbHome />
+      <BreadcrumbHome href={'/introducao-a-programacao'}>Introdução a Programação</BreadcrumbHome>
     </Breadcrumbs>
   ),
 }

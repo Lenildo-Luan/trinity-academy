@@ -53,7 +53,7 @@ export default function ProfilePage() {
       <CenteredPageLayout
         breadcrumbs={
           <Breadcrumbs>
-            <BreadcrumbHome />
+            <BreadcrumbHome href={'/introducao-a-programacao'}>Introdução a Programação</BreadcrumbHome>
             <BreadcrumbSeparator />
             <Breadcrumb>Perfil</Breadcrumb>
           </Breadcrumbs>
@@ -71,7 +71,7 @@ export default function ProfilePage() {
       <CenteredPageLayout
         breadcrumbs={
           <Breadcrumbs>
-            <BreadcrumbHome />
+            <BreadcrumbHome href={'/introducao-a-programacao'}>Introdução a Programação</BreadcrumbHome>
             <BreadcrumbSeparator />
             <Breadcrumb>Perfil</Breadcrumb>
           </Breadcrumbs>
@@ -122,7 +122,7 @@ export default function ProfilePage() {
     <CenteredPageLayout
       breadcrumbs={
         <Breadcrumbs>
-          <BreadcrumbHome />
+          <BreadcrumbHome href={'/introducao-a-programacao'}>Introdução a Programação</BreadcrumbHome>
           <BreadcrumbSeparator />
           <Breadcrumb>Perfil</Breadcrumb>
         </Breadcrumbs>

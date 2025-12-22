@@ -21,7 +21,7 @@ export default async function InterviewsPage() {
     <CenteredPageLayout
       breadcrumbs={
         <Breadcrumbs>
-          <BreadcrumbHome />
+          <BreadcrumbHome href={'/introducao-a-programacao'}>Introdução a Programação</BreadcrumbHome>
           <BreadcrumbSeparator />
           <Breadcrumb>Interviews</Breadcrumb>
         </Breadcrumbs>
