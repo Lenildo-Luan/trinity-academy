@@ -16,7 +16,7 @@ export function QuizQuestion({
   return (
     <div className="animate-fade-in">
       <div className="mb-8">
-        <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700 dark:bg-cyan-950/30 dark:text-cyan-400">
+        <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-700 dark:bg-green-950/30 dark:text-green-400">
           <svg
             className="h-3.5 w-3.5"
             fill="currentColor"
@@ -46,7 +46,7 @@ export function QuizQuestion({
               key={alternative.id}
               className={`group flex cursor-pointer items-start gap-4 rounded-xl border-2 p-4 transition-all hover:shadow-md ${
                 isSelected
-                  ? 'border-cyan-500 bg-cyan-50 shadow-md dark:border-cyan-500 dark:bg-cyan-950/30'
+                  ? 'border-green-500 bg-green-50 shadow-md dark:border-green-500 dark:bg-green-950/30'
                   : 'border-gray-200 hover:border-gray-300 dark:border-gray-700 dark:hover:border-gray-600'
               }`}
             >
@@ -56,12 +56,12 @@ export function QuizQuestion({
                   name={`question-${question.id}`}
                   checked={isSelected}
                   onChange={() => onSelectAlternative(alternative.id)}
-                  className="mt-0.5 h-5 w-5 cursor-pointer border-gray-300 text-cyan-600 transition focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 dark:border-gray-600 dark:bg-gray-800 dark:focus:ring-offset-gray-900"
+                  className="mt-0.5 h-5 w-5 cursor-pointer border-gray-300 text-green-600 transition focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:border-gray-600 dark:bg-gray-800 dark:focus:ring-offset-gray-900"
                 />
                 <div
                   className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold transition-colors ${
                     isSelected
-                      ? 'bg-cyan-600 text-white dark:bg-cyan-500'
+                      ? 'bg-green-600 text-white dark:bg-green-500'
                       : 'bg-gray-200 text-gray-600 group-hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:group-hover:bg-gray-600'
                   }`}
                 >

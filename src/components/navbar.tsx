@@ -168,7 +168,7 @@ function SiteNavigation() {
               <ChevronDownIcon className="stroke-gray-950 dark:stroke-white" />
             </DropdownButton>
             <DropdownMenu anchor="bottom end">
-              <DropdownItem href="https://trinity-academy.vercel.app/perfil">Perfil</DropdownItem>
+              <DropdownItem href="/perfil">Perfil</DropdownItem>
               <DropdownItem href="https://wa.me/5583986954994">Suporte</DropdownItem>
               <DropdownItem onClick={handleSignOut}>Sair</DropdownItem>
             </DropdownMenu>

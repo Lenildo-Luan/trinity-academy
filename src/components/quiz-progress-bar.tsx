@@ -17,14 +17,14 @@ export function QuizProgressBar({ current, total }: QuizProgressBarProps) {
             {current}/{total} respondidas
           </span>
         </span>
-        <span className="rounded-full bg-cyan-100 px-2 py-0.5 text-xs font-bold text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400">
+        <span className="rounded-full bg-green-100 px-2 py-0.5 text-xs font-bold text-green-700 dark:bg-green-900/30 dark:text-green-400">
           {percentage}%
         </span>
       </div>
 
       <div className="relative h-2.5 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-green-500 transition-all duration-500 ease-out"
+          className="h-full rounded-full bg-gradient-to-r from-green-500 to-lime-500 transition-all duration-500 ease-out"
           style={{ width: `${percentage}%` }}
           role="progressbar"
           aria-valuenow={current}

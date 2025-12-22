@@ -188,8 +188,8 @@
     "dropdown.border": "var(--color-gray-600)",
     "dropdown.foreground": "var(--color-gray-50)",
     "dropdown.listBackground": "var(--color-gray-900)",
-    "button.background": "var(--color-sky-500)",
-    "button.hoverBackground": "var(--color-sky-400)",
+    "button.background": "var(--color-green-500)",
+    "button.hoverBackground": "var(--color-green-400)",
     "button.foreground": "var(--color-white)",
     "button.secondaryBackground": "var(--color-gray-700)",
     "button.secondaryHoverBackground": "var(--color-gray-600)",
@@ -246,7 +246,9 @@
   "tokenColors": [
     {
       "name": "Comment",
-      "scope": ["comment"],
+      "scope": [
+        "comment"
+      ],
       "settings": {
         "fontStyle": "italic",
         "foreground": "var(--color-gray-500)"
@@ -254,98 +256,127 @@
     },
     {
       "name": "Punctuation",
-      "scope": ["punctuation"],
+      "scope": [
+        "punctuation"
+      ],
       "settings": {
         "foreground": "var(--color-gray-500)"
       }
     },
     {
       "name": "Constant - eg. Number, Boolean, Colors",
-      "scope": ["constant"],
+      "scope": [
+        "constant"
+      ],
       "settings": {
-        "foreground": "var(--color-pink-400)"
+        "foreground": "var(--color-indigo-400)"
       }
     },
     {
       "name": "Entity - eg. Function, Type, Tag, Attribute Name",
-      "scope": ["entity"],
+      "scope": [
+        "entity"
+      ],
       "settings": {
         "foreground": "var(--color-gray-200)"
       }
     },
     {
       "name": "Entity Name - eg. Function, Type, Tag, Attribute Name",
-      "scope": ["entity.name"],
+      "scope": [
+        "entity.name"
+      ],
       "settings": {
-        "foreground": "var(--color-teal-300)"
+        "foreground": "var(--color-yellow-300)"
       }
     },
     {
       "name": "Entity Name Function - eg. Function, Type, Tag, Attribute Name",
-      "scope": ["entity.name.function"],
+      "scope": [
+        "entity.name.function"
+      ],
+      "settings": {
+        "foreground": "var(--color-yellow-300)"
+      }
+    },
+    {
+      "name": "Keyword - eg. Control (while, for), Operator (or)",
+      "scope": [
+        "keyword"
+      ],
       "settings": {
         "foreground": "var(--color-teal-300)"
       }
     },
     {
-      "name": "Keyword - eg. Control (while, for), Operator (or)",
-      "scope": ["keyword"],
-      "settings": {
-        "foreground": "var(--color-indigo-300)"
-      }
-    },
-    {
       "name": "Keyword Assignment - eg. =",
-      "scope": ["keyword.operator.assignment"],
+      "scope": [
+        "keyword.operator.assignment"
+      ],
       "settings": {
         "foreground": "var(--color-gray-500)"
       }
     },
     {
       "name": "Storage - eg. Type (class, function, var)",
-      "scope": ["storage"],
+      "scope": [
+        "storage"
+      ],
       "settings": {
-        "foreground": "var(--color-indigo-300)"
+        "foreground": "var(--color-teal-300)"
       }
     },
     {
       "name": "String - eg. Quoted Value, Interpolated Values, Regex",
-      "scope": ["string", "punctuation.definition.string"],
+      "scope": [
+        "string",
+        "punctuation.definition.string"
+      ],
       "settings": {
-        "foreground": "var(--color-sky-300)"
+        "foreground": "var(--color-green-300)"
       }
     },
     {
       "name": "Support - eg. Key in JSON",
-      "scope": ["support"],
+      "scope": [
+        "support"
+      ],
       "settings": {
         "foreground": "var(--color-white)"
       }
     },
     {
       "name": "Variable - eg. Named Import, Variable",
-      "scope": ["variable"],
+      "scope": [
+        "variable"
+      ],
       "settings": {
         "foreground": "var(--color-white)"
       }
     },
     {
       "name": "Variable Object - eg. Named Import, Variable",
-      "scope": ["variable.other.constant.object"],
+      "scope": [
+        "variable.other.constant.object"
+      ],
       "settings": {
         "foreground": "var(--color-white)"
       }
     },
     {
       "name": "[HTML] - Entity",
-      "scope": ["text.html entity.name"],
+      "scope": [
+        "text.html entity.name"
+      ],
       "settings": {
-        "foreground": "var(--color-pink-400)"
+        "foreground": "var(--color-indigo-400)"
       }
     },
     {
       "name": "[HTML] - Attribute Names",
-      "scope": ["text.html entity.other.attribute-name"],
+      "scope": [
+        "text.html entity.other.attribute-name"
+      ],
       "settings": {
         "foreground": "var(--color-gray-300)"
       }
@@ -357,7 +388,7 @@
         "text.html punctuation.definition.string"
       ],
       "settings": {
-        "foreground": "var(--color-sky-300)"
+        "foreground": "var(--color-green-300)"
       }
     },
     {
@@ -378,12 +409,14 @@
         "text.html meta.tag.sgml punctuation"
       ],
       "settings": {
-        "foreground": "color-mix(in oklab, var(--color-blue-300) 75%, transparent)"
+        "foreground": "color-mix(in oklab, var(--color-emerald-300) 75%, transparent)"
       }
     },
     {
       "name": "[HTML] - Function",
-      "scope": ["text.html entity.name.function"],
+      "scope": [
+        "text.html entity.name.function"
+      ],
       "settings": {
         "foreground": "var(--color-teal-300)"
       }
@@ -398,7 +431,7 @@
         "source.css punctuation.definition.entity"
       ],
       "settings": {
-        "foreground": "var(--color-pink-400)"
+        "foreground": "var(--color-indigo-400)"
       }
     },
     {
@@ -409,7 +442,7 @@
         "source.css meta.selector.css"
       ],
       "settings": {
-        "foreground": "var(--color-pink-400)"
+        "foreground": "var(--color-indigo-400)"
       }
     },
     {
@@ -420,7 +453,7 @@
         "source.css entity.other.attribute-name"
       ],
       "settings": {
-        "foreground": "var(--color-sky-300)"
+        "foreground": "var(--color-green-300)"
       }
     },
     {
@@ -430,7 +463,7 @@
         "source.css meta.at-rule.media.header.css support.type.property-name.media.css"
       ],
       "settings": {
-        "foreground": "var(--color-sky-300)"
+        "foreground": "var(--color-green-300)"
       }
     },
     {
@@ -457,7 +490,10 @@
     },
     {
       "name": "[CSS] - Constant - eg. 2.55, ease-out",
-      "scope": ["source.css constant", "source.css support.constant"],
+      "scope": [
+        "source.css constant",
+        "source.css support.constant"
+      ],
       "settings": {
         "foreground": "var(--color-white)"
       }
@@ -470,26 +506,33 @@
         "source.css string"
       ],
       "settings": {
-        "foreground": "var(--color-sky-300)"
+        "foreground": "var(--color-green-300)"
       }
     },
     {
       "name": "[CSS] - Function - eg. var(), rgba()",
-      "scope": ["source.css support.function"],
+      "scope": [
+        "source.css support.function"
+      ],
       "settings": {
-        "foreground": "var(--color-indigo-300)"
+        "foreground": "var(--color-teal-300)"
       }
     },
     {
       "name": "[CSS] - Keyword - eg. =, and",
-      "scope": ["source.css keyword.control", "source.css keyword.operator"],
+      "scope": [
+        "source.css keyword.control",
+        "source.css keyword.operator"
+      ],
       "settings": {
         "foreground": "var(--color-gray-400)"
       }
     },
     {
       "name": "[CSS] - Unit - eg. px, %",
-      "scope": ["source.css keyword.other.unit"],
+      "scope": [
+        "source.css keyword.other.unit"
+      ],
       "settings": {
         "foreground": "var(--color-teal-300)"
       }
@@ -523,9 +566,12 @@
     },
     {
       "name": "[HTML in JS] - Entity",
-      "scope": ["source.js entity.name.tag", "source.ts entity.name.tag"],
+      "scope": [
+        "source.js entity.name.tag",
+        "source.ts entity.name.tag"
+      ],
       "settings": {
-        "foreground": "var(--color-pink-400)"
+        "foreground": "var(--color-indigo-400)"
       }
     },
     {
@@ -550,7 +596,7 @@
         "source.tsx meta.block punctuation.definition.string"
       ],
       "settings": {
-        "foreground": "var(--color-sky-300)"
+        "foreground": "var(--color-green-300)"
       }
     },
     {
@@ -586,7 +632,7 @@
         "source.tsx meta.block keyword.operator.ternary"
       ],
       "settings": {
-        "foreground": "var(--color-purple-400)"
+        "foreground": "var(--color-sky-400)"
       }
     },
     {
@@ -596,49 +642,62 @@
         "source.ts support.class.component"
       ],
       "settings": {
-        "foreground": "var(--color-purple-300)"
+        "foreground": "var(--color-sky-300)"
       }
     },
     {
       "name": "[JSON] - Support",
-      "scope": ["source.json support"],
+      "scope": [
+        "source.json support"
+      ],
       "settings": {
         "foreground": "var(--color-gray-300)"
       }
     },
     {
       "name": "[JSON] - Constant",
-      "scope": ["source.json constant"],
+      "scope": [
+        "source.json constant"
+      ],
       "settings": {
-        "foreground": "var(--color-pink-400)"
+        "foreground": "var(--color-indigo-400)"
       }
     },
     {
       "name": "[JSON] - Constant (Escaped) - eg. '",
-      "scope": ["constant.character.escape"],
+      "scope": [
+        "constant.character.escape"
+      ],
       "settings": {
         "foreground": "var(--color-gray-300)"
       }
     },
     {
       "name": "[JS] - Variable",
-      "scope": ["variable.other.property.js"],
+      "scope": [
+        "variable.other.property.js"
+      ],
       "settings": {
         "foreground": "var(--color-gray-300)"
       }
     },
     {
       "name": "[JS] - Import",
-      "scope": ["meta.import keyword.control.import"],
+      "scope": [
+        "meta.import keyword.control.import"
+      ],
       "settings": {
-        "foreground": "var(--color-indigo-300)"
+        "foreground": "var(--color-teal-300)"
       }
     },
     {
       "name": "[JS] - Import From",
-      "scope": ["meta.import keyword.control.from", "meta.import punctuation"],
+      "scope": [
+        "meta.import keyword.control.from",
+        "meta.import punctuation"
+      ],
       "settings": {
-        "foreground": "var(--color-indigo-300)"
+        "foreground": "var(--color-teal-300)"
       }
     },
     {
@@ -648,19 +707,24 @@
         "meta.import string punctuation.definition.string"
       ],
       "settings": {
-        "foreground": "var(--color-purple-300)"
+        "foreground": "var(--color-sky-300)"
       }
     },
     {
       "name": "[JS] - Import Variable - eg. React, Moment",
-      "scope": ["meta.import variable.other.readwrite"],
+      "scope": [
+        "meta.import variable.other.readwrite"
+      ],
       "settings": {
         "foreground": "var(--color-white)"
       }
     },
     {
       "name": "[TS] - Type annotation - eg. (foo: number)",
-      "scope": ["source.tsx support", "source.ts support"],
+      "scope": [
+        "source.tsx support",
+        "source.ts support"
+      ],
       "settings": {
         "fontStyle": "italic",
         "foreground": "color-mix(in oklab, var(--color-white) 75%, transparent)"

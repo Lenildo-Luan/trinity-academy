@@ -117,15 +117,15 @@ export function QuizNavigation({
               <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
                 <button
                   onClick={() => setShowFinishModal(false)}
-                  className="rounded-full border-2 border-gray-300 bg-white px-6 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50 focus:outline-2 focus:outline-offset-2 focus:outline-green-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+                  className="flex-1 rounded-full border-2 border-gray-300 bg-white px-6 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50 focus:outline-2 focus:outline-offset-2 focus:outline-green-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
                 >
                   Cancelar
                 </button>
                 <button
                   onClick={handleConfirmFinish}
-                  className="rounded-full bg-orange-600 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-orange-700 focus:outline-2 focus:outline-offset-2 focus:outline-orange-500 dark:bg-orange-500 dark:hover:bg-orange-600"
+                  className="flex-1 rounded-full bg-orange-600 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-orange-700 focus:outline-2 focus:outline-offset-2 focus:outline-orange-500 dark:bg-orange-500 dark:hover:bg-orange-600"
                 >
-                  Sim, Encerrar Prova
+                  Tenho certeza
                 </button>
               </div>
             </div>

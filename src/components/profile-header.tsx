@@ -74,7 +74,7 @@ export function ProfileHeader({
       {/* User Info */}
       <div className="w-full max-w-md space-y-4">
         {/* Name */}
-        <div>
+        <div className='flex flex-col content-center'>
           <label
             htmlFor="full_name"
             className="block text-sm font-medium text-zinc-700 dark:text-zinc-300"

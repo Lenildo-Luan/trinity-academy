@@ -11,10 +11,10 @@ export function QuizInitialView({ quiz, onStart }: QuizInitialViewProps) {
 
   return (
     <div className="animate-slide-up overflow-hidden rounded-2xl border border-gray-950/10 bg-white shadow-sm dark:border-white/10 dark:bg-white/2.5">
-      <div className="bg-gradient-to-br from-cyan-50 to-green-50 p-8 text-center dark:from-cyan-950/20 dark:to-green-950/20">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-cyan-500/10 dark:bg-cyan-500/20">
+      <div className="bg-gradient-to-br from-green-50 to-sky-50 p-8 text-center dark:from-green-950/20 dark:to-sky-950/20">
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10 dark:bg-green-500/20">
           <svg
-            className="h-8 w-8 text-cyan-600 dark:text-cyan-400"
+            className="h-8 w-8 text-green-600 dark:text-green-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -84,10 +84,10 @@ export function QuizInitialView({ quiz, onStart }: QuizInitialViewProps) {
         <div className="mt-6 flex justify-center">
           <button
             onClick={onStart}
-            className="group relative overflow-hidden rounded-full bg-gray-950 px-8 py-3 text-base font-semibold text-white transition-all hover:scale-105 hover:bg-gray-800 focus:outline-2 focus:outline-offset-2 focus:outline-green-500 active:scale-100 dark:bg-gray-700 dark:hover:bg-gray-600"
+            className="group relative overflow-hidden rounded-full bg-gray-950 px-8 py-3 text-base font-semibold text-white transition-all hover:scale-105 hover:bg-gray-800 focus:outline-2 focus:outline-offset-2 focus:outline-sky-500 active:scale-100 dark:bg-gray-700 dark:hover:bg-gray-600"
           >
             <span className="relative z-10">Iniciar Quiz</span>
-            <div className="absolute inset-0 -z-0 bg-gradient-to-r from-cyan-500 to-green-500 opacity-0 transition-opacity group-hover:opacity-20" />
+            <div className="absolute inset-0 -z-0 bg-gradient-to-r from-green-500 to-sky-500 opacity-0 transition-opacity group-hover:opacity-20" />
           </button>
         </div>
 
