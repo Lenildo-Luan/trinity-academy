@@ -96,7 +96,7 @@ export function QuizSection({ quiz, lessonId }: QuizSectionProps) {
     return (
       <div className="mt-16 border-t border-gray-950/10 pt-16 dark:border-white/10">
         <div className="flex items-center justify-center py-12">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600 dark:border-gray-700 dark:border-t-blue-400" />
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-green-600 dark:border-gray-700 dark:border-t-green-400" />
         </div>
       </div>
     )

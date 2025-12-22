@@ -37,7 +37,7 @@ export function QuizNavigation({
       <div className="flex items-center justify-between border-t border-gray-950/10 bg-gray-50 p-4 sm:p-6 dark:border-white/10 dark:bg-gray-950/50">
         <button
           onClick={handleFinishClick}
-          className="group flex items-center gap-2 rounded-full border-2 border-gray-300 bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 transition-all hover:border-gray-400 hover:bg-gray-50 focus:outline-2 focus:outline-offset-2 focus:outline-blue-500 active:scale-95 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-gray-500 dark:hover:bg-gray-700"
+          className="group flex items-center gap-2 rounded-full border-2 border-gray-300 bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 transition-all hover:border-gray-400 hover:bg-gray-50 focus:outline-2 focus:outline-offset-2 focus:outline-green-500 active:scale-95 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-gray-500 dark:hover:bg-gray-700"
         >
           <svg
             className="h-4 w-4 transition-transform group-hover:rotate-12"
@@ -58,7 +58,7 @@ export function QuizNavigation({
         <button
           onClick={onNext}
           disabled={!isCurrentQuestionAnswered}
-          className="group flex items-center gap-2 rounded-full bg-gray-950 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:scale-105 hover:bg-gray-800 focus:outline-2 focus:outline-offset-2 focus:outline-blue-500 active:scale-100 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-gray-950 dark:bg-gray-700 dark:hover:bg-gray-600 dark:disabled:hover:bg-gray-700"
+          className="group flex items-center gap-2 rounded-full bg-gray-950 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:scale-105 hover:bg-gray-800 focus:outline-2 focus:outline-offset-2 focus:outline-green-500 active:scale-100 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-gray-950 dark:bg-gray-700 dark:hover:bg-gray-600 dark:disabled:hover:bg-gray-700"
         >
           {isLastQuestion ? 'Finalizar Quiz' : 'Próxima Questão'}
           <svg
@@ -117,7 +117,7 @@ export function QuizNavigation({
               <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
                 <button
                   onClick={() => setShowFinishModal(false)}
-                  className="rounded-full border-2 border-gray-300 bg-white px-6 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50 focus:outline-2 focus:outline-offset-2 focus:outline-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+                  className="rounded-full border-2 border-gray-300 bg-white px-6 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50 focus:outline-2 focus:outline-offset-2 focus:outline-green-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
                 >
                   Cancelar
                 </button>

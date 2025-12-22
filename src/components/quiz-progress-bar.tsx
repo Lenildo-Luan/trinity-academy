@@ -24,7 +24,7 @@ export function QuizProgressBar({ current, total }: QuizProgressBarProps) {
 
       <div className="relative h-2.5 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-500 ease-out"
+          className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-green-500 transition-all duration-500 ease-out"
           style={{ width: `${percentage}%` }}
           role="progressbar"
           aria-valuenow={current}

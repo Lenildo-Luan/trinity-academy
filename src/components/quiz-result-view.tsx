@@ -100,7 +100,7 @@ export function QuizResultView({ quiz, result, onReset }: QuizResultViewProps) {
       {/* Lista de questões com resultados */}
       <div className="border-t border-gray-950/10 bg-white p-6 sm:p-8 dark:border-white/10 dark:bg-gray-950/20">
         <div className="mb-6 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 to-green-500">
             <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
             </svg>
@@ -193,11 +193,11 @@ export function QuizResultView({ quiz, result, onReset }: QuizResultViewProps) {
                       )}
 
                       {correctAlternative?.explanation && (
-                        <div className="rounded-lg bg-blue-50 p-3 dark:bg-blue-950/30">
-                          <p className="text-sm font-semibold text-blue-900 dark:text-blue-300">
+                        <div className="rounded-lg bg-green-50 p-3 dark:bg-green-950/30">
+                          <p className="text-sm font-semibold text-green-900 dark:text-green-300">
                             Explicação:
                           </p>
-                          <p className="mt-1 text-sm text-blue-800 dark:text-blue-200">
+                          <p className="mt-1 text-sm text-green-800 dark:text-green-200">
                             {correctAlternative.explanation}
                           </p>
                         </div>
@@ -216,7 +216,7 @@ export function QuizResultView({ quiz, result, onReset }: QuizResultViewProps) {
         <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-2 rounded-full border-2 border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-700 transition-all hover:border-gray-400 hover:bg-gray-50 focus:outline-2 focus:outline-offset-2 focus:outline-blue-500 active:scale-95 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-gray-500 dark:hover:bg-gray-700"
+            className="flex items-center gap-2 rounded-full border-2 border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-700 transition-all hover:border-gray-400 hover:bg-gray-50 focus:outline-2 focus:outline-offset-2 focus:outline-green-500 active:scale-95 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-gray-500 dark:hover:bg-gray-700"
           >
             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
@@ -225,7 +225,7 @@ export function QuizResultView({ quiz, result, onReset }: QuizResultViewProps) {
           </button>
           <button
             onClick={onReset}
-            className="flex items-center gap-2 rounded-full bg-gray-950 px-8 py-3 text-sm font-semibold text-white transition-all hover:scale-105 hover:bg-gray-800 focus:outline-2 focus:outline-offset-2 focus:outline-blue-500 active:scale-100 dark:bg-gray-700 dark:hover:bg-gray-600"
+            className="flex items-center gap-2 rounded-full bg-gray-950 px-8 py-3 text-sm font-semibold text-white transition-all hover:scale-105 hover:bg-gray-800 focus:outline-2 focus:outline-offset-2 focus:outline-green-500 active:scale-100 dark:bg-gray-700 dark:hover:bg-gray-600"
           >
             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
