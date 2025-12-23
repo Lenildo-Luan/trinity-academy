@@ -19,7 +19,7 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  let lesson = await getLesson((await params).slug);
+  let lesson = await getLesson('introducao-a-programacao', (await params).slug);
 
   return {
     title: `${lesson?.title} - Introdução a Programação`,
@@ -32,14 +32,15 @@ export default async function Page({
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  const moduleName = 'introducao-a-programacao';
   let slug = (await params).slug;
-  let lesson = await getLesson(slug);
+  let lesson = await getLesson('introducao-a-programacao', slug);
 
   if (!lesson) {
     notFound();
   }
 
-  let Content = await getLessonContent(slug);
+  let Content = await getLessonContent(`${moduleName}/${slug}`);
   let quiz = lesson.quizId ? await getQuiz(lesson.quizId) : null;
 
   return (

@@ -1,7 +1,7 @@
 "use client";
 
 import { IconButton } from "@/components/icon-button";
-import type { Module } from "@/data/lessons";
+import { getModules, type Module } from "@/data/lessons";
 import { SidebarIcon } from "@/icons/sidebar-icon";
 import {
   CloseButton,
@@ -106,14 +106,14 @@ function MobileNavigation({
 }
 
 export function SidebarLayout({
-  modules,
   children,
 }: {
-  modules: Module[];
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
   let [isSidebarOpen, setIsSidebarOpen] = useState(true);
   let [isMobileDialogOpen, setIsMobileDialogOpen] = useState(false);
+  let modules: Module[] = getModules(`${pathname.split('/')[1]}`);
 
   return (
     <SidebarContext.Provider

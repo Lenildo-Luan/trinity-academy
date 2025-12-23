@@ -30,7 +30,7 @@ function formatDuration(seconds: number): string {
 }
 
 export default async function Page() {
-  let modules = await getModules();
+  let modules: Module[] = await getModules('introducao-a-programacao');
   let lessons = modules.flatMap(({ lessons }) => lessons);
   let duration = lessons.reduce(
     (sum, { video }) => sum + (video?.duration ?? 0),
