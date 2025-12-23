@@ -153,9 +153,9 @@ export function validateQuizData(data: unknown): QuizValidationResult {
  * @param quizId - ID do quiz (ex: "quiz-1")
  * @returns Quiz validado ou null se não encontrado ou inválido
  */
-export async function getQuiz(quizId: string): Promise<Quiz | null> {
+export async function getQuiz(module: string, quizId: string): Promise<Quiz | null> {
   try {
-    const quiz = await import(`@/data/quizzes/${quizId}.json`);
+    const quiz = await import(`@/data/quizzes/${module}/${quizId}.json`);
     const quizData = quiz.default;
 
     // Validar estrutura do quiz
@@ -182,7 +182,7 @@ export async function getQuiz(quizId: string): Promise<Quiz | null> {
  * Lista todos os quizzes disponíveis
  * @returns Array de quizzes
  */
-export async function getAllQuizzes(): Promise<Quiz[]> {
+export async function getAllQuizzes(module: string): Promise<Quiz[]> {
   // Por enquanto, retorna lista vazia
   // Em produção, poderia usar fs.readdir ou glob pattern
   const quizIds = [
@@ -204,7 +204,7 @@ export async function getAllQuizzes(): Promise<Quiz[]> {
 
   const quizzes = await Promise.all(
     quizIds.map(async (id) => {
-      const quiz = await getQuiz(id);
+      const quiz = await getQuiz(module, id);
       return quiz;
     }),
   );

@@ -118,7 +118,7 @@ export default async function Page() {
                           <ContentLink
                             title={lesson.title}
                             description={lesson.description}
-                            href={`/${lesson.id}`}
+                            href={`/introducao-a-programacao/${lesson.id}`}
                             type="video"
                             duration={lesson.video?.duration}
                           />

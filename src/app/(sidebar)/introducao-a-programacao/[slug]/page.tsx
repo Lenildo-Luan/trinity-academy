@@ -41,7 +41,7 @@ export default async function Page({
   }
 
   let Content = await getLessonContent(`${moduleName}/${slug}`);
-  let quiz = lesson.quizId ? await getQuiz(lesson.quizId) : null;
+  let quiz = lesson.quizId ? await getQuiz('introducao-a-programacao', lesson.quizId) : null;
 
   return (
     <SidebarLayoutContent
