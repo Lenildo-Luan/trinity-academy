@@ -90,7 +90,7 @@ export default async function Page() {
 
               <div className="mt-10">
                 <Link
-                  href={`/${modules[0].lessons[0].id}`}
+                  href={`/introducao-a-programacao`}
                   className="inline-flex items-center gap-x-2 rounded-full bg-gray-950 px-3 py-0.5 text-sm/7 font-semibold text-white hover:bg-gray-800 dark:bg-green-600 dark:hover:bg-green-500"
                 >
                   <PlayIcon className="fill-white" />
