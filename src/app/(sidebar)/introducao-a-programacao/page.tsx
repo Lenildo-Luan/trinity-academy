@@ -66,6 +66,7 @@ export default async function Page() {
                 conceitos fundamentais da programação utilizando a linguagem mais
                 popular do mundo: JavaScript.
               </p>
+
               <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3 text-sm/7 font-semibold text-gray-950 sm:gap-3 dark:text-white">
                 <div className="flex items-center gap-1.5">
                   <BookIcon className="stroke-gray-950/40 dark:stroke-white/40" />
@@ -86,6 +87,7 @@ export default async function Page() {
                   {formatDuration(duration)}
                 </div>
               </div>
+
               <div className="mt-10">
                 <Link
                   href={`/${modules[0].lessons[0].id}`}
