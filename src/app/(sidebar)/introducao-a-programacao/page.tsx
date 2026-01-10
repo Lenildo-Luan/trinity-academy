@@ -47,7 +47,7 @@ export default async function Page() {
         </Breadcrumbs>
       }
     >
-      <div className="relative mx-auto max-w-7xl">
+      <div className="relative mx-auto max-w-7xl mt-6">
         <div className="absolute -inset-x-2 top-0 -z-10 h-80 overflow-hidden rounded-t-2xl mask-b-from-60% sm:h-88 md:h-112 lg:-inset-x-4 lg:h-128">
           <img
             alt=""
@@ -58,7 +58,7 @@ export default async function Page() {
         </div>
         <div className="mx-auto max-w-6xl">
           <div className="relative">
-            <div className="px-4 pt-48 pb-12 lg:py-24">
+            <div className="px-4 pt-12 sm:pt-48 pb-12 lg:py-24">
               <Logo className="h-8 fill-gray-950 dark:fill-white" />
               <h1 className="sr-only">Introdução a Programação</h1>
               <p className="mt-7 max-w-lg text-base/7 text-pretty text-gray-600 dark:text-gray-400">

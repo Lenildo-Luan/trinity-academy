@@ -44,8 +44,8 @@ export default async function Page() {
         </Breadcrumbs>
       }
     >
-      <div className="relative mx-auto max-w-7xl mb-8">
-        <div className="absolute -inset-x-2 top-0 -z-10 h-80 overflow-hidden rounded-t-2xl sm:h-[100%] lg:-inset-x-4">
+      <div className="relative mx-auto max-w-7xl mb-8 mt-6">
+        <div className="absolute -inset-x-2 top-0 -z-10 overflow-hidden rounded-t-2xl h-[100%] lg:-inset-x-4">
           <img
             alt=""
             src="https://ik.imagekit.io/qfmgarse7/js-background.avif?updatedAt=1760284705415"
@@ -56,7 +56,7 @@ export default async function Page() {
 
         <div className="mx-auto max-w-6xl">
           <div className="relative">
-            <div className="px-4 pt-48 pb-12 lg:py-24">
+            <div className="px-4 py-12 sm:pt-48 lg:py-24">
               <h1 className="max-w-lg text-xl md:text-[1.5rem] font-black text-base/7 text-pretty text-gray-900 dark:text-white">
                 Introdução a Programação
               </h1>
@@ -103,7 +103,7 @@ export default async function Page() {
       </div>
 
       <div className="relative mx-auto max-w-7xl mb-8">
-        <div className="absolute -inset-x-2 top-0 -z-10 h-80 overflow-hidden rounded-t-2xl sm:h-[100%] lg:-inset-x-4">
+        <div className="absolute -inset-x-2 top-0 -z-10 overflow-hidden rounded-t-2xl h-[100%] lg:-inset-x-4">
           <img
             alt=""
             src="https://ik.imagekit.io/qfmgarse7/thomas-t-OPpCbAAKWv8-unsplash.avif"
@@ -114,7 +114,7 @@ export default async function Page() {
 
         <div className="mx-auto max-w-6xl">
           <div className="relative">
-            <div className="px-4 pt-48 pb-12 lg:py-24">
+            <div className="px-4 py-12 sm:pt-48 lg:py-24">
               <h1 className="max-w-lg text-xl md:text-[1.5rem] font-black text-base/7 text-pretty text-gray-900 dark:text-white">
                 Em breve: Pré-cálculo
               </h1>
