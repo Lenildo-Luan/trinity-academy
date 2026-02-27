@@ -3,8 +3,9 @@ import path from 'path';
 
 const config: StorybookConfig = {
   stories: [
-    "../src/**/*.mdx",
-    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+    "../src/components/**/*.mdx",
+    "../src/stories/**/*.mdx",
+    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
   ],
   addons: [
     "@chromatic-com/storybook",
@@ -15,17 +16,20 @@ const config: StorybookConfig = {
   ],
   framework: {
     name: "@storybook/nextjs-vite",
-    options: {}
+    options: {},
   },
-  staticDirs: ['../public'],
+  staticDirs: ["../public"],
   viteFinal: async (config) => {
     // Resolve path aliases to match Next.js configuration
     if (config.resolve) {
       config.resolve.alias = {
         ...config.resolve.alias,
-        '@': path.resolve(__dirname, '../src'),
+        "@": path.resolve(__dirname, "../src"),
         // Mock auth context for Storybook
-        '@/contexts/auth-context': path.resolve(__dirname, './mocks/auth-context.tsx'),
+        "@/contexts/auth-context": path.resolve(
+          __dirname,
+          "./mocks/auth-context.tsx",
+        ),
       };
     }
     return config;
