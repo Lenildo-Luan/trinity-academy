@@ -1,12 +1,10 @@
 import createMDX from "@next/mdx";
-import rehypeKatex from "rehype-katex";
-import remarkMath from "remark-math";
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
-    remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex],
+    remarkPlugins: [["remark-math"]],
+    rehypePlugins: [["rehype-katex"]],
   },
 });
 
