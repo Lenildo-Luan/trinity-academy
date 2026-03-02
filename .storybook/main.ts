@@ -8,7 +8,6 @@ const __dirname = dirname(__filename);
 
 const config: StorybookConfig = {
   stories: [
-    "../src/components/**/*.mdx",
     "../src/stories/**/*.mdx",
     "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
   ],
