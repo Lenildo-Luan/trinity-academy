@@ -29,6 +29,24 @@ export function getModules(module: string): Module[] {
   return getLessons(module);
 }
 
+export function getCourseStats(courseId: string): {
+  moduleCount: number;
+  lessonCount: number;
+  duration: number;
+} | null {
+  try {
+    const modules = getLessons(courseId);
+    const lessons = modules.flatMap(({ lessons }) => lessons);
+    return {
+      moduleCount: modules.length,
+      lessonCount: lessons.length,
+      duration: lessons.reduce((sum, { video }) => sum + (video?.duration ?? 0), 0),
+    };
+  } catch {
+    return null;
+  }
+}
+
 export async function getLesson(
   moduleName: string,
   slug: string,
