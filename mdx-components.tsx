@@ -13,6 +13,11 @@ import {
   Particles,
   TrafficLight,
 } from "./src/components/p5-examples";
+import {
+  ImperativeVsReactive,
+  VirtualDomDiff,
+  ProgressiveFramework,
+} from "./src/components/vue-p5-examples";
 
 function getTextContent(node: ReactNode): string {
   if (typeof node === "string") return node;
@@ -150,6 +155,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     CirclePattern,
     Particles,
     TrafficLight,
+    ImperativeVsReactive,
+    VirtualDomDiff,
+    ProgressiveFramework,
     ...components,
   };
 }

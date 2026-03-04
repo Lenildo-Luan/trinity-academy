@@ -1,0 +1,17 @@
+[
+  {
+    "id": "introduction",
+    "title": "Introdução ao Vue.js",
+    "description": "Conheça o Vue.js, o framework JavaScript progressivo para construir interfaces de usuário reativas.",
+    "lessons": [
+      {
+        "id": "charpter-1",
+        "title": "O que é Vue.js?",
+        "description": "Descubra o que é o Vue.js, qual problema ele resolve, quando utilizá-lo e a história por trás do framework.",
+        "video": null,
+        "quizId": null
+      }
+    ]
+  }
+]
+

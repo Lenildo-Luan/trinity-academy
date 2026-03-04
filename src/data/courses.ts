@@ -17,6 +17,15 @@ export const courses: Course[] = [
     available: true,
   },
   {
+    id: "vuejs-fundamentals",
+    title: "Fundamentos do Vue.js",
+    description:
+      "Domine os fundamentos do Vue.js, o framework JavaScript progressivo para construir interfaces de usuário reativas e modernas, e eleve suas habilidades de desenvolvimento web para o próximo nível.",
+    backgroundImage:
+      "https://ik.imagekit.io/qfmgarse7/b286b91b-f5c4-4f25-b0fb-f3a1da720da8.webp",
+    available: true,
+  },
+  {
     id: "pre-calculo",
     title: "Pré-cálculo",
     description:
