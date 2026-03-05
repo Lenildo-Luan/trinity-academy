@@ -3,10 +3,11 @@ import { QuizBestAttempt } from './quiz-best-attempt'
 
 type QuizInitialViewProps = {
   quiz: Quiz
+  courseId: string
   onStart: () => void
 }
 
-export function QuizInitialView({ quiz, onStart }: QuizInitialViewProps) {
+export function QuizInitialView({ quiz, courseId, onStart }: QuizInitialViewProps) {
   const timeInMinutes = Math.floor(quiz.timeLimit / 60)
 
   return (
@@ -79,7 +80,7 @@ export function QuizInitialView({ quiz, onStart }: QuizInitialViewProps) {
         </div>
 
         {/* Melhor tentativa anterior */}
-        <QuizBestAttempt quizId={quiz.id} />
+        <QuizBestAttempt quizId={quiz.id} courseId={courseId} />
 
         <div className="mt-6 flex justify-center">
           <button

@@ -18,6 +18,7 @@ import {
 type UseQuizPersistenceProps = {
   quiz: Quiz | null
   lessonId: string
+  courseId: string
   state: QuizState
   userAnswers: UserAnswer[]
   result: QuizResult | null
@@ -26,6 +27,7 @@ type UseQuizPersistenceProps = {
 export function useQuizPersistence({
   quiz,
   lessonId,
+  courseId,
   state,
   userAnswers,
   result,
@@ -45,6 +47,7 @@ export function useQuizPersistence({
       createQuizAttempt({
         quiz_id: quiz.id,
         lesson_id: lessonId,
+        course_id: courseId,
         total_questions: quiz.questions.length,
         status: 'in_progress',
         user_id: '', // Será preenchido pela função
@@ -71,7 +74,7 @@ export function useQuizPersistence({
       savedAnswersRef.current.clear()
       startTimeRef.current = null
     }
-  }, [state, quiz, lessonId])
+  }, [state, quiz, lessonId, courseId])
 
   /**
    * Quando o usuário responde uma questão, salva no banco
@@ -154,7 +157,7 @@ export function useQuizPersistence({
   const loadBestAttempt = useCallback(async () => {
     if (!quiz) return null
 
-    const { data, error } = await getBestQuizAttempt(quiz.id)
+    const { data, error } = await getBestQuizAttempt(quiz.id, courseId)
 
     if (error) {
       console.error('Erro ao buscar melhor tentativa:', error)
@@ -162,7 +165,7 @@ export function useQuizPersistence({
     }
 
     return data
-  }, [quiz])
+  }, [quiz, courseId])
 
   return {
     attemptId: attemptIdRef.current,

@@ -6,14 +6,15 @@ import type { QuizAttempt } from '@/types/database'
 
 type QuizBestAttemptProps = {
   quizId: string
+  courseId: string
 }
 
-export function QuizBestAttempt({ quizId }: QuizBestAttemptProps) {
+export function QuizBestAttempt({ quizId, courseId }: QuizBestAttemptProps) {
   const [bestAttempt, setBestAttempt] = useState<QuizAttempt | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getBestQuizAttempt(quizId)
+    getBestQuizAttempt(quizId, courseId)
       .then(({ data, error }) => {
         if (error) {
           console.error('Erro ao buscar melhor tentativa:', error)
@@ -24,7 +25,7 @@ export function QuizBestAttempt({ quizId }: QuizBestAttemptProps) {
       .finally(() => {
         setLoading(false)
       })
-  }, [quizId])
+  }, [quizId, courseId])
 
   if (loading) {
     return (

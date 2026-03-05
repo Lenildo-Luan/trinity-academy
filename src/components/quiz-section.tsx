@@ -15,9 +15,10 @@ import { QuizAuthRequired } from './quiz-auth-required'
 type QuizSectionProps = {
   quiz: Quiz
   lessonId: string
+  courseId: string
 }
 
-export function QuizSection({ quiz, lessonId }: QuizSectionProps) {
+export function QuizSection({ quiz, lessonId, courseId }: QuizSectionProps) {
   const [showNavigationBlocker, setShowNavigationBlocker] = useState(false)
   const { user, loading } = useAuth()
 
@@ -27,6 +28,7 @@ export function QuizSection({ quiz, lessonId }: QuizSectionProps) {
   useQuizPersistence({
     quiz,
     lessonId,
+    courseId,
     state: quizState.state,
     userAnswers: quizState.userAnswers,
     result: quizState.result,
@@ -117,7 +119,7 @@ export function QuizSection({ quiz, lessonId }: QuizSectionProps) {
       <div className="mt-16 border-t border-gray-950/10 pt-16 dark:border-white/10">
         <div className="animate-fade-in">
           {quizState.state === 'inactive' && (
-            <QuizInitialView quiz={quiz} onStart={quizState.startQuiz} />
+            <QuizInitialView quiz={quiz} courseId={courseId} onStart={quizState.startQuiz} />
           )}
 
           {quizState.state === 'active' && quizState.currentQuestion && (

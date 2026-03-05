@@ -9,6 +9,7 @@ export type QuizAttempt = {
   user_id: string
   quiz_id: string
   lesson_id: string
+  course_id: string
   started_at: string
   finished_at: string | null
   time_spent: number | null
@@ -32,6 +33,7 @@ export type QuizAttemptInsert = {
   user_id: string
   quiz_id: string
   lesson_id: string
+  course_id: string
   total_questions: number
   status: QuizAttemptStatus
   started_at?: string
@@ -62,6 +64,7 @@ export type QuizStatistics = {
   user_id: string
   quiz_id: string
   lesson_id: string
+  course_id: string
   total_attempts: number
   best_score: number
   total_questions: number
@@ -76,6 +79,7 @@ export type CompletedLesson = {
   user_id: string
   lesson_id: string
   quiz_id: string
+  course_id: string
   best_score: number
   total_questions: number
   best_score_percentage: number
@@ -87,6 +91,7 @@ export type QuizAttemptDetail = {
   user_id: string
   quiz_id: string
   lesson_id: string
+  course_id: string
   started_at: string
   finished_at: string | null
   time_spent: number | null

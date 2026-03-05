@@ -1,4 +1,4 @@
-/**
+ /**
  * Serviço para gerenciar quizzes no Supabase
  * Funções para criar, atualizar e buscar tentativas de quiz
  */
@@ -131,6 +131,7 @@ export async function saveQuizAnswer(
  */
 export async function getUserQuizAttempts(
   quizId: string,
+  courseId: string,
 ): Promise<{ data: QuizAttempt[] | null; error: Error | null }> {
   try {
     const supabase = createClient()
@@ -147,6 +148,7 @@ export async function getUserQuizAttempts(
       .select('*')
       .eq('user_id', user.id)
       .eq('quiz_id', quizId)
+      .eq('course_id', courseId)
       .order('created_at', { ascending: false })
 
     if (error) throw error
@@ -166,6 +168,7 @@ export async function getUserQuizAttempts(
  */
 export async function getBestQuizAttempt(
   quizId: string,
+  courseId: string,
 ): Promise<{ data: QuizAttempt | null; error: Error | null }> {
   try {
     const supabase = createClient()
@@ -182,6 +185,7 @@ export async function getBestQuizAttempt(
       .select('*')
       .eq('user_id', user.id)
       .eq('quiz_id', quizId)
+      .eq('course_id', courseId)
       .eq('status', 'completed')
       .order('score', { ascending: false })
       .order('finished_at', { ascending: false })
