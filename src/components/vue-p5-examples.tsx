@@ -137,19 +137,30 @@ export function ImperativeVsReactive() {
 
 // Visualization 2: Virtual DOM diffing concept
 export function VirtualDomDiff() {
-  let phase = 0;
-  let step = 0; // 0: original, 1: change detected, 2: diff, 3: patch
+  let currentStep = 0;
 
   const setup = (p: p5) => {
     p.textFont("monospace");
   };
 
+  const mousePressed = (p: p5) => {
+    const w = p.width;
+    const h = p.height;
+    // Check if a dot was clicked
+    for (let i = 0; i < 4; i++) {
+      const dotX = w / 2 - 30 + i * 20;
+      const dotY = h - 20;
+      const d = p.dist(p.mouseX, p.mouseY, dotX, dotY);
+      if (d < 10) {
+        currentStep = i;
+      }
+    }
+  };
+
   const draw = (p: p5) => {
     p.background(2, 7, 19);
 
-    phase += 0.01;
-    step = Math.floor(phase % 4);
-
+    const step = currentStep;
     const w = p.width;
     const h = p.height;
 
@@ -211,13 +222,11 @@ export function VirtualDomDiff() {
 
     if (step === 0) {
       drawTree(w / 2, 50, "<div>", ["<h1>", "<p>", "<btn>"], -1, [66, 184, 131]);
-      // DOM Real
       p.fill(100);
       p.textSize(11);
       p.textAlign(p.CENTER);
       p.text("DOM Virtual", w / 2, 150);
 
-      // Real DOM representation
       p.fill(40);
       p.rect(w / 2 - 100, 170, 200, 120, 8);
       p.fill(200);
@@ -231,14 +240,12 @@ export function VirtualDomDiff() {
       p.textAlign(p.CENTER);
       p.text("DOM Real (navegador)", w / 2, 300);
     } else if (step === 1) {
-      // Old tree
       drawTree(w / 4, 50, "<div>", ["<h1>", "<p>", "<btn>"], -1, [80, 80, 80]);
       p.fill(80);
       p.textSize(10);
       p.textAlign(p.CENTER);
       p.text("anterior", w / 4, 145);
 
-      // New tree with change
       drawTree(
         (w * 3) / 4,
         50,
@@ -252,12 +259,10 @@ export function VirtualDomDiff() {
       p.textAlign(p.CENTER);
       p.text("novo (após mudança)", (w * 3) / 4, 145);
 
-      // Arrow
       p.fill(254, 200, 0);
       p.textSize(20);
       p.text("→", w / 2, 80);
     } else if (step === 2) {
-      // Diff visualization
       drawTree(w / 4, 50, "<div>", ["<h1>", "<p>", "<btn>"], 1, [80, 80, 80]);
       drawTree(
         (w * 3) / 4,
@@ -268,7 +273,6 @@ export function VirtualDomDiff() {
         [66, 184, 131],
       );
 
-      // Diff highlight
       const pulse = Math.sin(p.frameCount * 0.1) * 0.5 + 0.5;
       p.noFill();
       p.stroke(254, 200, 0, 100 + pulse * 155);
@@ -276,7 +280,6 @@ export function VirtualDomDiff() {
       p.rect(w / 4 - 60 + 60 - 28, 103, 56, 26, 7);
       p.rect((w * 3) / 4 - 60 + 60 - 28, 103, 56, 26, 7);
 
-      // Diff label
       p.noStroke();
       p.fill(254, 200, 0);
       p.textSize(12);
@@ -287,7 +290,6 @@ export function VirtualDomDiff() {
       p.textSize(11);
       p.text("Apenas <p> mudou", w / 2, 180);
     } else {
-      // Patch - only update what changed
       p.fill(40);
       p.rect(w / 2 - 100, 50, 200, 120, 8);
       p.fill(200);
@@ -295,7 +297,6 @@ export function VirtualDomDiff() {
       p.textAlign(p.LEFT, p.TOP);
       p.text("  Título", w / 2 - 80, 70);
 
-      // Highlighted changed element
       const pulse = Math.sin(p.frameCount * 0.15) * 0.5 + 0.5;
       p.fill(66, 184, 131, 30 + pulse * 40);
       p.rect(w / 2 - 90, 90, 180, 25, 4);
@@ -313,21 +314,37 @@ export function VirtualDomDiff() {
       p.textAlign(p.CENTER);
       p.text("DOM Real — apenas 1 elemento atualizado!", w / 2, 190);
 
-      // Efficiency indicator
       p.fill(66, 184, 131);
       p.textSize(14);
       p.text("⚡ Mínimas operações no DOM", w / 2, 220);
     }
 
-    // Step indicator
-    p.noStroke();
+    // Instruction label above dots
+    // p.noStroke();
+    // p.fill(80);
+    // p.textSize(10);
+    // p.textAlign(p.CENTER);
+    // p.text("Clique em um dos pontos para mudar o slide", w / 2, h - 38);
+
+    // Step indicator dots (clickable)
     for (let i = 0; i < 4; i++) {
-      p.fill(i === step ? 66 : 40, i === step ? 184 : 40, i === step ? 131 : 40);
-      p.circle(w / 2 - 30 + i * 20, h - 20, 8);
+      const dotX = w / 2 - 30 + i * 20;
+      const dotY = h - 20;
+      const isHovered = p.dist(p.mouseX, p.mouseY, dotX, dotY) < 10;
+
+      if (i === step) {
+        p.fill(66, 184, 131);
+      } else if (isHovered) {
+        p.fill(100, 100, 100);
+      } else {
+        p.fill(40, 40, 40);
+      }
+      p.noStroke();
+      p.circle(dotX, dotY, 10);
     }
   };
 
-  return <P5Sketch setup={setup} draw={draw} height={340} />;
+  return <P5Sketch setup={setup} draw={draw} mousePressed={mousePressed} height={340} />;
 }
 
 // Visualization 3: Vue.js ecosystem / progressive framework concept

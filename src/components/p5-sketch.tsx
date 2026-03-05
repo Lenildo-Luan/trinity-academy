@@ -6,6 +6,7 @@ import type p5 from "p5";
 type P5SketchProps = {
   setup: (p: p5) => void;
   draw: (p: p5) => void;
+  mousePressed?: (p: p5) => void;
   width?: number;
   height?: number;
   className?: string;
@@ -14,6 +15,7 @@ type P5SketchProps = {
 export function P5Sketch({
   setup,
   draw,
+  mousePressed,
   width,
   height = 400,
   className = "",
@@ -43,6 +45,12 @@ export function P5Sketch({
           p.draw = () => {
             draw(p);
           };
+
+          if (mousePressed) {
+            p.mousePressed = () => {
+              mousePressed(p);
+            };
+          }
         };
 
         p5InstanceRef.current = new P5(sketch, containerRef.current);
@@ -56,7 +64,7 @@ export function P5Sketch({
         p5InstanceRef.current = null;
       }
     };
-  }, [setup, draw, width, height]);
+  }, [setup, draw, mousePressed, width, height]);
 
   return (
     <div

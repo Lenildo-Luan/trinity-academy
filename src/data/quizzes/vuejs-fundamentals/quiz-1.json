@@ -1,0 +1,309 @@
+{
+  "id": "quiz-1",
+  "title": "Quiz - O que é Vue.js?",
+  "description": "Teste seus conhecimentos sobre o que é o Vue.js, qual problema ele resolve, quando utilizá-lo e a história do framework.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual é o principal problema que o Vue.js resolve no desenvolvimento web?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "A falta de suporte a CSS em navegadores modernos",
+          "isCorrect": false,
+          "explanation": "CSS é amplamente suportado pelos navegadores. O Vue.js resolve problemas relacionados à sincronização entre dados e interface."
+        },
+        {
+          "id": "a2",
+          "text": "A complexidade de manter a interface sincronizada com os dados usando manipulação imperativa do DOM",
+          "isCorrect": true,
+          "explanation": "Correto! O Vue.js elimina a necessidade de manipular o DOM manualmente, mantendo a interface automaticamente sincronizada com o estado da aplicação."
+        },
+        {
+          "id": "a3",
+          "text": "A impossibilidade de criar páginas web com HTML puro",
+          "isCorrect": false,
+          "explanation": "É perfeitamente possível criar páginas web com HTML puro. O Vue.js resolve a complexidade de aplicações interativas e dinâmicas."
+        },
+        {
+          "id": "a4",
+          "text": "A ausência de uma linguagem de programação para a web",
+          "isCorrect": false,
+          "explanation": "JavaScript já é a linguagem de programação da web. O Vue.js é um framework construído sobre JavaScript para facilitar a construção de interfaces."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "O que significa dizer que o Vue.js é um \"framework progressivo\"?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Que ele é atualizado frequentemente com novas versões",
+          "isCorrect": false,
+          "explanation": "Progressivo não se refere à frequência de atualizações, mas à forma como você pode adotá-lo incrementalmente."
+        },
+        {
+          "id": "a2",
+          "text": "Que ele só funciona em navegadores modernos e progressivos",
+          "isCorrect": false,
+          "explanation": "O termo progressivo não se refere a compatibilidade com navegadores, mas à flexibilidade de adoção."
+        },
+        {
+          "id": "a3",
+          "text": "Que você pode começar usando apenas o núcleo e adicionar funcionalidades conforme a necessidade",
+          "isCorrect": true,
+          "explanation": "Correto! O Vue.js permite adoção incremental — você pode usar só o core para interatividade simples ou escalar com Vue Router, Pinia, Nuxt e todo o ecossistema."
+        },
+        {
+          "id": "a4",
+          "text": "Que ele utiliza o conceito de Progressive Web Apps (PWA) nativamente",
+          "isCorrect": false,
+          "explanation": "Embora o Vue possa ser usado para construir PWAs, o termo 'progressivo' no contexto do Vue refere-se à adoção incremental do framework."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Quais são os três pilares fundamentais do Vue.js?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "HTML, CSS e JavaScript",
+          "isCorrect": false,
+          "explanation": "HTML, CSS e JavaScript são as tecnologias base da web, não os pilares específicos do Vue.js."
+        },
+        {
+          "id": "a2",
+          "text": "Reatividade declarativa, sistema de componentes e DOM virtual eficiente",
+          "isCorrect": true,
+          "explanation": "Correto! O Vue.js se apoia na reatividade declarativa (o estado controla a interface), no sistema de componentes (blocos reutilizáveis) e no DOM virtual eficiente (atualizações mínimas no DOM real)."
+        },
+        {
+          "id": "a3",
+          "text": "Router, Store e Server-Side Rendering",
+          "isCorrect": false,
+          "explanation": "Esses são recursos do ecossistema Vue (Vue Router, Pinia, Nuxt), mas não são os três pilares fundamentais do framework."
+        },
+        {
+          "id": "a4",
+          "text": "Templates, diretivas e filtros",
+          "isCorrect": false,
+          "explanation": "Templates e diretivas são funcionalidades do Vue, mas os três pilares são reatividade declarativa, componentes e DOM virtual."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Como o DOM Virtual do Vue.js melhora a performance da aplicação?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Ele substitui completamente o DOM real do navegador",
+          "isCorrect": false,
+          "explanation": "O DOM Virtual não substitui o DOM real — ele é uma representação leve em memória usada para calcular as mudanças mínimas necessárias."
+        },
+        {
+          "id": "a2",
+          "text": "Ele elimina a necessidade de usar JavaScript no navegador",
+          "isCorrect": false,
+          "explanation": "O DOM Virtual é implementado em JavaScript e não elimina seu uso."
+        },
+        {
+          "id": "a3",
+          "text": "Ele compara a versão anterior com a nova e aplica apenas as diferenças no DOM real",
+          "isCorrect": true,
+          "explanation": "Correto! O Vue cria uma nova versão do DOM Virtual quando o estado muda, compara com a anterior (diffing) e aplica apenas as mudanças mínimas no DOM real do navegador."
+        },
+        {
+          "id": "a4",
+          "text": "Ele armazena toda a página em cache para evitar re-renderizações",
+          "isCorrect": false,
+          "explanation": "O DOM Virtual não funciona como um sistema de cache. Ele é uma técnica para calcular e aplicar apenas as atualizações necessárias no DOM real."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Quem criou o Vue.js e qual foi a motivação principal?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Foi criado pelo Google como substituto do Angular",
+          "isCorrect": false,
+          "explanation": "O Vue.js não foi criado pelo Google. Diferente do Angular (Google) e React (Meta), o Vue é um projeto independente."
+        },
+        {
+          "id": "a2",
+          "text": "Foi criado por Evan You, que queria extrair a parte de data binding do Angular em algo mais leve",
+          "isCorrect": true,
+          "explanation": "Correto! Evan You trabalhava no Google Creative Lab e queria algo mais simples que o Angular — mantendo a vinculação de dados declarativa, mas sem toda a complexidade."
+        },
+        {
+          "id": "a3",
+          "text": "Foi criado pela Meta (Facebook) como alternativa ao React",
+          "isCorrect": false,
+          "explanation": "O React é da Meta. O Vue.js foi criado por Evan You como projeto pessoal independente."
+        },
+        {
+          "id": "a4",
+          "text": "Foi criado por uma comunidade de desenvolvedores anônimos no GitHub",
+          "isCorrect": false,
+          "explanation": "O Vue.js foi criado por Evan You, um desenvolvedor chinês-americano, como projeto pessoal em 2013-2014."
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual é a diferença entre a abordagem imperativa (JavaScript puro) e a declarativa (Vue.js)?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Na imperativa você diz 'o que' mostrar; na declarativa você diz 'como' atualizar",
+          "isCorrect": false,
+          "explanation": "É exatamente o contrário! Na abordagem imperativa você diz 'como' atualizar o DOM passo a passo, e na declarativa você declara 'o que' a interface deve exibir."
+        },
+        {
+          "id": "a2",
+          "text": "Na imperativa você manipula o DOM passo a passo; na declarativa você descreve o estado desejado e o framework atualiza a interface",
+          "isCorrect": true,
+          "explanation": "Correto! Com JavaScript puro (imperativo), você usa getElementById e textContent para atualizar cada elemento. Com Vue.js (declarativo), você apenas altera o estado e a interface se atualiza automaticamente."
+        },
+        {
+          "id": "a3",
+          "text": "Não há diferença prática, apenas uma diferença de sintaxe",
+          "isCorrect": false,
+          "explanation": "A diferença é fundamental. A abordagem declarativa elimina a necessidade de gerenciar manualmente o DOM, resultando em código mais previsível e menos sujeito a bugs."
+        },
+        {
+          "id": "a4",
+          "text": "A abordagem declarativa é mais lenta porque adiciona uma camada extra de abstração",
+          "isCorrect": false,
+          "explanation": "Na prática, o DOM Virtual e a reatividade do Vue.js frequentemente resultam em performance melhor, pois aplicam apenas as mudanças mínimas necessárias no DOM."
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Em qual destes cenários o Vue.js NÃO seria a melhor escolha?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Um painel administrativo com filtros dinâmicos e formulários complexos",
+          "isCorrect": false,
+          "explanation": "Este é um cenário ideal para o Vue.js — aplicações interativas com muitos componentes e estado dinâmico."
+        },
+        {
+          "id": "a2",
+          "text": "Um site 100% estático sem nenhuma interatividade, apenas conteúdo de texto",
+          "isCorrect": true,
+          "explanation": "Correto! Para um site completamente estático sem interatividade, HTML e CSS puros são suficientes — adicionar um framework seria desnecessário."
+        },
+        {
+          "id": "a3",
+          "text": "Um widget interativo que será inserido em uma página existente",
+          "isCorrect": false,
+          "explanation": "Esse é um dos pontos fortes do Vue.js — ser montado em qualquer div de uma página existente para adicionar interatividade."
+        },
+        {
+          "id": "a4",
+          "text": "Uma aplicação SPA com roteamento e gerenciamento de estado",
+          "isCorrect": false,
+          "explanation": "SPAs são um dos principais casos de uso do Vue.js, com Vue Router e Pinia para roteamento e estado."
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "O que diferencia o Vue.js do React e do Angular em termos de origem e financiamento?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Todos os três são apoiados por grandes empresas de tecnologia",
+          "isCorrect": false,
+          "explanation": "O React é da Meta e o Angular é do Google, mas o Vue.js nunca foi apoiado por uma megacorporação."
+        },
+        {
+          "id": "a2",
+          "text": "O Vue.js é o único que exige licença comercial para uso",
+          "isCorrect": false,
+          "explanation": "O Vue.js é totalmente open-source e gratuito, assim como o React e o Angular."
+        },
+        {
+          "id": "a3",
+          "text": "O Vue.js nunca foi apoiado por uma grande empresa — é financiado pela comunidade e por patrocínios independentes",
+          "isCorrect": true,
+          "explanation": "Correto! Diferente do React (Meta) e Angular (Google), o Vue.js é um projeto independente criado por Evan You, financiado por doações e patrocínios da comunidade."
+        },
+        {
+          "id": "a4",
+          "text": "O Vue.js é mantido pelo governo chinês por ter forte adoção na China",
+          "isCorrect": false,
+          "explanation": "Embora o Vue tenha grande adoção na China, ele é um projeto independente mantido pela comunidade open-source global."
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Qual versão do Vue.js introduziu o DOM Virtual e a renderização no servidor (SSR)?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Vue 1.0 (Evangelion)",
+          "isCorrect": false,
+          "explanation": "O Vue 1.0 trouxe sistema de componentes e diretivas personalizadas, mas ainda não utilizava DOM Virtual."
+        },
+        {
+          "id": "a2",
+          "text": "Vue 2.0 (Ghost in the Shell)",
+          "isCorrect": true,
+          "explanation": "Correto! O Vue 2.0 foi uma reescrita significativa que introduziu o DOM Virtual (inspirado no React), renderização no servidor (SSR) e consolidou os Single File Components (.vue)."
+        },
+        {
+          "id": "a3",
+          "text": "Vue 3.0 (One Piece)",
+          "isCorrect": false,
+          "explanation": "O Vue 3.0 trouxe a Composition API, reatividade baseada em Proxy e reescrita em TypeScript, mas o DOM Virtual foi introduzido no Vue 2.0."
+        },
+        {
+          "id": "a4",
+          "text": "Vue 0.x (Seed)",
+          "isCorrect": false,
+          "explanation": "A versão 0.x era o início modesto do projeto, quando ainda se chamava Seed. O DOM Virtual só foi introduzido no Vue 2.0."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "No Vue.js, o que a função `ref()` faz e como ela se relaciona com a reatividade?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Cria uma referência ao DOM real, equivalente a document.getElementById",
+          "isCorrect": false,
+          "explanation": "Embora o nome 'ref' lembre referências ao DOM, no contexto da Composition API, ref() cria um valor reativo."
+        },
+        {
+          "id": "a2",
+          "text": "Importa um componente externo para ser usado no template",
+          "isCorrect": false,
+          "explanation": "Para importar componentes usamos import/export do JavaScript. ref() serve para criar valores reativos."
+        },
+        {
+          "id": "a3",
+          "text": "Cria um valor reativo que, ao ser alterado, faz o Vue atualizar automaticamente a interface",
+          "isCorrect": true,
+          "explanation": "Correto! ref() cria um valor reativo. Quando você altera seu `.value`, o Vue detecta a mudança e atualiza automaticamente todas as partes da interface que dependem desse valor."
+        },
+        {
+          "id": "a4",
+          "text": "Define uma constante imutável que não pode ser alterada após a inicialização",
+          "isCorrect": false,
+          "explanation": "ref() cria um valor reativo que pode e deve ser alterado — é justamente a alteração que dispara a atualização da interface."
+        }
+      ]
+    }
+  ]
+}
+

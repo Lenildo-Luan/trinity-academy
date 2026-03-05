@@ -9,7 +9,7 @@
         "title": "O que é Vue.js?",
         "description": "Descubra o que é o Vue.js, qual problema ele resolve, quando utilizá-lo e a história por trás do framework.",
         "video": null,
-        "quizId": null
+        "quizId": "quiz-1"
       }
     ]
   }
