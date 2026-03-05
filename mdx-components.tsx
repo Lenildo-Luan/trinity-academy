@@ -18,6 +18,11 @@ import {
   VirtualDomDiff,
   ProgressiveFramework,
 } from "./src/components/vue-p5-examples";
+import {
+  FileChaosSim,
+  GitTimeline,
+  SnapshotVsDiff,
+} from "./src/components/git-p5-examples";
 
 function getTextContent(node: ReactNode): string {
   if (typeof node === "string") return node;
@@ -158,6 +163,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ImperativeVsReactive,
     VirtualDomDiff,
     ProgressiveFramework,
+    FileChaosSim,
+    GitTimeline,
+    SnapshotVsDiff,
     ...components,
   };
 }

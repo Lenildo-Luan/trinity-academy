@@ -1,0 +1,17 @@
+[
+   {
+      "id": "git-basics",
+      "title": "Introdução ao Git",
+      "description": "Entenda o que é Git, por que ele foi criado e qual problema ele resolve no dia a dia do desenvolvedor.",
+      "lessons": [
+         {
+            "id": "charpter-1",
+            "title": "Controlando o Tempo: Introdução ao Git",
+            "description": "Descubra o que é Git, qual problema ele resolve, quando usá-lo e a fascinante história por trás da ferramenta mais indispensável da programação.",
+            "video": null,
+            "quizId": "quiz-1"
+         }
+      ]
+   }
+]
+

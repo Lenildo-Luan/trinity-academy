@@ -1,0 +1,240 @@
+import {
+  MarkdownTable
+} from "../../../components/MarkdownTable";
+
+# Controlando o Tempo: Introdução ao Git
+
+Imagine que você está escrevendo um livro. Após meses de trabalho, você decide reescrever o capítulo 5 inteiro. Três horas depois, percebe que a versão anterior era muito melhor. Mas você já salvou por cima. O trabalho original se foi para sempre.
+
+Agora imagine que você pudesse **viajar no tempo** — voltar para qualquer momento da escrita do seu livro, ver exatamente o que mudou entre uma versão e outra, e nunca mais perder uma única linha sequer. Parece mágica? É exatamente isso que o **Git** faz para o seu código.
+
+Nesta primeira aula, vamos entender o que é Git, por que ele foi criado, qual problema gigantesco ele resolve e quando você deveria usá-lo. Ao final, você terá uma visão clara de por que o Git se tornou a ferramenta mais indispensável no mundo da programação.
+
+## O Que É Git?
+
+### A Analogia do Caderno Mágico
+
+Imagine um caderno mágico com poderes especiais:
+
+- Toda vez que você escreve algo, o caderno **tira uma foto instantânea** de todas as suas páginas
+- Você pode **voltar no tempo** para qualquer foto anterior com um único comando
+- Se dois amigos escreverem ao mesmo tempo, o caderno **combina as mudanças** automaticamente
+- Mesmo sem internet, o caderno funciona perfeitamente — ele guarda todo o histórico **na sua própria mesa**
+
+**Git é esse caderno mágico, só que para arquivos de computador.** Mais especificamente, Git é uma ferramenta de **controle de versão** — um sistema que registra mudanças em arquivos ao longo do tempo, permitindo que você recupere versões específicas quando precisar.
+
+### Definição Técnica
+
+De forma mais precisa, **Git é um sistema de controle de versão distribuído, gratuito e de código aberto**, projetado para lidar com tudo, desde projetos pequenos até projetos enormes, com velocidade e eficiência.
+
+Vamos desempacotar essa definição:
+
+- **Controle de versão:** registra o histórico de mudanças dos seus arquivos
+- **Distribuído:** cada pessoa tem uma cópia completa do histórico no próprio computador
+- **Gratuito e de código aberto:** qualquer pessoa pode usar, estudar e modificar o Git
+- **Rápido e eficiente:** projetado desde o início para ser extremamente veloz
+
+### O Que Git NÃO É
+
+Antes de continuar, é importante desfazer algumas confusões comuns:
+
+**Git não é a mesma coisa que GitHub.** Git é a ferramenta que roda no seu computador. GitHub é um site que hospeda projetos Git na nuvem. Pense assim: Git é o motor, GitHub é a estrada. Você pode usar o motor sem a estrada (Git local, sem GitHub), mas a estrada sem motor não faz sentido.
+
+**Git não é apenas um sistema de backup.** Embora Git proteja seus arquivos, ele vai muito além — permite que você entenda *o que* mudou, *quando* mudou, *quem* mudou e *por que* mudou.
+
+**Git não é só para programadores.** Escritores, designers, cientistas e até músicos usam Git para controlar versões de seus trabalhos. Qualquer pessoa que trabalhe com arquivos que mudam ao longo do tempo pode se beneficiar.
+
+## Qual Problema o Git Resolve?
+
+### O Caos Sem Controle de Versão
+
+Se você já trabalhou em um documento importante, provavelmente já viveu este pesadelo:
+
+```
+📁 Meus Documentos/
+   📄 trabalho.doc
+   📄 trabalho-v2.doc
+   📄 trabalho-FINAL.doc
+   📄 trabalho-FINAL-v2.doc
+   📄 trabalho-FINAL-REAL.doc
+   📄 trabalho-FINAL-REAL-AGORA-VAI.doc
+   📄 trabalho-FINAL-revisado-ENTREGA.doc
+   📄 trabalho-backup-nao-mexer.doc
+```
+
+**Parece familiar?** Essa é a forma mais primitiva de "controle de versão" — copiar o arquivo e mudar o nome. O problema? Funciona terrivelmente mal:
+
+- **Qual é a versão mais recente?** Ninguém sabe.
+- **O que mudou entre v2 e FINAL?** Impossível saber sem abrir os dois e comparar manualmente.
+- **Quando cada mudança foi feita?** A data de modificação do arquivo não é confiável.
+- **Quem fez cada alteração?** Se foi um trabalho em grupo, boa sorte descobrindo.
+
+Clique no botão abaixo para ver como o Git transforma esse caos em organização:
+
+<FileChaosSim />
+
+### O Problema da Colaboração
+
+Agora imagine algo pior: **duas pessoas editando o mesmo arquivo ao mesmo tempo.**
+
+É como dois chefs editando a mesma receita simultaneamente. O Chef A muda o tempero enquanto o Chef B muda o modo de preparo. Quando os dois salvam, um sobrescreve o trabalho do outro. O resultado? Uma receita incompleta e dois chefs frustrados.
+
+Sem Git, a "solução" para trabalho em equipe costuma ser:
+
+1. **"Ei, não mexe no arquivo agora, estou editando!"** — Funciona com 2 pessoas, impossível com 20
+2. **Cada um edita uma cópia separada** — E depois alguém tem que juntar tudo manualmente
+3. **Enviar por email** — "Segue a versão atualizada... ops, esqueci de incluir a última mudança"
+
+Git resolve tudo isso elegantemente: cada pessoa trabalha na sua cópia, e o Git **combina as mudanças automaticamente**, avisando quando há conflitos que precisam de atenção humana.
+
+### Quando Algo Dá Errado
+
+Todo programador já viveu (ou viverá) esta situação: você faz uma mudança no código, tudo parece funcionar, e então... algo que funcionava perfeitamente **para de funcionar**. Sem controle de versão, suas opções são:
+
+- Tentar lembrar o que você mudou e desfazer manualmente (🙏 boa sorte)
+- Usar Ctrl+Z freneticamente e torcer para chegar longe o suficiente
+- Chorar silenciosamente e reescrever tudo do zero
+
+Com Git, a solução é simples: **volte para a versão que funcionava**. Um único comando e tudo está como era antes. É literalmente uma máquina do tempo para o seu código.
+
+**Curiosidade:** Uma pesquisa de 2023 revelou que desenvolvedores usam `git log` (ver histórico) e `git diff` (ver mudanças) mais de 15 vezes por dia em média. Controle de versão não é um luxo — é uma necessidade diária!
+
+## Quando Usar Git?
+
+### Projetos de Programação (O Uso Clássico)
+
+Git nasceu para código e é onde ele brilha mais. Qualquer projeto de programação, por menor que seja, se beneficia do Git:
+
+- **Projetos pessoais:** Mesmo trabalhando sozinho, ter um histórico completo de mudanças é inestimável
+- **Trabalhos acadêmicos:** Acompanhar a evolução de um projeto de faculdade
+- **Projetos em equipe:** Essencial quando mais de uma pessoa toca no código
+- **Projetos de código aberto:** Como milhares de pessoas colaboram em projetos como Linux, React ou VS Code
+
+### Além do Código
+
+Git funciona excepcionalmente bem com qualquer **arquivo de texto**:
+
+- **Documentação técnica:** Manuais, guias, especificações
+- **Artigos e livros:** Escritores controlam versões de manuscritos
+- **Arquivos de configuração:** Infraestrutura como código
+- **Dados em formato texto:** CSV, JSON, YAML
+
+### Quando Git Talvez Não Seja Ideal
+
+Git foi projetado para arquivos de texto. Ele não funciona tão bem com:
+
+- **Arquivos binários grandes:** Vídeos, imagens PSD, arquivos ZIP
+- **Bancos de dados:** Existem ferramentas específicas para versionar dados
+- **Arquivos que mudam constantemente de forma automática:** Como logs de sistema
+
+> **Regra de ouro:** Se o arquivo é texto e muda ao longo do tempo, Git é seu melhor amigo.
+
+## A História do Git
+
+### Linux e o BitKeeper
+
+Para entender por que o Git existe, precisamos falar sobre **Linux** — o sistema operacional de código aberto mais importante do mundo. Linux roda em servidores que sustentam a internet, em smartphones Android, em supercomputadores e até na Estação Espacial Internacional.
+
+O criador do Linux, **Linus Torvalds**, enfrentava um problema monumental: milhares de programadores ao redor do mundo contribuíam para o código do Linux. Como organizar todo esse trabalho?
+
+De 2002 a 2005, o projeto Linux usava uma ferramenta chamada **BitKeeper** para controle de versão. Funcionava bem, mas tinha um problema: era um software **proprietário** (de uma empresa privada), e o Linux é um projeto de **código aberto**. Essa tensão inevitavelmente explodiu.
+
+Em 2005, a empresa dona do BitKeeper revogou a licença gratuita que o projeto Linux usava. De repente, milhares de desenvolvedores ficaram sem sua ferramenta de controle de versão.
+
+### Nasce o Git: Os Dias Que Mudaram o Mundo
+
+Linus Torvalds, com a mesma determinação que o levou a criar o Linux, decidiu resolver o problema ele mesmo. Em **abril de 2005**, ele começou a desenvolver uma nova ferramenta de controle de versão com objetivos ambiciosos:
+
+- **Velocidade absurda** — operações quase instantâneas
+- **Distribuído** — cada desenvolvedor tem o histórico completo
+- **Integridade total** — impossível alterar o histórico sem ser detectado
+- **Suporte a desenvolvimento não-linear** — milhares de branches paralelos
+
+**Curiosidade impressionante:** Linus desenvolveu a primeira versão funcional do Git em menos de **duas semanas**! Lembre-se de que JavaScript também foi criado em 10 dias por Brendan Eich. Parece que as melhores ferramentas nascem sob pressão extrema.
+
+Em 19 de abril de 2005, Linus fez o primeiro commit do Git — sim, o Git controlou sua própria versão desde o início! O nome "Git" é uma gíria britânica que pode significar "pessoa desagradável". Linus brincou: *"Eu nomeio todos os meus projetos com meu próprio nome. Primeiro Linux, agora Git."*
+
+Explore a linha do tempo interativa abaixo para conhecer os marcos mais importantes na história do Git:
+
+<GitTimeline />
+
+### Git Hoje
+
+Desde sua criação em 2005, o Git se tornou o **padrão absoluto** da indústria de software:
+
+- **Mais de 100 milhões de repositórios** existem só no GitHub
+- **Mais de 90% dos desenvolvedores** profissionais usam Git
+- Empresas como Google, Microsoft, Meta, Amazon e Netflix dependem dele diariamente
+- Praticamente **todo projeto de código aberto** no mundo usa Git
+
+Nenhuma outra ferramenta de controle de versão chegou perto dessa adoção. Git não é apenas popular — é **indispensável**.
+
+## Como o Git Pensa?
+
+Antes de mergulharmos nos comandos nas próximas aulas, é essencial entender a filosofia por trás do Git. Isso vai tornar tudo mais intuitivo depois.
+
+### Snapshots, Não Diferenças
+
+A maioria dos sistemas de controle de versão antigos funcionava registrando as **diferenças** (diffs) entre uma versão e outra. É como anotar: "na linha 5, troquei 'azul' por 'vermelho'".
+
+Git funciona de forma radicalmente diferente: ele tira uma **foto instantânea** (snapshot) de todos os seus arquivos a cada commit. Se um arquivo não mudou, Git não o copia de novo — ele apenas cria uma referência eficiente para a versão anterior.
+
+Clique em "Novo Commit" para ver a diferença entre as duas abordagens:
+
+<SnapshotVsDiff />
+
+**Por que isso importa?** Snapshots tornam o Git extremamente rápido. Para ver o estado do projeto em qualquer ponto do passado, Git não precisa "reconstruir" aplicando centenas de diferenças — ele simplesmente mostra a foto que já estava guardada.
+
+### Os Três Estados
+
+Git organiza seu trabalho em três áreas principais. Pense nelas como uma fábrica:
+
+1. **Diretório de trabalho** *(Working Directory)* — Sua bancada de trabalho. É onde você edita seus arquivos normalmente.
+
+2. **Área de preparação** *(Staging Area)* — A área de inspeção. Aqui você seleciona quais mudanças quer incluir no próximo "snapshot".
+
+3. **Repositório** *(Repository)* — O cofre. Onde os snapshots confirmados são armazenados permanentemente.
+
+O fluxo básico é:
+
+```
+Editar arquivos → Preparar mudanças → Confirmar snapshot
+(Working Dir)     (Staging Area)      (Repository)
+```
+
+Não se preocupe se isso parecer abstrato agora — nas próximas aulas vamos praticar cada uma dessas etapas com exemplos reais.
+
+## Resumo
+
+Vamos recapitular o que aprendemos nesta aula:
+
+<MarkdownTable
+  headers={[
+    'Conceito',
+    'O que aprendemos',
+  ]}
+  rows={[
+    ['**O que é Git**', 'Sistema de controle de versão distribuído que registra o histórico de mudanças dos seus arquivos'],
+    ['**Problema que resolve**', 'Elimina o caos de versões manuais, permite colaboração simultânea e possibilita voltar no tempo'],
+    ['**Quando usar**', 'Sempre que trabalhar com arquivos de texto que mudam ao longo do tempo, especialmente código'],
+    ['**História**', 'Criado por Linus Torvalds em 2005, tornou-se o padrão absoluto da indústria'],
+    ['**Como pensa**', 'Usa snapshots (fotos instantâneas) em vez de diferenças, organizado em 3 estados'],
+  ]}
+  showRowCount={true}
+  className="my-8"
+/>
+
+## Próximos Passos
+
+Na próxima aula, vamos colocar a mão na massa! Você vai:
+
+- **Instalar o Git** no seu computador
+- **Criar seu primeiro repositório**
+- **Fazer seus primeiros commits** (salvar snapshots do seu código)
+- **Explorar o histórico** de mudanças
+
+A teoria foi apresentada — agora é hora de praticar. O Git vai se tornar tão natural quanto salvar um arquivo. É só questão de prática!
+
+**Lembre-se:** Todo desenvolvedor profissional no mundo começou exatamente onde você está agora — sem saber nada sobre Git. A diferença é que eles deram o primeiro passo. E você acabou de dar o seu.
+
+*"Falar é fácil. Me mostre o código."* — Linus Torvalds, criador do Linux e do Git

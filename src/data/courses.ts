@@ -26,6 +26,15 @@ export const courses: Course[] = [
     available: true,
   },
   {
+    id: "github-fundamentals",
+    title: "Fundamentos do GitHub",
+    description:
+      "Domine o Git e o GitHub do zero: controle de versão, colaboração em equipe e as ferramentas essenciais que todo desenvolvedor profissional precisa dominar.",
+    backgroundImage:
+      "https://ik.imagekit.io/qfmgarse7/github-background.avif",
+    available: true,
+  },
+  {
     id: "pre-calculo",
     title: "Pré-cálculo",
     description:

@@ -1,0 +1,309 @@
+{
+  "id": "quiz-1",
+  "title": "Quiz - Controlando o Tempo: Introdução ao Git",
+  "description": "Teste seus conhecimentos sobre o que é Git, qual problema ele resolve, quando utilizá-lo e a história por trás da ferramenta mais indispensável da programação.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "O que é Git?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Um site para hospedar projetos de código aberto na internet",
+          "isCorrect": false,
+          "explanation": "Você está pensando no GitHub. Git é a ferramenta que roda no seu computador para controlar versões. GitHub é um site que hospeda projetos Git na nuvem."
+        },
+        {
+          "id": "a2",
+          "text": "Uma linguagem de programação usada para desenvolver aplicações web",
+          "isCorrect": false,
+          "explanation": "Git não é uma linguagem de programação. É um sistema de controle de versão — uma ferramenta que registra o histórico de mudanças dos seus arquivos."
+        },
+        {
+          "id": "a3",
+          "text": "Um sistema de controle de versão distribuído, gratuito e de código aberto",
+          "isCorrect": true,
+          "explanation": "Correto! Git é um sistema de controle de versão distribuído que registra mudanças em arquivos ao longo do tempo, permitindo recuperar versões específicas. É gratuito, de código aberto e extremamente rápido."
+        },
+        {
+          "id": "a4",
+          "text": "Um editor de código criado pela Microsoft para programadores",
+          "isCorrect": false,
+          "explanation": "Você pode estar pensando no VS Code. Git é um sistema de controle de versão, não um editor de código."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Qual é a diferença entre Git e GitHub?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "São a mesma coisa — 'GitHub' é apenas o nome completo do 'Git'",
+          "isCorrect": false,
+          "explanation": "Git e GitHub são coisas diferentes. Git é a ferramenta de controle de versão que roda no seu computador; GitHub é um site que hospeda projetos Git na nuvem."
+        },
+        {
+          "id": "a2",
+          "text": "Git é a ferramenta que roda no seu computador; GitHub é um site que hospeda projetos Git na nuvem",
+          "isCorrect": true,
+          "explanation": "Correto! Pense assim: Git é o motor, GitHub é a estrada. Você pode usar Git sem GitHub (localmente), mas GitHub depende do Git para funcionar."
+        },
+        {
+          "id": "a3",
+          "text": "GitHub é a versão gratuita e Git é a versão paga",
+          "isCorrect": false,
+          "explanation": "Ambos possuem versões gratuitas. Git é completamente gratuito e de código aberto. GitHub tem plano gratuito e planos pagos, mas são ferramentas diferentes."
+        },
+        {
+          "id": "a4",
+          "text": "Git funciona apenas no Linux, enquanto GitHub funciona em todos os sistemas operacionais",
+          "isCorrect": false,
+          "explanation": "Git funciona em todos os sistemas operacionais (Windows, macOS e Linux). A confusão pode vir do fato de que Git foi criado inicialmente para o projeto Linux."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Qual é o principal problema que o Git resolve?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "A falta de editores de código no mercado",
+          "isCorrect": false,
+          "explanation": "Existem muitos editores de código disponíveis. O Git resolve o problema de controlar versões de arquivos e colaboração em equipe."
+        },
+        {
+          "id": "a2",
+          "text": "A lentidão dos computadores ao executar programas",
+          "isCorrect": false,
+          "explanation": "Git não está relacionado à performance de execução de programas. Ele resolve o caos de gerenciar versões de arquivos e colaborar em equipe."
+        },
+        {
+          "id": "a3",
+          "text": "A impossibilidade de programar sem internet",
+          "isCorrect": false,
+          "explanation": "Na verdade, Git funciona perfeitamente sem internet (é distribuído). Ele resolve o problema de rastrear mudanças em arquivos e permitir colaboração organizada."
+        },
+        {
+          "id": "a4",
+          "text": "O caos de gerenciar versões de arquivos manualmente e a dificuldade de colaborar em equipe",
+          "isCorrect": true,
+          "explanation": "Correto! Sem Git, as pessoas recorrem a cópias como 'trabalho-FINAL-v2.doc' e enfrentam problemas quando múltiplas pessoas editam o mesmo arquivo. Git elimina esse caos registrando o histórico completo e combinando mudanças automaticamente."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Quem criou o Git e em que ano?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Bill Gates, em 2001, para uso interno na Microsoft",
+          "isCorrect": false,
+          "explanation": "O Git não foi criado pela Microsoft. Foi criado por Linus Torvalds, o mesmo criador do Linux, em 2005."
+        },
+        {
+          "id": "a2",
+          "text": "Linus Torvalds, em 2005, após a ferramenta BitKeeper revogar sua licença gratuita para o projeto Linux",
+          "isCorrect": true,
+          "explanation": "Correto! Linus Torvalds criou o Git em abril de 2005, após a empresa dona do BitKeeper revogar a licença gratuita que o projeto Linux usava. Ele desenvolveu a primeira versão funcional em menos de duas semanas!"
+        },
+        {
+          "id": "a3",
+          "text": "Brendan Eich, em 2010, como parte do projeto Mozilla",
+          "isCorrect": false,
+          "explanation": "Brendan Eich é o criador do JavaScript, não do Git. O Git foi criado por Linus Torvalds em 2005."
+        },
+        {
+          "id": "a4",
+          "text": "Uma equipe de desenvolvedores do Google, em 2008",
+          "isCorrect": false,
+          "explanation": "O Git não foi criado pelo Google. Foi um projeto pessoal de Linus Torvalds, criado em 2005 para o desenvolvimento do Linux."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "O que significa dizer que o Git é um sistema de controle de versão \"distribuído\"?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Que ele está disponível para download em vários sites diferentes",
+          "isCorrect": false,
+          "explanation": "Distribuído, no contexto do Git, não se refere à distribuição do software, mas à arquitetura do sistema — cada pessoa tem uma cópia completa do histórico."
+        },
+        {
+          "id": "a2",
+          "text": "Que ele só funciona quando conectado à internet",
+          "isCorrect": false,
+          "explanation": "É exatamente o oposto! Por ser distribuído, o Git funciona perfeitamente offline, pois cada pessoa tem o histórico completo no próprio computador."
+        },
+        {
+          "id": "a3",
+          "text": "Que cada pessoa que trabalha no projeto tem uma cópia completa do histórico no próprio computador",
+          "isCorrect": true,
+          "explanation": "Correto! Diferente de sistemas centralizados, onde o histórico fica apenas em um servidor, no Git cada desenvolvedor tem uma cópia completa de todo o histórico do projeto. Isso permite trabalhar offline e garante segurança caso o servidor principal falhe."
+        },
+        {
+          "id": "a4",
+          "text": "Que o código é distribuído automaticamente para todos os membros da equipe quando alguém faz uma mudança",
+          "isCorrect": false,
+          "explanation": "No Git, as mudanças não são distribuídas automaticamente. Cada pessoa decide quando enviar e quando buscar mudanças, usando comandos específicos."
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Como o Git registra o histórico de mudanças nos arquivos?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Salvando apenas as diferenças (diffs) entre uma versão e outra, como os sistemas antigos faziam",
+          "isCorrect": false,
+          "explanation": "Esse era o método dos sistemas de controle de versão mais antigos. O Git funciona de forma diferente — ele tira snapshots (fotos instantâneas) de todos os arquivos a cada commit."
+        },
+        {
+          "id": "a2",
+          "text": "Fazendo uma cópia completa de todo o projeto em uma pasta nova a cada mudança",
+          "isCorrect": false,
+          "explanation": "Isso seria extremamente ineficiente. O Git usa snapshots, mas de forma inteligente: se um arquivo não mudou, ele cria apenas uma referência para a versão anterior em vez de copiá-lo."
+        },
+        {
+          "id": "a3",
+          "text": "Tirando snapshots (fotos instantâneas) de todos os arquivos a cada commit, usando referências eficientes para arquivos não modificados",
+          "isCorrect": true,
+          "explanation": "Correto! O Git tira uma foto instantânea de todos os seus arquivos a cada commit. Para arquivos que não mudaram, ele não os copia novamente — apenas cria uma referência eficiente para a versão anterior. Isso torna o Git extremamente rápido."
+        },
+        {
+          "id": "a4",
+          "text": "Gravando um vídeo de todas as alterações feitas nos arquivos em tempo real",
+          "isCorrect": false,
+          "explanation": "O Git não grava mudanças em tempo real. Você decide quando registrar mudanças fazendo um 'commit', que é como tirar uma foto do estado de todos os seus arquivos naquele momento."
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Quais são os três estados (áreas) principais do Git?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Download, Upload e Sincronização",
+          "isCorrect": false,
+          "explanation": "Esses não são os três estados do Git. Os três estados são: Diretório de Trabalho (Working Directory), Área de Preparação (Staging Area) e Repositório (Repository)."
+        },
+        {
+          "id": "a2",
+          "text": "Diretório de Trabalho (Working Directory), Área de Preparação (Staging Area) e Repositório (Repository)",
+          "isCorrect": true,
+          "explanation": "Correto! O Diretório de Trabalho é onde você edita seus arquivos; a Área de Preparação é onde você seleciona quais mudanças incluir no próximo snapshot; e o Repositório é onde os snapshots confirmados são armazenados permanentemente."
+        },
+        {
+          "id": "a3",
+          "text": "Criação, Revisão e Publicação",
+          "isCorrect": false,
+          "explanation": "Esses não são os três estados do Git. Os estados corretos são Working Directory, Staging Area e Repository."
+        },
+        {
+          "id": "a4",
+          "text": "Local, Remoto e Nuvem",
+          "isCorrect": false,
+          "explanation": "Embora o Git tenha conceitos de local e remoto, os três estados principais referem-se ao fluxo de trabalho: Working Directory, Staging Area e Repository."
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Em qual destes cenários o Git seria a melhor ferramenta para usar?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Editar vídeos de alta resolução para o YouTube",
+          "isCorrect": false,
+          "explanation": "Git não é ideal para arquivos binários grandes como vídeos. Ele foi projetado para arquivos de texto que mudam ao longo do tempo."
+        },
+        {
+          "id": "a2",
+          "text": "Gerenciar um banco de dados com milhões de registros",
+          "isCorrect": false,
+          "explanation": "Existem ferramentas específicas para versionar bancos de dados. Git foi projetado para arquivos de texto, não para dados estruturados em bancos."
+        },
+        {
+          "id": "a3",
+          "text": "Um projeto de programação em equipe onde várias pessoas editam o código ao mesmo tempo",
+          "isCorrect": true,
+          "explanation": "Correto! Este é o caso de uso clássico do Git. Ele permite que várias pessoas trabalhem simultaneamente no mesmo projeto, cada uma em sua cópia, e combina as mudanças automaticamente."
+        },
+        {
+          "id": "a4",
+          "text": "Armazenar fotos de família organizadas por data",
+          "isCorrect": false,
+          "explanation": "Fotos são arquivos binários, e o Git não é a melhor ferramenta para gerenciá-las. Serviços de armazenamento em nuvem como Google Fotos são mais adequados para isso."
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "O que motivou Linus Torvalds a criar o Git em 2005?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Ele queria criar uma alternativa gratuita ao GitHub, que na época era pago",
+          "isCorrect": false,
+          "explanation": "O GitHub só foi criado em 2008, três anos depois do Git. O Git foi criado porque a ferramenta BitKeeper revogou a licença gratuita que o projeto Linux usava."
+        },
+        {
+          "id": "a2",
+          "text": "A empresa dona do BitKeeper revogou a licença gratuita que o projeto Linux utilizava",
+          "isCorrect": true,
+          "explanation": "Correto! De 2002 a 2005, o projeto Linux usava o BitKeeper (software proprietário) para controle de versão. Quando a licença gratuita foi revogada, Linus decidiu criar sua própria ferramenta — e desenvolveu a primeira versão funcional do Git em menos de duas semanas!"
+        },
+        {
+          "id": "a3",
+          "text": "Ele estava entediado e resolveu criar uma ferramenta por hobby",
+          "isCorrect": false,
+          "explanation": "A criação do Git foi motivada por uma necessidade real e urgente: milhares de desenvolvedores do Linux ficaram sem ferramenta de controle de versão quando o BitKeeper revogou a licença."
+        },
+        {
+          "id": "a4",
+          "text": "O sistema operacional Linux exigia uma ferramenta própria para ser instalado em computadores",
+          "isCorrect": false,
+          "explanation": "O Linux não exige o Git para ser instalado. O Git foi criado para gerenciar o código-fonte do projeto Linux, não para instalar o sistema operacional."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Qual das seguintes afirmações sobre o Git é VERDADEIRA?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Git é apenas um sistema de backup para proteger arquivos contra perda de dados",
+          "isCorrect": false,
+          "explanation": "Embora o Git proteja seus arquivos, ele vai muito além de um backup. Ele permite entender o que mudou, quando, quem fez a mudança e por quê, além de facilitar a colaboração em equipe."
+        },
+        {
+          "id": "a2",
+          "text": "Git só pode ser usado por programadores — outras profissões não se beneficiam dele",
+          "isCorrect": false,
+          "explanation": "Git não é só para programadores. Escritores, designers, cientistas e até músicos usam Git para controlar versões de seus trabalhos."
+        },
+        {
+          "id": "a3",
+          "text": "Git precisa de internet para funcionar, pois é um sistema baseado na nuvem",
+          "isCorrect": false,
+          "explanation": "Git funciona perfeitamente offline! Por ser distribuído, todo o histórico fica no seu computador. Internet só é necessária para sincronizar com repositórios remotos como o GitHub."
+        },
+        {
+          "id": "a4",
+          "text": "Mais de 90% dos desenvolvedores profissionais usam Git, e ele se tornou o padrão absoluto da indústria de software",
+          "isCorrect": true,
+          "explanation": "Correto! O Git domina o mercado de controle de versão. Com mais de 100 milhões de repositórios só no GitHub e mais de 90% de adoção entre desenvolvedores, ele é verdadeiramente indispensável na indústria."
+        }
+      ]
+    }
+  ]
+}
+
