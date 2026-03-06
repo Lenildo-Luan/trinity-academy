@@ -44,6 +44,11 @@ import {
   MuscleActuator,
   HandSensors,
   FaceSenses,
+  EyeAnatomy,
+  ConeSpectralSensitivity,
+  CCDSensorPipeline,
+  EyeVsCamera,
+  ConeColorMixing,
 } from "./src/components/sensors-actuators-p5-examples";
 
 function getTextContent(node: ReactNode): string {
@@ -208,6 +213,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     MuscleActuator,
     HandSensors,
     FaceSenses,
+    EyeAnatomy,
+    ConeSpectralSensitivity,
+    CCDSensorPipeline,
+    EyeVsCamera,
+    ConeColorMixing,
     ...components,
   };
 }

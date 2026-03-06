@@ -5,7 +5,7 @@ O conteúdo deve se basear no seguinte resumo: Apresentação dos conceitos fund
 Use use p5.js para ilustrar visualmente os conceitos apresentados.
 Use o componente MarkdownTable.tsx para criar tabelas.
 
-O segundo capítulo do modo será: O Corpo Humano como Sistema de Sensores e Atuadores.
-O conteúdo deve se basear no seguinte resumo: Analogia entre o corpo humano e sistemas eletromecânicos. Estruturas como ossos (comportamento piezoelétrico), músculos (atuadores biológicos), sistema circulatório, mãos (sensores de pressão, temperatura e umidade) e rosto (paladar, visão) são analisadas como referências para o desenvolvimento de sensores e atuadores artificiais.
+O segundo capítulo do modo será: O Olho Humano e as Câmeras Digitais
+O conteúdo deve se basear no seguinte resumo: Estudo do olho humano como sensor óptico biológico, com foco na retina, fotorreceptores e nos três tipos de cones (ondas curtas S, médias M e longas L) responsáveis pela percepção de cores. Comparação com câmeras digitais e o sensor CCD (Charge Coupled Device), que converte luz em sinal elétrico e depois em valor binário.
 Use use p5.js para ilustrar visualmente os conceitos apresentados.
 Use o componente MarkdownTable.tsx para criar tabelas.

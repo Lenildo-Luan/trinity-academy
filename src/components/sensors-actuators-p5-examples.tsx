@@ -3287,3 +3287,743 @@ export function FaceSenses() {
   return <P5Sketch setup={setup} draw={draw} height={360} />;
 }
 
+// ===== CHAPTER 5 — HUMAN EYE & DIGITAL CAMERAS =====
+
+// Visualization 20: Eye anatomy — light path through cornea, lens, retina
+export function EyeAnatomy() {
+  let time = 0;
+
+  const setup = (p: p5) => {
+    p.textFont("monospace");
+  };
+
+  const draw = (p: p5) => {
+    p.background(2, 7, 19);
+    time += 0.02;
+
+    const w = p.width;
+    const h = p.height;
+
+    p.noStroke();
+    p.fill(200);
+    p.textAlign(p.CENTER, p.TOP);
+    p.textSize(14);
+    p.text("Anatomia Óptica do Olho Humano", w / 2, 8);
+
+    const cx = w * 0.45;
+    const cy = h * 0.48;
+    const eyeRx = 110;
+    const eyeRy = 95;
+
+    // Eyeball outline
+    p.noFill();
+    p.stroke(80, 100, 140);
+    p.strokeWeight(2);
+    p.ellipse(cx, cy, eyeRx * 2, eyeRy * 2);
+    p.noStroke();
+
+    // Sclera fill
+    p.fill(30, 35, 50);
+    p.ellipse(cx, cy, eyeRx * 2 - 4, eyeRy * 2 - 4);
+
+    // Vitreous humor
+    p.fill(15, 25, 45, 200);
+    p.ellipse(cx, cy, eyeRx * 1.8, eyeRy * 1.8);
+
+    // Cornea (left bulge)
+    p.fill(100, 180, 255, 40);
+    p.arc(cx - eyeRx + 15, cy, 50, eyeRy * 1.4, -p.HALF_PI, p.HALF_PI);
+
+    // Lens (crystalline)
+    const lensX = cx - eyeRx + 55;
+    const focusAnim = Math.sin(time * 1.2) * 0.15;
+    const lensW = 18 + focusAnim * 8;
+    const lensH = 50 + focusAnim * 15;
+    p.fill(120, 180, 220, 100);
+    p.ellipse(lensX, cy, lensW, lensH);
+    p.noFill();
+    p.stroke(120, 180, 220, 80);
+    p.strokeWeight(1);
+    p.ellipse(lensX, cy, lensW + 4, lensH + 4);
+    p.noStroke();
+
+    // Iris + pupil
+    const irisX = cx - eyeRx + 38;
+    p.fill(60, 120, 80);
+    p.rect(irisX - 3, cy - 35, 6, 24, 2);
+    p.rect(irisX - 3, cy + 11, 6, 24, 2);
+    const pupilSize = 10 + Math.sin(time * 2) * 4;
+    p.fill(5, 5, 15);
+    p.ellipse(irisX, cy, 8, pupilSize);
+
+    // Retina (back curved surface)
+    p.stroke(255, 180, 80);
+    p.strokeWeight(3);
+    p.noFill();
+    p.arc(cx + 3, cy, eyeRx * 1.7, eyeRy * 1.7, -1.2, 1.2);
+    p.noStroke();
+
+    // Fovea marker
+    const foveaX = cx + eyeRx - 18;
+    p.fill(255, 220, 80);
+    p.circle(foveaX, cy, 8);
+    p.fill(255, 220, 80, 40);
+    p.circle(foveaX, cy, 18);
+
+    // Optic nerve
+    p.fill(200, 160, 100);
+    p.push();
+    p.translate(cx + eyeRx - 5, cy + 25);
+    p.rotate(0.6);
+    p.rect(-5, 0, 10, 35, 5);
+    p.pop();
+
+    // Light rays entering eye → focusing on retina
+    const lightColors = [
+      [255, 80, 80],
+      [80, 255, 80],
+      [80, 120, 255],
+    ];
+    lightColors.forEach((col, i) => {
+      const startY = cy - 30 + i * 30;
+      const alpha = 120 + Math.sin(time * 3 + i) * 40;
+
+      // Incoming ray
+      p.stroke(col[0], col[1], col[2], alpha * 0.6);
+      p.strokeWeight(1.5);
+      p.line(15, startY, irisX - 5, startY);
+
+      // Refracted → converge to fovea
+      p.stroke(col[0], col[1], col[2], alpha);
+      p.line(lensX + lensW / 2, startY + (cy - startY) * 0.2, foveaX - 4, cy);
+
+      // Traveling photon dot
+      const dotProg = (time * 0.5 + i * 0.15) % 1;
+      let dotX: number, dotY: number;
+      if (dotProg < 0.4) {
+        const t = dotProg / 0.4;
+        dotX = 15 + t * (irisX - 20);
+        dotY = startY;
+      } else {
+        const t = (dotProg - 0.4) / 0.6;
+        dotX = lensX + lensW / 2 + t * (foveaX - 4 - lensX - lensW / 2);
+        dotY = (startY + (cy - startY) * 0.2) + t * (cy - (startY + (cy - startY) * 0.2));
+      }
+      p.noStroke();
+      p.fill(col[0], col[1], col[2], 220);
+      p.circle(dotX, dotY, 5);
+    });
+    p.noStroke();
+
+    // Labels
+    p.fill(100, 180, 255);
+    p.textSize(8);
+    p.textAlign(p.CENTER, p.BOTTOM);
+    p.text("Córnea", cx - eyeRx + 15, cy - eyeRy + 10);
+    p.fill(60, 180, 100);
+    p.text("Íris", irisX, cy - 40);
+    p.fill(120, 180, 220);
+    p.text("Cristalino", lensX, cy - lensH / 2 - 5);
+    p.fill(255, 180, 80);
+    p.textAlign(p.LEFT, p.CENTER);
+    p.text("Retina", cx + eyeRx + 5, cy - 30);
+    p.fill(255, 220, 80);
+    p.text("Fóvea", foveaX + 12, cy);
+    p.fill(200, 160, 100);
+    p.text("Nervo óptico", cx + eyeRx + 5, cy + 50);
+
+    // Bottom path
+    p.fill(150);
+    p.textSize(9);
+    p.textAlign(p.CENTER, p.BOTTOM);
+    p.text("Luz → Córnea → Pupila → Cristalino (foco) → Retina (fotodetecção) → Nervo óptico → Cérebro", w / 2, h - 5);
+  };
+
+  return <P5Sketch setup={setup} draw={draw} height={360} />;
+}
+
+// Visualization 21: Cone spectral sensitivity — S, M, L cones with wavelength spectrum
+export function ConeSpectralSensitivity() {
+  let time = 0;
+
+  const setup = (p: p5) => {
+    p.textFont("monospace");
+  };
+
+  const draw = (p: p5) => {
+    p.background(2, 7, 19);
+    time += 0.015;
+
+    const w = p.width;
+    const h = p.height;
+
+    p.noStroke();
+    p.fill(200);
+    p.textAlign(p.CENTER, p.TOP);
+    p.textSize(14);
+    p.text("Sensibilidade Espectral dos Cones (S, M, L)", w / 2, 8);
+
+    const graphX = 70;
+    const graphY = 45;
+    const graphW = w - 140;
+    const graphH = h - 120;
+
+    // Graph background
+    p.fill(10, 15, 30);
+    p.rect(graphX, graphY, graphW, graphH, 6);
+
+    // Visible spectrum bar at bottom of graph
+    const specY = graphY + graphH + 2;
+    const specH = 14;
+    for (let i = 0; i < graphW; i++) {
+      const nm = 380 + (i / graphW) * (700 - 380);
+      const col = wavelengthToRGB(nm);
+      p.stroke(col[0], col[1], col[2]);
+      p.line(graphX + i, specY, graphX + i, specY + specH);
+    }
+    p.noStroke();
+
+    // Wavelength labels
+    p.fill(150);
+    p.textSize(8);
+    p.textAlign(p.CENTER, p.TOP);
+    const nmLabels = [400, 450, 500, 550, 600, 650, 700];
+    nmLabels.forEach((nm) => {
+      const x = graphX + ((nm - 380) / (700 - 380)) * graphW;
+      p.text(`${nm}`, x, specY + specH + 3);
+    });
+    p.text("Comprimento de onda (nm)", graphX + graphW / 2, specY + specH + 16);
+
+    // Y axis label
+    p.push();
+    p.translate(graphX - 18, graphY + graphH / 2);
+    p.rotate(-p.HALF_PI);
+    p.textAlign(p.CENTER, p.CENTER);
+    p.textSize(9);
+    p.text("Sensibilidade relativa", 0, 0);
+    p.pop();
+
+    // S, M, L cone curves (Gaussian approximations)
+    const cones: {
+      label: string;
+      peak: number;
+      sigma: number;
+      color: [number, number, number];
+    }[] = [
+      { label: "Cone S", peak: 420, sigma: 25, color: [80, 120, 255] },
+      { label: "Cone M", peak: 534, sigma: 40, color: [80, 220, 120] },
+      { label: "Cone L", peak: 564, sigma: 45, color: [255, 80, 80] },
+    ];
+
+    // Draw curves
+    cones.forEach((cone, idx) => {
+      // Filled area
+      p.fill(cone.color[0], cone.color[1], cone.color[2], 25);
+      p.beginShape();
+      p.vertex(graphX, graphY + graphH);
+      for (let nm = 380; nm <= 700; nm += 2) {
+        const x = graphX + ((nm - 380) / (700 - 380)) * graphW;
+        const sens = Math.exp(-0.5 * ((nm - cone.peak) / cone.sigma) ** 2);
+        const y = graphY + graphH - sens * (graphH - 10);
+        p.vertex(x, y);
+      }
+      p.vertex(graphX + graphW, graphY + graphH);
+      p.endShape(p.CLOSE);
+
+      // Curve line
+      p.noFill();
+      p.stroke(cone.color[0], cone.color[1], cone.color[2]);
+      p.strokeWeight(2);
+      p.beginShape();
+      for (let nm = 380; nm <= 700; nm += 2) {
+        const x = graphX + ((nm - 380) / (700 - 380)) * graphW;
+        const sens = Math.exp(-0.5 * ((nm - cone.peak) / cone.sigma) ** 2);
+        const y = graphY + graphH - sens * (graphH - 10);
+        p.vertex(x, y);
+      }
+      p.endShape();
+      p.noStroke();
+
+      // Peak label
+      const peakX = graphX + ((cone.peak - 380) / (700 - 380)) * graphW;
+      p.fill(cone.color[0], cone.color[1], cone.color[2]);
+      p.textSize(9);
+      p.textAlign(p.CENTER, p.TOP);
+      p.text(`${cone.label} (${cone.peak} nm)`, peakX, graphY + 10 + idx * 13);
+    });
+
+    // Animated wavelength marker
+    const markerNm = 380 + ((Math.sin(time * 0.8) + 1) / 2) * (700 - 380);
+    const markerX = graphX + ((markerNm - 380) / (700 - 380)) * graphW;
+
+    p.stroke(200, 200, 200, 80);
+    p.strokeWeight(1);
+    (p.drawingContext as CanvasRenderingContext2D).setLineDash([3, 3]);
+    p.line(markerX, graphY, markerX, graphY + graphH);
+    (p.drawingContext as CanvasRenderingContext2D).setLineDash([]);
+    p.noStroke();
+
+    // Marker triangle
+    const mCol = wavelengthToRGB(markerNm);
+    p.fill(mCol[0], mCol[1], mCol[2]);
+    p.triangle(markerX - 5, graphY + graphH + 1, markerX + 5, graphY + graphH + 1, markerX, graphY + graphH - 5);
+
+    // Cone responses at marker wavelength
+    const responses = cones.map((c) => Math.exp(-0.5 * ((markerNm - c.peak) / c.sigma) ** 2));
+    const respY = h - 22;
+    p.fill(200);
+    p.textSize(9);
+    p.textAlign(p.CENTER, p.CENTER);
+    p.text(`λ = ${markerNm.toFixed(0)} nm →`, graphX + 40, respY);
+
+    cones.forEach((c, i) => {
+      const rx = graphX + 110 + i * 100;
+      p.fill(c.color[0], c.color[1], c.color[2]);
+      p.text(`${c.label}: ${(responses[i] * 100).toFixed(0)}%`, rx, respY);
+    });
+  };
+
+  return <P5Sketch setup={setup} draw={draw} height={380} />;
+}
+
+// Helper: convert wavelength (nm) to approximate RGB
+function wavelengthToRGB(nm: number): [number, number, number] {
+  let r = 0, g = 0, b = 0;
+  if (nm >= 380 && nm < 440) { r = -(nm - 440) / (440 - 380); b = 1; }
+  else if (nm >= 440 && nm < 490) { g = (nm - 440) / (490 - 440); b = 1; }
+  else if (nm >= 490 && nm < 510) { g = 1; b = -(nm - 510) / (510 - 490); }
+  else if (nm >= 510 && nm < 580) { r = (nm - 510) / (580 - 510); g = 1; }
+  else if (nm >= 580 && nm < 645) { r = 1; g = -(nm - 645) / (645 - 580); }
+  else if (nm >= 645 && nm <= 700) { r = 1; }
+  let factor: number;
+  if (nm >= 380 && nm < 420) factor = 0.3 + 0.7 * (nm - 380) / (420 - 380);
+  else if (nm >= 645 && nm <= 700) factor = 0.3 + 0.7 * (700 - nm) / (700 - 645);
+  else factor = 1;
+  return [Math.round(r * factor * 255), Math.round(g * factor * 255), Math.round(b * factor * 255)];
+}
+
+// Visualization 22: CCD sensor pipeline — photon → charge → voltage → binary
+export function CCDSensorPipeline() {
+  let time = 0;
+
+  const setup = (p: p5) => {
+    p.textFont("monospace");
+  };
+
+  const draw = (p: p5) => {
+    p.background(2, 7, 19);
+    time += 0.02;
+
+    const w = p.width;
+    const h = p.height;
+
+    p.noStroke();
+    p.fill(200);
+    p.textAlign(p.CENTER, p.TOP);
+    p.textSize(14);
+    p.text("Sensor CCD: De Luz a Bits", w / 2, 8);
+
+    const stageW = (w - 30) / 5;
+    const stageY = 40;
+    const stageH = h - 60;
+
+    const stages = [
+      { label: "Fótons", sub: "Luz incide", color: [255, 220, 80] as [number, number, number] },
+      { label: "Fotosite", sub: "Filtro Bayer", color: [100, 180, 255] as [number, number, number] },
+      { label: "Carga (e⁻)", sub: "Efeito fotoelétrico", color: [80, 220, 160] as [number, number, number] },
+      { label: "Tensão (V)", sub: "Amplificação", color: [255, 180, 80] as [number, number, number] },
+      { label: "Valor Digital", sub: "Conversão ADC", color: [255, 100, 120] as [number, number, number] },
+    ];
+
+    stages.forEach((st, idx) => {
+      const sx = 15 + idx * stageW;
+      const stCx = sx + stageW / 2;
+
+      // Card
+      p.fill(15, 22, 40);
+      p.rect(sx, stageY, stageW - 8, stageH, 8);
+      p.fill(st.color[0], st.color[1], st.color[2]);
+      p.rect(sx, stageY, stageW - 8, 5, 8, 8, 0, 0);
+
+      // Header
+      p.fill(st.color[0], st.color[1], st.color[2]);
+      p.textAlign(p.CENTER, p.TOP);
+      p.textSize(10);
+      p.text(st.label, stCx - 4, stageY + 12);
+      p.fill(130);
+      p.textSize(8);
+      p.text(st.sub, stCx - 4, stageY + 26);
+
+      const animY = stageY + 48;
+      const animH = stageH - 75;
+
+      if (idx === 0) {
+        // Photons falling
+        for (let i = 0; i < 8; i++) {
+          const px = sx + 10 + (i * 13 % (stageW - 25));
+          const py = animY + ((time * 60 + i * 30) % animH);
+          const col = wavelengthToRGB(420 + i * 40);
+          p.fill(col[0], col[1], col[2], 180);
+          p.noStroke();
+          p.circle(px, py, 5);
+        }
+      } else if (idx === 1) {
+        // Bayer grid
+        const gridSize = 6;
+        const cellSize = Math.min((stageW - 28) / gridSize, animH / gridSize);
+        const gridStartX = stCx - (gridSize * cellSize) / 2 - 4;
+        const gridStartY = animY + 5;
+        const bayer = ["R", "G", "G", "B"];
+        for (let row = 0; row < gridSize; row++) {
+          for (let col = 0; col < gridSize; col++) {
+            const bi = (row % 2) * 2 + (col % 2);
+            const type = bayer[bi];
+            const pulse = Math.sin(time * 3 + row * 0.5 + col * 0.3) * 20;
+            let cc: [number, number, number];
+            if (type === "R") cc = [180 + pulse, 40, 40];
+            else if (type === "G") cc = [40, 140 + pulse, 40];
+            else cc = [40, 40, 180 + pulse];
+            p.fill(cc[0], cc[1], cc[2]);
+            p.rect(gridStartX + col * cellSize, gridStartY + row * cellSize, cellSize - 1, cellSize - 1, 1);
+          }
+        }
+        p.fill(150);
+        p.textSize(7);
+        p.textAlign(p.CENTER, p.TOP);
+        p.text("Filtro de Bayer (RGGB)", stCx - 4, gridStartY + gridSize * cellSize + 4);
+      } else if (idx === 2) {
+        // Electron wells
+        const wellCount = 4;
+        const wellW = (stageW - 28) / wellCount;
+        const wellH = animH * 0.55;
+        const wellBaseY = animY + animH - 5;
+        for (let i = 0; i < wellCount; i++) {
+          const wx = sx + 10 + i * wellW;
+          p.fill(20, 30, 50);
+          p.rect(wx, wellBaseY - wellH, wellW - 3, wellH, 2);
+          const fill = (Math.sin(time * 1.5 + i * 1.3) + 1) / 2;
+          const fH = fill * (wellH - 4);
+          p.fill(80, 220, 160, 120);
+          p.rect(wx + 2, wellBaseY - fH - 2, wellW - 7, fH, 2);
+          const eCount = Math.floor(fill * 4);
+          for (let e = 0; e < eCount; e++) {
+            p.fill(150, 255, 200);
+            p.textSize(7);
+            p.textAlign(p.CENTER, p.CENTER);
+            p.text("e⁻", wx + wellW / 2 - 1, wellBaseY - 8 - e * (fH / (eCount + 1)));
+          }
+        }
+        p.fill(150);
+        p.textSize(7);
+        p.textAlign(p.CENTER, p.TOP);
+        p.text("Poços de potencial", stCx - 4, wellBaseY + 4);
+      } else if (idx === 3) {
+        // Analog waveform
+        p.stroke(255, 180, 80);
+        p.strokeWeight(2);
+        p.noFill();
+        p.beginShape();
+        for (let i = 0; i < stageW - 25; i += 2) {
+          const x = sx + 10 + i;
+          const t = (i / (stageW - 25)) * p.TWO_PI * 3;
+          const noiseVal = Math.sin(t + time * 3) * 0.6 + Math.sin(t * 2.3 + time * 1.7) * 0.4;
+          p.vertex(x, animY + animH / 2 - noiseVal * (animH / 2 - 10));
+        }
+        p.endShape();
+        p.noStroke();
+        p.fill(150);
+        p.textSize(8);
+        p.textAlign(p.CENTER, p.TOP);
+        p.text("Sinal analógico", stCx - 4, animY + animH + 4);
+      } else {
+        // Binary bits
+        const bits = 8;
+        const bitH = 15;
+        const bitW = (stageW - 28) / bits;
+        const rowCount = 6;
+        for (let row = 0; row < rowCount; row++) {
+          const rowY = animY + 5 + row * (bitH + 4);
+          const pVal = Math.floor(((Math.sin(time * 2 + row * 0.7) + 1) / 2) * 255);
+          const bin = pVal.toString(2).padStart(bits, "0");
+          for (let b = 0; b < bits; b++) {
+            const bx = sx + 10 + b * bitW;
+            const isOne = bin[b] === "1";
+            p.fill(isOne ? [255, 100, 120] : [30, 35, 50]);
+            p.rect(bx, rowY, bitW - 2, bitH, 2);
+            p.fill(isOne ? 255 : 60);
+            p.textSize(7);
+            p.textAlign(p.CENTER, p.CENTER);
+            p.text(bin[b], bx + bitW / 2, rowY + bitH / 2);
+          }
+          p.fill(255, 100, 120, 150);
+          p.textSize(6);
+          p.textAlign(p.LEFT, p.CENTER);
+          p.text(`=${pVal}`, sx + 10 + bits * bitW + 1, rowY + bitH / 2);
+        }
+        p.fill(150);
+        p.textSize(7);
+        p.textAlign(p.CENTER, p.TOP);
+        p.text("8-bit por canal", stCx - 4, animY + rowCount * (bitH + 4) + 6);
+      }
+
+      // Arrow to next stage
+      if (idx < stages.length - 1) {
+        const arrowX = sx + stageW - 8;
+        const arrowMidY = stageY + stageH / 2;
+        p.fill(st.color[0], st.color[1], st.color[2], 150);
+        p.triangle(arrowX + 5, arrowMidY, arrowX, arrowMidY - 5, arrowX, arrowMidY + 5);
+      }
+    });
+  };
+
+  return <P5Sketch setup={setup} draw={draw} height={380} />;
+}
+
+// Visualization 23: Eye vs Camera side-by-side comparison
+export function EyeVsCamera() {
+  let time = 0;
+
+  const setup = (p: p5) => {
+    p.textFont("monospace");
+  };
+
+  const draw = (p: p5) => {
+    p.background(2, 7, 19);
+    time += 0.02;
+
+    const w = p.width;
+    const h = p.height;
+
+    p.noStroke();
+    p.fill(200);
+    p.textAlign(p.CENTER, p.TOP);
+    p.textSize(14);
+    p.text("Olho Humano vs. Câmera Digital", w / 2, 8);
+
+    const halfW = w / 2 - 10;
+    const colY = 32;
+
+    // Divider
+    p.stroke(50);
+    p.strokeWeight(1);
+    p.line(w / 2, colY, w / 2, h - 10);
+    p.noStroke();
+
+    // ---- LEFT: Eye ----
+    const lx = halfW / 2 + 5;
+    p.fill(80, 220, 160);
+    p.textSize(12);
+    p.textAlign(p.CENTER, p.TOP);
+    p.text("Olho Humano", lx, colY);
+
+    // Mini eye
+    const eyeY = colY + 25;
+    p.fill(40, 50, 65);
+    p.ellipse(lx, eyeY + 30, 60, 50);
+    p.fill(60, 130, 90);
+    p.circle(lx - 20, eyeY + 30, 18);
+    const pupil = 6 + Math.sin(time * 2) * 2;
+    p.fill(5);
+    p.circle(lx - 20, eyeY + 30, pupil);
+    p.stroke(255, 180, 80);
+    p.strokeWeight(2);
+    p.noFill();
+    p.arc(lx + 3, eyeY + 30, 45, 40, -0.9, 0.9);
+    p.noStroke();
+
+    const specs = [
+      { label: "Sensor:", value: "Retina (bastonetes + cones)" },
+      { label: "Resolução:", value: "~576 megapixels (efetiva)" },
+      { label: "Faixa dinâmica:", value: "~20 stops" },
+      { label: "Sensibilidade:", value: "1 fóton (bastonetes)" },
+      { label: "Filtro de cor:", value: "3 tipos de cones (S, M, L)" },
+      { label: "Foco:", value: "Cristalino deformável (10 cm–∞)" },
+      { label: "Processamento:", value: "Retina + Cérebro (paralelo)" },
+    ];
+    specs.forEach((s, i) => {
+      const sy = eyeY + 70 + i * 20;
+      p.fill(80, 220, 160);
+      p.textSize(8);
+      p.textAlign(p.LEFT, p.TOP);
+      p.text(s.label, 15, sy);
+      p.fill(180);
+      p.text(s.value, 75, sy);
+    });
+
+    // ---- RIGHT: Camera ----
+    const rx = w / 2 + halfW / 2 + 5;
+    p.fill(100, 150, 255);
+    p.textSize(12);
+    p.textAlign(p.CENTER, p.TOP);
+    p.text("Câmera Digital (CCD)", rx, colY);
+
+    // Mini camera
+    const camY = colY + 25;
+    p.fill(50, 60, 80);
+    p.rect(rx - 35, camY + 10, 70, 45, 6);
+    p.fill(40, 50, 70);
+    p.circle(rx - 18, camY + 32, 28);
+    p.fill(60, 80, 120);
+    p.circle(rx - 18, camY + 32, 20);
+    p.fill(80, 100, 140);
+    p.circle(rx - 18, camY + 32, 12);
+    p.fill(100, 150, 255, 80);
+    p.rect(rx + 10, camY + 18, 18, 22, 2);
+
+    const camSpecs = [
+      { label: "Sensor:", value: "CCD / CMOS (fotodiodos Si)" },
+      { label: "Resolução:", value: "20–200 megapixels" },
+      { label: "Faixa dinâmica:", value: "~12–15 stops" },
+      { label: "Sensibilidade:", value: "~5–10 fótons/pixel" },
+      { label: "Filtro de cor:", value: "Bayer (RGGB) sobre pixels" },
+      { label: "Foco:", value: "Lentes móveis (motor AF)" },
+      { label: "Processamento:", value: "ISP + Software (sequencial)" },
+    ];
+    camSpecs.forEach((s, i) => {
+      const sy = camY + 70 + i * 20;
+      p.fill(100, 150, 255);
+      p.textSize(8);
+      p.textAlign(p.LEFT, p.TOP);
+      p.text(s.label, w / 2 + 15, sy);
+      p.fill(180);
+      p.text(s.value, w / 2 + 75, sy);
+    });
+
+    // Bottom verdict
+    p.fill(60);
+    p.rect(15, h - 32, w - 30, 26, 6);
+    p.fill(200);
+    p.textSize(9);
+    p.textAlign(p.CENTER, p.CENTER);
+    p.text("O olho supera em adaptação e faixa dinâmica  |  A câmera supera em ISO alto e reprodutibilidade", w / 2, h - 19);
+  };
+
+  return <P5Sketch setup={setup} draw={draw} height={360} />;
+}
+
+// Visualization 24: Color mixing — how S, M, L cones combine to perceive colors
+export function ConeColorMixing() {
+  let time = 0;
+
+  const setup = (p: p5) => {
+    p.textFont("monospace");
+  };
+
+  const draw = (p: p5) => {
+    p.background(2, 7, 19);
+    time += 0.015;
+
+    const w = p.width;
+    const h = p.height;
+
+    p.noStroke();
+    p.fill(200);
+    p.textAlign(p.CENTER, p.TOP);
+    p.textSize(14);
+    p.text("Percepção de Cores: Mistura de Sinais S, M, L", w / 2, 8);
+
+    // ---- LEFT: Three additive circles ----
+    const mixCx = w * 0.28;
+    const mixCy = h * 0.45;
+    const circR = 50;
+    const offset = 28;
+
+    p.blendMode(p.ADD);
+    const sAlpha = ((Math.sin(time * 1.2) + 1) / 2) * 180 + 40;
+    p.fill(0, 0, sAlpha);
+    p.circle(mixCx, mixCy - offset, circR * 2);
+    const mAlpha = ((Math.sin(time * 1.2 + 2) + 1) / 2) * 180 + 40;
+    p.fill(0, mAlpha, 0);
+    p.circle(mixCx - offset, mixCy + offset * 0.6, circR * 2);
+    const lAlpha = ((Math.sin(time * 1.2 + 4) + 1) / 2) * 180 + 40;
+    p.fill(lAlpha, 0, 0);
+    p.circle(mixCx + offset, mixCy + offset * 0.6, circR * 2);
+    p.blendMode(p.BLEND);
+
+    // Labels
+    p.fill(200);
+    p.textSize(9);
+    p.textAlign(p.CENTER, p.CENTER);
+    p.text("S", mixCx, mixCy - offset - circR + 12);
+    p.text("M", mixCx - offset - circR + 18, mixCy + offset * 0.6);
+    p.text("L", mixCx + offset + circR - 18, mixCy + offset * 0.6);
+    p.textSize(7);
+    p.text("Ciano", mixCx - 16, mixCy - 8);
+    p.text("Magenta", mixCx + 16, mixCy - 8);
+    p.text("Amarelo", mixCx, mixCy + 20);
+    p.text("Branco", mixCx, mixCy + 5);
+
+    // ---- RIGHT: Perceived color ----
+    const panelX = w * 0.55;
+    const panelW = w * 0.42;
+
+    p.fill(200);
+    p.textSize(11);
+    p.textAlign(p.CENTER, p.TOP);
+    p.text("Cor percebida pelo cérebro", panelX + panelW / 2, 34);
+
+    const rVal = Math.round(lAlpha / 220 * 255);
+    const gVal = Math.round(mAlpha / 220 * 255);
+    const bVal = Math.round(sAlpha / 220 * 255);
+    const swatchY = 55;
+    const swatchSize = 70;
+    p.fill(rVal, gVal, bVal);
+    p.rect(panelX + panelW / 2 - swatchSize / 2, swatchY, swatchSize, swatchSize, 10);
+    p.noFill();
+    p.stroke(80);
+    p.strokeWeight(1);
+    p.rect(panelX + panelW / 2 - swatchSize / 2, swatchY, swatchSize, swatchSize, 10);
+    p.noStroke();
+
+    // RGB values
+    p.textSize(10);
+    p.textAlign(p.CENTER, p.TOP);
+    p.fill(255, 80, 80);
+    p.text(`R: ${rVal}`, panelX + panelW * 0.2, swatchY + swatchSize + 10);
+    p.fill(80, 220, 120);
+    p.text(`G: ${gVal}`, panelX + panelW * 0.5, swatchY + swatchSize + 10);
+    p.fill(80, 120, 255);
+    p.text(`B: ${bVal}`, panelX + panelW * 0.8, swatchY + swatchSize + 10);
+
+    // Slider bars
+    const barY = swatchY + swatchSize + 30;
+    const barW = panelW - 20;
+    const barH = 10;
+
+    // L → red
+    p.fill(40, 20, 20);
+    p.rect(panelX + 10, barY, barW, barH, 4);
+    p.fill(255, 80, 80);
+    p.rect(panelX + 10, barY, barW * (rVal / 255), barH, 4);
+    p.fill(200);
+    p.textSize(8);
+    p.textAlign(p.LEFT, p.CENTER);
+    p.text("Cone L →", panelX + 10, barY + barH + 8);
+
+    // M → green
+    const gBarY = barY + 28;
+    p.fill(20, 40, 20);
+    p.rect(panelX + 10, gBarY, barW, barH, 4);
+    p.fill(80, 220, 120);
+    p.rect(panelX + 10, gBarY, barW * (gVal / 255), barH, 4);
+    p.fill(200);
+    p.text("Cone M →", panelX + 10, gBarY + barH + 8);
+
+    // S → blue
+    const bBarY = gBarY + 28;
+    p.fill(20, 20, 40);
+    p.rect(panelX + 10, bBarY, barW, barH, 4);
+    p.fill(80, 120, 255);
+    p.rect(panelX + 10, bBarY, barW * (bVal / 255), barH, 4);
+    p.fill(200);
+    p.text("Cone S →", panelX + 10, bBarY + barH + 8);
+
+    // Bottom note
+    p.fill(140);
+    p.textSize(9);
+    p.textAlign(p.CENTER, p.BOTTOM);
+    p.text("Toda cor percebida = combinação de respostas dos 3 tipos de cones (visão tricromática)", w / 2, h - 5);
+  };
+
+  return <P5Sketch setup={setup} draw={draw} height={350} />;
+}

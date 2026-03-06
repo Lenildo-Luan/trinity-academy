@@ -31,6 +31,13 @@
         "description": "Analogia entre o corpo humano e sistemas eletromecânicos: ossos piezoelétricos, músculos como atuadores, mãos como matrizes de sensores e o rosto como central sensorial.",
         "video": null,
         "quizId": null
+      },
+      {
+        "id": "charpter-5",
+        "title": "O Olho Humano e as Câmeras Digitais",
+        "description": "Estudo do olho humano como sensor óptico biológico, com foco na retina, fotorreceptores e cones S, M, L. Comparação com câmeras digitais e o sensor CCD.",
+        "video": null,
+        "quizId": null
       }
     ]
   }
