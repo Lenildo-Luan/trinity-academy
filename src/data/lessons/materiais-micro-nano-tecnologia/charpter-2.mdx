@@ -1,0 +1,225 @@
+# Tipos de Sensores e Atuadores
+
+No capítulo anterior, aprendemos os conceitos fundamentais de sensores e atuadores e como eles trabalham juntos em sistemas de controle. Agora, vamos ampliar essa visão com um **panorama geral das categorias existentes**, entendendo como os sensores são classificados pela grandeza que medem e quais são os principais tipos de atuadores encontrados na indústria e na engenharia moderna.
+
+## Classificação de Sensores por Grandeza Medida
+
+A forma mais prática de classificar sensores é pela **grandeza física** que eles são capazes de medir. Cada categoria utiliza princípios físicos diferentes e atende a aplicações específicas. A visualização abaixo apresenta as sete categorias principais:
+
+<SensorCategoryOverview />
+
+Vamos explorar cada uma dessas categorias em detalhe.
+
+### Sensores de Posição
+
+Sensores de posição determinam a **localização** ou o **deslocamento** de um objeto em relação a um ponto de referência. São fundamentais em sistemas de automação, robótica e CNC (Controle Numérico Computadorizado).
+
+<MarkdownTable
+  headers={["Tipo de Sensor", "Princípio de Funcionamento", "Aplicações Típicas"]}
+  rows={[
+    ["**Potenciômetro**", "Variação de resistência proporcional ao deslocamento mecânico", "Controle de volume, joysticks, ajuste de posição"],
+    ["**Encoder óptico**", "Disco com fendas interrompe feixe de luz; pulsos contam posição", "Motores, robótica, impressoras"],
+    ["**LVDT**", "Transformador diferencial linear: variação de indutância com deslocamento", "Medição de alta precisão em máquinas-ferramenta"],
+    ["**Sensor ultrassônico**", "Mede tempo de retorno de onda sonora refletida pelo alvo", "Medição de nível, estacionamento de veículos"],
+  ]}
+/>
+
+### Sensores de Velocidade
+
+Sensores de velocidade medem a **taxa de variação da posição** de um objeto ao longo do tempo, seja velocidade linear ou angular (rotação).
+
+A visualização interativa abaixo demonstra a relação entre posição e velocidade — mova o mouse horizontalmente para controlar o objeto e observe como os dois gráficos se comportam:
+
+<PositionVelocitySensor />
+
+<MarkdownTable
+  headers={["Tipo de Sensor", "Princípio de Funcionamento", "Aplicações Típicas"]}
+  rows={[
+    ["**Tacômetro**", "Gera tensão proporcional à velocidade de rotação de um eixo", "Medição de RPM em motores"],
+    ["**Sensor de efeito Hall**", "Detecta variação de campo magnético causada por rotação de ímãs", "Velocidade de rodas (ABS automotivo), ventiladores"],
+    ["**Encoder incremental**", "Conta pulsos por revolução para calcular velocidade angular", "Servomotores, robótica industrial"],
+    ["**Radar Doppler**", "Mede variação de frequência de onda refletida por objeto em movimento", "Radares de velocidade, controle de tráfego"],
+  ]}
+/>
+
+### Sensores de Presença
+
+Sensores de presença detectam a **existência de um objeto** dentro de uma zona de detecção, sem necessidade de contato físico. A visualização abaixo compara três tecnologias com alcances diferentes:
+
+<PresenceSensorDemo />
+
+<MarkdownTable
+  headers={["Tipo de Sensor", "Princípio de Funcionamento", "Materiais Detectados", "Alcance Típico"]}
+  rows={[
+    ["**Indutivo**", "Variação de campo eletromagnético na presença de metal", "Apenas metais", "1–30 mm"],
+    ["**Capacitivo**", "Variação de capacitância quando um objeto altera o campo elétrico", "Metais, plásticos, líquidos, pós", "1–25 mm"],
+    ["**Óptico (fotocélula)**", "Interrupção ou reflexão de feixe de luz", "Qualquer material opaco", "0,1–100 m"],
+    ["**Ultrassônico**", "Reflexão de ondas sonoras de alta frequência", "Qualquer material sólido ou líquido", "0,02–8 m"],
+    ["**Magnético (Reed)**", "Contato acionado por campo magnético de ímã", "Ímãs permanentes", "5–50 mm"],
+  ]}
+/>
+
+### Sensores de Carga (Força e Peso)
+
+Sensores de carga medem a **força** ou **peso** aplicado sobre uma estrutura. São essenciais em balanças industriais, ensaios de materiais e monitoramento estrutural.
+
+<MarkdownTable
+  headers={["Tipo de Sensor", "Princípio de Funcionamento", "Aplicações Típicas"]}
+  rows={[
+    ["**Célula de carga (strain gauge)**", "Deformação mecânica causa variação de resistência elétrica proporcional à força", "Balanças, silos, ensaios de tração"],
+    ["**Sensor piezoelétrico**", "Cristal gera carga elétrica quando submetido a força mecânica", "Medição de forças dinâmicas, impacto"],
+    ["**Sensor capacitivo de força**", "Força aplicada altera distância entre placas de um capacitor", "Telas touchscreen, dispositivos hápticos"],
+  ]}
+/>
+
+### Sensores de Pressão e Vazão
+
+Sensores de pressão medem a **força por unidade de área** exercida por fluidos (gases ou líquidos), enquanto sensores de vazão medem o **volume de fluido** que passa por um ponto por unidade de tempo. A visualização abaixo simula ambos lado a lado:
+
+<PressureFlowDemo />
+
+<MarkdownTable
+  headers={["Tipo de Sensor", "Grandeza", "Princípio de Funcionamento", "Aplicações"]}
+  rows={[
+    ["**Piezoelétrico**", "Pressão", "Cristal gera sinal proporcional à pressão aplicada", "Hidráulica, pneumática, meteorologia"],
+    ["**Capacitivo (diafragma)**", "Pressão", "Diafragma deforma-se e altera capacitância", "Pressão arterial, altímetros"],
+    ["**Piezoresistivo (MEMS)**", "Pressão", "Membrana de silício com strain gauges integrados", "Pressão de pneus (TPMS), smartphones"],
+    ["**Turbina**", "Vazão", "Fluxo gira uma turbina; frequência indica vazão", "Medição de vazão industrial"],
+    ["**Eletromagnético**", "Vazão", "Fluido condutor gera tensão ao passar por campo magnético", "Estações de tratamento de água"],
+    ["**Vortex**", "Vazão", "Obstáculo gera vórtices cuja frequência é proporcional à vazão", "Processos químicos, vapor"],
+  ]}
+/>
+
+### Sensores de Temperatura
+
+Sensores de temperatura são os mais utilizados na indústria. Cada tipo opera em uma **faixa de temperatura** e oferece diferentes níveis de precisão.
+
+<MarkdownTable
+  headers={["Tipo de Sensor", "Faixa Típica", "Princípio de Funcionamento", "Vantagens"]}
+  rows={[
+    ["**Termopar**", "-200°C a +2300°C", "Dois metais diferentes geram tensão proporcional à diferença de temperatura (efeito Seebeck)", "Ampla faixa, robusto, barato"],
+    ["**RTD (Pt100)**", "-200°C a +850°C", "Resistência de platina varia linearmente com a temperatura", "Alta precisão e estabilidade"],
+    ["**Termistor NTC**", "-50°C a +300°C", "Resistência diminui exponencialmente com aumento de temperatura", "Alta sensibilidade, baixo custo"],
+    ["**Infravermelho**", "-50°C a +3000°C", "Detecta radiação térmica emitida pelo objeto (sem contato)", "Medição sem contato, objetos em movimento"],
+    ["**Semicondutor (IC)**", "-40°C a +150°C", "Junção PN com tensão proporcional à temperatura", "Saída digital, fácil integração"],
+  ]}
+/>
+
+## Categorias de Atuadores
+
+Se os sensores são os "sentidos" de um sistema automatizado, os atuadores são seus "membros". Vamos agora explorar as principais categorias de atuadores utilizados em engenharia. A visualização abaixo mostra seis tipos fundamentais em funcionamento:
+
+<ActuatorCategoryOverview />
+
+### Válvulas Pneumáticas
+
+Válvulas pneumáticas controlam o **fluxo de ar comprimido** em sistemas pneumáticos. São amplamente utilizadas na automação industrial por sua velocidade de resposta e simplicidade.
+
+- **Válvulas direcionais** — Controlam a direção do fluxo (2/2, 3/2, 5/2 vias).
+- **Válvulas proporcionais** — Permitem controle contínuo da vazão e pressão.
+- **Válvulas de alívio** — Protegem o sistema contra sobrepressão.
+
+**Características:** Resposta rápida (milissegundos), forças moderadas, limpeza (não contaminam o ambiente).
+
+### Válvulas Hidráulicas
+
+Válvulas hidráulicas controlam o **fluxo de fluido pressurizado** (geralmente óleo) em circuitos hidráulicos. Permitem forças muito maiores que as pneumáticas.
+
+- **Válvulas de controle direcional** — Direcionam o fluxo de óleo para cilindros e motores.
+- **Válvulas de controle de pressão** — Regulam a pressão máxima do sistema.
+- **Válvulas de controle de vazão** — Ajustam a velocidade de atuadores hidráulicos.
+
+**Características:** Altíssimas forças (toneladas), controle preciso, usadas em prensas, escavadeiras e máquinas pesadas.
+
+### Relés
+
+Relés são **interruptores eletromecânicos** que usam um pequeno sinal elétrico para controlar circuitos de maior potência. São a ponte entre sinais de controle de baixa tensão e cargas de alta potência.
+
+<MarkdownTable
+  headers={["Tipo de Relé", "Princípio", "Vantagens", "Aplicações"]}
+  rows={[
+    ["**Eletromecânico**", "Bobina eletromagnética aciona contato mecânico", "Isolamento galvânico, suporta altas correntes", "Automação industrial, quadros elétricos"],
+    ["**Estado sólido (SSR)**", "Semicondutores (triacs/MOSFETs) chaveiam sem partes móveis", "Sem desgaste mecânico, chaveamento rápido, silencioso", "Controle de aquecedores, iluminação"],
+    ["**Reed**", "Contato metálico acionado por campo magnético", "Compacto, longa vida útil", "Sensores de porta/janela, alarmes"],
+  ]}
+/>
+
+### Cilindros (Pneumáticos e Hidráulicos)
+
+Cilindros convertem **energia de fluido pressurizado em movimento linear**. São os atuadores lineares mais comuns na indústria.
+
+<MarkdownTable
+  headers={["Tipo", "Fluido", "Força Típica", "Velocidade", "Aplicações"]}
+  rows={[
+    ["**Cilindro pneumático simples ação**", "Ar comprimido", "Até 5 kN", "Até 2 m/s", "Fixação, ejeção de peças"],
+    ["**Cilindro pneumático dupla ação**", "Ar comprimido", "Até 30 kN", "Até 2 m/s", "Alimentação de máquinas, robótica"],
+    ["**Cilindro hidráulico**", "Óleo", "Até 1000+ kN", "Até 0,5 m/s", "Prensas, máquinas pesadas, guindastes"],
+    ["**Cilindro elétrico (fuso)**", "N/A (motor elétrico)", "Até 100 kN", "Variável", "Posicionamento de precisão"],
+  ]}
+/>
+
+### Motores Elétricos
+
+Motores elétricos convertem **energia elétrica em movimento rotativo**. São os atuadores mais versáteis e amplamente utilizados.
+
+<MarkdownTable
+  headers={["Tipo de Motor", "Características", "Controle", "Aplicações"]}
+  rows={[
+    ["**Motor DC (corrente contínua)**", "Torque proporcional à corrente, velocidade proporcional à tensão", "Simples: PWM", "Brinquedos, veículos elétricos, robótica"],
+    ["**Motor AC (corrente alternada)**", "Alta potência, longa durabilidade", "Inversor de frequência (VFD)", "Bombas, ventiladores, esteiras"],
+    ["**Servomotor**", "Motor DC/AC + encoder + controlador em malha fechada", "Posição, velocidade e torque", "Robótica, CNC, automação de precisão"],
+    ["**Motor de passo**", "Rotação em incrementos discretos (passos de 1,8° ou 0,9°)", "Malha aberta: pulsos", "Impressoras 3D, scanners, posicionadores"],
+  ]}
+/>
+
+### Músculos Artificiais
+
+Músculos artificiais representam uma **fronteira emergente** na engenharia de atuadores, inspirados pela biologia. São especialmente relevantes para robótica macia (*soft robotics*) e próteses.
+
+<MarkdownTable
+  headers={["Tecnologia", "Princípio", "Vantagens", "Estado Atual"]}
+  rows={[
+    ["**Ligas com memória de forma (SMA)**", "Liga metálica (Ni-Ti) muda de forma quando aquecida e retorna ao resfriar", "Compacto, silencioso, alta relação força/peso", "Uso comercial em próteses e aeroespacial"],
+    ["**Polímeros eletroativos (EAP)**", "Polímero se deforma quando submetido a campo elétrico", "Flexível, leve, resposta rápida", "Pesquisa avançada, robótica macia"],
+    ["**Atuadores pneumáticos macios**", "Câmaras de ar em estruturas flexíveis de silicone inflam controladamente", "Seguro para interação humana, leve", "Soft robotics, reabilitação"],
+    ["**Fibras de nylon torcidas**", "Fio de nylon torcido contrai ao ser aquecido", "Extremamente barato, leve", "Pesquisa acadêmica"],
+  ]}
+/>
+
+## Comparação Geral: Sensores × Atuadores
+
+Para consolidar o que aprendemos, a tabela abaixo resume as principais diferenças funcionais entre sensores e atuadores:
+
+<MarkdownTable
+  headers={["Aspecto", "Sensores", "Atuadores"]}
+  rows={[
+    ["**Função**", "Medir grandezas físicas do ambiente", "Executar ações físicas sobre o ambiente"],
+    ["**Direção do fluxo**", "Ambiente → Sistema (entrada de dados)", "Sistema → Ambiente (saída de ação)"],
+    ["**Classificação principal**", "Por grandeza medida (posição, temperatura, pressão...)", "Por tipo de energia (elétrico, pneumático, hidráulico...)"],
+    ["**Exemplos**", "Termopar, encoder, célula de carga, fotocélula", "Motor, cilindro, válvula, relé, músculo artificial"],
+    ["**Critérios de escolha**", "Sensibilidade, faixa, resolução, precisão", "Força, velocidade, precisão de posicionamento"],
+  ]}
+/>
+
+## Resumo da Aula
+
+Neste capítulo, exploramos o panorama completo das categorias de sensores e atuadores:
+
+**Sensores — classificados por grandeza medida:**
+- **Posição** — Encoders, potenciômetros, LVDTs
+- **Velocidade** — Tacômetros, sensores Hall, encoders incrementais
+- **Presença** — Indutivos, capacitivos, ópticos, ultrassônicos
+- **Carga** — Células de carga, sensores piezoelétricos
+- **Pressão** — Piezoresistivos, capacitivos, MEMS
+- **Temperatura** — Termopares, RTDs, termistores, infravermelhos
+- **Vazão** — Turbinas, eletromagnéticos, vortex
+
+**Atuadores — classificados por tipo:**
+- **Válvulas pneumáticas e hidráulicas** — Controle de fluxo de fluidos
+- **Relés** — Chaveamento eletromecânico e de estado sólido
+- **Cilindros** — Movimento linear por fluido pressurizado
+- **Motores elétricos** — DC, AC, servomotores, motores de passo
+- **Músculos artificiais** — SMAs, polímeros eletroativos, atuadores macios
+
+No próximo capítulo, vamos nos aprofundar nos **princípios físicos** por trás do funcionamento desses dispositivos, explorando os materiais e fenômenos que tornam a transdução possível.
+

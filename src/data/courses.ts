@@ -43,5 +43,14 @@ export const courses: Course[] = [
       "https://ik.imagekit.io/qfmgarse7/thomas-t-OPpCbAAKWv8-unsplash.avif",
     available: false,
   },
+  {
+    id: "materiais-micro-nano-tecnologia",
+    title: "Materiais para Micro e Nano Tecnologia",
+    description:
+      "Explore o fascinante mundo dos materiais para micro e nano tecnologia, compreendendo sensores, atuadores e os princípios fundamentais que impulsionam a engenharia moderna em escala micro e nanométrica.",
+    backgroundImage:
+      "https://ik.imagekit.io/qfmgarse7/thomas-t-OPpCbAAKWv8-unsplash.avif",
+    available: true,
+  },
 ];
 

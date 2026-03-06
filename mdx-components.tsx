@@ -5,6 +5,7 @@ import React, { ReactNode } from "react";
 import { createHighlighter, Highlighter } from "shiki";
 import theme from "./src/app/syntax-theme.json";
 import { P5Sketch } from "./src/components/p5-sketch";
+import { MarkdownTable } from "./src/components/MarkdownTable";
 import {
   BouncingBall,
   FollowMouse,
@@ -23,6 +24,22 @@ import {
   GitTimeline,
   SnapshotVsDiff,
 } from "./src/components/git-p5-examples";
+import {
+  SensorTypes,
+  ActuatorTypes,
+  ControlLoop,
+  MEMSScale,
+  SensorCharacteristics,
+  SensorCategoryOverview,
+  ActuatorCategoryOverview,
+  PositionVelocitySensor,
+  PresenceSensorDemo,
+  PressureFlowDemo,
+  BiosensorArchitecture,
+  GlucoseBiosensor,
+  BiosensorTransducers,
+  GlucoseCalibrationCurve,
+} from "./src/components/sensors-actuators-p5-examples";
 
 function getTextContent(node: ReactNode): string {
   if (typeof node === "string") return node;
@@ -154,6 +171,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       return <CodeBlock code={code} lang={lang} />;
     },
     P5Sketch,
+    MarkdownTable,
     BouncingBall,
     FollowMouse,
     SineWave,
@@ -166,6 +184,20 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     FileChaosSim,
     GitTimeline,
     SnapshotVsDiff,
+    SensorTypes,
+    ActuatorTypes,
+    ControlLoop,
+    MEMSScale,
+    SensorCharacteristics,
+    SensorCategoryOverview,
+    ActuatorCategoryOverview,
+    PositionVelocitySensor,
+    PresenceSensorDemo,
+    PressureFlowDemo,
+    BiosensorArchitecture,
+    GlucoseBiosensor,
+    BiosensorTransducers,
+    GlucoseCalibrationCurve,
     ...components,
   };
 }

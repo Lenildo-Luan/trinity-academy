@@ -1,0 +1,31 @@
+[
+  {
+    "id": "sensores-e-atuadores",
+    "title": "Sensores e Atuadores",
+    "description": "Compreenda os conceitos fundamentais de sensores e atuadores, dispositivos essenciais para a interação entre sistemas eletrônicos e o mundo físico.",
+    "lessons": [
+      {
+        "id": "charpter-1",
+        "title": "Introdução a Sensores e Atuadores",
+        "description": "Apresentação dos conceitos fundamentais de sensores e atuadores, entendendo como esses dispositivos permitem a medição de grandezas físicas e o controle de sistemas.",
+        "video": null,
+        "quizId": null
+      },
+      {
+        "id": "charpter-2",
+        "title": "Tipos de Sensores e Atuadores",
+        "description": "Panorama geral das categorias de sensores classificados por grandeza medida e dos principais tipos de atuadores utilizados em sistemas de controle.",
+        "video": null,
+        "quizId": null
+      },
+      {
+        "id": "charpter-3",
+        "title": "Biossensores",
+        "description": "Introdução aos sensores biológicos: como um biossensor combina componentes biológicos com transdutores físico-químicos, com foco no biossensor de glicose.",
+        "video": null,
+        "quizId": null
+      }
+    ]
+  }
+]
+

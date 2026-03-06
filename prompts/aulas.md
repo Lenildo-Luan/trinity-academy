@@ -1,7 +1,11 @@
-Este é a primeira aula do curso de fundamentos do vue.js. Nessa aula vue js será apresentado para o estudante. Ela deve cobrir ao menos os seguintes tópicos: o que é vue.js, qual o problema que o vue.js resolve, quando usar vue.js e a história do vue.js.
-Lembre que este curso é voltado para alguém com conhecimento intermediário em desenvolvimento web e que não conhece frameworks como vue.js.
-Caso necessário, use p5.js para ilustrar visualmente os conceitos apresentados.
+Crie um curso de: materiais para micro e nano tecnologia. Voltado para estudantes do primeiro semestre de cursos de engenharia.
+O primeiro módulo será: Sensores e Atuadores.
+O primeiro capítulo do modo será: Introdução a Sensores e Atuadores.
+O conteúdo deve se basear no seguinte resumo: Apresentação dos conceitos fundamentais de sensores e atuadores. Sensores são dispositivos sensíveis a formas de energia ambiental (luminosa, térmica, cinética) que mensuram grandezas físicas como temperatura, pressão e velocidade. Atuadores são dispositivos que recebem sinais de um controlador e modificam uma variável controlada em um sistema.
+Use use p5.js para ilustrar visualmente os conceitos apresentados.
+Use o componente MarkdownTable.tsx para criar tabelas.
 
-agora, em (sidenar), crie as telas para o novo curso de fundamentos de vuejs
-
-agora, assim como nos capítulos do curso de introdução a programação, faça um quiz de 10 questões para o capítulo 1 do curso de fundamentos do vue.js
+O segundo capítulo do modo será: O Corpo Humano como Sistema de Sensores e Atuadores.
+O conteúdo deve se basear no seguinte resumo: Introdução aos sensores biológicos. Um biossensor combina um componente biológico (tecidos, enzimas, anticorpos, ácidos nucleicos) com um detector físico-químico. O exemplo central é o biossensor de glicose, que utiliza a enzima glicose oxidase para medir a concentração de glicose no sangue por meio de uma corrente elétrica gerada no eletrodo transdutor.
+Use use p5.js para ilustrar visualmente os conceitos apresentados.
+Use o componente MarkdownTable.tsx para criar tabelas.
