@@ -6,6 +6,10 @@ export type Course = {
   available: boolean;
 };
 
+export function getCourse(id: string): Course | undefined {
+  return courses.find((course) => course.id === id);
+}
+
 export const courses: Course[] = [
   {
     id: "introducao-a-programacao",
