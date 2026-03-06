@@ -39,6 +39,11 @@ import {
   GlucoseBiosensor,
   BiosensorTransducers,
   GlucoseCalibrationCurve,
+  HumanBodyOverview,
+  BonePiezoelectric,
+  MuscleActuator,
+  HandSensors,
+  FaceSenses,
 } from "./src/components/sensors-actuators-p5-examples";
 
 function getTextContent(node: ReactNode): string {
@@ -198,6 +203,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     GlucoseBiosensor,
     BiosensorTransducers,
     GlucoseCalibrationCurve,
+    HumanBodyOverview,
+    BonePiezoelectric,
+    MuscleActuator,
+    HandSensors,
+    FaceSenses,
     ...components,
   };
 }

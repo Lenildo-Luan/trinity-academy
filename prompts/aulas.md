@@ -6,6 +6,6 @@ Use use p5.js para ilustrar visualmente os conceitos apresentados.
 Use o componente MarkdownTable.tsx para criar tabelas.
 
 O segundo capítulo do modo será: O Corpo Humano como Sistema de Sensores e Atuadores.
-O conteúdo deve se basear no seguinte resumo: Introdução aos sensores biológicos. Um biossensor combina um componente biológico (tecidos, enzimas, anticorpos, ácidos nucleicos) com um detector físico-químico. O exemplo central é o biossensor de glicose, que utiliza a enzima glicose oxidase para medir a concentração de glicose no sangue por meio de uma corrente elétrica gerada no eletrodo transdutor.
+O conteúdo deve se basear no seguinte resumo: Analogia entre o corpo humano e sistemas eletromecânicos. Estruturas como ossos (comportamento piezoelétrico), músculos (atuadores biológicos), sistema circulatório, mãos (sensores de pressão, temperatura e umidade) e rosto (paladar, visão) são analisadas como referências para o desenvolvimento de sensores e atuadores artificiais.
 Use use p5.js para ilustrar visualmente os conceitos apresentados.
 Use o componente MarkdownTable.tsx para criar tabelas.

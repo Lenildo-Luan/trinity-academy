@@ -2411,3 +2411,879 @@ export function GlucoseCalibrationCurve() {
   return <P5Sketch setup={setup} draw={draw} height={380} />;
 }
 
+// ===== CHAPTER 4 — HUMAN BODY AS SENSORS & ACTUATORS =====
+
+// Visualization 15: Human body overview — mapping biological structures to engineering equivalents
+export function HumanBodyOverview() {
+  let time = 0;
+
+  const setup = (p: p5) => {
+    p.textFont("monospace");
+  };
+
+  const draw = (p: p5) => {
+    p.background(2, 7, 19);
+    time += 0.02;
+
+    const w = p.width;
+    const h = p.height;
+
+    p.noStroke();
+    p.fill(200);
+    p.textAlign(p.CENTER, p.TOP);
+    p.textSize(14);
+    p.text("O Corpo Humano: Sensores e Atuadores Biológicos", w / 2, 8);
+
+    // Stylised body silhouette (center)
+    const cx = w / 2;
+    const headY = 55;
+
+    // Head
+    p.fill(50, 60, 80);
+    p.ellipse(cx, headY, 38, 44);
+    // Neck
+    p.rect(cx - 7, headY + 20, 14, 14);
+    // Torso
+    p.beginShape();
+    p.vertex(cx - 30, headY + 34);
+    p.vertex(cx + 30, headY + 34);
+    p.vertex(cx + 26, headY + 120);
+    p.vertex(cx - 26, headY + 120);
+    p.endShape(p.CLOSE);
+    // Arms
+    p.push();
+    p.translate(cx - 30, headY + 40);
+    p.rotate(-0.15);
+    p.rect(-6, 0, 12, 75, 6);
+    // Hand
+    p.ellipse(0, 78, 16, 14);
+    p.pop();
+    p.push();
+    p.translate(cx + 30, headY + 40);
+    p.rotate(0.15);
+    p.rect(-6, 0, 12, 75, 6);
+    p.ellipse(0, 78, 16, 14);
+    p.pop();
+    // Legs
+    p.rect(cx - 22, headY + 120, 16, 85, 6);
+    p.rect(cx + 6, headY + 120, 16, 85, 6);
+    // Skeleton hint lines
+    p.stroke(80, 100, 140, 60);
+    p.strokeWeight(1);
+    p.line(cx, headY + 34, cx, headY + 120); // Spine
+    p.line(cx - 24, headY + 50, cx + 24, headY + 50); // Shoulders
+    p.noStroke();
+
+    // Annotation lines and labels — left side (sensors)
+    const sensors = [
+      { label: "Olhos — Visão", sub: "Sensor óptico", y: headY - 2, color: [80, 220, 160] as [number, number, number] },
+      { label: "Língua — Paladar", sub: "Sensor químico", y: headY + 18, color: [255, 180, 80] as [number, number, number] },
+      { label: "Mãos — Pressão/Temp.", sub: "Sensor tátil", y: headY + 100, color: [100, 180, 255] as [number, number, number] },
+    ];
+
+    sensors.forEach((s, i) => {
+      const lx = 15;
+      const lineEndX = cx - 45;
+      const pulse = Math.sin(time * 2.5 + i * 1.2) * 3;
+
+      // Connector line
+      p.stroke(s.color[0], s.color[1], s.color[2], 80);
+      p.strokeWeight(1);
+      p.line(lx + 105, s.y, lineEndX, s.y);
+      p.noStroke();
+
+      // Dot on body
+      p.fill(s.color[0], s.color[1], s.color[2], 120);
+      p.circle(lineEndX + 2, s.y, 8 + pulse);
+      p.fill(s.color[0], s.color[1], s.color[2]);
+      p.circle(lineEndX + 2, s.y, 5);
+
+      // Card
+      p.fill(15, 22, 40);
+      p.rect(lx, s.y - 16, 105, 32, 6);
+      p.fill(s.color[0], s.color[1], s.color[2]);
+      p.rect(lx, s.y - 16, 4, 32, 6, 0, 0, 6);
+      p.textAlign(p.LEFT, p.CENTER);
+      p.textSize(9);
+      p.text(s.label, lx + 10, s.y - 5);
+      p.fill(130);
+      p.textSize(8);
+      p.text(s.sub, lx + 10, s.y + 7);
+    });
+
+    // Right side (actuators / structures)
+    const actuators = [
+      { label: "Ossos — Piezoelétrico", sub: "Estrutura + sensor", y: headY + 10, color: [255, 220, 100] as [number, number, number] },
+      { label: "Músculos — Atuador", sub: "Mov. mecânico", y: headY + 70, color: [255, 100, 120] as [number, number, number] },
+      { label: "Sist. Circulatório", sub: "Transporte / fluido", y: headY + 140, color: [220, 80, 80] as [number, number, number] },
+    ];
+
+    actuators.forEach((a, i) => {
+      const rx = w - 120;
+      const lineStartX = cx + 45;
+      const pulse = Math.sin(time * 2.5 + i * 1.2 + 1) * 3;
+
+      p.stroke(a.color[0], a.color[1], a.color[2], 80);
+      p.strokeWeight(1);
+      p.line(lineStartX, a.y, rx, a.y);
+      p.noStroke();
+
+      p.fill(a.color[0], a.color[1], a.color[2], 120);
+      p.circle(lineStartX - 2, a.y, 8 + pulse);
+      p.fill(a.color[0], a.color[1], a.color[2]);
+      p.circle(lineStartX - 2, a.y, 5);
+
+      p.fill(15, 22, 40);
+      p.rect(rx, a.y - 16, 110, 32, 6);
+      p.fill(a.color[0], a.color[1], a.color[2]);
+      p.rect(rx + 106, a.y - 16, 4, 32, 0, 6, 6, 0);
+      p.textAlign(p.RIGHT, p.CENTER);
+      p.textSize(9);
+      p.fill(a.color[0], a.color[1], a.color[2]);
+      p.text(a.label, rx + 100, a.y - 5);
+      p.fill(130);
+      p.textSize(8);
+      p.text(a.sub, rx + 100, a.y + 7);
+    });
+
+    // Legend at bottom
+    const legY = h - 35;
+    p.fill(80, 220, 160);
+    p.textAlign(p.CENTER, p.TOP);
+    p.textSize(9);
+    p.circle(w * 0.25, legY + 5, 8);
+    p.text("Sensores biológicos", w * 0.25, legY + 14);
+    p.fill(255, 100, 120);
+    p.circle(w * 0.75, legY + 5, 8);
+    p.text("Atuadores / Estruturas", w * 0.75, legY + 14);
+  };
+
+  return <P5Sketch setup={setup} draw={draw} height={310} />;
+}
+
+// Visualization 16: Bone piezoelectricity — stress → electric charge
+export function BonePiezoelectric() {
+  let time = 0;
+
+  const setup = (p: p5) => {
+    p.textFont("monospace");
+  };
+
+  const draw = (p: p5) => {
+    p.background(2, 7, 19);
+    time += 0.02;
+
+    const w = p.width;
+    const h = p.height;
+
+    p.noStroke();
+    p.fill(200);
+    p.textAlign(p.CENTER, p.TOP);
+    p.textSize(14);
+    p.text("Piezoeletricidade nos Ossos", w / 2, 8);
+
+    // Two states: relaxed and stressed
+    const stateT = (Math.sin(time * 1.5) + 1) / 2; // 0 = relaxed, 1 = compressed
+
+    // ---- LEFT: Bone structure ----
+    const boneX = w * 0.3;
+    const boneY = 50;
+    const boneH = 180;
+    const boneW = 50;
+    const compression = stateT * 12;
+
+    // Force arrows (top)
+    if (stateT > 0.3) {
+      const arrowAlpha = (stateT - 0.3) * 255;
+      p.fill(255, 100, 80, arrowAlpha);
+      p.triangle(boneX - 8, boneY - 5, boneX + 8, boneY - 5, boneX, boneY + 8);
+      p.triangle(boneX - 20, boneY - 10, boneX + 20, boneY - 10, boneX, boneY + 2);
+      p.fill(255, 100, 80, arrowAlpha * 0.8);
+      p.textSize(10);
+      p.textAlign(p.CENTER, p.BOTTOM);
+      p.text("Força (carga mecânica)", boneX, boneY - 12);
+    }
+
+    // Bone shape (simplified femur-like)
+    p.fill(230, 220, 190);
+    // Top knob
+    p.ellipse(boneX, boneY + 20, boneW + 10, 30);
+    // Shaft — compressed
+    const shaftH = boneH - 50 - compression;
+    p.rect(boneX - boneW / 2 + 8, boneY + 30, boneW - 16, shaftH, 4);
+    // Bottom knob
+    p.ellipse(boneX, boneY + 30 + shaftH, boneW + 10, 30);
+
+    // Collagen fibers inside bone (oriented lines)
+    p.stroke(200, 180, 140, 100);
+    p.strokeWeight(1);
+    for (let i = 0; i < 8; i++) {
+      const fy = boneY + 35 + i * (shaftH / 8);
+      const offset = Math.sin(time * 3 + i) * stateT * 3;
+      p.line(boneX - 12 + offset, fy, boneX + 12 + offset, fy + shaftH / 10);
+    }
+    p.noStroke();
+
+    // Hydroxyapatite crystals (small rects along collagen)
+    for (let i = 0; i < 6; i++) {
+      const cy = boneY + 40 + i * (shaftH / 6);
+      const shift = stateT * 4 * (i % 2 === 0 ? 1 : -1);
+      p.fill(180, 220, 255, 150);
+      p.rect(boneX - 8 + shift, cy, 6, 10, 2);
+      p.rect(boneX + 3 + shift, cy + 5, 6, 10, 2);
+    }
+
+    // Labels on bone
+    p.fill(180);
+    p.textSize(8);
+    p.textAlign(p.LEFT, p.CENTER);
+    p.text("Colágeno", boneX + 30, boneY + 60);
+    p.fill(180, 220, 255);
+    p.text("Hidroxiapatita", boneX + 30, boneY + 78);
+
+    // ---- RIGHT: Electrical signal ----
+    const sigX = w * 0.68;
+
+    // Arrow from bone to signal
+    p.stroke(255, 220, 100, 80);
+    p.strokeWeight(2);
+    p.line(boneX + boneW / 2 + 15, boneY + boneH / 2, sigX - 60, boneY + boneH / 2);
+    p.line(sigX - 65, boneY + boneH / 2 - 4, sigX - 60, boneY + boneH / 2);
+    p.line(sigX - 65, boneY + boneH / 2 + 4, sigX - 60, boneY + boneH / 2);
+    p.noStroke();
+
+    p.fill(255, 220, 100);
+    p.textSize(9);
+    p.textAlign(p.CENTER, p.CENTER);
+    p.text("Deformação →", (boneX + boneW / 2 + 15 + sigX - 60) / 2, boneY + boneH / 2 - 14);
+    p.text("Carga elétrica", (boneX + boneW / 2 + 15 + sigX - 60) / 2, boneY + boneH / 2 + 14);
+
+    // Charge visualization
+    const charges = stateT * 6;
+    for (let i = 0; i < Math.floor(charges); i++) {
+      const cy = boneY + 50 + i * 25;
+      const drift = Math.sin(time * 4 + i * 2) * 5;
+      // Positive charge
+      p.fill(255, 100, 100);
+      p.circle(sigX - 20 + drift, cy, 14);
+      p.fill(255);
+      p.textSize(10);
+      p.text("+", sigX - 20 + drift, cy);
+      // Negative charge
+      p.fill(100, 150, 255);
+      p.circle(sigX + 20 - drift, cy, 14);
+      p.fill(255);
+      p.text("−", sigX + 20 - drift, cy);
+    }
+
+    // Voltage graph
+    const graphX = sigX - 50;
+    const graphY = boneY + boneH + 10;
+    const graphW = 140;
+    const graphH = 60;
+
+    p.fill(10, 15, 30);
+    p.rect(graphX, graphY, graphW, graphH, 6);
+
+    // Zero line
+    p.stroke(50);
+    p.strokeWeight(0.5);
+    p.line(graphX + 5, graphY + graphH / 2, graphX + graphW - 5, graphY + graphH / 2);
+    p.noStroke();
+
+    // Signal trace (voltage proportional to stress)
+    p.stroke(255, 220, 100);
+    p.strokeWeight(2);
+    p.noFill();
+    p.beginShape();
+    for (let i = 0; i < graphW - 10; i += 2) {
+      const t = (time * 30 - i + graphW) % (graphW * 4);
+      const val = Math.sin((time - i * 0.01) * 1.5);
+      const y = graphY + graphH / 2 - val * (graphH / 2 - 5);
+      p.vertex(graphX + 5 + i, y);
+    }
+    p.endShape();
+    p.noStroke();
+
+    p.fill(255, 220, 100);
+    p.textSize(9);
+    p.textAlign(p.CENTER, p.TOP);
+    p.text("Tensão gerada (mV)", graphX + graphW / 2, graphY + graphH + 4);
+
+    // State label
+    p.fill(200);
+    p.textSize(11);
+    p.textAlign(p.CENTER, p.BOTTOM);
+    p.text(stateT > 0.5 ? "Osso sob compressão → gera sinal" : "Osso relaxado", w / 2, h - 4);
+  };
+
+  return <P5Sketch setup={setup} draw={draw} height={360} />;
+}
+
+// Visualization 17: Muscle contraction — biological actuator
+export function MuscleActuator() {
+  let time = 0;
+
+  const setup = (p: p5) => {
+    p.textFont("monospace");
+  };
+
+  const draw = (p: p5) => {
+    p.background(2, 7, 19);
+    time += 0.02;
+
+    const w = p.width;
+    const h = p.height;
+
+    p.noStroke();
+    p.fill(200);
+    p.textAlign(p.CENTER, p.TOP);
+    p.textSize(14);
+    p.text("Músculo: O Atuador Biológico", w / 2, 8);
+
+    const contraction = (Math.sin(time * 1.8) + 1) / 2; // 0 = relaxed, 1 = contracted
+
+    // ---- LEFT SIDE: Biological muscle ----
+    const leftCx = w * 0.28;
+    const muscY = 55;
+
+    p.fill(100, 180, 255, 60);
+    p.textSize(11);
+    p.textAlign(p.CENTER, p.TOP);
+    p.fill(200);
+    p.text("Músculo biológico", leftCx, muscY - 10);
+
+    // Bone anchor top
+    p.fill(230, 220, 190);
+    p.rect(leftCx - 18, muscY, 36, 16, 4);
+    p.fill(160);
+    p.textSize(7);
+    p.textAlign(p.CENTER, p.CENTER);
+    p.text("Osso", leftCx, muscY + 8);
+
+    // Tendon top
+    p.fill(220, 200, 170);
+    p.rect(leftCx - 4, muscY + 16, 8, 14, 2);
+
+    // Muscle belly
+    const muscLen = 100 - contraction * 35;
+    const muscWidth = 30 + contraction * 20;
+    const muscStartY = muscY + 30;
+    p.fill(180, 60, 70);
+    p.beginShape();
+    // Left side curve
+    p.vertex(leftCx - 6, muscStartY);
+    p.vertex(leftCx - muscWidth / 2, muscStartY + muscLen * 0.3);
+    p.vertex(leftCx - muscWidth / 2 - 3, muscStartY + muscLen * 0.5);
+    p.vertex(leftCx - muscWidth / 2, muscStartY + muscLen * 0.7);
+    p.vertex(leftCx - 6, muscStartY + muscLen);
+    // Right side curve
+    p.vertex(leftCx + 6, muscStartY + muscLen);
+    p.vertex(leftCx + muscWidth / 2, muscStartY + muscLen * 0.7);
+    p.vertex(leftCx + muscWidth / 2 + 3, muscStartY + muscLen * 0.5);
+    p.vertex(leftCx + muscWidth / 2, muscStartY + muscLen * 0.3);
+    p.vertex(leftCx + 6, muscStartY);
+    p.endShape(p.CLOSE);
+
+    // Muscle fibers (striations)
+    p.stroke(200, 80, 90, 100);
+    p.strokeWeight(1);
+    for (let i = 1; i < 8; i++) {
+      const fy = muscStartY + (muscLen / 8) * i;
+      const fxOff = Math.sin((i / 8) * p.PI) * muscWidth / 2;
+      p.line(leftCx - fxOff + 2, fy, leftCx + fxOff - 2, fy);
+    }
+    p.noStroke();
+
+    // Tendon bottom
+    p.fill(220, 200, 170);
+    p.rect(leftCx - 4, muscStartY + muscLen, 8, 14, 2);
+
+    // Bone anchor bottom
+    p.fill(230, 220, 190);
+    p.rect(leftCx - 18, muscStartY + muscLen + 14, 36, 16, 4);
+    p.fill(160);
+    p.textSize(7);
+    p.textAlign(p.CENTER, p.CENTER);
+    p.text("Osso", leftCx, muscStartY + muscLen + 22);
+
+    // Force arrow
+    if (contraction > 0.3) {
+      const arrowAlpha = (contraction - 0.3) * 300;
+      p.fill(255, 100, 120, arrowAlpha);
+      p.textSize(9);
+      p.textAlign(p.CENTER, p.CENTER);
+      p.text("↑ Força ↑", leftCx, muscStartY + muscLen / 2);
+    }
+
+    // ---- CENTER: Sarcomere detail ----
+    const sarCx = w * 0.55;
+    const sarY = muscY;
+
+    p.fill(200);
+    p.textSize(11);
+    p.textAlign(p.CENTER, p.TOP);
+    p.text("Sarcômero (unidade contrátil)", sarCx, sarY - 10);
+
+    // Z-lines
+    const sarW = 80 - contraction * 25;
+    const sarLeft = sarCx - sarW;
+    const sarRight = sarCx + sarW;
+    const sarTop = sarY + 15;
+    const sarBot = sarY + 85;
+
+    p.stroke(100, 150, 255);
+    p.strokeWeight(2);
+    p.line(sarLeft, sarTop, sarLeft, sarBot);
+    p.line(sarRight, sarTop, sarRight, sarBot);
+    p.noStroke();
+    p.fill(100, 150, 255);
+    p.textSize(7);
+    p.textAlign(p.CENTER, p.TOP);
+    p.text("Linha Z", sarLeft, sarBot + 3);
+    p.text("Linha Z", sarRight, sarBot + 3);
+
+    // Actin (thin filaments) — from Z-lines inward
+    p.stroke(80, 220, 160);
+    p.strokeWeight(2);
+    const actinLen = sarW * 0.7;
+    for (let i = 0; i < 4; i++) {
+      const fy = sarTop + 10 + i * 18;
+      p.line(sarLeft, fy, sarLeft + actinLen, fy);
+      p.line(sarRight, fy, sarRight - actinLen, fy);
+    }
+    p.noStroke();
+
+    // Myosin (thick filaments) — centered
+    p.stroke(255, 100, 120);
+    p.strokeWeight(3);
+    const myosinLen = sarW * 0.8;
+    for (let i = 0; i < 4; i++) {
+      const fy = sarTop + 10 + i * 18;
+      p.line(sarCx - myosinLen / 2, fy, sarCx + myosinLen / 2, fy);
+    }
+    p.noStroke();
+
+    // Cross-bridges (myosin heads) - animated
+    for (let i = 0; i < 4; i++) {
+      const fy = sarTop + 10 + i * 18;
+      const bridgePhase = (time * 4 + i) % (p.TWO_PI);
+      const bridgeAngle = Math.sin(bridgePhase) * 0.5;
+      // Left side bridges
+      p.push();
+      p.translate(sarCx - myosinLen / 2 + 10, fy);
+      p.rotate(bridgeAngle - 0.8);
+      p.fill(255, 150, 160);
+      p.ellipse(0, -6, 5, 4);
+      p.pop();
+      // Right side bridges
+      p.push();
+      p.translate(sarCx + myosinLen / 2 - 10, fy);
+      p.rotate(-bridgeAngle + 0.8);
+      p.fill(255, 150, 160);
+      p.ellipse(0, -6, 5, 4);
+      p.pop();
+    }
+
+    // Legend
+    p.fill(80, 220, 160);
+    p.textSize(8);
+    p.textAlign(p.LEFT, p.CENTER);
+    p.text("— Actina (filamento fino)", sarCx - sarW, sarBot + 20);
+    p.fill(255, 100, 120);
+    p.text("— Miosina (filamento grosso)", sarCx - sarW, sarBot + 32);
+
+    // ---- RIGHT: Engineering equivalent ----
+    const eqX = w * 0.85;
+    const eqY = muscY;
+
+    p.fill(200);
+    p.textSize(11);
+    p.textAlign(p.CENTER, p.TOP);
+    p.text("Equivalente artificial", eqX, eqY - 10);
+
+    // Servo motor / linear actuator representation
+    p.fill(30, 45, 65);
+    p.rect(eqX - 22, eqY + 15, 44, 50, 6);
+    p.fill(80, 100, 140);
+    p.textSize(8);
+    p.textAlign(p.CENTER, p.CENTER);
+    p.text("SERVO", eqX, eqY + 32);
+    p.text("MOTOR", eqX, eqY + 44);
+
+    // Actuator rod
+    const rodLen = 20 + contraction * 35;
+    p.fill(100, 130, 180);
+    p.rect(eqX - 4, eqY + 65, 8, rodLen, 2);
+    // End
+    p.fill(80, 100, 140);
+    p.rect(eqX - 10, eqY + 65 + rodLen, 20, 8, 3);
+
+    // Comparison arrow
+    p.fill(150);
+    p.textSize(8);
+    p.textAlign(p.CENTER, p.CENTER);
+    p.text("≈", (sarCx + sarW + eqX - 22) / 2, eqY + 50);
+
+    // Bottom status
+    p.fill(200);
+    p.textSize(11);
+    p.textAlign(p.CENTER, p.BOTTOM);
+    p.text(
+      contraction > 0.5 ? "Contraído — encurtamento por deslizamento de filamentos" : "Relaxado — filamentos afastados",
+      w / 2, h - 4
+    );
+  };
+
+  return <P5Sketch setup={setup} draw={draw} height={340} />;
+}
+
+// Visualization 18: Hand sensors — pressure, temperature, humidity mapped
+export function HandSensors() {
+  let time = 0;
+
+  const setup = (p: p5) => {
+    p.textFont("monospace");
+  };
+
+  const draw = (p: p5) => {
+    p.background(2, 7, 19);
+    time += 0.02;
+
+    const w = p.width;
+    const h = p.height;
+
+    p.noStroke();
+    p.fill(200);
+    p.textAlign(p.CENTER, p.TOP);
+    p.textSize(14);
+    p.text("A Mão Humana: Matriz de Sensores", w / 2, 8);
+
+    // Simplified hand shape (palm + fingers)
+    const hx = w * 0.35;
+    const hy = 60;
+
+    // Palm
+    p.fill(60, 55, 65);
+    p.beginShape();
+    p.vertex(hx - 40, hy + 50);
+    p.vertex(hx - 45, hy + 100);
+    p.vertex(hx - 35, hy + 140);
+    p.vertex(hx + 35, hy + 140);
+    p.vertex(hx + 45, hy + 100);
+    p.vertex(hx + 40, hy + 50);
+    p.endShape(p.CLOSE);
+
+    // Fingers
+    const fingers = [
+      { x: hx - 32, y: hy + 50, len: 55, angle: -0.15 },
+      { x: hx - 14, y: hy + 38, len: 65, angle: -0.05 },
+      { x: hx + 4, y: hy + 35, len: 68, angle: 0.02 },
+      { x: hx + 22, y: hy + 40, len: 58, angle: 0.1 },
+      { x: hx + 38, y: hy + 60, len: 40, angle: 0.35 },
+    ];
+
+    fingers.forEach((f) => {
+      p.push();
+      p.translate(f.x, f.y);
+      p.rotate(f.angle);
+      p.fill(60, 55, 65);
+      p.rect(-7, -f.len, 14, f.len, 7);
+      p.pop();
+    });
+
+    // Sensor receptors mapped on the hand
+    const receptors: {
+      name: string;
+      type: string;
+      x: number;
+      y: number;
+      color: [number, number, number];
+      radius: number;
+    }[] = [
+      // Fingertips (high density — Meissner)
+      { name: "Meissner", type: "Pressão leve", x: hx - 32, y: hy + 2, color: [100, 180, 255], radius: 8 },
+      { name: "Meissner", type: "Pressão leve", x: hx - 14, y: hy - 18, color: [100, 180, 255], radius: 8 },
+      { name: "Meissner", type: "Pressão leve", x: hx + 4, y: hy - 24, color: [100, 180, 255], radius: 8 },
+      { name: "Meissner", type: "Pressão leve", x: hx + 22, y: hy - 10, color: [100, 180, 255], radius: 8 },
+      // Palm (Pacini — deep pressure)
+      { name: "Pacini", type: "Vibração", x: hx - 15, y: hy + 80, color: [180, 130, 255], radius: 10 },
+      { name: "Pacini", type: "Vibração", x: hx + 15, y: hy + 85, color: [180, 130, 255], radius: 10 },
+      // Ruffini (stretch)
+      { name: "Ruffini", type: "Estiramento", x: hx - 25, y: hy + 110, color: [255, 180, 80], radius: 9 },
+      { name: "Ruffini", type: "Estiramento", x: hx + 25, y: hy + 105, color: [255, 180, 80], radius: 9 },
+      // Thermoreceptors
+      { name: "Termorreceptor", type: "Temperatura", x: hx, y: hy + 120, color: [255, 100, 80], radius: 9 },
+    ];
+
+    receptors.forEach((r, i) => {
+      const pulse = Math.sin(time * 3 + i * 0.7) * 3;
+      p.fill(r.color[0], r.color[1], r.color[2], 40);
+      p.circle(r.x, r.y, r.radius * 2 + pulse + 8);
+      p.fill(r.color[0], r.color[1], r.color[2]);
+      p.circle(r.x, r.y, r.radius + pulse);
+    });
+
+    // ---- RIGHT SIDE: Sensor comparison ----
+    const panelX = w * 0.6;
+    const panelW = w * 0.38;
+
+    const sensorTypes = [
+      {
+        bio: "Meissner",
+        eng: "FSR (resistivo de força)",
+        measure: "Pressão leve / toque",
+        color: [100, 180, 255] as [number, number, number],
+        density: "~140/cm² na ponta do dedo",
+      },
+      {
+        bio: "Pacini",
+        eng: "Acelerômetro MEMS",
+        measure: "Vibração (10–500 Hz)",
+        color: [180, 130, 255] as [number, number, number],
+        density: "~20/cm² na palma",
+      },
+      {
+        bio: "Ruffini",
+        eng: "Strain gauge",
+        measure: "Estiramento / deformação",
+        color: [255, 180, 80] as [number, number, number],
+        density: "~10/cm²",
+      },
+      {
+        bio: "Termorreceptor",
+        eng: "Termistor NTC",
+        measure: "Temperatura (frio/calor)",
+        color: [255, 100, 80] as [number, number, number],
+        density: "Sensível a ΔT de 0,01°C",
+      },
+    ];
+
+    const cardH = 52;
+    sensorTypes.forEach((s, i) => {
+      const cy = 50 + i * (cardH + 10);
+
+      p.fill(15, 22, 40);
+      p.rect(panelX, cy, panelW, cardH, 8);
+      p.fill(s.color[0], s.color[1], s.color[2]);
+      p.rect(panelX, cy, 4, cardH, 8, 0, 0, 8);
+
+      p.textAlign(p.LEFT, p.TOP);
+      p.fill(s.color[0], s.color[1], s.color[2]);
+      p.textSize(10);
+      p.text(`${s.bio}  →  ${s.eng}`, panelX + 12, cy + 6);
+
+      p.fill(160);
+      p.textSize(8);
+      p.text(`Mede: ${s.measure}`, panelX + 12, cy + 22);
+      p.fill(120);
+      p.text(s.density, panelX + 12, cy + 35);
+    });
+
+    // Bottom note
+    p.fill(150);
+    p.textSize(9);
+    p.textAlign(p.CENTER, p.BOTTOM);
+    p.text("A ponta do dedo tem ~17.000 receptores táteis — uma das áreas mais sensíveis do corpo", w / 2, h - 4);
+  };
+
+  return <P5Sketch setup={setup} draw={draw} height={320} />;
+}
+
+// Visualization 19: Face senses — vision & taste mapped to engineering sensors
+export function FaceSenses() {
+  let time = 0;
+
+  const setup = (p: p5) => {
+    p.textFont("monospace");
+  };
+
+  const draw = (p: p5) => {
+    p.background(2, 7, 19);
+    time += 0.02;
+
+    const w = p.width;
+    const h = p.height;
+
+    p.noStroke();
+    p.fill(200);
+    p.textAlign(p.CENTER, p.TOP);
+    p.textSize(14);
+    p.text("Rosto: Visão e Paladar como Sensores", w / 2, 8);
+
+    // ---- LEFT: VISION ----
+    const vx = w * 0.28;
+    const vy = 45;
+
+    p.fill(200);
+    p.textSize(11);
+    p.textAlign(p.CENTER, p.TOP);
+    p.text("Visão — Sensor Óptico", vx, vy);
+
+    // Eye shape
+    const eyeY = vy + 45;
+    p.fill(240, 240, 245);
+    p.beginShape();
+    for (let a = 0; a <= p.TWO_PI; a += 0.1) {
+      const rx = 35;
+      const ry = 20;
+      const ex = vx + Math.cos(a) * rx;
+      const ey = eyeY + Math.sin(a) * ry * (Math.cos(a) > 0 ? 1 : 0.8);
+      p.vertex(ex, ey);
+    }
+    p.endShape(p.CLOSE);
+
+    // Iris
+    const irisDrift = Math.sin(time * 1.5) * 5;
+    p.fill(80, 140, 100);
+    p.circle(vx + irisDrift, eyeY, 22);
+    // Pupil
+    const pupilSize = 8 + Math.sin(time * 2) * 3; // dilate/constrict
+    p.fill(10);
+    p.circle(vx + irisDrift, eyeY, pupilSize);
+    // Light reflection
+    p.fill(255, 255, 255, 200);
+    p.circle(vx + irisDrift + 3, eyeY - 3, 4);
+
+    // Light rays entering
+    for (let i = 0; i < 3; i++) {
+      const rayAngle = -0.3 + i * 0.3;
+      const rayStart = 55;
+      p.stroke(255, 220, 100, 100);
+      p.strokeWeight(1);
+      p.line(
+        vx - rayStart * Math.cos(rayAngle), eyeY - rayStart * Math.sin(rayAngle),
+        vx + irisDrift, eyeY
+      );
+    }
+    p.noStroke();
+
+    // Retina (rod/cone) representation
+    const retY = eyeY + 50;
+    p.fill(180);
+    p.textSize(9);
+    p.textAlign(p.CENTER, p.TOP);
+    p.text("Retina: 120M bastonetes + 6M cones", vx, retY);
+
+    // Rod and cone icons
+    for (let i = 0; i < 12; i++) {
+      const rx = vx - 50 + i * 9;
+      const isCone = i % 4 === 0;
+      p.fill(isCone ? [255, 100, 120] as unknown as p5.Color : [100, 150, 200] as unknown as p5.Color);
+      if (isCone) {
+        p.triangle(rx, retY + 20, rx - 3, retY + 32, rx + 3, retY + 32);
+      } else {
+        p.rect(rx - 1.5, retY + 20, 3, 12, 1);
+      }
+    }
+
+    p.fill(100, 150, 200);
+    p.textSize(7);
+    p.text("Bastonetes (luz)", vx - 25, retY + 36);
+    p.fill(255, 100, 120);
+    p.text("Cones (cor)", vx + 25, retY + 36);
+
+    // Engineering equivalent
+    p.fill(80, 220, 160);
+    p.textSize(9);
+    p.textAlign(p.CENTER, p.TOP);
+    p.text("≈ Câmera CCD/CMOS", vx, retY + 52);
+    p.fill(120);
+    p.textSize(8);
+    p.text("Fotodiodos em matriz", vx, retY + 65);
+
+    // ---- RIGHT: TASTE ----
+    const tx = w * 0.72;
+    const ty = 45;
+
+    p.fill(200);
+    p.textSize(11);
+    p.textAlign(p.CENTER, p.TOP);
+    p.text("Paladar — Sensor Químico", tx, ty);
+
+    // Tongue shape
+    const tongueY = ty + 50;
+    p.fill(200, 100, 110);
+    p.beginShape();
+    p.vertex(tx - 35, tongueY - 20);
+    p.vertex(tx - 40, tongueY + 10);
+    p.vertex(tx - 30, tongueY + 40);
+    p.vertex(tx - 10, tongueY + 55);
+    p.vertex(tx + 10, tongueY + 55);
+    p.vertex(tx + 30, tongueY + 40);
+    p.vertex(tx + 40, tongueY + 10);
+    p.vertex(tx + 35, tongueY - 20);
+    p.endShape(p.CLOSE);
+
+    // Taste zones with papillae dots
+    const tastes: {
+      label: string;
+      x: number;
+      y: number;
+      color: [number, number, number];
+    }[] = [
+      { label: "Doce", x: tx, y: tongueY + 45, color: [255, 180, 80] },
+      { label: "Salgado", x: tx - 28, y: tongueY + 15, color: [100, 180, 255] },
+      { label: "Salgado", x: tx + 28, y: tongueY + 15, color: [100, 180, 255] },
+      { label: "Ácido", x: tx - 30, y: tongueY - 5, color: [80, 220, 160] },
+      { label: "Ácido", x: tx + 30, y: tongueY - 5, color: [80, 220, 160] },
+      { label: "Amargo", x: tx, y: tongueY - 15, color: [180, 130, 255] },
+      { label: "Umami", x: tx, y: tongueY + 20, color: [255, 100, 120] },
+    ];
+
+    tastes.forEach((t, i) => {
+      const pulse = Math.sin(time * 2.5 + i * 0.9) * 2;
+      p.fill(t.color[0], t.color[1], t.color[2], 150);
+      p.circle(t.x, t.y, 12 + pulse);
+      // Only show unique labels
+      if (i === 0 || i === 1 || i === 3 || i === 5 || i === 6) {
+        p.fill(t.color[0], t.color[1], t.color[2]);
+        p.textSize(7);
+        p.textAlign(p.CENTER, p.CENTER);
+        p.text(t.label, t.x, t.y);
+      }
+    });
+
+    // Papillae dots
+    for (let i = 0; i < 30; i++) {
+      const px = tx - 25 + (i % 6) * 10;
+      const py = tongueY - 10 + Math.floor(i / 6) * 12;
+      const dist = Math.sqrt((px - tx) ** 2 + (py - tongueY + 10) ** 2);
+      if (dist < 35) {
+        p.fill(220, 120, 130, 80);
+        p.circle(px, py, 3);
+      }
+    }
+
+    // Taste bud count
+    p.fill(180);
+    p.textSize(9);
+    p.textAlign(p.CENTER, p.TOP);
+    p.text("~10.000 papilas gustativas", tx, tongueY + 65);
+    p.text("5 sabores básicos + receptores de calor", tx, tongueY + 78);
+
+    // Engineering equivalent
+    p.fill(80, 220, 160);
+    p.textSize(9);
+    p.text("≈ Língua eletrônica", tx, tongueY + 96);
+    p.fill(120);
+    p.textSize(8);
+    p.text("Array de sensores eletroquímicos", tx, tongueY + 109);
+
+    // ---- Bottom comparison ----
+    const compY = h - 45;
+    p.fill(60);
+    p.rect(15, compY, w - 30, 38, 8);
+
+    p.fill(200);
+    p.textAlign(p.CENTER, p.CENTER);
+    p.textSize(10);
+    p.text("Olho: ~576 megapixels efetivos  |  Melhor câmera: ~200 MP", w / 2, compY + 12);
+    p.fill(150);
+    p.textSize(9);
+    p.text("A natureza continua superando a engenharia em sensibilidade e integração", w / 2, compY + 28);
+  };
+
+  return <P5Sketch setup={setup} draw={draw} height={360} />;
+}
+

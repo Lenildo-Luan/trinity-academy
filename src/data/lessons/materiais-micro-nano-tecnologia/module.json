@@ -24,6 +24,13 @@
         "description": "Introdução aos sensores biológicos: como um biossensor combina componentes biológicos com transdutores físico-químicos, com foco no biossensor de glicose.",
         "video": null,
         "quizId": null
+      },
+      {
+        "id": "charpter-4",
+        "title": "O Corpo Humano como Sistema de Sensores e Atuadores",
+        "description": "Analogia entre o corpo humano e sistemas eletromecânicos: ossos piezoelétricos, músculos como atuadores, mãos como matrizes de sensores e o rosto como central sensorial.",
+        "video": null,
+        "quizId": null
       }
     ]
   }
