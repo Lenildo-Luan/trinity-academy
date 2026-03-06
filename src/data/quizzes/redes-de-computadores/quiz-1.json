@@ -1,0 +1,109 @@
+{
+  "id": "quiz-1",
+  "title": "Quiz — Introdução aos Serviços e Protocolos de Transporte",
+  "description": "Teste seus conhecimentos sobre a camada de transporte, comunicação lógica entre processos, multiplexação/demultiplexação, e os protocolos TCP e UDP.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual é a função central da camada de transporte?",
+      "alternatives": [
+        { "id": "a1", "text": "Fornecer comunicação lógica entre hosts (máquinas) na rede", "isCorrect": false, "explanation": "Comunicação host-a-host é responsabilidade da camada de rede (IP). A camada de transporte vai além." },
+        { "id": "a2", "text": "Fornecer comunicação lógica entre processos executando em hosts diferentes", "isCorrect": true, "explanation": "Correto! A camada de transporte estende a entrega host-a-host da camada de rede para entrega processo-a-processo, usando portas para identificar cada processo." },
+        { "id": "a3", "text": "Rotear pacotes entre redes diferentes através de roteadores", "isCorrect": false, "explanation": "Roteamento é função da camada de rede (IP), não da camada de transporte." },
+        { "id": "a4", "text": "Transmitir bits pelo meio físico (cabo, fibra, wireless)", "isCorrect": false, "explanation": "A transmissão de bits é função da camada física, a mais baixa do modelo." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Na analogia das casas e cartas, o que João e Lúcia (que coletam e entregam as cartas dentro de cada casa) representam?",
+      "alternatives": [
+        { "id": "a1", "text": "A camada de aplicação", "isCorrect": false, "explanation": "As pessoas da família (Ana, Carlos, etc.) representam os processos da camada de aplicação, não João e Lúcia." },
+        { "id": "a2", "text": "A camada de rede", "isCorrect": false, "explanation": "O serviço postal (que transporta cartas entre casas) representa a camada de rede." },
+        { "id": "a3", "text": "A camada de transporte", "isCorrect": true, "explanation": "Correto! João e Lúcia coletam cartas de cada pessoa (multiplexação) e entregam as cartas recebidas à pessoa correta (demultiplexação) — exatamente o papel da camada de transporte." },
+        { "id": "a4", "text": "A camada de enlace", "isCorrect": false, "explanation": "A camada de enlace cuida da comunicação em um único link físico, não está representada nessa analogia." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Qual a principal diferença entre a camada de transporte e a camada de rede?",
+      "alternatives": [
+        { "id": "a1", "text": "A camada de rede usa TCP e a camada de transporte usa IP", "isCorrect": false, "explanation": "É o contrário: a camada de transporte usa TCP/UDP e a camada de rede usa IP." },
+        { "id": "a2", "text": "A camada de rede comunica host-a-host (IP); a camada de transporte comunica processo-a-processo (IP + porta)", "isCorrect": true, "explanation": "Correto! A camada de rede entrega o pacote na máquina certa (pelo IP), enquanto a camada de transporte entrega os dados ao processo certo dentro da máquina (pelo número de porta)." },
+        { "id": "a3", "text": "A camada de transporte é mais rápida que a camada de rede", "isCorrect": false, "explanation": "Não se trata de velocidade, mas de escopo: a camada de rede identifica máquinas, a de transporte identifica processos." },
+        { "id": "a4", "text": "A camada de rede é orientada a conexão e a de transporte não é", "isCorrect": false, "explanation": "A camada de rede (IP) é sem conexão. A camada de transporte pode ser orientada a conexão (TCP) ou não (UDP)." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "O que é multiplexação no contexto da camada de transporte?",
+      "alternatives": [
+        { "id": "a1", "text": "Dividir um pacote grande em pacotes menores para transmissão", "isCorrect": false, "explanation": "Isso se chama fragmentação, não multiplexação." },
+        { "id": "a2", "text": "Combinar dados de múltiplos processos em segmentos identificados por portas para envio pela rede", "isCorrect": true, "explanation": "Correto! Na multiplexação, a camada de transporte do emissor recolhe dados de vários processos (sockets), adiciona cabeçalhos com portas, e entrega à camada de rede." },
+        { "id": "a3", "text": "Criptografar dados de múltiplas aplicações ao mesmo tempo", "isCorrect": false, "explanation": "Criptografia é função de protocolos como TLS, não do mecanismo de multiplexação." },
+        { "id": "a4", "text": "Enviar o mesmo pacote por múltiplos caminhos simultaneamente", "isCorrect": false, "explanation": "Isso seria multipath routing, não multiplexação de transporte." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "As portas well-known (0–1023) são reservadas para:",
+      "alternatives": [
+        { "id": "a1", "text": "Conexões temporárias do cliente (portas efêmeras)", "isCorrect": false, "explanation": "Portas efêmeras são as de faixa 49152–65535, atribuídas dinamicamente pelo SO." },
+        { "id": "a2", "text": "Serviços padrão da Internet como HTTP (80), SSH (22) e DNS (53)", "isCorrect": true, "explanation": "Correto! As portas 0–1023 são reservadas pela IANA para serviços conhecidos e geralmente requerem privilégio de administrador para serem usadas." },
+        { "id": "a3", "text": "Aplicações de banco de dados como MySQL e PostgreSQL", "isCorrect": false, "explanation": "MySQL (3306) e PostgreSQL (5432) estão na faixa de registered ports (1024–49151)." },
+        { "id": "a4", "text": "Qualquer aplicação do usuário sem restrições", "isCorrect": false, "explanation": "Portas well-known requerem privilégio root/admin e são reservadas para serviços padrão." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "O TCP estabelece uma conexão antes de transmitir dados usando um processo chamado:",
+      "alternatives": [
+        { "id": "a1", "text": "2-way handshake (SYN → ACK)", "isCorrect": false, "explanation": "O TCP usa três mensagens, não duas, para estabelecer a conexão." },
+        { "id": "a2", "text": "3-way handshake (SYN → SYN-ACK → ACK)", "isCorrect": true, "explanation": "Correto! O 3-way handshake sincroniza emissor e receptor em três etapas: o cliente envia SYN, o servidor responde SYN-ACK, e o cliente confirma com ACK." },
+        { "id": "a3", "text": "4-way handshake (SYN → ACK → SYN → ACK)", "isCorrect": false, "explanation": "O 4-way handshake é usado para encerrar uma conexão TCP, não para estabelecê-la." },
+        { "id": "a4", "text": "Broadcast handshake", "isCorrect": false, "explanation": "TCP é ponto-a-ponto, não usa broadcast para estabelecer conexões." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual protocolo de transporte seria mais adequado para uma aplicação de videoconferência ao vivo?",
+      "alternatives": [
+        { "id": "a1", "text": "TCP — porque garante que todos os quadros de vídeo cheguem completos", "isCorrect": false, "explanation": "TCP retransmitiria quadros perdidos, causando atraso. Em videoconferência, é melhor pular um quadro do que esperar a retransmissão." },
+        { "id": "a2", "text": "UDP — porque baixa latência é mais importante que entregar todos os pacotes", "isCorrect": true, "explanation": "Correto! Em videoconferência, perder um quadro é aceitável — o vídeo continua. Mas o atraso causado por retransmissões TCP tornaria a chamada inutilizável." },
+        { "id": "a3", "text": "TCP — porque o handshake garante que a conexão é segura", "isCorrect": false, "explanation": "O handshake do TCP não garante segurança (criptografia é função do TLS), e o overhead adicional prejudica a latência." },
+        { "id": "a4", "text": "Nenhum — videoconferência usa diretamente a camada de rede (IP)", "isCorrect": false, "explanation": "Aplicações sempre usam a camada de transporte (TCP ou UDP) para se comunicar. Não acessam IP diretamente." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Qual é o tamanho do cabeçalho UDP?",
+      "alternatives": [
+        { "id": "a1", "text": "20 bytes", "isCorrect": false, "explanation": "20 bytes é o tamanho mínimo do cabeçalho TCP, não do UDP." },
+        { "id": "a2", "text": "8 bytes", "isCorrect": true, "explanation": "Correto! O cabeçalho UDP tem apenas 8 bytes (porta origem, porta destino, comprimento e checksum), refletindo sua filosofia minimalista." },
+        { "id": "a3", "text": "32 bytes", "isCorrect": false, "explanation": "32 bytes excede tanto o cabeçalho UDP (8 bytes) quanto o mínimo do TCP (20 bytes)." },
+        { "id": "a4", "text": "64 bytes", "isCorrect": false, "explanation": "64 bytes é muito maior que qualquer cabeçalho de transporte padrão." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "No processo de encapsulamento, quando a camada de transporte recebe dados da aplicação, ela cria um:",
+      "alternatives": [
+        { "id": "a1", "text": "Datagrama IP, adicionando endereços IP de origem e destino", "isCorrect": false, "explanation": "O datagrama IP é criado pela camada de rede, não pela de transporte." },
+        { "id": "a2", "text": "Quadro (frame), adicionando endereços MAC", "isCorrect": false, "explanation": "Quadros são criados pela camada de enlace." },
+        { "id": "a3", "text": "Segmento (TCP) ou datagrama (UDP), adicionando cabeçalho com portas, sequência e flags", "isCorrect": true, "explanation": "Correto! A camada de transporte encapsula os dados da aplicação em um segmento (TCP) ou datagrama (UDP) adicionando seu cabeçalho com portas, números de sequência, checksum, etc." },
+        { "id": "a4", "text": "Pacote de bits, convertendo dados em sinais elétricos", "isCorrect": false, "explanation": "A conversão em sinais físicos é função da camada física." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Qual das seguintes afirmações sobre o UDP é VERDADEIRA?",
+      "alternatives": [
+        { "id": "a1", "text": "UDP garante a entrega ordenada dos dados ao receptor", "isCorrect": false, "explanation": "UDP não garante ordem — datagramas podem chegar fora de sequência." },
+        { "id": "a2", "text": "UDP realiza controle de congestionamento para não sobrecarregar a rede", "isCorrect": false, "explanation": "UDP não possui controle de congestionamento — pode inundar a rede." },
+        { "id": "a3", "text": "UDP oferece multiplexação/demultiplexação e detecção de erros (checksum), mas sem garantia de entrega", "isCorrect": true, "explanation": "Correto! O serviço mínimo do UDP inclui multiplexação (portas) e checksum para detecção de erros, mas não garante entrega, ordem ou retransmissão." },
+        { "id": "a4", "text": "UDP estabelece uma conexão com 3-way handshake antes de enviar dados", "isCorrect": false, "explanation": "UDP é sem conexão (connectionless) — envia datagramas imediatamente, sem handshake." }
+      ]
+    }
+  ]
+}
+
