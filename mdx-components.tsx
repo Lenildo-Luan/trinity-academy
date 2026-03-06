@@ -50,6 +50,25 @@ import {
   EyeVsCamera,
   ConeColorMixing,
 } from "./src/components/sensors-actuators-p5-examples";
+import {
+  PixelMatrixVisualization,
+  GrayscaleLevels,
+  RGBColorModel,
+  RGBPixelGrid,
+  BitDepthComparison,
+  RGBColorSpace,
+  AnalogToDigital,
+  ImageResolutionDemo,
+} from "./src/components/image-digitization-p5-examples";
+import {
+  UltrasoundImaging,
+  ThermalCameraView,
+  XRaySensorView,
+  DepthSensorView,
+  SensorSpectrumOverview,
+  SensorApplicationsDashboard,
+  SeismicSonarMapping,
+} from "./src/components/image-sensors-p5-examples";
 
 function getTextContent(node: ReactNode): string {
   if (typeof node === "string") return node;
@@ -218,6 +237,21 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     CCDSensorPipeline,
     EyeVsCamera,
     ConeColorMixing,
+    PixelMatrixVisualization,
+    GrayscaleLevels,
+    RGBColorModel,
+    RGBPixelGrid,
+    BitDepthComparison,
+    RGBColorSpace,
+    AnalogToDigital,
+    ImageResolutionDemo,
+    UltrasoundImaging,
+    ThermalCameraView,
+    XRaySensorView,
+    DepthSensorView,
+    SensorSpectrumOverview,
+    SensorApplicationsDashboard,
+    SeismicSonarMapping,
     ...components,
   };
 }

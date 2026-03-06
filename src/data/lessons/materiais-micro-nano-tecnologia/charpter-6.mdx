@@ -1,0 +1,227 @@
+# Digitalização de Imagens
+
+No capítulo anterior, vimos como o olho humano e as câmeras digitais capturam luz e a convertem em sinais elétricos. Mas como, exatamente, esses sinais se tornam uma **imagem digital** — algo que um computador pode armazenar, processar e exibir? A resposta está na **digitalização**: o processo de transformar uma cena contínua do mundo real em uma **matriz de números**. Neste capítulo, vamos explorar os fundamentos da representação digital de imagens, entender o que é um **pixel**, como funcionam as **escalas de cinza** e o **sistema de cores RGB**.
+
+## A Imagem como Matriz de Pixels
+
+Uma imagem digital é, na sua essência, uma **matriz** (tabela bidimensional) onde cada elemento é chamado de **pixel** (*picture element*). Cada pixel ocupa uma posição definida por uma **linha** (*i*) e uma **coluna** (*j*), e armazena um valor numérico que representa a **intensidade de luz** ou **cor** naquela posição.
+
+Matematicamente, uma imagem em escala de cinza pode ser descrita como uma função:
+
+> **I(i, j)** = intensidade do pixel na linha *i*, coluna *j*
+
+A visualização abaixo mostra uma imagem modelada como uma matriz de pixels. Observe como cada célula contém um valor numérico (intensidade) e é identificada por sua posição (linha, coluna):
+
+<PixelMatrixVisualization />
+
+### Terminologia Fundamental
+
+<MarkdownTable
+  headers={["Termo", "Definição", "Exemplo"]}
+  rows={[
+    ["**Pixel**", "Menor unidade de uma imagem digital — um ponto com posição e valor de intensidade", "O pixel na posição (3, 7) tem intensidade 182"],
+    ["**Resolução espacial**", "Número de pixels na imagem, expresso como M×N (linhas × colunas)", "Uma imagem 1920×1080 tem ~2 milhões de pixels"],
+    ["**Intensidade**", "Valor numérico que representa o brilho ou cor de um pixel", "0 = preto, 255 = branco (em 8 bits)"],
+    ["**Matriz de imagem**", "Representação matemática: tabela M×N onde cada elemento é um pixel", "Uma foto de 4×3 megapixels é uma matriz de 3000×4000"],
+  ]}
+/>
+
+### Coordenadas de Pixel
+
+No sistema de coordenadas de uma imagem digital, a origem **(0, 0)** fica no **canto superior esquerdo**. As linhas crescem para baixo e as colunas crescem para a direita — diferente do sistema cartesiano tradicional da matemática. Essa convenção é usada por praticamente todos os formatos de imagem e bibliotecas de processamento.
+
+<MarkdownTable
+  headers={["Posição", "Linha (i)", "Coluna (j)", "Localização na Imagem"]}
+  rows={[
+    ["**(0, 0)**", "0", "0", "Canto superior esquerdo"],
+    ["**(0, N-1)**", "0", "N-1", "Canto superior direito"],
+    ["**(M-1, 0)**", "M-1", "0", "Canto inferior esquerdo"],
+    ["**(M-1, N-1)**", "M-1", "N-1", "Canto inferior direito"],
+    ["**(M/2, N/2)**", "M/2", "N/2", "Centro aproximado da imagem"],
+  ]}
+/>
+
+## Do Contínuo ao Discreto: Amostragem e Quantização
+
+A cena real que uma câmera observa é **contínua** — a intensidade de luz varia suavemente no espaço. Para transformá-la em uma imagem digital, são necessários dois processos fundamentais:
+
+<AnalogToDigital />
+
+### Os Dois Passos da Digitalização
+
+<MarkdownTable
+  headers={["Processo", "O que faz", "Parâmetro", "Efeito"]}
+  rows={[
+    ["**Amostragem** (*sampling*)", "Divide o espaço contínuo em uma grade de M×N posições discretas (pixels)", "Resolução espacial (M×N)", "Mais pixels → mais detalhes capturados"],
+    ["**Quantização**", "Converte a intensidade contínua de cada pixel em um valor discreto com número finito de níveis", "Profundidade de bits (*b*)", "Mais bits → mais níveis → transições mais suaves"],
+  ]}
+/>
+
+A **amostragem** determina *quantos* pixels a imagem terá (resolução espacial), enquanto a **quantização** determina *quantos tons diferentes* cada pixel pode assumir (resolução de intensidade).
+
+## Resolução Espacial: O Efeito do Número de Pixels
+
+A resolução espacial define o nível de **detalhe** que uma imagem pode capturar. Quanto mais pixels (M×N maior), mais fielmente a imagem digital reproduz a cena original. A visualização abaixo demonstra o impacto visual de diferentes resoluções:
+
+<ImageResolutionDemo />
+
+<MarkdownTable
+  headers={["Resolução", "Total de Pixels", "Uso Típico"]}
+  rows={[
+    ["**640×480** (VGA)", "~307 mil", "Webcams antigas, vídeo de baixa qualidade"],
+    ["**1280×720** (HD)", "~921 mil", "Streaming, videoconferência"],
+    ["**1920×1080** (Full HD)", "~2 milhões", "TV, monitores, YouTube"],
+    ["**3840×2160** (4K UHD)", "~8,3 milhões", "Cinema digital, TVs premium"],
+    ["**7680×4320** (8K)", "~33 milhões", "Produção profissional, realidade virtual"],
+  ]}
+/>
+
+## Escala de Cinza: A Quantização da Intensidade
+
+Em uma imagem em **escala de cinza** (*grayscale*), cada pixel armazena um único valor numérico que representa sua **intensidade luminosa**: 0 para preto total e o valor máximo para branco total.
+
+### Bits e Níveis de Cinza
+
+O número de tons de cinza disponíveis é determinado pelo número de **bits** (*b*) usados para representar cada pixel. A relação é:
+
+> **Níveis = 2ᵇ**
+
+Com *b* bits, podemos representar **2ᵇ** níveis de intensidade diferentes, variando de **0** (preto) até **2ᵇ − 1** (branco).
+
+<GrayscaleLevels />
+
+### Tabela de Profundidade de Bits
+
+<MarkdownTable
+  headers={["Bits (b)", "Níveis (2ᵇ)", "Faixa de Valores", "Qualidade Visual"]}
+  rows={[
+    ["**1**", "2", "0–1", "Apenas preto e branco (binária) — sem tons intermediários"],
+    ["**2**", "4", "0–3", "4 tons de cinza — contornos grosseiros visíveis"],
+    ["**3**", "8", "0–7", "8 tons — ainda com transições perceptíveis (banding)"],
+    ["**4**", "16", "0–15", "16 tons — melhora significativa, mas banding ainda visível"],
+    ["**8**", "256", "0–255", "256 tons — **padrão para imagens digitais**, suficiente para a percepção humana"],
+    ["**12**", "4.096", "0–4095", "Usado em fotografia RAW e imagens médicas"],
+    ["**16**", "65.536", "0–65535", "Imagens científicas de alta precisão"],
+  ]}
+/>
+
+### Por que 8 Bits São Suficientes?
+
+O olho humano consegue distinguir aproximadamente **200 a 250 tons de cinza** em condições ideais. Como 8 bits fornecem **256 níveis**, isso é mais do que suficiente para que as transições de intensidade pareçam **suaves e contínuas** ao nosso sistema visual. Usar mais bits (12, 14 ou 16) é útil para **pós-processamento** profissional (onde os valores serão manipulados), mas para a *exibição final*, 8 bits são o padrão.
+
+### Comparação Visual
+
+A visualização abaixo mostra a mesma imagem representada com diferentes profundidades de bits. Observe como o aumento do número de bits elimina o efeito de *banding* (faixas visíveis entre tons):
+
+<BitDepthComparison />
+
+### Memória Ocupada por uma Imagem em Escala de Cinza
+
+O tamanho de uma imagem em escala de cinza pode ser calculado como:
+
+> **Tamanho (bits)** = M × N × b
+
+Onde M é o número de linhas, N o número de colunas, e b a profundidade de bits.
+
+<MarkdownTable
+  headers={["Imagem (M×N)", "Bits/Pixel", "Tamanho (sem compressão)"]}
+  rows={[
+    ["640×480", "8 bits", "640 × 480 × 8 = 2.457.600 bits ≈ **300 KB**"],
+    ["1920×1080", "8 bits", "1920 × 1080 × 8 = 16.588.800 bits ≈ **2 MB**"],
+    ["3840×2160", "8 bits", "3840 × 2160 × 8 = 66.355.200 bits ≈ **8 MB**"],
+    ["3840×2160", "16 bits", "3840 × 2160 × 16 = 132.710.400 bits ≈ **16 MB**"],
+  ]}
+/>
+
+## O Sistema de Cores RGB
+
+Até agora, tratamos de imagens em escala de cinza, onde cada pixel tem **um** valor. Mas o mundo é colorido! Para representar cores, o sistema mais utilizado em imagens digitais é o **RGB** (*Red, Green, Blue*) — baseado no princípio da **mistura aditiva de luz**.
+
+### O Princípio da Mistura Aditiva
+
+Na mistura aditiva, cores são criadas combinando **luz** de diferentes comprimentos de onda. As três cores primárias da luz são:
+
+- **R** (*Red*) — Vermelho
+- **G** (*Green*) — Verde
+- **B** (*Blue*) — Azul
+
+Qualquer cor visível pode ser aproximada pela combinação de diferentes intensidades dessas três componentes. A visualização abaixo demonstra esse princípio, mostrando como os canais R, G e B se combinam para formar a cor resultante:
+
+<RGBColorModel />
+
+### Como Funciona o RGB?
+
+Em uma imagem RGB, cada pixel armazena **três valores** — um para cada canal de cor:
+
+> **Pixel(i, j)** = (R, G, B)
+
+Cada canal utiliza **8 bits** (valores de 0 a 255), totalizando **24 bits por pixel**. Isso resulta em:
+
+> **2²⁴ = 16.777.216 ≈ 16,7 milhões de cores possíveis**
+
+<MarkdownTable
+  headers={["Canal", "Cor", "Faixa (8 bits)", "Valor 0 significa", "Valor 255 significa"]}
+  rows={[
+    ["**R**", "Vermelho", "0–255", "Sem vermelho", "Vermelho máximo"],
+    ["**G**", "Verde", "0–255", "Sem verde", "Verde máximo"],
+    ["**B**", "Azul", "0–255", "Sem azul", "Azul máximo"],
+  ]}
+/>
+
+### Cores Resultantes da Combinação RGB
+
+<MarkdownTable
+  headers={["Cor", "R", "G", "B", "Observação"]}
+  rows={[
+    ["**Preto**", "0", "0", "0", "Ausência total de luz"],
+    ["**Branco**", "255", "255", "255", "Máxima intensidade em todos os canais"],
+    ["**Vermelho puro**", "255", "0", "0", "Apenas canal R ativo"],
+    ["**Verde puro**", "0", "255", "0", "Apenas canal G ativo"],
+    ["**Azul puro**", "0", "0", "255", "Apenas canal B ativo"],
+    ["**Amarelo**", "255", "255", "0", "R + G (sem azul)"],
+    ["**Ciano**", "0", "255", "255", "G + B (sem vermelho)"],
+    ["**Magenta**", "255", "0", "255", "R + B (sem verde)"],
+    ["**Cinza médio**", "128", "128", "128", "Valores iguais = cinza (sem saturação)"],
+  ]}
+/>
+
+### Os Três Canais de uma Imagem RGB
+
+Uma imagem colorida RGB pode ser pensada como **três imagens em escala de cinza empilhadas** — uma para cada canal (R, G, B). A visualização abaixo mostra como cada canal individual contribui para a imagem final:
+
+<RGBPixelGrid />
+
+### O Espaço de Cores RGB
+
+O conjunto de todas as cores possíveis no sistema RGB pode ser visualizado como um **cubo tridimensional**, onde cada eixo representa um canal (R, G, B) variando de 0 a 255. Cada ponto dentro do cubo corresponde a uma cor única:
+
+<RGBColorSpace />
+
+### Memória Ocupada por uma Imagem RGB
+
+Como cada pixel agora armazena **3 valores** (R, G, B), o tamanho da imagem triplica em relação à escala de cinza:
+
+> **Tamanho (bits)** = M × N × 3 × b
+
+<MarkdownTable
+  headers={["Imagem (M×N)", "Bits/Canal", "Tamanho (sem compressão)"]}
+  rows={[
+    ["640×480", "8 bits", "640 × 480 × 3 × 8 = 7.372.800 bits ≈ **900 KB**"],
+    ["1920×1080", "8 bits", "1920 × 1080 × 3 × 8 = 49.766.400 bits ≈ **6 MB**"],
+    ["3840×2160 (4K)", "8 bits", "3840 × 2160 × 3 × 8 = 199.065.600 bits ≈ **24 MB**"],
+    ["3840×2160 (4K)", "16 bits", "3840 × 2160 × 3 × 16 = 398.131.200 bits ≈ **48 MB**"],
+  ]}
+/>
+
+> Por isso existem formatos de **compressão** como JPEG (com perdas) e PNG (sem perdas) — armazenar imagens sem compressão consumiria espaço impraticável.
+
+## Resumo da Aula
+
+Neste capítulo, exploramos os fundamentos da digitalização de imagens:
+
+- Uma **imagem digital** é uma **matriz M×N** de pixels, onde cada pixel armazena um valor numérico de intensidade na posição (linha, coluna).
+- A **digitalização** envolve dois processos: **amostragem** (discretização do espaço → define a resolução M×N) e **quantização** (discretização da intensidade → define os níveis com *b* bits).
+- Na **escala de cinza**, cada pixel usa *b* bits, resultando em **2ᵇ níveis** de intensidade. Com **8 bits** (256 níveis), as transições são imperceptíveis ao olho humano.
+- No sistema **RGB**, cada pixel armazena 3 valores (R, G, B), cada um com 8 bits, totalizando **24 bits por pixel** e **~16,7 milhões de cores** possíveis.
+- A **resolução espacial** (M×N) determina o nível de detalhe, enquanto a **profundidade de bits** determina a suavidade das transições de intensidade.
+- O tamanho de uma imagem sem compressão é **M × N × canais × bits**, o que justifica o uso de formatos de compressão como JPEG e PNG.

@@ -38,6 +38,20 @@
         "description": "Estudo do olho humano como sensor óptico biológico, com foco na retina, fotorreceptores e cones S, M, L. Comparação com câmeras digitais e o sensor CCD.",
         "video": null,
         "quizId": null
+      },
+      {
+        "id": "charpter-6",
+        "title": "Digitalização de Imagens",
+        "description": "Fundamentos da representação digital de imagens: pixels como matriz, escala de cinza com 2ᵇ níveis, sistema de cores RGB com 24 bits e ~16,7 milhões de cores.",
+        "video": null,
+        "quizId": null
+      },
+      {
+        "id": "charpter-7",
+        "title": "Outros Tipos de Sensores de Imagem e Aplicações",
+        "description": "Exploração de sensores além da câmera convencional: ultrassom, câmeras térmicas infravermelhas (IR), sensores de raio-X e sensores de profundidade, com aplicações práticas em medicina, indústria e segurança.",
+        "video": null,
+        "quizId": null
       }
     ]
   }
