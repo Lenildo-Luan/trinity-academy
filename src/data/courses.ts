@@ -52,5 +52,14 @@ export const courses: Course[] = [
       "https://ik.imagekit.io/qfmgarse7/thomas-t-OPpCbAAKWv8-unsplash.avif",
     available: true,
   },
+  {
+    id: "redes-de-computadores",
+    title: "Redes de Computadores",
+    description:
+      "Domine os fundamentos das redes de computadores, desde a camada de transporte até protocolos como TCP e UDP, com foco nos conceitos essenciais para engenharia de computação.",
+    backgroundImage:
+      "https://ik.imagekit.io/qfmgarse7/thomas-t-OPpCbAAKWv8-unsplash.avif",
+    available: true,
+  },
 ];
 

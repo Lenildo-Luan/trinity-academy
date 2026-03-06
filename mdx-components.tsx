@@ -69,6 +69,14 @@ import {
   SensorApplicationsDashboard,
   SeismicSonarMapping,
 } from "./src/components/image-sensors-p5-examples";
+import {
+  LogicalCommunication,
+  HouseLetterAnalogy,
+  TransportVsNetworkLayer,
+  TCPvsUDP,
+  MultiplexingDemux,
+  SegmentEncapsulation,
+} from "./src/components/transport-layer-p5-examples";
 
 function getTextContent(node: ReactNode): string {
   if (typeof node === "string") return node;
@@ -252,6 +260,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     SensorSpectrumOverview,
     SensorApplicationsDashboard,
     SeismicSonarMapping,
+    LogicalCommunication,
+    HouseLetterAnalogy,
+    TransportVsNetworkLayer,
+    TCPvsUDP,
+    MultiplexingDemux,
+    SegmentEncapsulation,
     ...components,
   };
 }

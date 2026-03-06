@@ -1,0 +1,237 @@
+# Introdução aos Serviços e Protocolos de Transporte
+
+Quando você acessa uma página web, envia um e-mail ou faz uma chamada de vídeo, múltiplas aplicações no seu computador trocam dados simultaneamente com aplicações em outros computadores espalhados pelo mundo. Mas como o sistema operacional sabe que os dados que chegam pela rede devem ir para o navegador e não para o e-mail? A resposta está na **camada de transporte** — a camada do modelo TCP/IP responsável por fornecer **comunicação lógica entre processos** em hosts distintos. Neste capítulo, vamos entender o papel dessa camada, diferenciá-la da camada de rede, e conhecer os dois protocolos que a dominam: **TCP** e **UDP**.
+
+## O Papel da Camada de Transporte
+
+A camada de transporte é o elo entre as **aplicações** (que produzem e consomem dados) e a **infraestrutura de rede** (que move pacotes entre máquinas). Sua função central é:
+
+> Fornecer **comunicação lógica** entre **processos** executando em **hosts diferentes**.
+
+A palavra-chave aqui é *lógica*: do ponto de vista dos processos, eles se comunicam *diretamente* um com o outro, como se estivessem conectados por um fio dedicado. Na realidade, os dados atravessam dezenas de roteadores, links e switches — mas a camada de transporte **abstrai** toda essa complexidade.
+
+<LogicalCommunication />
+
+### O que Significa "Comunicação Lógica"?
+
+Imagine dois processos: um servidor HTTP rodando na porta 80 de um computador em São Paulo e um navegador rodando em um notebook em Tóquio. Quando o navegador faz uma requisição, a camada de transporte:
+
+1. No **emissor**: recebe os dados da aplicação, adiciona um **cabeçalho de transporte** (com portas de origem e destino), criando um **segmento**, e entrega à camada de rede.
+2. No **receptor**: recebe o segmento da camada de rede, examina o cabeçalho, e entrega os dados ao **processo correto** baseado no número de porta.
+
+Os processos não precisam saber nada sobre roteadores, caminhos ou topologia de rede. Para eles, a comunicação é "direta" — essa é a abstração da camada de transporte.
+
+## Camada de Transporte vs. Camada de Rede
+
+Uma confusão comum é não distinguir claramente a camada de transporte da camada de rede. Ambas movem dados, mas em **escopos diferentes**:
+
+<TransportVsNetworkLayer />
+
+<MarkdownTable
+  headers={["Característica", "Camada de Rede (IP)", "Camada de Transporte (TCP/UDP)"]}
+  rows={[
+    ["**Entidade de comunicação**", "Host ↔ Host", "Processo ↔ Processo"],
+    ["**Endereçamento**", "Endereço IP (identifica a máquina)", "Endereço IP + Porta (identifica o processo)"],
+    ["**Unidade de dados**", "Datagrama IP", "Segmento (TCP) / Datagrama (UDP)"],
+    ["**Responsabilidade**", "Roteamento entre redes, encaminhamento de pacotes", "Entrega ao processo correto, (opcionalmente) confiabilidade"],
+    ["**Confiabilidade**", "Melhor esforço — sem garantias", "Depende: TCP oferece garantias, UDP não"],
+    ["**Analogia (casas)**", "Serviço Postal — entrega na casa certa", "João/Lúcia — entrega à pessoa certa dentro da casa"],
+  ]}
+/>
+
+> **Resumo em uma frase:** A camada de rede entrega o pacote na **máquina** certa; a camada de transporte entrega os dados no **processo** certo dentro daquela máquina.
+
+## A Analogia das Casas e Cartas
+
+Para tornar esses conceitos mais concretos, vamos usar uma analogia clássica das redes de computadores.
+
+Imagine duas famílias morando em casas distantes:
+
+- Na **Casa do João** moram Ana, Pedro e Maria.
+- Na **Casa da Lúcia** moram Carlos, Luísa e Bruno.
+
+Cada membro de uma família se comunica com um membro da outra através de **cartas**. O processo funciona assim:
+
+1. **Ana** escreve uma carta para **Carlos** e a entrega ao **João** (responsável pelas cartas na casa).
+2. **João** coloca a carta no envelope, escreve o endereço da casa da Lúcia, e deposita na **caixa de correio**.
+3. O **Serviço Postal** transporta a carta até a casa da Lúcia.
+4. **Lúcia** recolhe a carta da caixa de correio, vê que é para Carlos, e a entrega a ele.
+
+<HouseLetterAnalogy />
+
+### Mapeamento da Analogia
+
+<MarkdownTable
+  headers={["Mundo Real (Analogia)", "Redes de Computadores", "Camada"]}
+  rows={[
+    ["**Pessoas** (Ana, Carlos, ...)", "**Processos** (navegador, servidor HTTP, ...)", "Aplicação"],
+    ["**Cartas**", "**Mensagens da aplicação**", "Aplicação"],
+    ["**João / Lúcia** (coletam e entregam cartas)", "**Camada de transporte** (multiplexação/demultiplexação)", "Transporte"],
+    ["**Envelope** (com endereço da casa + nome do destinatário)", "**Segmento** (com IP + porta de destino)", "Transporte"],
+    ["**Serviço Postal** (transporta entre casas)", "**Camada de rede** (roteamento IP entre hosts)", "Rede"],
+    ["**Endereço da casa**", "**Endereço IP** do host", "Rede"],
+    ["**Nome da pessoa no envelope**", "**Número de porta** do processo", "Transporte"],
+  ]}
+/>
+
+### O que João e Lúcia NÃO fazem
+
+Um ponto crucial da analogia: João e Lúcia (camada de transporte) **não controlam** o serviço postal (camada de rede). Se o serviço postal perder cartas, atrasar entregas ou entregar fora de ordem, João e Lúcia não podem impedir isso. O que eles *podem* fazer é:
+
+- **Numerar as cartas** para que o destinatário saiba se faltou alguma (→ TCP: números de sequência)
+- **Pedir confirmação de recebimento** (→ TCP: ACKs)
+- **Reenviar cartas** que não foram confirmadas (→ TCP: retransmissão)
+- Ou simplesmente **entregar as cartas como chegam**, sem garantias extras (→ UDP)
+
+## Multiplexação e Demultiplexação
+
+O serviço mais fundamental da camada de transporte é a **multiplexação/demultiplexação** — o mecanismo que permite que múltiplos processos compartilhem a mesma conexão de rede.
+
+### Multiplexação (no emissor)
+
+Múltiplos processos (HTTP na porta 80, SSH na porta 22, DNS na porta 53) entregam dados à camada de transporte. A camada de transporte **combina** esses dados em segmentos identificados por portas de origem e destino, e os entrega à camada de rede por um único canal IP.
+
+### Demultiplexação (no receptor)
+
+A camada de transporte no receptor examina o **número de porta de destino** em cada segmento recebido e entrega os dados ao processo correto.
+
+<MultiplexingDemux />
+
+<MarkdownTable
+  headers={["Conceito", "Definição", "Identificador Usado"]}
+  rows={[
+    ["**Multiplexação**", "Combinar dados de múltiplos processos em segmentos para envio pela rede", "Porta de origem + porta de destino no cabeçalho"],
+    ["**Demultiplexação**", "Examinar o segmento recebido e entregar ao processo correto", "Porta de destino no cabeçalho do segmento"],
+    ["**Socket**", "Interface entre o processo e a camada de transporte — o 'ponto de acesso'", "Combinação de IP + porta (ex: 192.168.1.10:80)"],
+  ]}
+/>
+
+### Portas: O Endereço do Processo
+
+As portas são números de 16 bits (0 a 65535) que identificam processos dentro de um host:
+
+<MarkdownTable
+  headers={["Faixa de Portas", "Nome", "Descrição", "Exemplos"]}
+  rows={[
+    ["**0–1023**", "Well-known ports", "Reservadas para serviços padrão (requer privilégio root/admin)", "HTTP (80), HTTPS (443), SSH (22), DNS (53), SMTP (25)"],
+    ["**1024–49151**", "Registered ports", "Registradas na IANA para aplicações específicas", "MySQL (3306), PostgreSQL (5432), Redis (6379)"],
+    ["**49152–65535**", "Dynamic/Ephemeral ports", "Atribuídas dinamicamente pelo SO para conexões temporárias", "Porta do cliente em uma conexão HTTP"],
+  ]}
+/>
+
+## Encapsulamento: De Dados a Segmentos
+
+Quando a camada de transporte recebe dados da aplicação, ela os **encapsula** adicionando um cabeçalho próprio. Esse processo cria o **segmento** (TCP) ou **datagrama** (UDP):
+
+<SegmentEncapsulation />
+
+<MarkdownTable
+  headers={["Camada", "Unidade de Dados", "Cabeçalho Adicionado", "Informações no Cabeçalho"]}
+  rows={[
+    ["**Aplicação**", "Mensagem (dados puros)", "—", "Dados da aplicação (ex: HTML, JSON)"],
+    ["**Transporte**", "Segmento (TCP) / Datagrama (UDP)", "Header TCP ou UDP", "Portas origem/destino, nº sequência, flags, checksum"],
+    ["**Rede**", "Datagrama IP", "Header IP", "IPs origem/destino, TTL, protocolo, checksum"],
+    ["**Enlace**", "Quadro (Frame)", "Header + Trailer de enlace", "MACs origem/destino, tipo, FCS"],
+  ]}
+/>
+
+> Cada camada **encapsula** os dados da camada superior com seu próprio cabeçalho. No receptor, o processo inverso (**desencapsulamento**) remove os cabeçalhos camada por camada até que os dados cheguem à aplicação.
+
+## Os Dois Protocolos da Camada de Transporte
+
+A camada de transporte da Internet oferece **dois protocolos** com filosofias radicalmente diferentes:
+
+<TCPvsUDP />
+
+### TCP — Transmission Control Protocol
+
+O TCP é o protocolo **confiável e orientado a conexão** da camada de transporte. Ele garante que os dados cheguem ao destino **completos**, **ordenados** e **sem erros**. Para isso, utiliza mecanismos sofisticados:
+
+<MarkdownTable
+  headers={["Mecanismo", "O que Faz", "Como Funciona"]}
+  rows={[
+    ["**Estabelecimento de conexão** (3-way handshake)", "Cria uma conexão lógica antes de transferir dados", "SYN → SYN-ACK → ACK (três mensagens para sincronizar)"],
+    ["**Números de sequência**", "Numera cada byte transmitido para garantir ordenação", "Receptor reordena segmentos que chegam fora de ordem"],
+    ["**Confirmação (ACK)**", "Receptor confirma o recebimento de cada segmento", "Se o ACK não chega no tempo esperado, o emissor retransmite"],
+    ["**Controle de fluxo**", "Evita que o emissor sobrecarregue o receptor", "Receptor anuncia tamanho da janela (window) disponível"],
+    ["**Controle de congestionamento**", "Evita que o emissor sobrecarregue a rede", "Algoritmos como AIMD, slow start, fast recovery"],
+    ["**Checksum**", "Detecta erros de transmissão nos dados", "Soma de verificação sobre cabeçalho + dados"],
+  ]}
+/>
+
+**Aplicações típicas do TCP:**
+
+- **HTTP/HTTPS** (navegação web) — cada byte da página precisa chegar correto
+- **SMTP/IMAP** (e-mail) — mensagens não podem perder pedaços
+- **FTP** (transferência de arquivos) — integridade total dos dados
+- **SSH** (acesso remoto) — cada comando precisa ser entregue na ordem
+
+### UDP — User Datagram Protocol
+
+O UDP é o protocolo **simples e sem conexão**. Ele oferece o mínimo: multiplexação/demultiplexação e detecção de erros (checksum). **Não** garante entrega, ordem ou retransmissão.
+
+<MarkdownTable
+  headers={["Característica", "UDP"]}
+  rows={[
+    ["**Conexão**", "Sem conexão — envia datagramas independentes"],
+    ["**Confiabilidade**", "Não confiável — dados podem ser perdidos, duplicados ou chegar fora de ordem"],
+    ["**Overhead**", "Mínimo — cabeçalho de apenas 8 bytes (vs 20+ do TCP)"],
+    ["**Latência**", "Menor possível — sem handshake, sem espera por ACKs"],
+    ["**Controle de fluxo**", "Nenhum — aplicação envia na velocidade que quiser"],
+    ["**Controle de congestionamento**", "Nenhum — pode inundar a rede"],
+  ]}
+/>
+
+**Aplicações típicas do UDP:**
+
+- **DNS** — consultas rápidas de resolução de nomes (1 pergunta, 1 resposta)
+- **VoIP / Videoconferência** — latência importa mais que perder um pacote
+- **Streaming ao vivo** — um quadro perdido é melhor que esperar retransmissão
+- **Jogos online** — posição do jogador precisa chegar rápido, não perfeita
+- **DHCP** — atribuição de endereço IP (broadcast)
+
+### Comparação Direta: TCP vs UDP
+
+<MarkdownTable
+  headers={["Aspecto", "TCP", "UDP"]}
+  rows={[
+    ["**Tipo de serviço**", "Orientado a conexão (connection-oriented)", "Sem conexão (connectionless)"],
+    ["**Confiabilidade**", "Confiável — entrega garantida, ordenada, sem erros", "Não confiável — melhor esforço, sem garantias"],
+    ["**Ordem dos dados**", "Garantida — números de sequência reordenam", "Não garantida — podem chegar fora de ordem"],
+    ["**Controle de fluxo**", "Sim — janela deslizante (sliding window)", "Não"],
+    ["**Controle de congestionamento**", "Sim — slow start, AIMD", "Não"],
+    ["**Handshake**", "Sim — 3-way handshake antes de enviar dados", "Não — envia imediatamente"],
+    ["**Cabeçalho**", "20–60 bytes", "8 bytes"],
+    ["**Velocidade**", "Mais lento (overhead de confiabilidade)", "Mais rápido (overhead mínimo)"],
+    ["**Uso típico**", "Web, e-mail, transferência de arquivos, SSH", "DNS, VoIP, streaming, jogos, DHCP"],
+  ]}
+/>
+
+### Quando Usar Cada Um?
+
+A escolha entre TCP e UDP depende dos **requisitos da aplicação**:
+
+<MarkdownTable
+  headers={["Requisito da Aplicação", "Protocolo Recomendado", "Justificativa"]}
+  rows={[
+    ["Dados devem chegar completos e na ordem", "**TCP**", "Retransmissão e números de sequência garantem integridade"],
+    ["Baixa latência é mais importante que confiabilidade", "**UDP**", "Sem handshake e sem espera por ACKs = mínima latência"],
+    ["Aplicação tolera perda ocasional de dados", "**UDP**", "Perder um quadro de vídeo é melhor que atrasar todos os seguintes"],
+    ["Aplicação precisa de controle de fluxo", "**TCP**", "TCP ajusta a taxa de envio à capacidade do receptor"],
+    ["Comunicação é do tipo requisição-resposta simples", "**UDP**", "DNS: uma pergunta, uma resposta — overhead do TCP é desnecessário"],
+    ["Transmissão de grandes volumes de dados", "**TCP**", "Controle de congestionamento evita perdas massivas na rede"],
+  ]}
+/>
+
+## Resumo da Aula
+
+Neste capítulo introdutório, exploramos os fundamentos da camada de transporte:
+
+- A camada de transporte fornece **comunicação lógica entre processos** em hosts distintos, abstraindo toda a complexidade da rede física.
+- A **camada de rede** entrega pacotes entre **hosts** (endereço IP); a **camada de transporte** entrega dados entre **processos** (endereço IP + porta).
+- Na **analogia das casas e cartas**, João e Lúcia representam a camada de transporte: coletam cartas de cada pessoa (processo), endereçam, e entregam ao serviço postal (camada de rede).
+- **Multiplexação** combina dados de vários processos para envio; **demultiplexação** distribui os dados recebidos ao processo correto, usando **portas** (0–65535).
+- O **TCP** é confiável e orientado a conexão: garante entrega ordenada, retransmissão, controle de fluxo e congestionamento — ideal para web, e-mail e transferência de arquivos.
+- O **UDP** é simples e sem conexão: oferece apenas multiplexação e checksum, priorizando **velocidade** e **baixa latência** — ideal para DNS, VoIP, streaming e jogos.
+- O **encapsulamento** adiciona cabeçalhos camada por camada: dados → segmento (TCP/UDP header) → datagrama (IP header) → quadro (enlace header).
+
