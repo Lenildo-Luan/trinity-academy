@@ -31,17 +31,8 @@ export const courses: Course[] = [
     description:
       "Domine o Git e o GitHub do zero: controle de versão, colaboração em equipe e as ferramentas essenciais que todo desenvolvedor profissional precisa dominar.",
     backgroundImage:
-      "https://ik.imagekit.io/qfmgarse7/github-background.avif",
+      "https://ik.imagekit.io/qfmgarse7/roman-synkevych-wX2L8L-fGeA-unsplash.avif",
     available: true,
-  },
-  {
-    id: "pre-calculo",
-    title: "Pré-cálculo",
-    description:
-      "Prepare-se para dominar os conceitos essenciais de pré-cálculo, incluindo funções, gráficos e trigonometria, estabelecendo uma base sólida para o sucesso em matemática avançada.",
-    backgroundImage:
-      "https://ik.imagekit.io/qfmgarse7/thomas-t-OPpCbAAKWv8-unsplash.avif",
-    available: false,
   },
   {
     id: "materiais-micro-nano-tecnologia",
@@ -49,7 +40,7 @@ export const courses: Course[] = [
     description:
       "Explore o fascinante mundo dos materiais para micro e nano tecnologia, compreendendo sensores, atuadores e os princípios fundamentais que impulsionam a engenharia moderna em escala micro e nanométrica.",
     backgroundImage:
-      "https://ik.imagekit.io/qfmgarse7/thomas-t-OPpCbAAKWv8-unsplash.avif",
+      "https://ik.imagekit.io/qfmgarse7/d-koi-5nI9N2wNcBU-unsplash.avif",
     available: true,
   },
   {
@@ -58,7 +49,7 @@ export const courses: Course[] = [
     description:
       "Domine os fundamentos das redes de computadores, desde a camada de transporte até protocolos como TCP e UDP, com foco nos conceitos essenciais para engenharia de computação.",
     backgroundImage:
-      "https://ik.imagekit.io/qfmgarse7/thomas-t-OPpCbAAKWv8-unsplash.avif",
+      "https://ik.imagekit.io/qfmgarse7/jordan-harrison-40XgDxBfYXM-unsplash.avif",
     available: true,
   },
 ];
