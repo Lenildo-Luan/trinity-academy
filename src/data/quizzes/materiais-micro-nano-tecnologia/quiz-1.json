@@ -1,0 +1,109 @@
+{
+  "id": "quiz-1",
+  "title": "Quiz — Introdução a Sensores e Atuadores",
+  "description": "Teste seus conhecimentos sobre os conceitos fundamentais de sensores, atuadores, transdução e malhas de controle.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "O que é transdução no contexto de sensores?",
+      "alternatives": [
+        { "id": "a1", "text": "O processo de amplificar um sinal elétrico", "isCorrect": false, "explanation": "Amplificação é o aumento da intensidade de um sinal, não a conversão entre formas de energia." },
+        { "id": "a2", "text": "O processo de converter uma forma de energia em outra", "isCorrect": true, "explanation": "Correto! Transdução é a conversão de uma forma de energia (ex.: térmica) em outra (ex.: elétrica), que é a função fundamental de um sensor." },
+        { "id": "a3", "text": "O processo de armazenar energia em um capacitor", "isCorrect": false, "explanation": "Armazenamento de energia em capacitor é um processo elétrico, não relacionado diretamente à transdução sensorial." },
+        { "id": "a4", "text": "O processo de transmitir dados por radiofrequência", "isCorrect": false, "explanation": "Transmissão de dados é uma etapa de comunicação, não de transdução." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Qual é a diferença fundamental entre sensores ativos e sensores passivos?",
+      "alternatives": [
+        { "id": "a1", "text": "Sensores ativos são digitais e passivos são analógicos", "isCorrect": false, "explanation": "A classificação ativo/passivo não se refere ao tipo de sinal (digital ou analógico)." },
+        { "id": "a2", "text": "Sensores ativos são mais precisos que os passivos", "isCorrect": false, "explanation": "A precisão depende do sensor específico, não da classificação ativo/passivo." },
+        { "id": "a3", "text": "Sensores ativos geram seu próprio sinal elétrico, enquanto passivos precisam de alimentação externa", "isCorrect": true, "explanation": "Correto! Sensores ativos (como termopares) geram sinal próprio, enquanto passivos (como termistores) precisam de circuito externo para medir a variação de propriedade elétrica." },
+        { "id": "a4", "text": "Sensores ativos funcionam apenas com luz e passivos apenas com calor", "isCorrect": false, "explanation": "Ambas as categorias podem operar com diversos tipos de energia." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Em um sistema de controle de temperatura, qual componente compara a temperatura medida com o setpoint e toma a decisão de ação?",
+      "alternatives": [
+        { "id": "a1", "text": "O sensor (termistor)", "isCorrect": false, "explanation": "O sensor apenas mede a temperatura e envia o sinal — não toma decisões." },
+        { "id": "a2", "text": "O atuador (compressor do ar-condicionado)", "isCorrect": false, "explanation": "O atuador executa a ação, mas não toma a decisão." },
+        { "id": "a3", "text": "O controlador", "isCorrect": true, "explanation": "Correto! O controlador recebe o sinal do sensor, compara com o setpoint e decide se o atuador deve ser acionado." },
+        { "id": "a4", "text": "O display de temperatura", "isCorrect": false, "explanation": "O display apenas exibe informações — não participa da lógica de controle." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Qual característica de um sensor indica a menor variação da grandeza física que ele consegue detectar?",
+      "alternatives": [
+        { "id": "a1", "text": "Sensibilidade", "isCorrect": false, "explanation": "Sensibilidade é a relação entre variação de saída e variação de entrada, não a menor variação detectável." },
+        { "id": "a2", "text": "Faixa de medição (range)", "isCorrect": false, "explanation": "A faixa de medição é o intervalo total de valores que o sensor pode medir." },
+        { "id": "a3", "text": "Resolução", "isCorrect": true, "explanation": "Correto! Resolução é a menor variação da grandeza física que o sensor consegue distinguir." },
+        { "id": "a4", "text": "Linearidade", "isCorrect": false, "explanation": "Linearidade indica se a relação entrada-saída é proporcional dentro da faixa de operação." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Qual tipo de atuador é mais adequado para aplicações que exigem movimentos extremamente precisos em escala nanométrica?",
+      "alternatives": [
+        { "id": "a1", "text": "Atuador pneumático", "isCorrect": false, "explanation": "Atuadores pneumáticos são rápidos mas não oferecem a precisão nanométrica necessária." },
+        { "id": "a2", "text": "Atuador hidráulico", "isCorrect": false, "explanation": "Atuadores hidráulicos são ideais para grandes forças, não para precisão nanométrica." },
+        { "id": "a3", "text": "Atuador piezoelétrico", "isCorrect": true, "explanation": "Correto! Atuadores piezoelétricos oferecem movimentos extremamente precisos em escala micro e nanométrica, sendo usados em microscópios de força atômica (AFM)." },
+        { "id": "a4", "text": "Motor DC convencional", "isCorrect": false, "explanation": "Motores DC convencionais não possuem resolução suficiente para posicionamento nanométrico." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "O que significa a sigla MEMS?",
+      "alternatives": [
+        { "id": "a1", "text": "Micro-Electronic Measurement Systems", "isCorrect": false, "explanation": "A sigla correta não se refere a 'Measurement Systems'." },
+        { "id": "a2", "text": "Micro-Electro-Mechanical Systems", "isCorrect": true, "explanation": "Correto! MEMS significa Micro-Electro-Mechanical Systems — dispositivos miniaturizados que integram sensores, atuadores e eletrônica em um único chip." },
+        { "id": "a3", "text": "Multiple Energy Management Systems", "isCorrect": false, "explanation": "Esta não é a definição correta de MEMS." },
+        { "id": "a4", "text": "Magnetic Electromagnetic Modulation Systems", "isCorrect": false, "explanation": "MEMS não se refere a modulação eletromagnética." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual é a ordem correta do fluxo em uma malha de controle?",
+      "alternatives": [
+        { "id": "a1", "text": "Controlador → Sensor → Atuador → Processo", "isCorrect": false, "explanation": "O sensor deve medir primeiro para que o controlador tenha informação para processar." },
+        { "id": "a2", "text": "Sensor → Controlador → Atuador → Processo", "isCorrect": true, "explanation": "Correto! O sensor mede a grandeza, o controlador processa a informação e decide, o atuador executa a ação sobre o processo." },
+        { "id": "a3", "text": "Atuador → Sensor → Controlador → Processo", "isCorrect": false, "explanation": "O atuador age por último, não primeiro." },
+        { "id": "a4", "text": "Processo → Atuador → Controlador → Sensor", "isCorrect": false, "explanation": "O sensor precisa medir o processo antes que qualquer ação seja tomada." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Qual das seguintes NÃO é uma vantagem da miniaturização de sensores e atuadores (MEMS/NEMS)?",
+      "alternatives": [
+        { "id": "a1", "text": "Menor consumo de energia", "isCorrect": false, "explanation": "Menor consumo de energia é sim uma vantagem da miniaturização." },
+        { "id": "a2", "text": "Maior sensibilidade devido a efeitos quânticos", "isCorrect": false, "explanation": "Na escala nano, efeitos quânticos permitem medições mais precisas — isso é uma vantagem." },
+        { "id": "a3", "text": "Maior capacidade de gerar grandes forças mecânicas", "isCorrect": true, "explanation": "Correto! Dispositivos miniaturizados são limitados em força mecânica — essa é uma limitação, não uma vantagem." },
+        { "id": "a4", "text": "Fabricação em massa a baixo custo", "isCorrect": false, "explanation": "A fabricação em massa usando técnicas de microfabricação é uma vantagem significativa." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Um termistor é um exemplo de qual tipo de sensor?",
+      "alternatives": [
+        { "id": "a1", "text": "Sensor ativo — gera tensão proporcional à temperatura", "isCorrect": false, "explanation": "O termistor não gera tensão própria; ele muda sua resistência com a temperatura." },
+        { "id": "a2", "text": "Sensor passivo — sua resistência varia com a temperatura, mas precisa de alimentação externa", "isCorrect": true, "explanation": "Correto! O termistor é um sensor passivo: sua resistência elétrica varia com a temperatura, mas ele precisa de um circuito externo para medir essa variação." },
+        { "id": "a3", "text": "Atuador — converte eletricidade em calor", "isCorrect": false, "explanation": "Um termistor é um sensor, não um atuador." },
+        { "id": "a4", "text": "Controlador — processa sinais térmicos", "isCorrect": false, "explanation": "Um termistor é um sensor de medição, não um controlador." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Qual aplicação utiliza micro-espelhos (DMD) como atuadores MEMS?",
+      "alternatives": [
+        { "id": "a1", "text": "Medição de pressão arterial", "isCorrect": false, "explanation": "Medição de pressão utiliza sensores piezoresistivos, não micro-espelhos." },
+        { "id": "a2", "text": "Projetores DLP (Digital Light Processing)", "isCorrect": true, "explanation": "Correto! Projetores DLP usam milhões de micro-espelhos DMD, cada um inclinável individualmente, para projetar imagens." },
+        { "id": "a3", "text": "Sistemas de navegação GPS", "isCorrect": false, "explanation": "GPS utiliza sinais de satélites, não micro-espelhos." },
+        { "id": "a4", "text": "Sensores de gases tóxicos", "isCorrect": false, "explanation": "Sensores de gases usam princípios químicos, não ópticos com micro-espelhos." }
+      ]
+    }
+  ]
+}
+

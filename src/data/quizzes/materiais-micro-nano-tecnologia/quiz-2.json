@@ -1,0 +1,109 @@
+{
+  "id": "quiz-2",
+  "title": "Quiz — Tipos de Sensores e Atuadores",
+  "description": "Teste seus conhecimentos sobre as categorias de sensores classificados por grandeza medida e os principais tipos de atuadores.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual sensor utiliza o princípio de variação de indutância com o deslocamento para medir posição com alta precisão?",
+      "alternatives": [
+        { "id": "a1", "text": "Potenciômetro", "isCorrect": false, "explanation": "O potenciômetro usa variação de resistência, não de indutância." },
+        { "id": "a2", "text": "Encoder óptico", "isCorrect": false, "explanation": "O encoder óptico conta pulsos de luz interrompida por um disco com fendas." },
+        { "id": "a3", "text": "LVDT (Transformador Diferencial Linear)", "isCorrect": true, "explanation": "Correto! O LVDT é um transformador diferencial que mede deslocamento pela variação de indutância, oferecendo alta precisão." },
+        { "id": "a4", "text": "Sensor ultrassônico", "isCorrect": false, "explanation": "O sensor ultrassônico mede distância pelo tempo de retorno de ondas sonoras." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Sensores de velocidade baseados no efeito Hall detectam variações de:",
+      "alternatives": [
+        { "id": "a1", "text": "Temperatura", "isCorrect": false, "explanation": "Sensores de efeito Hall não medem temperatura." },
+        { "id": "a2", "text": "Campo magnético", "isCorrect": true, "explanation": "Correto! Sensores de efeito Hall detectam variações de campo magnético causadas pela rotação de ímãs, permitindo medir velocidade angular." },
+        { "id": "a3", "text": "Pressão atmosférica", "isCorrect": false, "explanation": "Pressão é medida por sensores piezoresistivos ou capacitivos." },
+        { "id": "a4", "text": "Luminosidade", "isCorrect": false, "explanation": "Luminosidade é medida por fotodiodos ou LDRs, não por sensores Hall." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Qual tipo de sensor de presença tem o MAIOR alcance de detecção?",
+      "alternatives": [
+        { "id": "a1", "text": "Sensor capacitivo", "isCorrect": false, "explanation": "Sensores capacitivos têm alcance de poucos centímetros." },
+        { "id": "a2", "text": "Sensor indutivo", "isCorrect": false, "explanation": "Sensores indutivos detectam apenas metais a poucos milímetros de distância." },
+        { "id": "a3", "text": "Sensor ultrassônico", "isCorrect": true, "explanation": "Correto! Sensores ultrassônicos podem detectar objetos a vários metros de distância, muito mais que capacitivos ou indutivos." },
+        { "id": "a4", "text": "Sensor de contato mecânico", "isCorrect": false, "explanation": "Sensores de contato requerem toque físico — alcance zero." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Qual princípio físico é utilizado por sensores de pressão do tipo strain gauge?",
+      "alternatives": [
+        { "id": "a1", "text": "Efeito fotoelétrico", "isCorrect": false, "explanation": "O efeito fotoelétrico é usado em fotodiodos, não em strain gauges." },
+        { "id": "a2", "text": "Efeito piezoresistivo — variação de resistência com deformação mecânica", "isCorrect": true, "explanation": "Correto! Strain gauges mudam sua resistência elétrica quando são deformados (esticados ou comprimidos), permitindo medir pressão e força." },
+        { "id": "a3", "text": "Efeito termoelétrico", "isCorrect": false, "explanation": "O efeito termoelétrico é usado em termopares para medir temperatura." },
+        { "id": "a4", "text": "Efeito Doppler", "isCorrect": false, "explanation": "O efeito Doppler é usado em radares para medir velocidade, não pressão." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Um radar Doppler mede velocidade baseado em qual fenômeno?",
+      "alternatives": [
+        { "id": "a1", "text": "Reflexão de luz visível", "isCorrect": false, "explanation": "Radar Doppler usa ondas de rádio ou micro-ondas, não luz visível." },
+        { "id": "a2", "text": "Variação de frequência da onda refletida por um objeto em movimento", "isCorrect": true, "explanation": "Correto! O efeito Doppler causa uma mudança na frequência da onda refletida quando o objeto está em movimento — essa diferença é proporcional à velocidade." },
+        { "id": "a3", "text": "Variação de intensidade magnética", "isCorrect": false, "explanation": "O radar Doppler não mede campos magnéticos." },
+        { "id": "a4", "text": "Variação de temperatura do ar entre o radar e o objeto", "isCorrect": false, "explanation": "A temperatura do ar não é o princípio de funcionamento do radar Doppler." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual tipo de atuador é mais adequado para gerar grandes forças em máquinas pesadas como prensas industriais?",
+      "alternatives": [
+        { "id": "a1", "text": "Motor de passo", "isCorrect": false, "explanation": "Motores de passo são precisos mas geram forças relativamente baixas." },
+        { "id": "a2", "text": "Atuador piezoelétrico", "isCorrect": false, "explanation": "Atuadores piezoelétricos são para movimentos de precisão em escala micro/nano, não para grandes forças." },
+        { "id": "a3", "text": "Atuador hidráulico", "isCorrect": true, "explanation": "Correto! Atuadores hidráulicos usam fluidos pressurizados para gerar forças muito elevadas, ideais para prensas e máquinas pesadas." },
+        { "id": "a4", "text": "Solenoide eletromagnético", "isCorrect": false, "explanation": "Solenoides são usados em válvulas e travas, mas não geram as grandes forças necessárias para prensas industriais." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Um sensor indutivo detecta apenas objetos feitos de qual material?",
+      "alternatives": [
+        { "id": "a1", "text": "Plástico", "isCorrect": false, "explanation": "Plástico não é detectado por sensores indutivos, pois não é condutor." },
+        { "id": "a2", "text": "Metal", "isCorrect": true, "explanation": "Correto! Sensores indutivos geram um campo magnético e detectam a perturbação causada pela presença de objetos metálicos." },
+        { "id": "a3", "text": "Vidro", "isCorrect": false, "explanation": "Vidro não interage com o campo magnético do sensor indutivo." },
+        { "id": "a4", "text": "Madeira", "isCorrect": false, "explanation": "Madeira não é condutora e não é detectada por sensores indutivos." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Em automação industrial, qual sensor é tipicamente usado no sistema ABS (Anti-lock Braking System) de veículos?",
+      "alternatives": [
+        { "id": "a1", "text": "Termistor NTC", "isCorrect": false, "explanation": "Termistores medem temperatura, não velocidade de rodas." },
+        { "id": "a2", "text": "Sensor de efeito Hall", "isCorrect": true, "explanation": "Correto! Sensores de efeito Hall são usados no ABS para medir a velocidade de rotação das rodas, detectando variações de campo magnético." },
+        { "id": "a3", "text": "Sensor de pH", "isCorrect": false, "explanation": "Sensores de pH são para medições químicas, não automotivas." },
+        { "id": "a4", "text": "Célula de carga", "isCorrect": false, "explanation": "Células de carga medem peso/força, não velocidade de rotação." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Qual a principal vantagem de atuadores pneumáticos em ambientes industriais?",
+      "alternatives": [
+        { "id": "a1", "text": "Precisão nanométrica de posicionamento", "isCorrect": false, "explanation": "Atuadores pneumáticos não oferecem precisão nanométrica — isso é típico de atuadores piezoelétricos." },
+        { "id": "a2", "text": "Rapidez e confiabilidade com ar comprimido", "isCorrect": true, "explanation": "Correto! Atuadores pneumáticos são rápidos, confiáveis e amplamente utilizados em ambientes industriais por usarem ar comprimido, que é limpo e seguro." },
+        { "id": "a3", "text": "Capacidade de gerar forças maiores que cilindros hidráulicos", "isCorrect": false, "explanation": "Cilindros hidráulicos geram forças maiores que pneumáticos." },
+        { "id": "a4", "text": "Funcionamento silencioso sem necessidade de compressor", "isCorrect": false, "explanation": "Atuadores pneumáticos necessitam de compressor e não são silenciosos." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Um RTD (Resistance Temperature Detector) mede temperatura através de:",
+      "alternatives": [
+        { "id": "a1", "text": "Geração de tensão pela diferença de temperatura entre dois metais diferentes", "isCorrect": false, "explanation": "Isso descreve um termopar, não um RTD." },
+        { "id": "a2", "text": "Variação de resistência de um metal puro (geralmente platina) com a temperatura", "isCorrect": true, "explanation": "Correto! RTDs usam a variação previsível e linear da resistência de metais puros (como platina Pt100) com a temperatura." },
+        { "id": "a3", "text": "Emissão de radiação infravermelha proporcional à temperatura", "isCorrect": false, "explanation": "Isso descreve um pirômetro, não um RTD." },
+        { "id": "a4", "text": "Variação de capacitância com a temperatura", "isCorrect": false, "explanation": "RTDs são baseados em variação de resistência, não de capacitância." }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,109 @@
+{
+  "id": "quiz-6",
+  "title": "Quiz — Digitalização de Imagens",
+  "description": "Teste seus conhecimentos sobre pixels, matrizes de imagem, amostragem, quantização, escala de cinza e sistema de cores RGB.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "O que é um pixel?",
+      "alternatives": [
+        { "id": "a1", "text": "Uma unidade de medida de resolução de tela", "isCorrect": false, "explanation": "Pixel é o elemento da imagem, não uma unidade de medida." },
+        { "id": "a2", "text": "A menor unidade de uma imagem digital, com posição (i,j) e valor de intensidade", "isCorrect": true, "explanation": "Correto! Pixel (picture element) é o menor elemento de uma imagem digital, identificado por linha e coluna, armazenando um valor numérico de intensidade ou cor." },
+        { "id": "a3", "text": "Um tipo de sensor de luz usado em câmeras", "isCorrect": false, "explanation": "O sensor de luz é o fotodiodo — pixel é o elemento resultante na imagem digital." },
+        { "id": "a4", "text": "Um formato de arquivo de imagem", "isCorrect": false, "explanation": "Formatos de imagem incluem JPEG e PNG — pixel é o elemento constituinte da imagem." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "No sistema de coordenadas de uma imagem digital, onde fica a origem (0, 0)?",
+      "alternatives": [
+        { "id": "a1", "text": "No centro da imagem", "isCorrect": false, "explanation": "Diferente do sistema cartesiano, a origem da imagem digital não fica no centro." },
+        { "id": "a2", "text": "No canto inferior esquerdo", "isCorrect": false, "explanation": "Essa é a convenção do sistema cartesiano, não de imagens digitais." },
+        { "id": "a3", "text": "No canto superior esquerdo", "isCorrect": true, "explanation": "Correto! Em imagens digitais, a origem (0,0) fica no canto superior esquerdo, com linhas crescendo para baixo e colunas para a direita." },
+        { "id": "a4", "text": "No canto superior direito", "isCorrect": false, "explanation": "A origem fica no canto superior esquerdo, não no direito." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Quais são os dois processos fundamentais da digitalização de uma imagem?",
+      "alternatives": [
+        { "id": "a1", "text": "Compressão e descompressão", "isCorrect": false, "explanation": "Compressão e descompressão são processos de armazenamento, não de digitalização." },
+        { "id": "a2", "text": "Amostragem (sampling) e quantização", "isCorrect": true, "explanation": "Correto! Amostragem divide o espaço contínuo em pixels (M×N), e quantização converte intensidades contínuas em valores discretos (2ᵇ níveis)." },
+        { "id": "a3", "text": "Filtragem e amplificação", "isCorrect": false, "explanation": "Filtragem e amplificação são etapas de processamento de sinal, não os processos fundamentais de digitalização." },
+        { "id": "a4", "text": "Codificação e decodificação", "isCorrect": false, "explanation": "Codificação/decodificação refere-se ao formato de armazenamento, não à digitalização em si." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Com 8 bits por pixel em escala de cinza, quantos níveis de intensidade são possíveis?",
+      "alternatives": [
+        { "id": "a1", "text": "8 níveis", "isCorrect": false, "explanation": "8 é o número de bits, não de níveis. Níveis = 2ᵇ." },
+        { "id": "a2", "text": "64 níveis", "isCorrect": false, "explanation": "64 = 2⁶, não 2⁸." },
+        { "id": "a3", "text": "256 níveis (0 a 255)", "isCorrect": true, "explanation": "Correto! 2⁸ = 256 níveis de cinza, variando de 0 (preto) a 255 (branco). Isso é suficiente para a percepção humana." },
+        { "id": "a4", "text": "1024 níveis", "isCorrect": false, "explanation": "1024 = 2¹⁰. Com 8 bits temos 2⁸ = 256 níveis." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Por que 8 bits são considerados suficientes para imagens em escala de cinza destinadas à visualização humana?",
+      "alternatives": [
+        { "id": "a1", "text": "Porque 8 é um número par que facilita o processamento", "isCorrect": false, "explanation": "A razão é perceptual, não computacional." },
+        { "id": "a2", "text": "Porque o olho humano distingue apenas ~200–250 tons de cinza, e 256 níveis superam esse limite", "isCorrect": true, "explanation": "Correto! O sistema visual humano distingue ~200–250 tons em condições ideais, e 8 bits fornecem 256 níveis — suficiente para transições suaves e imperceptíveis." },
+        { "id": "a3", "text": "Porque monitores não conseguem exibir mais que 256 tons", "isCorrect": false, "explanation": "Monitores HDR modernos suportam 10 ou 12 bits. A limitação é da percepção humana, não do hardware." },
+        { "id": "a4", "text": "Porque formatos de imagem como JPEG só suportam 8 bits", "isCorrect": false, "explanation": "JPEG realmente usa 8 bits, mas a razão fundamental é a percepção visual, não a limitação do formato." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "No sistema RGB, quantos bits são usados por pixel para representar uma cor com 3 canais de 8 bits?",
+      "alternatives": [
+        { "id": "a1", "text": "8 bits", "isCorrect": false, "explanation": "8 bits é o tamanho de um único canal. RGB com 3 canais usa 3 × 8 = 24 bits." },
+        { "id": "a2", "text": "16 bits", "isCorrect": false, "explanation": "16 bits não corresponde a 3 canais de 8 bits." },
+        { "id": "a3", "text": "24 bits (8R + 8G + 8B)", "isCorrect": true, "explanation": "Correto! Cada pixel RGB armazena 3 canais de 8 bits, totalizando 24 bits e permitindo 2²⁴ ≈ 16,7 milhões de cores." },
+        { "id": "a4", "text": "32 bits", "isCorrect": false, "explanation": "32 bits inclui um canal alfa (transparência) — RGB puro usa 24 bits." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual cor é representada pelo valor RGB (0, 0, 0)?",
+      "alternatives": [
+        { "id": "a1", "text": "Branco", "isCorrect": false, "explanation": "Branco é RGB (255, 255, 255) — máxima intensidade em todos os canais." },
+        { "id": "a2", "text": "Preto", "isCorrect": true, "explanation": "Correto! RGB (0, 0, 0) significa ausência total de luz em todos os canais — preto." },
+        { "id": "a3", "text": "Vermelho", "isCorrect": false, "explanation": "Vermelho puro é RGB (255, 0, 0)." },
+        { "id": "a4", "text": "Cinza médio", "isCorrect": false, "explanation": "Cinza médio é RGB (128, 128, 128)." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Qual a cor resultante da mistura aditiva R + G (sem azul)?",
+      "alternatives": [
+        { "id": "a1", "text": "Magenta", "isCorrect": false, "explanation": "Magenta é R + B (sem verde)." },
+        { "id": "a2", "text": "Ciano", "isCorrect": false, "explanation": "Ciano é G + B (sem vermelho)." },
+        { "id": "a3", "text": "Amarelo", "isCorrect": true, "explanation": "Correto! Na mistura aditiva de luz, vermelho + verde = amarelo. É por isso que RGB (255, 255, 0) produz amarelo." },
+        { "id": "a4", "text": "Branco", "isCorrect": false, "explanation": "Branco requer os três canais R + G + B em máxima intensidade." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Qual é o tamanho aproximado (sem compressão) de uma imagem RGB Full HD (1920×1080) com 8 bits por canal?",
+      "alternatives": [
+        { "id": "a1", "text": "~600 KB", "isCorrect": false, "explanation": "600 KB seria o tamanho de uma imagem Full HD em escala de cinza, não RGB." },
+        { "id": "a2", "text": "~2 MB", "isCorrect": false, "explanation": "2 MB seria o tamanho de uma imagem Full HD em escala de cinza com 8 bits." },
+        { "id": "a3", "text": "~6 MB", "isCorrect": true, "explanation": "Correto! 1920 × 1080 × 3 × 8 bits = ~49,8 Mbits ≈ 6 MB. O fator ×3 vem dos três canais RGB." },
+        { "id": "a4", "text": "~24 MB", "isCorrect": false, "explanation": "24 MB seria o tamanho de uma imagem 4K RGB, não Full HD." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "O que o efeito de 'banding' (faixas visíveis) indica em uma imagem em escala de cinza?",
+      "alternatives": [
+        { "id": "a1", "text": "Que a resolução espacial (M×N) é muito alta", "isCorrect": false, "explanation": "Resolução espacial alta melhora a imagem — banding é causado por poucos níveis de cinza." },
+        { "id": "a2", "text": "Que a profundidade de bits é insuficiente para transições suaves", "isCorrect": true, "explanation": "Correto! Banding ocorre quando há poucos níveis de quantização (ex.: 4 bits = 16 tons), tornando as transições de intensidade visíveis como faixas abruptas." },
+        { "id": "a3", "text": "Que a imagem está superexposta", "isCorrect": false, "explanation": "Superexposição causa clipping (brancos saturados), não banding." },
+        { "id": "a4", "text": "Que o formato de compressão é JPEG", "isCorrect": false, "explanation": "JPEG pode causar artefatos de bloco, mas banding é causado por quantização insuficiente." }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,109 @@
+{
+  "id": "quiz-4",
+  "title": "Quiz — O Corpo Humano como Sistema de Sensores e Atuadores",
+  "description": "Teste seus conhecimentos sobre ossos piezoelétricos, músculos como atuadores, o sistema circulatório, receptores táteis da mão e sensores do rosto.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual propriedade física os ossos humanos apresentam quando submetidos a tensões mecânicas?",
+      "alternatives": [
+        { "id": "a1", "text": "Magnetismo — geram campo magnético", "isCorrect": false, "explanation": "Ossos não apresentam propriedades magnéticas significativas sob deformação." },
+        { "id": "a2", "text": "Piezoeletricidade — geram cargas elétricas", "isCorrect": true, "explanation": "Correto! As fibras de colágeno nos ossos geram cargas elétricas quando deformadas, exatamente como cristais piezoelétricos artificiais (PZT)." },
+        { "id": "a3", "text": "Fluorescência — emitem luz visível", "isCorrect": false, "explanation": "Ossos não emitem luz sob tensão mecânica." },
+        { "id": "a4", "text": "Supercondutividade — perdem toda resistência elétrica", "isCorrect": false, "explanation": "Supercondutividade ocorre em materiais específicos a temperaturas extremamente baixas, não em ossos." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Qual componente do osso é o principal responsável pelo efeito piezoelétrico?",
+      "alternatives": [
+        { "id": "a1", "text": "Hidroxiapatita (mineral)", "isCorrect": false, "explanation": "A hidroxiapatita é o componente mineral do osso, mas é o colágeno que gera o efeito piezoelétrico." },
+        { "id": "a2", "text": "Colágeno (proteína fibrosa)", "isCorrect": true, "explanation": "Correto! O colágeno, que compõe ~30% da massa óssea, gera cargas elétricas quando suas fibras se deslocam em relação aos cristais de hidroxiapatita sob deformação." },
+        { "id": "a3", "text": "Medula óssea", "isCorrect": false, "explanation": "A medula óssea produz células sanguíneas, não está relacionada ao efeito piezoelétrico." },
+        { "id": "a4", "text": "Periósteo (membrana externa)", "isCorrect": false, "explanation": "O periósteo reveste o osso externamente, mas não é responsável pelo efeito piezoelétrico." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "No modelo de filamentos deslizantes da contração muscular, quais dois filamentos interagem?",
+      "alternatives": [
+        { "id": "a1", "text": "Colágeno e elastina", "isCorrect": false, "explanation": "Colágeno e elastina são proteínas estruturais de tecido conjuntivo, não de contração muscular." },
+        { "id": "a2", "text": "Actina (filamentos finos) e miosina (filamentos grossos)", "isCorrect": true, "explanation": "Correto! A contração muscular ocorre quando as cabeças de miosina puxam os filamentos de actina, encurtando o sarcômero." },
+        { "id": "a3", "text": "Hemoglobina e mioglobina", "isCorrect": false, "explanation": "Hemoglobina e mioglobina transportam oxigênio, não participam diretamente da contração." },
+        { "id": "a4", "text": "Queratina e fibrina", "isCorrect": false, "explanation": "Queratina está em cabelos/unhas e fibrina em coagulação — não são proteínas de contração muscular." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Qual a fonte de energia química que os músculos convertem em movimento mecânico?",
+      "alternatives": [
+        { "id": "a1", "text": "Glicogênio", "isCorrect": false, "explanation": "Glicogênio é uma reserva de energia, mas a molécula diretamente convertida em trabalho mecânico é o ATP." },
+        { "id": "a2", "text": "ATP (adenosina trifosfato)", "isCorrect": true, "explanation": "Correto! O ATP é a molécula que fornece energia direta para a contração muscular — as cabeças de miosina hidrolisam ATP para puxar os filamentos de actina." },
+        { "id": "a3", "text": "Eletricidade do nervo motor", "isCorrect": false, "explanation": "O impulso nervoso desencadeia a contração, mas a energia mecânica vem do ATP, não da eletricidade." },
+        { "id": "a4", "text": "Oxigênio", "isCorrect": false, "explanation": "O oxigênio é necessário para a respiração celular que produz ATP, mas não é diretamente convertido em movimento." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Quantos receptores táteis aproximadamente cada mão humana contém?",
+      "alternatives": [
+        { "id": "a1", "text": "Cerca de 500", "isCorrect": false, "explanation": "500 é muito pouco — a mão é uma das estruturas sensoriais mais densas do corpo." },
+        { "id": "a2", "text": "Cerca de 17.000", "isCorrect": true, "explanation": "Correto! Cada mão contém aproximadamente 17.000 receptores táteis distribuídos em diferentes camadas da pele." },
+        { "id": "a3", "text": "Cerca de 1.000.000", "isCorrect": false, "explanation": "1 milhão seria excessivo — a retina do olho tem ~126 milhões de fotorreceptores, mas a mão tem ~17.000 mecanorreceptores." },
+        { "id": "a4", "text": "Cerca de 100", "isCorrect": false, "explanation": "100 seria insuficiente para a sofisticada sensibilidade tátil humana." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual receptor da pele é especializado em detectar vibração (10–500 Hz)?",
+      "alternatives": [
+        { "id": "a1", "text": "Corpúsculo de Meissner", "isCorrect": false, "explanation": "Meissner detecta toque leve e textura fina, não vibração de alta frequência." },
+        { "id": "a2", "text": "Corpúsculo de Pacini", "isCorrect": true, "explanation": "Correto! O corpúsculo de Pacini, localizado na derme profunda, é especializado em detectar vibrações e pressão profunda (10–500 Hz)." },
+        { "id": "a3", "text": "Disco de Merkel", "isCorrect": false, "explanation": "Discos de Merkel detectam pressão sustentada e detalhes finos, não vibração." },
+        { "id": "a4", "text": "Corpúsculo de Ruffini", "isCorrect": false, "explanation": "Ruffini detecta estiramento da pele e cisalhamento, não vibração." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Na analogia corpo-engenharia, o coração equivale a qual componente de um sistema hidráulico?",
+      "alternatives": [
+        { "id": "a1", "text": "Válvula de retenção", "isCorrect": false, "explanation": "As válvulas cardíacas correspondem a válvulas de retenção, mas o coração como um todo é uma bomba." },
+        { "id": "a2", "text": "Bomba hidráulica", "isCorrect": true, "explanation": "Correto! O coração é uma bomba pulsátil que gera pressão para movimentar o sangue, bombeando ~5 L/min a ~70 bpm." },
+        { "id": "a3", "text": "Filtro de fluido", "isCorrect": false, "explanation": "A filtragem do sangue é feita pelos rins, não pelo coração." },
+        { "id": "a4", "text": "Reservatório de fluido", "isCorrect": false, "explanation": "O coração bombeia o sangue, não o armazena em grandes quantidades." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Por que exercícios de impacto fortalecem os ossos?",
+      "alternatives": [
+        { "id": "a1", "text": "Porque o impacto quebra micro-fraturas que cicatrizam mais fortes", "isCorrect": false, "explanation": "Embora micro-fraturas existam, o mecanismo principal é a sinalização piezoelétrica." },
+        { "id": "a2", "text": "Porque a compressão gera cargas elétricas (piezoeletricidade) que estimulam osteoblastos a depositar novo tecido ósseo", "isCorrect": true, "explanation": "Correto! A deformação mecânica gera cargas negativas nas regiões comprimidas, estimulando a deposição óssea por osteoblastos — é por isso que astronautas perdem massa óssea em microgravidade." },
+        { "id": "a3", "text": "Porque o aumento de temperatura pelo exercício endurece os minerais do osso", "isCorrect": false, "explanation": "A temperatura corporal durante exercício não é suficiente para alterar a mineralização óssea." },
+        { "id": "a4", "text": "Porque o impacto aumenta o fluxo de cálcio alimentar para os ossos", "isCorrect": false, "explanation": "A ingestão de cálcio é importante, mas o mecanismo de fortalecimento pelo impacto é piezoelétrico." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Quantos sabores básicos a língua humana consegue detectar?",
+      "alternatives": [
+        { "id": "a1", "text": "3 (doce, salgado, amargo)", "isCorrect": false, "explanation": "São 5 sabores básicos, não 3." },
+        { "id": "a2", "text": "4 (doce, salgado, ácido, amargo)", "isCorrect": false, "explanation": "São 5 — falta o umami." },
+        { "id": "a3", "text": "5 (doce, salgado, ácido, amargo, umami)", "isCorrect": true, "explanation": "Correto! Os cinco sabores básicos são doce, salgado, ácido (azedo), amargo e umami (glutamato)." },
+        { "id": "a4", "text": "7 (doce, salgado, ácido, amargo, umami, picante, mentolado)", "isCorrect": false, "explanation": "Picante e mentolado são sensações táteis/térmicas (capsaicina e mentol), não sabores gustativos." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Qual a resolução efetiva aproximada do olho humano, combinando fóvea e periferia?",
+      "alternatives": [
+        { "id": "a1", "text": "~12 megapixels", "isCorrect": false, "explanation": "12 MP é a resolução de uma câmera de smartphone — o olho é muito mais complexo." },
+        { "id": "a2", "text": "~50 megapixels", "isCorrect": false, "explanation": "50 MP subestima a capacidade do olho humano." },
+        { "id": "a3", "text": "~576 megapixels", "isCorrect": true, "explanation": "Correto! Combinando a alta resolução da fóvea (cones) com a sensibilidade da periferia (bastonetes), o olho equivale a ~576 megapixels." },
+        { "id": "a4", "text": "~2 gigapixels", "isCorrect": false, "explanation": "2 GP superestima a resolução do olho humano." }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,109 @@
+{
+  "id": "quiz-7",
+  "title": "Quiz — Outros Tipos de Sensores de Imagem e Aplicações",
+  "description": "Teste seus conhecimentos sobre ultrassom, câmeras térmicas IR, sensores de raio-X, sensores de profundidade e suas aplicações práticas.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual princípio o ultrassom utiliza para formar imagens do interior do corpo?",
+      "alternatives": [
+        { "id": "a1", "text": "Absorção de luz visível pelos tecidos", "isCorrect": false, "explanation": "Ultrassom não usa luz — usa ondas sonoras de alta frequência." },
+        { "id": "a2", "text": "Emissão e reflexão (eco) de ondas sonoras de alta frequência", "isCorrect": true, "explanation": "Correto! A sonda emite pulsos de som que refletem nas interfaces entre tecidos com densidades diferentes. O tempo de retorno do eco indica a distância." },
+        { "id": "a3", "text": "Emissão de radiação infravermelha pelo corpo", "isCorrect": false, "explanation": "Isso descreve uma câmera térmica, não ultrassom." },
+        { "id": "a4", "text": "Passagem de raios-X através do corpo", "isCorrect": false, "explanation": "Isso descreve radiografia, não ultrassom." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Qual a principal vantagem da ecografia médica (ultrassom) em relação à radiografia (raio-X)?",
+      "alternatives": [
+        { "id": "a1", "text": "Maior resolução de imagem", "isCorrect": false, "explanation": "A resolução do ultrassom é geralmente inferior à do raio-X digital." },
+        { "id": "a2", "text": "Não utiliza radiação ionizante — é não-invasivo e seguro para uso repetido", "isCorrect": true, "explanation": "Correto! Ultrassom usa apenas ondas sonoras, sem qualquer radiação ionizante, tornando-o seguro para gestantes, crianças e uso frequente." },
+        { "id": "a3", "text": "Pode visualizar ossos com mais clareza", "isCorrect": false, "explanation": "Raio-X é superior para visualizar estruturas ósseas." },
+        { "id": "a4", "text": "Funciona melhor para detectar fraturas", "isCorrect": false, "explanation": "Raio-X é o método padrão para detectar fraturas ósseas." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "No mapeamento sísmico para exploração de petróleo, por que são usadas frequências muito baixas (Hz)?",
+      "alternatives": [
+        { "id": "a1", "text": "Porque frequências baixas produzem imagens de maior resolução", "isCorrect": false, "explanation": "Na verdade, frequências baixas têm menor resolução — o benefício é a penetração." },
+        { "id": "a2", "text": "Porque frequências baixas penetram quilômetros de rocha sólida", "isCorrect": true, "explanation": "Correto! Frequências baixas (infrassom) penetram muito mais fundo que frequências altas. É um tradeoff: menor resolução, mas penetração de quilômetros." },
+        { "id": "a3", "text": "Porque frequências baixas são inaudíveis e não perturbam os trabalhadores", "isCorrect": false, "explanation": "A razão é técnica (penetração), não conforto acústico." },
+        { "id": "a4", "text": "Porque frequências baixas são mais baratas de gerar", "isCorrect": false, "explanation": "O custo não é a razão principal — equipamentos sísmicos são muito caros de qualquer forma." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "O que uma câmera térmica infravermelha detecta?",
+      "alternatives": [
+        { "id": "a1", "text": "Luz visível refletida pelos objetos", "isCorrect": false, "explanation": "Isso é o que uma câmera convencional faz. Câmeras IR detectam radiação infravermelha." },
+        { "id": "a2", "text": "Radiação infravermelha emitida pelos próprios objetos (calor)", "isCorrect": true, "explanation": "Correto! Câmeras IR captam a radiação térmica emitida por qualquer objeto com temperatura acima do zero absoluto, gerando um mapa de temperaturas (termograma)." },
+        { "id": "a3", "text": "Ondas de rádio emitidas por equipamentos eletrônicos", "isCorrect": false, "explanation": "Ondas de rádio estão em uma faixa espectral diferente da infravermelha." },
+        { "id": "a4", "text": "Raios ultravioleta refletidos pela pele humana", "isCorrect": false, "explanation": "Câmeras IR operam no infravermelho, não no ultravioleta." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Qual sensor térmico NÃO precisa de resfriamento criogênico para funcionar?",
+      "alternatives": [
+        { "id": "a1", "text": "MCT (HgCdTe)", "isCorrect": false, "explanation": "MCT geralmente requer resfriamento criogênico (~77 K) para reduzir ruído térmico." },
+        { "id": "a2", "text": "InSb (Antimoneto de Índio)", "isCorrect": false, "explanation": "InSb é um sensor refrigerado que opera em temperaturas criogênicas." },
+        { "id": "a3", "text": "Microbolômetro", "isCorrect": true, "explanation": "Correto! Microbolômetros operam em temperatura ambiente — são compactos, baratos e não necessitam de resfriamento, sendo os mais usados em câmeras térmicas portáteis." },
+        { "id": "a4", "text": "QWIP", "isCorrect": false, "explanation": "QWIP (Quantum Well Infrared Photodetector) geralmente requer resfriamento criogênico." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "No monitoramento de transformadores elétricos por termografia, um ponto quente com temperatura >100°C acima do ambiente indica:",
+      "alternatives": [
+        { "id": "a1", "text": "Operação normal — temperatura esperada sob carga", "isCorrect": false, "explanation": "Temperaturas >100°C acima do ambiente são classificadas como críticas." },
+        { "id": "a2", "text": "Situação de atenção — investigar na próxima manutenção programada", "isCorrect": false, "explanation": "Atenção é para a faixa de 40–70°C acima do ambiente." },
+        { "id": "a3", "text": "Situação crítica — ação imediata, risco de falha iminente", "isCorrect": true, "explanation": "Correto! Mais de 100°C acima do ambiente é classificação 'Crítico', exigindo ação imediata para evitar falhas catastróficas." },
+        { "id": "a4", "text": "Erro de medição do sensor — recalibrar a câmera", "isCorrect": false, "explanation": "Temperaturas dessa magnitude são plausíveis em equipamentos defeituosos e não indicam erro de medição." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Na imagem de raio-X, materiais densos como ossos e metais aparecem em qual tonalidade?",
+      "alternatives": [
+        { "id": "a1", "text": "Preto (escuro)", "isCorrect": false, "explanation": "Preto indica que os raios-X passaram livremente — é a aparência de materiais pouco densos como ar." },
+        { "id": "a2", "text": "Branco (claro)", "isCorrect": true, "explanation": "Correto! Materiais densos absorvem mais raios-X, resultando em menos fótons no detector e aparecendo claros/brancos na imagem." },
+        { "id": "a3", "text": "Vermelho", "isCorrect": false, "explanation": "Raio-X convencional produz imagens em escala de cinza, não em cores." },
+        { "id": "a4", "text": "Azul", "isCorrect": false, "explanation": "Imagens de raio-X são em escala de cinza — cores são usadas apenas em processamento posterior (falsa cor)." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Qual tecnologia de sensor de profundidade é usada no Face ID dos iPhones?",
+      "alternatives": [
+        { "id": "a1", "text": "LiDAR rotativo", "isCorrect": false, "explanation": "LiDAR rotativo é usado em veículos autônomos, não em smartphones para reconhecimento facial." },
+        { "id": "a2", "text": "Estereoscopia com duas câmeras", "isCorrect": false, "explanation": "Face ID não usa estereoscopia — usa projeção de pontos IR." },
+        { "id": "a3", "text": "Sensor de Tempo de Voo (ToF) com projeção de pontos infravermelhos", "isCorrect": true, "explanation": "Correto! O Face ID projeta ~30.000 pontos infravermelhos no rosto e usa um sensor ToF para criar um mapa 3D, sendo mais seguro que reconhecimento facial 2D." },
+        { "id": "a4", "text": "Radar de micro-ondas", "isCorrect": false, "explanation": "Radar de micro-ondas não fornece resolução suficiente para mapeamento facial." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Por que câmeras térmicas são eficazes para vigilância noturna mesmo na escuridão total (0 lux)?",
+      "alternatives": [
+        { "id": "a1", "text": "Porque possuem flash infravermelho muito potente", "isCorrect": false, "explanation": "Câmeras térmicas são passivas — detectam a radiação emitida pelo objeto, não refletida." },
+        { "id": "a2", "text": "Porque detectam a radiação térmica emitida naturalmente por corpos quentes (pessoas, veículos)", "isCorrect": true, "explanation": "Correto! Todo objeto com temperatura acima do zero absoluto emite radiação IR. Pessoas (~37°C) emitem muito mais que o ambiente (~20°C), criando contraste térmico mesmo sem nenhuma luz." },
+        { "id": "a3", "text": "Porque amplificam a pouca luz existente como visão noturna", "isCorrect": false, "explanation": "Amplificação de luz é o princípio de intensificadores de imagem (visão noturna gen-2/gen-3), não de câmeras térmicas." },
+        { "id": "a4", "text": "Porque usam raios-X para ver através das paredes", "isCorrect": false, "explanation": "Câmeras IR não usam raio-X e não enxergam através de paredes." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Sistemas de raio-X em portais rodoviários usam raios-X de alta energia (MeV) porque:",
+      "alternatives": [
+        { "id": "a1", "text": "Precisam produzir imagens coloridas dos contêineres", "isCorrect": false, "explanation": "Raio-X produz imagens em escala de cinza baseadas em absorção, não imagens coloridas." },
+        { "id": "a2", "text": "Precisam penetrar contêineres de aço e revelar o conteúdo interno sem abrir o caminhão", "isCorrect": true, "explanation": "Correto! Raios-X de alta energia (até 6 MeV) conseguem penetrar paredes de aço de contêineres, permitindo inspecionar até 150 caminhões/hora para detectar contrabando e materiais proibidos." },
+        { "id": "a3", "text": "Precisam medir a temperatura dos motores dos caminhões", "isCorrect": false, "explanation": "Medição de temperatura é função de câmeras IR, não de raio-X." },
+        { "id": "a4", "text": "Precisam detectar a velocidade dos veículos na rodovia", "isCorrect": false, "explanation": "Medição de velocidade usa radar Doppler ou câmeras de velocidade, não raio-X." }
+      ]
+    }
+  ]
+}
+

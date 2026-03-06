@@ -1,0 +1,109 @@
+{
+  "id": "quiz-5",
+  "title": "Quiz — O Olho Humano e as Câmeras Digitais",
+  "description": "Teste seus conhecimentos sobre a retina, fotorreceptores, cones S/M/L, visão tricromática, sensor CCD e filtro de Bayer.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual estrutura do olho humano é equivalente ao sensor CCD/CMOS de uma câmera digital?",
+      "alternatives": [
+        { "id": "a1", "text": "Córnea", "isCorrect": false, "explanation": "A córnea é a primeira superfície de refração — equivale ao elemento frontal da lente." },
+        { "id": "a2", "text": "Cristalino", "isCorrect": false, "explanation": "O cristalino é a lente ajustável do olho — equivale ao autofoco da câmera." },
+        { "id": "a3", "text": "Retina", "isCorrect": true, "explanation": "Correto! A retina contém ~126 milhões de fotorreceptores que convertem luz em impulsos nervosos — é o sensor de imagem biológico." },
+        { "id": "a4", "text": "Íris", "isCorrect": false, "explanation": "A íris controla a quantidade de luz que entra — equivale ao diafragma da câmera." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Quantos fotorreceptores existem aproximadamente na retina humana?",
+      "alternatives": [
+        { "id": "a1", "text": "~6 milhões", "isCorrect": false, "explanation": "6 milhões é o número de cones, não o total de fotorreceptores." },
+        { "id": "a2", "text": "~126 milhões (120M bastonetes + 6M cones)", "isCorrect": true, "explanation": "Correto! A retina possui ~120 milhões de bastonetes (visão noturna) e ~6 milhões de cones (visão colorida), totalizando ~126 milhões." },
+        { "id": "a3", "text": "~1 milhão", "isCorrect": false, "explanation": "1 milhão é o número de fibras no nervo óptico, não de fotorreceptores." },
+        { "id": "a4", "text": "~576 milhões", "isCorrect": false, "explanation": "576 milhões refere-se à resolução equivalente em megapixels, não ao número de fotorreceptores." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Os três tipos de cones (S, M, L) são a base de qual teoria da visão de cores?",
+      "alternatives": [
+        { "id": "a1", "text": "Teoria da oponência de cores (Hering)", "isCorrect": false, "explanation": "A teoria da oponência de Hering descreve o processamento pós-retinal, não a captura na retina." },
+        { "id": "a2", "text": "Teoria tricromática (Young-Helmholtz)", "isCorrect": true, "explanation": "Correto! A teoria tricromática propõe que a visão de cores resulta da combinação de respostas de três tipos de cones com sensibilidades espectrais diferentes." },
+        { "id": "a3", "text": "Teoria ondulatória de Huygens", "isCorrect": false, "explanation": "A teoria ondulatória de Huygens descreve a propagação da luz, não a percepção de cores." },
+        { "id": "a4", "text": "Lei de Snell da refração", "isCorrect": false, "explanation": "A lei de Snell descreve a refração da luz em interfaces, não a percepção de cores." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Qual tipo de cone é o MAIS abundante na retina humana?",
+      "alternatives": [
+        { "id": "a1", "text": "Cone S (azul) — ~65% dos cones", "isCorrect": false, "explanation": "Cones S são os mais raros, representando apenas ~2% dos cones." },
+        { "id": "a2", "text": "Cone M (verde) — ~65% dos cones", "isCorrect": false, "explanation": "Cones M representam ~33% dos cones, não 65%." },
+        { "id": "a3", "text": "Cone L (vermelho) — ~65% dos cones", "isCorrect": true, "explanation": "Correto! Cones L são os mais abundantes (~65%), seguidos por cones M (~33%) e cones S (~2%)." },
+        { "id": "a4", "text": "Todos os tipos em proporções iguais (~33% cada)", "isCorrect": false, "explanation": "A distribuição é desigual: ~65% L, ~33% M, ~2% S." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "No sensor CCD de uma câmera digital, qual componente permite capturar cores, já que o fotodiodo de silício é monocromático?",
+      "alternatives": [
+        { "id": "a1", "text": "O conversor analógico-digital (ADC)", "isCorrect": false, "explanation": "O ADC converte tensão em valores digitais, mas não é responsável pela separação de cores." },
+        { "id": "a2", "text": "O filtro de Bayer (RGGB)", "isCorrect": true, "explanation": "Correto! O filtro de Bayer é uma grade de micro-filtros coloridos (R, G, G, B) sobre o sensor que permite que cada pixel 'veja' apenas uma cor." },
+        { "id": "a3", "text": "A lente da câmera", "isCorrect": false, "explanation": "A lente focaliza a luz, mas não separa cores." },
+        { "id": "a4", "text": "O processador de imagem (ISP)", "isCorrect": false, "explanation": "O ISP processa a imagem após a captura, mas a separação de cores ocorre no filtro de Bayer." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Por que o filtro de Bayer utiliza DOIS pixels verdes para cada vermelho e azul (padrão RGGB)?",
+      "alternatives": [
+        { "id": "a1", "text": "Porque LEDs verdes são mais baratos de fabricar", "isCorrect": false, "explanation": "O filtro de Bayer não usa LEDs — são micro-filtros passivos." },
+        { "id": "a2", "text": "Porque o olho humano é mais sensível ao verde, e mais amostras verdes melhoram a percepção de nitidez", "isCorrect": true, "explanation": "Correto! A sensibilidade do olho ao verde é maior (curva fotópica), então mais pixels verdes resultam em imagens percebidas como mais nítidas." },
+        { "id": "a3", "text": "Porque a cor verde ocupa mais espaço no espectro visível", "isCorrect": false, "explanation": "O espaço espectral não é o motivo — é a sensibilidade do olho humano ao verde." },
+        { "id": "a4", "text": "Porque câmeras digitais não conseguem detectar verde com um único pixel", "isCorrect": false, "explanation": "Um pixel com filtro verde detecta verde normalmente — a duplicação é para melhor qualidade perceptual." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual fenômeno físico o sensor CCD utiliza para converter fótons de luz em carga elétrica?",
+      "alternatives": [
+        { "id": "a1", "text": "Efeito Doppler", "isCorrect": false, "explanation": "O efeito Doppler relaciona-se com variação de frequência de ondas, não com conversão de luz em eletricidade." },
+        { "id": "a2", "text": "Efeito fotoelétrico", "isCorrect": true, "explanation": "Correto! No efeito fotoelétrico, fótons que atingem o silício transferem energia a elétrons, liberando-os e gerando carga elétrica proporcional à intensidade de luz." },
+        { "id": "a3", "text": "Efeito piezoelétrico", "isCorrect": false, "explanation": "O efeito piezoelétrico converte deformação mecânica em eletricidade, não luz." },
+        { "id": "a4", "text": "Efeito Hall", "isCorrect": false, "explanation": "O efeito Hall relaciona campo magnético com tensão elétrica, não luz." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Deuteranopia é um tipo de daltonismo causado pela ausência de qual tipo de cone?",
+      "alternatives": [
+        { "id": "a1", "text": "Cone S (azul)", "isCorrect": false, "explanation": "A ausência de cones S causa tritanopia, não deuteranopia." },
+        { "id": "a2", "text": "Cone M (verde)", "isCorrect": true, "explanation": "Correto! Deuteranopia é a ausência de cones M (verde), sendo o tipo mais comum de daltonismo. Verde e vermelho ficam confusos." },
+        { "id": "a3", "text": "Cone L (vermelho)", "isCorrect": false, "explanation": "A ausência de cones L causa protanopia." },
+        { "id": "a4", "text": "Todos os cones", "isCorrect": false, "explanation": "A ausência de todos os cones causa acromatopsia (visão apenas em tons de cinza)." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Em que aspecto o olho humano SUPERA as câmeras digitais?",
+      "alternatives": [
+        { "id": "a1", "text": "Sensibilidade em ISO muito alto", "isCorrect": false, "explanation": "Câmeras modernas superam o olho em ISO alto (>100.000)." },
+        { "id": "a2", "text": "Reprodutibilidade objetiva das imagens", "isCorrect": false, "explanation": "Câmeras produzem imagens idênticas; a percepção visual varia entre indivíduos." },
+        { "id": "a3", "text": "Faixa dinâmica adaptativa em tempo real (~20 stops)", "isCorrect": true, "explanation": "Correto! O olho ajusta sua sensibilidade continuamente e região por região, com ~20 stops de faixa dinâmica — câmeras têm ~12–15 stops fixos por frame." },
+        { "id": "a4", "text": "Detecção de infravermelho próximo", "isCorrect": false, "explanation": "Sensores de silício detectam infravermelho (~1100 nm), invisível ao olho humano." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "O processo de 'acomodação' no olho humano é equivalente a qual função de uma câmera?",
+      "alternatives": [
+        { "id": "a1", "text": "Controle de exposição (ISO)", "isCorrect": false, "explanation": "O controle de exposição é equivalente à adaptação da pupila, não à acomodação." },
+        { "id": "a2", "text": "Autofoco (AF)", "isCorrect": true, "explanation": "Correto! Na acomodação, os músculos ciliares deformam o cristalino para focalizar objetos próximos ou distantes — exatamente como o autofoco de uma câmera." },
+        { "id": "a3", "text": "Disparo em modo burst", "isCorrect": false, "explanation": "Modo burst é captura rápida de múltiplas fotos, sem equivalente direto no olho." },
+        { "id": "a4", "text": "Balanço de branco", "isCorrect": false, "explanation": "Balanço de branco é uma compensação de cor — a acomodação é sobre foco." }
+      ]
+    }
+  ]
+}
+

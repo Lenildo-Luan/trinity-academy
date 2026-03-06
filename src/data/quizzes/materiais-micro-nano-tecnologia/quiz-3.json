@@ -1,0 +1,109 @@
+{
+  "id": "quiz-3",
+  "title": "Quiz — Biossensores",
+  "description": "Teste seus conhecimentos sobre biossensores, seus componentes, tipos de biorreceptores e transdutores, e o biossensor de glicose.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Quais são os três componentes fundamentais de todo biossensor?",
+      "alternatives": [
+        { "id": "a1", "text": "LED, resistor e capacitor", "isCorrect": false, "explanation": "Esses são componentes eletrônicos, não os componentes conceituais de um biossensor." },
+        { "id": "a2", "text": "Analito, biorreceptor e transdutor", "isCorrect": true, "explanation": "Correto! Todo biossensor combina o analito (substância a detectar), o biorreceptor (elemento biológico que reconhece o analito) e o transdutor (que converte o evento biológico em sinal mensurável)." },
+        { "id": "a3", "text": "Sensor, controlador e atuador", "isCorrect": false, "explanation": "Esses são os componentes de uma malha de controle, não especificamente de um biossensor." },
+        { "id": "a4", "text": "Anticorpo, enzima e DNA", "isCorrect": false, "explanation": "Esses são exemplos de biorreceptores, mas não representam os três componentes fundamentais." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Qual enzima é utilizada como biorreceptor no biossensor de glicose?",
+      "alternatives": [
+        { "id": "a1", "text": "Lactato oxidase", "isCorrect": false, "explanation": "Lactato oxidase é usada em sensores de lactato, não de glicose." },
+        { "id": "a2", "text": "Glicose oxidase (GOx)", "isCorrect": true, "explanation": "Correto! A glicose oxidase (GOx) catalisa a oxidação da glicose, gerando peróxido de hidrogênio (H₂O₂) que é detectado eletroquimicamente." },
+        { "id": "a3", "text": "Colesterol oxidase", "isCorrect": false, "explanation": "Colesterol oxidase é usada em sensores de colesterol." },
+        { "id": "a4", "text": "Acetilcolinesterase", "isCorrect": false, "explanation": "Acetilcolinesterase é usada em biossensores para detecção de pesticidas." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Na reação enzimática do biossensor de glicose, qual é o produto que gera a corrente elétrica no eletrodo?",
+      "alternatives": [
+        { "id": "a1", "text": "Ácido glucônico", "isCorrect": false, "explanation": "O ácido glucônico é um produto da reação, mas não é ele que é oxidado no eletrodo para gerar corrente." },
+        { "id": "a2", "text": "Peróxido de hidrogênio (H₂O₂)", "isCorrect": true, "explanation": "Correto! O H₂O₂ produzido pela reação enzimática é oxidado no eletrodo de platina, liberando elétrons que geram a corrente mensurável." },
+        { "id": "a3", "text": "Oxigênio (O₂)", "isCorrect": false, "explanation": "O oxigênio é consumido na reação, não é o produto que gera a corrente." },
+        { "id": "a4", "text": "Glicose", "isCorrect": false, "explanation": "A glicose é o analito (substância a ser medida), não o produto da reação." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "A relação entre concentração de glicose e corrente no biossensor segue qual modelo cinético?",
+      "alternatives": [
+        { "id": "a1", "text": "Lei de Ohm", "isCorrect": false, "explanation": "A lei de Ohm relaciona tensão, corrente e resistência em circuitos elétricos, não cinética enzimática." },
+        { "id": "a2", "text": "Cinética de Michaelis-Menten", "isCorrect": true, "explanation": "Correto! A corrente aumenta linearmente em baixas concentrações e satura em altas concentrações, seguindo I = Imax · [S] / (Km + [S])." },
+        { "id": "a3", "text": "Lei de Beer-Lambert", "isCorrect": false, "explanation": "Beer-Lambert relaciona absorção de luz com concentração em sensores ópticos, não enzimáticos." },
+        { "id": "a4", "text": "Equação de Nernst", "isCorrect": false, "explanation": "A equação de Nernst descreve o potencial de eletrodos, não a cinética de saturação enzimática." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "O que diferencia um biossensor de um sensor convencional?",
+      "alternatives": [
+        { "id": "a1", "text": "Biossensores são sempre implantáveis no corpo", "isCorrect": false, "explanation": "Nem todos os biossensores são implantáveis — testes de gravidez e glicosímetros portáteis são exemplos de biossensores externos." },
+        { "id": "a2", "text": "Biossensores utilizam um componente biológico para reconhecimento específico do analito", "isCorrect": true, "explanation": "Correto! A presença de um biorreceptor (enzima, anticorpo, DNA) que reconhece especificamente o analito é o que distingue um biossensor." },
+        { "id": "a3", "text": "Biossensores são mais baratos que sensores convencionais", "isCorrect": false, "explanation": "O custo varia — biossensores com anticorpos monoclonais podem ser bastante caros." },
+        { "id": "a4", "text": "Biossensores funcionam apenas com amostras de sangue", "isCorrect": false, "explanation": "Biossensores podem analisar sangue, urina, suor, água, alimentos e muitos outros meios." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual tipo de transdutor mede a variação de frequência de ressonância causada pela massa do analito adsorvido?",
+      "alternatives": [
+        { "id": "a1", "text": "Eletroquímico (amperométrico)", "isCorrect": false, "explanation": "Transdutores amperométricos medem corrente elétrica, não frequência de ressonância." },
+        { "id": "a2", "text": "Óptico (SPR)", "isCorrect": false, "explanation": "SPR mede variações de índice de refração na interface do sensor, não frequência mecânica." },
+        { "id": "a3", "text": "Piezoelétrico (QCM — Microbalança de Cristal de Quartzo)", "isCorrect": true, "explanation": "Correto! A QCM vibra a uma frequência de ressonância que diminui quando massa é adsorvida na superfície, permitindo detectar vírus e proteínas." },
+        { "id": "a4", "text": "Térmico (calorimétrico)", "isCorrect": false, "explanation": "Transdutores térmicos medem variação de temperatura, não de frequência." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "O teste rápido de COVID-19 (antígeno) utiliza qual tipo de biorreceptor?",
+      "alternatives": [
+        { "id": "a1", "text": "Enzima glicose oxidase", "isCorrect": false, "explanation": "Glicose oxidase é usada em sensores de glicose, não para detecção viral." },
+        { "id": "a2", "text": "Anticorpo monoclonal contra a proteína spike ou nucleocapsídeo do SARS-CoV-2", "isCorrect": true, "explanation": "Correto! Testes rápidos de antígeno usam anticorpos que reconhecem especificamente proteínas do vírus SARS-CoV-2." },
+        { "id": "a3", "text": "Aptâmero de RNA", "isCorrect": false, "explanation": "Aptâmeros são usados em pesquisa, mas testes rápidos comerciais de COVID usam anticorpos." },
+        { "id": "a4", "text": "Tecido hepático", "isCorrect": false, "explanation": "Tecidos não são usados em testes rápidos de diagnóstico." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Qual é uma das principais limitações dos biossensores?",
+      "alternatives": [
+        { "id": "a1", "text": "Não conseguem detectar substâncias específicas", "isCorrect": false, "explanation": "Pelo contrário — alta especificidade é a principal vantagem dos biossensores." },
+        { "id": "a2", "text": "Estabilidade biológica limitada — enzimas e anticorpos degradam com o tempo", "isCorrect": true, "explanation": "Correto! Componentes biológicos são frágeis e podem perder atividade com o tempo, temperatura e pH, limitando a vida útil do sensor." },
+        { "id": "a3", "text": "Funcionam apenas em temperaturas acima de 100°C", "isCorrect": false, "explanation": "A maioria dos biossensores opera em temperatura ambiente ou corporal (~37°C). Temperaturas altas degradam os componentes biológicos." },
+        { "id": "a4", "text": "Não podem ser miniaturizados", "isCorrect": false, "explanation": "Biossensores podem ser altamente miniaturizados — testes de gravidez e lab-on-a-chip são exemplos." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "O que é um dispositivo 'lab-on-a-chip'?",
+      "alternatives": [
+        { "id": "a1", "text": "Um chip de computador que simula reações químicas virtualmente", "isCorrect": false, "explanation": "Lab-on-a-chip são dispositivos físicos reais, não simulações." },
+        { "id": "a2", "text": "Um laboratório inteiro miniaturizado em um chip de poucos centímetros", "isCorrect": true, "explanation": "Correto! Lab-on-a-chip integra múltiplas funções laboratoriais (mistura, separação, detecção) em um único chip miniaturizado para diagnósticos rápidos." },
+        { "id": "a3", "text": "Um sensor de temperatura em formato de chip", "isCorrect": false, "explanation": "Lab-on-a-chip é muito mais complexo que um simples sensor de temperatura." },
+        { "id": "a4", "text": "Um componente de smartphones usado para medir glicose", "isCorrect": false, "explanation": "Lab-on-a-chip são dispositivos médicos especializados, não componentes de smartphones." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Qual a principal vantagem do monitoramento contínuo de glicose (CGM) em relação ao glicosímetro convencional?",
+      "alternatives": [
+        { "id": "a1", "text": "É mais barato e mais simples de usar", "isCorrect": false, "explanation": "CGMs são mais caros e complexos que glicosímetros convencionais." },
+        { "id": "a2", "text": "Fornece leituras contínuas 24 horas com alertas automáticos", "isCorrect": true, "explanation": "Correto! CGMs implantáveis medem glicose continuamente, gerando gráficos de tendência e alertas de hipo/hiperglicemia em tempo real." },
+        { "id": "a3", "text": "Não requer nenhum tipo de calibração", "isCorrect": false, "explanation": "Alguns CGMs ainda requerem calibração periódica com glicosímetros convencionais." },
+        { "id": "a4", "text": "Usa amostras de urina em vez de sangue", "isCorrect": false, "explanation": "CGMs usam um sensor implantado no tecido subcutâneo que mede glicose intersticial." }
+      ]
+    }
+  ]
+}
+
