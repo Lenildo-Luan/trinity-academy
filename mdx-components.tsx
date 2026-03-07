@@ -93,6 +93,15 @@ import {
   UDPUseCases,
   UDPvsTPHeaderSize,
 } from "./src/components/udp-protocol-p5-examples";
+import {
+  RDT10SimpleChannel,
+  RDT20AckNak,
+  RDT21SequenceNumbers,
+  RDT22DuplicateAcks,
+  RDT30TimerRetransmission,
+  StopAndWaitUtilization,
+  PipelineGBNvsSR,
+} from "./src/components/reliable-data-transfer-p5-examples";
 
 function getTextContent(node: ReactNode): string {
   if (typeof node === "string") return node;
@@ -294,6 +303,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     UDPChecksumDemo,
     UDPUseCases,
     UDPvsTPHeaderSize,
+    RDT10SimpleChannel,
+    RDT20AckNak,
+    RDT21SequenceNumbers,
+    RDT22DuplicateAcks,
+    RDT30TimerRetransmission,
+    StopAndWaitUtilization,
+    PipelineGBNvsSR,
     ...components,
   };
 }

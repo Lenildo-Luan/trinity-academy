@@ -5,9 +5,11 @@ O conteúdo deve se basear no seguinte resumo: Apresenta a função da camada de
 Use use p5.js para ilustrar visualmente os conceitos apresentados.
 Use o componente MarkdownTable.tsx para criar tabelas.
 
-No curso de redes de computadores, o próximo capítulo do modulo de Camada de Transporte será:
-Protocolo UDP
+No curso de redes de computadores, o próximo capítulo do módulo de Camada de Transporte será:
+Princípios de Transferência Confiável de Dados (RDT)
 O conteúdo deve se basear no seguinte resumo:
-Apresenta o UDP como protocolo "cru" de melhor esforço. Discute suas vantagens (baixa latência, sem handshake, cabeçalho pequeno) e casos de uso típicos (streaming de mídia, DNS, SNMP, HTTP/3). Detalha a estrutura do segmento UDP e o mecanismo de checksum para detecção de erros.
+Núcleo teórico do módulo. Desenvolve incrementalmente os protocolos RDT (Reliable Data Transfer) usando Máquinas de Estados Finitos (FSM), partindo de um canal ideal (rdt1.0) até canais com erros e perdas (rdt3.0). Aborda ACKs, NAKs, números de sequência, temporizadores e retransmissão. Apresenta o problema de desempenho do protocolo stop-and-wait e as soluções com pipeline: Go-Back-N (GBN) e Repetição Seletiva (SR).
+Use p5.js para ilustrar visualmente os conceitos apresentados.
 Use o componente MarkdownTable.tsx para criar tabelas.
 Faça o quiz ao final de cada capítulo.
+Todo o contexto e padrões necessários para realizar a tarefa acima estão no arquivo prompts/processo-criacao-aula.md. Antes de iniciar a criação do curso, certifique-se de ler e entender o conteúdo do arquivo mencionado para seguir os padrões estabelecidos.

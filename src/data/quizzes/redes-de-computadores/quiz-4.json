@@ -1,0 +1,109 @@
+{
+  "id": "quiz-4",
+  "title": "Quiz — Princípios de Transferência Confiável de Dados (RDT)",
+  "description": "Teste seus conhecimentos sobre os protocolos rdt1.0 a rdt3.0, números de sequência, ACKs, NAKs, temporizadores, stop-and-wait, Go-Back-N e Repetição Seletiva.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "No protocolo rdt1.0, por que não são necessários mecanismos de ACK, NAK ou retransmissão?",
+      "alternatives": [
+        { "id": "a1", "text": "Porque o rdt1.0 usa checksum para corrigir automaticamente os erros", "isCorrect": false, "explanation": "Checksum apenas detecta erros — não os corrige. O rdt1.0 não precisa de checksum porque o canal é perfeito." },
+        { "id": "a2", "text": "Porque o emissor envia cada pacote múltiplas vezes por precaução", "isCorrect": false, "explanation": "O rdt1.0 envia cada pacote apenas uma vez. Enviar múltiplas cópias seria redundância desnecessária em um canal perfeito." },
+        { "id": "a3", "text": "Porque o canal subjacente é perfeitamente confiável — não há erros, perdas ou reordenação", "isCorrect": true, "explanation": "Correto! O rdt1.0 assume um canal ideal onde todos os pacotes chegam corretamente e em ordem. Sem problemas no canal, nenhum mecanismo de recuperação é necessário." },
+        { "id": "a4", "text": "Porque o receptor reconstrói pacotes perdidos a partir dos pacotes vizinhos", "isCorrect": false, "explanation": "O receptor do rdt1.0 não tem capacidade de reconstruir pacotes. Simplesmente não é necessário, pois o canal não perde pacotes." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Qual é a falha fundamental do protocolo rdt2.0 que levou à criação do rdt2.1?",
+      "alternatives": [
+        { "id": "a1", "text": "O rdt2.0 não possui checksum para detectar erros nos pacotes de dados", "isCorrect": false, "explanation": "O rdt2.0 utiliza checksum nos pacotes de dados. O problema está nas mensagens de feedback." },
+        { "id": "a2", "text": "O rdt2.0 não trata o caso em que o próprio ACK ou NAK é corrompido, podendo gerar duplicatas não detectáveis", "isCorrect": true, "explanation": "Correto! Se o ACK ou NAK for corrompido, o emissor não sabe se deve reenviar. Se reenviar, o receptor pode receber uma duplicata sem conseguir distingui-la de um pacote novo — pois não há números de sequência." },
+        { "id": "a3", "text": "O rdt2.0 não funciona quando há perda de pacotes na rede", "isCorrect": false, "explanation": "De fato o rdt2.0 não trata perdas, mas essa limitação é resolvida pelo rdt3.0, não pelo rdt2.1. O rdt2.1 resolve especificamente o problema de ACK/NAK corrompidos." },
+        { "id": "a4", "text": "O rdt2.0 usa apenas um número de sequência, insuficiente para identificar pacotes", "isCorrect": false, "explanation": "O rdt2.0 na verdade não usa números de sequência — essa é justamente a falha. Foi o rdt2.1 que introduziu seq# 0/1." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Por que os números de sequência 0 e 1 são suficientes no protocolo rdt2.1 (stop-and-wait)?",
+      "alternatives": [
+        { "id": "a1", "text": "Porque o canal só permite transmitir dois pacotes antes de falhar", "isCorrect": false, "explanation": "O canal não tem essa limitação. A razão é sobre quantos pacotes estão em trânsito simultaneamente, não sobre quantos podem ser transmitidos." },
+        { "id": "a2", "text": "Porque o protocolo é stop-and-wait — no máximo 1 pacote em trânsito, então basta distinguir o pacote atual do anterior", "isCorrect": true, "explanation": "Correto! No stop-and-wait, o emissor envia um pacote e espera pelo ACK antes de enviar o próximo. Assim, o receptor só precisa distinguir entre o pacote atual e uma possível retransmissão — dois valores (0 e 1) bastam." },
+        { "id": "a3", "text": "Porque os pacotes são muito pequenos e não há espaço no cabeçalho para mais bits", "isCorrect": false, "explanation": "O tamanho do cabeçalho não é a razão. Protocolos com pipeline usam espaços de sequência muito maiores com o mesmo tipo de cabeçalho." },
+        { "id": "a4", "text": "Porque o receptor descarta todos os pacotes com número de sequência maior que 1", "isCorrect": false, "explanation": "O receptor do rdt2.1 não descarta pacotes por terem seq# maior que 1 — ele simplesmente alterna entre esperar 0 e esperar 1." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Como o protocolo rdt2.2 elimina a necessidade de mensagens NAK?",
+      "alternatives": [
+        { "id": "a1", "text": "O receptor simplesmente ignora pacotes corrompidos e espera o timeout do emissor", "isCorrect": false, "explanation": "No rdt2.2, o receptor ainda responde ativamente — ele envia um ACK duplicado. Ignorar pacotes seria a abordagem do rdt3.0 com timers." },
+        { "id": "a2", "text": "O receptor envia o ACK do último pacote recebido corretamente — o emissor interpreta um ACK duplicado como indicação de erro", "isCorrect": true, "explanation": "Correto! Em vez de enviar NAK, o receptor reenvia o ACK com o número de sequência do último pacote que recebeu sem erros. O emissor detecta que o ACK recebido tem seq# diferente do esperado (ACK duplicado) e retransmite." },
+        { "id": "a3", "text": "O rdt2.2 usa checksums mais fortes que corrigem os erros automaticamente, eliminando a necessidade de feedback negativo", "isCorrect": false, "explanation": "O rdt2.2 não usa correção de erros. A detecção continua sendo feita por checksum, e o feedback negativo é substituído por ACKs duplicados." },
+        { "id": "a4", "text": "O receptor envia dois ACKs seguidos para confirmar — se o emissor receber apenas um, assume que houve erro", "isCorrect": false, "explanation": "O receptor não envia ACKs em duplicidade propositalmente. O 'ACK duplicado' se refere a enviar um ACK com o mesmo seq# do ACK anterior, sinalizando erro no pacote novo." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "No rdt3.0, o que acontece quando ocorre um timeout prematuro (o ACK estava a caminho mas não chegou a tempo)?",
+      "alternatives": [
+        { "id": "a1", "text": "O emissor retransmite o pacote, o receptor recebe uma duplicata (detectada pelo seq#), descarta os dados e reenvia o ACK", "isCorrect": true, "explanation": "Correto! O timeout prematuro causa uma retransmissão desnecessária. O receptor recebe o pacote duplicado, verifica que o seq# é igual ao anterior, descarta os dados e reenvia o ACK. O protocolo continua funcionando corretamente graças aos números de sequência." },
+        { "id": "a2", "text": "O emissor descarta o pacote e avança para o próximo, causando perda de dados", "isCorrect": false, "explanation": "O emissor nunca descarta pacotes não confirmados. Ele retransmite o pacote atual — a confiabilidade é garantida." },
+        { "id": "a3", "text": "O receptor envia um NAK especial indicando que já recebeu o pacote, e o emissor cancela a retransmissão", "isCorrect": false, "explanation": "O rdt3.0 (na versão 2.2+) não usa NAK. Além disso, o emissor não pode 'cancelar' um pacote já em trânsito." },
+        { "id": "a4", "text": "O protocolo entra em deadlock, pois ambos os lados ficam esperando", "isCorrect": false, "explanation": "Não há deadlock — o timer garante que o emissor sempre toma ação (retransmitir) após a expiração." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual mecanismo foi introduzido em cada versão do protocolo RDT?",
+      "alternatives": [
+        { "id": "a1", "text": "rdt2.0: timer; rdt2.1: checksum; rdt2.2: NAK; rdt3.0: seq#", "isCorrect": false, "explanation": "A ordem correta é: rdt2.0 introduziu checksum + ACK/NAK, rdt2.1 adicionou números de sequência, rdt2.2 eliminou o NAK, e rdt3.0 adicionou temporizadores." },
+        { "id": "a2", "text": "rdt2.0: números de sequência; rdt2.1: ACK/NAK; rdt2.2: timer; rdt3.0: pipeline", "isCorrect": false, "explanation": "Essa sequência está incorreta. Números de sequência foram introduzidos no rdt2.1, não no rdt2.0. Pipeline não é parte do rdt3.0." },
+        { "id": "a3", "text": "rdt2.0: checksum + ACK/NAK; rdt2.1: números de sequência (0/1); rdt2.2: ACK duplicado (sem NAK); rdt3.0: temporizador", "isCorrect": true, "explanation": "Correto! Cada versão adiciona exatamente um mecanismo: rdt2.0 traz detecção de erros e feedback, rdt2.1 resolve duplicatas com seq#, rdt2.2 simplifica eliminando NAK, e rdt3.0 trata perdas com timers." },
+        { "id": "a4", "text": "rdt2.0: pipeline; rdt2.1: ACK cumulativo; rdt2.2: buffer; rdt3.0: janela deslizante", "isCorrect": false, "explanation": "Pipeline, ACK cumulativo, buffer e janela deslizante são conceitos do GBN e SR, não dos protocolos rdt2.x/3.0." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Em um enlace de 1 Gbps com RTT de 30 ms e pacotes de 8.000 bits, qual é a utilização do emissor com stop-and-wait?",
+      "alternatives": [
+        { "id": "a1", "text": "Aproximadamente 50% — o emissor usa metade do tempo enviando e metade esperando", "isCorrect": false, "explanation": "Com stop-and-wait, o tempo de transmissão (0,008 ms) é minúsculo comparado ao RTT (30 ms). A utilização é muito menor que 50%." },
+        { "id": "a2", "text": "Aproximadamente 0,027% — o emissor fica ocioso quase todo o tempo esperando pelo ACK", "isCorrect": true, "explanation": "Correto! U = L/R ÷ (RTT + L/R) = 0,008ms ÷ 30,008ms ≈ 0,00027 = 0,027%. O emissor transmite por apenas 8 microssegundos a cada 30 milissegundos — uma utilização mínima." },
+        { "id": "a3", "text": "Aproximadamente 33% — pois o pacote viaja por 1/3 do RTT", "isCorrect": false, "explanation": "O tempo de transmissão (L/R = 0,008 ms) é o que determina a utilização, não o tempo de propagação. A utilização é muito menor que 33%." },
+        { "id": "a4", "text": "Aproximadamente 99% — pois o enlace de 1 Gbps é muito rápido", "isCorrect": false, "explanation": "Ter um enlace rápido piora a utilização no stop-and-wait! Quanto mais rápido o enlace, menor o tempo de transmissão relativo ao RTT, e menor a utilização." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "No Go-Back-N com janela N=4, se o pacote 2 for perdido mas os pacotes 3, 4 e 5 chegarem ao receptor, o que acontece?",
+      "alternatives": [
+        { "id": "a1", "text": "O receptor armazena os pacotes 3, 4 e 5 em buffer e espera o pacote 2 chegar", "isCorrect": false, "explanation": "O receptor GBN NÃO usa buffer para pacotes fora de ordem. Ele descarta todos os pacotes que não sejam o próximo esperado." },
+        { "id": "a2", "text": "O receptor aceita os pacotes 3, 4 e 5 e envia ACKs individuais para cada um", "isCorrect": false, "explanation": "O receptor GBN só aceita o próximo pacote em sequência. Como espera o pacote 2, os pacotes 3, 4 e 5 são descartados." },
+        { "id": "a3", "text": "O receptor descarta os pacotes 3, 4 e 5, reenvia ACK(1), e o emissor retransmite todos a partir do pacote 2 após o timeout", "isCorrect": true, "explanation": "Correto! No GBN, o receptor só aceita pacotes em ordem. Os pacotes 3, 4 e 5 são descartados, e o receptor continua enviando ACK(1) — o último pacote em sequência. Quando o timer do pacote 2 expira, o emissor retransmite 2, 3, 4 e 5." },
+        { "id": "a4", "text": "O emissor detecta a perda imediatamente pelo gap nos ACKs e retransmite apenas o pacote 2", "isCorrect": false, "explanation": "O emissor GBN não detecta perda por gap nos ACKs — ele usa timeout. Além disso, o GBN retransmite todos os pacotes da janela, não apenas o perdido." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Como o receptor da Repetição Seletiva (SR) trata pacotes que chegam fora de ordem?",
+      "alternatives": [
+        { "id": "a1", "text": "Descarta todos os pacotes fora de ordem e espera o próximo em sequência, como no GBN", "isCorrect": false, "explanation": "Essa é a abordagem do GBN, não do SR. O SR foi criado justamente para evitar o desperdício de descartar pacotes já recebidos." },
+        { "id": "a2", "text": "Armazena os pacotes em buffer, envia ACK individual para cada um, e entrega à aplicação quando o pacote faltante chegar", "isCorrect": true, "explanation": "Correto! O receptor SR mantém uma janela de recepção e armazena (buffering) pacotes fora de ordem. Quando o pacote faltante chega, todos os pacotes consecutivos armazenados são entregues à aplicação de uma vez." },
+        { "id": "a3", "text": "Envia um NAK para o pacote faltante e descarta os demais até receber a retransmissão", "isCorrect": false, "explanation": "O SR não usa NAK. Ele envia ACKs individuais para cada pacote recebido (mesmo fora de ordem) e aguarda os faltantes." },
+        { "id": "a4", "text": "Reordena automaticamente os pacotes usando timestamps e entrega imediatamente à aplicação", "isCorrect": false, "explanation": "O SR reordena usando números de sequência (não timestamps), e só entrega quando tem uma sequência contínua a partir do início da janela." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Qual das seguintes comparações entre Go-Back-N (GBN) e Repetição Seletiva (SR) está CORRETA?",
+      "alternatives": [
+        { "id": "a1", "text": "GBN usa ACKs individuais e SR usa ACKs cumulativos", "isCorrect": false, "explanation": "É o contrário: GBN usa ACKs cumulativos (ACK(n) confirma todos até n) e SR usa ACKs individuais (ACK(n) confirma apenas n)." },
+        { "id": "a2", "text": "Ambos retransmitem apenas o pacote perdido, mas o GBN é mais rápido na retransmissão", "isCorrect": false, "explanation": "O GBN retransmite TODOS os pacotes a partir do perdido, não apenas o perdido. Somente o SR retransmite seletivamente." },
+        { "id": "a3", "text": "GBN tem receptor simples (sem buffer) e retransmite em massa; SR tem receptor com buffer e retransmite apenas o perdido", "isCorrect": true, "explanation": "Correto! O GBN mantém o receptor simples (descarta fora de ordem) mas paga o preço de retransmitir pacotes já recebidos. O SR é mais eficiente na retransmissão mas exige que o receptor armazene pacotes fora de ordem." },
+        { "id": "a4", "text": "SR precisa de menos números de sequência que o GBN para a mesma janela N", "isCorrect": false, "explanation": "É o contrário: SR precisa de espaço de seq# ≥ 2N, enquanto GBN precisa apenas de ≥ N+1. O SR exige mais números de sequência para evitar ambiguidade." }
+      ]
+    }
+  ]
+}
+

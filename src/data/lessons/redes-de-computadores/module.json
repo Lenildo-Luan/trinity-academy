@@ -24,6 +24,13 @@
         "description": "O UDP como protocolo de melhor esforço: vantagens (baixa latência, sem handshake, cabeçalho pequeno), casos de uso (streaming, DNS, SNMP, HTTP/3), estrutura do segmento e mecanismo de checksum.",
         "video": null,
         "quizId": "quiz-3"
+      },
+      {
+        "id": "charpter-4",
+        "title": "Princípios de Transferência Confiável de Dados (RDT)",
+        "description": "Desenvolvimento incremental dos protocolos RDT (rdt1.0 a rdt3.0) com FSM, ACKs, NAKs, números de sequência e temporizadores. Problema de desempenho do stop-and-wait e soluções com pipeline: Go-Back-N (GBN) e Repetição Seletiva (SR).",
+        "video": null,
+        "quizId": "quiz-4"
       }
     ]
   }

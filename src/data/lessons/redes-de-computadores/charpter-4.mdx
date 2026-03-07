@@ -1,0 +1,311 @@
+# Princípios de Transferência Confiável de Dados (RDT)
+
+No capítulo anterior, estudamos o **UDP** — um protocolo de transporte simples, rápido e sem garantias de entrega. Vimos que o UDP é ideal para cenários onde a velocidade supera a necessidade de confiabilidade. Mas e quando **perder dados é inaceitável**? Transferências de arquivos, e-mails, páginas web — todas essas aplicações exigem que **cada byte chegue corretamente ao destino**. Como construir um protocolo de transporte **confiável** sobre um canal que pode corromper e perder pacotes? Neste capítulo, desenvolvemos essa resposta de forma incremental, construindo protocolos cada vez mais robustos até chegarmos a soluções práticas como o **pipeline**.
+
+## Por que Transferência Confiável?
+
+A camada de rede (IP) oferece um serviço de **melhor esforço** (*best-effort*): pacotes podem ser **corrompidos**, **perdidos** ou **entregues fora de ordem**. A responsabilidade de fornecer **confiabilidade** recai sobre a camada de transporte.
+
+> O desafio fundamental é: como oferecer a **ilusão** de um canal confiável para a aplicação, quando o canal real abaixo é **não confiável**?
+
+A abordagem clássica para resolver esse problema é desenvolver protocolos de **transferência confiável de dados** (*Reliable Data Transfer* — RDT), adicionando mecanismos incrementalmente conforme o canal se torna mais "hostil".
+
+<MarkdownTable
+  headers={["Protocolo", "Canal Subjacente", "Mecanismos Adicionados"]}
+  rows={[
+    ["**rdt1.0**", "Perfeitamente confiável", "Nenhum — apenas envia e recebe"],
+    ["**rdt2.0**", "Pode corromper bits", "Checksum + ACK/NAK"],
+    ["**rdt2.1**", "Pode corromper bits (incluindo ACK/NAK)", "Números de sequência (0/1)"],
+    ["**rdt2.2**", "Pode corromper bits", "ACKs numerados (sem NAK)"],
+    ["**rdt3.0**", "Pode corromper bits e perder pacotes", "Temporizador + retransmissão"],
+  ]}
+/>
+
+Vamos construir cada um desses protocolos passo a passo, usando **Máquinas de Estados Finitos** (*Finite State Machines* — FSM) para descrever o comportamento do emissor e do receptor.
+
+## rdt1.0 — Transferência sobre Canal Perfeitamente Confiável
+
+O caso mais simples: o canal subjacente é **perfeito** — não perde pacotes, não corrompe bits, não reordena nada. Nesse cenário idealizado, o protocolo é trivial:
+
+- **Emissor:** recebe dados da aplicação, empacota em um segmento e envia pelo canal.
+- **Receptor:** recebe o segmento, extrai os dados e entrega à aplicação.
+
+<RDT10SimpleChannel />
+
+Não há necessidade de **feedback** do receptor (ACK, NAK), nem de **retransmissão**, nem de **números de sequência**. Cada lado tem apenas **um estado** na FSM.
+
+<MarkdownTable
+  headers={["Componente", "Emissor (rdt1.0)", "Receptor (rdt1.0)"]}
+  rows={[
+    ["**Estados FSM**", "1 estado: aguardar chamada de cima", "1 estado: aguardar chamada de baixo"],
+    ["**Ação ao enviar**", "`make_pkt(data)` → `udt_send(packet)`", "—"],
+    ["**Ação ao receber**", "—", "`extract(packet)` → `deliver_data(data)`"],
+    ["**Mecanismos**", "Nenhum", "Nenhum"],
+  ]}
+/>
+
+> O rdt1.0 é puramente teórico, mas serve como **ponto de partida** para entender quais mecanismos são necessários quando o canal **não** é confiável.
+
+## rdt2.0 — Canal com Erros de Bit (ACK e NAK)
+
+Agora, o canal pode **corromper bits** durante a transmissão. Como o receptor sabe se o pacote chegou correto? E como o emissor sabe se deve reenviar?
+
+A solução do rdt2.0 introduz três mecanismos:
+
+1. **Detecção de erros:** o emissor adiciona um **checksum** ao pacote.
+2. **Feedback do receptor:** o receptor responde com **ACK** (*acknowledgment* — "recebi corretamente") ou **NAK** (*negative acknowledgment* — "detectei erro").
+3. **Retransmissão:** ao receber um NAK, o emissor **reenvia** o mesmo pacote.
+
+<RDT20AckNak />
+
+Observe o padrão de funcionamento: o emissor envia um pacote e **para de enviar** até receber ACK ou NAK. Se receber NAK, retransmite. Esse comportamento é chamado de **stop-and-wait** (*pare e espere*) — o emissor nunca tem mais de um pacote em trânsito.
+
+<MarkdownTable
+  headers={["Elemento", "Função no rdt2.0"]}
+  rows={[
+    ["**Checksum**", "Permite ao receptor detectar se o pacote foi corrompido"],
+    ["**ACK**", "Receptor informa que o pacote chegou **sem erros** — emissor pode enviar o próximo"],
+    ["**NAK**", "Receptor informa que o pacote chegou **com erros** — emissor retransmite"],
+    ["**Retransmissão**", "Emissor reenvia o pacote quando recebe NAK"],
+  ]}
+/>
+
+### A Falha Fatal do rdt2.0
+
+O rdt2.0 tem um problema grave: **e se o ACK ou NAK for corrompido?** O emissor recebe uma resposta ilegível e não sabe se o pacote foi recebido corretamente ou não. Se retransmitir por segurança, o receptor pode receber **duas cópias** do mesmo pacote sem saber que a segunda é uma **duplicata**.
+
+> O rdt2.0 não trata corrupção nas mensagens de feedback (ACK/NAK). Essa é uma falha fundamental que o rdt2.1 resolve.
+
+## rdt2.1 — Números de Sequência para Tratar Duplicatas
+
+Para resolver o problema dos ACK/NAK corrompidos, o rdt2.1 adiciona **números de sequência** aos pacotes. Como estamos em um protocolo stop-and-wait (no máximo um pacote em trânsito por vez), bastam **dois números de sequência: 0 e 1** — alternando entre eles.
+
+### Como funciona:
+
+1. O emissor adiciona o **número de sequência** (0 ou 1) ao pacote.
+2. Se o ACK/NAK chegar corrompido, o emissor **retransmite** o pacote com o **mesmo número de sequência**.
+3. O receptor verifica o número de sequência:
+   - Se for o número **esperado** → aceita os dados e entrega à aplicação.
+   - Se for o número **anterior** (duplicata) → **descarta** os dados, mas envia ACK novamente.
+
+<RDT21SequenceNumbers />
+
+O número de sequência permite ao receptor **distinguir um pacote novo de uma retransmissão**. A FSM agora tem **o dobro de estados** — um conjunto para seq=0 e outro para seq=1.
+
+<MarkdownTable
+  headers={["Cenário", "Ação do Emissor", "Ação do Receptor"]}
+  rows={[
+    ["ACK recebido corretamente", "Avança para o próximo seq# e envia novo pacote", "—"],
+    ["NAK recebido corretamente", "Retransmite o pacote com o **mesmo** seq#", "—"],
+    ["ACK/NAK corrompido", "Retransmite o pacote com o **mesmo** seq#", "—"],
+    ["Pacote duplicado recebido", "—", "Descarta dados, mas reenvia ACK para o seq# recebido"],
+    ["Pacote corrompido recebido", "—", "Envia NAK"],
+  ]}
+/>
+
+> A chave do rdt2.1 é simples: com números de sequência, o receptor **sempre sabe** se o pacote recebido é novo ou duplicado, independentemente do que aconteceu com o ACK anterior.
+
+## rdt2.2 — Protocolo sem NAK (ACKs Duplicados)
+
+O rdt2.2 simplifica o rdt2.1 eliminando completamente o **NAK**. Em vez de enviar um NAK quando detecta erro, o receptor simplesmente **reenvia o ACK do último pacote recebido corretamente**.
+
+O emissor interpreta um **ACK duplicado** (ACK com número de sequência diferente do esperado) como se fosse um NAK — e retransmite.
+
+<RDT22DuplicateAcks />
+
+<MarkdownTable
+  headers={["Aspecto", "rdt2.1 (com NAK)", "rdt2.2 (sem NAK)"]}
+  rows={[
+    ["**Feedback positivo**", "ACK (sem número)", "ACK com número de sequência"],
+    ["**Feedback negativo**", "NAK explícito", "ACK duplicado (do pacote anterior)"],
+    ["**Como o emissor detecta erro**", "Recebe NAK", "Recebe ACK com seq# ≠ esperado"],
+    ["**Tipos de mensagem**", "3 (PKT, ACK, NAK)", "2 (PKT, ACK)"],
+    ["**Complexidade**", "Ligeiramente maior — 3 tipos de mensagem", "Mais simples — apenas 2 tipos"],
+  ]}
+/>
+
+> A eliminação do NAK simplifica o protocolo sem perder funcionalidade. Essa técnica é usada no **TCP**, que utiliza ACKs duplicados como indicação de perda.
+
+## rdt3.0 — Canal com Erros e Perdas (Temporizador)
+
+Até agora, assumimos que os pacotes podem ser corrompidos, mas **sempre chegam**. E se o canal puder **perder pacotes completamente** — tanto dados quanto ACKs? O emissor ficaria esperando eternamente por uma resposta que nunca virá.
+
+A solução do rdt3.0: o emissor inicia um **temporizador** (*timer*) ao enviar cada pacote. Se o ACK não chegar antes do tempo expirar, o emissor **retransmite**.
+
+### Os Quatro Cenários do rdt3.0
+
+<RDT30TimerRetransmission />
+
+Vamos analisar cada cenário em detalhe:
+
+<MarkdownTable
+  headers={["Cenário", "O que Acontece", "Resultado"]}
+  rows={[
+    ["**(a) Sem perda**", "PKT chega, ACK retorna antes do timeout", "Funcionamento normal — timer é cancelado"],
+    ["**(b) Perda de pacote**", "PKT se perde na rede → timeout → emissor retransmite", "Receptor recebe o pacote retransmitido e envia ACK"],
+    ["**(c) Perda de ACK**", "PKT chega, mas ACK se perde → timeout → retransmissão", "Receptor recebe duplicata (seq# igual), descarta dados, reenvia ACK"],
+    ["**(d) Timeout prematuro**", "ACK está a caminho, mas timeout dispara antes → retransmissão desnecessária", "Receptor descarta duplicata; emissor recebe ACK duplicado e ignora"],
+  ]}
+/>
+
+> O rdt3.0 é um protocolo **funcionalmente correto**: ele garante transferência confiável sobre um canal com erros e perdas. É também chamado de **protocolo de bit alternante** (*alternating-bit protocol*) porque os números de sequência alternam entre 0 e 1.
+
+### Escolhendo o Valor do Temporizador
+
+O temporizador deve ser configurado com cuidado:
+
+<MarkdownTable
+  headers={["Temporizador", "Consequência"]}
+  rows={[
+    ["**Muito curto**", "Timeouts prematuros → retransmissões desnecessárias → desperdício de banda"],
+    ["**Muito longo**", "Reação lenta a perdas reais → atraso na recuperação"],
+    ["**Ideal**", "Ligeiramente maior que o RTT típico + tempo de processamento no receptor"],
+  ]}
+/>
+
+## Problema de Desempenho: Stop-and-Wait
+
+O rdt3.0 é **correto**, mas tem um problema grave de **desempenho**. Como o emissor deve esperar pelo ACK antes de enviar o próximo pacote, a **utilização do enlace** é extremamente baixa.
+
+### Exemplo Numérico
+
+Considere um enlace de **1 Gbps** com **RTT = 30 ms** e pacotes de **L = 8.000 bits**:
+
+<MarkdownTable
+  headers={["Parâmetro", "Valor"]}
+  rows={[
+    ["Capacidade do enlace (R)", "1 Gbps = 10⁹ bits/s"],
+    ["Tamanho do pacote (L)", "8.000 bits (1 KB)"],
+    ["Tempo de transmissão (L/R)", "8.000 / 10⁹ = 0,008 ms"],
+    ["Round-Trip Time (RTT)", "30 ms"],
+    ["Tempo total por pacote", "RTT + L/R = 30,008 ms"],
+  ]}
+/>
+
+A **utilização do emissor** é:
+
+> **U = (L/R) / (RTT + L/R) = 0,008 / 30,008 ≈ 0,00027 = 0,027%**
+
+<StopAndWaitUtilization />
+
+O emissor usa o enlace de 1 Gbps durante apenas **0,027%** do tempo! É como ter uma rodovia de 10 faixas e permitir que apenas **um carro** entre a cada 30 segundos. A taxa efetiva de envio é de apenas **267 kbps** — em um enlace de 1 Gbps!
+
+> O protocolo stop-and-wait é funcionalmente correto, mas **desperdiça quase toda a capacidade do enlace**. A solução? Permitir múltiplos pacotes em trânsito simultaneamente — o conceito de **pipeline**.
+
+## Protocolos com Pipeline
+
+A solução para o problema de desempenho do stop-and-wait é o **pipelining** (*enfileiramento*): o emissor pode enviar **múltiplos pacotes** sem esperar pelo ACK de cada um individualmente.
+
+Com pipeline, se permitirmos **3 pacotes em trânsito** simultaneamente, a utilização sobe de 0,027% para aproximadamente **0,081%** — um aumento de 3x. Com janelas maiores, a melhoria é proporcional.
+
+<MarkdownTable
+  headers={["Aspecto", "Stop-and-Wait", "Pipeline"]}
+  rows={[
+    ["**Pacotes em trânsito**", "Máximo 1", "Múltiplos (até N)"],
+    ["**Utilização do enlace**", "U = L/R ÷ (RTT + L/R)", "U ≈ N × L/R ÷ (RTT + L/R)"],
+    ["**Números de sequência**", "0 e 1 (1 bit)", "Faixa maior (depende de N)"],
+    ["**Buffers**", "Não necessários", "Emissor e/ou receptor precisam de buffers"],
+    ["**Complexidade**", "Muito simples", "Maior — gerenciamento de janela, timers, buffers"],
+  ]}
+/>
+
+O pipelining traz duas consequências importantes:
+
+1. **Faixa de números de sequência maior:** com múltiplos pacotes em trânsito, precisamos de mais do que apenas 0 e 1 para identificá-los.
+2. **Buffers no emissor e/ou receptor:** pacotes enviados mas ainda não confirmados precisam ser armazenados para possível retransmissão.
+
+Existem duas abordagens fundamentais para protocolos com pipeline: **Go-Back-N (GBN)** e **Repetição Seletiva (SR)**.
+
+## Go-Back-N (GBN)
+
+No protocolo **Go-Back-N**, o emissor pode ter até **N pacotes não confirmados** em trânsito simultaneamente. O receptor é extremamente simples — ele só aceita pacotes **em ordem**.
+
+### Funcionamento do Emissor GBN
+
+- Mantém uma **janela deslizante** de tamanho N.
+- Envia pacotes dentro da janela sem esperar ACK individual.
+- Usa um **único temporizador** para o pacote mais antigo não confirmado.
+- Ao receber um **ACK(n)**, interpreta como **ACK cumulativo** — todos os pacotes até n foram recebidos.
+- Se o timer expirar, **retransmite TODOS** os pacotes da janela a partir do não confirmado.
+
+### Funcionamento do Receptor GBN
+
+- Mantém apenas o **número de sequência do próximo pacote esperado**.
+- Se receber o pacote esperado → entrega à aplicação e envia ACK.
+- Se receber pacote **fora de ordem** → **descarta** (não armazena em buffer) e reenvia ACK do último pacote em ordem.
+
+<MarkdownTable
+  headers={["Componente", "Comportamento no GBN"]}
+  rows={[
+    ["**Janela do emissor**", "Até N pacotes não confirmados em trânsito"],
+    ["**ACK**", "Cumulativo — ACK(n) confirma todos até n"],
+    ["**Timer**", "Único — para o pacote mais antigo da janela"],
+    ["**Timeout**", "Retransmite TODOS os pacotes a partir do não confirmado"],
+    ["**Receptor**", "Aceita SOMENTE o próximo pacote em sequência; descarta fora de ordem"],
+    ["**Buffer do receptor**", "Não necessário — receptor é simples"],
+  ]}
+/>
+
+> O GBN é eficiente no receptor (sem buffer), mas pode ser **wasteful** no emissor: se o pacote 2 de uma janela de 10 for perdido, os pacotes 3–10 (que já foram enviados) serão descartados pelo receptor e retransmitidos pelo emissor.
+
+## Repetição Seletiva (SR)
+
+O protocolo de **Repetição Seletiva** (*Selective Repeat*) resolve a ineficiência do GBN retransmitindo **apenas os pacotes que foram realmente perdidos ou corrompidos**.
+
+### Funcionamento do Emissor SR
+
+- Mantém uma janela de tamanho N (como o GBN).
+- Usa um **temporizador individual** para cada pacote não confirmado.
+- Quando um timer expira, retransmite **apenas aquele pacote**.
+- ACKs são **individuais** (não cumulativos).
+
+### Funcionamento do Receptor SR
+
+- Mantém uma **janela de recepção** de tamanho N.
+- Se receber pacote **dentro da janela** mas fora de ordem → **armazena em buffer** e envia ACK individual.
+- Quando o pacote mais antigo da janela chega → entrega todos os pacotes consecutivos armazenados à aplicação e avança a janela.
+
+<PipelineGBNvsSR />
+
+Note a diferença fundamental na visualização: quando o pacote 2 é perdido, o **GBN retransmite os pacotes 2, 3 e 4**, enquanto o **SR retransmite apenas o pacote 2** — os pacotes 3 e 4 já estavam armazenados no buffer do receptor.
+
+<MarkdownTable
+  headers={["Aspecto", "Go-Back-N (GBN)", "Repetição Seletiva (SR)"]}
+  rows={[
+    ["**Tipo de ACK**", "Cumulativo — ACK(n) confirma até n", "Individual — ACK(n) confirma apenas n"],
+    ["**Temporizadores**", "Único — para o pacote mais antigo", "Individual — um por pacote não confirmado"],
+    ["**Retransmissão**", "Todos a partir do perdido", "Apenas o pacote perdido"],
+    ["**Buffer do receptor**", "Não necessário — descarta fora de ordem", "Necessário — armazena fora de ordem"],
+    ["**Complexidade do receptor**", "Simples", "Maior — precisa gerenciar buffer e janela"],
+    ["**Eficiência em redes com perdas**", "Menor — retransmissão em massa", "Maior — retransmite o mínimo necessário"],
+    ["**Uso de banda em erros**", "Alto — pacotes já recebidos são reenviados", "Baixo — apenas o pacote perdido é reenviado"],
+  ]}
+/>
+
+### Tamanho da Janela e Números de Sequência
+
+Um detalhe importante nos protocolos com pipeline: o **tamanho da janela** deve ser compatível com o **espaço de números de sequência**. Para o SR, a janela deve ter tamanho **≤ metade do espaço de sequência**, para evitar ambiguidade entre pacotes novos e retransmissões.
+
+<MarkdownTable
+  headers={["Protocolo", "Requisito de Números de Sequência"]}
+  rows={[
+    ["**GBN**", "Espaço de seq# ≥ N + 1 (janela + 1)"],
+    ["**SR**", "Espaço de seq# ≥ 2N (o dobro da janela)"],
+  ]}
+/>
+
+> Exemplo: com janela N=4, o GBN precisa de pelo menos 5 números de sequência (0–4), enquanto o SR precisa de pelo menos 8 (0–7).
+
+## Resumo da Aula
+
+Neste capítulo, construímos protocolos de transferência confiável de dados de forma incremental:
+
+- **rdt1.0 (canal ideal):** Sem mecanismos extras — o canal perfeito garante tudo. Serve como ponto de partida teórico.
+- **rdt2.0 (erros de bit):** Introduz **checksum**, **ACK/NAK** e **retransmissão** — mas falha se o próprio ACK/NAK for corrompido.
+- **rdt2.1 (números de sequência):** Resolve duplicatas com **seq# 0/1** — receptor distingue pacotes novos de retransmissões.
+- **rdt2.2 (sem NAK):** Substitui NAK por **ACK duplicado** — simplifica o protocolo para apenas 2 tipos de mensagem.
+- **rdt3.0 (perdas + timer):** Adiciona **temporizador** para detectar perdas — garante entrega confiável sobre canal com erros e perdas.
+- **Stop-and-wait:** Protocolo correto mas com **utilização de enlace mínima** — o emissor fica ocioso quase todo o tempo.
+- **Go-Back-N (GBN):** Pipeline com **ACKs cumulativos**, **timer único** e retransmissão em massa — receptor simples, mas potencialmente desperdiça banda.
+- **Repetição Seletiva (SR):** Pipeline com **ACKs individuais**, **timers por pacote** e retransmissão seletiva — mais eficiente, mas receptor mais complexo com buffer.
+
