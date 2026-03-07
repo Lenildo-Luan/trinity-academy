@@ -17,6 +17,13 @@
         "description": "Como um host gerencia múltiplos fluxos de dados: multiplexação no emissor, demultiplexação no receptor, demux UDP (porta destino) e demux TCP (4-tupla).",
         "video": null,
         "quizId": "quiz-2"
+      },
+      {
+        "id": "charpter-3",
+        "title": "Protocolo UDP",
+        "description": "O UDP como protocolo de melhor esforço: vantagens (baixa latência, sem handshake, cabeçalho pequeno), casos de uso (streaming, DNS, SNMP, HTTP/3), estrutura do segmento e mecanismo de checksum.",
+        "video": null,
+        "quizId": "quiz-3"
       }
     ]
   }

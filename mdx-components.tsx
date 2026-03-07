@@ -85,6 +85,14 @@ import {
   UDPvsTCPDemuxComparison,
   SegmentHeaderPorts,
 } from "./src/components/multiplexing-demux-p5-examples";
+import {
+  UDPBestEffort,
+  UDPNoHandshake,
+  UDPSegmentStructure,
+  UDPChecksumDemo,
+  UDPUseCases,
+  UDPvsTPHeaderSize,
+} from "./src/components/udp-protocol-p5-examples";
 
 function getTextContent(node: ReactNode): string {
   if (typeof node === "string") return node;
@@ -280,6 +288,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     TCPDemultiplexing,
     UDPvsTCPDemuxComparison,
     SegmentHeaderPorts,
+    UDPBestEffort,
+    UDPNoHandshake,
+    UDPSegmentStructure,
+    UDPChecksumDemo,
+    UDPUseCases,
+    UDPvsTPHeaderSize,
     ...components,
   };
 }

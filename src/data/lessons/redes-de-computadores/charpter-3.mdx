@@ -1,0 +1,296 @@
+# Protocolo UDP
+
+No capítulo anterior, exploramos como a camada de transporte usa a **multiplexação** e a **demultiplexação** para gerenciar múltiplos fluxos de dados. Vimos que o UDP identifica sockets apenas pela porta de destino, enquanto o TCP usa a 4-tupla completa. Agora é hora de mergulhar no **UDP (User Datagram Protocol)** — o protocolo de transporte mais simples e direto da Internet. Apesar de parecer "limitado" à primeira vista, o UDP é extremamente importante e amplamente utilizado em cenários onde velocidade e simplicidade superam a necessidade de confiabilidade.
+
+## O que é o UDP?
+
+O UDP é um protocolo de transporte **"cru"** e de **melhor esforço** (*best-effort*). Isso significa que ele faz o **mínimo possível** além do que a camada de rede (IP) já oferece: basicamente, adiciona a capacidade de **multiplexação/demultiplexação** (usando portas) e uma **verificação de integridade** opcional (checksum).
+
+> O UDP é como enviar um cartão-postal pelos correios: você escreve a mensagem, coloca o endereço e deposita na caixa. Não há confirmação de entrega, não há rastreamento, e se o cartão se perder no caminho, ninguém avisa. Mas é **rápido** e **barato**.
+
+### Características Fundamentais do UDP
+
+<MarkdownTable
+  headers={["Característica", "Descrição"]}
+  rows={[
+    ["**Sem conexão (connectionless)**", "Não há handshake entre emissor e receptor antes de enviar dados"],
+    ["**Melhor esforço (best-effort)**", "Segmentos podem ser perdidos, duplicados ou entregues fora de ordem — sem garantias"],
+    ["**Sem controle de congestionamento**", "O UDP não reduz a taxa de envio mesmo se a rede estiver congestionada"],
+    ["**Sem controle de fluxo**", "O emissor pode enviar dados mais rápido do que o receptor consegue processar"],
+    ["**Orientado a mensagem**", "Cada chamada `sendto()` gera exatamente um datagrama — preserva os limites da mensagem"],
+  ]}
+/>
+
+<UDPBestEffort />
+
+Observe na visualização acima como os datagramas UDP são enviados diretamente pela rede, sem nenhum estabelecimento prévio de conexão. Alguns pacotes podem ser perdidos no caminho, e o emissor **não é notificado** dessas perdas.
+
+## Por que Usar UDP? Vantagens sobre o TCP
+
+Se o UDP não garante a entrega dos dados, por que alguém o usaria? A resposta está nas **vantagens** que surgem justamente de sua simplicidade:
+
+### 1. Sem Estabelecimento de Conexão (Sem Handshake)
+
+O TCP exige um **3-way handshake** antes de enviar qualquer dado, o que adiciona pelo menos **1 RTT (Round-Trip Time)** de atraso. O UDP envia dados **imediatamente** — sem atrasos iniciais.
+
+<UDPNoHandshake />
+
+<MarkdownTable
+  headers={["Protocolo", "Antes de Enviar Dados", "Atraso Inicial"]}
+  rows={[
+    ["**UDP**", "Nada — envia direto", "**0 RTT**"],
+    ["**TCP**", "3-way handshake (SYN → SYN-ACK → ACK)", "**1 RTT** mínimo"],
+  ]}
+/>
+
+> Para aplicações que enviam **poucos dados** (como uma consulta DNS), o atraso do handshake TCP pode ser **maior** que o tempo de envio dos próprios dados!
+
+### 2. Sem Estado de Conexão
+
+O TCP mantém **buffers de envio e recebimento**, **números de sequência**, **timers de retransmissão**, **janelas de congestionamento** e outros parâmetros por conexão. Isso consome memória e processamento no servidor.
+
+O UDP **não mantém nenhum estado** — cada datagrama é independente. Isso permite que um servidor UDP atenda **muito mais clientes simultâneos** com os mesmos recursos.
+
+<MarkdownTable
+  headers={["Recurso", "TCP (por conexão)", "UDP"]}
+  rows={[
+    ["Buffers de envio/recebimento", "Sim — alocados por conexão", "Não mantém buffers"],
+    ["Números de sequência", "Sim — por byte transmitido", "Não existe"],
+    ["Timers de retransmissão", "Sim — múltiplos timers ativos", "Não existe"],
+    ["Janela de congestionamento", "Sim — ajustada dinamicamente", "Não existe"],
+    ["Memória por cliente", "~Kilobytes por conexão", "~Zero estado adicional"],
+  ]}
+/>
+
+### 3. Cabeçalho Menor
+
+O cabeçalho UDP tem apenas **8 bytes**, contra **20 bytes** (mínimo) do TCP. Isso significa menos overhead por pacote — crucial quando os dados enviados são pequenos.
+
+<UDPvsTPHeaderSize />
+
+<MarkdownTable
+  headers={["Campo do Cabeçalho", "UDP", "TCP"]}
+  rows={[
+    ["Porta de origem", "2 bytes", "2 bytes"],
+    ["Porta de destino", "2 bytes", "2 bytes"],
+    ["Comprimento / Nº sequência", "2 bytes", "4 bytes"],
+    ["Checksum / Nº ACK", "2 bytes", "4 bytes"],
+    ["Flags, janela, ponteiro urgente, opções", "—", "8+ bytes"],
+    ["**Total mínimo**", "**8 bytes**", "**20 bytes**"],
+  ]}
+/>
+
+> Para um datagrama DNS típico (~40 bytes de dados), o cabeçalho UDP (8 bytes) representa 17% de overhead. Com TCP (20 bytes + handshake), o overhead seria de 33% — quase o dobro — sem contar os pacotes extras do handshake e do ACK.
+
+### 4. Sem Controle de Congestionamento
+
+O TCP reduz automaticamente a taxa de envio quando detecta congestionamento na rede (perda de pacotes). Isso é ótimo para a saúde da rede, mas pode ser indesejável para aplicações de **tempo real**:
+
+<MarkdownTable
+  headers={["Situação", "Comportamento TCP", "Comportamento UDP"]}
+  rows={[
+    ["Rede congestionada", "Reduz taxa de envio (backoff)", "Continua enviando na mesma taxa"],
+    ["Pacote perdido", "Retransmite e espera ACK", "Ignora — a aplicação decide o que fazer"],
+    ["Aplicação precisa de taxa constante", "Não garante — pode reduzir drasticamente", "Permite taxa constante (aplicação controla)"],
+  ]}
+/>
+
+## Casos de Uso Típicos do UDP
+
+O UDP é a escolha ideal quando a **velocidade** e a **baixa latência** são mais importantes que a **confiabilidade perfeita**. Vamos explorar os principais cenários:
+
+<UDPUseCases />
+
+### Streaming de Mídia (Áudio e Vídeo)
+
+Aplicações de streaming como **videoconferências**, **VoIP** e **live streaming** preferem UDP porque:
+- Perder alguns pacotes causa apenas um pequeno glitch — é **tolerável**
+- Retransmitir pacotes atrasados é **inútil** (o momento da reprodução já passou)
+- A taxa de envio precisa ser **constante** para manter a qualidade
+
+> Em uma chamada de vídeo, receber um frame 2 segundos atrasado (por retransmissão TCP) é pior do que simplesmente pular aquele frame.
+
+### DNS (Domain Name System)
+
+O DNS é o exemplo clássico de uso do UDP:
+- Consultas são **pequenas** (geralmente < 512 bytes)
+- Cada consulta é **independente** (sem necessidade de conexão)
+- A **velocidade** é crítica (toda navegação web começa com DNS)
+- Se a resposta não chegar, o **cliente simplesmente reenvia** a consulta
+
+### SNMP (Simple Network Management Protocol)
+
+O SNMP monitora dispositivos de rede (roteadores, switches, servidores). Usa UDP porque:
+- As mensagens são pequenas e frequentes
+- A rede pode estar **congestionada** justamente quando o SNMP é mais necessário — usar TCP com controle de congestionamento seria contraproducente
+- Perder uma consulta de monitoramento é aceitável — a próxima virá em segundos
+
+### HTTP/3 (QUIC sobre UDP)
+
+Surpreendentemente, a versão mais recente do HTTP — **HTTP/3** — roda sobre **UDP** (via protocolo QUIC):
+
+<MarkdownTable
+  headers={["Versão HTTP", "Protocolo de Transporte", "Motivação"]}
+  rows={[
+    ["HTTP/1.1", "TCP", "Confiabilidade necessária para páginas web"],
+    ["HTTP/2", "TCP", "Multiplexação de streams sobre uma conexão TCP"],
+    ["**HTTP/3**", "**UDP (QUIC)**", "Elimina o head-of-line blocking do TCP; handshake 0-RTT; migração de conexão"],
+  ]}
+/>
+
+O QUIC implementa **confiabilidade, controle de fluxo e controle de congestionamento** no nível da aplicação, sobre UDP. Isso permite mais flexibilidade e inovação do que modificar o TCP (que está ossificado nos sistemas operacionais).
+
+> HTTP/3 prova que UDP não é "inferior" ao TCP — é uma **base flexível** sobre a qual aplicações podem construir exatamente o nível de confiabilidade que precisam.
+
+### Resumo dos Casos de Uso
+
+<MarkdownTable
+  headers={["Aplicação", "Por que UDP?", "Tolerância a Perdas"]}
+  rows={[
+    ["**Streaming de vídeo/áudio**", "Baixa latência, taxa constante", "Alta — glitches menores são aceitáveis"],
+    ["**DNS**", "Consultas pequenas, sem estado", "Média — cliente reenvia se não receber resposta"],
+    ["**SNMP**", "Funciona sob congestionamento, mensagens pequenas", "Alta — próxima consulta vem em segundos"],
+    ["**HTTP/3 (QUIC)**", "0-RTT, sem head-of-line blocking", "Tratada pelo QUIC sobre UDP"],
+    ["**Jogos online**", "Latência mínima para posição/ações", "Alta — posição antiga é descartada pela nova"],
+    ["**IoT / Sensores**", "Dispositivos com poucos recursos", "Alta — próxima leitura substitui a anterior"],
+  ]}
+/>
+
+## Estrutura do Segmento UDP
+
+O segmento UDP (também chamado de **datagrama UDP**) tem uma estrutura extremamente simples — apenas **4 campos** no cabeçalho, totalizando **8 bytes**:
+
+<UDPSegmentStructure />
+
+### Campos do Cabeçalho UDP
+
+<MarkdownTable
+  headers={["Campo", "Tamanho", "Descrição"]}
+  rows={[
+    ["**Porta de Origem**", "16 bits (2 bytes)", "Identifica o processo remetente. Usado como 'endereço de retorno' para respostas. Opcional — pode ser 0 se nenhuma resposta é esperada."],
+    ["**Porta de Destino**", "16 bits (2 bytes)", "Identifica o processo destinatário. Campo-chave para a demultiplexação no receptor."],
+    ["**Comprimento**", "16 bits (2 bytes)", "Tamanho total do datagrama UDP (cabeçalho + dados), em bytes. Mínimo: 8 bytes (cabeçalho sem dados). Máximo teórico: 65.535 bytes."],
+    ["**Checksum**", "16 bits (2 bytes)", "Verificação de integridade do segmento (cabeçalho + dados + pseudo-cabeçalho IP). Detalhado na próxima seção."],
+  ]}
+/>
+
+### Observações Importantes sobre o Comprimento
+
+O campo **Comprimento** inclui o cabeçalho de 8 bytes + os dados da aplicação:
+
+<MarkdownTable
+  headers={["Exemplo", "Dados da Aplicação", "Comprimento UDP"]}
+  rows={[
+    ["Datagrama vazio (apenas cabeçalho)", "0 bytes", "8 bytes"],
+    ["Consulta DNS típica", "~40 bytes", "48 bytes"],
+    ["Pacote de jogo online", "~100 bytes", "108 bytes"],
+    ["Máximo teórico", "65.527 bytes", "65.535 bytes"],
+  ]}
+/>
+
+> O tamanho máximo teórico é 65.535 bytes (limite de 16 bits), mas na prática o **MTU da rede** (geralmente 1.500 bytes para Ethernet) limita o tamanho útil. Datagramas maiores que o MTU serão **fragmentados** pela camada de rede.
+
+## Checksum UDP — Detecção de Erros
+
+Embora o UDP não garanta a entrega dos dados, ele oferece um mecanismo básico para detectar se os dados foram **corrompidos** durante a transmissão: o **checksum**.
+
+### Por que o Checksum é Necessário?
+
+Mesmo em redes modernas, bits podem ser invertidos durante a transmissão por:
+- Interferência eletromagnética
+- Ruído térmico nos circuitos
+- Erros em roteadores ou buffers de memória
+
+> O checksum é a **última linha de defesa** contra dados corrompidos. Sem ele, a aplicação poderia processar dados inválidos sem saber.
+
+### Como o Checksum é Calculado
+
+O checksum UDP usa **aritmética de complemento de 1** sobre palavras de 16 bits. O processo funciona assim:
+
+**No emissor:**
+1. Divide o segmento (pseudo-cabeçalho + cabeçalho + dados) em **palavras de 16 bits**
+2. **Soma** todas as palavras usando aritmética de complemento de 1 (carry é adicionado de volta)
+3. Calcula o **complemento de 1** da soma (inverte todos os bits)
+4. O resultado é colocado no campo **Checksum** do cabeçalho
+
+**No receptor:**
+1. Soma todas as palavras de 16 bits do segmento recebido (incluindo o checksum)
+2. Se o resultado for `1111111111111111` (todos 1s), **não há erro detectado**
+3. Se qualquer bit for 0, **erro detectado** — o segmento é descartado
+
+<UDPChecksumDemo />
+
+### Exemplo de Cálculo do Checksum
+
+Considere três palavras de 16 bits a serem somadas:
+
+<MarkdownTable
+  headers={["Passo", "Operação", "Resultado (binário)", "Resultado (hex)"]}
+  rows={[
+    ["Palavra 1", "—", "`0110 0110 0110 0000`", "`0x6660`"],
+    ["Palavra 2", "—", "`0101 0101 0101 0101`", "`0x5555`"],
+    ["Soma parcial", "Palavra 1 + Palavra 2", "`1011 1011 1011 0101`", "`0xBBB5`"],
+    ["Palavra 3", "—", "`1000 1111 0000 1100`", "`0x8F0C`"],
+    ["Soma total", "Soma parcial + Palavra 3", "`0100 1010 1100 0010`*", "`0x4AC2`*"],
+    ["**Checksum**", "Complemento de 1", "`1011 0101 0011 1101`", "`0xB53D`"],
+  ]}
+/>
+
+*\*A soma `0xBBB5 + 0x8F0C = 0x14AC1` gera carry. O carry (1) é adicionado de volta: `0x4AC1 + 1 = 0x4AC2`.*
+
+### O Pseudo-Cabeçalho
+
+Um detalhe importante: o checksum UDP não cobre apenas o segmento UDP em si. Ele inclui um **pseudo-cabeçalho** com informações da camada IP:
+
+<MarkdownTable
+  headers={["Campo do Pseudo-Cabeçalho", "Tamanho", "Origem"]}
+  rows={[
+    ["Endereço IP de origem", "32 bits", "Cabeçalho IP"],
+    ["Endereço IP de destino", "32 bits", "Cabeçalho IP"],
+    ["Zero (padding)", "8 bits", "Fixo"],
+    ["Protocolo", "8 bits", "Cabeçalho IP (17 = UDP)"],
+    ["Comprimento UDP", "16 bits", "Cabeçalho UDP"],
+  ]}
+/>
+
+> O pseudo-cabeçalho garante que o segmento chegou ao **host correto**. Se um roteador encaminhar o pacote ao IP errado, o checksum falhará porque os IPs do pseudo-cabeçalho não conferem.
+
+### Limitações do Checksum
+
+<MarkdownTable
+  headers={["Limitação", "Consequência"]}
+  rows={[
+    ["**Detecta, mas não corrige**", "Se o checksum falhar, o segmento é descartado — o UDP não retransmite"],
+    ["**Não detecta todos os erros**", "Erros que se cancelam mutuamente (mesma soma) passam despercebidos"],
+    ["**Opcional em IPv4**", "Em IPv4, a aplicação pode desabilitar o checksum (campo = 0). Em IPv6, é obrigatório"],
+    ["**Não protege contra reordenação**", "Troca de palavras de 16 bits pode resultar no mesmo checksum"],
+  ]}
+/>
+
+## UDP na Prática — Quando Usar Cada Protocolo?
+
+A escolha entre UDP e TCP depende dos **requisitos da aplicação**:
+
+<MarkdownTable
+  headers={["Requisito da Aplicação", "Protocolo Recomendado", "Justificativa"]}
+  rows={[
+    ["Entrega confiável obrigatória", "**TCP**", "TCP garante entrega com retransmissão e ordenação"],
+    ["Menor latência possível", "**UDP**", "Sem handshake, sem espera por ACKs ou retransmissões"],
+    ["Taxa de envio constante", "**UDP**", "TCP pode reduzir a taxa por controle de congestionamento"],
+    ["Mensagens pequenas e independentes", "**UDP**", "Sem overhead de conexão; 1 mensagem = 1 datagrama"],
+    ["Transferência de arquivos grandes", "**TCP**", "Dados devem chegar completos e em ordem"],
+    ["Comunicação em tempo real", "**UDP**", "Dados antigos são descartados; latência importa mais que confiabilidade"],
+    ["Confiabilidade customizada", "**UDP + aplicação**", "QUIC (HTTP/3) implementa confiabilidade sobre UDP"],
+  ]}
+/>
+
+## Resumo da Aula
+
+Neste capítulo, estudamos o **Protocolo UDP** em profundidade:
+
+- **UDP é um protocolo de melhor esforço:** não garante entrega, ordenação ou integridade dos dados. Adiciona apenas multiplexação/demultiplexação e checksum ao serviço da camada de rede.
+- **Vantagens do UDP:** sem handshake (0 RTT de atraso), sem estado de conexão (mais clientes com menos recursos), cabeçalho pequeno (8 bytes vs 20+ do TCP), e sem controle de congestionamento (taxa constante).
+- **Casos de uso:** streaming de mídia (tolerante a perdas, sensível a latência), DNS (mensagens pequenas e independentes), SNMP (funciona sob congestionamento), HTTP/3/QUIC (confiabilidade implementada na aplicação sobre UDP).
+- **Estrutura do segmento:** cabeçalho de 8 bytes com 4 campos — porta de origem, porta de destino, comprimento e checksum.
+- **Checksum:** usa aritmética de complemento de 1 sobre um pseudo-cabeçalho (IPs) + cabeçalho UDP + dados. Detecta erros de bits, mas não corrige. Obrigatório em IPv6, opcional em IPv4.
+- **UDP não é "inferior" ao TCP** — é uma base flexível que permite às aplicações implementar exatamente o nível de confiabilidade que precisam, como demonstra o sucesso do HTTP/3 sobre QUIC/UDP.
