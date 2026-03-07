@@ -10,6 +10,13 @@
         "description": "Função da camada de transporte, distinção entre camada de transporte e de rede, analogia das casas e cartas, e introdução aos protocolos TCP e UDP.",
         "video": null,
         "quizId": "quiz-1"
+      },
+      {
+        "id": "charpter-2",
+        "title": "Multiplexação e Demultiplexação",
+        "description": "Como um host gerencia múltiplos fluxos de dados: multiplexação no emissor, demultiplexação no receptor, demux UDP (porta destino) e demux TCP (4-tupla).",
+        "video": null,
+        "quizId": "quiz-2"
       }
     ]
   }

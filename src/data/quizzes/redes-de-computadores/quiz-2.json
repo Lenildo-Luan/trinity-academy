@@ -1,0 +1,109 @@
+{
+  "id": "quiz-2",
+  "title": "Quiz — Multiplexação e Demultiplexação",
+  "description": "Teste seus conhecimentos sobre multiplexação no emissor, demultiplexação no receptor, demultiplexação UDP (sem conexão) e TCP (orientada a conexão com 4-tupla).",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "O que é multiplexação no contexto da camada de transporte?",
+      "alternatives": [
+        { "id": "a1", "text": "Dividir um segmento grande em vários segmentos menores para transmissão", "isCorrect": false, "explanation": "Isso se chama fragmentação, não multiplexação. A multiplexação trata de combinar dados de múltiplos processos." },
+        { "id": "a2", "text": "Coletar dados de múltiplos sockets, encapsulá-los em segmentos com cabeçalho (portas) e entregá-los à camada de rede", "isCorrect": true, "explanation": "Correto! A multiplexação no emissor recolhe dados de vários processos (sockets), adiciona cabeçalhos com portas de origem e destino, e entrega tudo à camada de rede." },
+        { "id": "a3", "text": "Enviar o mesmo segmento para múltiplos destinatários simultaneamente", "isCorrect": false, "explanation": "Isso seria multicast ou broadcast, não multiplexação de transporte." },
+        { "id": "a4", "text": "Criptografar dados de múltiplas aplicações em um único fluxo seguro", "isCorrect": false, "explanation": "Criptografia é função do TLS/SSL, não do mecanismo de multiplexação da camada de transporte." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Na demultiplexação, qual campo do cabeçalho do segmento é o mais importante para direcionar os dados ao processo correto?",
+      "alternatives": [
+        { "id": "a1", "text": "O endereço IP de destino", "isCorrect": false, "explanation": "O endereço IP de destino identifica o host (máquina), não o processo. É responsabilidade da camada de rede." },
+        { "id": "a2", "text": "O campo de checksum", "isCorrect": false, "explanation": "O checksum serve para detecção de erros, não para identificar o processo destinatário." },
+        { "id": "a3", "text": "A porta de destino", "isCorrect": true, "explanation": "Correto! A porta de destino no cabeçalho do segmento é o campo-chave que permite à camada de transporte identificar e entregar os dados ao socket (processo) correto." },
+        { "id": "a4", "text": "O número de sequência", "isCorrect": false, "explanation": "O número de sequência (TCP) é usado para ordenar dados, não para identificar o processo de destino." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Como a demultiplexação UDP identifica o socket de destino?",
+      "alternatives": [
+        { "id": "a1", "text": "Pela 4-tupla: IP origem, porta origem, IP destino, porta destino", "isCorrect": false, "explanation": "A 4-tupla é usada pelo TCP, não pelo UDP. O UDP usa uma identificação mais simples." },
+        { "id": "a2", "text": "Apenas pela porta de destino — datagramas com mesma porta destino vão para o mesmo socket", "isCorrect": true, "explanation": "Correto! O UDP identifica o socket apenas pela porta de destino. Datagramas de diferentes origens, mas com a mesma porta destino, são todos entregues ao mesmo socket." },
+        { "id": "a3", "text": "Pelo endereço MAC do remetente", "isCorrect": false, "explanation": "O endereço MAC é da camada de enlace e não é usado pela camada de transporte para demultiplexação." },
+        { "id": "a4", "text": "Pelo IP de origem e porta de origem apenas", "isCorrect": false, "explanation": "A demultiplexação precisa identificar o destino, não a origem. A porta de destino é o campo-chave." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "No TCP, o que é a '4-tupla' usada para identificar cada conexão?",
+      "alternatives": [
+        { "id": "a1", "text": "IP origem, IP destino, protocolo, TTL", "isCorrect": false, "explanation": "Protocolo e TTL são campos do cabeçalho IP (camada de rede), não da identificação de conexão TCP." },
+        { "id": "a2", "text": "Porta origem, porta destino, número de sequência, número de ACK", "isCorrect": false, "explanation": "Números de sequência e ACK são usados para controle de fluxo, não para identificar a conexão." },
+        { "id": "a3", "text": "IP de origem, porta de origem, IP de destino, porta de destino", "isCorrect": true, "explanation": "Correto! A 4-tupla TCP combina os IPs e portas de ambos os lados da conexão, permitindo identificar unicamente cada conexão mesmo quando milhares de clientes usam a mesma porta destino." },
+        { "id": "a4", "text": "MAC origem, MAC destino, IP origem, IP destino", "isCorrect": false, "explanation": "Endereços MAC pertencem à camada de enlace e não fazem parte da identificação de conexão TCP." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Um servidor DNS (UDP, porta 53) recebe consultas de três clientes diferentes. Quantos sockets UDP o servidor usa para atender esses clientes?",
+      "alternatives": [
+        { "id": "a1", "text": "3 sockets — um para cada cliente", "isCorrect": false, "explanation": "Isso seria o comportamento do TCP. No UDP, todos os datagramas com destino à porta 53 vão para o mesmo socket." },
+        { "id": "a2", "text": "1 socket — todos os datagramas com destino à porta 53 vão para o mesmo socket", "isCorrect": true, "explanation": "Correto! No UDP, a demultiplexação usa apenas a porta de destino. Um único socket na porta 53 recebe todas as consultas, independente de quantos clientes enviam." },
+        { "id": "a3", "text": "6 sockets — um de entrada e um de saída para cada cliente", "isCorrect": false, "explanation": "O UDP não cria sockets separados por cliente nem separa entrada e saída dessa forma." },
+        { "id": "a4", "text": "Depende do número de consultas por segundo", "isCorrect": false, "explanation": "O número de sockets não depende da taxa de consultas. No UDP, há 1 socket por porta, independente do tráfego." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Um servidor web (TCP, porta 80) atende 500 clientes simultâneos. Quantos sockets TCP de conexão o servidor mantém?",
+      "alternatives": [
+        { "id": "a1", "text": "1 socket — todos os clientes compartilham o mesmo socket na porta 80", "isCorrect": false, "explanation": "Esse seria o comportamento UDP. No TCP, cada conexão gera um socket separado identificado pela 4-tupla." },
+        { "id": "a2", "text": "500 sockets de conexão (mais 1 socket de boas-vindas que continua escutando)", "isCorrect": true, "explanation": "Correto! O TCP cria um socket dedicado para cada conexão aceita, identificado pela 4-tupla. O socket de boas-vindas (listen) permanece aceitando novas conexões." },
+        { "id": "a3", "text": "80 sockets — o número é limitado pelo número da porta", "isCorrect": false, "explanation": "O número da porta não limita a quantidade de sockets. O TCP pode ter milhares de conexões na mesma porta." },
+        { "id": "a4", "text": "250 sockets — metade para envio e metade para recebimento", "isCorrect": false, "explanation": "Sockets TCP são bidirecionais (full-duplex). Cada conexão usa 1 socket para envio e recebimento." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Dois segmentos chegam a um servidor TCP na porta 80: um vindo de (10.0.0.1, 50001) e outro de (10.0.0.1, 50002). O que acontece?",
+      "alternatives": [
+        { "id": "a1", "text": "Ambos vão para o mesmo socket, pois vêm do mesmo IP", "isCorrect": false, "explanation": "No TCP, a 4-tupla completa é usada. Portas de origem diferentes geram 4-tuplas diferentes, logo sockets diferentes." },
+        { "id": "a2", "text": "Ambos são descartados por conflito de endereço", "isCorrect": false, "explanation": "Não há conflito — são duas conexões TCP válidas e distintas." },
+        { "id": "a3", "text": "Cada um é direcionado a um socket diferente, pois as 4-tuplas são distintas (portas de origem diferentes)", "isCorrect": true, "explanation": "Correto! Mesmo com mesmo IP de origem e mesma porta de destino, as portas de origem diferentes (50001 e 50002) geram 4-tuplas únicas, resultando em sockets de conexão separados." },
+        { "id": "a4", "text": "O primeiro é aceito e o segundo é rejeitado", "isCorrect": false, "explanation": "O TCP não rejeita conexões por terem o mesmo IP. Cada porta de origem diferente gera uma conexão válida." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Qual é o papel da porta de origem em um datagrama UDP?",
+      "alternatives": [
+        { "id": "a1", "text": "É o campo principal para a demultiplexação no receptor", "isCorrect": false, "explanation": "No UDP, a demultiplexação usa a porta de destino, não a de origem." },
+        { "id": "a2", "text": "Serve como 'endereço de retorno' — o receptor a usa como porta destino ao responder", "isCorrect": true, "explanation": "Correto! A porta de origem permite que o receptor saiba para onde enviar a resposta. Por exemplo, um servidor DNS usa a porta de origem do cliente como destino da resposta." },
+        { "id": "a3", "text": "Não tem função — é sempre zero no UDP", "isCorrect": false, "explanation": "A porta de origem no UDP é opcional (pode ser 0), mas normalmente é preenchida para permitir respostas." },
+        { "id": "a4", "text": "É usada para criptografia do datagrama", "isCorrect": false, "explanation": "Portas não têm relação com criptografia. Segurança é função de protocolos como TLS." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Por que o TCP precisa da 4-tupla para identificar conexões, enquanto o UDP usa apenas a porta de destino?",
+      "alternatives": [
+        { "id": "a1", "text": "Porque o TCP é mais lento e precisa de mais informações para processar", "isCorrect": false, "explanation": "Não se trata de velocidade, mas da necessidade de manter estado por conexão." },
+        { "id": "a2", "text": "Porque o TCP é orientado a conexão e precisa manter um socket dedicado para cada cliente, diferenciando-os pela 4-tupla", "isCorrect": true, "explanation": "Correto! O TCP mantém estado por conexão (buffers, números de sequência, etc.), então precisa distinguir cada cliente. A 4-tupla garante unicidade mesmo quando milhares de clientes usam a mesma porta destino." },
+        { "id": "a3", "text": "Porque o TCP usa portas maiores que o UDP", "isCorrect": false, "explanation": "Ambos usam portas de 16 bits (0–65535). O tamanho das portas é idêntico." },
+        { "id": "a4", "text": "Porque o UDP não suporta múltiplos clientes simultaneamente", "isCorrect": false, "explanation": "O UDP suporta múltiplos clientes — todos os datagramas vão para o mesmo socket, e a aplicação é responsável por distingui-los." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Em um servidor TCP, o que é o 'socket de boas-vindas' (welcome socket)?",
+      "alternatives": [
+        { "id": "a1", "text": "É o socket usado para transmitir dados após a conexão ser estabelecida", "isCorrect": false, "explanation": "O socket de dados (conexão) é criado separadamente. O socket de boas-vindas serve apenas para aceitar novas conexões." },
+        { "id": "a2", "text": "É o socket que escuta (listen) em uma porta e aceita novas conexões, criando um novo socket dedicado para cada cliente", "isCorrect": true, "explanation": "Correto! O socket de boas-vindas fica em estado 'listen' na porta do servidor. Quando um cliente inicia o 3-way handshake, o servidor cria um novo socket de conexão (identificado pela 4-tupla) e o socket de boas-vindas continua aceitando novos clientes." },
+        { "id": "a3", "text": "É o primeiro socket criado pelo cliente para iniciar a conexão", "isCorrect": false, "explanation": "O socket de boas-vindas é do lado do servidor, não do cliente." },
+        { "id": "a4", "text": "É um socket temporário que é destruído após o 3-way handshake", "isCorrect": false, "explanation": "O socket de boas-vindas persiste durante toda a vida do servidor — ele não é destruído após cada handshake." }
+      ]
+    }
+  ]
+}
+

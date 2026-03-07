@@ -77,6 +77,14 @@ import {
   MultiplexingDemux,
   SegmentEncapsulation,
 } from "./src/components/transport-layer-p5-examples";
+import {
+  MultiplexingSender,
+  DemultiplexingReceiver,
+  UDPDemultiplexing,
+  TCPDemultiplexing,
+  UDPvsTCPDemuxComparison,
+  SegmentHeaderPorts,
+} from "./src/components/multiplexing-demux-p5-examples";
 
 function getTextContent(node: ReactNode): string {
   if (typeof node === "string") return node;
@@ -266,6 +274,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     TCPvsUDP,
     MultiplexingDemux,
     SegmentEncapsulation,
+    MultiplexingSender,
+    DemultiplexingReceiver,
+    UDPDemultiplexing,
+    TCPDemultiplexing,
+    UDPvsTCPDemuxComparison,
+    SegmentHeaderPorts,
     ...components,
   };
 }

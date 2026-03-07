@@ -1,0 +1,196 @@
+# Multiplexação e Demultiplexação
+
+No capítulo anterior, vimos que a camada de transporte fornece **comunicação lógica entre processos**. Mas como exatamente um host com dezenas de aplicações rodando simultaneamente — navegador, e-mail, streaming, jogos — consegue **enviar e receber dados** de todas elas ao mesmo tempo, usando uma única conexão de rede? A resposta está no mecanismo mais fundamental da camada de transporte: a **multiplexação** e a **demultiplexação**. Neste capítulo, vamos explorar em detalhe como esses mecanismos funcionam, entender as diferenças entre a abordagem do UDP e do TCP, e compreender o papel central dos **números de porta** nesse processo.
+
+## O Problema: Múltiplos Processos, Uma Rede
+
+Imagine um servidor que roda simultaneamente um servidor HTTP (porta 80), um servidor SSH (porta 22) e um servidor DNS (porta 53). Pela camada de rede, todos os pacotes chegam ao servidor pelo mesmo endereço IP. Mas cada pacote precisa ser entregue ao **processo correto**. Da mesma forma, quando esses processos enviam dados, todos compartilham a **mesma interface de rede** para alcançar a Internet.
+
+Este é o problema central que a multiplexação e a demultiplexação resolvem:
+
+> Como **combinar** dados de múltiplos processos para envio (multiplexação) e **distribuir** os dados recebidos ao processo correto (demultiplexação)?
+
+## Multiplexação no Emissor
+
+A **multiplexação** acontece no **lado do emissor**. Quando vários processos (aplicações) precisam enviar dados pela rede, a camada de transporte:
+
+1. **Coleta dados** de cada socket (interface entre processo e camada de transporte)
+2. **Encapsula** cada bloco de dados em um **segmento**, adicionando um cabeçalho com as **portas de origem e destino**
+3. **Entrega** todos os segmentos à camada de rede, que os envia pelo mesmo canal IP
+
+A multiplexação é como um funcionário dos correios que recolhe cartas de várias pessoas na casa, coloca cada uma em um envelope com o endereço correto, e deposita todas na mesma caixa de correio.
+
+<MultiplexingSender />
+
+### O Papel do Cabeçalho de Transporte
+
+O segredo da multiplexação está no **cabeçalho** que a camada de transporte adiciona aos dados. Os campos mais importantes para a mux/demux são:
+
+<SegmentHeaderPorts />
+
+<MarkdownTable
+  headers={["Campo", "Tamanho", "Função na Multiplexação/Demultiplexação"]}
+  rows={[
+    ["**Porta de Origem**", "16 bits (0–65535)", "Identifica o processo remetente; serve como 'endereço de retorno' para o receptor"],
+    ["**Porta de Destino**", "16 bits (0–65535)", "Identifica o processo destinatário; campo-chave para a demultiplexação"],
+  ]}
+/>
+
+> Sem os números de porta no cabeçalho, a camada de transporte não teria como saber para qual processo entregar os dados — todos os pacotes iriam para o "limbo".
+
+## Demultiplexação no Receptor
+
+A **demultiplexação** é o processo inverso, acontecendo no **lado do receptor**. Quando segmentos chegam pela rede, a camada de transporte:
+
+1. **Recebe** o segmento da camada de rede
+2. **Examina** o cabeçalho do segmento (especialmente a **porta de destino**)
+3. **Direciona** os dados ao **socket correto**, onde o processo da aplicação está esperando
+
+<DemultiplexingReceiver />
+
+A demultiplexação é como o Lúcia (da analogia do capítulo anterior) que pega as cartas da caixa de correio, olha o nome do destinatário em cada envelope, e entrega à pessoa certa dentro de casa.
+
+### Como o Socket é Identificado?
+
+A forma como o socket correto é identificado depende do **protocolo de transporte** usado. Esta é uma diferença fundamental entre UDP e TCP:
+
+<MarkdownTable
+  headers={["Protocolo", "Identificação do Socket", "Campos Utilizados"]}
+  rows={[
+    ["**UDP**", "Apenas pela **porta de destino**", "IP destino + Porta destino (2-tupla)"],
+    ["**TCP**", "Pela **4-tupla completa**", "IP origem + Porta origem + IP destino + Porta destino"],
+  ]}
+/>
+
+Essa diferença tem **consequências profundas** no funcionamento de cada protocolo, como veremos a seguir.
+
+## Demultiplexação sem Conexão (UDP)
+
+O UDP é um protocolo **sem conexão** (*connectionless*). Isso significa que não existe o conceito de "estabelecer uma conexão" antes de enviar dados. Cada datagrama UDP é tratado de forma **independente**.
+
+### Como Funciona a Demux UDP
+
+Quando um socket UDP é criado no servidor, ele é vinculado a uma **porta** específica. A camada de transporte identifica o socket de destino usando **apenas dois campos**:
+
+1. **Endereço IP de destino** (para encontrar o host certo — responsabilidade da camada de rede)
+2. **Porta de destino** (para encontrar o socket certo dentro do host)
+
+<UDPDemultiplexing />
+
+### Consequência Importante
+
+Isso significa que **datagramas de origens completamente diferentes** — com IPs e portas de origem distintos — são todos direcionados ao **mesmo socket**, desde que tenham a **mesma porta de destino**.
+
+<MarkdownTable
+  headers={["Datagrama", "IP Origem", "Porta Origem", "IP Destino", "Porta Destino", "Socket de Destino"]}
+  rows={[
+    ["#1", "10.0.0.1", "5000", "192.168.1.5", "**9999**", "Socket UDP porta 9999"],
+    ["#2", "10.0.0.2", "7000", "192.168.1.5", "**9999**", "Socket UDP porta 9999"],
+    ["#3", "10.0.0.3", "5000", "192.168.1.5", "**9999**", "Socket UDP porta 9999"],
+  ]}
+/>
+
+> **Todos os três datagramas vão para o mesmo socket!** O UDP não distingue remetentes — apenas a porta de destino importa para a demultiplexação.
+
+### Quando a Porta de Origem é Usada?
+
+A porta de origem no UDP não participa da demultiplexação, mas ela tem um papel importante: é usada como **endereço de retorno**. Quando o servidor precisa responder ao cliente, ele usa a porta de origem do datagrama recebido como porta de destino da resposta.
+
+<MarkdownTable
+  headers={["Cenário", "Porta de Origem", "Uso"]}
+  rows={[
+    ["**Cliente envia consulta DNS**", "49152 (efêmera)", "Servidor DNS usa 49152 como destino da resposta"],
+    ["**Servidor responde**", "53 (well-known)", "Cliente identifica que é resposta do DNS"],
+  ]}
+/>
+
+## Demultiplexação Orientada a Conexão (TCP)
+
+O TCP funciona de maneira **fundamentalmente diferente**. Como protocolo **orientado a conexão** (*connection-oriented*), o TCP identifica cada socket usando a **4-tupla completa**:
+
+> **(IP de origem, Porta de origem, IP de destino, Porta de destino)**
+
+Isso significa que dois segmentos com a **mesma porta de destino** mas **IPs ou portas de origem diferentes** são direcionados a **sockets diferentes**.
+
+<TCPDemultiplexing />
+
+### Por que a 4-Tupla?
+
+Um servidor web (por exemplo, Apache ou Nginx) escuta na porta 80. Quando centenas de clientes se conectam simultaneamente, **todos enviam segmentos para a porta 80**. Se o TCP usasse apenas a porta de destino (como o UDP), seria impossível separar os dados de cada cliente!
+
+A solução: cada conexão TCP é identificada de forma **única** pela combinação dos quatro campos:
+
+<MarkdownTable
+  headers={["Conexão", "IP Origem", "Porta Origem", "IP Destino", "Porta Destino", "Socket"]}
+  rows={[
+    ["Conexão 1", "10.0.0.1", "50001", "192.168.1.100", "80", "Socket TCP #1"],
+    ["Conexão 2", "10.0.0.2", "50002", "192.168.1.100", "80", "Socket TCP #2"],
+    ["Conexão 3", "10.0.0.1", "50003", "192.168.1.100", "80", "Socket TCP #3"],
+  ]}
+/>
+
+Observe que:
+- **Conexão 1 e Conexão 3** vêm do **mesmo IP** (10.0.0.1), mas têm **portas de origem diferentes** → sockets separados
+- **Todas as conexões** têm a **mesma porta de destino** (80), mas são conexões distintas por causa dos campos de origem
+
+### O Processo de Criação de Sockets no TCP
+
+No TCP, o servidor segue um fluxo específico:
+
+<MarkdownTable
+  headers={["Etapa", "Ação", "Descrição"]}
+  rows={[
+    ["1", "**Criar socket de boas-vindas**", "Servidor cria um socket que escuta (listen) em uma porta (ex: 80)"],
+    ["2", "**Receber SYN**", "Cliente inicia 3-way handshake (SYN)"],
+    ["3", "**Criar socket de conexão**", "Servidor cria um **novo socket** dedicado àquela conexão (identificado pela 4-tupla)"],
+    ["4", "**Comunicação**", "Dados fluem pelo socket de conexão; o socket de boas-vindas continua aceitando novos clientes"],
+  ]}
+/>
+
+> **Ponto-chave:** O TCP cria um novo socket para **cada conexão aceita**. Um servidor web popular pode ter **milhares** de sockets ativos simultaneamente, todos na "mesma porta" (80), mas diferenciados pela 4-tupla.
+
+## Comparação: UDP vs TCP na Demultiplexação
+
+<UDPvsTCPDemuxComparison />
+
+<MarkdownTable
+  headers={["Aspecto", "UDP (Sem Conexão)", "TCP (Orientado a Conexão)"]}
+  rows={[
+    ["**Identificação do socket**", "2-tupla: (IP dest, Porta dest)", "4-tupla: (IP orig, Porta orig, IP dest, Porta dest)"],
+    ["**Sockets por porta**", "1 socket por porta — recebe de todos", "1 socket por conexão — cada cliente tem o seu"],
+    ["**Distinção de remetentes**", "Não distingue na demultiplexação", "Distingue completamente pela 4-tupla"],
+    ["**Criação de sockets**", "Socket criado uma vez, reutilizado", "Novo socket para cada conexão aceita"],
+    ["**Uso de recursos**", "Mínimo — poucos sockets abertos", "Pode ser alto — 1 socket por cliente conectado"],
+    ["**Exemplo prático**", "Servidor DNS: 1 socket porta 53 recebe todas as consultas", "Servidor Web: 1 socket por cliente na porta 80"],
+  ]}
+/>
+
+## Exemplo Prático: Servidor Web com Múltiplos Clientes
+
+Para consolidar os conceitos, vamos analisar um cenário real. Um servidor web (IP: 200.1.1.1) roda na porta 80. Três clientes se conectam:
+
+<MarkdownTable
+  headers={["Cliente", "IP do Cliente", "Porta Efêmera", "4-Tupla da Conexão"]}
+  rows={[
+    ["Navegador do Alice", "10.0.0.50", "51234", "(10.0.0.50, 51234, 200.1.1.1, 80)"],
+    ["Navegador do Bob", "10.0.0.60", "52000", "(10.0.0.60, 52000, 200.1.1.1, 80)"],
+    ["Outra aba do Alice", "10.0.0.50", "51235", "(10.0.0.50, 51235, 200.1.1.1, 80)"],
+  ]}
+/>
+
+O servidor cria **3 sockets TCP distintos** — um para cada conexão. Mesmo Alice usando o mesmo computador para duas abas, as portas efêmeras diferentes (51234 e 51235) geram 4-tuplas únicas, resultando em sockets separados.
+
+Se fosse UDP, **todos os datagramas** com destino à porta 80 iriam para o **mesmo socket**, sem distinção de remetente.
+
+## Resumo da Aula
+
+Neste capítulo, exploramos os mecanismos de multiplexação e demultiplexação:
+
+- **Multiplexação (emissor):** A camada de transporte coleta dados de múltiplos sockets, encapsula cada bloco em um segmento com cabeçalho (portas de origem e destino), e entrega à camada de rede por um único canal.
+- **Demultiplexação (receptor):** A camada de transporte examina a porta de destino (e outros campos) do segmento recebido e entrega os dados ao socket correto.
+- **Campos essenciais:** Porta de origem (16 bits) e porta de destino (16 bits) no cabeçalho do segmento são os identificadores que possibilitam todo o mecanismo.
+- **UDP (sem conexão):** A demultiplexação usa apenas a **porta de destino** — datagramas de diferentes origens vão para o mesmo socket se tiverem a mesma porta destino.
+- **TCP (orientado a conexão):** A demultiplexação usa a **4-tupla completa** (IP origem, porta origem, IP destino, porta destino) — cada conexão gera um socket separado.
+- **Consequência prática:** Um servidor TCP cria um novo socket para cada cliente, enquanto um servidor UDP usa um único socket por porta para todos os clientes.
+- A **porta de origem** serve como "endereço de retorno" em ambos os protocolos, permitindo que o receptor envie respostas de volta ao processo correto.
+

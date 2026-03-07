@@ -5,8 +5,9 @@ O conteúdo deve se basear no seguinte resumo: Apresenta a função da camada de
 Use use p5.js para ilustrar visualmente os conceitos apresentados.
 Use o componente MarkdownTable.tsx para criar tabelas.
 
-O próximo capítulo do modulo será: Outros Tipos de Sensores de Imagem e Aplicações
-O conteúdo deve se basear no seguinte resumo: Exploração de sensores além da câmera convencional: microfones e ultrassom (com aplicações em imagens médicas e mapeamento sísmico), câmeras térmicas infravermelhas (IR), sensores de raio-X e sensores de profundidade. Aplicações práticas incluem monitoramento de transformadores elétricos, vigilância noturna e segurança em rodovias.
-Use use p5.js para ilustrar visualmente os conceitos apresentados.
+No curso de redes de computadores, o próximo capítulo do modulo de Camada de Transporte será:
+Multiplexação e Demultiplexação
+O conteúdo deve se basear no seguinte resumo:
+Explica como um host gerencia múltiplos fluxos de dados simultaneamente. Aborda o conceito de multiplexação no emissor (encapsulamento de dados de diferentes sockets) e demultiplexação no receptor (direcionamento para o socket correto). Detalha a demultiplexação sem conexão (UDP, baseada apenas na porta de destino) e orientada a conexão (TCP, baseada na 4-tupla: IPs e portas de origem e destino).Use use p5.js para ilustrar visualmente os conceitos apresentados.
 Use o componente MarkdownTable.tsx para criar tabelas.
 Faça o quiz ao final de cada capítulo.
