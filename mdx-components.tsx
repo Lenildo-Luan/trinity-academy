@@ -102,6 +102,41 @@ import {
   StopAndWaitUtilization,
   PipelineGBNvsSR,
 } from "./src/components/reliable-data-transfer-p5-examples";
+import {
+  TCPPointToPoint,
+  TCPSegmentStructure,
+  TCPSequenceAckNumbers,
+  TCPCumulativeAck,
+  TCPRttEstimation,
+  TCPTimeoutCalculation,
+  TCPRetransmissionScenarios,
+  TCPBuffersAndMSS,
+} from "./src/components/tcp-fundamentals-p5-examples";
+import {
+  TCPFlowControlBuffer,
+  TCPRwndZeroProblem,
+  TCPThreeWayHandshake,
+  TCPTwoWayHandshakeProblem,
+  TCPConnectionTeardown,
+  TCPResetFlag,
+} from "./src/components/tcp-flow-connection-p5-examples";
+import {
+  CongestionCosts,
+  CongestionScenarios,
+  TCPAIMDSawtooth,
+  TCPCongestionFSM,
+  TCPCubicVsReno,
+  TCPBBRvsLossBased,
+  TCPSlowStartDetail,
+} from "./src/components/congestion-control-p5-examples";
+import {
+  ECNSignaling,
+  TCPFairnessConvergence,
+  TCPFairnessLimits,
+  QUICArchitecture,
+  QUICHandshakeComparison,
+  QUICHOLBlocking,
+} from "./src/components/ecn-fairness-quic-p5-examples";
 
 function getTextContent(node: ReactNode): string {
   if (typeof node === "string") return node;
@@ -310,6 +345,33 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     RDT30TimerRetransmission,
     StopAndWaitUtilization,
     PipelineGBNvsSR,
+    TCPPointToPoint,
+    TCPSegmentStructure,
+    TCPSequenceAckNumbers,
+    TCPCumulativeAck,
+    TCPRttEstimation,
+    TCPTimeoutCalculation,
+    TCPRetransmissionScenarios,
+    TCPBuffersAndMSS,
+    TCPFlowControlBuffer,
+    TCPRwndZeroProblem,
+    TCPThreeWayHandshake,
+    TCPTwoWayHandshakeProblem,
+    TCPConnectionTeardown,
+    TCPResetFlag,
+    CongestionCosts,
+    CongestionScenarios,
+    TCPAIMDSawtooth,
+    TCPCongestionFSM,
+    TCPCubicVsReno,
+    TCPBBRvsLossBased,
+    TCPSlowStartDetail,
+    ECNSignaling,
+    TCPFairnessConvergence,
+    TCPFairnessLimits,
+    QUICArchitecture,
+    QUICHandshakeComparison,
+    QUICHOLBlocking,
     ...components,
   };
 }

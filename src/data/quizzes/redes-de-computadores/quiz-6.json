@@ -1,0 +1,109 @@
+{
+  "id": "quiz-6",
+  "title": "Quiz — TCP: Controle de Fluxo e Gerenciamento de Conexão",
+  "description": "Teste seus conhecimentos sobre o controle de fluxo com rwnd, o problema do rwnd=0, o handshake de 3 vias, os problemas do handshake de 2 vias, o encerramento gracioso FIN/ACK e o encerramento abrupto com RST.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual é o propósito do campo rwnd (receive window) nos segmentos TCP?",
+      "alternatives": [
+        { "id": "a1", "text": "Indicar a velocidade máxima de transmissão do enlace de rede", "isCorrect": false, "explanation": "O rwnd não tem relação com a velocidade do enlace. Ele reflete o espaço livre no buffer de recepção do receptor — um parâmetro da camada de transporte, não de enlace." },
+        { "id": "a2", "text": "Informar ao emissor quanto espaço livre existe no buffer de recepção, limitando o quanto ele pode enviar sem confirmação", "isCorrect": true, "explanation": "Correto! O campo rwnd (receive window) contém o espaço livre no buffer do receptor. O emissor usa esse valor para garantir que (LastByteSent − LastByteAcked) ≤ rwnd, protegendo o buffer do receptor de transbordar." },
+        { "id": "a3", "text": "Especificar o número máximo de retransmissões permitidas para um segmento", "isCorrect": false, "explanation": "O TCP não tem limite fixo de retransmissões especificado no rwnd. O número de retransmissões é controlado por timers e não é anunciado pelo receptor." },
+        { "id": "a4", "text": "Indicar ao receptor quantos bytes o emissor ainda pretende enviar", "isCorrect": false, "explanation": "O rwnd flui na direção receptor→emissor (está no ACK), não do emissor para o receptor. É o receptor que anuncia seu espaço disponível ao emissor." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "O buffer de recepção TCP tem capacidade de 16.000 bytes. O receptor já recebeu 10.000 bytes que a aplicação ainda não leu. Qual o valor de rwnd anunciado?",
+      "alternatives": [
+        { "id": "a1", "text": "16.000 bytes", "isCorrect": false, "explanation": "16.000 bytes seria o tamanho total do buffer, não o espaço livre. rwnd = RcvBuffer − (LastByteRcvd − LastByteRead) = 16.000 − 10.000 = 6.000 bytes." },
+        { "id": "a2", "text": "10.000 bytes", "isCorrect": false, "explanation": "10.000 bytes é a quantidade de dados que ainda estão no buffer aguardando leitura — o espaço ocupado, não o livre." },
+        { "id": "a3", "text": "6.000 bytes", "isCorrect": true, "explanation": "Correto! rwnd = RcvBuffer − (dados acumulados no buffer) = 16.000 − 10.000 = 6.000 bytes. Esse é o espaço livre que o receptor anuncia ao emissor." },
+        { "id": "a4", "text": "0 bytes, pois o buffer está mais de 50% cheio", "isCorrect": false, "explanation": "Não há regra de 50%. O rwnd é o espaço livre real: 6.000 bytes neste caso. O rwnd só seria 0 se o buffer estivesse completamente cheio (0 bytes livres)." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "O que acontece quando o emissor TCP recebe um ACK com rwnd = 0?",
+      "alternatives": [
+        { "id": "a1", "text": "O emissor reseta a conexão com RST, pois rwnd = 0 indica erro no receptor", "isCorrect": false, "explanation": "rwnd = 0 não é um erro — significa que o buffer do receptor está temporariamente cheio. O emissor não deve resetar a conexão; deve esperar com persist timer." },
+        { "id": "a2", "text": "O emissor para de enviar dados e inicia um persist timer; quando expira, envia uma sonda de 1 byte para descobrir quando o espaço reabre", "isCorrect": true, "explanation": "Correto! Ao receber rwnd = 0, o emissor para de enviar. O persist timer evita o deadlock: quando expira, o emissor envia um segmento de sonda de 1 byte, forçando o receptor a responder com o rwnd atual." },
+        { "id": "a3", "text": "O emissor aguarda indefinidamente até receber um ACK com rwnd > 0 do receptor", "isCorrect": false, "explanation": "Aguardar indefinidamente criaria deadlock se a notificação de rwnd > 0 for perdida. Por isso existe o persist timer, que força o emissor a sondar ativamente o receptor." },
+        { "id": "a4", "text": "O emissor divide os dados em pacotes de 1 byte e continua enviando lentamente", "isCorrect": false, "explanation": "O emissor não pode enviar nada quando rwnd = 0 (exceto a sonda do persist timer). Enviar dados normalmente violaria a restrição de controle de fluxo." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "No handshake de 3 vias do TCP, qual é a função do segundo passo (SYNACK)?",
+      "alternatives": [
+        { "id": "a1", "text": "Apenas confirmar o SYN do cliente, sem anunciar nenhum parâmetro do servidor", "isCorrect": false, "explanation": "O SYNACK faz muito mais do que confirmar o SYN. Ele também anuncia o ISN do servidor (necessário para o cliente sincronizar a direção B→A da comunicação) e aloca recursos no servidor." },
+        { "id": "a2", "text": "Enviar os primeiros dados da resposta HTTP, aproveitando o segmento de handshake", "isCorrect": false, "explanation": "No handshake padrão, o SYNACK não carrega dados da aplicação. O SYNACK tem SYN=1 e ACK=1, mas sem payload de dados. Dados podem ser enviados no 3º passo (ACK do cliente)." },
+        { "id": "a3", "text": "Confirmar o SYN do cliente (ACK = x+1), anunciar o ISN do servidor (seq = y) e sinalizar que o servidor está pronto para a conexão", "isCorrect": true, "explanation": "Correto! O SYNACK tem SYN=1 e ACK=1. O campo de sequência = y (ISN do servidor, aleatório) e ACK = x+1 (confirma o SYN do cliente). Isso sincroniza ambas as direções da comunicação full-duplex." },
+        { "id": "a4", "text": "Apenas reservar a porta no servidor; a sincronização de seq# acontece no terceiro passo", "isCorrect": false, "explanation": "A sincronização de seq# do servidor acontece exatamente no SYNACK (2º passo), não no 3º. O ISN do servidor é anunciado no campo Seq do SYNACK." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Por que o TCP usa ISN (Initial Sequence Number) aleatório em vez de sempre começar em 0?",
+      "alternatives": [
+        { "id": "a1", "text": "Para tornar a numeração de bytes mais eficiente em redes com alta largura de banda", "isCorrect": false, "explanation": "Eficiência de numeração não é a razão. Um ISN aleatório não tem impacto de desempenho na numeração — o espaço de 32 bits é suficiente para qualquer fluxo." },
+        { "id": "a2", "text": "Para evitar que segmentos atrasados de uma conexão anterior (com mesmo par IP:porta) sejam confundidos com segmentos da nova conexão", "isCorrect": true, "explanation": "Correto! Se o ISN sempre fosse 0, um segmento atrasado de uma conexão encerrada poderia ter um seq# válido na nova conexão — corrompendo silenciosamente o fluxo. O ISN aleatório torna isso astronomicamente improvável." },
+        { "id": "a3", "text": "Para que cada conexão ocupe uma faixa diferente do espaço de seq#, permitindo múltiplas conexões simultâneas", "isCorrect": false, "explanation": "Múltiplas conexões são identificadas pela 4-tupla (IP orig, porta orig, IP dest, porta dest), não pelo seq#. O ISN aleatório existe por segurança contra segmentos atrasados." },
+        { "id": "a4", "text": "Para cumprir requisito de segurança que impede ataques de força bruta ao checksum", "isCorrect": false, "explanation": "O ISN aleatório ajuda a prevenir ataques de injeção de TCP (onde um atacante tenta adivinhar o seq# para inserir segmentos forjados), mas o motivo principal do ISN é evitar confusão com segmentos de conexões anteriores." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual dos problemas abaixo NÃO seria resolvido pelo handshake de 3 vias em comparação ao de 2 vias?",
+      "alternatives": [
+        { "id": "a1", "text": "Um SYN muito atrasado chegar depois que a conexão original foi encerrada e criar uma conexão fantasma no servidor", "isCorrect": false, "explanation": "Este problema É resolvido pelo 3-way handshake: o 3º passo (ACK do cliente) é necessário. Se o cliente não reconhecer o SYNACK (pois não iniciou essa conexão), o servidor não finaliza o estabelecimento." },
+        { "id": "a2", "text": "Dados de uma conexão anterior com mesmo par IP:porta chegarem na nova conexão com seq# coincidente", "isCorrect": false, "explanation": "Este problema É mitigado pelo ISN aleatório, parte integrante do handshake de 3 vias. ISNs aleatórios tornam a coincidência de seq# entre conexões antigas e novas extremamente improvável." },
+        { "id": "a3", "text": "A latência de 1,5 RTTs antes do primeiro dado útil ser enviado", "isCorrect": true, "explanation": "Correto! A latência de 1,5 RTTs é uma consequência do handshake de 3 vias — não é um problema que ele resolve. Pelo contrário, é um custo dele. Protocolos como QUIC (HTTP/3) foram criados justamente para reduzir essa latência." },
+        { "id": "a4", "text": "O servidor abrir recursos (buffers) para uma conexão que o cliente não confirmou", "isCorrect": false, "explanation": "O 3-way handshake também ajuda aqui: o servidor aloca recursos preliminares no SYNACK, mas a alocação final só ocorre após o ACK. Além disso, mecanismos como SYN cookies adiam a alocação até o 3º passo." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Durante o encerramento gracioso TCP, o que ocorre no estado CLOSE_WAIT?",
+      "alternatives": [
+        { "id": "a1", "text": "Ambos os lados aguardam o encerramento — nenhum dado pode mais ser enviado", "isCorrect": false, "explanation": "No half-close do TCP, CLOSE_WAIT é um estado de apenas um lado (o passivo). Enquanto está em CLOSE_WAIT, esse lado ainda pode enviar dados — só o outro lado (ativo) fechou sua metade." },
+        { "id": "a2", "text": "O lado passivo recebeu o FIN do lado ativo e pode ainda enviar dados antes de enviar seu próprio FIN", "isCorrect": true, "explanation": "Correto! CLOSE_WAIT indica que o receptor do FIN (lado passivo) confirmou o encerramento do lado ativo, mas ainda não enviou seu próprio FIN. Nesse estado, a aplicação do lado passivo pode continuar enviando dados pela sua metade da conexão." },
+        { "id": "a3", "text": "O lado ativo está aguardando o FIN do lado passivo após ter recebido o ACK do seu FIN", "isCorrect": false, "explanation": "Esse é o estado FIN_WAIT_2, não CLOSE_WAIT. FIN_WAIT_2 é o estado do lado ativo depois de receber o ACK do seu FIN." },
+        { "id": "a4", "text": "A conexão está completamente fechada, mas os sockets ainda não foram liberados pelo sistema operacional", "isCorrect": false, "explanation": "CLOSE_WAIT não é um estado pós-encerramento. É um estado intermediário do lado passivo, onde a conexão ainda está parcialmente ativa — o lado passivo ainda pode enviar dados." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Por que o TCP mantém o estado TIME_WAIT por 2×MSL após enviar o ACK final do encerramento?",
+      "alternatives": [
+        { "id": "a1", "text": "Para aguardar que todos os buffers de rede sejam liberados antes de reutilizar o par IP:porta", "isCorrect": false, "explanation": "Embora 2×MSL garantia que pacotes antigos expirem (o que ajuda com a reutilização de portas), a razão principal do TIME_WAIT é garantir que o ACK final chegou ao servidor — não apenas a liberação de buffers." },
+        { "id": "a2", "text": "Para permitir que a aplicação releia os dados do buffer antes que a conexão seja fechada definitivamente", "isCorrect": false, "explanation": "Os dados já foram entregues à aplicação antes de chegar ao TIME_WAIT. Esse estado existe por razões de protocolo (garantir o ACK), não para leitura da aplicação." },
+        { "id": "a3", "text": "Por duas razões: garantir que o ACK final chegou ao servidor (se ele reenviar o FIN, o cliente ainda pode responder) e evitar que pacotes atrasados contaminem conexões futuras", "isCorrect": true, "explanation": "Correto! O TIME_WAIT dura 2×MSL (tipicamente 60s) por dois motivos: (1) se o ACK final for perdido, o servidor reenviará o FIN — o cliente ainda em TIME_WAIT pode responder; (2) 2×MSL é o tempo máximo para qualquer pacote expirar, garantindo que a nova conexão no mesmo par IP:porta não receba pacotes da anterior." },
+        { "id": "a4", "text": "Para que o servidor possa retransmitir dados que não foram confirmados antes do FIN", "isCorrect": false, "explanation": "Quando o FIN é enviado, todos os dados já foram confirmados. O TIME_WAIT é sobre o ACK final do encerramento, não sobre retransmissão de dados." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Em qual situação o TCP envia um segmento com flag RST=1?",
+      "alternatives": [
+        { "id": "a1", "text": "Quando a janela de congestionamento é reduzida após detecção de perda de pacotes", "isCorrect": false, "explanation": "A redução da janela de congestionamento é um mecanismo interno do TCP — não envolve o envio de RST. O RST é sobre encerramento abrupto de conexão, não controle de congestionamento." },
+        { "id": "a2", "text": "Sempre que um checksum falha, para notificar o emissor sobre o erro detectado", "isCorrect": false, "explanation": "Quando um checksum falha, o TCP simplesmente descarta o segmento silenciosamente — não envia RST. O RST é para situações de conexão inválida ou erro fatal, não para erros de checksum." },
+        { "id": "a3", "text": "Somente durante o handshake, para indicar que o servidor rejeita parâmetros de conexão propostos pelo cliente", "isCorrect": false, "explanation": "O RST pode ser enviado em qualquer momento da conexão, não apenas no handshake. E durante o handshake, ele indica principalmente que a porta não está escutando — não uma negociação de parâmetros." },
+        { "id": "a4", "text": "Quando um segmento chega para uma porta sem processo escutando, quando a conexão é inválida, ou quando uma aplicação fecha o socket abruptamente", "isCorrect": true, "explanation": "Correto! O RST é enviado em situações de encerramento abrupto: porta fechada (sem processo escutando), segmento fora de contexto (pertence a conexão inexistente) ou encerramento de emergência pela aplicação. O RST termina a conexão imediatamente sem handshake gracioso." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Qual é a principal diferença entre o controle de fluxo (rwnd) e o controle de congestionamento no TCP?",
+      "alternatives": [
+        { "id": "a1", "text": "O controle de fluxo é implementado no emissor; o controle de congestionamento é implementado no receptor", "isCorrect": false, "explanation": "Ambos os mecanismos são gerenciados pelo emissor. O controle de fluxo usa informações anunciadas pelo receptor (rwnd), mas quem limita o envio é o emissor." },
+        { "id": "a2", "text": "O controle de fluxo usa a janela de recepção (rwnd) para proteger o receptor de sobrecarga; o controle de congestionamento usa a janela de congestionamento (cwnd) para proteger a rede", "isCorrect": true, "explanation": "Correto! São dois mecanismos distintos: o controle de fluxo (rwnd) protege o buffer do receptor específico, evitando que ele seja sobrecarregado; o controle de congestionamento (cwnd) protege a rede como um todo, evitando que o emissor injete dados mais rápido do que a rede suporta." },
+        { "id": "a3", "text": "São sinônimos — ambos limitam a taxa de envio usando o campo Window do cabeçalho TCP", "isCorrect": false, "explanation": "São mecanismos distintos. O controle de fluxo usa o campo Window (rwnd) anunciado pelo receptor. O controle de congestionamento usa uma janela interna (cwnd) estimada pelo emissor com base em sinais de perda e atraso." },
+        { "id": "a4", "text": "O controle de fluxo é opcional; o controle de congestionamento é obrigatório por RFC", "isCorrect": false, "explanation": "Ambos são componentes obrigatórios do TCP padrão. O controle de fluxo está na RFC 793 original; o controle de congestionamento foi formalizado na RFC 5681." }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,206 @@
+# Protocolo TCP: Fundamentos
+
+No capítulo anterior, construímos protocolos de **transferência confiável de dados** (RDT) de forma incremental — do canal perfeito (rdt1.0) até soluções com pipeline como **Go-Back-N** e **Repetição Seletiva**. Esses conceitos são a base teórica para o protocolo que estudaremos agora: o **TCP** (*Transmission Control Protocol*). O TCP é o protocolo de transporte mais utilizado na Internet, responsável por garantir que dados cheguem **corretamente**, **em ordem** e **sem perdas** entre dois processos. Neste capítulo, vamos explorar seus fundamentos: características gerais, a estrutura do segmento TCP, o mecanismo de números de sequência e ACK cumulativo, a estimativa adaptativa de RTT e os cenários de retransmissão.
+
+## Visão Geral do TCP
+
+O TCP é um protocolo de transporte com as seguintes características fundamentais:
+
+- **Ponto-a-ponto:** cada conexão TCP envolve exatamente **um emissor** e **um receptor** — não há multicast nem broadcast.
+- **Full-duplex:** os dados fluem em **ambas as direções** simultaneamente na mesma conexão. O Host A pode enviar dados para o Host B ao mesmo tempo que recebe dados de B.
+- **Fluxo de bytes confiável e ordenado** (*reliable, in-order byte stream*): a aplicação enxerga os dados como um fluxo contínuo de bytes, sem fronteiras de mensagem. O TCP garante que todos os bytes cheguem, na ordem correta.
+- **Orientado a conexão** (*connection-oriented*): antes de trocar dados, os dois hosts realizam um **handshake** para estabelecer a conexão e sincronizar parâmetros.
+- **Com controle de fluxo:** o emissor não sobrecarrega o receptor — a **janela de recepção** (*receive window*) limita a quantidade de dados em trânsito.
+
+<TCPPointToPoint />
+
+> O TCP oferece a **ilusão** de um canal confiável e ordenado para a aplicação, mesmo que a camada de rede (IP) por baixo seja de **melhor esforço** — podendo perder, duplicar ou reordenar pacotes.
+
+### Buffers e Segmentação
+
+Quando uma aplicação escreve dados no socket TCP, os bytes são armazenados no **buffer de envio** (*send buffer*). O TCP, por conta própria, decide quando e quantos bytes agrupar em um **segmento** para enviar pela rede. A quantidade máxima de dados em cada segmento é limitada pelo **MSS** (*Maximum Segment Size*).
+
+<TCPBuffersAndMSS />
+
+<MarkdownTable
+  headers={["Conceito", "Definição", "Valor Típico"]}
+  rows={[
+    ["**MSS** (*Maximum Segment Size*)", "Quantidade máxima de dados da aplicação em um segmento TCP (sem contar cabeçalhos)", "1460 bytes"],
+    ["**MTU** (*Maximum Transmission Unit*)", "Tamanho máximo do frame no nível de enlace (inclui todos os cabeçalhos)", "1500 bytes (Ethernet)"],
+    ["**Send Buffer**", "Buffer onde o TCP armazena dados enviados pela aplicação, aguardando transmissão e confirmação", "Configurável pelo SO"],
+    ["**Receive Buffer**", "Buffer onde o TCP armazena dados recebidos, aguardando leitura pela aplicação", "Configurável pelo SO"],
+  ]}
+/>
+
+> O MSS é calculado como: **MSS = MTU − Cabeçalho IP − Cabeçalho TCP** = 1500 − 20 − 20 = **1460 bytes** (para Ethernet com cabeçalhos padrão).
+
+## Estrutura do Segmento TCP
+
+O segmento TCP é a unidade de dados trocada entre dois hosts na camada de transporte. Assim como o UDP, o segmento TCP contém campos de **porta de origem** e **porta de destino** para multiplexação/demultiplexação. Porém, o cabeçalho TCP é significativamente mais complexo, refletindo os mecanismos de confiabilidade, controle de fluxo e controle de conexão.
+
+<TCPSegmentStructure />
+
+<MarkdownTable
+  headers={["Campo", "Tamanho", "Função"]}
+  rows={[
+    ["**Porta de Origem**", "16 bits", "Identifica o processo remetente no host emissor"],
+    ["**Porta de Destino**", "16 bits", "Identifica o processo destinatário no host receptor"],
+    ["**Número de Sequência**", "32 bits", "Número do primeiro byte de dados no segmento dentro do fluxo"],
+    ["**Número de ACK**", "32 bits", "Número do próximo byte esperado do outro lado (ACK cumulativo)"],
+    ["**Header Length**", "4 bits", "Tamanho do cabeçalho TCP em palavras de 32 bits (mínimo 5 = 20 bytes)"],
+    ["**Flags de Controle**", "9 bits", "URG, ACK, PSH, RST, SYN, FIN — controlam o comportamento da conexão"],
+    ["**Janela (Window)**", "16 bits", "Tamanho da janela de recepção — usado para controle de fluxo"],
+    ["**Checksum**", "16 bits", "Verificação de integridade do segmento (cabeçalho + dados)"],
+    ["**Ponteiro Urgente**", "16 bits", "Indica o fim dos dados urgentes (usado quando flag URG está ativa)"],
+    ["**Opções**", "Variável", "Campos opcionais como MSS, Window Scaling, Timestamps"],
+  ]}
+/>
+
+### Flags de Controle
+
+As **flags de controle** do TCP são bits individuais que sinalizam o tipo e o propósito do segmento:
+
+<MarkdownTable
+  headers={["Flag", "Nome", "Função"]}
+  rows={[
+    ["**SYN**", "Synchronize", "Solicita abertura de conexão — usado no handshake de 3 vias"],
+    ["**ACK**", "Acknowledgment", "Indica que o campo Número de ACK é válido — presente em quase todos os segmentos após o handshake"],
+    ["**FIN**", "Finish", "Solicita encerramento da conexão"],
+    ["**RST**", "Reset", "Reseta a conexão abruptamente — indica erro ou rejeição"],
+    ["**PSH**", "Push", "Solicita que o receptor entregue os dados à aplicação imediatamente"],
+    ["**URG**", "Urgent", "Indica que o segmento contém dados urgentes — referenciados pelo Ponteiro Urgente"],
+  ]}
+/>
+
+> O cabeçalho TCP tem **20 bytes mínimos** (sem opções), contra apenas **8 bytes** do UDP. Esse custo extra é o preço pela confiabilidade, controle de fluxo e controle de conexão que o TCP oferece.
+
+## Números de Sequência e ACK Cumulativo
+
+Dois dos campos mais importantes do cabeçalho TCP são o **número de sequência** (*sequence number*) e o **número de reconhecimento** (*acknowledgment number*). Eles são a base de toda a mecânica de transferência confiável do TCP.
+
+### Número de Sequência
+
+O TCP trata os dados como um **fluxo contínuo de bytes**, numerados sequencialmente. O **número de sequência** de um segmento é o **número do primeiro byte de dados** contido naquele segmento dentro do fluxo.
+
+Por exemplo, se a aplicação enviar 5000 bytes e o MSS for 1000 bytes, o TCP criará 5 segmentos:
+
+<MarkdownTable
+  headers={["Segmento", "Bytes Contidos", "Número de Sequência"]}
+  rows={[
+    ["Segmento 1", "Bytes 0–999", "**Seq = 0**"],
+    ["Segmento 2", "Bytes 1000–1999", "**Seq = 1000**"],
+    ["Segmento 3", "Bytes 2000–2999", "**Seq = 2000**"],
+    ["Segmento 4", "Bytes 3000–3999", "**Seq = 3000**"],
+    ["Segmento 5", "Bytes 4000–4999", "**Seq = 4000**"],
+  ]}
+/>
+
+> Na prática, o número de sequência inicial (**ISN** — *Initial Sequence Number*) é escolhido aleatoriamente durante o handshake, não começa em zero. Isso evita conflitos com segmentos de conexões anteriores.
+
+### Número de ACK (Acknowledgment)
+
+O **número de ACK** indica o **próximo byte que o receptor espera receber**. O TCP usa **ACKs cumulativos**: ao enviar `ACK = N`, o receptor está dizendo "recebi corretamente todos os bytes até o byte N−1 e estou esperando o byte N".
+
+<TCPSequenceAckNumbers />
+
+### Comportamento do ACK Cumulativo
+
+O ACK cumulativo traz uma consequência importante: se um segmento for perdido, mas segmentos posteriores chegarem, o ACK **não avança** além do ponto da lacuna. O receptor confirma apenas até o último byte contíguo recebido.
+
+<TCPCumulativeAck />
+
+<MarkdownTable
+  headers={["Evento no Receptor", "Ação do TCP"]}
+  rows={[
+    ["Segmento chega em ordem, sem lacunas, todos anteriores confirmados", "ACK atrasado: espera até 500ms por outro segmento. Se nenhum chegar, envia ACK"],
+    ["Segmento chega em ordem, sem lacunas, um ACK atrasado pendente", "Envia imediatamente um ACK cumulativo para ambos os segmentos"],
+    ["Segmento chega fora de ordem (seq# maior que esperado) — lacuna detectada", "Envia imediatamente um **ACK duplicado** com o número do byte esperado (início da lacuna)"],
+    ["Segmento preenche parcial ou totalmente a lacuna", "Envia imediatamente um ACK se o segmento preenche o início da lacuna"],
+  ]}
+/>
+
+> O conceito de **piggybacking** é comum no TCP: como a conexão é full-duplex, o ACK de dados recebidos pode ser enviado junto (*piggyback*) com dados na direção oposta, economizando um segmento separado.
+
+## Estimativa de RTT e Timeout Adaptativo
+
+Uma questão crucial para o TCP é: **quanto tempo esperar antes de retransmitir um segmento?** Se o timeout for muito curto, haverá retransmissões desnecessárias (timeouts prematuros). Se for muito longo, a recuperação de perdas será lenta.
+
+A solução do TCP é calcular um **timeout adaptativo**, baseado em medições contínuas do **RTT** (*Round-Trip Time*) — o tempo entre o envio de um segmento e o recebimento de seu ACK.
+
+### Passo 1: Medir o SampleRTT
+
+O TCP mede periodicamente o **SampleRTT** — o RTT real de um segmento específico (que **não** foi retransmitido). Essa amostra varia bastante de segmento para segmento, pois depende do congestionamento e das rotas na rede.
+
+### Passo 2: Calcular o EstimatedRTT (EWMA)
+
+Para suavizar as flutuações, o TCP mantém uma **média móvel exponencial ponderada** (*Exponentially Weighted Moving Average* — EWMA) do RTT:
+
+> **EstimatedRTT = (1 − α) × EstimatedRTT + α × SampleRTT**
+
+Onde **α = 0.125** (recomendado pela RFC 6298). Isso significa que amostras recentes têm mais peso do que amostras antigas — o EstimatedRTT se adapta às mudanças na rede, mas sem reagir abruptamente a uma única amostra discrepante.
+
+<TCPRttEstimation />
+
+### Passo 3: Calcular o DevRTT (Variabilidade)
+
+Além da média, o TCP calcula uma estimativa da **variabilidade** do RTT — o **DevRTT** (*Deviation RTT*):
+
+> **DevRTT = (1 − β) × DevRTT + β × |SampleRTT − EstimatedRTT|**
+
+Onde **β = 0.25**. O DevRTT captura o quanto o RTT real oscila em relação à média estimada.
+
+### Passo 4: Definir o TimeoutInterval
+
+Finalmente, o timeout é calculado como:
+
+> **TimeoutInterval = EstimatedRTT + 4 × DevRTT**
+
+Essa fórmula dá uma **margem de segurança** proporcional à variabilidade. Se o RTT é estável (DevRTT baixo), o timeout fica próximo do EstimatedRTT. Se o RTT oscila muito (DevRTT alto), o timeout é mais generoso, evitando retransmissões prematuras.
+
+<TCPTimeoutCalculation />
+
+<MarkdownTable
+  headers={["Parâmetro", "Fórmula", "Valor Recomendado"]}
+  rows={[
+    ["**EstimatedRTT**", "(1−α) × EstimatedRTT + α × SampleRTT", "α = 0.125"],
+    ["**DevRTT**", "(1−β) × DevRTT + β × |SampleRTT − EstimatedRTT|", "β = 0.25"],
+    ["**TimeoutInterval**", "EstimatedRTT + 4 × DevRTT", "—"],
+    ["**Timeout inicial**", "Valor antes da primeira medição", "1 segundo (RFC 6298)"],
+    ["**Após timeout**", "Timeout é dobrado (backoff exponencial)", "Até nova medição"],
+  ]}
+/>
+
+> O TCP **não** mede o SampleRTT de segmentos retransmitidos (ambiguidade de Karn), pois não é possível saber se o ACK corresponde ao segmento original ou à retransmissão.
+
+## Cenários de Retransmissão
+
+Com os mecanismos de números de sequência, ACK cumulativo e timeout adaptativo, o TCP lida com diversas situações de perda e atraso. Vamos examinar os três cenários clássicos.
+
+### Cenário 1: ACK Perdido
+
+O Host A envia um segmento (Seq=92, 8 bytes de dados). O Host B recebe e envia ACK=100, mas o **ACK é perdido na rede**. O timer de A expira → A retransmite o segmento (Seq=92). B percebe que é uma duplicata (já recebeu esses bytes), descarta os dados, mas reenvia ACK=100.
+
+### Cenário 2: Timeout Prematuro
+
+O Host A envia dois segmentos (Seq=92 e Seq=100). O timer do primeiro segmento expira **antes** de o ACK chegar (o ACK está a caminho, mas o timeout foi curto demais). A retransmite Seq=92. Quando os ACKs chegam (ACK=100, depois ACK=120), A percebe que os dois segmentos foram recebidos. Quando chega o ACK do segmento retransmitido (ACK=120 novamente), A simplesmente o aceita.
+
+### Cenário 3: ACK Cumulativo Salva o Dia
+
+O Host A envia dois segmentos (Seq=92 e Seq=100). O ACK=100 do primeiro segmento é **perdido**, mas o ACK=120 do segundo segmento **chega**. Como o ACK é cumulativo, ACK=120 significa "recebi tudo até o byte 119". Portanto, A sabe que **ambos** os segmentos foram recebidos — **nenhuma retransmissão é necessária**, mesmo com o primeiro ACK perdido!
+
+<TCPRetransmissionScenarios />
+
+> O ACK cumulativo é uma das grandes forças do TCP: mesmo que alguns ACKs se percam, basta que **um ACK mais recente** chegue para confirmar todos os bytes anteriores.
+
+## Resumo da Aula
+
+Neste capítulo, exploramos os fundamentos do protocolo TCP:
+
+- **Características gerais:** TCP é ponto-a-ponto, full-duplex, orientado a conexão, com fluxo de bytes confiável e ordenado. A aplicação escreve no socket, e o TCP segmenta os dados em pedaços de até **MSS** bytes.
+- **Estrutura do segmento:** O cabeçalho TCP tem **20+ bytes**, incluindo portas, número de sequência, número de ACK, flags (SYN, ACK, FIN, RST, PSH, URG), janela de recepção, checksum e opções.
+- **Números de sequência:** Baseados em **bytes** (não pacotes) — o Seq# é o número do primeiro byte de dados do segmento no fluxo.
+- **ACK cumulativo:** O ACK# indica o **próximo byte esperado** — confirma todos os bytes até aquele ponto. Se há lacunas, o ACK não avança.
+- **Estimativa de RTT (EWMA):** O TCP calcula uma média móvel exponencial do RTT com α = 0.125, suavizando flutuações na rede.
+- **Timeout adaptativo:** TimeoutInterval = EstimatedRTT + 4×DevRTT — combina a média do RTT com uma margem proporcional à variabilidade (DevRTT, β = 0.25).
+- **Cenários de retransmissão:** O TCP lida com ACKs perdidos, timeouts prematuros e usa o ACK cumulativo para evitar retransmissões desnecessárias.
+

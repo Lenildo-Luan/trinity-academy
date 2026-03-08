@@ -1,0 +1,218 @@
+# Controle de Congestionamento TCP
+
+No capítulo anterior, estudamos o **controle de fluxo** e o **gerenciamento de conexão** do TCP — mecanismos que protegem o receptor e coordenam o ciclo de vida de uma conexão. Agora chegamos a um dos mecanismos mais sofisticados da Internet: o **controle de congestionamento**. Enquanto o controle de fluxo protege o **receptor**, o controle de congestionamento protege a **rede** — evitando que múltiplos emissores injetem mais dados do que os roteadores conseguem encaminhar. Compreender esse mecanismo é fundamental para entender por que a Internet funciona de forma estável mesmo com bilhões de hosts transmitindo simultaneamente.
+
+## O Problema do Congestionamento
+
+**Congestionamento** ocorre quando a carga total ofertada à rede excede a capacidade de algum enlace ou roteador. Ao contrário do controle de fluxo — que lida com um receptor específico — o congestionamento é um **problema da rede como um todo**: múltiplos fluxos competindo pelos mesmos recursos.
+
+> Congestionamento ≠ sobrecarga do receptor. O receptor pode ter buffer livre; o problema está nos roteadores **no caminho**.
+
+<CongestionCosts />
+
+### Os Custos do Congestionamento
+
+O congestionamento tem efeitos progressivos e devastadores:
+
+1. **Atraso de fila crescente:** conforme os buffers dos roteadores enchem, o atraso aumenta rapidamente — tendendo ao infinito quando a carga se aproxima da capacidade do enlace.
+2. **Descarte de pacotes:** quando o buffer do roteador está cheio, pacotes são simplesmente descartados. O emissor precisará retransmiti-los — desperdiçando banda que já foi usada para transportar o pacote original até o roteador.
+3. **Trabalho inútil em múltiplos saltos:** se um pacote percorre 15 roteadores e é descartado no último, todo o trabalho dos 14 roteadores anteriores foi desperdiçado. Em redes congestionadas, isso é uma perda enorme.
+
+<MarkdownTable
+  headers={["Custo", "Causa", "Efeito"]}
+  rows={[
+    ["**Atraso elevado**", "Buffers dos roteadores enchendo", "Latência aumenta exponencialmente perto da capacidade"],
+    ["**Retransmissões**", "Pacotes descartados por buffer cheio", "Banda útil cai; mais tráfego agrava o congestionamento"],
+    ["**Desperdício multi-hop**", "Descarte após múltiplos saltos", "Trabalho de todos os roteadores intermediários é perdido"],
+    ["**Starvation**", "Fluxos agressivos dominam", "Fluxos conservadores ficam sem banda — injustiça"],
+  ]}
+/>
+
+## Três Cenários de Congestionamento
+
+Para entender o problema progressivamente, o livro de Kurose & Ross analisa três cenários com complexidade crescente.
+
+<CongestionScenarios />
+
+### Cenário 1: Buffer Infinito, Sem Retransmissão
+
+Dois emissores, um roteador com **buffer infinito**, taxa de saída R. Quando a carga total se aproxima de R, o atraso de fila cresce sem limite. A vazão nunca passa de R/2 por fluxo, mas o atraso → ∞.
+
+### Cenário 2: Buffer Finito, Com Retransmissões
+
+Com buffer **finito**, pacotes são descartados. O emissor deve retransmitir. Se o emissor conhecesse perfeitamente quais pacotes foram perdidos (retransmissão perfeita), a vazão útil seria ligeiramente menor que R/2. Na prática, com **timeouts prematuros** e **retransmissões desnecessárias**, a vazão útil cai muito mais, pois a banda é desperdiçada em cópias de pacotes que já foram entregues.
+
+### Cenário 3: Múltiplos Roteadores
+
+Com **múltiplos saltos**, um pacote descartado no último roteador desperdiçou capacidade em **todos os roteadores anteriores**. Isso cria um efeito em cascata: o congestionamento em um ponto da rede causa desperdício em toda a rota.
+
+<MarkdownTable
+  headers={["Cenário", "Buffer", "Retransmissão", "Consequência"]}
+  rows={[
+    ["**Cenário 1**", "Infinito", "Não", "Atraso → ∞; vazão máxima = R/2 por fluxo"],
+    ["**Cenário 2 (ideal)**", "Finito", "Apenas perdas", "Vazão < R/2; retransmissões consomem banda"],
+    ["**Cenário 2 (real)**", "Finito", "Perdas + timeout prematuro", "Vazão << R/2; retransmissões desnecessárias"],
+    ["**Cenário 3**", "Finito", "Sim, multi-hop", "Descarte no último hop desperdiça trabalho de todos os anteriores"],
+  ]}
+/>
+
+## Abordagens para o Controle de Congestionamento
+
+Existem duas abordagens fundamentais:
+
+<MarkdownTable
+  headers={["Abordagem", "Como funciona", "Exemplos"]}
+  rows={[
+    ["**Fim-a-fim** (*end-to-end*)", "Os hosts inferem o congestionamento por **sinais indiretos**: perda de pacotes (timeout, ACKs duplicados) ou aumento do RTT. A rede não fornece feedback explícito.", "TCP Reno, TCP CUBIC, BBR"],
+    ["**Assistida pela rede** (*network-assisted*)", "Roteadores sinalizam explicitamente o congestionamento para os hosts, usando bits no cabeçalho IP ou mensagens de controle.", "ECN (Explicit Congestion Notification), ATM ABR, DECbit"],
+  ]}
+/>
+
+> O TCP tradicional usa **controle fim-a-fim**: infere congestionamento apenas por perdas e atrasos, sem nenhuma informação explícita dos roteadores. O **ECN** é uma extensão que adiciona sinalização explícita mantendo compatibilidade com a Internet atual.
+
+## Mecanismo AIMD — Aumento Aditivo, Decremento Multiplicativo
+
+O coração do controle de congestionamento do TCP é o algoritmo **AIMD** (*Additive Increase, Multiplicative Decrease*). A ideia é simples e elegante:
+
+- **Aumento Aditivo (AI):** enquanto não há congestionamento, aumentar a taxa de envio **linearmente** (+1 MSS por RTT) — sondar mais banda.
+- **Decremento Multiplicativo (MD):** ao detectar congestionamento, **cortar pela metade** a taxa de envio — recuar rapidamente.
+
+> A combinação AI+MD produz o famoso **padrão dente-de-serra** da janela TCP: crescimento suave seguido de quedas bruscas.
+
+<TCPAIMDSawtooth />
+
+O TCP implementa o AIMD através de uma variável chamada **cwnd** (*congestion window* — janela de congestionamento). O emissor limita o envio ao **mínimo entre cwnd e rwnd**:
+
+> **LastByteSent − LastByteAcked ≤ min(cwnd, rwnd)**
+
+A taxa efetiva de envio pode ser estimada como:
+
+> **taxa ≈ cwnd / RTT** (bytes por segundo)
+
+<MarkdownTable
+  headers={["Evento", "Ação do AIMD", "Resultado"]}
+  rows={[
+    ["**ACK recebido** (sem perda)", "cwnd += 1 MSS por RTT (na fase CA)", "Crescimento linear — sondagem de banda"],
+    ["**3 ACKs duplicados** (perda inferida)", "ssthresh = cwnd/2; cwnd = ssthresh", "Queda para metade — Fast Retransmit"],
+    ["**Timeout** (perda severa)", "ssthresh = cwnd/2; cwnd = 1 MSS", "Reinício do Slow Start — queda total"],
+  ]}
+/>
+
+## Slow Start, Prevenção de Congestionamento e Recuperação Rápida
+
+O TCP não usa AIMD puro desde o início. Ele possui três **fases** bem definidas, controladas por duas variáveis: **cwnd** e **ssthresh** (*slow start threshold*).
+
+<TCPCongestionFSM />
+
+### Fase 1: Slow Start (cwnd < ssthresh)
+
+Ao iniciar uma conexão (ou após um timeout), o TCP começa com **cwnd = 1 MSS**. A cada ACK recebido, incrementa cwnd em 1 MSS — o que significa que cwnd **dobra a cada RTT** (crescimento exponencial).
+
+> Apesar do nome, o Slow Start não é lento: começa devagar, mas cresce **exponencialmente**. O nome refere-se ao fato de começar de forma lenta em comparação ao ideal.
+
+Quando cwnd atinge ou ultrapassa ssthresh, o TCP transiciona para a **Prevenção de Congestionamento**.
+
+<TCPSlowStartDetail />
+
+### Fase 2: Prevenção de Congestionamento (cwnd ≥ ssthresh)
+
+Na fase de Prevenção de Congestionamento (*Congestion Avoidance*), o TCP cresce **linearmente**: a cada ACK recebido, incrementa cwnd em MSS²/cwnd, o que resulta em +1 MSS por RTT completo.
+
+> O crescimento linear é o "aumento aditivo" do AIMD. O TCP está sondando a banda disponível com cautela.
+
+Se **3 ACKs duplicados** chegam (indicando que um pacote foi perdido mas outros posteriores chegaram), o TCP executa o **Fast Retransmit** e entra em Recuperação Rápida.
+
+### Fase 3: Recuperação Rápida (Fast Recovery)
+
+O Fast Recovery é ativado por **3 ACKs duplicados** (não por timeout):
+
+1. `ssthresh = cwnd / 2`
+2. `cwnd = ssthresh + 3 MSS` (os 3 ACKs dup confirmam 3 pacotes fora de ordem)
+3. Retransmite o pacote perdido imediatamente
+4. Para cada ACK duplicado adicional: `cwnd += 1 MSS`
+5. Quando o ACK do pacote retransmitido chega: `cwnd = ssthresh` → entra em Prevenção de Congestionamento
+
+<MarkdownTable
+  headers={["Fase", "Gatilho", "cwnd inicial", "Crescimento", "Saída"]}
+  rows={[
+    ["**Slow Start**", "Início da conexão ou timeout", "1 MSS", "Exponencial (×2 por RTT)", "cwnd ≥ ssthresh → CA"],
+    ["**Prevenção de Congestionamento**", "cwnd ≥ ssthresh", "ssthresh", "Linear (+1 MSS/RTT)", "3 dup ACK → FR | Timeout → SS"],
+    ["**Recuperação Rápida**", "3 ACKs duplicados", "ssthresh + 3", "cwnd += 1 por dup ACK", "ACK novo → CA | Timeout → SS"],
+  ]}
+/>
+
+> A diferença entre **timeout** e **3 ACKs duplicados** é fundamental: timeout indica perda severa (cwnd volta a 1); 3 ACKs dup indica perda isolada com rede ainda funcional (cwnd cai só para metade). Tratar os dois da mesma forma seria muito conservador.
+
+## TCP CUBIC — O Padrão do Linux
+
+O TCP Reno (AIMD clássico) tem uma limitação: seu crescimento linear é muito lento em redes de **alta largura de banda** e **alto RTT** (redes de longa distância, fibra óptica). O tempo para recuperar após uma perda pode ser enorme.
+
+O **TCP CUBIC** (padrão no Linux desde 2006 e também no macOS/iOS) substitui o crescimento linear por uma **função cúbica** do tempo decorrido desde a última perda:
+
+> **W(t) = C × (t − K)³ + Wmax**
+
+Onde **Wmax** é a janela no momento da perda, **K** é o tempo para voltar ao tamanho de Wmax, e **C** é um parâmetro de escala.
+
+<TCPCubicVsReno />
+
+<MarkdownTable
+  headers={["Característica", "TCP Reno (AIMD)", "TCP CUBIC"]}
+  rows={[
+    ["**Crescimento após perda**", "Linear (+1 MSS/RTT)", "Cúbico — rápido longe de Wmax, lento perto"],
+    ["**Desempenho em redes BDP alto**", "Ruim — recupera muito devagar", "Ótimo — chega rapidamente ao Wmax anterior"],
+    ["**Estabilidade**", "Boa em redes lentas", "Melhor em redes rápidas e de longa distância"],
+    ["**Dependência do RTT**", "Sim — crescimento proporcional a 1/RTT", "Independente do RTT — crescimento baseado em tempo real"],
+    ["**Uso atual**", "Padrão legado (Windows XP/Vista)", "Padrão no Linux, macOS 10.15+, iOS 13+"],
+  ]}
+/>
+
+> A chave do CUBIC é: **após uma perda, cresce rapidamente até perto de Wmax** (onde ocorreu a perda anterior), depois **desacelera** para explorar cuidadosamente a banda disponível. Isso é muito mais eficiente que o crescimento linear do Reno.
+
+## Controle de Congestionamento Baseado em Atraso: BBR
+
+Tanto o Reno quanto o CUBIC são **baseados em perda**: só reconhecem congestionamento quando pacotes são descartados. Isso significa que o TCP enche os buffers dos roteadores antes de recuar — causando o problema do **bufferbloat** (atraso excessivo mesmo sem perda visível).
+
+O **BBR** (*Bottleneck Bandwidth and Round-trip propagation time*), desenvolvido pelo Google em 2016 e usado em larga escala no YouTube, Google Cloud e Stack Overflow, usa uma abordagem radicalmente diferente: **baseada em atraso**.
+
+<TCPBBRvsLossBased />
+
+### Como o BBR Funciona
+
+O BBR modela a rede como um "gargalo" com duas propriedades:
+
+- **BtlBw** (*Bottleneck Bandwidth*): a largura de banda máxima disponível no enlace gargalo.
+- **RTprop** (*Round-Trip propagation delay*): o RTT mínimo possível (sem filas).
+
+O **ponto de operação ideal** é o **BDP** (*Bandwidth-Delay Product*):
+
+> **BDP = BtlBw × RTprop** (quantidade ideal de dados em trânsito)
+
+O BBR tenta manter `cwnd ≈ BDP` — suficiente para saturar o enlace, mas sem criar filas excessivas.
+
+<MarkdownTable
+  headers={["Aspecto", "Baseado em Perda (Reno/CUBIC)", "BBR (baseado em atraso)"]}
+  rows={[
+    ["**Sinal de congestionamento**", "Perda de pacote", "Aumento do RTT / queda da banda medida"],
+    ["**Ocupação dos buffers**", "Enche os buffers antes de recuar", "Evita encher — opera abaixo da capacidade"],
+    ["**Atraso de fila**", "Alto (bufferbloat)", "Baixo — RTT estável"],
+    ["**Eficiência**", "Boa em redes normais", "Melhor em redes com buffer grande ou perda aleatória"],
+    ["**Implementação**", "Kernel do SO (TCP)", "Kernel do SO — padrão em Android, servidores Google"],
+  ]}
+/>
+
+> Em redes com **perda aleatória** (wireless, satélite), o BBR tem vantagem: não interpreta toda perda como congestionamento — distingue perda por congestionamento de perda por ruído do canal.
+
+## Resumo da Aula
+
+Neste capítulo, estudamos o controle de congestionamento do TCP:
+
+- **Problema do congestionamento:** excesso de carga na rede causa atraso crescente, descarte de pacotes e desperdício de trabalho em múltiplos saltos. Diferente do controle de fluxo, que protege o receptor.
+- **Três cenários:** buffer infinito (atraso → ∞), buffer finito com retransmissões (vazão cai), múltiplos saltos (desperdício amplificado).
+- **Abordagens:** fim-a-fim (TCP infere congestionamento por perdas/RTT) e assistida pela rede (ECN — roteadores sinalizam explicitamente).
+- **AIMD:** Aumento Aditivo (+1 MSS/RTT) + Decremento Multiplicativo (÷2 ao detectar perda) — produz o padrão dente-de-serra de cwnd.
+- **Slow Start:** inicia com cwnd=1 e dobra a cada RTT (exponencial) até atingir ssthresh.
+- **Prevenção de Congestionamento:** crescimento linear (+1 MSS/RTT) após ssthresh — sondagem cuidadosa.
+- **Recuperação Rápida:** ativada por 3 ACKs duplicados — Fast Retransmit sem voltar ao Slow Start; cwnd = ssthresh.
+- **TCP CUBIC:** substitui crescimento linear por função cúbica — muito mais eficiente em redes de alta largura de banda e alto RTT. Padrão no Linux/macOS.
+- **BBR:** controle baseado em atraso — mede BtlBw e RTprop, opera no ponto BDP ótimo sem encher buffers. Evita bufferbloat e funciona melhor em redes com perda aleatória.
+

@@ -1,0 +1,170 @@
+# TCP: Controle de Fluxo e Gerenciamento de Conexão
+
+No capítulo anterior, vimos os fundamentos do TCP: sua estrutura de segmento, os números de sequência baseados em bytes, o mecanismo de ACK cumulativo e o cálculo adaptativo do timeout via EWMA. Agora vamos explorar dois mecanismos essenciais que completam a visão do TCP como protocolo confiável: o **controle de fluxo** — que protege o receptor de ser sobrecarregado — e o **gerenciamento de conexão** — que cobre como uma conexão TCP é estabelecida com o famoso **handshake de 3 vias** e como ela é encerrada de forma limpa ou abrupta.
+
+## Controle de Fluxo
+
+Imagine que um emissor rápido envia dados a 1 Gbps para um receptor lento que só consegue processar 10 Mbps. Sem controle, o **buffer de recepção** do receptor transbordaria, descartando dados — que precisariam ser retransmitidos. O **controle de fluxo** (*flow control*) resolve isso: o receptor informa continuamente ao emissor quanto espaço livre tem no buffer, e o emissor limita o quanto envia.
+
+> O controle de fluxo é um mecanismo de **proteção do receptor**: evita que o emissor envie mais dados do que o receptor consegue absorver.
+
+### A Janela de Recepção (rwnd)
+
+O receptor mantém um **buffer de recepção** onde os dados chegam antes de ser lidos pela aplicação. O espaço livre nesse buffer é anunciado ao emissor através do campo **rwnd** (*receive window*) no cabeçalho TCP de cada segmento ou ACK enviado de volta.
+
+<TCPFlowControlBuffer />
+
+A regra que o emissor deve obedecer é:
+
+> **LastByteSent − LastByteAcked ≤ rwnd**
+
+Ou seja, a quantidade de dados enviados mas ainda não confirmados não pode exceder o espaço livre no buffer do receptor.
+
+<MarkdownTable
+  headers={["Variável", "Significado"]}
+  rows={[
+    ["`LastByteSent`", "Número de sequência do último byte enviado pelo emissor"],
+    ["`LastByteAcked`", "Número de sequência do último byte confirmado (ACK recebido)"],
+    ["`LastByteSent - LastByteAcked`", "Quantidade de dados em trânsito (enviados, aguardando ACK)"],
+    ["`rwnd`", "Espaço livre no buffer do receptor — anunciado em cada ACK"],
+  ]}
+/>
+
+No receptor, o espaço livre é calculado como:
+
+> **rwnd = RcvBuffer − (LastByteRcvd − LastByteRead)**
+
+Onde `RcvBuffer` é a capacidade total do buffer, `LastByteRcvd` é o último byte recebido da rede e `LastByteRead` é o último byte lido pela aplicação.
+
+### O Problema do rwnd = 0
+
+Um caso especial ocorre quando o buffer do receptor está **completamente cheio** — a aplicação não está lendo dados rápido o suficiente. Nesse cenário, o receptor anuncia **rwnd = 0** e o emissor **para de enviar**.
+
+Mas agora temos um problema: se o receptor só notifica o emissor quando tem espaço livre, e essa notificação for perdida, o emissor ficará **bloqueado para sempre** — um **deadlock**.
+
+<TCPRwndZeroProblem />
+
+A solução do TCP é o **persist timer** (temporizador de persistência): quando recebe `rwnd = 0`, o emissor inicia um timer. Quando expira, envia um **segmento de sondagem** (*probe*) de **1 byte** para forçar o receptor a responder com o rwnd atual. Assim, o emissor sempre descobre quando o espaço reabre.
+
+<MarkdownTable
+  headers={["Situação", "Comportamento do TCP"]}
+  rows={[
+    ["**rwnd > 0**", "Emissor pode enviar até `rwnd` bytes não confirmados"],
+    ["**rwnd = 0**", "Emissor para de enviar dados; inicia persist timer"],
+    ["**Persist timer expira**", "Emissor envia segmento de sonda de 1 byte"],
+    ["**Receptor responde à sonda**", "Envia ACK com rwnd atual (0 ou > 0)"],
+    ["**rwnd volta a ser > 0**", "Emissor retoma o envio normal"],
+  ]}
+/>
+
+> Nota: O controle de fluxo protege o receptor. Existe outro mecanismo — o **controle de congestionamento** — que protege a **rede**. Ambos trabalham juntos no TCP, mas o controle de congestionamento será abordado em um capítulo futuro.
+
+## Gerenciamento de Conexão TCP
+
+O TCP é um protocolo **orientado a conexão**: antes de trocar qualquer dado, os dois hosts devem **estabelecer** a conexão, acordando parâmetros como os números de sequência iniciais. E ao terminar, a conexão deve ser **encerrada** de forma ordenada. O TCP usa mensagens específicas (com flags SYN, FIN, ACK, RST) para gerenciar esse ciclo de vida.
+
+## Estabelecimento de Conexão: Handshake de 3 Vias
+
+O **handshake de 3 vias** (*three-way handshake*) é o protocolo que o TCP usa para estabelecer uma conexão. Ele garante que **ambos os lados estejam prontos** para comunicar e que **sincronizem seus números de sequência iniciais** (ISN — *Initial Sequence Numbers*).
+
+<TCPThreeWayHandshake />
+
+### Os 3 Passos
+
+**Passo 1 — SYN (cliente → servidor):**
+O cliente envia um segmento especial com a flag **SYN = 1** e sem dados. O campo de sequência contém o **ISN do cliente** (x), escolhido aleatoriamente. O cliente entra no estado `SYN_SENT`.
+
+**Passo 2 — SYNACK (servidor → cliente):**
+O servidor recebe o SYN, aloca buffers e variáveis para a conexão, e responde com um segmento **SYN = 1, ACK = 1**. O campo de sequência contém o **ISN do servidor** (y), também aleatório. O campo ACK = x+1 confirma o SYN do cliente. O servidor entra no estado `SYN_RCVD`.
+
+**Passo 3 — ACK (cliente → servidor):**
+O cliente confirma o SYNACK com **ACK = y+1**. A partir daqui, **ambos entram no estado `ESTAB`** (estabelecido) e podem trocar dados. O cliente pode já incluir dados neste terceiro segmento.
+
+<MarkdownTable
+  headers={["Passo", "Quem Envia", "Flags", "Seq", "ACK", "Propósito"]}
+  rows={[
+    ["**1 — SYN**", "Cliente", "`SYN=1`", "x (ISN cliente)", "—", "Solicita conexão, anuncia ISN do cliente"],
+    ["**2 — SYNACK**", "Servidor", "`SYN=1, ACK=1`", "y (ISN servidor)", "x+1", "Aceita conexão, anuncia ISN do servidor, confirma SYN do cliente"],
+    ["**3 — ACK**", "Cliente", "`ACK=1`", "x+1", "y+1", "Confirma SYNACK do servidor — conexão estabelecida"],
+  ]}
+/>
+
+> O handshake de 3 vias introduz uma latência de **1,5 RTTs** antes do primeiro dado útil trafegar. Esse é um dos motivadores do HTTP/3 e QUIC, que reduzem essa latência.
+
+### Por que não Usar um Handshake de 2 Vias?
+
+Em redes reais, pacotes podem ser **extremamente atrasados** — chegando muito depois de uma conexão anterior ter sido encerrada. Um handshake de apenas 2 mensagens (SYN + SYNACK) seria insuficiente para lidar com esses cenários.
+
+<TCPTwoWayHandshakeProblem />
+
+<MarkdownTable
+  headers={["Problema", "Cenário", "Por que o 3-way resolve"]}
+  rows={[
+    ["**SYN atrasado**", "Um SYN de uma conexão antiga chega depois que a conexão foi encerrada — o servidor abriria uma conexão 'fantasma'", "O 3º passo (ACK do cliente) é necessário. Se o cliente não reconhece o SYNACK, não confirma → servidor não abre a conexão"],
+    ["**Dados antigos**", "Dados de uma conexão anterior chegam na nova conexão com o mesmo seq#, corrompendo o fluxo", "ISN aleatório torna extremamente improvável que dados antigos tenham seq# válido na nova conexão"],
+  ]}
+/>
+
+## Encerramento de Conexão: FIN/ACK
+
+Quando uma aplicação não tem mais dados para enviar, ela fecha sua metade da conexão com um segmento **FIN**. O TCP usa um **encerramento de meio-fechamento** (*half-close*): cada lado fecha independentemente. Uma conexão completa exige 4 mensagens.
+
+<TCPConnectionTeardown />
+
+### Os 4 Passos do Encerramento
+
+**Passo 1 — FIN (cliente → servidor):** O cliente envia FIN=1 sinalizando que não tem mais dados. Entra em `FIN_WAIT_1`.
+
+**Passo 2 — ACK (servidor → cliente):** O servidor confirma o FIN. O cliente entra em `FIN_WAIT_2`. O servidor pode ainda enviar dados (half-close) — o cliente continua recebendo.
+
+**Passo 3 — FIN (servidor → cliente):** Quando o servidor também termina, envia seu próprio FIN=1. Entra em `LAST_ACK`.
+
+**Passo 4 — ACK (cliente → servidor):** O cliente confirma o FIN do servidor e entra em **`TIME_WAIT`**. Após esperar **2×MSL** (*Maximum Segment Lifetime*, tipicamente 60s), entra em `CLOSED`. O servidor fecha imediatamente ao receber o ACK.
+
+<MarkdownTable
+  headers={["Estado", "Lado", "Significado"]}
+  rows={[
+    ["`FIN_WAIT_1`", "Ativo (quem inicia)", "Enviou FIN, aguarda ACK"],
+    ["`FIN_WAIT_2`", "Ativo", "Recebeu ACK do FIN, aguarda FIN do outro lado"],
+    ["`CLOSE_WAIT`", "Passivo (quem recebe)", "Recebeu FIN, aplicação ainda pode enviar dados"],
+    ["`LAST_ACK`", "Passivo", "Enviou FIN, aguarda ACK final"],
+    ["`TIME_WAIT`", "Ativo", "Recebeu FIN, aguarda 2×MSL antes de fechar definitivamente"],
+    ["`CLOSED`", "Ambos", "Conexão completamente encerrada"],
+  ]}
+/>
+
+> O estado **TIME_WAIT** existe por duas razões: (1) garantir que o ACK final chegou ao servidor — se o servidor reenviar o FIN, o cliente ainda pode responder; (2) evitar que pacotes atrasados da conexão encerrada sejam confundidos com pacotes de uma nova conexão.
+
+### Encerramento Simultâneo
+
+Em casos raros, ambos os lados enviam FIN ao mesmo tempo. O TCP lida com isso: ambos entram em `FIN_WAIT_1`, recebem o FIN um do outro, e cada um confirma. Ambos passam por TIME_WAIT antes de fechar.
+
+## Encerramento Abrupto: Flag RST
+
+Diferente do encerramento gracioso (FIN/ACK), o TCP também suporta **encerramento abrupto** via flag **RST** (*Reset*). Um segmento com RST=1 termina a conexão **imediatamente**, sem handshake de encerramento.
+
+<TCPResetFlag />
+
+<MarkdownTable
+  headers={["Situação", "Por que RST é enviado"]}
+  rows={[
+    ["**Porta não está escutando**", "Um host recebe um SYN para uma porta que não tem processo escutando → responde com RST"],
+    ["**Conexão inválida**", "Chega um segmento que não pertence a nenhuma conexão conhecida → RST descarta o segmento e notifica o remetente"],
+    ["**Encerramento de emergência**", "Uma aplicação fecha o socket abruptamente (ex: crash) → TCP envia RST para notificar o outro lado imediatamente"],
+    ["**Firewall/filtragem**", "Firewalls podem enviar RST para rejeitar conexões indesejadas, simulando uma porta fechada"],
+  ]}
+/>
+
+> Ao receber um RST, o receptor **descarta todos os dados em buffer** e fecha o socket imediatamente. Não há retransmissão, não há garantia de entrega dos dados em trânsito. RST é um sinal de "algo deu muito errado".
+
+## Resumo da Aula
+
+Neste capítulo, completamos a visão dos fundamentos do TCP com dois mecanismos cruciais:
+
+- **Controle de fluxo:** O receptor anuncia seu espaço livre (`rwnd`) no campo Window de cada ACK. O emissor garante que `LastByteSent − LastByteAcked ≤ rwnd`, protegendo o buffer do receptor de transbordar.
+- **Problema do rwnd = 0:** Quando o buffer do receptor está cheio, o emissor usa um **persist timer** para enviar sondas de 1 byte, evitando deadlock caso a notificação de reabertura seja perdida.
+- **Handshake de 3 vias:** SYN → SYNACK → ACK. Garante que ambos os lados estão prontos, sincroniza ISNs aleatórios e previne conexões fantasmas por SYNs atrasados.
+- **Por que não 2 vias:** SYNs atrasados poderiam criar conexões órfãs; dados antigos com seq# coincidente poderiam corromper o fluxo da nova conexão.
+- **Encerramento gracioso (FIN/ACK):** 4 mensagens em half-close — cada lado encerra independentemente. O estado `TIME_WAIT` (2×MSL) garante que o ACK final chegou e que pacotes antigos expiraram.
+- **Encerramento abrupto (RST):** Termina a conexão imediatamente — usado para portas fechadas, conexões inválidas e erros fatais. Dados em trânsito são descartados sem garantias.
+

@@ -1,0 +1,171 @@
+# ECN, Equidade e Evolução da Camada de Transporte
+
+No capítulo anterior, estudamos o controle de congestionamento do TCP: AIMD, Slow Start, CUBIC e BBR. Encerramos aquele capítulo com a questão: como a rede pode **avisar proativamente** os emissores sobre congestionamento, antes de precisar descartar pacotes? Além disso, o TCP sozinho é suficiente para a Internet moderna? Neste capítulo final do módulo de Camada de Transporte, respondemos essas perguntas explorando o **ECN** (sinalização explícita de congestionamento), a **equidade entre fluxos** e suas limitações práticas, e o protocolo **QUIC** — a evolução da camada de transporte que alimenta o HTTP/3 e grande parte do tráfego moderno do Google, YouTube e Cloudflare.
+
+## ECN — Notificação Explícita de Congestionamento
+
+O controle de congestionamento tradicional (Reno, CUBIC) depende de **perdas de pacotes** como sinal de congestionamento. Esse sinal é tardio: o pacote já foi descartado, o trabalho de todos os roteadores intermediários foi desperdiçado, e o emissor só descobre o problema após um timeout ou 3 ACKs duplicados.
+
+O **ECN** (*Explicit Congestion Notification*, RFC 3168) resolve isso: roteadores que detectam congestionamento iminente **marcam** os pacotes em vez de descartá-los, e os hosts reagem imediatamente.
+
+<ECNSignaling />
+
+### Como o ECN Funciona
+
+O ECN usa **2 bits no campo ToS** (Type of Service) do cabeçalho IP e **2 bits no cabeçalho TCP**:
+
+<MarkdownTable
+  headers={["Bit / Campo", "Localização", "Significado"]}
+  rows={[
+    ["`ECT(0)` e `ECT(1)`", "IP — bits 6 e 7 do ToS", "**ECN-Capable Transport**: emissor indica que suporta ECN"],
+    ["`CE`", "IP — bits 6 e 7 (valor `11`)", "**Congestion Experienced**: roteador marcou congestionamento"],
+    ["`ECE`", "TCP — bit nos flags de controle", "**ECN-Echo**: receptor ecoa o sinal CE de volta ao emissor"],
+    ["`CWR`", "TCP — bit nos flags de controle", "**Congestion Window Reduced**: emissor confirmou que reduziu cwnd"],
+  ]}
+/>
+
+O fluxo completo do ECN é:
+
+1. **Negociação:** no handshake TCP, ambos os lados indicam suporte a ECN (flags ECE+CWR no SYN/SYNACK).
+2. **Marcação:** quando um roteador está com buffer quase cheio, em vez de descartar, seta `CE=1` no cabeçalho IP do pacote.
+3. **Echo:** o receptor, ao ver `CE=1`, seta `ECE=1` no próximo ACK enviado ao emissor.
+4. **Reação:** o emissor recebe `ECE=1`, reduz `cwnd` (como se fosse 3 ACKs dup), e seta `CWR=1` para avisar o receptor que já reagiu.
+
+> O ECN é uma **extensão opcional** do TCP — ambos os lados precisam suportá-lo. Na Internet atual, a maioria dos sistemas operacionais modernos e CDNs habilitam ECN por padrão.
+
+<MarkdownTable
+  headers={["Aspecto", "Sem ECN (Drop)", "Com ECN (Mark)"]}
+  rows={[
+    ["**Sinal de congestionamento**", "Descarte do pacote", "Marcação CE=1 no cabeçalho IP"],
+    ["**Trabalho desperdiçado**", "Sim — pacote descartado após múltiplos saltos", "Não — pacote entregue com sinal"],
+    ["**Latência de detecção**", "Alta — timeout ou 3 ACKs dup", "Baixa — próximo ACK já carrega ECE=1"],
+    ["**Impacto na aplicação**", "Retransmissão necessária", "Apenas redução de cwnd (sem retransmissão)"],
+    ["**Adoção**", "Universal (sempre ativo)", "Requer suporte em ambos os hosts e roteadores"],
+  ]}
+/>
+
+> ECN é especialmente valioso em **data centers** e redes de alta velocidade, onde o RTT é pequeno e as perdas são raras mas os buffers podem encher rapidamente.
+
+## Equidade no TCP
+
+O controle de congestionamento TCP foi projetado com um objetivo de **equidade** (*fairness*): quando K fluxos TCP compartilham um enlace de capacidade R, cada fluxo deveria receber aproximadamente **R/K** de banda.
+
+### Por que o AIMD Converge para Equidade
+
+A elegância do AIMD está em como ele naturalmente converge para uma divisão justa:
+
+- Ambos os fluxos aumentam na mesma taxa (aumento aditivo +1 MSS/RTT) → movem-se na direção de equidade.
+- Ao detectar congestionamento, ambos reduzem pela metade → recuam em direção à origem, mantendo-se próximos da linha de equidade.
+
+<TCPFairnessConvergence />
+
+Em termos geométricos: o aumento aditivo move os fluxos na **diagonal de 45°** (mesma taxa), enquanto o decremento multiplicativo move na **direção da origem**. A combinação cria uma trajetória que converge para a interseção da linha de capacidade (x₁+x₂=C) com a linha de equidade (x₁=x₂).
+
+### Limites Práticos da Equidade
+
+<TCPFairnessLimits />
+
+A equidade do TCP tem duas grandes limitações práticas:
+
+**1. Fluxos UDP não controlados:**
+Aplicações que usam UDP (streaming, DNS, VOIP, QUIC antigo) não implementam controle de congestionamento. Um fluxo UDP agressivo pode consumir banda indiscriminadamente, espremendo os fluxos TCP que tentam ser "bons cidadãos" da rede.
+
+**2. Múltiplas conexões TCP paralelas:**
+Nada impede uma aplicação de abrir múltiplas conexões TCP simultaneamente. Cada conexão recebe sua "parcela justa" — portanto, uma aplicação com 9 conexões recebe 9 vezes mais banda que uma com 1 conexão. Isso é uma exploração intencional do mecanismo de equidade.
+
+<MarkdownTable
+  headers={["Cenário", "Divisão da Banda", "Equitativo?"]}
+  rows={[
+    ["K fluxos TCP iguais", "~R/K cada", "✅ Sim"],
+    ["1 fluxo UDP + K fluxos TCP", "UDP monopoliza; TCP se divide no restante", "❌ Não — UDP é agressivo"],
+    ["1 app com N conexões TCP vs 1 app com 1", "App A recebe N×(R/(N+1)); App B recebe R/(N+1)", "❌ Não — paralelo vence"],
+  ]}
+/>
+
+> O conceito de equidade do TCP é **intra-protocolo**: funciona bem entre fluxos TCP que se comportam corretamente. A equidade inter-protocolo e com aplicações não cooperativas é um problema em aberto da engenharia de redes.
+
+## QUIC — Quick UDP Internet Connections
+
+O TCP foi projetado nos anos 1970, muito antes da web, HTTPS e aplicações em tempo real existirem. Com o tempo, acumulou limitações estruturais difíceis de corrigir — o TCP está implementado no **kernel** do sistema operacional, e mudanças exigem atualização de todos os sistemas. O **QUIC** (RFC 9000, Google 2012 → IETF 2021) resolve essas limitações construindo um protocolo de transporte moderno **sobre UDP**, no espaço do usuário.
+
+### Arquitetura QUIC
+
+<QUICArchitecture />
+
+O QUIC integra em uma única camada o que o TCP/TLS/HTTP/2 fazem em três camadas separadas:
+
+<MarkdownTable
+  headers={["Funcionalidade", "TCP + TLS + HTTP/2", "QUIC"]}
+  rows={[
+    ["**Confiabilidade**", "TCP (camada separada)", "QUIC (integrado)"],
+    ["**Criptografia**", "TLS 1.3 (handshake separado)", "Integrada — todo o QUIC é criptografado"],
+    ["**Controle de congestionamento**", "TCP (kernel)", "QUIC (userspace — atualizável!)"],
+    ["**Multiplexação de streams**", "HTTP/2 (mas sofre HOL block no TCP)", "Nativo — streams independentes"],
+    ["**Handshake total**", "2.5 RTT (1.5 TCP + 1 TLS)", "1 RTT (ou 0-RTT para conexões repetidas)"],
+    ["**Deployability**", "Requer atualização de kernel", "Atualização de aplicação basta (userspace)"],
+  ]}
+/>
+
+> Um insight fundamental do QUIC: como roda **no espaço do usuário** (não no kernel), qualquer aplicação pode atualizar seu protocolo de transporte simplesmente atualizando sua biblioteca QUIC — sem necessidade de patch do sistema operacional.
+
+### Estabelecimento de Conexão em 1 RTT
+
+O TCP precisa de 1.5 RTT para estabelecer a conexão, mais 1 RTT para o TLS 1.3 — total de ~2.5 RTTs antes do primeiro dado útil trafegar. O QUIC integra o handshake de transporte e o handshake criptográfico em **uma única troca de mensagens**:
+
+<QUICHandshakeComparison />
+
+**QUIC 0-RTT** (para conexões repetidas): se o cliente já se conectou ao servidor antes, pode enviar dados **junto com o primeiro pacote** (0 RTTs de setup). O servidor usa parâmetros criptográficos cacheados da sessão anterior para decriptar imediatamente.
+
+<MarkdownTable
+  headers={["Fase", "TCP + TLS 1.3", "QUIC (primeira conexão)", "QUIC (0-RTT)"]}
+  rows={[
+    ["**Transporte**", "1.5 RTT (SYN/SYNACK/ACK)", "Integrado", "Integrado"],
+    ["**Criptografia**", "+1 RTT (TLS handshake)", "Integrado", "Integrado"],
+    ["**Primeiro dado**", "Após 2.5 RTT", "Após 1 RTT", "0 RTT (junto com handshake)"],
+  ]}
+/>
+
+### Resolução do Problema HOL Blocking
+
+O **HOL Blocking** (*Head-of-Line Blocking*) é um dos problemas mais sérios do TCP em aplicações web. O HTTP/2 foi criado para multiplexar múltiplas requisições sobre uma única conexão TCP, evitando abrir múltiplas conexões paralelas. Mas como o TCP garante **ordem estrita** dos bytes, a perda de **um único segmento TCP** bloqueia **todas** as streams HTTP/2 — mesmo aquelas que já receberam seus dados.
+
+<QUICHOLBlocking />
+
+O QUIC resolve o HOL blocking porque cada **stream QUIC é independente**: a perda de um pacote de uma stream afeta apenas aquela stream. As demais streams continuam sendo entregues à aplicação sem interrupção.
+
+<MarkdownTable
+  headers={["Situação", "HTTP/2 sobre TCP", "HTTP/3 sobre QUIC"]}
+  rows={[
+    ["**Perda de 1 pacote**", "Bloqueia TODAS as streams até retransmissão", "Bloqueia apenas a stream afetada"],
+    ["**Streams independentes**", "Não — compartilham o bytestream TCP", "Sim — cada stream tem seu próprio controle de sequência"],
+    ["**Entrega fora de ordem**", "Impossível — TCP garante ordem global", "Possível entre streams (mas ordenada dentro de cada stream)"],
+    ["**Impacto em página web típica**", "Alto — JS bloqueado esperando CSS perdida", "Baixo — recursos chegam independentemente"],
+  ]}
+/>
+
+### Onde o QUIC é Usado Hoje
+
+O QUIC já responde por uma fatia enorme do tráfego global da Internet:
+
+<MarkdownTable
+  headers={["Empresa / Produto", "Uso do QUIC"]}
+  rows={[
+    ["**Google**", "Tráfego interno Google; YouTube; Google Search — ~35% do tráfego web global usa QUIC"],
+    ["**Cloudflare**", "Toda CDN e DNS-over-QUIC; suporte em todos os servidores"],
+    ["**Meta (Facebook/Instagram)**", "Tráfego mobile — reduz latência em conexões celulares instáveis"],
+    ["**Apple**", "iOS/macOS suportam HTTP/3 nativamente desde iOS 15/macOS 12"],
+    ["**HTTP/3**", "QUIC é o transporte obrigatório do HTTP/3 — RFC 9114 (2022)"],
+  ]}
+/>
+
+## Resumo da Aula
+
+Neste capítulo, concluímos o módulo de Camada de Transporte com os mecanismos mais modernos:
+
+- **ECN:** Extensão que permite roteadores **marcar** pacotes (CE=1) em vez de descartá-los ao detectar congestionamento iminente. Emissores reagem imediatamente ao sinal ECE no ACK, sem precisar de timeout ou retransmissão.
+- **Equidade TCP:** O AIMD converge geometricamente para um compartilhamento justo entre fluxos TCP. Mas a equidade tem limites — fluxos UDP não controlados e múltiplas conexões TCP paralelas contornam o mecanismo.
+- **Limites práticos:** UDP é livre para usar toda a banda disponível; apps com N conexões TCP recebem N vezes mais banda. Equidade funciona entre fluxos TCP "cooperativos".
+- **QUIC:** Protocolo moderno sobre UDP que integra confiabilidade, criptografia e controle de congestionamento em uma camada. Reduz o handshake de 2.5 RTT para 1 RTT (ou 0-RTT).
+- **HOL Blocking:** O TCP bloqueia todos os streams HTTP/2 quando um pacote é perdido. O QUIC elimina esse problema com streams totalmente independentes.
+- **Adoção:** QUIC é o transporte do HTTP/3 (RFC 9114) e já representa ~35% do tráfego web global via Google, YouTube, Cloudflare e Meta.
+

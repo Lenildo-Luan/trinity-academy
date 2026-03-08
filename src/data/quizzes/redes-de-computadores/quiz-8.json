@@ -1,0 +1,109 @@
+{
+  "id": "quiz-8",
+  "title": "Quiz — ECN, Equidade e Evolução da Camada de Transporte",
+  "description": "Teste seus conhecimentos sobre ECN, equidade TCP e seus limites, QUIC, handshake de 1 RTT e resolução do problema HOL blocking.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual é a principal vantagem do ECN sobre o mecanismo tradicional de detecção de congestionamento por perda de pacotes?",
+      "alternatives": [
+        { "id": "a1", "text": "O ECN elimina completamente o congestionamento, pois roteadores com ECN nunca ficam sem capacidade", "isCorrect": false, "explanation": "O ECN não elimina congestionamento — ele apenas sinaliza mais cedo. Roteadores ainda podem congestionar; o ECN só avisa os emissores antes de precisar descartar." },
+        { "id": "a2", "text": "O ECN permite que roteadores marquem pacotes com sinal de congestionamento sem descartá-los, permitindo reação imediata sem perda de dados e sem retransmissão", "isCorrect": true, "explanation": "Correto! Em vez de descartar (o que desperdiça trabalho e exige retransmissão), o roteador seta CE=1 no IP. O receptor ecoa via ECE no ACK e o emissor reduz cwnd imediatamente — sem perda, sem retransmissão, com menor latência de reação." },
+        { "id": "a3", "text": "O ECN aumenta a capacidade do enlace ao comprimir cabeçalhos IP nos momentos de congestionamento", "isCorrect": false, "explanation": "ECN não comprime nada — usa bits que já existem no campo ToS do cabeçalho IP (bits 6 e 7). Não altera a capacidade do enlace." },
+        { "id": "a4", "text": "O ECN substitui completamente o controle de congestionamento TCP, tornando AIMD e CUBIC desnecessários", "isCorrect": false, "explanation": "O ECN é complementar ao controle de congestionamento, não um substituto. Quando o sinal ECE chega, o emissor ainda usa o algoritmo de controle (reduz cwnd como faria com 3 ACKs dup). AIMD e CUBIC continuam necessários." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "No mecanismo ECN, quando o receptor recebe um pacote com CE=1 no cabeçalho IP, o que ele faz?",
+      "alternatives": [
+        { "id": "a1", "text": "Descarta o pacote e envia um NAK pedindo retransmissão", "isCorrect": false, "explanation": "O receptor não descarta o pacote — o CE=1 apenas sinaliza congestionamento. O pacote foi entregue corretamente. O receptor o processa normalmente e ecoa o sinal no próximo ACK." },
+        { "id": "a2", "text": "Reduz imediatamente sua janela de recepção (rwnd) para zero para pausar o emissor", "isCorrect": false, "explanation": "O receptor não manipula o rwnd em resposta ao ECN. Sua ação é setar o bit ECE=1 no próximo ACK TCP enviado de volta ao emissor — é o emissor que reduz cwnd." },
+        { "id": "a3", "text": "Seta o bit ECE=1 no próximo ACK enviado ao emissor, que então reduz cwnd e responde com CWR=1", "isCorrect": true, "explanation": "Correto! O receptor ecoa o sinal via ECE (ECN-Echo) no ACK. O emissor recebe, reduz cwnd (como com 3 ACKs dup) e seta CWR=1 (Congestion Window Reduced) para informar o receptor que já tomou ação." },
+        { "id": "a4", "text": "Retransmite o pacote com os bits ECN limpos para que chegue sem sinal de congestionamento ao destinatário final", "isCorrect": false, "explanation": "O receptor não retransmite pacotes — apenas a aplicação e o TCP do lado emissor retransmitem. O receptor simplesmente entrega os dados e ecoa o sinal ECN no ACK." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Por que o algoritmo AIMD converge geometricamente para um ponto de compartilhamento justo entre dois fluxos TCP?",
+      "alternatives": [
+        { "id": "a1", "text": "Porque o TCP usa um árbitro central que distribui a banda igualmente entre todos os fluxos", "isCorrect": false, "explanation": "Não existe árbitro central no TCP — cada fluxo toma decisões individuais com base em seus próprios sinais. A equidade emerge de forma descentralizada do comportamento AIMD." },
+        { "id": "a2", "text": "Porque o aumento aditivo move ambos os fluxos na diagonal de 45° (mesma taxa) e o decremento multiplicativo move na direção da origem — combinados, convergem para a interseção da linha de capacidade e equidade", "isCorrect": true, "explanation": "Correto! Geometricamente: AI (+1 MSS/RTT para cada fluxo) = vetor diagonal de 45° em direção à linha de capacidade. MD (÷2 ambos) = vetor em direção à origem. A trajetória espiral converge para o ponto ótimo x₁=x₂=C/2." },
+        { "id": "a3", "text": "Porque o TCP limita explicitamente cada fluxo a não usar mais que 1/K da capacidade, onde K é o número de fluxos ativos", "isCorrect": false, "explanation": "O TCP não tem conhecimento do número de fluxos ou da capacidade total do enlace. Não há limite explícito — a equidade emerge implicitamente do mecanismo AIMD." },
+        { "id": "a4", "text": "Porque o decremento multiplicativo reduz o fluxo maior proporcionalmente mais que o menor, forçando convergência", "isCorrect": false, "explanation": "O MD reduz ambos os fluxos pela mesma proporção (÷2). Um fluxo com cwnd=40 vai para 20; um com cwnd=10 vai para 5. Ambos perdem 50% — não há tratamento diferenciado por tamanho. A equidade vem da trajetória geométrica combinada, não de um tratamento assimétrico." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Uma aplicação abre 9 conexões TCP paralelas ao mesmo servidor, enquanto outra aplicação usa apenas 1 conexão. Qual é a distribuição aproximada da banda?",
+      "alternatives": [
+        { "id": "a1", "text": "50% para cada aplicação, pois o TCP garante equidade entre aplicações", "isCorrect": false, "explanation": "O TCP garante equidade entre conexões, não entre aplicações. Cada conexão recebe ~1/10 da banda — App A com 9 conexões recebe 9/10, App B com 1 conexão recebe 1/10." },
+        { "id": "a2", "text": "App A: ~90%, App B: ~10% — cada conexão recebe 1/10, e App A tem 9 delas", "isCorrect": true, "explanation": "Correto! O TCP é justo por conexão. Com 10 conexões total (9+1), cada recebe ~1/10 da capacidade. App A soma 9 conexões = ~90%; App B com 1 = ~10%. Isso é uma forma de contornar a equidade TCP — browsers modernos historicamente usavam 6-8 conexões paralelas." },
+        { "id": "a3", "text": "App A: ~9%, App B: ~91% — o TCP penaliza aplicações que abrem múltiplas conexões", "isCorrect": false, "explanation": "O TCP não penaliza conexões paralelas — cada uma é tratada independentemente como qualquer outra conexão. Não há mecanismo que detecte ou puna o comportamento de múltiplas conexões." },
+        { "id": "a4", "text": "Igual para ambas — o TCP detecta que são do mesmo host e limita a banda total por host", "isCorrect": false, "explanation": "O TCP padrão não tem mecanismo de identificação ou limite por host. Cada conexão TCP é tratada de forma independente, sem conhecimento das outras conexões do mesmo host." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Por que o QUIC foi construído sobre UDP em vez de TCP?",
+      "alternatives": [
+        { "id": "a1", "text": "Porque o UDP tem menor latência que o TCP por usar cabeçalhos menores (8 bytes vs 20 bytes)", "isCorrect": false, "explanation": "A diferença de 12 bytes no cabeçalho não é a razão principal. O QUIC sobre UDP implementa seus próprios cabeçalhos maiores — o foco não é economizar bytes de cabeçalho." },
+        { "id": "a2", "text": "Porque o UDP não implementa nenhum mecanismo de transporte, dando ao QUIC liberdade total para implementar os seus próprios no espaço do usuário — sem precisar alterar o kernel do OS", "isCorrect": true, "explanation": "Correto! TCP está no kernel — mudanças exigem atualizar sistemas operacionais de bilhões de dispositivos (lento, difícil). UDP é apenas um socket simples que entrega datagramas. O QUIC implementa tudo (confiabilidade, criptografia, controle de congestionamento) em userspace como biblioteca — atualizável com qualquer app." },
+        { "id": "a3", "text": "Porque o UDP suporta multicast e o QUIC precisa enviar dados para múltiplos clientes simultaneamente", "isCorrect": false, "explanation": "O QUIC não usa multicast — é um protocolo ponto-a-ponto como o TCP. A razão de usar UDP é a flexibilidade no espaço do usuário, não suporte a multicast." },
+        { "id": "a4", "text": "Porque o TCP foi descontinuado pela IETF e substituído pelo UDP como protocolo de transporte padrão", "isCorrect": false, "explanation": "O TCP não foi descontinuado — continua sendo o protocolo de transporte mais usado da Internet. O QUIC complementa, não substitui, o TCP." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual é o tempo total de handshake para estabelecer uma nova conexão QUIC comparado ao TCP + TLS 1.3?",
+      "alternatives": [
+        { "id": "a1", "text": "QUIC: 3 RTTs | TCP+TLS: 1 RTT — QUIC é mais lento por integrar mais funcionalidades", "isCorrect": false, "explanation": "É o contrário: QUIC é mais rápido. O QUIC integra transporte + criptografia em 1 RTT. TCP+TLS separados precisam de 1.5 RTT (TCP) + 1 RTT (TLS) ≈ 2.5 RTTs." },
+        { "id": "a2", "text": "QUIC: 1 RTT | TCP+TLS: ~2.5 RTTs — QUIC integra handshake de transporte e criptografia em uma única troca", "isCorrect": true, "explanation": "Correto! TCP SYN/SYNACK/ACK = 1.5 RTT + TLS 1.3 = +1 RTT = ~2.5 RTTs no total antes do primeiro dado. O QUIC combina tudo em 1 RTT (Initial + Handshake + primeiros dados). Para conexões repetidas: QUIC 0-RTT envia dados imediatamente." },
+        { "id": "a3", "text": "QUIC: 2 RTTs | TCP+TLS: 2 RTTs — ambos têm o mesmo desempenho de estabelecimento", "isCorrect": false, "explanation": "Não são iguais. O QUIC precisa de ~1 RTT; TCP+TLS 1.3 precisa de ~2.5 RTTs. Essa diferença é significativa em conexões móveis com RTT de 50-100ms." },
+        { "id": "a4", "text": "QUIC: 0 RTTs sempre | TCP+TLS: 2 RTTs — QUIC nunca precisa de handshake por usar UDP", "isCorrect": false, "explanation": "O 0-RTT do QUIC só se aplica a reconexões com parâmetros criptográficos cacheados, não a todas as conexões. Uma nova conexão QUIC precisa de 1 RTT. Além disso, ser sobre UDP não elimina o handshake — ele é necessário para negociar criptografia." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "O que é o problema de HOL Blocking no contexto do HTTP/2 sobre TCP?",
+      "alternatives": [
+        { "id": "a1", "text": "O cabeçalho do primeiro pacote HTTP/2 é muito grande, atrasando os pacotes seguintes na fila do roteador", "isCorrect": false, "explanation": "HOL Blocking (Head-of-Line Blocking) não se refere ao tamanho do cabeçalho. Refere-se ao bloqueio causado pela ordenação estrita do TCP quando um pacote é perdido." },
+        { "id": "a2", "text": "A perda de um único segmento TCP bloqueia a entrega de TODOS os streams HTTP/2 multiplexados, pois o TCP garante ordem estrita dos bytes", "isCorrect": true, "explanation": "Correto! O HTTP/2 multiplexa várias streams sobre uma única conexão TCP. Se um pacote TCP é perdido, o TCP não entrega nada ao HTTP/2 até que aquele pacote seja retransmitido e recebido — mesmo que os pacotes subsequentes já tenham chegado. Streams que já receberam todos os seus dados ficam bloqueadas esperando uma stream não relacionada." },
+        { "id": "a3", "text": "O primeiro servidor a receber a requisição HTTP/2 bloqueia todos os outros servidores de responder simultaneamente", "isCorrect": false, "explanation": "HOL Blocking é um problema de protocolo de transporte (TCP), não de coordenação entre servidores. Refere-se ao bloqueio de streams dentro de uma única conexão TCP." },
+        { "id": "a4", "text": "O HTTP/2 só consegue processar uma requisição por vez, enfileirando as demais em sequência linear", "isCorrect": false, "explanation": "O HTTP/2 foi criado exatamente para resolver a serialização do HTTP/1.1, suportando múltiplas requisições em paralelo na mesma conexão. O problema é que o TCP subjacente bloqueia quando há perda." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Como o QUIC resolve o problema de HOL Blocking que o HTTP/2 sobre TCP sofre?",
+      "alternatives": [
+        { "id": "a1", "text": "O QUIC usa múltiplas conexões UDP paralelas, uma por stream, eliminando o compartilhamento de estado", "isCorrect": false, "explanation": "Múltiplas conexões UDP paralelas seria a abordagem antiga (como HTTP/1.1 fazia com TCP). O QUIC usa uma única conexão com múltiplas streams lógicas independentes — mais eficiente." },
+        { "id": "a2", "text": "O QUIC implementa streams totalmente independentes: a perda de um pacote de uma stream não bloqueia as outras streams, pois cada uma tem seu próprio controle de sequência", "isCorrect": true, "explanation": "Correto! No QUIC, cada stream tem numeração e controle de sequência independentes. A perda de um pacote afeta apenas a stream que o contém — as demais streams continuam sendo entregues à aplicação sem interrupção. Isso elimina o HOL blocking do TCP enquanto mantém entrega ordenada dentro de cada stream." },
+        { "id": "a3", "text": "O QUIC elimina a garantia de entrega ordenada — os dados chegam fora de ordem e a aplicação reordena", "isCorrect": false, "explanation": "O QUIC mantém entrega ordenada dentro de cada stream. A diferença é que streams diferentes são independentes — a desordem/perda em uma não afeta a entrega das outras." },
+        { "id": "a4", "text": "O QUIC usa retransmissão preventiva — envia cada pacote duas vezes por caminhos diferentes para eliminar perdas", "isCorrect": false, "explanation": "Retransmissão preventiva (FEC — Forward Error Correction) não é a solução do QUIC para HOL blocking. O QUIC usa streams independentes e retransmite apenas quando há perda, como o TCP." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Qual das afirmações sobre o QUIC 0-RTT é VERDADEIRA?",
+      "alternatives": [
+        { "id": "a1", "text": "O 0-RTT elimina completamente o handshake — dados são enviados sem nenhuma negociação de segurança", "isCorrect": false, "explanation": "O 0-RTT não elimina segurança — usa parâmetros criptográficos cacheados de uma sessão anterior. Os dados ainda são criptografados. A limitação é que o 0-RTT não protege contra ataques de replay." },
+        { "id": "a2", "text": "O 0-RTT permite ao cliente enviar dados junto com o primeiro pacote usando parâmetros criptográficos de sessões anteriores, sem esperar resposta do servidor", "isCorrect": true, "explanation": "Correto! O QUIC armazena parâmetros de sessão em cache. Na reconexão, o cliente usa esses parâmetros para criptografar os primeiros dados imediatamente (0 RTTs de espera). O tradeoff é vulnerabilidade a ataques de replay — dados 0-RTT podem ser capturados e reenviados." },
+        { "id": "a3", "text": "O 0-RTT funciona em todas as conexões QUIC, incluindo a primeira vez que o cliente acessa um servidor", "isCorrect": false, "explanation": "O 0-RTT requer que o cliente já tenha dados de sessão anteriores. Na primeira conexão com um servidor, sempre é necessário pelo menos 1 RTT. O 0-RTT se aplica apenas a reconexões." },
+        { "id": "a4", "text": "O 0-RTT é proibido pelo IETF por ser inseguro e não deve ser implementado em produção", "isCorrect": false, "explanation": "O 0-RTT é padronizado na RFC 9000 e amplamente usado em produção (Google, Cloudflare). Tem restrições (dados 0-RTT devem ser idempotentes devido ao risco de replay), mas não é proibido." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Por que o fato do QUIC rodar no espaço do usuário (userspace) é considerado uma vantagem de deployability em relação ao TCP?",
+      "alternatives": [
+        { "id": "a1", "text": "Porque código userspace é sempre mais rápido que código no kernel, melhorando o desempenho automaticamente", "isCorrect": false, "explanation": "Código userspace geralmente é mais lento que código kernel por causa de overhead de chamadas de sistema. A vantagem do userspace no QUIC é deployability, não desempenho." },
+        { "id": "a2", "text": "Porque melhorias no protocolo QUIC podem ser distribuídas atualizando apenas a biblioteca da aplicação, sem precisar de patches de kernel do sistema operacional em todos os dispositivos", "isCorrect": true, "explanation": "Correto! O TCP está no kernel — uma mudança no TCP exige que o Google, a Microsoft, a Apple e todas as distribuições Linux lancem patches e que bilhões de dispositivos atualizem o OS (processo que leva anos). O QUIC como biblioteca de aplicação: o Google atualiza sua biblioteca e todos os clientes Chrome recebem automaticamente via update do browser." },
+        { "id": "a3", "text": "Porque o userspace permite que o QUIC acesse diretamente o hardware de rede, bypassando o kernel completamente", "isCorrect": false, "explanation": "Acesso direto ao hardware (DPDK, RDMA) é uma técnica diferente e mais radical. O QUIC sobre UDP ainda usa o kernel para enviar/receber datagramas — apenas a lógica de protocolo fica em userspace." },
+        { "id": "a4", "text": "Porque código userspace não tem limites de buffer, eliminando perdas por overflow de fila", "isCorrect": false, "explanation": "Buffers userspace também têm limites e podem causar perdas. A vantagem de deployability do QUIC é sobre atualizabilidade do protocolo, não sobre eliminação de limitações de buffer." }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,109 @@
+{
+  "id": "quiz-7",
+  "title": "Quiz — Controle de Congestionamento TCP",
+  "description": "Teste seus conhecimentos sobre os custos do congestionamento, os três cenários progressivos, AIMD, Slow Start, Prevenção de Congestionamento, Recuperação Rápida, TCP CUBIC e BBR.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual é a principal diferença entre controle de fluxo e controle de congestionamento no TCP?",
+      "alternatives": [
+        { "id": "a1", "text": "O controle de fluxo usa o campo rwnd; o controle de congestionamento usa o campo cwnd — ambos protegem o receptor", "isCorrect": false, "explanation": "O controle de fluxo protege o receptor (usando rwnd), mas o controle de congestionamento protege a rede, não o receptor. cwnd e rwnd têm funções distintas." },
+        { "id": "a2", "text": "Controle de fluxo protege o receptor de ser sobrecarregado; controle de congestionamento protege a rede de ser sobrecarregada por múltiplos emissores", "isCorrect": true, "explanation": "Correto! Controle de fluxo: receptor anuncia rwnd → emissor limita envio para não transbordar o buffer do receptor. Controle de congestionamento: emissor ajusta cwnd com base em sinais de perda/atraso para não sobrecarregar a rede (roteadores intermediários)." },
+        { "id": "a3", "text": "Controle de fluxo é implementado na camada de rede; controle de congestionamento é implementado na camada de transporte", "isCorrect": false, "explanation": "Ambos são mecanismos da camada de transporte (TCP). Nenhum deles é implementado na camada de rede — o IP é best-effort e não realiza controle de fluxo ou congestionamento." },
+        { "id": "a4", "text": "São sinônimos — ambos referem-se ao mesmo mecanismo de limitação da taxa de envio", "isCorrect": false, "explanation": "São mecanismos distintos. O controle de fluxo usa o rwnd anunciado pelo receptor; o controle de congestionamento usa o cwnd estimado pelo emissor com base em perdas e atrasos." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "No cenário 2 de congestionamento (buffer finito com retransmissões), por que a vazão útil é menor do que a taxa oferecida pelo emissor?",
+      "alternatives": [
+        { "id": "a1", "text": "Porque o receptor descarta pacotes que chegam fora de ordem, forçando mais retransmissões", "isCorrect": false, "explanation": "O descarte por buffer cheio do roteador é o problema, não o descarte pelo receptor. Além disso, o TCP mantém pacotes fora de ordem no buffer — não os descarta imediatamente." },
+        { "id": "a2", "text": "Porque retransmissões consomem parte da banda — o enlace transporta tanto dados novos quanto cópias de pacotes já enviados", "isCorrect": true, "explanation": "Correto! Com buffer finito, pacotes são descartados. O emissor retransmite, mas a retransmissão consome banda do enlace. Parte da capacidade é desperdiçada em cópias — a vazão útil (novos dados entregues) é menor que a banda total usada. Com timeouts prematuros, retransmissões desnecessárias pioram ainda mais." },
+        { "id": "a3", "text": "Porque o buffer finito limita o throughput máximo ao tamanho do buffer dividido pelo RTT", "isCorrect": false, "explanation": "O tamanho do buffer não divide o throughput diretamente por RTT dessa forma. O problema é o descarte e as retransmissões resultantes, não uma divisão aritmética." },
+        { "id": "a4", "text": "Porque pacotes retransmitidos ocupam dois slots no buffer do receptor simultaneamente", "isCorrect": false, "explanation": "O receptor não armazena duplicatas — quando chega um pacote retransmitido de um pacote já recebido, ele é descartado. O problema de vazão está na retransmissão ocupando banda no enlace, não no buffer do receptor." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "O que caracteriza o algoritmo AIMD (Additive Increase, Multiplicative Decrease)?",
+      "alternatives": [
+        { "id": "a1", "text": "Aumenta cwnd multiplicativamente quando há banda disponível e diminui aditivamente ao detectar congestionamento", "isCorrect": false, "explanation": "É o contrário: o aumento é aditivo (lento e linear) e a diminuição é multiplicativa (rápida, corta pela metade). O AIMD evita reagir de forma excessiva durante o crescimento." },
+        { "id": "a2", "text": "Aumenta cwnd em 1 MSS por RTT enquanto não há congestionamento e corta cwnd pela metade ao detectar perda", "isCorrect": true, "explanation": "Correto! AI = +1 MSS por RTT (crescimento linear, sondagem de banda). MD = cwnd/2 ao detectar perda (recuo rápido). Isso produz o padrão dente-de-serra e garante que o TCP converge para um uso justo e eficiente da rede." },
+        { "id": "a3", "text": "Aumenta cwnd exponencialmente para atingir capacidade máxima rapidamente, depois mantém constante", "isCorrect": false, "explanation": "O crescimento exponencial é a fase Slow Start, não o AIMD em si. A fase de AIMD (Prevenção de Congestionamento) usa crescimento linear, não exponencial." },
+        { "id": "a4", "text": "É usado apenas no início da conexão para determinar a capacidade do enlace", "isCorrect": false, "explanation": "O AIMD é o comportamento principal do TCP durante toda a vida da conexão, não apenas no início. O Slow Start (início) é um mecanismo separado." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Por que a fase inicial do TCP se chama 'Slow Start' se o crescimento de cwnd é exponencial?",
+      "alternatives": [
+        { "id": "a1", "text": "Porque o crescimento exponencial é mais lento que o crescimento linear do AIMD clássico", "isCorrect": false, "explanation": "Exponencial é mais rápido que linear, não mais lento. O nome não tem a ver com comparação entre crescimentos." },
+        { "id": "a2", "text": "Porque começa com cwnd = 1 MSS — uma taxa de envio muito baixa comparada à capacidade do enlace, mesmo crescendo rapidamente", "isCorrect": true, "explanation": "Correto! 'Slow' refere-se ao ponto de partida (1 MSS), não à taxa de crescimento. Comparado ao ideal (usar toda a banda imediatamente), começar em 1 MSS e dobrar a cada RTT ainda é 'lento' para alcançar a capacidade total do enlace. O nome é histórico e pode ser um pouco enganoso." },
+        { "id": "a3", "text": "Porque é executado mais devagar que as outras fases para proteger roteadores com buffer pequeno", "isCorrect": false, "explanation": "A velocidade de execução do código não é a razão. O Slow Start cresce na mesma cadência (por RTT) que as outras fases. O 'slow' refere-se ao tamanho inicial de cwnd." },
+        { "id": "a4", "text": "Porque foi projetado para redes lentas e não funciona bem em redes de alta largura de banda", "isCorrect": false, "explanation": "O Slow Start é universal — funciona em qualquer rede. A limitação em redes de alta largura de banda é do AIMD linear (Prevenção de Congestionamento), não do Slow Start." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Uma conexão TCP tem cwnd = 20 MSS e ssthresh = 10 MSS. Chegam 3 ACKs duplicados. O que acontece?",
+      "alternatives": [
+        { "id": "a1", "text": "ssthresh = 5, cwnd = 1 (retorna ao Slow Start como em caso de timeout)", "isCorrect": false, "explanation": "3 ACKs duplicados ativam o Fast Retransmit/Fast Recovery, não o Slow Start. O retorno ao Slow Start (cwnd=1) só ocorre com timeout, que indica perda mais severa." },
+        { "id": "a2", "text": "ssthresh = 10, cwnd = 10 (o ssthresh não muda pois já está correto)", "isCorrect": false, "explanation": "O ssthresh é recalculado como cwnd/2 no momento da perda. Com cwnd=20, o novo ssthresh = 20/2 = 10. Coincidentemente igual ao valor anterior, mas o cálculo ainda acontece." },
+        { "id": "a3", "text": "ssthresh = 10, cwnd = 13 (ssthresh=cwnd/2=10, depois cwnd=ssthresh+3=13, entra em Fast Recovery)", "isCorrect": true, "explanation": "Correto! 3 ACKs duplicados → Fast Retransmit: ssthresh = cwnd/2 = 10, cwnd = ssthresh + 3 = 13. O TCP entra em Fast Recovery: retransmite o pacote perdido e incrementa cwnd por ACK duplicado adicional, até o ACK do pacote retransmitido." },
+        { "id": "a4", "text": "ssthresh = 20, cwnd = 20 (nada muda, ACKs duplicados são ignorados em Prevenção de Congestionamento)", "isCorrect": false, "explanation": "3 ACKs duplicados são um sinal importante de perda — o TCP nunca os ignora. Eles ativam Fast Retransmit mesmo durante a Prevenção de Congestionamento." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual é a principal diferença entre timeout e 3 ACKs duplicados como sinais de perda no TCP?",
+      "alternatives": [
+        { "id": "a1", "text": "Ambos causam o mesmo comportamento — a diferença é apenas na velocidade de detecção", "isCorrect": false, "explanation": "A diferença é fundamental no comportamento: timeout → cwnd=1, Slow Start (perda severa); 3 ACKs dup → Fast Recovery, cwnd=ssthresh (perda isolada, rede ainda funcional)." },
+        { "id": "a2", "text": "3 ACKs dup são mais confiáveis que timeout; o TCP prefere esperar sempre por 3 ACKs dup antes de retransmitir", "isCorrect": false, "explanation": "O TCP não 'prefere' um sobre o outro — usa o que acontecer primeiro. Se o timeout expirar antes de receber 3 ACKs dup, ele age pelo timeout." },
+        { "id": "a3", "text": "Timeout indica perda severa (rede possivelmente congestionada) → cwnd=1 e Slow Start; 3 ACKs dup indicam perda isolada (segmentos posteriores chegaram) → Fast Recovery com cwnd=ssthresh", "isCorrect": true, "explanation": "Correto! Se chegaram 3 ACKs dup, segmentos posteriores ao perdido foram entregues — a rede está funcionando. É uma perda isolada → recuperação suave (Fast Recovery). Timeout indica que nada chegou após o pacote enviado — congestionamento severo → resposta drástica (Slow Start)." },
+        { "id": "a4", "text": "Timeout só ocorre no Slow Start; 3 ACKs dup só ocorrem na Prevenção de Congestionamento", "isCorrect": false, "explanation": "Tanto timeout quanto 3 ACKs dup podem ocorrer em qualquer fase. Ambos os mecanismos transitam para estados apropriados independentemente da fase atual." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Por que o TCP CUBIC foi criado para substituir o TCP Reno em redes modernas?",
+      "alternatives": [
+        { "id": "a1", "text": "Porque o TCP Reno não suporta o protocolo IPv6", "isCorrect": false, "explanation": "O TCP Reno funciona perfeitamente com IPv6. A razão do CUBIC não tem relação com a versão do IP." },
+        { "id": "a2", "text": "Porque o crescimento linear do Reno é muito lento para recuperar a janela em redes de alta largura de banda e alto RTT (links intercontinentais, fibra óptica)", "isCorrect": true, "explanation": "Correto! Em redes de alta largura de banda (10Gbps+) e alto RTT (100ms+), o produto banda×atraso (BDP) é enorme. O Reno cresce +1 MSS por RTT — pode demorar minutos para recuperar a janela após uma perda. O CUBIC usa função cúbica, recuperando rapidamente ao Wmax anterior." },
+        { "id": "a3", "text": "Porque o TCP Reno causa mais perda de pacotes por usar janelas maiores", "isCorrect": false, "explanation": "O Reno não causa mais perda por ter janelas maiores. O problema é o oposto: o Reno usa janelas menores do que o necessário em redes rápidas, subutilizando a capacidade disponível." },
+        { "id": "a4", "text": "Porque o CUBIC elimina completamente o mecanismo de Slow Start, tornando as conexões mais rápidas", "isCorrect": false, "explanation": "O CUBIC mantém o Slow Start. O que ele substitui é o crescimento linear da fase de Prevenção de Congestionamento por uma função cúbica." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "O BBR do Google usa qual estratégia fundamental diferente do TCP Reno e CUBIC?",
+      "alternatives": [
+        { "id": "a1", "text": "Usa perda de pacotes como sinal de congestionamento, mas reage mais rapidamente que o Reno", "isCorrect": false, "explanation": "Reatividade mais rápida à perda ainda seria um controle baseado em perda. A inovação do BBR é exatamente não depender de perda como sinal primário." },
+        { "id": "a2", "text": "Usa ACKs seletivos (SACK) em vez de ACKs cumulativos para detectar congestionamento com mais precisão", "isCorrect": false, "explanation": "SACK é um mecanismo de recuperação de perdas, não de controle de congestionamento. O BBR inova no modelo de rede que usa para estimar a capacidade disponível." },
+        { "id": "a3", "text": "Mede a largura de banda máxima disponível (BtlBw) e o RTT mínimo (RTprop), operando no ponto BDP ótimo sem depender de perdas como sinal de congestionamento", "isCorrect": true, "explanation": "Correto! O BBR é baseado em modelo: mede BtlBw (bandwidth máximo observado) e RTprop (RTT mínimo propagação). Mantém cwnd ≈ BDP = BtlBw × RTprop. Isso evita encher buffers e reduz atraso. Funciona melhor em redes com perda aleatória (wireless) onde o Reno/CUBIC interpretariam ruído como congestionamento." },
+        { "id": "a4", "text": "Delega o controle de congestionamento aos roteadores, que enviam feedback explícito para o emissor", "isCorrect": false, "explanation": "Isso seria controle de congestionamento assistido pela rede (como ECN). O BBR é fim-a-fim — o emissor infere tudo sem ajuda explícita dos roteadores." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Em uma conexão TCP com ssthresh = 8 MSS, qual é a sequência correta de cwnd nos primeiros 6 RTTs (começando em cwnd = 1)?",
+      "alternatives": [
+        { "id": "a1", "text": "1 → 2 → 4 → 8 → 16 → 32 (crescimento exponencial sempre)", "isCorrect": false, "explanation": "O crescimento exponencial para quando cwnd atinge ssthresh. Após ssthresh = 8, o TCP muda para crescimento linear (+1 MSS/RTT)." },
+        { "id": "a2", "text": "1 → 2 → 3 → 4 → 5 → 6 (crescimento linear desde o início)", "isCorrect": false, "explanation": "O crescimento linear (+1 MSS/RTT) é da fase de Prevenção de Congestionamento. O Slow Start (cwnd < ssthresh) cresce exponencialmente." },
+        { "id": "a3", "text": "1 → 2 → 4 → 8 → 9 → 10 (exponencial até ssthresh=8, depois linear)", "isCorrect": true, "explanation": "Correto! RTT 1: cwnd=1. RTT 2: cwnd=2 (SS). RTT 3: cwnd=4 (SS). RTT 4: cwnd=8 = ssthresh → transição para CA. RTT 5: cwnd=9 (+1, CA). RTT 6: cwnd=10 (+1, CA). O Slow Start cresce exponencialmente até ssthresh, depois a Prevenção de Congestionamento cresce linearmente." },
+        { "id": "a4", "text": "1 → 2 → 4 → 8 → 8 → 8 (congela em ssthresh até detectar perda)", "isCorrect": false, "explanation": "O TCP não congela em ssthresh — ele transiciona para Prevenção de Congestionamento e continua crescendo linearmente (+1 MSS/RTT). O ssthresh é um limiar de transição, não um teto." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Qual das afirmações sobre o controle de congestionamento fim-a-fim é VERDADEIRA?",
+      "alternatives": [
+        { "id": "a1", "text": "Os roteadores enviam mensagens explícitas de congestionamento para os hosts ajustarem suas taxas", "isCorrect": false, "explanation": "Isso descreve o controle assistido pela rede (como ECN), não o fim-a-fim. No controle fim-a-fim, os hosts inferem tudo sem feedback explícito dos roteadores." },
+        { "id": "a2", "text": "O emissor infere congestionamento a partir de sinais indiretos como perda de pacotes e aumento do RTT, sem informação explícita da rede", "isCorrect": true, "explanation": "Correto! No controle fim-a-fim, os hosts observam sintomas: perda (timeout, ACKs dup) e atraso crescente (RTT aumentando). A rede (roteadores) não fornece feedback direto. Isso é o que o TCP Reno, CUBIC e BBR fazem — inferência a partir de observações." },
+        { "id": "a3", "text": "É menos eficiente que o controle assistido pela rede e será substituído pelo ECN em breve", "isCorrect": false, "explanation": "O controle fim-a-fim funciona muito bem e não será abandonado. O ECN é uma extensão que adiciona sinalização explícita opcional, mas o controle fim-a-fim continua sendo o padrão universal da Internet." },
+        { "id": "a4", "text": "Requer que todos os roteadores na rota implementem o mesmo algoritmo de controle de congestionamento", "isCorrect": false, "explanation": "No controle fim-a-fim, os roteadores não precisam implementar nenhum algoritmo específico — apenas encaminhar pacotes e possivelmente descartar quando o buffer enche. O algoritmo fica inteiramente nos hosts." }
+      ]
+    }
+  ]
+}
+

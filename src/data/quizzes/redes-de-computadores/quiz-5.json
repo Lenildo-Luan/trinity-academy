@@ -1,0 +1,109 @@
+{
+  "id": "quiz-5",
+  "title": "Quiz — Protocolo TCP: Fundamentos",
+  "description": "Teste seus conhecimentos sobre as características do TCP, estrutura do segmento, números de sequência e ACK cumulativo, estimativa de RTT com EWMA, timeout adaptativo e cenários de retransmissão.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual das alternativas descreve corretamente as características fundamentais do TCP?",
+      "alternatives": [
+        { "id": "a1", "text": "TCP é ponto-a-ponto, full-duplex, orientado a conexão, com fluxo de bytes confiável e ordenado", "isCorrect": true, "explanation": "Correto! O TCP conecta exatamente um emissor e um receptor (ponto-a-ponto), permite fluxo de dados em ambas as direções simultaneamente (full-duplex), exige handshake prévio (orientado a conexão) e garante entrega confiável e ordenada de bytes." },
+        { "id": "a2", "text": "TCP é multicast, half-duplex, sem conexão, com entrega de melhor esforço", "isCorrect": false, "explanation": "Essas são características opostas ao TCP. Multicast, half-duplex e sem conexão descrevem outros protocolos. O UDP é que oferece melhor esforço." },
+        { "id": "a3", "text": "TCP é ponto-a-ponto, half-duplex, orientado a conexão, com fluxo de datagramas independentes", "isCorrect": false, "explanation": "O TCP é full-duplex, não half-duplex. Além disso, o TCP trata os dados como um fluxo contínuo de bytes, não como datagramas independentes — essa é uma característica do UDP." },
+        { "id": "a4", "text": "TCP é broadcast, full-duplex, sem conexão, com fluxo de bytes não ordenado", "isCorrect": false, "explanation": "O TCP não suporta broadcast, é orientado a conexão (exige handshake) e garante que os bytes cheguem em ordem. Nenhuma dessas descrições se aplica ao TCP." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Qual é a relação entre MSS (Maximum Segment Size) e MTU (Maximum Transmission Unit)?",
+      "alternatives": [
+        { "id": "a1", "text": "MSS = MTU, pois ambos representam o mesmo conceito de tamanho máximo", "isCorrect": false, "explanation": "MSS e MTU são conceitos diferentes. O MTU inclui todos os cabeçalhos (IP + TCP + dados), enquanto o MSS se refere apenas à quantidade de dados da aplicação no segmento." },
+        { "id": "a2", "text": "MSS = MTU + Cabeçalho IP + Cabeçalho TCP, pois o MSS é sempre maior", "isCorrect": false, "explanation": "É o contrário: o MSS é sempre menor que o MTU, pois exclui os cabeçalhos. A fórmula correta é MSS = MTU − Cabeçalhos." },
+        { "id": "a3", "text": "MSS = MTU − Cabeçalho IP − Cabeçalho TCP, resultando tipicamente em 1460 bytes em Ethernet", "isCorrect": true, "explanation": "Correto! Em Ethernet (MTU = 1500 bytes), MSS = 1500 − 20 (IP) − 20 (TCP) = 1460 bytes. O MSS limita apenas os dados da aplicação no segmento, excluindo os cabeçalhos de transporte e rede." },
+        { "id": "a4", "text": "MSS é definido pelo sistema operacional e não tem relação com o MTU da rede", "isCorrect": false, "explanation": "O MSS é diretamente derivado do MTU. Ele é calculado subtraindo o tamanho dos cabeçalhos IP e TCP do MTU do enlace." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "No TCP, o que representa o número de sequência de um segmento?",
+      "alternatives": [
+        { "id": "a1", "text": "A posição ordinal do segmento na sequência de envio (1º, 2º, 3º segmento, etc.)", "isCorrect": false, "explanation": "O TCP não numera segmentos ordinalmente. Ele numera bytes — o número de sequência é o índice do primeiro byte de dados no fluxo." },
+        { "id": "a2", "text": "O número do último byte de dados do segmento no fluxo de bytes", "isCorrect": false, "explanation": "O número de sequência refere-se ao primeiro byte, não ao último. Por exemplo, um segmento com Seq=1000 e 500 bytes de dados contém os bytes 1000–1499." },
+        { "id": "a3", "text": "A quantidade total de bytes já enviados pela conexão", "isCorrect": false, "explanation": "O número de sequência não é um contador cumulativo de bytes enviados. É o índice do primeiro byte de dados daquele segmento específico no fluxo." },
+        { "id": "a4", "text": "O número do primeiro byte de dados do segmento dentro do fluxo de bytes", "isCorrect": true, "explanation": "Correto! O TCP trata os dados como um fluxo de bytes numerados. O número de sequência de um segmento é o índice do primeiro byte de dados que ele carrega. Por exemplo, se o MSS é 1000 bytes, o primeiro segmento tem Seq=0 (bytes 0–999), o segundo Seq=1000 (bytes 1000–1999), etc." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "O que significa um ACK com valor 500 no TCP?",
+      "alternatives": [
+        { "id": "a1", "text": "O receptor confirma ter recebido o segmento com número de sequência 500", "isCorrect": false, "explanation": "O ACK no TCP não confirma um segmento específico pelo Seq#. Ele indica o próximo byte esperado — ACK=500 significa que os bytes 0–499 foram recebidos." },
+        { "id": "a2", "text": "O receptor confirma ter recebido exatamente 500 bytes no total", "isCorrect": false, "explanation": "O ACK não indica a quantidade total de bytes recebidos. Ele indica o próximo byte esperado — o ponto até onde todos os bytes contíguos foram recebidos." },
+        { "id": "a3", "text": "O receptor recebeu corretamente todos os bytes até o byte 499 e espera o byte 500 como próximo", "isCorrect": true, "explanation": "Correto! O ACK cumulativo do TCP indica o próximo byte que o receptor espera. ACK=500 significa: 'recebi todos os bytes de 0 a 499 em ordem, e o próximo que espero é o byte 500'. Mesmo que bytes posteriores (ex: 600–699) tenham chegado, o ACK não avança se há lacuna." },
+        { "id": "a4", "text": "O receptor recebeu todos os bytes até o byte 500, inclusive", "isCorrect": false, "explanation": "Quase! Mas o byte 500 ainda não foi recebido — ACK=500 significa que o receptor espera o byte 500. Os bytes confirmados vão de 0 a 499 (exclusivo do valor do ACK)." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Por que o TCP usa Média Móvel Exponencial Ponderada (EWMA) para estimar o RTT, em vez de simplesmente usar a última amostra medida?",
+      "alternatives": [
+        { "id": "a1", "text": "Porque a última amostra é sempre imprecisa e deve ser descartada", "isCorrect": false, "explanation": "A última amostra não é descartada — ela tem peso α = 0.125 na fórmula. O EWMA considera a amostra recente, mas suaviza seu impacto para evitar reações excessivas a variações pontuais." },
+        { "id": "a2", "text": "Porque o EWMA suaviza flutuações: dá mais peso a amostras recentes mas mantém histórico, evitando reações bruscas a variações pontuais do RTT", "isCorrect": true, "explanation": "Correto! O SampleRTT varia bastante de segmento para segmento. Se o timeout fosse baseado em uma única amostra, ele oscilaria demais — gerando timeouts prematuros ou muito lentos. O EWMA (α = 0.125) faz a estimativa se adaptar gradualmente, combinando o histórico com informações recentes." },
+        { "id": "a3", "text": "Porque o EWMA é obrigatório por padrão do protocolo IP e não pode ser substituído", "isCorrect": false, "explanation": "O EWMA é recomendado pela RFC 6298 para o TCP, não é uma exigência do IP. O protocolo IP não se envolve com estimativas de RTT — isso é responsabilidade da camada de transporte." },
+        { "id": "a4", "text": "Porque usar a última amostra consumiria muita memória para armazenar todas as medições anteriores", "isCorrect": false, "explanation": "Na verdade, o EWMA é eficiente em memória — ele mantém apenas um valor (EstimatedRTT) e o atualiza incrementalmente. Não é uma questão de memória, mas de precisão e estabilidade da estimativa." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Na fórmula do timeout TCP (TimeoutInterval = EstimatedRTT + 4×DevRTT), qual é o papel do termo 4×DevRTT?",
+      "alternatives": [
+        { "id": "a1", "text": "É um valor fixo de 4 milissegundos adicionado ao RTT estimado", "isCorrect": false, "explanation": "O 4 não é um valor em milissegundos — é um multiplicador da variabilidade (DevRTT). O DevRTT mede o quanto o RTT oscila, e multiplicá-lo por 4 dá uma margem de segurança proporcional." },
+        { "id": "a2", "text": "Representa o tempo de processamento dos 4 roteadores intermediários da rede", "isCorrect": false, "explanation": "O 4 não tem relação com o número de roteadores. É um fator multiplicativo sobre o DevRTT para criar uma margem de segurança que acompanha a variabilidade da rede." },
+        { "id": "a3", "text": "Serve como margem de segurança proporcional à variabilidade do RTT — se o RTT oscila pouco, o timeout fica próximo do EstimatedRTT; se oscila muito, o timeout é mais generoso", "isCorrect": true, "explanation": "Correto! O DevRTT captura a variabilidade das amostras de RTT. Multiplicar por 4 garante que o timeout tenha margem suficiente para acomodar variações normais sem disparar retransmissões desnecessárias. Em redes estáveis (DevRTT ≈ 0), o timeout fica próximo do EstimatedRTT." },
+        { "id": "a4", "text": "Garante que o timeout seja sempre pelo menos 4 vezes maior que o RTT estimado", "isCorrect": false, "explanation": "O timeout não é 4 vezes o EstimatedRTT — é o EstimatedRTT mais 4 vezes o DevRTT. Se o DevRTT for pequeno (rede estável), o timeout será apenas ligeiramente maior que o EstimatedRTT." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "O Host A envia dois segmentos TCP: Seq=100 (50 bytes) e Seq=150 (50 bytes). O ACK=150 do primeiro é perdido, mas o ACK=200 do segundo chega. O que acontece?",
+      "alternatives": [
+        { "id": "a1", "text": "A retransmite o primeiro segmento (Seq=100), pois seu ACK foi perdido", "isCorrect": false, "explanation": "Não é necessário retransmitir! O ACK=200 é cumulativo — ele confirma que TODOS os bytes até 199 foram recebidos, incluindo os bytes do primeiro segmento (100–149)." },
+        { "id": "a2", "text": "A retransmite ambos os segmentos, pois não pode confirmar nenhum sem o primeiro ACK", "isCorrect": false, "explanation": "O TCP não exige que cada ACK individual chegue. O ACK cumulativo ACK=200 confirma todos os bytes até 199, cobrindo ambos os segmentos." },
+        { "id": "a3", "text": "A não retransmite nada — o ACK=200 cumulativo confirma que todos os bytes até 199 foram recebidos, cobrindo ambos os segmentos", "isCorrect": true, "explanation": "Correto! Esta é a força do ACK cumulativo. ACK=200 significa que o receptor recebeu todos os bytes de 0 a 199. Isso inclui os bytes 100–149 (primeiro segmento) e 150–199 (segundo segmento). Mesmo com o ACK=150 perdido, a confirmação é completa." },
+        { "id": "a4", "text": "A entra em estado de erro e reseta a conexão com RST, pois houve inconsistência nos ACKs", "isCorrect": false, "explanation": "Perder um ACK não é um erro de conexão. O TCP lida naturalmente com ACKs perdidos graças ao mecanismo de ACK cumulativo." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Por que o TCP NÃO utiliza o SampleRTT de segmentos retransmitidos para calcular o EstimatedRTT?",
+      "alternatives": [
+        { "id": "a1", "text": "Porque segmentos retransmitidos sempre têm RTT maior e distorceriam a média", "isCorrect": false, "explanation": "Nem sempre o RTT de retransmissões é maior. O problema real é a ambiguidade: não é possível saber se o ACK corresponde à transmissão original ou à retransmissão." },
+        { "id": "a2", "text": "Porque há ambiguidade (problema de Karn): não é possível saber se o ACK recebido corresponde à transmissão original ou à retransmissão", "isCorrect": true, "explanation": "Correto! Quando um segmento é retransmitido, o ACK que chega pode ser resposta ao segmento original (que estava atrasado) ou ao retransmitido. Como não há como distinguir, usar essa medição levaria a estimativas incorretas do RTT. A solução de Karn é ignorar amostras de segmentos retransmitidos." },
+        { "id": "a3", "text": "Porque segmentos retransmitidos são enviados por rotas diferentes e o RTT não seria comparável", "isCorrect": false, "explanation": "O TCP não controla rotas — isso é responsabilidade do IP. A razão para não medir é a ambiguidade entre ACK do original e ACK da retransmissão (algoritmo de Karn)." },
+        { "id": "a4", "text": "Porque a RFC 6298 proíbe qualquer medição de RTT após uma perda de pacote", "isCorrect": false, "explanation": "A RFC 6298 não proíbe medições após perdas — ela recomenda não medir o RTT de segmentos especificamente retransmitidos. Novos segmentos enviados após a retransmissão podem ser medidos normalmente." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Qual é o tamanho mínimo do cabeçalho TCP (sem opções) e quais os campos que o tornam significativamente maior que o cabeçalho UDP?",
+      "alternatives": [
+        { "id": "a1", "text": "8 bytes — os campos extras são apenas checksum e porta de origem", "isCorrect": false, "explanation": "8 bytes é o tamanho do cabeçalho UDP. O cabeçalho TCP mínimo tem 20 bytes — muito maior, pois inclui campos como número de sequência, número de ACK, flags e janela." },
+        { "id": "a2", "text": "32 bytes — o excesso vem exclusivamente do campo de opções obrigatórias", "isCorrect": false, "explanation": "O cabeçalho mínimo TCP tem 20 bytes, não 32. As opções são variáveis e não obrigatórias. Os 20 bytes mínimos incluem campos fixos como Seq#, ACK#, flags e window." },
+        { "id": "a3", "text": "20 bytes — os campos adicionais em relação ao UDP incluem número de sequência (32 bits), número de ACK (32 bits), flags de controle e janela de recepção", "isCorrect": true, "explanation": "Correto! O cabeçalho TCP mínimo tem 20 bytes (vs 8 do UDP). Os 12 bytes extras incluem: Seq# (4 bytes), ACK# (4 bytes), Header Length + Flags (2 bytes) e Window (2 bytes). Esses campos são necessários para confiabilidade, controle de fluxo e gerenciamento de conexão." },
+        { "id": "a4", "text": "16 bytes — a diferença é apenas o campo de número de sequência e o checksum expandido", "isCorrect": false, "explanation": "O cabeçalho TCP mínimo tem 20 bytes, não 16. Além do Seq#, há ACK#, flags, window e outros campos que não existem no UDP." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Em um cenário de timeout prematuro no TCP, o que acontece quando o emissor retransmite um segmento e depois recebe o ACK original (que estava atrasado)?",
+      "alternatives": [
+        { "id": "a1", "text": "O emissor descarta o ACK atrasado e espera um novo ACK da retransmissão antes de continuar", "isCorrect": false, "explanation": "O TCP não descarta ACKs válidos. Qualquer ACK recebido que confirme bytes é processado normalmente, independentemente de ser do original ou da retransmissão." },
+        { "id": "a2", "text": "O emissor reseta a conexão, pois receber dois ACKs para o mesmo segmento indica erro no protocolo", "isCorrect": false, "explanation": "Receber ACKs duplicados ou atrasados é normal no TCP e não constitui erro. O emissor simplesmente processa cada ACK conforme o mecanismo cumulativo." },
+        { "id": "a3", "text": "O emissor entra em modo de recuperação rápida e reduz a janela de congestionamento pela metade", "isCorrect": false, "explanation": "A recuperação rápida (fast recovery) é acionada por 3 ACKs duplicados, não por um ACK atrasado após timeout. Neste cenário, o ACK simplesmente confirma os bytes normalmente." },
+        { "id": "a4", "text": "O emissor aceita o ACK normalmente — como o ACK é cumulativo, ele confirma todos os bytes até aquele ponto e o emissor pode avançar", "isCorrect": true, "explanation": "Correto! O ACK atrasado é processado normalmente. Se ele confirma bytes que o emissor ainda não sabia que foram recebidos, o emissor avança sua janela. Se os bytes já foram confirmados por um ACK posterior, o ACK atrasado é simplesmente redundante mas não causa problemas." }
+      ]
+    }
+  ]
+}
+

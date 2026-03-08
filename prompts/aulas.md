@@ -5,11 +5,11 @@ O conteúdo deve se basear no seguinte resumo: Apresenta a função da camada de
 Use use p5.js para ilustrar visualmente os conceitos apresentados.
 Use o componente MarkdownTable.tsx para criar tabelas.
 
+Todos os contextos e padrões necessários para realizar esta tarefa estão no arquivo prompts/processo-criacao-aula.md. Antes de iniciar o seu trabalho, certifique-se de ler e entender o conteúdo do arquivo mencionado.
 No curso de redes de computadores, o próximo capítulo do módulo de Camada de Transporte será:
-Princípios de Transferência Confiável de Dados (RDT)
+ECN, Equidade e Evolução da Camada de Transporte
 O conteúdo deve se basear no seguinte resumo:
-Núcleo teórico do módulo. Desenvolve incrementalmente os protocolos RDT (Reliable Data Transfer) usando Máquinas de Estados Finitos (FSM), partindo de um canal ideal (rdt1.0) até canais com erros e perdas (rdt3.0). Aborda ACKs, NAKs, números de sequência, temporizadores e retransmissão. Apresenta o problema de desempenho do protocolo stop-and-wait e as soluções com pipeline: Go-Back-N (GBN) e Repetição Seletiva (SR).
+Aborda o ECN (Explicit Congestion Notification), mecanismo de sinalização de congestionamento no cabeçalho IP. Discute o conceito de equidade (fairness) no TCP e os limites práticos com UDP e múltiplas conexões paralelas. Apresenta o protocolo QUIC (Quick UDP Internet Connections), sua arquitetura sobre UDP, o estabelecimento de conexão em 1 handshake e a resolução do problema de bloqueio HOL (Head-of-Line blocking) com paralelismo de fluxos.
 Use p5.js para ilustrar visualmente os conceitos apresentados.
 Use o componente MarkdownTable.tsx para criar tabelas.
 Faça o quiz ao final de cada capítulo.
-Todo o contexto e padrões necessários para realizar a tarefa acima estão no arquivo prompts/processo-criacao-aula.md. Antes de iniciar a criação do curso, certifique-se de ler e entender o conteúdo do arquivo mencionado para seguir os padrões estabelecidos.

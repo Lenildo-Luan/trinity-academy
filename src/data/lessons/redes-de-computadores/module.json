@@ -31,6 +31,34 @@
         "description": "Desenvolvimento incremental dos protocolos RDT (rdt1.0 a rdt3.0) com FSM, ACKs, NAKs, números de sequência e temporizadores. Problema de desempenho do stop-and-wait e soluções com pipeline: Go-Back-N (GBN) e Repetição Seletiva (SR).",
         "video": null,
         "quizId": "quiz-4"
+      },
+      {
+        "id": "charpter-5",
+        "title": "Protocolo TCP: Fundamentos",
+        "description": "Introdução ao TCP: protocolo ponto-a-ponto, full-duplex, com fluxo confiável e ordenado de bytes. Estrutura do segmento TCP, números de sequência e ACK cumulativo, estimativa de RTT com EWMA, timeout adaptativo e cenários de retransmissão.",
+        "video": null,
+        "quizId": "quiz-5"
+      },
+      {
+        "id": "charpter-6",
+        "title": "TCP: Controle de Fluxo e Gerenciamento de Conexão",
+        "description": "Controle de fluxo com rwnd e persist timer. Gerenciamento de conexão: handshake de 3 vias (SYN/SYNACK/ACK), problemas do handshake de 2 vias, encerramento gracioso (FIN/ACK, TIME_WAIT) e encerramento abrupto (RST).",
+        "video": null,
+        "quizId": "quiz-6"
+      },
+      {
+        "id": "charpter-7",
+        "title": "Controle de Congestionamento TCP",
+        "description": "Custos do congestionamento, três cenários progressivos, abordagens fim-a-fim e assistida pela rede. AIMD, Slow Start, Prevenção de Congestionamento, Recuperação Rápida, TCP CUBIC (padrão Linux) e controle baseado em atraso com BBR (Google).",
+        "video": null,
+        "quizId": "quiz-7"
+      },
+      {
+        "id": "charpter-8",
+        "title": "ECN, Equidade e Evolução da Camada de Transporte",
+        "description": "ECN (Explicit Congestion Notification): marcação de pacotes em vez de descarte. Equidade TCP (fairness) e limites com UDP e conexões paralelas. QUIC: arquitetura sobre UDP, handshake em 1 RTT, streams independentes e resolução do HOL blocking no HTTP/3.",
+        "video": null,
+        "quizId": "quiz-8"
       }
     ]
   }
