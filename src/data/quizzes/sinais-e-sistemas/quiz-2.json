@@ -1,0 +1,309 @@
+{
+  "id": "quiz-2",
+  "title": "Quiz — Tamanho de um Sinal: Energia e Potência",
+  "description": "Teste seus conhecimentos sobre energia e potência de sinais, classificação de sinais de energia e potência, valor RMS e relação sinal-ruído (SNR).",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Por que usamos |x(t)|² em vez de x(t) para medir o tamanho de um sinal?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Porque |x(t)|² é sempre não-negativo, evitando que valores positivos e negativos se cancelem na integração",
+          "isCorrect": true,
+          "explanation": "Correto! Se usássemos x(t) diretamente, a integral de uma senoide seria zero — os valores positivos e negativos se cancelam. Elevando ao quadrado, todos os valores ficam positivos e a integral reflete a atividade real do sinal."
+        },
+        {
+          "id": "a2",
+          "text": "Porque a amplitude ao quadrado é mais fácil de calcular do que a amplitude linear",
+          "isCorrect": false,
+          "explanation": "Na verdade, elevar ao quadrado geralmente torna o cálculo mais complexo, não mais fácil. A razão é conceitual: evitar cancelamento e corresponder à energia física dissipada."
+        },
+        {
+          "id": "a3",
+          "text": "Porque x(t) pode ser complexo e o módulo ao quadrado remove a parte imaginária",
+          "isCorrect": false,
+          "explanation": "Embora isso seja verdade para sinais complexos, a razão principal é evitar o cancelamento de valores positivos e negativos, que se aplica mesmo a sinais reais."
+        },
+        {
+          "id": "a4",
+          "text": "Porque o quadrado torna todos os sinais periódicos, facilitando a análise",
+          "isCorrect": false,
+          "explanation": "Elevar ao quadrado não torna sinais não-periódicos em periódicos. A razão é garantir uma medida não-negativa que reflita corretamente o conteúdo do sinal."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Qual é a energia do sinal x(t) = 5·e⁻³ᵗ · u(t)?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "E = 5/3",
+          "isCorrect": false,
+          "explanation": "Esse seria o resultado se não elevássemos x(t) ao quadrado. A energia é ∫|x(t)|² dt = ∫₀^∞ 25·e⁻⁶ᵗ dt = 25/6."
+        },
+        {
+          "id": "a2",
+          "text": "E = 25/3",
+          "isCorrect": false,
+          "explanation": "Esse resultado usa o expoente incorreto. |x(t)|² = 25·e⁻⁶ᵗ (o expoente dobra), então ∫₀^∞ 25·e⁻⁶ᵗ dt = 25/6, não 25/3."
+        },
+        {
+          "id": "a3",
+          "text": "E = 25/6",
+          "isCorrect": true,
+          "explanation": "Correto! E = ∫₀^∞ (5·e⁻³ᵗ)² dt = ∫₀^∞ 25·e⁻⁶ᵗ dt = 25·[-1/6·e⁻⁶ᵗ]₀^∞ = 25·(0 − (−1/6)) = 25/6. Regra geral: para A·e⁻ᵃᵗ·u(t), E = A²/(2a)."
+        },
+        {
+          "id": "a4",
+          "text": "E = ∞ (a energia é infinita porque e⁻³ᵗ nunca chega a zero)",
+          "isCorrect": false,
+          "explanation": "Embora e⁻³ᵗ nunca seja exatamente zero, a integral converge: ∫₀^∞ e⁻⁶ᵗ dt = 1/6. Sinais exponenciais decrescentes têm energia finita — são sinais de energia."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Uma senoide pura x(t) = A·sin(ωt) que oscila indefinidamente é classificada como:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Sinal de energia, pois a integral de sin²(ωt) converge",
+          "isCorrect": false,
+          "explanation": "A integral de sin²(ωt) de −∞ a +∞ diverge, pois o sinal nunca cessa. Uma senoide infinita tem energia infinita."
+        },
+        {
+          "id": "a2",
+          "text": "Nem sinal de energia nem de potência, pois oscila entre valores positivos e negativos",
+          "isCorrect": false,
+          "explanation": "A oscilação entre positivo e negativo é irrelevante — usamos |x(t)|². A senoide tem E = ∞ e P = A²/2 (finita), logo é sinal de potência."
+        },
+        {
+          "id": "a3",
+          "text": "Sinal de potência, pois tem E = ∞ e P = A²/2 (finita e não-nula)",
+          "isCorrect": true,
+          "explanation": "Correto! A senoide infinita tem energia infinita (integra-se para sempre), mas potência finita P = A²/2. Sinais persistentes e periódicos são sinais de potência."
+        },
+        {
+          "id": "a4",
+          "text": "Depende da frequência ω — para ω alto é sinal de energia, para ω baixo é de potência",
+          "isCorrect": false,
+          "explanation": "A classificação não depende da frequência. Para qualquer ω, a senoide infinita tem E = ∞ e P = A²/2. A frequência afeta a aparência, não a classificação energética."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Se um sinal tem energia finita (0 < E < ∞), qual é necessariamente sua potência?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "P = E (potência igual à energia)",
+          "isCorrect": false,
+          "explanation": "Energia e potência têm unidades diferentes. P = lim(1/2T)·∫|x|² dt. Para sinais transitórios, a energia finita dividida por um intervalo que tende ao infinito resulta em P = 0."
+        },
+        {
+          "id": "a2",
+          "text": "P = 0 — a potência é sempre zero para sinais de energia",
+          "isCorrect": true,
+          "explanation": "Correto! Se E é finita, então P = lim(T→∞) E/(2T) = E_finito/∞ = 0. Isso faz sentido fisicamente: sinais de energia são transitórios — sua atividade média ao longo de tempo infinito tende a zero."
+        },
+        {
+          "id": "a3",
+          "text": "P = E/2 — metade da energia",
+          "isCorrect": false,
+          "explanation": "Não existe essa relação. A potência é a média temporal de |x(t)|², e para sinais com energia finita, essa média sobre tempo infinito é zero."
+        },
+        {
+          "id": "a4",
+          "text": "Não é possível determinar sem conhecer a forma exata do sinal",
+          "isCorrect": false,
+          "explanation": "É sempre possível determinar: se E é finita, P = lim(E/(2T)) = 0. Não é necessário conhecer a forma do sinal — isso vale universalmente."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "A rede elétrica brasileira é descrita como '127V'. Esse valor se refere a:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "A amplitude de pico da tensão senoidal",
+          "isCorrect": false,
+          "explanation": "A amplitude de pico é cerca de 180V (127·√2 ≈ 180V). Os 127V referem-se ao valor RMS, que é A/√2."
+        },
+        {
+          "id": "a2",
+          "text": "A amplitude pico-a-pico da tensão senoidal",
+          "isCorrect": false,
+          "explanation": "A amplitude pico-a-pico seria 2 × 180V ≈ 360V. O valor de 127V é o RMS — a tensão DC equivalente em termos de potência dissipada."
+        },
+        {
+          "id": "a3",
+          "text": "A média temporal da tensão senoidal",
+          "isCorrect": false,
+          "explanation": "A média temporal de uma senoide pura é zero (valores positivos e negativos se cancelam). O 127V é o valor RMS = A/√2 ≈ 180/1.414 ≈ 127V."
+        },
+        {
+          "id": "a4",
+          "text": "O valor RMS (Root Mean Square) — a raiz quadrada da potência média",
+          "isCorrect": true,
+          "explanation": "Correto! V_rms = A_pico/√2 ≈ 180/1.414 ≈ 127V. O RMS representa a tensão DC equivalente que produziria a mesma potência. É o valor medido por multímetros AC e usado em especificações elétricas."
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual é a potência do sinal x(t) = 4·cos(2πt) + 3·sin(2πt)?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "P = 49/2 = 24.5 — usando (A + B)²/2",
+          "isCorrect": false,
+          "explanation": "Não se pode somar amplitudes e depois calcular a potência. Os termos cruzados cos·sin se anulam na média. P = A²/2 + B²/2 = 16/2 + 9/2 = 12.5."
+        },
+        {
+          "id": "a2",
+          "text": "P = 7/2 = 3.5 — usando (A + B)/√2",
+          "isCorrect": false,
+          "explanation": "Essa fórmula não é correta. A potência de senoides independentes se soma: P = 4²/2 + 3²/2 = 8 + 4.5 = 12.5."
+        },
+        {
+          "id": "a3",
+          "text": "P = (A² + B²)/2 = (16 + 9)/2 = 12.5",
+          "isCorrect": true,
+          "explanation": "Correto! Para sinais da forma A·cos(ωt) + B·sin(ωt) com mesma frequência, os termos cruzados cos·sin se anulam na média sobre um período. P = A²/2 + B²/2 = 16/2 + 9/2 = 12.5."
+        },
+        {
+          "id": "a4",
+          "text": "P = 0 — os termos cosseno e seno se cancelam",
+          "isCorrect": false,
+          "explanation": "Embora cos(ωt)·sin(ωt) tenha média zero, cada termo individual contribui com potência: cos²(ωt) tem média 1/2, e sin²(ωt) também. P = A²/2 + B²/2."
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "O sinal x(t) = t² (parábola crescendo indefinidamente) é classificado como:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Sinal de energia — a integral converge por simetria",
+          "isCorrect": false,
+          "explanation": "∫₋∞^∞ t⁴ dt diverge. A simetria de t⁴ não ajuda — a integral de uma função par positiva que cresce sem limite sempre diverge. E = ∞."
+        },
+        {
+          "id": "a2",
+          "text": "Sinal de potência — oscila em torno de um valor médio constante",
+          "isCorrect": false,
+          "explanation": "x(t) = t² não oscila — cresce monotonicamente. P = lim(1/2T)∫₋T^T t⁴ dt = lim(1/2T)(2T⁵/5) = lim(T⁴/5) = ∞. A potência também diverge."
+        },
+        {
+          "id": "a3",
+          "text": "Nem sinal de energia nem de potência — tanto E quanto P são infinitas",
+          "isCorrect": true,
+          "explanation": "Correto! E = ∫t⁴ dt = ∞ e P = lim(T⁴/5) = ∞. Sinais cuja amplitude cresce indefinidamente não se encaixam em nenhuma categoria — são classificados como 'nem energia nem potência'."
+        },
+        {
+          "id": "a4",
+          "text": "Depende do intervalo de observação — pode ser de energia ou de potência",
+          "isCorrect": false,
+          "explanation": "A classificação é definida para t de −∞ a +∞, não para intervalos finitos. Independentemente do intervalo escolhido, no limite T→∞ ambas as medidas divergem."
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Um sistema de comunicação tem P_sinal = 50 mW e P_ruído = 0.05 mW. Qual é a SNR em dB?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "SNR = 10 dB",
+          "isCorrect": false,
+          "explanation": "SNR linear = 50/0.05 = 1000. SNR_dB = 10·log₁₀(1000) = 10·3 = 30 dB, não 10 dB."
+        },
+        {
+          "id": "a2",
+          "text": "SNR = 20 dB",
+          "isCorrect": false,
+          "explanation": "20 dB corresponderia a SNR linear de 100. Mas SNR = 50/0.05 = 1000, que equivale a 10·log₁₀(1000) = 30 dB."
+        },
+        {
+          "id": "a3",
+          "text": "SNR = 30 dB",
+          "isCorrect": true,
+          "explanation": "Correto! SNR = P_sinal/P_ruído = 50/0.05 = 1000 (linear). Em dB: SNR_dB = 10·log₁₀(1000) = 10·3 = 30 dB. Isso indica uma comunicação de excelente qualidade."
+        },
+        {
+          "id": "a4",
+          "text": "SNR = 60 dB",
+          "isCorrect": false,
+          "explanation": "60 dB corresponderia a SNR linear de 10⁶ = 1.000.000. A SNR real é 1000 = 10³, portanto 30 dB. O erro seria usar 20·log₁₀ (que é para razões de amplitude, não potência)."
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Qual é o valor RMS de uma onda quadrada que alterna entre +5V e −5V?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "V_rms = 0V — os valores positivos e negativos se cancelam",
+          "isCorrect": false,
+          "explanation": "O RMS usa o quadrado: (+5)² = (−5)² = 25. A média de x²(t) é 25, logo V_rms = √25 = 5V. O cancelamento afetaria a média, não o RMS."
+        },
+        {
+          "id": "a2",
+          "text": "V_rms = 5/√2 ≈ 3.54V — usa a mesma fórmula da senoide",
+          "isCorrect": false,
+          "explanation": "A fórmula A/√2 é específica para senoides. Para onda quadrada ±A, x²(t) = A² para todo t, logo P = A² e V_rms = A = 5V."
+        },
+        {
+          "id": "a3",
+          "text": "V_rms = 10V — soma dos valores absolutos",
+          "isCorrect": false,
+          "explanation": "O RMS não é a soma dos valores absolutos. É √(média de x²). Como x²(t) = 25 sempre, V_rms = √25 = 5V."
+        },
+        {
+          "id": "a4",
+          "text": "V_rms = 5V — pois x²(t) = 25 para todo t, então P = 25 e RMS = √25 = 5",
+          "isCorrect": true,
+          "explanation": "Correto! Para onda quadrada ±A, o sinal ao quadrado é constante: (±5)² = 25. A média de 25 é 25, e RMS = √25 = 5V. Diferente da senoide, o RMS da onda quadrada é igual à amplitude."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Por que a SNR usa potência (e não energia) para comparar sinal e ruído?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Porque a energia é mais difícil de medir com instrumentos reais",
+          "isCorrect": false,
+          "explanation": "Ambas são mensuráveis. A razão é conceitual: sinais de comunicação são persistentes (sinais de potência com E = ∞), então a razão E_sinal/E_ruído seria ∞/∞ — indefinida."
+        },
+        {
+          "id": "a2",
+          "text": "Porque sinais de comunicação são tipicamente sinais de potência (persistentes), e a razão de energias infinitas seria indefinida",
+          "isCorrect": true,
+          "explanation": "Correto! Sinais de comunicação transmitem continuamente — são sinais de potência com E = ∞. A razão ∞/∞ não faz sentido, mas P_sinal/P_ruído (ambas finitas) é bem definida e significativa para avaliar qualidade."
+        },
+        {
+          "id": "a3",
+          "text": "Porque a potência em dB tem escala logarítmica mais conveniente",
+          "isCorrect": false,
+          "explanation": "A escala dB é uma conveniência prática, mas não é a razão para usar potência. A razão fundamental é que sinais de comunicação têm energia infinita, tornando a razão de energias indefinida."
+        },
+        {
+          "id": "a4",
+          "text": "Porque a energia de um sinal depende da duração da transmissão e a potência não",
+          "isCorrect": false,
+          "explanation": "Embora verdadeiro, essa não é a razão principal. O ponto-chave é que sinais persistentes têm E = ∞ para qualquer duração infinita, tornando a comparação de energias sem sentido."
+        }
+      ]
+    }
+  ]
+}
+

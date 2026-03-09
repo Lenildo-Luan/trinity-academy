@@ -1,0 +1,309 @@
+{
+  "id": "quiz-8",
+  "title": "Quiz — Análise no Domínio do Tempo de Sistemas Lineares",
+  "description": "Teste seus conhecimentos sobre análise de sistemas LCIT no domínio do tempo: EDO, equação característica, modos naturais, resposta de entrada nula, resposta de estado nulo, integral de convolução e decomposição da resposta total.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Um sistema LCIT de segunda ordem tem a EDO: ÿ(t) + 5ẏ(t) + 6y(t) = x(t). Qual é sua equação característica?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "λ² + 5λ + 6 = 0",
+          "isCorrect": true,
+          "explanation": "Correto! Substituindo y = e^(λt) na equação homogênea ÿ + 5ẏ + 6y = 0: λ²e^(λt) + 5λe^(λt) + 6e^(λt) = 0. Dividindo por e^(λt): λ² + 5λ + 6 = 0. As raízes são λ₁ = −2 e λ₂ = −3 (ambas negativas → sistema estável)."
+        },
+        {
+          "id": "a2",
+          "text": "λ² − 5λ − 6 = 0",
+          "isCorrect": false,
+          "explanation": "Os sinais dos coeficientes devem ser preservados da EDO, não invertidos. A equação característica é obtida substituindo y^(k) por λᵏ: λ² + 5λ + 6 = 0, com os mesmos sinais positivos da EDO."
+        },
+        {
+          "id": "a3",
+          "text": "5λ + 6 = 0  (apenas termos de primeira ordem)",
+          "isCorrect": false,
+          "explanation": "A equação característica deve incluir todos os termos da EDO, incluindo o coeficiente do maior grau. Para uma EDO de segunda ordem ÿ + 5ẏ + 6y = 0, a equação é λ² + 5λ + 6 = 0 (grau 2)."
+        },
+        {
+          "id": "a4",
+          "text": "λ + 6 = 0  (apenas o termo de ordem zero)",
+          "isCorrect": false,
+          "explanation": "A equação característica inclui TODOS os termos. Para ÿ + 5ẏ + 6y = 0, obtemos λ² + 5λ + 6 = 0. Omitir termos levaria a uma análise incorreta dos modos naturais do sistema."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Para a equação característica λ² + 5λ + 6 = 0, quais são as raízes e o que indicam sobre estabilidade?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "λ₁ = 2, λ₂ = 3  →  sistema instável (raízes positivas)",
+          "isCorrect": false,
+          "explanation": "As raízes de λ² + 5λ + 6 = 0 são λ = (−5 ± √(25−24))/2 = (−5 ± 1)/2, dando λ₁ = −2 e λ₂ = −3, não +2 e +3. Raízes negativas indicam sistema estável."
+        },
+        {
+          "id": "a2",
+          "text": "λ₁ = −2, λ₂ = −3  →  sistema estável (raízes com parte real negativa)",
+          "isCorrect": true,
+          "explanation": "Correto! Fatorando: (λ+2)(λ+3) = 0 → λ₁ = −2, λ₂ = −3. Ambas as raízes têm parte real negativa (Re(λ) < 0), então os modos e^(−2t) e e^(−3t) decaem para zero. O sistema é BIBO estável."
+        },
+        {
+          "id": "a3",
+          "text": "λ = ±j√6  →  sistema oscilatório (raízes imaginárias puras)",
+          "isCorrect": false,
+          "explanation": "Raízes imaginárias puras ±jω resultariam da equação λ² + 6 = 0 (sem termo λ). Com o termo +5λ, as raízes são reais e negativas: λ₁ = −2, λ₂ = −3."
+        },
+        {
+          "id": "a4",
+          "text": "Não tem solução real, pois o discriminante é negativo",
+          "isCorrect": false,
+          "explanation": "O discriminante de λ² + 5λ + 6 é b² − 4ac = 25 − 24 = 1 > 0. O discriminante positivo indica duas raízes reais distintas: λ₁ = (−5+1)/2 = −2 e λ₂ = (−5−1)/2 = −3."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Para o sistema ÿ + 5ẏ + 6y = x com condições iniciais y(0) = 1, ẏ(0) = 0, qual é a forma geral da resposta de entrada nula?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "y_zi(t) = c₁e^(−2t) + c₂e^(−3t), com c₁ e c₂ determinados por y(0)=1, ẏ(0)=0",
+          "isCorrect": true,
+          "explanation": "Correto! As raízes são λ₁=−2 e λ₂=−3, então y_zi = c₁e^(−2t) + c₂e^(−3t). Aplicando condições: y_zi(0) = c₁+c₂ = 1; ẏ_zi(0) = −2c₁−3c₂ = 0. Resolvendo: c₁ = 3, c₂ = −2. Logo y_zi = 3e^(−2t) − 2e^(−3t)."
+        },
+        {
+          "id": "a2",
+          "text": "y_zi(t) = e^(−5t)  (produto das raízes como expoente)",
+          "isCorrect": false,
+          "explanation": "Não se multiplicam as raízes para obter o expoente. Cada raiz gera um modo separado: e^(λ₁t) e e^(λ₂t). Com λ₁=−2 e λ₂=−3, y_zi = c₁e^(−2t) + c₂e^(−3t)."
+        },
+        {
+          "id": "a3",
+          "text": "y_zi(t) = cos(√6·t)  (oscilação baseada nos coeficientes da EDO)",
+          "isCorrect": false,
+          "explanation": "Oscilações cos(ωt) ocorrem quando as raízes são imaginárias puras ±jω. Aqui as raízes são reais e negativas (−2 e −3), gerando decaimentos exponenciais, não oscilações."
+        },
+        {
+          "id": "a4",
+          "text": "y_zi(t) = 1  (constante igual à condição inicial)",
+          "isCorrect": false,
+          "explanation": "A condição inicial y(0)=1 determina o valor em t=0, não que y_zi seja constante. Como as raízes são negativas, y_zi decai de 1 para 0, não permanece constante."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "O que representa a resposta ao impulso h(t) de um sistema LIT?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "A amplitude máxima que a saída pode atingir",
+          "isCorrect": false,
+          "explanation": "h(t) é uma função do tempo — não um valor máximo. Conhecendo h(t), podemos calcular a saída para qualquer entrada via convolução, não apenas a amplitude máxima."
+        },
+        {
+          "id": "a2",
+          "text": "A saída y_zs(t) quando a entrada é o impulso δ(t) com condições iniciais zero",
+          "isCorrect": true,
+          "explanation": "Correto! h(t) = H{δ(t)} com cond. iniciais nulas. Para sistemas LIT, h(t) contém TODA a informação sobre o sistema: y_zs(t) = x(t)*h(t) para qualquer entrada x(t). h(t) é a 'identidade' do sistema."
+        },
+        {
+          "id": "a3",
+          "text": "A derivada da resposta ao degrau do sistema",
+          "isCorrect": false,
+          "explanation": "Embora seja verdade que h(t) = dg(t)/dt onde g(t) é a resposta ao degrau, a DEFINIÇÃO de h(t) é a saída do sistema quando a entrada é δ(t). A relação com a derivada da resposta ao degrau é uma consequência, não a definição."
+        },
+        {
+          "id": "a4",
+          "text": "O ganho em frequência do sistema na frequência ω₀",
+          "isCorrect": false,
+          "explanation": "O ganho em frequência ω₀ é |H(jω₀)|, onde H(jω) é a Transformada de Fourier de h(t). h(t) é a função temporal, e seu espectro H(jω) fornece o ganho em frequência. São representações duais do mesmo sistema."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "A integral de convolução y(t) = ∫x(τ)·h(t−τ)dτ calcula:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "A resposta de entrada nula do sistema",
+          "isCorrect": false,
+          "explanation": "A convolução calcula a resposta de ESTADO NULO (y_zs), não de entrada nula (y_zi). y_zi é calculada com x=0 usando as condições iniciais. y_zs = x*h usa apenas a entrada e a resposta ao impulso, com condições iniciais zero."
+        },
+        {
+          "id": "a2",
+          "text": "A resposta de estado nulo — y_zs(t) para condições iniciais zero",
+          "isCorrect": true,
+          "explanation": "Correto! y_zs(t) = ∫x(τ)·h(t−τ)dτ = x(t)*h(t). Esse cálculo é válido quando as condições iniciais são zero. Cada impulso de x(τ) em τ gera uma contribuição h(t−τ); a integral soma todas essas contribuições."
+        },
+        {
+          "id": "a3",
+          "text": "O produto escalar entre x(t) e h(t) no domínio da frequência",
+          "isCorrect": false,
+          "explanation": "O produto escalar no domínio da frequência seria ∫X(ω)H*(ω)dω (correlação). A convolução ∫x(τ)h(t−τ)dτ é outra operação — corresponde à multiplicação no domínio da frequência: Y(ω) = X(ω)·H(ω)."
+        },
+        {
+          "id": "a4",
+          "text": "A derivada temporal da saída y(t)",
+          "isCorrect": false,
+          "explanation": "A derivada de y(t) é dy/dt, não a integral de convolução. A convolução é uma operação de integração que 'mistura' x e h no tempo, produzindo a resposta de estado nulo."
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Um sistema LIT tem resposta ao impulso h(t) = e^(−3t)u(t). A resposta de estado nulo para x(t) = u(t) (degrau) é:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "y_zs(t) = (1/3)·(1 − e^(−3t))·u(t)",
+          "isCorrect": true,
+          "explanation": "Correto! y_zs = u(t)*e^(−3t)u(t) = ∫₀ᵗ e^(−3τ)dτ (para t≥0) = [−e^(−3τ)/3]₀ᵗ = (1/3)(1−e^(−3t)). Para t<0: y=0. O fator 1/3 vem da constante de integração de e^(−3t)."
+        },
+        {
+          "id": "a2",
+          "text": "y_zs(t) = e^(−3t)·u(t)",
+          "isCorrect": false,
+          "explanation": "e^(−3t)u(t) é a própria resposta ao impulso h(t), não a convolução h*u. Para obter a resposta ao degrau: y_zs = ∫₀ᵗ e^(−3τ)dτ = (1/3)(1−e^(−3t))."
+        },
+        {
+          "id": "a3",
+          "text": "y_zs(t) = 3·(1 − e^(−t/3))·u(t)",
+          "isCorrect": false,
+          "explanation": "O coeficiente correto é 1/3, não 3. E a constante de tempo é 1/3 s (polo em −3), então e^(−3t) = e^(−t/(1/3)), não e^(−t/3). A resposta correta é y_zs = (1/3)(1−e^(−3t))u(t)."
+        },
+        {
+          "id": "a4",
+          "text": "y_zs(t) = t·e^(−3t)·u(t)",
+          "isCorrect": false,
+          "explanation": "t·e^(−3t) seria o modo para um polo duplo em −3. A convolução de e^(−3t)u(t) com u(t) resulta em (1/3)(1−e^(−3t))u(t), não t·e^(−3t)."
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "O sistema ÿ + 2ẏ + y = x tem um polo duplo. Qual é a forma da resposta de entrada nula?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "y_zi(t) = (c₁ + c₂·t)·e^(−t)",
+          "isCorrect": true,
+          "explanation": "Correto! Equação característica: λ² + 2λ + 1 = (λ+1)² = 0 → polo duplo λ = −1. Para raíz repetida de multiplicidade 2: y_zi = (c₁ + c₂t)e^(λt) = (c₁+c₂t)e^(−t). Os coeficientes c₁ e c₂ são determinados por y(0) e ẏ(0)."
+        },
+        {
+          "id": "a2",
+          "text": "y_zi(t) = c₁·e^(−t) + c₂·e^(+t)",
+          "isCorrect": false,
+          "explanation": "Duas raízes reais distintas seriam λ₁ = −1 e λ₂ = +1, mas a equação (λ+1)² = 0 tem apenas λ = −1 com multiplicidade 2. A forma correta para polo duplo é (c₁+c₂t)e^(−t)."
+        },
+        {
+          "id": "a3",
+          "text": "y_zi(t) = c₁·cos(t) + c₂·sin(t)",
+          "isCorrect": false,
+          "explanation": "Seno e cosseno ocorrem para raízes imaginárias puras ±jω. Aqui a equação (λ+1)²=0 tem raiz real dupla λ=−1. A forma correta é (c₁+c₂t)e^(−t)."
+        },
+        {
+          "id": "a4",
+          "text": "y_zi(t) = c₁·e^(−2t)  (apenas um modo, pois há um polo duplo)",
+          "isCorrect": false,
+          "explanation": "Um polo duplo não reduz o número de modos — ainda são necessários 2 coeficientes para um sistema de segunda ordem. A forma correta é (c₁+c₂t)e^(−t), com dois coeficientes ajustáveis pelas condições iniciais."
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "O sistema com EDO ẏ − 2y = x(t) tem polo em λ = +2. Qual é o comportamento da resposta de entrada nula e o que isso implica?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "y_zi → 0 para t → ∞: sistema estável que retorna ao equilíbrio",
+          "isCorrect": false,
+          "explanation": "Com polo em λ = +2 > 0, o modo e^(+2t) cresce exponencialmente. y_zi → ∞ para t → ∞, não para zero. O sistema é instável."
+        },
+        {
+          "id": "a2",
+          "text": "y_zi = c·e^(+2t) cresce sem limite: sistema INSTÁVEL",
+          "isCorrect": true,
+          "explanation": "Correto! Com polo real positivo λ = +2, y_zi = c·e^(+2t) → ∞ para t → ∞. Qualquer perturbação nas condições iniciais (c ≠ 0) causa divergência. Esse sistema é instável — condição inicial não nula resulta em saída que cresce ilimitadamente."
+        },
+        {
+          "id": "a3",
+          "text": "y_zi = c·cos(2t): oscilação estável sem amortecimento",
+          "isCorrect": false,
+          "explanation": "Oscilação cos(2t) ocorre para polo imaginário puro λ = ±j2. O polo real λ = +2 gera e^(+2t), não cos(2t). Polo no semiplano direito real → crescimento exponencial → instabilidade."
+        },
+        {
+          "id": "a4",
+          "text": "y_zi = 0 para todo t: o polo cancelado não contribui",
+          "isCorrect": false,
+          "explanation": "y_zi = 0 só ocorre quando as condições iniciais são todas zero. Para qualquer c ≠ 0, y_zi = c·e^(+2t) é não nula e cresce sem limite."
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "A resposta total de um sistema LCIT é y(t) = 3e^(−2t) − 2e^(−3t) + 1 − e^(−2t) para t ≥ 0. Identificar as componentes:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "y_zi = 3e^(−2t) − 2e^(−3t)  e  y_zs = 1 − e^(−2t)  (supondo y_zi = modos naturais sem excitação externa)",
+          "isCorrect": true,
+          "explanation": "Correto! A resposta de entrada nula y_zi é formada pelos modos naturais com coeficientes determinados pelas condições iniciais (sem entrada). A resposta de estado nulo y_zs = 1 − e^(−2t) reflete a resposta à entrada (degrau), contendo o regime permanente (1) e um transitório transitório natural (−e^(−2t)) forçado pela excitação."
+        },
+        {
+          "id": "a2",
+          "text": "y_zi = 1  e  y_zs = 3e^(−2t) − 2e^(−3t) − e^(−2t)",
+          "isCorrect": false,
+          "explanation": "A constante 1 é o regime permanente forçado pela entrada (faz parte de y_zs), não a resposta de entrada nula. y_zi é composta pelos modos naturais (exponenciais cujos coeficientes dependem das condições iniciais), não pela parte constante."
+        },
+        {
+          "id": "a3",
+          "text": "y_zi = y_zs = y/2  (partes iguais)",
+          "isCorrect": false,
+          "explanation": "Não há motivo para as componentes serem iguais. A decomposição y = y_zi + y_zs é determinada pela causa: condições iniciais (y_zi) e entrada (y_zs), não pela distribuição igual da resposta total."
+        },
+        {
+          "id": "a4",
+          "text": "Não é possível identificar y_zi e y_zs sem conhecer x(t) e as condições iniciais",
+          "isCorrect": false,
+          "explanation": "Na prática, sim — precisamos de mais informações. Mas o enunciado apresenta uma decomposição plausível: y_zi = 3e^(−2t) − 2e^(−3t) (modos naturais puros) e y_zs = 1 − e^(−2t) (resposta ao degrau)."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Qual é o significado físico da integral de convolução y(t) = ∫x(τ)·h(t−τ)dτ?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "A saída é a média ponderada de todos os valores passados da entrada, com pesos dados por h",
+          "isCorrect": true,
+          "explanation": "Correto! A convolução representa exatamente isso: cada valor x(τ) da entrada contribui com peso h(t−τ) para a saída em t. A resposta ao impulso h age como uma 'memória ponderada': eventos mais recentes (τ próximo de t) têm peso h(δ) para δ pequeno, e eventos mais antigos têm peso h(t−τ) para t−τ grande."
+        },
+        {
+          "id": "a2",
+          "text": "A saída é o valor máximo entre x(t) e h(t)",
+          "isCorrect": false,
+          "explanation": "A convolução não é o máximo — é uma integral do produto. A interpretação correta é a soma ponderada de contribuições de todos os instantes passados da entrada."
+        },
+        {
+          "id": "a3",
+          "text": "A saída é a frequência fundamental da entrada filtrada pelo sistema",
+          "isCorrect": false,
+          "explanation": "A frequência fundamental é um conceito do domínio da frequência. A convolução é uma operação no domínio do tempo, representando a superposição de respostas elementares ao impulso."
+        },
+        {
+          "id": "a4",
+          "text": "A saída é a derivada da entrada escalada por h",
+          "isCorrect": false,
+          "explanation": "A convolução é uma integração, não uma derivação. A saída y(t) = ∫x(τ)h(t−τ)dτ é a integral do produto de x(τ) com a versão invertida e deslocada de h. Não envolve derivadas de x."
+        }
+      ]
+    }
+  ]
+}
+

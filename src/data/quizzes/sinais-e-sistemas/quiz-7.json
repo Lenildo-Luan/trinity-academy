@@ -1,0 +1,309 @@
+{
+  "id": "quiz-7",
+  "title": "Quiz — Classificação de Sistemas",
+  "description": "Teste seus conhecimentos sobre as oito categorias de sistemas: linear/não linear, invariante/variante, sem/com memória, causal/não causal, contínuo/discreto, analógico/digital, inversível/não inversível, e BIBO estável/instável.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "O sistema y(t) = 3·x(t − 2) é:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Não linear, pois multiplica x por 3",
+          "isCorrect": false,
+          "explanation": "Multiplicar por uma constante (escalar) é uma operação linear. O princípio da homogeneidade é satisfeito: H{a·x} = 3·(a·x) = a·3x = a·H{x}. O sistema y = 3x(t−2) é linear."
+        },
+        {
+          "id": "a2",
+          "text": "Linear, invariante no tempo, com memória e causal",
+          "isCorrect": true,
+          "explanation": "Correto! Linear: H{ax₁+bx₂} = 3(ax₁+bx₂)(t−2) = aH{x₁}+bH{x₂} ✓. Invariante: H{x(t−t₀)} = 3x(t−2−t₀) = y(t−t₀) ✓. Com memória: usa x(t−2), valor passado da entrada. Causal: depende de t−2 ≤ t ✓."
+        },
+        {
+          "id": "a3",
+          "text": "Variante no tempo, pois o sinal é deslocado de 2 unidades",
+          "isCorrect": false,
+          "explanation": "O deslocamento de 2 não torna o sistema variante. Invariância significa que o deslocamento da entrada produz deslocamento igual na saída. Teste: H{x(t−t₀)} = 3x(t−t₀−2) = y(t−t₀). ✓ É invariante."
+        },
+        {
+          "id": "a4",
+          "text": "Sem memória, pois y(t) é proporcional a x",
+          "isCorrect": false,
+          "explanation": "y(t) = 3·x(t−2) depende de x em t−2, que é um instante PASSADO em relação a t. Portanto o sistema tem memória (usa valor passado da entrada). Sem memória seria y(t) = 3·x(t)."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "O sistema y(t) = x²(t) é linear?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Sim, pois mapeia cada valor de x em um único valor de y",
+          "isCorrect": false,
+          "explanation": "Mapeamento único (função bem-definida) não implica linearidade. O teste é a superposição: H{ax₁+bx₂} = (ax₁+bx₂)² = a²x₁² + 2abx₁x₂ + b²x₂² ≠ a·x₁² + b·x₂² = aH{x₁}+bH{x₂}. O sistema é não linear."
+        },
+        {
+          "id": "a2",
+          "text": "Não, pois viola o princípio da superposição: H{x₁+x₂} = (x₁+x₂)² ≠ x₁² + x₂²",
+          "isCorrect": true,
+          "explanation": "Correto! Teste: H{x₁+x₂} = (x₁+x₂)² = x₁² + 2x₁x₂ + x₂². Já H{x₁}+H{x₂} = x₁² + x₂². Como 2x₁x₂ ≠ 0 em geral, a superposição é violada. O sistema y = x² é não linear (quadrático)."
+        },
+        {
+          "id": "a3",
+          "text": "Sim, pois x² é uma função contínua e diferenciável",
+          "isCorrect": false,
+          "explanation": "Continuidade e diferenciabilidade são propriedades matemáticas da função, não critérios de linearidade de sistemas. Um sistema linear exige superposição: H{ax₁+bx₂} = aH{x₁}+bH{x₂}, que x² não satisfaz."
+        },
+        {
+          "id": "a4",
+          "text": "Sim, desde que a amplitude de x(t) seja pequena",
+          "isCorrect": false,
+          "explanation": "Linearidade é uma propriedade global — vale para TODOS os valores de x. Um sistema pode se aproximar de linear para pequenas amplitudes (linearização), mas formalmente y = x² é não linear em qualquer amplitude."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Um sistema tem parâmetros que variam com a temperatura ambiente. Esse sistema é:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Invariante no tempo, pois a temperatura é uma variável física, não temporal",
+          "isCorrect": false,
+          "explanation": "Se a temperatura varia com o tempo, os parâmetros do sistema também variam com o tempo. Um sistema cujos parâmetros mudam ao longo do tempo é, por definição, variante no tempo — independente da causa da variação."
+        },
+        {
+          "id": "a2",
+          "text": "Variante no tempo, pois os parâmetros do sistema mudam conforme o tempo passa",
+          "isCorrect": true,
+          "explanation": "Correto! Um sistema é invariante no tempo somente se seus parâmetros são constantes. Se a temperatura (e com ela os parâmetros) muda com o tempo, o sistema é variante. Exemplo: resistência de um termistor muda com T(t) → o circuito é variante no tempo."
+        },
+        {
+          "id": "a3",
+          "text": "Linear, pois temperatura é uma grandeza física contínua",
+          "isCorrect": false,
+          "explanation": "Linearidade e invariância no tempo são propriedades independentes. Um sistema pode ser linear e variante no tempo simultaneamente (sistemas LVT). A questão pede sobre invariância, não linearidade."
+        },
+        {
+          "id": "a4",
+          "text": "Estável, pois a temperatura sempre atinge um equilíbrio",
+          "isCorrect": false,
+          "explanation": "Estabilidade (BIBO) é outra propriedade, independente da invariância no tempo. A questão descreve variância no tempo (parâmetros que mudam), não estabilidade."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Um filtro de média móvel centrada y[n] = (x[n−1] + x[n] + x[n+1])/3 é:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Causal, pois usa apenas três amostras próximas",
+          "isCorrect": false,
+          "explanation": "O filtro usa x[n+1] — um valor FUTURO em relação ao instante n. Por definição, um sistema causal não pode usar valores futuros da entrada. Portanto esse filtro é NÃO CAUSAL."
+        },
+        {
+          "id": "a2",
+          "text": "Não causal, pois y[n] depende de x[n+1] (valor futuro da entrada)",
+          "isCorrect": true,
+          "explanation": "Correto! y[n] depende de x[n+1], que é um valor da entrada em instante futuro (n+1 > n). Sistemas causais só podem usar x[k] com k ≤ n. Esse filtro é não causal — só pode ser implementado se o sinal completo estiver disponível (processamento offline)."
+        },
+        {
+          "id": "a3",
+          "text": "Instável, pois usa três amostras",
+          "isCorrect": false,
+          "explanation": "O número de amostras usadas não determina estabilidade. A média móvel de três amostras é estável: para entrada limitada |x[n]| ≤ M, a saída |y[n]| ≤ M. Causalidade e estabilidade são propriedades independentes."
+        },
+        {
+          "id": "a4",
+          "text": "Sem memória, pois a saída é calculada instantaneamente",
+          "isCorrect": false,
+          "explanation": "Um sistema sem memória usa apenas x[n] (instante atual). Esse filtro usa x[n−1], x[n] e x[n+1] — três instantes diferentes. Portanto tem memória. O fato de ser calculável rapidamente não implica 'sem memória'."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Qual é a condição necessária e suficiente de estabilidade BIBO para um sistema LIT?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "A resposta ao impulso h(t) deve ser positiva para todo t ≥ 0",
+          "isCorrect": false,
+          "explanation": "h(t) não precisa ser positiva. Um filtro passa-banda tem h(t) com valores positivos e negativos, mas é estável. A condição BIBO exige que ∫|h(t)|dt < ∞ (integrabilidade absoluta), não que h > 0."
+        },
+        {
+          "id": "a2",
+          "text": "A integral ∫₋∞^{+∞} |h(t)| dt deve ser finita",
+          "isCorrect": true,
+          "explanation": "Correto! A condição BIBO para sistemas LIT é ∫|h(t)|dt < ∞ (h absolutamente integrável). Isso é equivalente a dizer que todos os polos do sistema estão no semiplano esquerdo aberto (Re(λ) < 0). Se qualquer polo tiver Re(λ) ≥ 0, o sistema é instável ou limítrofe."
+        },
+        {
+          "id": "a3",
+          "text": "O ganho DC do sistema H(0) deve ser igual a 1",
+          "isCorrect": false,
+          "explanation": "O ganho DC H(0) = ∫h(t)dt é relacionado à amplitude da resposta em frequência zero, não à estabilidade. Um amplificador com H(0)=100 pode ser perfeitamente estável, e H(0)=1 não garante estabilidade."
+        },
+        {
+          "id": "a4",
+          "text": "A entrada deve ser uma senoide para garantir saída limitada",
+          "isCorrect": false,
+          "explanation": "A estabilidade BIBO deve valer para QUALQUER entrada limitada, não apenas senóides. A condição é sobre a propriedade intrínseca do sistema (h absolutamente integrável), independente da forma da entrada."
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "O sistema y(t) = x(t) · cos(ω₀t) é:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Linear e invariante no tempo",
+          "isCorrect": false,
+          "explanation": "O sistema é linear (pode-se verificar a superposição). Mas NÃO é invariante: H{x(t−t₀)} = x(t−t₀)·cos(ω₀t), enquanto y(t−t₀) = x(t−t₀)·cos(ω₀(t−t₀)). Como cos(ω₀t) ≠ cos(ω₀(t−t₀)) em geral, é variante no tempo."
+        },
+        {
+          "id": "a2",
+          "text": "Linear e variante no tempo",
+          "isCorrect": true,
+          "explanation": "Correto! Linear: H{ax₁+bx₂} = (ax₁+bx₂)cos(ω₀t) = a·x₁cos(ω₀t) + b·x₂cos(ω₀t) = aH{x₁}+bH{x₂} ✓. Variante no tempo: o fator cos(ω₀t) muda com t, então H{x(t−t₀)} ≠ y(t−t₀) em geral. É um modulador AM — linear mas variante."
+        },
+        {
+          "id": "a3",
+          "text": "Não linear, pois multiplica dois sinais",
+          "isCorrect": false,
+          "explanation": "Multiplicar por cos(ω₀t) é linear em x, pois cos(ω₀t) é uma função determinística do tempo, não de x. A linearidade é violada apenas quando x é multiplicado POR OUTRO SINAL que depende de x (ex: x² = x·x)."
+        },
+        {
+          "id": "a4",
+          "text": "Não causal, pois usa frequência ω₀ do futuro",
+          "isCorrect": false,
+          "explanation": "Causalidade refere-se ao uso de valores futuros da ENTRADA x(t). O fator cos(ω₀t) é uma função determinística conhecida do tempo, não um sinal futuro. O sistema y(t) = x(t)·cos(ω₀t) é causal (usa x(t) no instante atual)."
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Por que todo sistema físico operando em tempo real é necessariamente causal?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Porque sistemas físicos só funcionam com sinais de energia finita",
+          "isCorrect": false,
+          "explanation": "Energia finita é a propriedade dos sinais de energia, não o motivo da causalidade. Sistemas físicos são causais porque obedecem ao princípio de causa e efeito: a saída não pode preceder a causa (entrada)."
+        },
+        {
+          "id": "a2",
+          "text": "Porque a física impõe que o efeito não pode preceder a causa: a saída em t não pode depender de entrada que ainda não ocorreu",
+          "isCorrect": true,
+          "explanation": "Correto! Causalidade é uma consequência do princípio físico de causa e efeito. Em operação em tempo real, o sistema só 'conhece' a entrada até o instante presente. Para usar x(t+δ) (futuro), seria necessário prever o futuro — impossível em tempo real."
+        },
+        {
+          "id": "a3",
+          "text": "Porque sistemas físicos são sempre lineares e sistemas lineares são sempre causais",
+          "isCorrect": false,
+          "explanation": "Sistemas físicos podem ser não-lineares (ex: diodo, amplificador saturado). E linearidade não implica causalidade: o filtro de média centrada y[n] = (x[n-1]+x[n]+x[n+1])/3 é linear mas não causal."
+        },
+        {
+          "id": "a4",
+          "text": "Porque sistemas físicos têm resposta ao impulso h(t) sempre positiva",
+          "isCorrect": false,
+          "explanation": "h(t) não precisa ser positiva. Um sistema com h(t) que inclui oscilações (valores negativos) pode ser perfeitamente físico e causal. A causalidade em sistemas LIT é expressa como h(t) = 0 para t < 0."
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Qual das seguintes afirmações sobre a relação entre memória e causalidade é CORRETA?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Todo sistema com memória é não causal",
+          "isCorrect": false,
+          "explanation": "Falso. Um sistema com memória pode ser causal se usar apenas valores PASSADOS da entrada (τ < t). Ex: y(t) = ∫₋∞ᵗ x(τ)dτ tem memória (usa todo o passado de x) mas é causal."
+        },
+        {
+          "id": "a2",
+          "text": "Todo sistema sem memória é automaticamente causal",
+          "isCorrect": true,
+          "explanation": "Correto! Um sistema sem memória tem y(t) = f(x(t)) — usa apenas o valor atual de x. Como só usa o instante presente (não o futuro), é automaticamente causal. Todo sistema sem memória ⊂ causal."
+        },
+        {
+          "id": "a3",
+          "text": "Todo sistema causal é sem memória",
+          "isCorrect": false,
+          "explanation": "Falso. Um sistema causal pode ter memória: y(t) = x(t) + x(t−1) é causal (usa t e t−1, ambos ≤ t) mas tem memória (usa valor passado). Causalidade e memória são propriedades relacionadas, mas não equivalentes."
+        },
+        {
+          "id": "a4",
+          "text": "Sistemas não causais não têm memória, pois processam o sinal instantaneamente",
+          "isCorrect": false,
+          "explanation": "Sistemas não causais podem ter memória — na verdade, tipicamente têm: y(t) = ∫₋∞^{+∞} x(τ)dτ usa passado E futuro. 'Não causal' significa que usa valores futuros da entrada, independente de ter ou não memória."
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "O sistema y(t) = t · x(t) é:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Invariante no tempo, pois a multiplicação é comutativa",
+          "isCorrect": false,
+          "explanation": "A comutatividade da multiplicação não tem relação com invariância temporal. O sistema é variante no tempo: H{x(t−t₀)} = t·x(t−t₀), enquanto y(t−t₀) = (t−t₀)·x(t−t₀). Como t ≠ t−t₀, o sistema é variante."
+        },
+        {
+          "id": "a2",
+          "text": "Linear e variante no tempo",
+          "isCorrect": true,
+          "explanation": "Correto! Linear: H{ax₁+bx₂} = t(ax₁+bx₂) = at·x₁ + bt·x₂ = aH{x₁}+bH{x₂} ✓. Variante: H{x(t−t₀)} = t·x(t−t₀), mas y(t−t₀) = (t−t₀)·x(t−t₀) ≠ t·x(t−t₀). O coeficiente 't' muda com o tempo → variante."
+        },
+        {
+          "id": "a3",
+          "text": "Não linear, pois a saída cresce com o tempo",
+          "isCorrect": false,
+          "explanation": "O crescimento da saída com o tempo não indica não-linearidade. Linearidade é testada pela superposição: H{ax₁+bx₂} = t(ax₁+bx₂) = aH{x₁}+bH{x₂} ✓. O sistema é linear, apenas variante no tempo."
+        },
+        {
+          "id": "a4",
+          "text": "Instável, pois y → ∞ para t → ∞",
+          "isCorrect": false,
+          "explanation": "A análise de estabilidade BIBO requer verificar se entrada limitada implica saída limitada. Para x(t) = u(t) (entrada limitada), y(t) = t·u(t) → ∞. Logo o sistema é INSTÁVEL — essa é a conclusão correta, mas a alternativa afirma 'apenas instável', enquanto a classificação completa é 'linear e variante no tempo e instável'."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Um sistema de comunicação precisa recuperar a mensagem original m(t) a partir do sinal transmitido s(t) = A_c · [1 + k_a·m(t)] · cos(ω_c·t). Que propriedade do sistema de transmissão é NECESSÁRIA para isso ser possível?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "O sistema de transmissão deve ser BIBO estável",
+          "isCorrect": false,
+          "explanation": "Estabilidade é importante em qualquer sistema, mas não é a propriedade que garante a recuperação da mensagem. O que garante a recuperabilidade é a inversibilidade: deve existir um sistema receptor H⁻¹ que recupere m(t) de s(t)."
+        },
+        {
+          "id": "a2",
+          "text": "O sistema de transmissão deve ser causal",
+          "isCorrect": false,
+          "explanation": "Causalidade garante implementação em tempo real, mas não garante recuperabilidade. Um sistema causal não invertível não permite recuperar a mensagem, enquanto um sistema não-causal invertível permite (processamento offline)."
+        },
+        {
+          "id": "a3",
+          "text": "O sistema de transmissão deve ser invertível",
+          "isCorrect": true,
+          "explanation": "Correto! Para recuperar m(t) a partir de s(t), deve existir um sistema inverso H⁻¹ tal que H⁻¹{s(t)} = m(t). A modulação AM com carrier conhecido é invertível: a demodulação (multiplicação por cos(ω_c t) e filtragem) recupera m(t). Se o sistema não fosse invertível, a mensagem seria irreversivelmente perdida."
+        },
+        {
+          "id": "a4",
+          "text": "O sistema de transmissão deve ser sem memória",
+          "isCorrect": false,
+          "explanation": "Sistemas sem memória são os mais simples, mas não são necessários para recuperabilidade. Na prática, muitos sistemas de comunicação têm memória (filtros, equalizadores) e ainda assim são invertíveis."
+        }
+      ]
+    }
+  ]
+}
+

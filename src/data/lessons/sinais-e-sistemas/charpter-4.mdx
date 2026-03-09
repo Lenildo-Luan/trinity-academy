@@ -1,0 +1,146 @@
+# Classificação de Sinais
+
+No capítulo anterior, estudamos as três operações fundamentais sobre sinais no domínio do tempo — deslocamento, escalamento e reversão. Agora daremos um passo atrás e organizaremos o universo dos sinais em **categorias bem definidas**. Compreender a classificação de um sinal é essencial porque cada categoria determina quais ferramentas matemáticas são aplicáveis, quais propriedades valem e como o sistema que processa esse sinal deve ser projetado.
+
+## Sinais Contínuos e Discretos no Tempo
+
+A primeira e mais fundamental distinção entre sinais diz respeito ao **domínio temporal** em que estão definidos.
+
+Um **sinal contínuo no tempo** (*continuous-time signal*) x(t) é definido para todo valor real de t. O argumento t varia continuamente, e entre quaisquer dois instantes existem infinitos outros instantes. A maioria dos sinais físicos do mundo real — temperatura, pressão, tensão elétrica — é contínua no tempo.
+
+Um **sinal discreto no tempo** (*discrete-time signal*) x[n] é definido apenas para valores inteiros do índice n. Ele pode ser obtido pela **amostragem** de um sinal contínuo ou pode ser gerado diretamente por sistemas computacionais. A notação usa colchetes [ ] para distinguir do sinal contínuo.
+
+<ContinuousVsDiscreteTime />
+
+Observe na visualização como o sinal contínuo forma uma curva suave, ao passo que o sinal discreto é representado por hastes isoladas (chamadas de *stems*) nos instantes inteiros. Não existe valor do sinal entre as hastes — o sinal simplesmente não está definido ali.
+
+<MarkdownTable
+  headers={["Aspecto", "Contínuo no Tempo x(t)", "Discreto no Tempo x[n]"]}
+  rows={[
+    ["**Domínio**", "Todo t ∈ ℝ (infinito incontável)", "Apenas n ∈ ℤ (infinito contável)"],
+    ["**Notação**", "Parênteses: x(t)", "Colchetes: x[n]"],
+    ["**Origem**", "Sinais físicos naturais", "Amostragem ou geração computacional"],
+    ["**Ferramenta principal**", "Cálculo diferencial/integral", "Diferenças finitas, somas"],
+    ["**Exemplo**", "Tensão num fio, temperatura", "Pixels de uma imagem, dados de sensor"],
+  ]}
+/>
+
+## Sinais Analógicos e Digitais
+
+Uma segunda classificação independente refere-se à **amplitude** do sinal, não ao seu domínio temporal.
+
+Um **sinal analógico** possui amplitude que pode assumir qualquer valor real dentro de um intervalo contínuo. Não há restrição sobre os níveis de amplitude — a grandeza física varia de forma contínua.
+
+Um **sinal digital** possui amplitude restrita a um conjunto **finito e discreto** de valores, tipicamente representados por palavras binárias. Um sinal de 8 bits, por exemplo, só pode assumir 2⁸ = 256 valores distintos.
+
+<AnalogVsDigitalSignal />
+
+> **Atenção — confusão frequente!** Contínuo no tempo ≠ Analógico, e Discreto no tempo ≠ Digital. Essas são classificações **independentes**. Um sinal pode ser contínuo no tempo **e** digital (ex: saída de um DAC antes de ser filtrada), ou discreto no tempo **e** analógico (ex: sequência de amostras com precisão infinita).
+
+<MarkdownTable
+  headers={["Classificação", "Domínio Temporal", "Domínio da Amplitude", "Exemplo"]}
+  rows={[
+    ["**Contínuo e Analógico**", "Todo t ∈ ℝ", "Amplitude contínua", "Sinal de voz no microfone"],
+    ["**Contínuo e Digital**", "Todo t ∈ ℝ", "Amplitude discreta", "Onda quadrada de 0 V e 5 V"],
+    ["**Discreto e Analógico**", "Apenas n ∈ ℤ", "Amplitude contínua", "Amostras com precisão infinita"],
+    ["**Discreto e Digital**", "Apenas n ∈ ℤ", "Amplitude em 2ⁿ níveis", "Sinal PCM em CD de áudio"],
+  ]}
+/>
+
+## Sinais Periódicos e Não Periódicos
+
+Um **sinal periódico** (*periodic signal*) é aquele que se repete indefinidamente com um padrão fixo. Formalmente, x(t) é periódico se existe um valor T₀ > 0 tal que:
+
+> **x(t) = x(t + T₀)  para todo t ∈ (−∞, +∞)**
+
+O menor valor positivo de T₀ que satisfaz essa equação é chamado de **período fundamental**. A **frequência fundamental** é f₀ = 1/T₀ (em Hz) e a **frequência angular** é ω₀ = 2πf₀ (em rad/s).
+
+Um **sinal aperiódico** (*aperiodic signal*) não satisfaz essa condição. Dentro dos sinais aperiódicos, existem dois subtipos importantes:
+
+- **Sinal causal de duração finita:** existe apenas em um intervalo [t₁, t₂] e é zero fora dele. Representa eventos físicos com início e fim definidos.
+- **Sinal causal de duração infinita:** existe para t ≥ 0 mas decai e nunca se repete. Exemplo: a resposta ao impulso de um sistema estável.
+
+<PeriodicVsAperiodic />
+
+### Condição de Periodicidade para Somas de Senóides
+
+Uma questão prática importante: quando a **soma de dois sinais periódicos** é também periódica? A resposta depende da razão entre seus períodos.
+
+> A soma x₁(t) + x₂(t) é periódica se e somente se a razão T₁/T₂ for um número **racional** (p/q, com p, q ∈ ℤ). Nesse caso, o período do sinal resultante é o **mínimo múltiplo comum** de T₁ e T₂.
+
+<MarkdownTable
+  headers={["Tipo", "Condição", "Duração", "Exemplos"]}
+  rows={[
+    ["**Periódico**", "x(t) = x(t + T₀)", "Infinita (−∞ a +∞)", "cos(ω₀t), sinal quadrado, dente de serra"],
+    ["**Aperiódico causal finito**", "x(t) = 0 fora de [t₁, t₂]", "Finita", "Pulso retangular, janela de Hamming"],
+    ["**Aperiódico causal infinito**", "x(t) = 0 para t < 0, decai", "Semi-infinita", "e^(−αt)u(t) com α > 0"],
+    ["**Aperiódico bilateral infinito**", "Nenhuma simetria temporal", "Infinita bilateral", "Sinc(t), sinal chirp não periódico"],
+  ]}
+/>
+
+## Sinais de Energia e Sinais de Potência
+
+Nem todo sinal pode ser classificado pela mesma métrica de "tamanho". Dois critérios opostos definem duas grandes famílias:
+
+**Energia total** de um sinal contínuo: E = ∫₋∞^(+∞) |x(t)|² dt
+
+**Potência média** de um sinal contínuo: P = lim(T→∞) (1/2T) ∫₋ₜ^T |x(t)|² dt
+
+Um sinal é classificado como:
+
+- **Sinal de energia** (*energy signal*): se E < ∞ (e consequentemente P = 0)
+- **Sinal de potência** (*power signal*): se P < ∞ e P > 0 (e consequentemente E → ∞)
+- **Nem energia nem potência:** se E → ∞ **e** P → ∞ (ex: sinal que cresce sem limite)
+
+<EnergyVsPowerClassification />
+
+> **Regra prática:** Sinais de duração finita ou com decaimento exponencial são tipicamente sinais de energia. Sinais periódicos (como senóides) ou o degrau unitário são tipicamente sinais de potência.
+
+<MarkdownTable
+  headers={["Tipo", "Energia E", "Potência P", "Exemplos"]}
+  rows={[
+    ["**Sinal de Energia**", "E < ∞", "P = 0", "Pulso retangular, e^(−αt)u(t), sinc(t)"],
+    ["**Sinal de Potência**", "E = ∞", "P < ∞, P > 0", "cos(ω₀t), u(t), sinal quadrado periódico"],
+    ["**Nem/Nem**", "E = ∞", "P = ∞", "t · u(t), e^(+αt) com α > 0"],
+  ]}
+/>
+
+## Sinais Determinísticos e Aleatórios
+
+A última grande classificação diz respeito à **previsibilidade** do sinal.
+
+Um **sinal determinístico** (*deterministic signal*) é completamente descrito por uma equação matemática ou regra explícita. Dado qualquer instante de tempo, o valor do sinal pode ser calculado exatamente. Toda a teoria clássica de sinais e sistemas é desenvolvida para sinais determinísticos.
+
+Um **sinal aleatório** (*random signal* ou *stochastic signal*) não pode ser descrito por uma expressão matemática fechada. Seu comportamento é governado por **distribuições de probabilidade**. Ruído térmico, fala humana e sinais de radar são exemplos de sinais essencialmente aleatórios.
+
+<DeterministicVsRandom />
+
+> Em sistemas de comunicação reais, o **sinal útil** é determinístico e a **interferência** (ruído) é aleatória. O projeto do sistema deve garantir que a relação sinal-ruído (SNR) seja suficiente para recuperar a informação.
+
+<MarkdownTable
+  headers={["Aspecto", "Determinístico", "Aleatório (Estocástico)"]}
+  rows={[
+    ["**Descrição**", "Equação matemática exata", "Distribuição de probabilidade"],
+    ["**Previsibilidade**", "Valor em qualquer t é conhecido a priori", "Valor em t só é conhecido em termos de P(x)"],
+    ["**Ferramentas**", "Análise de Fourier, convolução, EDOs", "Estatística, processos estocásticos, autocorrelação"],
+    ["**Exemplos**", "cos(ω₀t), e^(−αt)u(t), pulso retangular", "Ruído térmico, fala, turbulência, mercado financeiro"],
+    ["**Uso típico**", "Projeto de sistemas, filtros, modulação", "Análise de ruído, estimação, detecção"],
+  ]}
+/>
+
+## Visão Geral das Classificações
+
+<SignalClassificationMap />
+
+As cinco categorias apresentadas são **ortogonais** — um sinal pode ser classificado em cada uma delas de forma independente. Por exemplo, um sinal de voz digitalizado é: discreto no tempo, digital, aperiódico (em curto prazo), de energia finita por bloco, e uma mistura de determinístico e aleatório.
+
+## Resumo da Aula
+
+Neste capítulo, organizamos os sinais em cinco pares de classificações fundamentais:
+
+- **Contínuo vs. Discreto no Tempo:** diferença no domínio temporal — contínuo (todo t ∈ ℝ) usa parênteses x(t); discreto (n ∈ ℤ) usa colchetes x[n].
+- **Analógico vs. Digital:** diferença na amplitude — analógico tem amplitude contínua; digital tem amplitude restrita a 2ⁿ níveis discretos.
+- **Periódico vs. Aperiódico:** x(t) periódico satisfaz x(t) = x(t + T₀) para todo t; sinais aperiódicos não se repetem e incluem sinais causais de duração finita ou infinita.
+- **Energia vs. Potência:** sinais de energia têm E < ∞ e P = 0 (tipicamente de duração finita ou com decaimento); sinais de potência têm P < ∞ e E → ∞ (tipicamente periódicos ou permanentes).
+- **Determinístico vs. Aleatório:** sinais determinísticos são descritos por equação exata; sinais aleatórios são descritos por distribuições de probabilidade e tratados com ferramentas estatísticas.
+

@@ -1,0 +1,187 @@
+# Operações com Sinais no Tempo
+
+No capítulo anterior, aprendemos a quantificar o **tamanho** de um sinal por meio de sua energia e potência. Agora, estudaremos como **transformar** sinais no domínio do tempo. Existem três operações fundamentais que alteram a forma como um sinal se distribui ao longo do eixo temporal: o **deslocamento temporal** (*time shifting*), o **escalamento temporal** (*time scaling*) e a **reversão temporal** (*time reversal*). Essas operações são a base para manipulação de sinais em sistemas de comunicação, processamento de áudio e vídeo, controle e muito mais. Ao final, veremos como combiná-las para interpretar expressões do tipo **x(at − b)**.
+
+## Deslocamento Temporal — Atraso e Avanço
+
+O **deslocamento temporal** move o sinal para a direita ou para a esquerda no eixo do tempo, sem alterar sua forma ou amplitude. Dado um sinal x(t), o sinal deslocado é:
+
+> **y(t) = x(t − t₀)**
+>
+> - Se **t₀ > 0**: o sinal é **atrasado** (desloca para a **direita**) — o evento acontece mais tarde.
+> - Se **t₀ < 0**: o sinal é **avançado** (desloca para a **esquerda**) — o evento acontece mais cedo.
+
+<TimeShiftDemo />
+
+Observe na visualização como o pulso triangular mantém exatamente a mesma forma, apenas mudando sua posição no eixo temporal. O pico que estava em t = 2 no sinal original aparece em t = 4 no sinal atrasado x(t − 2) e em t = 1 no sinal avançado x(t + 1).
+
+### Intuição: Por que x(t − 2) é Atraso?
+
+A confusão mais comum é: "se estou **subtraindo** 2, por que o sinal vai para a **direita**?" A resposta está na substituição direta:
+
+- x(t) atinge seu pico quando o **argumento** vale 2 (ou seja, x(2) é o pico).
+- x(t − 2) atinge o pico quando **t − 2 = 2**, ou seja, **t = 4**. O pico "esperou" 2 unidades.
+- x(t + 1) atinge o pico quando **t + 1 = 2**, ou seja, **t = 1**. O pico "adiantou" 1 unidade.
+
+> **Regra prática:** x(t − t₀) com t₀ > 0 sempre desloca para a **direita** (atraso). x(t + t₀) com t₀ > 0 sempre desloca para a **esquerda** (avanço). O sinal de t₀ é contra-intuitivo — memorize!
+
+### Aplicações do Deslocamento Temporal
+
+<MarkdownTable
+  headers={["Aplicação", "Operação", "Exemplo"]}
+  rows={[
+    ["**Atraso de propagação**", "x(t − τ) onde τ = distância/velocidade", "Sinal de rádio atrasado pela distância até o receptor"],
+    ["**Eco em áudio**", "y(t) = x(t) + α·x(t − τ)", "Reflexão sonora chega com atraso τ e amplitude reduzida α"],
+    ["**Sincronização**", "Alinhar dois sinais no tempo", "GPS calcula posição medindo atrasos de múltiplos satélites"],
+    ["**Buffers digitais**", "x[n − k] — atraso de k amostras", "Fila FIFO em processadores de áudio"],
+  ]}
+/>
+
+## Escalamento Temporal — Compressão e Expansão
+
+O **escalamento temporal** altera a "velocidade" do sinal, comprimindo-o ou expandindo-o no eixo do tempo:
+
+> **y(t) = x(at)**
+>
+> - Se **|a| > 1**: o sinal é **comprimido** (duração diminui, frequências aumentam).
+> - Se **|a| < 1**: o sinal é **expandido** (duração aumenta, frequências diminuem).
+> - A **amplitude** não muda — apenas a distribuição temporal.
+
+<TimeScalingDemo />
+
+### Como Encontrar os Novos Limites
+
+Se x(t) está definido no intervalo [t₁, t₂], então x(at) está definido quando:
+
+- t₁ ≤ at ≤ t₂ → **t₁/a ≤ t ≤ t₂/a** (para a > 0)
+
+A duração original D = t₂ − t₁ se transforma em **D/|a|**:
+
+<MarkdownTable
+  headers={["Fator a", "Efeito", "Duração", "Frequências", "Exemplo Prático"]}
+  rows={[
+    ["**a = 2**", "Comprime ×2", "D/2 (metade)", "Dobram (pitch sobe)", "Áudio em velocidade 2×"],
+    ["**a = 1/2**", "Expande ×2", "2D (dobro)", "Caem pela metade (pitch desce)", "Câmera lenta (slow motion)"],
+    ["**a = 3**", "Comprime ×3", "D/3 (um terço)", "Triplicam", "Aceleração de vídeo 3×"],
+    ["**a = 1**", "Sem alteração", "D", "Inalteradas", "Sinal original"],
+  ]}
+/>
+
+### Exemplo: Reprodução de Áudio
+
+Quando você reproduz um áudio na velocidade 2×, está aplicando x(2t):
+- Um podcast de 60 minutos passa a durar 30 minutos.
+- As frequências dobram: vozes ficam mais agudas (efeito "chipmunk").
+- A informação é preservada — você ainda entende o conteúdo.
+
+Quando usa câmera lenta (0.5×), aplica x(t/2):
+- Um vídeo de 10 segundos passa a durar 20 segundos.
+- As frequências caem pela metade: sons ficam mais graves.
+
+## Reversão Temporal — Espelhamento
+
+A **reversão temporal** espelha o sinal em relação ao eixo vertical (t = 0), trocando o passado pelo futuro:
+
+> **y(t) = x(−t)**
+>
+> O ponto que estava em t = 3 agora está em t = −3. A forma é preservada, mas refletida.
+
+<TimeReversalDemo />
+
+A reversão temporal é equivalente a reproduzir o sinal "de trás para frente". Na visualização, observe como o sinal assimétrico — que crescia gradualmente e decaía rapidamente — agora cresce rapidamente e decai gradualmente. A forma é a imagem espelhada.
+
+### Sinais Pares e Ímpares
+
+A reversão temporal nos leva a uma classificação importante:
+
+<MarkdownTable
+  headers={["Classificação", "Condição", "Propriedade", "Exemplos"]}
+  rows={[
+    ["**Sinal par**", "x(−t) = x(t) para todo t", "Simétrico em relação a t = 0", "cos(t), e⁻|ᵗ|, constante C"],
+    ["**Sinal ímpar**", "x(−t) = −x(t) para todo t", "Anti-simétrico; x(0) = 0", "sin(t), t, t³"],
+    ["**Nem par nem ímpar**", "Nenhuma das condições acima", "Caso geral — a maioria dos sinais", "e⁻ᵗ·u(t), pulso assimétrico"],
+  ]}
+/>
+
+> **Decomposição par-ímpar:** qualquer sinal x(t) pode ser decomposto em uma parte par e uma parte ímpar:
+>
+> - **Parte par:** xₑ(t) = ½[x(t) + x(−t)]
+> - **Parte ímpar:** xₒ(t) = ½[x(t) − x(−t)]
+> - **x(t) = xₑ(t) + xₒ(t)** — sempre, para qualquer sinal!
+
+### Exemplo: Decomposição de e⁻ᵗ·u(t)
+
+O sinal x(t) = e⁻ᵗ·u(t) (exponencial causal) não é par nem ímpar. Sua decomposição:
+
+- x(−t) = eᵗ·u(−t) (exponencial que existe para t < 0)
+- **Parte par:** xₑ(t) = ½[e⁻ᵗ·u(t) + eᵗ·u(−t)] = **½·e⁻|ᵗ|** — simétrica, decai para ambos os lados
+- **Parte ímpar:** xₒ(t) = ½[e⁻ᵗ·u(t) − eᵗ·u(−t)] — anti-simétrica, com descontinuidade em t = 0
+
+## Combinando Operações — x(at − b)
+
+Na prática, frequentemente precisamos aplicar múltiplas operações simultaneamente. A expressão **y(t) = x(at − b)** combina escalamento e deslocamento. A ordem em que aplicamos as operações importa!
+
+### Método 1: Desloca Primeiro, Depois Escala
+
+1. Comece com x(t)
+2. Desloque: x(t) → x(t − b) — substitui t por (t − b)
+3. Escale: x(t − b) → x(at − b) — substitui t por at
+
+<ShiftThenScaleDemo />
+
+### Método 2: Escala Primeiro, Depois Desloca
+
+1. Comece com x(t)
+2. Escale: x(t) → x(at)
+3. Desloque: x(at) → x(a(t − b/a)) = x(at − b) — desloca por **b/a**, não por b!
+
+<ScaleThenShiftDemo />
+
+> **Atenção crítica:** no Método 2, o deslocamento após o escalamento é **b/a**, não b! Se x(at − b) = x(a(t − b/a)), o deslocamento no eixo t escalado é b/a. Esse é o erro mais comum em provas.
+
+<MarkdownTable
+  headers={["Método", "Passo 1", "Passo 2", "Deslocamento Aplicado"]}
+  rows={[
+    ["**Método 1** (desloca → escala)", "x(t) → x(t − b)", "x(t − b) → x(at − b)", "b unidades (direto)"],
+    ["**Método 2** (escala → desloca)", "x(t) → x(at)", "x(at) → x(a(t − b/a))", "b/a unidades (dividido por a)"],
+  ]}
+/>
+
+### Exemplo Completo: x(2t − 6)
+
+Escrevendo na forma x(a(t − t₀)): x(2t − 6) = x(2(t − 3))
+
+**Método 1:** x(t) → x(t − 6) → x(2t − 6)
+- Desloca 6 unidades à direita, depois comprime por fator 2.
+
+**Método 2:** x(t) → x(2t) → x(2(t − 3)) = x(2t − 6)
+- Comprime por fator 2, depois desloca 3 unidades à direita (b/a = 6/2 = 3).
+
+Ambos os métodos produzem o mesmo resultado. Se x(t) é um pulso em [1, 3]:
+- x(2t − 6) existe quando 1 ≤ 2t − 6 ≤ 3, ou seja, **3.5 ≤ t ≤ 4.5** (duração = 1, metade da original).
+
+## Visão Geral das Três Operações
+
+<CombinedOperationsSummary />
+
+<MarkdownTable
+  headers={["Operação", "Expressão", "Efeito no Sinal", "Preserva Forma?", "Preserva Duração?"]}
+  rows={[
+    ["**Deslocamento**", "x(t − t₀)", "Move para direita (t₀ > 0) ou esquerda (t₀ < 0)", "Sim", "Sim"],
+    ["**Escalamento**", "x(at)", "Comprime (|a| > 1) ou expande (|a| < 1)", "Sim (horizontalmente)", "Não — D/|a|"],
+    ["**Reversão**", "x(−t)", "Espelha em relação a t = 0", "Sim (espelhada)", "Sim"],
+    ["**Combinada**", "x(at − b)", "Escala + desloca + possivelmente inverte", "Sim", "Não — D/|a|"],
+  ]}
+/>
+
+## Resumo da Aula
+
+Neste capítulo, estudamos as três operações fundamentais sobre sinais no tempo:
+
+- **Deslocamento temporal:** x(t − t₀) move o sinal sem alterar forma ou duração. t₀ > 0 atrasa (→ direita), t₀ < 0 avança (→ esquerda).
+- **Escalamento temporal:** x(at) comprime (|a| > 1) ou expande (|a| < 1) o sinal. A duração se torna D/|a|. Aplicações: velocidade de reprodução, câmera lenta.
+- **Reversão temporal:** x(−t) espelha o sinal em relação a t = 0. Base para classificação em sinais pares e ímpares.
+- **Decomposição par-ímpar:** qualquer sinal x(t) = xₑ(t) + xₒ(t), onde xₑ = ½[x(t) + x(−t)] e xₒ = ½[x(t) − x(−t)].
+- **Operações combinadas:** x(at − b) pode ser obtido por dois métodos — desloca-depois-escala (deslocamento de b) ou escala-depois-desloca (deslocamento de b/a).
+- **Erro clássico:** no Método 2, o deslocamento após escalamento é b/a, não b. Essa distinção é a fonte de erro mais frequente em provas.
+

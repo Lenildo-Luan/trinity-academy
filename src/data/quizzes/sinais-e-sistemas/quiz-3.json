@@ -1,0 +1,309 @@
+{
+  "id": "quiz-3",
+  "title": "Quiz — Operações com Sinais no Tempo",
+  "description": "Teste seus conhecimentos sobre deslocamento temporal, escalamento temporal, reversão temporal e combinação de operações com sinais.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Se x(t) tem um pico em t = 5, em que instante ocorre o pico de x(t − 3)?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "t = 2 — o pico é adiantado em 3 unidades",
+          "isCorrect": false,
+          "explanation": "x(t − 3) representa um atraso, não um avanço. O pico ocorre quando t − 3 = 5, ou seja, t = 8. O sinal \"demora\" 3 unidades a mais para atingir o pico."
+        },
+        {
+          "id": "a2",
+          "text": "t = 8 — o sinal é atrasado (deslocado para a direita) em 3 unidades",
+          "isCorrect": true,
+          "explanation": "Correto! x(t − 3) atinge o pico quando seu argumento vale 5: t − 3 = 5 → t = 8. Subtrair no argumento desloca para a direita (atraso)."
+        },
+        {
+          "id": "a3",
+          "text": "t = 5 — o deslocamento não afeta a posição do pico",
+          "isCorrect": false,
+          "explanation": "O deslocamento temporal altera a posição de todos os pontos do sinal. O pico que estava em t = 5 agora está em t = 5 + 3 = 8."
+        },
+        {
+          "id": "a4",
+          "text": "t = 15 — o pico é multiplicado pelo fator de atraso",
+          "isCorrect": false,
+          "explanation": "O deslocamento é aditivo, não multiplicativo. x(t − t₀) desloca o pico de t_pico para t_pico + t₀ = 5 + 3 = 8."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "O sinal x(t) está definido no intervalo [2, 6]. Qual é o intervalo de x(3t)?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "[6, 18] — multiplica os limites por 3",
+          "isCorrect": false,
+          "explanation": "Multiplicar os limites por 3 seria o resultado de x(t/3). Para x(3t), resolvemos 2 ≤ 3t ≤ 6, ou seja, t ∈ [2/3, 2]. A compressão divide os limites por 3."
+        },
+        {
+          "id": "a2",
+          "text": "[2/3, 2] — os limites são divididos por 3 (compressão)",
+          "isCorrect": true,
+          "explanation": "Correto! x(3t) existe quando 2 ≤ 3t ≤ 6. Dividindo por 3: 2/3 ≤ t ≤ 2. A duração original de 4 unidades se comprime para 4/3 ≈ 1.33 unidades — fator 1/3."
+        },
+        {
+          "id": "a3",
+          "text": "[2, 6] — o escalamento não altera o intervalo",
+          "isCorrect": false,
+          "explanation": "O escalamento altera o intervalo. x(3t) comprime o sinal por fator 3, reduzindo a duração de 4 para 4/3 e movendo os limites para [2/3, 2]."
+        },
+        {
+          "id": "a4",
+          "text": "[0, 2] — os limites são subtraídos pelo fator",
+          "isCorrect": false,
+          "explanation": "Não se subtrai o fator. A regra é: se x(t) existe para t₁ ≤ t ≤ t₂, então x(at) existe para t₁/a ≤ t ≤ t₂/a (quando a > 0). Aqui: [2/3, 2]."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "O sinal x(t) = cos(t) é classificado como:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Sinal ímpar, pois cos(−t) = −cos(t)",
+          "isCorrect": false,
+          "explanation": "Na verdade, cos(−t) = cos(t), não −cos(t). Isso é a definição de sinal par, não ímpar."
+        },
+        {
+          "id": "a2",
+          "text": "Sinal par, pois cos(−t) = cos(t) — simétrico em relação a t = 0",
+          "isCorrect": true,
+          "explanation": "Correto! cos(−t) = cos(t) para todo t. Isso significa que o gráfico é simétrico em relação ao eixo vertical — definição exata de sinal par."
+        },
+        {
+          "id": "a3",
+          "text": "Nem par nem ímpar — funções trigonométricas não têm essa classificação",
+          "isCorrect": false,
+          "explanation": "Funções trigonométricas são os exemplos clássicos: cos(t) é par e sin(t) é ímpar. A classificação par/ímpar aplica-se a qualquer função."
+        },
+        {
+          "id": "a4",
+          "text": "Par e ímpar simultaneamente — pois cos(t) satisfaz ambas as condições",
+          "isCorrect": false,
+          "explanation": "O único sinal que é simultaneamente par e ímpar é x(t) = 0 para todo t. cos(t) ≠ 0 para todo t, e cos(−t) = cos(t) ≠ −cos(t), portanto é apenas par."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Reproduzir um áudio na velocidade 0.5× corresponde a qual operação matemática?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "x(t − 0.5) — atrasa o sinal em 0.5 unidades",
+          "isCorrect": false,
+          "explanation": "x(t − 0.5) apenas desloca o sinal no tempo, não altera sua velocidade ou duração. Velocidade 0.5× é escalamento temporal."
+        },
+        {
+          "id": "a2",
+          "text": "x(2t) — comprime o sinal por fator 2",
+          "isCorrect": false,
+          "explanation": "x(2t) acelera o áudio (velocidade 2×), comprimindo-o. Velocidade 0.5× é o oposto: expansão temporal."
+        },
+        {
+          "id": "a3",
+          "text": "x(t/2) — expande o sinal por fator 2, dobrando a duração",
+          "isCorrect": true,
+          "explanation": "Correto! x(t/2) ou equivalentemente x(0.5·t) expande o sinal: a duração dobra, as frequências caem pela metade (sons ficam mais graves). É exatamente o efeito de câmera lenta / slow motion."
+        },
+        {
+          "id": "a4",
+          "text": "0.5·x(t) — reduz a amplitude pela metade",
+          "isCorrect": false,
+          "explanation": "0.5·x(t) diminui o volume (amplitude) pela metade, mas não altera a velocidade ou duração. Velocidade 0.5× requer escalamento temporal: x(t/2)."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Dado x(t) = u(t) − u(t−2) (pulso retangular de 0 a 2), qual é a expressão de x(−t)?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "u(−t) − u(−t−2) — um pulso de −2 a 0",
+          "isCorrect": false,
+          "explanation": "Essa expressão resulta em u(−t) − u(−(t+2)). u(−t) = 1 para t ≤ 0 e u(−t−2) = u(−(t+2)) = 1 para t ≤ −2. A diferença é 1 para −2 ≤ t ≤ 0. Mas a notação correta seria u(−t) − u(−t−2)."
+        },
+        {
+          "id": "a2",
+          "text": "u(−t) − u(−t+2) — um pulso de −2 a 0",
+          "isCorrect": true,
+          "explanation": "Correto! Substituindo t por −t: x(−t) = u(−t) − u(−t−(−2)) = u(−t) − u(−t+2). u(−t) = 1 para t ≤ 0, e u(−t+2) = u(−(t−2)) = 1 para t ≤ 2. A diferença é 1 para −2 ≤ t ≤ 0 — o pulso espelhado."
+        },
+        {
+          "id": "a3",
+          "text": "−u(t) + u(t−2) — inverte a amplitude do pulso",
+          "isCorrect": false,
+          "explanation": "Isso seria −x(t), não x(−t). Reversão temporal espelha o eixo t (troca t por −t), não inverte a amplitude."
+        },
+        {
+          "id": "a4",
+          "text": "u(t) − u(t+2) — desloca para a esquerda",
+          "isCorrect": false,
+          "explanation": "Isso seria x(t+2), um deslocamento, não uma reversão. A reversão troca t por −t em todos os termos."
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Para obter x(2t − 4) pelo Método 2 (escala primeiro, depois desloca), qual deslocamento deve ser aplicado após o escalamento?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "4 unidades à direita — mesmo valor de b",
+          "isCorrect": false,
+          "explanation": "No Método 2, o deslocamento é b/a, não b. Aqui: x(2t − 4) = x(2(t − 2)), então o deslocamento é 4/2 = 2 unidades à direita."
+        },
+        {
+          "id": "a2",
+          "text": "2 unidades à direita — pois b/a = 4/2 = 2",
+          "isCorrect": true,
+          "explanation": "Correto! x(2t − 4) = x(2(t − 2)). Pelo Método 2: primeiro escala x(t) → x(2t), depois desloca por b/a = 4/2 = 2 unidades à direita. Esse é o erro clássico em provas — o deslocamento no Método 2 é sempre b/a."
+        },
+        {
+          "id": "a3",
+          "text": "8 unidades à direita — pois b·a = 4·2 = 8",
+          "isCorrect": false,
+          "explanation": "Não se multiplica b por a. A relação correta é b/a. x(2t − 4) = x(2(t − 2)), portanto desloca-se 2 unidades à direita."
+        },
+        {
+          "id": "a4",
+          "text": "2 unidades à esquerda — divide-se b por a e inverte a direção",
+          "isCorrect": false,
+          "explanation": "A direção não é invertida. Como b = 4 > 0 (subtraído no argumento), o deslocamento é para a direita. O valor é b/a = 2, para a direita."
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "A decomposição par-ímpar de um sinal x(t) garante que xₑ(t) = ½[x(t) + x(−t)]. Se x(t) = e⁻²ᵗ·u(t), qual é xₑ(t)?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "xₑ(t) = e⁻²ᵗ para todo t",
+          "isCorrect": false,
+          "explanation": "e⁻²ᵗ existe para todo t mas não é simétrico (e⁻² ≠ e²). A parte par usa x(−t) = e²ᵗ·u(−t), resultando em xₑ(t) = ½[e⁻²ᵗ·u(t) + e²ᵗ·u(−t)] = ½·e⁻²|ᵗ|."
+        },
+        {
+          "id": "a2",
+          "text": "xₑ(t) = ½·e⁻²|ᵗ| — exponencial simétrica decaindo para ambos os lados",
+          "isCorrect": true,
+          "explanation": "Correto! xₑ(t) = ½[e⁻²ᵗ·u(t) + e²ᵗ·u(−t)]. Para t > 0: ½·e⁻²ᵗ. Para t < 0: ½·e²ᵗ. Em ambos os casos, = ½·e⁻²|ᵗ| — uma curva simétrica em forma de tenda invertida."
+        },
+        {
+          "id": "a3",
+          "text": "xₑ(t) = 0 — pois e⁻²ᵗ·u(t) é um sinal ímpar",
+          "isCorrect": false,
+          "explanation": "e⁻²ᵗ·u(t) não é ímpar. Um sinal ímpar satisfaz x(−t) = −x(t), mas e⁻²ᵗ·u(t) ≠ −e²ᵗ·u(−t). A parte par é não-nula: ½·e⁻²|ᵗ|."
+        },
+        {
+          "id": "a4",
+          "text": "xₑ(t) = ½·e⁻²ᵗ·u(t) — metade do sinal original",
+          "isCorrect": false,
+          "explanation": "A parte par não é simplesmente metade do original. É ½[x(t) + x(−t)], que inclui o sinal espelhado. O resultado é ½·e⁻²|ᵗ|, simétrico."
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Se x(t) é um pulso definido em [1, 5], qual é o intervalo de x(−t)?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "[−5, −1] — os limites são negados e a ordem se inverte",
+          "isCorrect": true,
+          "explanation": "Correto! x(−t) existe quando 1 ≤ −t ≤ 5, ou seja, −5 ≤ t ≤ −1. Os limites são negados e a ordem se inverte. O pulso que existia no intervalo positivo agora está no intervalo negativo — refletido em relação a t = 0."
+        },
+        {
+          "id": "a2",
+          "text": "[−1, −5] — apenas nega os limites sem inverter a ordem",
+          "isCorrect": false,
+          "explanation": "Os limites negativos devem ser reordenados: de 1 ≤ −t ≤ 5, obtemos −5 ≤ t ≤ −1 (multiplicando por −1 inverte a desigualdade). O intervalo correto é [−5, −1]."
+        },
+        {
+          "id": "a3",
+          "text": "[1, 5] — a reversão não altera o intervalo",
+          "isCorrect": false,
+          "explanation": "A reversão espelha o sinal em relação a t = 0. O intervalo [1, 5] está no lado positivo; após reversão, fica em [−5, −1] no lado negativo."
+        },
+        {
+          "id": "a4",
+          "text": "[−5, 5] — combina os intervalos original e espelhado",
+          "isCorrect": false,
+          "explanation": "[−5, 5] seria o intervalo de x(t) + x(−t), não de x(−t) sozinho. A reversão apenas espelha: [1, 5] → [−5, −1]."
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Qual das seguintes afirmações sobre escalamento temporal é VERDADEIRA?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "x(at) com |a| > 1 expande o sinal no tempo, aumentando sua duração",
+          "isCorrect": false,
+          "explanation": "|a| > 1 comprime o sinal, reduzindo a duração para D/|a|. O efeito é aceleração — como assistir um vídeo em velocidade rápida."
+        },
+        {
+          "id": "a2",
+          "text": "O escalamento temporal altera a amplitude do sinal proporcionalmente ao fator a",
+          "isCorrect": false,
+          "explanation": "O escalamento temporal NÃO altera a amplitude — apenas a distribuição no eixo do tempo. Para alterar amplitude, seria necessário multiplicar: a·x(t)."
+        },
+        {
+          "id": "a3",
+          "text": "x(at) com |a| > 1 comprime o sinal, reduzindo a duração para D/|a| sem alterar a amplitude",
+          "isCorrect": true,
+          "explanation": "Correto! O escalamento temporal afeta apenas o eixo do tempo. |a| > 1 comprime (duração D/|a|), |a| < 1 expande (duração D/|a|). A amplitude permanece inalterada."
+        },
+        {
+          "id": "a4",
+          "text": "A energia de x(at) é sempre igual à energia de x(t), pois a forma do sinal não muda",
+          "isCorrect": false,
+          "explanation": "A energia muda! E[x(at)] = (1/|a|)·E[x(t)]. Comprimir o sinal reduz a duração da integração, diminuindo a energia. A forma é preservada, mas o intervalo de integração não."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Dado x(t) definido em [0, 4], qual é o intervalo de x(−2t + 6)?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "[1, 3] — escrevemos como x(−2(t − 3)) e aplicamos as operações",
+          "isCorrect": true,
+          "explanation": "Correto! x(−2t + 6) = x(−2(t − 3)). Precisa 0 ≤ −2t + 6 ≤ 4. Da primeira: −2t ≥ −6 → t ≤ 3. Da segunda: −2t ≤ −2 → t ≥ 1. Logo t ∈ [1, 3]. A duração original 4 comprime para 4/2 = 2."
+        },
+        {
+          "id": "a2",
+          "text": "[−1, 3] — aplica-se compressão por 2 e deslocamento de 3",
+          "isCorrect": false,
+          "explanation": "Da condição 0 ≤ −2t + 6 ≤ 4: resolvendo, 1 ≤ t ≤ 3. O intervalo correto é [1, 3], não [−1, 3]."
+        },
+        {
+          "id": "a3",
+          "text": "[3, 7] — pois desloca 6 e divide por 2",
+          "isCorrect": false,
+          "explanation": "Essa conta está incorreta. O correto é resolver 0 ≤ −2t + 6 ≤ 4 → 2 ≤ 2t ≤ 6 → 1 ≤ t ≤ 3. A reversão (sinal negativo em −2t) inverte a direção."
+        },
+        {
+          "id": "a4",
+          "text": "[−3, −1] — o sinal negativo nega todo o intervalo",
+          "isCorrect": false,
+          "explanation": "O deslocamento de +6 compensa o efeito do sinal negativo. Resolvendo corretamente: 0 ≤ −2t + 6 ≤ 4 → 1 ≤ t ≤ 3. O intervalo é positivo."
+        }
+      ]
+    }
+  ]
+}
+

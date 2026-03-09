@@ -1,0 +1,172 @@
+# Tamanho de um Sinal — Energia e Potência
+
+No capítulo anterior, definimos o que é um **sinal** — uma função que carrega informação, tipicamente no domínio do tempo — e o que é um **sistema**. Agora surge uma pergunta natural: como podemos medir o **tamanho** de um sinal? Não estamos falando da amplitude em um instante, mas de uma medida global que capture o "conteúdo" do sinal ao longo do tempo. Neste capítulo, apresentamos duas medidas fundamentais: a **energia** e a **potência** de um sinal. Essas grandezas permitem classificar sinais, comparar suas intensidades e são a base de conceitos práticos como a **relação sinal-ruído** (*Signal-to-Noise Ratio*, SNR), essencial em telecomunicações.
+
+## Por que Medir o "Tamanho" de um Sinal?
+
+A amplitude instantânea x(t) nos diz o valor do sinal em um único instante, mas não quantifica o sinal como um todo. Considere dois sinais: um pulso curto de grande amplitude e uma onda senoidal de baixa amplitude que dura indefinidamente. Qual deles "carrega mais"? Para responder, precisamos de medidas que agreguem toda a informação ao longo do tempo.
+
+A primeira tentativa seria calcular a **média** do sinal — mas a média de uma senoide é zero, o que claramente não captura o fato de que a senoide está presente e ativa. A solução é usar **|x(t)|²** — o quadrado do valor absoluto do sinal:
+
+> **Ideia central:** usamos |x(t)|² como medida instantânea de "tamanho" porque: (1) é sempre não-negativo, eliminando o cancelamento entre valores positivos e negativos; e (2) dá mais peso a amplitudes maiores, refletindo a energia física carregada pelo sinal.
+
+<SignalEnergyArea />
+
+Na visualização acima, observe como a área sombreada sob a curva x²(t) representa a energia acumulada do sinal. Mesmo que x(t) oscile entre valores positivos e negativos, x²(t) é sempre positivo — a área acumulada cresce monotonicamente.
+
+## Energia de um Sinal
+
+A **energia** de um sinal é a integral do quadrado de sua amplitude ao longo de todo o tempo:
+
+> **Eₓ = ∫₋∞^∞ |x(t)|² dt**
+
+Para sinais reais, |x(t)|² = x²(t). A energia captura o **conteúdo total** do sinal — toda a "atividade" ao longo de sua existência.
+
+<MarkdownTable
+  headers={["Tipo de Sinal", "Energia", "Exemplo"]}
+  rows={[
+    ["**Pulso retangular** de amplitude A e duração T", "Eₓ = A² · T", "Pulso de 3V por 2s → E = 9 · 2 = 18"],
+    ["**Exponencial decrescente** e⁻ᵃᵗ · u(t), a > 0", "Eₓ = 1/(2a)", "e⁻²ᵗ · u(t) → E = 1/4"],
+    ["**Senoide** A·sin(ωt) — oscila indefinidamente", "Eₓ = ∞", "Integral diverge porque o sinal nunca cessa"],
+    ["**Constante** x(t) = C para todo t", "Eₓ = ∞", "C² integrado de −∞ a +∞ diverge"],
+  ]}
+/>
+
+### Exemplo Resolvido: Energia de uma Exponencial
+
+Dado x(t) = e⁻²ᵗ · u(t), onde u(t) é o degrau unitário (vale 1 para t ≥ 0 e 0 caso contrário):
+
+1. Eₓ = ∫₀^∞ |e⁻²ᵗ|² dt = ∫₀^∞ e⁻⁴ᵗ dt
+2. Eₓ = [-1/4 · e⁻⁴ᵗ]₀^∞ = (0) − (−1/4) = **1/4**
+
+Este sinal tem energia finita. Dizemos que é um **sinal de energia**.
+
+## Potência de um Sinal
+
+Nem todo sinal tem energia finita. Uma senoide pura, por exemplo, oscila para sempre — sua energia é infinita. Para esses sinais, usamos a **potência** — a média temporal da energia:
+
+> **Pₓ = lim(T→∞) (1/2T) · ∫₋T^T |x(t)|² dt**
+
+A potência é a **taxa média** com que o sinal dissipa energia por unidade de tempo.
+
+<SignalPowerAverage />
+
+Na visualização, observe como a janela de integração se expande enquanto a potência converge para um valor estável. Para sinais periódicos, basta calcular a média sobre um período.
+
+### Potência de Sinais Periódicos
+
+Para sinais periódicos com período T₀, a potência se simplifica:
+
+> **Pₓ = (1/T₀) · ∫₀^T₀ |x(t)|² dt**
+
+<MarkdownTable
+  headers={["Sinal Periódico", "Potência", "Cálculo"]}
+  rows={[
+    ["**A·sin(ωt)** ou **A·cos(ωt)**", "P = A²/2", "Média de sin²(t) em um período = 1/2"],
+    ["**Constante** x(t) = C", "P = C²", "Média de C² = C²"],
+    ["**Onda quadrada** ±A", "P = A²", "x²(t) = A² para todo t"],
+    ["**A·sin(ωt) + B·cos(ωt)**", "P = (A² + B²)/2", "Termos cruzados se anulam na média"],
+  ]}
+/>
+
+### Exemplo Resolvido: Potência de uma Senoide
+
+Dado x(t) = 3·sin(2πt):
+
+1. Pₓ = (1/T₀) · ∫₀^T₀ 9·sin²(2πt) dt, com T₀ = 1s
+2. Usando sin²(θ) = (1 − cos(2θ))/2:
+3. Pₓ = 9 · (1/1) · ∫₀^1 (1 − cos(4πt))/2 dt = 9 · [t/2 − sin(4πt)/(8π)]₀^1 = 9 · 1/2 = **9/2 = 4.5**
+
+Regra geral: para A·sin(ωt), **P = A²/2**.
+
+<SinusoidalEnergyPower />
+
+## Classificação: Sinais de Energia vs. Sinais de Potência
+
+Todo sinal pode ser classificado em uma de três categorias mutuamente exclusivas:
+
+<EnergyVsPowerSignals />
+
+<MarkdownTable
+  headers={["Categoria", "Energia Eₓ", "Potência Pₓ", "Característica", "Exemplos"]}
+  rows={[
+    ["**Sinal de energia**", "0 < Eₓ < ∞", "Pₓ = 0", "Transitório — desaparece com o tempo", "Pulsos, exponenciais decrescentes, sinais de duração finita"],
+    ["**Sinal de potência**", "Eₓ = ∞", "0 < Pₓ < ∞", "Persistente — amplitude se mantém indefinidamente", "Senoides, constantes, ondas quadradas, ruído estacionário"],
+    ["**Nem energia nem potência**", "Eₓ = ∞", "Pₓ = ∞", "Amplitude cresce indefinidamente", "x(t) = t, x(t) = eᵗ (rampa, exponencial crescente)"],
+  ]}
+/>
+
+> **Regra fundamental:** se um sinal tem energia finita (Eₓ < ∞), sua potência é necessariamente zero (Pₓ = 0). Se tem potência finita e não-nula (0 < Pₓ < ∞), sua energia é necessariamente infinita (Eₓ = ∞). As duas medidas são complementares — todo sinal "útil" é de energia ou de potência.
+
+## Valor RMS — Root Mean Square
+
+O **valor RMS** (*Root Mean Square*) é a raiz quadrada da potência:
+
+> **x_rms = √Pₓ**
+
+O RMS é extremamente importante na prática porque representa o **nível DC equivalente** — uma tensão DC que produziria a mesma potência dissipada em uma resistência.
+
+<RMSValueDemo />
+
+<MarkdownTable
+  headers={["Sinal", "Potência P", "Valor RMS", "Significado Prático"]}
+  rows={[
+    ["**A·sin(ωt)**", "A²/2", "A/√2 ≈ 0.707A", "Tensão eficaz da rede elétrica"],
+    ["**Constante C**", "C²", "C", "RMS = próprio valor DC"],
+    ["**Onda quadrada ±A**", "A²", "A", "RMS = amplitude (sem fator √2)"],
+  ]}
+/>
+
+### Exemplo Prático: Rede Elétrica Brasileira
+
+A rede elétrica brasileira fornece uma tensão senoidal com amplitude de pico de aproximadamente 180V:
+
+- x(t) = 180·sin(2π·60·t) (frequência de 60 Hz)
+- P = 180²/2 = 16200 V²
+- **V_rms = 180/√2 ≈ 127V**
+
+É por isso que dizemos que a rede é de **127V** — esse é o valor RMS, não o pico. O valor RMS é o que aparece no multímetro e determina a potência real entregue aos equipamentos.
+
+## Relação Sinal-Ruído (SNR)
+
+Na prática, sinais raramente viajam sozinhos — são acompanhados por **ruído** (*noise*). A **SNR** (*Signal-to-Noise Ratio*) quantifica a qualidade de uma comunicação comparando a potência do sinal com a potência do ruído:
+
+> **SNR = P_sinal / P_ruído**
+
+Em **decibéis** (dB): **SNR_dB = 10 · log₁₀(P_sinal / P_ruído)**
+
+<SNRVisualization />
+
+<MarkdownTable
+  headers={["SNR (dB)", "SNR (linear)", "Qualidade", "Exemplo de Aplicação"]}
+  rows={[
+    ["**> 40 dB**", "> 10.000", "Excelente", "CD de áudio, fibra óptica"],
+    ["**20–40 dB**", "100–10.000", "Boa", "Wi-Fi forte, telefonia digital"],
+    ["**10–20 dB**", "10–100", "Aceitável", "Wi-Fi distante, rádio AM/FM"],
+    ["**0–10 dB**", "1–10", "Ruim", "Comunicação no limite da inteligibilidade"],
+    ["**< 0 dB**", "< 1", "Ruído domina", "GPS (usa técnicas especiais de spread spectrum)"],
+  ]}
+/>
+
+> **Por que SNR usa potência?** Sinais de comunicação são tipicamente persistentes (sinais de potência com E = ∞). A razão ∞/∞ não faz sentido, mas P_sinal/P_ruído é finita e significativa.
+
+### Exemplo: Cálculo de SNR
+
+Um sistema de comunicação tem P_sinal = 10 mW e P_ruído = 0.1 mW:
+
+1. SNR = 10/0.1 = 100 (linear)
+2. SNR_dB = 10 · log₁₀(100) = 10 · 2 = **20 dB**
+
+Essa é uma comunicação de boa qualidade — o sinal é 100× mais forte que o ruído.
+
+## Resumo da Aula
+
+Neste capítulo, estudamos como quantificar o tamanho de um sinal:
+
+- **Medida instantânea:** usamos |x(t)|² em vez de x(t) para evitar cancelamento de valores positivos e negativos.
+- **Energia:** Eₓ = ∫|x(t)|² dt — mede o conteúdo total do sinal. Sinais de energia são transitórios (decaem com o tempo).
+- **Potência:** Pₓ = lim(1/2T)∫|x(t)|² dt — mede a taxa média de energia. Sinais de potência persistem indefinidamente.
+- **Classificação:** sinais de energia têm Eₓ finita e Pₓ = 0; sinais de potência têm Eₓ = ∞ e Pₓ finita; as categorias são mutuamente exclusivas.
+- **Valor RMS:** x_rms = √Pₓ — o nível DC equivalente. Para senoide: RMS = A/√2. A rede brasileira de 127V é o valor RMS de uma senoide com pico de ~180V.
+- **SNR:** relação entre potência do sinal e do ruído, expressa em dB. Quanto maior, melhor a qualidade da comunicação.
+

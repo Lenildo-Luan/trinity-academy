@@ -1,0 +1,57 @@
+# Classificação de Sistemas
+
+No capítulo anterior, introduzimos o conceito de sistema como uma entidade que transforma uma entrada x(t) em uma saída y(t), e vimos como o circuito RC é descrito por uma EDO de primeira ordem. Agora vamos organizar os sistemas em **oito categorias fundamentais**.
+
+## Sistemas Lineares e Não Lineares
+
+Um sistema H\{·\} é **linear** se satisfaz o **princípio da superposição**:
+
+> **H\{a·x₁(t) + b·x₂(t)\} = a·H\{x₁(t)\} + b·H\{x₂(t)\}**
+
+<SuperpositionPrinciple />
+
+## Sistemas Invariantes e Variantes no Tempo
+
+Um sistema é **invariante no tempo** se deslocar a entrada no tempo produz a mesma saída deslocada no tempo.
+
+<TimeInvarianceDemo />
+
+## Sistemas Sem Memória e Com Memória
+
+Um sistema é **sem memória** se: **y(t) = f(x(t))**
+
+<MemoryAndCausality />
+
+## Sistemas Causais e Não Causais
+
+Um sistema é **causal** se a saída depende apenas de valores presentes e passados da entrada.
+
+## Sistemas Contínuos e Discretos no Tempo
+
+- **Contínuo:** x(t) e y(t) — todos os t ∈ ℝ
+- **Discreto:** x[n] e y[n] — apenas n ∈ ℤ
+
+## Sistemas Analógicos e Digitais
+
+- **Analógico:** amplitude contínua
+- **Digital:** amplitude quantizada em 2ⁿ níveis
+
+## Sistemas Inversíveis e Não Inversíveis
+
+Um sistema é **inversível** se existe H⁻¹ que recupera x a partir de y.
+
+<InvertibilityDemo />
+
+## Sistemas Estáveis e Instáveis — BIBO
+
+Um sistema é **BIBO estável** se toda entrada limitada produz saída limitada.
+
+<BIBOStabilityDemo />
+
+## Visão Geral
+
+<SystemClassificationSummary />
+
+## Resumo
+
+As oito categorias fundamentais de sistemas foram apresentadas, cada uma com aplicações e critérios de teste específicos.

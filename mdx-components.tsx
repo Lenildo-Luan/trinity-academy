@@ -145,6 +145,61 @@ import {
   SystemHardwareSoftware,
   SignalProcessingChain,
 } from "./src/components/signals-systems-intro-p5-examples";
+import {
+  SignalEnergyArea,
+  SignalPowerAverage,
+  EnergyVsPowerSignals,
+  RMSValueDemo,
+  SinusoidalEnergyPower,
+  SNRVisualization,
+} from "./src/components/signal-energy-power-p5-examples";
+import {
+  TimeShiftDemo,
+  TimeScalingDemo,
+  TimeReversalDemo,
+  ShiftThenScaleDemo,
+  ScaleThenShiftDemo,
+  CombinedOperationsSummary,
+} from "./src/components/signal-operations-p5-examples"; // signal ops
+import {
+  ContinuousVsDiscreteTime,
+  AnalogVsDigitalSignal,
+  PeriodicVsAperiodic,
+  EnergyVsPowerClassification,
+  DeterministicVsRandom,
+  SignalClassificationMap,
+} from "./src/components/signal-classification-p5-examples";
+import {
+  UnitStepFunction,
+  CausalSignalWithStep,
+  UnitImpulseFunction,
+  SamplingProperty,
+  DelayedImpulseAndStep,
+  ImpulseStepRelation,
+} from "./src/components/signal-models-p5-examples";
+import {
+  SystemBlockDiagram,
+  RCCircuitModel,
+  RCCircuitResponse,
+  InitialConditionsEffect,
+  PhysicsToMathModel,
+  NaturalVsForcedResponse,
+} from "./src/components/systems-intro-p5-examples";
+import {
+  SuperpositionPrinciple,
+  TimeInvarianceDemo,
+  MemoryAndCausality,
+  BIBOStabilityDemo,
+  InvertibilityDemo,
+  SystemClassificationSummary,
+} from "./src/components/systems-classification-p5-examples";
+import {
+  TwoAnalysisMethods,
+  ZeroInputZeroStateDecomp,
+  CharacteristicModes,
+  ConvolutionIntegral,
+  LCITAnalysisWorkflow,
+} from "./src/components/time-domain-analysis-p5-examples";
 
 function getTextContent(node: ReactNode): string {
   if (typeof node === "string") return node;
@@ -386,6 +441,47 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ContinuousVsDiscrete,
     SystemHardwareSoftware,
     SignalProcessingChain,
+    SignalEnergyArea,
+    SignalPowerAverage,
+    EnergyVsPowerSignals,
+    RMSValueDemo,
+    SinusoidalEnergyPower,
+    SNRVisualization,
+    TimeShiftDemo,
+    TimeScalingDemo,
+    TimeReversalDemo,
+    ShiftThenScaleDemo,
+    ScaleThenShiftDemo,
+    CombinedOperationsSummary,
+    ContinuousVsDiscreteTime,
+    AnalogVsDigitalSignal,
+    PeriodicVsAperiodic,
+    EnergyVsPowerClassification,
+    DeterministicVsRandom,
+    SignalClassificationMap,
+    UnitStepFunction,
+    CausalSignalWithStep,
+    UnitImpulseFunction,
+    SamplingProperty,
+    DelayedImpulseAndStep,
+    ImpulseStepRelation,
+    SystemBlockDiagram,
+    RCCircuitModel,
+    RCCircuitResponse,
+    InitialConditionsEffect,
+    PhysicsToMathModel,
+    NaturalVsForcedResponse,
+    SuperpositionPrinciple,
+    TimeInvarianceDemo,
+    MemoryAndCausality,
+    BIBOStabilityDemo,
+    InvertibilityDemo,
+    SystemClassificationSummary,
+    TwoAnalysisMethods,
+    ZeroInputZeroStateDecomp,
+    CharacteristicModes,
+    ConvolutionIntegral,
+    LCITAnalysisWorkflow,
     ...components,
   };
 }

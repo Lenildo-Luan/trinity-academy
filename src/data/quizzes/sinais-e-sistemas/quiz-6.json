@@ -1,0 +1,309 @@
+{
+  "id": "quiz-6",
+  "title": "Quiz — Introdução a Sistemas",
+  "description": "Teste seus conhecimentos sobre a definição de sistemas, modelagem matemática via EDO, o circuito RC como exemplo, condições iniciais e a decomposição da resposta total em entrada nula e estado nulo.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "O que é um sistema no contexto de sinais e sistemas?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Um conjunto de sinais armazenados em memória para processamento futuro",
+          "isCorrect": false,
+          "explanation": "Um conjunto de sinais armazenados é uma base de dados, não um sistema. Um sistema é uma entidade que processa sinais de entrada para gerar saídas."
+        },
+        {
+          "id": "a2",
+          "text": "Uma entidade que transforma um sinal de entrada x(t) em um sinal de saída y(t) por meio de uma operação matemática H{·}",
+          "isCorrect": true,
+          "explanation": "Correto! Um sistema é qualquer entidade — física ou computacional — que realiza a operação y(t) = H{x(t)}, transformando a entrada em saída de acordo com uma regra matemática. Pode ser implementado em hardware (circuitos) ou software (algoritmos)."
+        },
+        {
+          "id": "a3",
+          "text": "Um sinal periódico que oscila entre valores máximo e mínimo",
+          "isCorrect": false,
+          "explanation": "Isso descreve um tipo de sinal, não um sistema. Um sistema opera sobre sinais, transformando-os."
+        },
+        {
+          "id": "a4",
+          "text": "Um protocolo de comunicação entre dois dispositivos eletrônicos",
+          "isCorrect": false,
+          "explanation": "Protocolo de comunicação é um conceito de redes de computadores. No contexto de sinais e sistemas, um sistema é um operador matemático que transforma entradas em saídas."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "No circuito RC com resistor R e capacitor C, qual é a equação diferencial que relaciona a tensão de entrada x(t) com a tensão no capacitor y(t)?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "y(t) = RC · x(t)",
+          "isCorrect": false,
+          "explanation": "Essa equação representaria um amplificador de ganho RC, não um circuito RC. O circuito RC é dinâmico e envolve a derivada de y, pois a corrente no capacitor é proporcional à taxa de variação da tensão."
+        },
+        {
+          "id": "a2",
+          "text": "RC · dy(t)/dt + y(t) = x(t)",
+          "isCorrect": true,
+          "explanation": "Correto! Aplicando a Lei de Kirchhoff: x(t) = R·i(t) + y(t), e usando i(t) = C·dy/dt (corrente no capacitor), obtemos x(t) = RC·dy/dt + y(t), ou RC·dy/dt + y(t) = x(t). É uma EDO de primeira ordem linear com coeficientes constantes."
+        },
+        {
+          "id": "a3",
+          "text": "RC · d²y(t)/dt² + y(t) = x(t)",
+          "isCorrect": false,
+          "explanation": "O circuito RC simples é de primeira ordem (uma derivada). A segunda derivada d²y/dt² apareceria em um circuito de segunda ordem, como o RLC série."
+        },
+        {
+          "id": "a4",
+          "text": "dy(t)/dt = x(t) − y(t)",
+          "isCorrect": false,
+          "explanation": "Essa expressão está incompleta — falta o fator RC. A equação correta é RC·dy/dt = x(t) − y(t), ou dividindo por RC: dy/dt + y/RC = x/RC."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "A constante de tempo τ = RC do circuito RC representa:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "O tempo necessário para o capacitor atingir 100% do valor final",
+          "isCorrect": false,
+          "explanation": "100% do valor final (regime permanente) é atingido teoricamente apenas em t → ∞. τ = RC é o tempo para atingir 63,2% (ou 1 − 1/e ≈ 63,2%) do valor final, não 100%."
+        },
+        {
+          "id": "a2",
+          "text": "O tempo necessário para o capacitor atingir aproximadamente 63% do valor final de regime permanente",
+          "isCorrect": true,
+          "explanation": "Correto! Para um degrau unitário com y(0)=0: y(τ) = 1 − e^(−1) ≈ 0.632 = 63,2%. A constante de tempo τ = RC é o parâmetro que controla a velocidade do transitório: τ pequeno = transitório rápido; τ grande = transitório lento."
+        },
+        {
+          "id": "a3",
+          "text": "A frequência de ressonância do circuito em rad/s",
+          "isCorrect": false,
+          "explanation": "A frequência de ressonância em rad/s é 1/√(LC) para circuitos RLC. Para o circuito RC de primeira ordem, o polo está em s = −1/RC = −1/τ, e a 'frequência de corte' é ωc = 1/RC."
+        },
+        {
+          "id": "a4",
+          "text": "A potência máxima dissipada no resistor",
+          "isCorrect": false,
+          "explanation": "A potência dissipada no resistor é P = i²R ou P = v²R, que não tem relação direta com τ = RC. A constante de tempo é um parâmetro temporal, não de potência."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Em um circuito RC com condição inicial y(0) = 2 V e entrada x(t) = u(t) (degrau unitário), qual é o valor de regime permanente y(∞)?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "y(∞) = 2 V (permanece na condição inicial)",
+          "isCorrect": false,
+          "explanation": "A condição inicial determina o transitório, não o regime permanente. Para t→∞, a exponencial e^(−t/RC)→0, e a resposta converge para o valor forçado pela entrada, que é y_∞ = 1 V para degrau unitário."
+        },
+        {
+          "id": "a2",
+          "text": "y(∞) = 3 V (soma da condição inicial com a entrada)",
+          "isCorrect": false,
+          "explanation": "O regime permanente não é a soma de y(0) e a amplitude do degrau. Para t→∞, o capacitor carrega até a tensão da fonte, que é 1 V (amplitude do degrau unitário)."
+        },
+        {
+          "id": "a3",
+          "text": "y(∞) = 1 V (imposta pelo degrau unitário, independente da cond. inicial)",
+          "isCorrect": true,
+          "explanation": "Correto! A resposta total é y(t) = 1 + (y₀ − 1)e^(−t/RC). Para t→∞: e^(−t/RC)→0, então y(∞) = 1 V. Em sistemas estáveis, o regime permanente é determinado pela entrada, independente das condições iniciais."
+        },
+        {
+          "id": "a4",
+          "text": "y(∞) = 0 V (o capacitor descarrega completamente)",
+          "isCorrect": false,
+          "explanation": "O capacitor se carrega (ou descarrega) até igualar a tensão da fonte. Para x(t) = u(t) = 1 V, o regime permanente é y(∞) = 1 V, não zero."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "O que é a 'resposta de entrada nula' (zero-input response) y_zi(t)?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "A resposta do sistema quando as condições iniciais são zero e a entrada é aplicada",
+          "isCorrect": false,
+          "explanation": "Isso é a definição da resposta de ESTADO nulo (y_zs), não de entrada nula. A resposta de entrada nula é calculada com x(t) = 0, usando apenas as condições iniciais não-nulas."
+        },
+        {
+          "id": "a2",
+          "text": "A resposta do sistema quando a entrada é zero x(t) = 0, mas as condições iniciais são não-nulas",
+          "isCorrect": true,
+          "explanation": "Correto! y_zi(t) é calculada com x(t)=0 mas com y(0), ẏ(0), etc. não-nulas. Fisicamente: é a 'descarga' do sistema a partir de seu estado inicial, sem excitação externa. Para o RC: y_zi(t) = y(0)·e^(−t/RC)."
+        },
+        {
+          "id": "a3",
+          "text": "A resposta em regime permanente após os transitórios se extinguirem",
+          "isCorrect": false,
+          "explanation": "O regime permanente não é a resposta de entrada nula. Para sistemas estáveis, y_zi(t)→0 para t→∞ (pois é formada por modos decrescentes). A resposta em regime é determinada pela entrada, não pelas condições iniciais."
+        },
+        {
+          "id": "a4",
+          "text": "A resposta do sistema a uma entrada senoidal de amplitude zero",
+          "isCorrect": false,
+          "explanation": "Uma entrada senoidal de amplitude zero é equivalente a x(t) = 0. A resposta de entrada nula é de fato calculada com x(t) = 0, mas o ponto importante é que as condições iniciais são não-nulas. A 'entrada nula' refere-se ao estado da entrada, não à amplitude de um sinal específico."
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual é a equação característica do circuito RC descrito por RC·dy/dt + y = x, e qual é sua raiz?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Equação: RC·λ + 1 = 0  →  λ = −1/(RC)",
+          "isCorrect": true,
+          "explanation": "Correto! Substituindo y = e^(λt) na equação homogênea RC·dy/dt + y = 0, obtemos RC·λ·e^(λt) + e^(λt) = 0, dividindo por e^(λt): RC·λ + 1 = 0, logo λ = −1/RC. A raiz negativa indica que o modo e^(λt) = e^(−t/RC) decai — sistema estável."
+        },
+        {
+          "id": "a2",
+          "text": "Equação: RC·λ² + 1 = 0  →  λ = ±j/√(RC)",
+          "isCorrect": false,
+          "explanation": "Uma equação de segunda ordem com λ² seria para um sistema de segunda ordem. O circuito RC é de primeira ordem, com equação característica de grau 1: RC·λ + 1 = 0."
+        },
+        {
+          "id": "a3",
+          "text": "Equação: λ + RC = 0  →  λ = −RC",
+          "isCorrect": false,
+          "explanation": "A equação característica não é λ + RC = 0. Substituindo y = e^(λt) na equação homogênea RC·dy/dt + y = 0 e dividindo por e^(λt): RC·λ + 1 = 0, que dá λ = −1/RC, não −RC."
+        },
+        {
+          "id": "a4",
+          "text": "Equação: λ² + (1/RC)λ + 1 = 0  →  duas raízes complexas",
+          "isCorrect": false,
+          "explanation": "O circuito RC de primeira ordem tem equação característica de grau 1, com uma única raiz real. Uma equação de grau 2 seria para um sistema de segunda ordem (ex: circuito RLC)."
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Um engenheiro tem o modelo de um sistema de controle de temperatura descrito por: 5ẏ(t) + y(t) = 2x(t), com y(0) = 10°C e entrada x(t) = 20°C·u(t). Qual é a resposta de entrada nula y_zi(t)?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "y_zi(t) = 10·e^(−t/5)  para t ≥ 0",
+          "isCorrect": true,
+          "explanation": "Correto! Equação característica: 5λ+1=0 → λ=−1/5. Resposta de entrada nula: y_zi = c·e^(−t/5). Condição inicial: y_zi(0) = c = 10. Portanto y_zi(t) = 10·e^(−t/5). Fisicamente: a temperatura decai de 10°C em direção a zero (sem entrada)."
+        },
+        {
+          "id": "a2",
+          "text": "y_zi(t) = 40·e^(−t/5)  para t ≥ 0",
+          "isCorrect": false,
+          "explanation": "O coeficiente 40 não está correto. A condição inicial é y(0)=10°C, então o coeficiente é c = y_zi(0) = 10, não 40. A entrada não afeta y_zi."
+        },
+        {
+          "id": "a3",
+          "text": "y_zi(t) = 10·e^(−5t)  para t ≥ 0",
+          "isCorrect": false,
+          "explanation": "A raiz da equação característica é λ = −1/5, não −5. Portanto o modo é e^(−t/5) com constante de tempo τ = 5s, não e^(−5t)."
+        },
+        {
+          "id": "a4",
+          "text": "y_zi(t) = 40·(1 − e^(−t/5))  para t ≥ 0",
+          "isCorrect": false,
+          "explanation": "Essa forma (1 − e^(−t/RC)) corresponde à resposta de estado nulo para um degrau, não à resposta de entrada nula. y_zi deve satisfazer y_zi(0) = 10 e y_zi(∞) = 0 (sem entrada, o sistema vai para zero)."
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "A resposta de estado nulo y_zs(t) de um sistema LIT é calculada por:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "y_zs(t) = x(t) + h(t)  (soma da entrada com a resposta ao impulso)",
+          "isCorrect": false,
+          "explanation": "A combinação correta é a CONVOLUÇÃO, não a soma. A integral de convolução y = x * h = ∫x(τ)·h(t−τ)dτ é o que calcula y_zs. A soma x + h não tem significado físico neste contexto."
+        },
+        {
+          "id": "a2",
+          "text": "y_zs(t) = h(t) · x(t)  (produto da entrada com a resposta ao impulso)",
+          "isCorrect": false,
+          "explanation": "O produto pontual h(t)·x(t) não é a convolução. A convolução é y_zs(t) = ∫x(τ)·h(t−τ)dτ — envolve inverter e deslocar h, depois integrar o produto com x."
+        },
+        {
+          "id": "a3",
+          "text": "y_zs(t) = ∫₋∞ᵗ x(τ)·h(t−τ)dτ  (integral de convolução)",
+          "isCorrect": true,
+          "explanation": "Correto! A integral de convolução y_zs = x(t)*h(t) = ∫x(τ)·h(t−τ)dτ calcula a resposta de estado nulo. O limite superior é t (não +∞) para sistemas causais, onde h(t)=0 para t<0. Para sistemas não causais, o limite vai a +∞."
+        },
+        {
+          "id": "a4",
+          "text": "y_zs(t) = dy(t)/dt  (derivada da resposta total)",
+          "isCorrect": false,
+          "explanation": "dy/dt é a derivada temporal de y, não a resposta de estado nulo. A resposta de estado nulo é obtida pela convolução da entrada com a resposta ao impulso do sistema."
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "O que é a 'resposta ao impulso' h(t) de um sistema LIT?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "A saída do sistema quando a entrada é um degrau unitário u(t) com condições iniciais zero",
+          "isCorrect": false,
+          "explanation": "A saída para degrau unitário é a 'resposta ao degrau' g(t), não a resposta ao impulso. A resposta ao impulso h(t) é a saída quando a entrada é δ(t) (impulso de Dirac), com condições iniciais zero."
+        },
+        {
+          "id": "a2",
+          "text": "A saída do sistema quando a entrada é δ(t) (impulso de Dirac) com condições iniciais zero",
+          "isCorrect": true,
+          "explanation": "Correto! h(t) = H{δ(t)} com condições iniciais nulas. Para sistemas LIT, h(t) é a 'impressão digital' do sistema — conhecendo h(t), podemos calcular a saída para QUALQUER entrada via convolução: y_zs(t) = x(t) * h(t)."
+        },
+        {
+          "id": "a3",
+          "text": "O maior valor que a saída do sistema pode atingir antes de estabilizar",
+          "isCorrect": false,
+          "explanation": "O maior valor da saída (pico de overshoot) é uma propriedade da resposta transitória, não a definição de h(t). A resposta ao impulso h(t) é uma função do tempo, não um número escalar."
+        },
+        {
+          "id": "a4",
+          "text": "A frequência de oscilação natural do sistema",
+          "isCorrect": false,
+          "explanation": "A frequência natural ω₀ é determinada pelas raízes da equação característica. h(t) é uma função temporal completa, que pode incluir termos oscilatórios e/ou exponenciais dependendo do sistema."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Qual das afirmações sobre a decomposição y = y_zi + y_zs é VERDADEIRA?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "y_zi é sempre maior que y_zs, pois as condições iniciais têm prioridade sobre a entrada",
+          "isCorrect": false,
+          "explanation": "Não existe hierarquia entre y_zi e y_zs — ambas contribuem igualmente para y total. A magnitude de cada componente depende das condições iniciais e da entrada específicas do problema."
+        },
+        {
+          "id": "a2",
+          "text": "A decomposição só vale para sistemas de primeira ordem como o circuito RC",
+          "isCorrect": false,
+          "explanation": "A decomposição y = y_zi + y_zs decorre diretamente da linearidade e vale para qualquer sistema linear de qualquer ordem — primeira, segunda, n-ésima ordem. É uma consequência da superposição, não uma propriedade específica de primeira ordem."
+        },
+        {
+          "id": "a3",
+          "text": "A decomposição decorre da linearidade: y_zi depende apenas das cond. iniciais e y_zs depende apenas da entrada; a superposição garante que a soma é a resposta total",
+          "isCorrect": true,
+          "explanation": "Correto! A decomposição é uma consequência direta do princípio da superposição para sistemas lineares. Resolvemos dois problemas mais simples: (1) sistema com entrada zero e condições iniciais não-nulas → y_zi; (2) sistema com condições iniciais zero e entrada → y_zs. A superposição garante y = y_zi + y_zs."
+        },
+        {
+          "id": "a4",
+          "text": "Para sistemas estáveis, y_zs(t) → 0 para t → ∞, enquanto y_zi(t) permanece constante",
+          "isCorrect": false,
+          "explanation": "É o oposto: para sistemas estáveis, y_zi(t) → 0 para t → ∞ (pois é formada por modos decrescentes e^(λt) com Re(λ) < 0). Já y_zs(t) converge para a resposta de regime permanente imposta pela entrada."
+        }
+      ]
+    }
+  ]
+}
+

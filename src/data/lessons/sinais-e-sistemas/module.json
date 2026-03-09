@@ -10,6 +10,55 @@
         "description": "O que é um sinal (função do tempo, exemplos do cotidiano), o que é um sistema (transforma entrada em saída), sinais contínuos vs. discretos, implementações em hardware e software, e a cadeia de processamento de sinais.",
         "video": null,
         "quizId": "quiz-1"
+      },
+      {
+        "id": "charpter-2",
+        "title": "Tamanho de um Sinal — Energia e Potência",
+        "description": "Medidas quantitativas do tamanho de sinais: energia (integral de x²), potência (média temporal), classificação de sinais de energia e potência, valor RMS e relação sinal-ruído (SNR).",
+        "video": null,
+        "quizId": "quiz-2"
+      },
+      {
+        "id": "charpter-3",
+        "title": "Operações com Sinais no Tempo",
+        "description": "Três operações fundamentais sobre sinais: deslocamento temporal (atraso e avanço), escalamento temporal (compressão e expansão), reversão temporal (espelhamento). Combinação de operações: x(at − b).",
+        "video": null,
+        "quizId": "quiz-3"
+      },
+      {
+        "id": "charpter-4",
+        "title": "Classificação de Sinais",
+        "description": "As cinco categorias fundamentais de sinais: contínuo vs. discreto no tempo, analógico vs. digital, periódico vs. aperiódico, sinais de energia vs. de potência, e sinais determinísticos vs. aleatórios.",
+        "video": null,
+        "quizId": "quiz-4"
+      },
+      {
+        "id": "charpter-5",
+        "title": "Modelos Úteis de Sinais",
+        "description": "As funções-modelo fundamentais: degrau unitário u(t) com aplicações em sinais causais e pulsos retangulares, e impulso unitário δ(t) com suas propriedades de multiplicação e amostragem (sifting property).",
+        "video": null,
+        "quizId": "quiz-5"
+      },
+      {
+        "id": "charpter-6",
+        "title": "Introdução a Sistemas",
+        "description": "Definição de sistema como bloco entrada-saída, modelagem matemática via EDO ilustrada pelo circuito RC, papel das condições iniciais na resposta transitória, e decomposição da resposta total em entrada nula e estado nulo.",
+        "video": null,
+        "quizId": "quiz-6"
+      },
+      {
+        "id": "charpter-7",
+        "title": "Classificação de Sistemas",
+        "description": "As oito categorias fundamentais: linear/não linear (superposição), invariante/variante no tempo, sem/com memória, causal/não causal, contínuo/discreto, analógico/digital, inversível/não inversível, e BIBO estável/instável.",
+        "video": null,
+        "quizId": "quiz-7"
+      },
+      {
+        "id": "charpter-8",
+        "title": "Análise no Domínio do Tempo de Sistemas Lineares",
+        "description": "Análise de sistemas LCIT no domínio do tempo: equação diferencial, equação característica e modos naturais, resposta de entrada nula (y_zi), resposta de estado nulo via convolução (y_zs = x*h), e resposta total.",
+        "video": null,
+        "quizId": "quiz-8"
       }
     ]
   }

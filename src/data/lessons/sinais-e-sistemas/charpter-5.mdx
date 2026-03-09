@@ -1,0 +1,172 @@
+# Modelos Úteis de Sinais
+
+No capítulo anterior, classificamos os sinais em categorias como contínuos/discretos, periódicos/aperiódicos, de energia/potência e determinísticos/aleatórios. Agora apresentaremos as **funções-modelo** mais utilizadas em sinais e sistemas: o **degrau unitário** u(t) e o **impulso unitário** δ(t). Esses dois modelos não são apenas exemplos acadêmicos — são as peças fundamentais com as quais qualquer sinal pode ser descrito, qualquer sistema pode ser analisado, e sobre as quais toda a teoria de sistemas lineares é construída.
+
+## A Função Degrau Unitário u(t)
+
+### Definição e Representação
+
+A **função degrau unitário** (*unit step function*), denotada por u(t), é definida por:
+
+> **u(t) = 1  para t ≥ 0**
+> **u(t) = 0  para t < 0**
+
+É uma função descontínua no instante t = 0: ela salta abruptamente de 0 para 1. Fisicamente, representa o ato de "ligar" algo em t = 0 — como conectar uma bateria a um circuito, abrir uma válvula ou iniciar uma transmissão.
+
+<UnitStepFunction />
+
+Observe na visualização o círculo aberto em (0, 0) e o círculo fechado em (0, 1), indicando a descontinuidade: o valor em exatamente t = 0 é convencionalmente definido como 1 (pela semissoma: u(0) = [u(0⁺) + u(0⁻)]/2 = 1/2 em algumas definições, mas a convenção mais comum em engenharia é u(0) = 1).
+
+### Deslocamento do Degrau
+
+Assim como qualquer outro sinal, o degrau pode ser deslocado no tempo usando as operações do capítulo anterior:
+
+- **u(t − t₀):** degrau que sobe em t = t₀ (sinal "liga" em t = t₀)
+- **u(−t):** degrau espelhado — vale 1 para t ≤ 0 e 0 para t > 0
+- **−u(t − t₀):** degrau negativo que "desce" em t = t₀
+
+### Construção de Sinais Causais e Pulsos Retangulares
+
+A aplicação mais imediata do degrau unitário é **"ligar" e "desligar" outros sinais**, criando versões causais e pulsos.
+
+Um sinal **causal** (*causal signal*) é aquele que vale zero para t < 0. Para tornar qualquer sinal x(t) causal, basta multiplicá-lo por u(t):
+
+> **y(t) = x(t) · u(t)** → y(t) = x(t) para t ≥ 0 e y(t) = 0 para t < 0
+
+Um **pulso retangular** de duração τ pode ser construído como a diferença de dois degraus:
+
+> **p(t) = u(t) − u(t − τ)** → vale 1 para 0 ≤ t < τ e 0 fora desse intervalo
+
+<CausalSignalWithStep />
+
+Na visualização, veja como somar u(t) com −u(t − 4) produz exatamente um pulso retangular de duração 4. Esse é o **princípio da construção por degraus**: qualquer sinal com transições abruptas pode ser escrito como combinação de degraus deslocados.
+
+<MarkdownTable
+  headers={["Expressão", "Sinal Resultante", "Aplicação"]}
+  rows={[
+    ["**x(t) · u(t)**", "Versão causal de x(t)", "Tornar um sinal zero para t < 0"],
+    ["**u(t) − u(t − τ)**", "Pulso retangular em [0, τ]", "Janela de análise, pulso de radar"],
+    ["**u(t − a) − u(t − b)**", "Pulso retangular em [a, b]", "Pulso em intervalo arbitrário"],
+    ["**A · u(t − t₀)**", "Degrau de amplitude A em t₀", "Modelar ativação de uma fonte"],
+    ["**x(t) · [u(t − a) − u(t − b)]**", "Trecho de x(t) entre a e b", "Extração de um intervalo do sinal"],
+  ]}
+/>
+
+> **Por que u(t) é tão importante?** Porque a **resposta ao degrau** de um sistema linear revela completamente seu comportamento — se soubermos como o sistema responde a u(t), podemos calcular a resposta a qualquer entrada usando derivação e integração.
+
+## A Função Impulso Unitário δ(t)
+
+### Definição Intuitiva e Formal
+
+A **função impulso unitário** (*unit impulse function* ou *distribuição de Dirac*), denotada por δ(t), é o modelo de um evento de **duração infinitamente curta e amplitude infinitamente grande**, mas com **área unitária**. Ela é definida pelas propriedades:
+
+> **∫₋∞^(+∞) δ(t) dt = 1** (área total igual a 1)
+> **δ(t) = 0  para todo t ≠ 0** (zero em qualquer instante exceto na origem)
+
+Matematicamente, δ(t) não é uma função clássica — é uma **distribuição** (ou funcional linear) no sentido da teoria de distribuições de Schwartz. Na prática de engenharia, trabalhamos com ela por meio de suas **propriedades**, não pela avaliação pontual.
+
+Uma forma de visualizar δ(t) é como o **limite de pulsos retangulares** de largura Δ e altura 1/Δ conforme Δ → 0:
+
+<UnitImpulseFunction />
+
+Observe como, à medida que o pulso fica mais estreito, ele fica mais alto — mas a área (largura × altura = Δ × 1/Δ = 1) permanece sempre igual a 1. No limite, a largura vai a zero e a altura vai a infinito: esse é o impulso de Dirac.
+
+### Representação Gráfica
+
+Por convenção, δ(t) é representado graficamente por uma **seta vertical** na origem, com o número **1** ao lado indicando que sua área é 1. Um impulso deslocado δ(t − t₀) é uma seta em t = t₀. Um impulso de área k, escrito como k·δ(t), é representado com o número k ao lado da seta.
+
+### Propriedade de Multiplicação
+
+Quando um sinal x(t) é multiplicado por δ(t), o resultado é um impulso na origem com área igual ao valor de x(t) em t = 0:
+
+> **x(t) · δ(t) = x(0) · δ(t)**
+
+De forma mais geral, para um impulso deslocado:
+
+> **x(t) · δ(t − t₀) = x(t₀) · δ(t − t₀)**
+
+O impulso "captura" o valor de x(t) no instante t₀ e multiplica esse escalar pela função δ. Qualquer variação de x(t) em torno de t₀ é irrelevante, pois δ é zero em todos os outros instantes.
+
+### Propriedade de Amostragem (Sifting Property)
+
+A propriedade mais importante do impulso é a **propriedade de amostragem** (*sifting property*):
+
+> **∫₋∞^(+∞) x(t) · δ(t − t₀) dt = x(t₀)**
+
+A integração de x(t) multiplicado por um impulso em t₀ extrai (*sifts out*) o valor de x(t) exatamente em t₀. Isso é fundamental porque:
+
+1. Permite **amostrar** um sinal contínuo em um instante específico
+2. Serve como base para a representação de sinais contínuos como superposição de impulsos
+3. É a ferramenta central para analisar sistemas lineares por meio de sua resposta ao impulso
+
+<SamplingProperty />
+
+Acompanhe na visualização como o impulso δ(t − t₀) "lê" o valor de x(t) no instante t₀ enquanto t₀ varia. O resultado da integral é sempre exatamente x(t₀) — o impulso funciona como um "amostrador perfeito".
+
+<MarkdownTable
+  headers={["Propriedade", "Expressão Matemática", "Interpretação"]}
+  rows={[
+    ["**Área unitária**", "∫ δ(t) dt = 1", "A 'energia' concentrada em t = 0 é 1"],
+    ["**Suporte pontual**", "δ(t) = 0, t ≠ 0", "Nulo em todo instante exceto a origem"],
+    ["**Multiplicação**", "x(t) · δ(t − t₀) = x(t₀) · δ(t − t₀)", "Isola o valor de x no ponto t₀"],
+    ["**Amostragem**", "∫ x(t) · δ(t − t₀) dt = x(t₀)", "Extrai o valor de x em t₀"],
+    ["**Simetria**", "δ(t) = δ(−t)", "O impulso é uma função par"],
+    ["**Escala**", "δ(at) = δ(t)/|a|", "Compressão/expansão do impulso"],
+  ]}
+/>
+
+## Degrau e Impulso Deslocados
+
+Tanto o degrau quanto o impulso podem ser deslocados para qualquer instante t₀, usando a substituição t → t − t₀:
+
+<DelayedImpulseAndStep />
+
+Na visualização, observe três exemplos:
+- **u(t − 2):** o degrau "liga" em t = 2 (zero antes, um depois)
+- **δ(t − 3):** impulso na posição t = 3 com área unitária
+- **u(t − 1) − u(t − 5):** pulso retangular entre t = 1 e t = 5
+
+<MarkdownTable
+  headers={["Expressão", "Descrição", "Valor em t < t₀", "Valor em t ≥ t₀"]}
+  rows={[
+    ["**u(t − t₀)**", "Degrau deslocado", "0", "1"],
+    ["**−u(t − t₀)**", "Degrau negativo deslocado", "0", "−1"],
+    ["**δ(t − t₀)**", "Impulso deslocado", "0", "∞ (área = 1) apenas em t₀"],
+    ["**u(t − a) − u(t − b)**", "Pulso retangular em [a, b]", "0", "1 se a ≤ t < b, senão 0"],
+  ]}
+/>
+
+## Relação entre δ(t) e u(t)
+
+O impulso e o degrau não são independentes — eles formam um par diferencial/integral:
+
+> **δ(t) = du(t)/dt** (o impulso é a derivada do degrau)
+> **u(t) = ∫₋∞^t δ(τ) dτ** (o degrau é a integral acumulada do impulso)
+
+A derivada formal de u(t) em t = 0 é "infinita" na perspectiva clássica (descontinuidade de salto unitário em largura zero), o que é exatamente a definição de δ(t). Na direção oposta, a integral do impulso de −∞ até t é zero para t < 0 e 1 para t ≥ 0 — exatamente u(t).
+
+<ImpulseStepRelation />
+
+> Essa relação é mais do que um exercício matemático: em circuitos, se u(t) representa a tensão em degrau aplicada a um capacitor, então δ(t) representa a corrente impulsiva que carrega o capacitor instantaneamente. Em sistemas mecânicos, u(t) representa uma força degrau e δ(t) representa um impacto instantâneo.
+
+<MarkdownTable
+  headers={["Operação", "Sentido", "Expressão"]}
+  rows={[
+    ["**Derivação**", "δ(t) é a derivada de u(t)", "δ(t) = du(t)/dt"],
+    ["**Integração**", "u(t) é a integral de δ(t)", "u(t) = ∫₋∞^t δ(τ) dτ"],
+    ["**Diferença finita (discreto)**", "δ[n] é a diferença de u[n]", "δ[n] = u[n] − u[n−1]"],
+    ["**Soma acumulada (discreto)**", "u[n] é a soma de δ[n]", "u[n] = Σₖ₌₋∞ⁿ δ[k]"],
+  ]}
+/>
+
+## Resumo da Aula
+
+Neste capítulo, estudamos os dois modelos de sinal mais fundamentais da disciplina:
+
+- **Degrau unitário u(t):** vale 0 para t < 0 e 1 para t ≥ 0. Representa o "ligar" de um sinal. Deslocado como u(t − t₀), permite construir sinais causais e pulsos retangulares pela fórmula u(t − a) − u(t − b).
+- **Pulsos retangulares por degraus:** qualquer sinal com ativação/desativação em instantes definidos pode ser escrito como combinação de degraus deslocados, tornando a descrição matemática sistemática.
+- **Impulso unitário δ(t):** distribuição de Dirac com área unitária e suporte pontual em t = 0. Definido por suas propriedades: ∫δ(t)dt = 1 e δ(t) = 0 para t ≠ 0.
+- **Propriedade de multiplicação:** x(t)·δ(t − t₀) = x(t₀)·δ(t − t₀). O impulso isola o valor de x no ponto t₀.
+- **Propriedade de amostragem:** ∫ x(t)·δ(t − t₀) dt = x(t₀). Essa propriedade é a base do processamento de sinais: o impulso "captura" o valor do sinal em qualquer instante desejado.
+- **Relação δ(t) ↔ u(t):** δ(t) = du(t)/dt e u(t) = ∫₋∞^t δ(τ)dτ. Derivada e integral são operações inversas que conectam os dois modelos fundamentais.
+

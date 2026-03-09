@@ -1,0 +1,159 @@
+# Análise no Domínio do Tempo de Sistemas Lineares
+
+Nos capítulos anteriores, introduzimos os sistemas como entidades que transformam entradas em saídas, vimos o circuito RC como exemplo de modelagem matemática, e classificamos sistemas em oito categorias. Agora chegamos ao primeiro método formal de **análise de sistemas**: o domínio do tempo. Nosso foco são os **sistemas lineares contínuos e invariantes no tempo** (LCIT), também chamados de sistemas LIT contínuos. Aprenderemos a calcular a resposta completa de um sistema a qualquer entrada, decompondo-a em duas componentes: a resposta de entrada nula e a resposta de estado nulo.
+
+## Os Dois Métodos de Análise de Sistemas LIT
+
+Existem dois grandes métodos para analisar sistemas LIT:
+
+<TwoAnalysisMethods />
+
+Neste capítulo, focaremos integralmente no **domínio do tempo**. O domínio da frequência (Transformada de Fourier, Laplace) será o tema de módulos futuros.
+
+> **Por que estudar domínio do tempo primeiro?** Porque ele conecta diretamente à física do sistema (EDOs) e revela a estrutura da solução de forma intuitiva. A compreensão da resposta natural e forçada no tempo é o alicerce para entender filtros, estabilidade e resposta em frequência.
+
+## A Equação Diferencial do Sistema LCIT
+
+Um **sistema linear contínuo invariante no tempo (LCIT)** de ordem n é descrito por uma EDO linear com coeficientes constantes:
+
+> **aₙ · y^(n)(t) + aₙ₋₁ · y^(n−1)(t) + ... + a₁ · ẏ(t) + a₀ · y(t) = bₘ · x^(m)(t) + ... + b₁ · ẋ(t) + b₀ · x(t)**
+
+onde y^(k)(t) denota a k-ésima derivada de y, e os coeficientes a₀, ..., aₙ e b₀, ..., bₘ são **constantes reais** (daí "invariante no tempo").
+
+Para o circuito RC de primeira ordem (n = 1):
+- **a₁ = RC, a₀ = 1, b₀ = 1, m = 0**
+- EDO: RC · ẏ(t) + y(t) = x(t)
+
+## A Propriedade de Decomposição
+
+A propriedade central que nos permite dividir o problema em partes menores é a **propriedade de decomposição**, que decorre diretamente da linearidade:
+
+> **Resposta Total = Resposta de Entrada Nula + Resposta de Estado Nulo**
+> **y(t) = y_zi(t) + y_zs(t)**
+
+- **y_zi(t)** (*zero-input response*): resposta quando a entrada é zero x(t) = 0, mas as condições iniciais y(0), ẏ(0), ..., y^(n−1)(0) são não-nulas. Depende apenas do sistema e das condições iniciais.
+- **y_zs(t)** (*zero-state response*): resposta quando as condições iniciais são todas zero, mas a entrada x(t) é aplicada. Depende do sistema e da entrada.
+
+<ZeroInputZeroStateDecomp />
+
+Essa decomposição é extremamente poderosa porque:
+1. Permite resolver dois problemas mais simples separadamente
+2. y_zi não depende de x(t) e y_zs não depende das condições iniciais
+3. A superposição garante que a soma é a resposta correta
+
+<MarkdownTable
+  headers={["Componente", "Entrada x(t)", "Cond. Iniciais", "Calculada por"]}
+  rows={[
+    ["**y_zi(t)**", "x(t) = 0", "y(0), ẏ(0), ... não-nulas", "Solução homogênea da EDO"],
+    ["**y_zs(t)**", "x(t) aplicada", "Todas zero", "Convolução: x(t) * h(t)"],
+    ["**y(t) = y_zi + y_zs**", "x(t) aplicada", "y(0), ẏ(0), ... não-nulas", "Soma das duas componentes"],
+  ]}
+/>
+
+## Calculando a Resposta de Entrada Nula y_zi(t)
+
+Com x(t) = 0, a EDO torna-se a **equação homogênea**:
+
+> **aₙ · y^(n) + aₙ₋₁ · y^(n−1) + ... + a₀ · y = 0**
+
+A solução dessa equação tem a forma y = e^(λt). Substituindo:
+
+> **aₙλⁿ + aₙ₋₁λⁿ⁻¹ + ... + a₁λ + a₀ = 0** — **equação característica**
+
+As raízes λ₁, λ₂, ..., λₙ são as **frequências naturais** (ou modos) do sistema. Para cada raiz λᵢ:
+
+<CharacteristicModes />
+
+Os três casos são:
+- **λᵢ real negativo (σ < 0):** modo amortecido e^(σt) — sistema estável, decai para zero
+- **λᵢ imaginário puro (σ = 0, λ = jω):** oscilação cos(ωt) sem amortecimento — limítrofe
+- **λᵢ real positivo ou complexo com σ > 0:** modo crescente — sistema instável
+
+Para raízes distintas, a resposta de entrada nula é:
+
+> **y_zi(t) = c₁e^(λ₁t) + c₂e^(λ₂t) + ... + cₙe^(λₙt)**
+
+Os coeficientes c₁, ..., cₙ são determinados pelas condições iniciais y(0), ẏ(0), ..., y^(n−1)(0).
+
+<MarkdownTable
+  headers={["Raiz λ", "Modo", "Forma de y_zi", "Significado"]}
+  rows={[
+    ["**λ = σ (real negativa)**", "Decaimento", "e^(σt) → 0", "Sistema estável, transitório amortecido"],
+    ["**λ = σ (real positiva)**", "Crescimento", "e^(σt) → ∞", "Sistema instável"],
+    ["**λ = ±jω (par complexo)**", "Oscilação", "cos(ωt + φ)", "Oscilação sem amortecimento"],
+    ["**λ = σ ± jω (complexo)**", "Oscilação amortecida", "e^(σt)cos(ωt + φ)", "σ < 0: amortecido; σ > 0: crescente"],
+    ["**λ repetida (multiplicidade r)**", "Polinomial × exponencial", "tᵏ·e^(λt), k=0..r-1", "Resposta polinomial modulada"],
+  ]}
+/>
+
+## Calculando a Resposta de Estado Nulo y_zs(t)
+
+Com condições iniciais nulas, a resposta ao estado nulo envolve a **resposta ao impulso** h(t) do sistema — a saída quando a entrada é δ(t) com condições iniciais zero.
+
+Para sistemas LIT, a resposta de estado nulo é dada pela **integral de convolução**:
+
+> **y_zs(t) = ∫₋∞^(+∞) x(τ) · h(t − τ) dτ = x(t) ∗ h(t)**
+
+<ConvolutionIntegral />
+
+O processo de convolução pode ser visualizado em três passos:
+1. **Flip:** inverter h(τ) → h(−τ)
+2. **Shift:** deslocar por t → h(t − τ)
+3. **Integrate:** calcular a área do produto x(τ) · h(t − τ)
+
+> **Significado:** a integral de convolução representa a "memória" do sistema. Cada impulso de x(τ) em τ gera uma resposta h(t − τ) no sistema. A saída total é a superposição (integral) de todas essas respostas elementares.
+
+## O Fluxo Completo de Análise LCIT
+
+<LCITAnalysisWorkflow />
+
+O procedimento sistemático para qualquer sistema LCIT é:
+
+1. **Identificar a EDO:** aₙy^(n) + ... + a₀y = bₘx^(m) + ... + b₀x
+2. **Encontrar as raízes:** resolver aₙλⁿ + ... + a₀ = 0 → λ₁, ..., λₙ
+3. **Calcular y_zi:** usar as raízes e as condições iniciais para determinar c₁, ..., cₙ
+4. **Calcular y_zs:** convolucionar x(t) com h(t)
+5. **Resposta total:** y(t) = y_zi(t) + y_zs(t)
+
+<MarkdownTable
+  headers={["Passo", "Operação", "Ferramentas", "Resultado"]}
+  rows={[
+    ["**1. EDO**", "Modelar o sistema físico", "Kirchhoff, Newton, etc.", "aₙy^(n)+...= bₘx^(m)+..."],
+    ["**2. Eq. Característica**", "Resolver aₙλⁿ+...+a₀=0", "Álgebra polinomial", "λ₁, λ₂, ..., λₙ (raízes)"],
+    ["**3. y_zi**", "Cond. iniciais, coef. cᵢ", "Sistema linear nxn", "y_zi(t) = Σcᵢe^(λᵢt)"],
+    ["**4. y_zs = x*h**", "Integral de convolução", "Cálculo integral", "y_zs(t) = ∫x(τ)h(t−τ)dτ"],
+    ["**5. y total**", "Somar as componentes", "Álgebra", "y(t) = y_zi(t) + y_zs(t)"],
+  ]}
+/>
+
+## Exemplo Completo: Circuito RC com Entrada Degrau
+
+Para o circuito RC com EDO: ẏ + (1/τ)y = (1/τ)x, onde τ = RC:
+
+**Equação característica:** λ + 1/τ = 0 → **λ = −1/τ**
+
+**Resposta de entrada nula** (cond. inicial y(0) = y₀):
+> y_zi(t) = y₀ · e^(−t/τ)
+
+**Resposta de estado nulo** para x(t) = u(t):
+
+A resposta ao impulso é h(t) = (1/τ)e^(−t/τ)u(t). Convoluindo com u(t):
+> y_zs(t) = (1 − e^(−t/τ)) · u(t)
+
+**Resposta total:**
+> **y(t) = y₀ · e^(−t/τ) + (1 − e^(−t/τ)) = 1 + (y₀ − 1) · e^(−t/τ)**
+
+Para t → ∞: y(∞) = 1 (regime permanente). Para t = 0: y(0) = y₀ (condição inicial). ✓
+
+## Resumo da Aula
+
+Neste capítulo, estudamos a análise no domínio do tempo de sistemas LCIT:
+
+- **Dois métodos:** domínio do tempo (EDOs, convolução) e domínio da frequência (Fourier/Laplace). Este capítulo cobre o domínio do tempo.
+- **EDO de sistema LCIT:** aₙy^(n) + ... + a₀y = bₘx^(m) + ... + b₀x. Coeficientes constantes determinam "invariante no tempo"; estrutura linear determina "linear".
+- **Decomposição y = y_zi + y_zs:** propriedade fundamental da linearidade. Entrada nula usa cond. iniciais com x=0; estado nulo usa x(t) com cond. iniciais zero.
+- **y_zi(t):** obtida pela equação característica. Raízes λᵢ são as frequências naturais. σ < 0: estável; σ ≥ 0: instável/limítrofe.
+- **Modos característicos:** e^(λt) para raízes simples; tᵏe^(λt) para raízes repetidas. Determinam a "personalidade" do sistema.
+- **y_zs(t) = x(t) ∗ h(t):** integral de convolução. h(t) é a resposta ao impulso — a "impressão digital" do sistema LIT.
+- **Fluxo LCIT:** EDO → equação característica → y_zi (cond. iniciais) + y_zs (convolução) → y total.
+

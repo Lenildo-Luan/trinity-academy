@@ -1,0 +1,309 @@
+{
+  "id": "quiz-5",
+  "title": "Quiz — Modelos Úteis de Sinais",
+  "description": "Teste seus conhecimentos sobre a função degrau unitário u(t), a função impulso unitário δ(t) (Delta de Dirac), suas propriedades de multiplicação e amostragem, e a relação derivada/integral entre os dois modelos.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "A função degrau unitário u(t) é definida como:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "u(t) = t para t ≥ 0 e u(t) = 0 para t < 0",
+          "isCorrect": false,
+          "explanation": "Essa seria a função rampa unitária r(t) = t·u(t), não o degrau. O degrau tem amplitude constante igual a 1 para t ≥ 0, não cresce linearmente."
+        },
+        {
+          "id": "a2",
+          "text": "u(t) = 1 para t ≥ 0 e u(t) = 0 para t < 0",
+          "isCorrect": true,
+          "explanation": "Correto! O degrau unitário u(t) vale exatamente 1 para todo t ≥ 0 e 0 para todo t < 0. É uma função com descontinuidade de salto unitário em t = 0, representando o 'ligar' de um sinal nesse instante."
+        },
+        {
+          "id": "a3",
+          "text": "u(t) = ∞ para t = 0 e u(t) = 0 para t ≠ 0",
+          "isCorrect": false,
+          "explanation": "Essa é a descrição intuitiva do impulso de Dirac δ(t), não do degrau unitário. O degrau tem valor 1 para todo t ≥ 0, sendo uma função limitada (com exceção da descontinuidade em t = 0)."
+        },
+        {
+          "id": "a4",
+          "text": "u(t) = 1 para todo t ∈ ℝ",
+          "isCorrect": false,
+          "explanation": "Se fosse 1 para todo t, seria simplesmente a função constante, não o degrau. O degrau tem o papel essencial de ser zero para t < 0, modelando o início de um evento em t = 0."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Como se expressa matematicamente um pulso retangular que vale 1 para 2 ≤ t < 5 e 0 em todos os outros instantes?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "u(t − 2) + u(t − 5)",
+          "isCorrect": false,
+          "explanation": "Essa expressão vale 0 para t < 2, depois 1 para 2 ≤ t < 5, e depois 2 para t ≥ 5 — não é um pulso, mas dois degraus somados. Para 'desligar', precisa subtrair o segundo degrau."
+        },
+        {
+          "id": "a2",
+          "text": "u(t − 2) · u(t − 5)",
+          "isCorrect": false,
+          "explanation": "O produto u(t−2)·u(t−5) vale 0 para t < 5 e 1 para t ≥ 5 — o oposto de um pulso. Para criar um pulso retangular, usa-se a diferença de degraus, não o produto."
+        },
+        {
+          "id": "a3",
+          "text": "u(t − 2) − u(t − 5)",
+          "isCorrect": true,
+          "explanation": "Correto! u(t−2) 'liga' em t = 2 e u(t−5) 'liga' em t = 5. A diferença u(t−2) − u(t−5) vale: 0−0=0 para t<2, 1−0=1 para 2≤t<5, e 1−1=0 para t≥5. Exatamente o pulso retangular desejado."
+        },
+        {
+          "id": "a4",
+          "text": "δ(t − 2) − δ(t − 5)",
+          "isCorrect": false,
+          "explanation": "A diferença de dois impulsos não forma um pulso retangular — ela resulta em dois impulsos isolados (um positivo em t=2 e um negativo em t=5). Para construir um pulso retangular, usam-se degraus, não impulsos."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Quais são as duas condições que definem o impulso de Dirac δ(t)?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "δ(t) = ∞ para t = 0 e δ(t) = 1 para t ≠ 0",
+          "isCorrect": false,
+          "explanation": "O valor δ(t) = 1 para t ≠ 0 está errado — o impulso é zero para todo t ≠ 0. As duas condições corretas são: δ(t) = 0 para t ≠ 0, e ∫δ(t)dt = 1 (área unitária)."
+        },
+        {
+          "id": "a2",
+          "text": "δ(t) = 0 para t ≠ 0, e ∫₋∞^{+∞} δ(t) dt = 1",
+          "isCorrect": true,
+          "explanation": "Correto! O impulso de Dirac é definido por duas condições: (1) é nulo em todo instante exceto t = 0, e (2) sua integral em todo o eixo real vale 1 (área unitária). Essas duas condições juntas determinam unicamente δ(t) como distribuição."
+        },
+        {
+          "id": "a3",
+          "text": "δ(t) = 1 para t = 0 e ∫₋∞^{+∞} δ(t) dt = 0",
+          "isCorrect": false,
+          "explanation": "Ambas as condições estão erradas. O impulso não tem valor 1 em t = 0 (tecnicamente tem valor 'infinito' como distribuição), e a área é 1, não 0. A condição ∫δ(t)dt = 1 é fundamental — é ela que diferencia δ(t) da função identicamente nula."
+        },
+        {
+          "id": "a4",
+          "text": "δ(t) = 0 para t = 0 e ∫₋∞^{+∞} δ(t) dt = ∞",
+          "isCorrect": false,
+          "explanation": "Essas condições contradizem a definição do impulso. δ(t) não é zero em t = 0, e a integral não é infinita — é exatamente 1. A área unitária é o que torna o impulso útil como modelo de um 'evento de força concentrada em um ponto'."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "A propriedade de amostragem do impulso afirma que: ∫₋∞^{+∞} x(t) · δ(t − t₀) dt = ?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "= x(t) para todo t",
+          "isCorrect": false,
+          "explanation": "O resultado da integral não é uma função de t — é um número escalar. A propriedade de amostragem extrai o valor de x no instante específico t₀, não a função inteira."
+        },
+        {
+          "id": "a2",
+          "text": "= δ(t − t₀)",
+          "isCorrect": false,
+          "explanation": "O resultado é um escalar, não uma função. A integral de x(t)·δ(t−t₀) em relação a t produz um único número: o valor de x avaliado em t₀."
+        },
+        {
+          "id": "a3",
+          "text": "= x(t₀)",
+          "isCorrect": true,
+          "explanation": "Correto! Essa é a propriedade de amostragem (sifting property): ∫x(t)·δ(t−t₀)dt = x(t₀). O impulso deslocado em t₀ 'peneira' o sinal e extrai seu valor exatamente em t₀. É a propriedade mais importante do impulso para processamento de sinais."
+        },
+        {
+          "id": "a4",
+          "text": "= 0, pois δ(t − t₀) é zero em quase todo lugar",
+          "isCorrect": false,
+          "explanation": "Apesar de δ(t−t₀) ser zero para t ≠ t₀, a integral não é zero porque δ tem área unitária. O resultado é x(t₀) — o valor de x no ponto t₀. O fato de δ ser zero 'quase em todo lugar' não anula a integral."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Qual é o resultado de x(t) · δ(t − 3), dado x(t) = t² + 1?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "(t² + 1) · δ(t − 3), sem simplificação possível",
+          "isCorrect": false,
+          "explanation": "A propriedade de multiplicação do impulso permite simplificar: x(t)·δ(t−t₀) = x(t₀)·δ(t−t₀). Aqui t₀ = 3, então x(3) = 9+1 = 10, e o resultado é 10·δ(t−3)."
+        },
+        {
+          "id": "a2",
+          "text": "10 · δ(t − 3)",
+          "isCorrect": true,
+          "explanation": "Correto! Pela propriedade de multiplicação: x(t)·δ(t−3) = x(3)·δ(t−3). Calculando x(3) = 3² + 1 = 10. Portanto, o resultado é 10·δ(t−3) — um impulso em t = 3 com área 10."
+        },
+        {
+          "id": "a3",
+          "text": "δ(t − 10)",
+          "isCorrect": false,
+          "explanation": "O valor de x em t=3 não desloca o impulso — apenas multiplica sua área. O impulso permanece em t=3. A resposta correta é 10·δ(t−3), não δ(t−10)."
+        },
+        {
+          "id": "a4",
+          "text": "10",
+          "isCorrect": false,
+          "explanation": "O resultado 10 seria obtido pela integral ∫x(t)·δ(t−3)dt = x(3) = 10 (propriedade de amostragem). Mas a expressão x(t)·δ(t−3) sem integral é ainda uma função (distribuição): 10·δ(t−3)."
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual é a relação matemática entre o impulso δ(t) e o degrau u(t)?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "u(t) = d[δ(t)]/dt  (o degrau é a derivada do impulso)",
+          "isCorrect": false,
+          "explanation": "A relação está invertida. É o impulso que é a derivada do degrau: δ(t) = du(t)/dt. A derivada do impulso seria δ'(t) (dublet), não o degrau."
+        },
+        {
+          "id": "a2",
+          "text": "δ(t) = du(t)/dt  (o impulso é a derivada do degrau)",
+          "isCorrect": true,
+          "explanation": "Correto! δ(t) = du(t)/dt. O degrau u(t) tem uma descontinuidade de salto de 0 para 1 em t = 0. No sentido das distribuições, a derivada dessa descontinuidade é exatamente o impulso de Dirac. Na direção oposta: u(t) = ∫₋∞^t δ(τ)dτ."
+        },
+        {
+          "id": "a3",
+          "text": "δ(t) = u(t) · u(−t)  (produto dos degraus espelhados)",
+          "isCorrect": false,
+          "explanation": "u(t)·u(−t) = 0 para t ≠ 0 (produto de dois sinais não sobrepostos). Embora seja zero quase em todo lugar como δ, não possui área unitária e não tem as propriedades de amostragem do impulso. A relação correta é δ(t) = du(t)/dt."
+        },
+        {
+          "id": "a4",
+          "text": "u(t) = δ(t) · δ(t)  (produto de dois impulsos)",
+          "isCorrect": false,
+          "explanation": "O produto de dois impulsos (δ² ) é matematicamente problemático na teoria das distribuições e não resulta em u(t). A relação correta é: u(t) = ∫₋∞^t δ(τ)dτ — o degrau é a integral acumulada do impulso."
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Um engenheiro precisa modelar matematicamente um circuito elétrico que recebe tensão zero para t < 0 e depois tensão constante de 5 V para t ≥ 0. Qual expressão descreve essa tensão?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "v(t) = 5 · δ(t)",
+          "isCorrect": false,
+          "explanation": "5·δ(t) representa um impulso — uma tensão de área 5 concentrada em t = 0, não uma tensão constante de 5 V para t ≥ 0. O degrau u(t) é o modelo correto para 'ligar' uma fonte em t = 0."
+        },
+        {
+          "id": "a2",
+          "text": "v(t) = 5 · rect(t)",
+          "isCorrect": false,
+          "explanation": "A função rect (retângulo) seria zero antes e depois de um intervalo específico — não descreve uma tensão que permanece constante para todo t ≥ 0. O modelo correto é o degrau escalonado: 5·u(t)."
+        },
+        {
+          "id": "a3",
+          "text": "v(t) = 5 · u(t)",
+          "isCorrect": true,
+          "explanation": "Correto! v(t) = 5·u(t) vale 0 para t < 0 e 5 para t ≥ 0 — exatamente uma tensão DC de 5 V 'ligada' em t = 0. Esse é o modelo padrão para análise de circuitos com chaveamento."
+        },
+        {
+          "id": "a4",
+          "text": "v(t) = 5, para todo t ∈ ℝ",
+          "isCorrect": false,
+          "explanation": "v(t) = 5 para todo t descreve uma tensão constante que existia desde t = −∞, não uma tensão que é 'ligada' em t = 0. O enunciado especifica que a tensão é zero para t < 0, o que exige o degrau: v(t) = 5·u(t)."
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Qual é o resultado da integral ∫₋∞^{+∞} cos(t) · δ(t − π) dt?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "0, pois cos(π) = −1 e a integral de um impulso negativo é −1",
+          "isCorrect": false,
+          "explanation": "O raciocínio está parcialmente correto sobre cos(π) = −1, mas a conclusão está errada. Pela propriedade de amostragem: ∫cos(t)·δ(t−π)dt = cos(π) = −1, não 0."
+        },
+        {
+          "id": "a2",
+          "text": "−1, pela propriedade de amostragem: resultado = cos(π) = −1",
+          "isCorrect": true,
+          "explanation": "Correto! Pela propriedade de amostragem: ∫x(t)·δ(t−t₀)dt = x(t₀). Aqui x(t) = cos(t) e t₀ = π. Portanto: ∫cos(t)·δ(t−π)dt = cos(π) = −1."
+        },
+        {
+          "id": "a3",
+          "text": "1, pois ∫δ(t)dt = 1 independente do sinal multiplicado",
+          "isCorrect": false,
+          "explanation": "∫δ(t)dt = 1 só quando não há outra função multiplicando. Com x(t), o resultado é x(t₀), não 1. Aqui x(π) = cos(π) = −1."
+        },
+        {
+          "id": "a4",
+          "text": "cos(t), pois a integral não pode ser avaliada sem os limites corretos",
+          "isCorrect": false,
+          "explanation": "Os limites são de −∞ a +∞ e são suficientes para aplicar a propriedade de amostragem diretamente. O resultado é o escalar cos(π) = −1, não uma função de t."
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "O sinal x(t) = e^(−3t) · u(t) pode ser descrito como:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "e^(−3t) para todo t ∈ ℝ, incluindo t < 0",
+          "isCorrect": false,
+          "explanation": "Sem o fator u(t), o sinal seria e^(−3t) para todo t, o que resultaria em e^(+∞) → ∞ para t → −∞ (energia infinita). O fator u(t) torna o sinal causal: vale apenas para t ≥ 0."
+        },
+        {
+          "id": "a2",
+          "text": "Exponencial decrescente apenas para t ≥ 0, e zero para t < 0 — sinal causal",
+          "isCorrect": true,
+          "explanation": "Correto! O produto e^(−3t) · u(t) 'recorta' a exponencial: para t ≥ 0 o sinal é e^(−3t) (decai de 1 até 0), e para t < 0 u(t) = 0 anula tudo. Isso é precisamente um sinal causal — zero antes de t = 0."
+        },
+        {
+          "id": "a3",
+          "text": "Um pulso retangular de amplitude e^(−3t)",
+          "isCorrect": false,
+          "explanation": "Pulso retangular tem amplitude constante dentro de um intervalo. Aqui a amplitude decai exponencialmente — não é um pulso retangular. O sinal e^(−3t)u(t) é uma exponencial decrescente causal."
+        },
+        {
+          "id": "a4",
+          "text": "Um sinal periódico de período T₀ = 2π/3",
+          "isCorrect": false,
+          "explanation": "e^(−3t)u(t) não é periódico — ele decai monotonicamente para 0 conforme t cresce, sem nunca repetir o padrão. A condição de periodicidade x(t) = x(t+T₀) não pode ser satisfeita para nenhum T₀ > 0."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Por que o impulso unitário δ(t) é considerado fundamental para a análise de sistemas lineares?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Porque δ(t) é o único sinal com área diferente de zero, facilitando cálculos",
+          "isCorrect": false,
+          "explanation": "Muitos sinais têm área diferente de zero (ex: u(t) tem integral divergente). A importância de δ(t) não vem de ser o único com área não nula, mas de suas propriedades únicas de amostragem e de ser a 'identidade' da convolução."
+        },
+        {
+          "id": "a2",
+          "text": "Porque qualquer sinal pode ser escrito como superposição de impulsos deslocados, e a resposta do sistema a δ(t) determina completamente sua saída para qualquer entrada",
+          "isCorrect": true,
+          "explanation": "Correto! Pela propriedade de amostragem, qualquer sinal x(t) pode ser expresso como x(t) = ∫x(τ)·δ(t−τ)dτ — superposição de impulsos deslocados. Para sistemas lineares invariantes no tempo (LIT), conhecendo a resposta ao impulso h(t), a saída para qualquer entrada x(t) é y(t) = x(t) * h(t) (convolução). Isso é a base de toda a análise de sistemas LIT."
+        },
+        {
+          "id": "a3",
+          "text": "Porque δ(t) é o único sinal que pode ser enviado sem distorção por qualquer canal",
+          "isCorrect": false,
+          "explanation": "Não existe sinal que passe sem distorção por qualquer canal. O impulso sofre distorções assim como qualquer outro sinal. A importância de δ(t) é teórica: ele é o 'átomo' com que qualquer sinal pode ser construído, e sua resposta revela o comportamento completo do sistema."
+        },
+        {
+          "id": "a4",
+          "text": "Porque δ(t) tem energia infinita, sendo o sinal mais energético possível para testes",
+          "isCorrect": false,
+          "explanation": "Na realidade, δ(t) como distribuição não tem energia 'convencional' definida. Do ponto de vista prático, um impulso ideal é impossível de gerar fisicamente. Sua importância é teórica: como limite de pulsos unitários, permite a representação de qualquer sinal como superposição de impulsos."
+        }
+      ]
+    }
+  ]
+}
+

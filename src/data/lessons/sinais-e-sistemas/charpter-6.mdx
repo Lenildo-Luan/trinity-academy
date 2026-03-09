@@ -1,0 +1,148 @@
+# Introdução a Sistemas
+
+Nos capítulos anteriores, estudamos os sinais em profundidade: suas definições, formas de quantificar seu tamanho, operações sobre eles no domínio do tempo, como classificá-los e os modelos matemáticos fundamentais — degrau e impulso. Agora chegou o momento de estudar a segunda metade do nome da disciplina: os **sistemas**. Um sistema é o que *processa* sinais, transformando entradas em saídas de acordo com regras matemáticas precisas. Compreender como modelar um sistema matematicamente é o primeiro passo para projetá-lo, analisá-lo e controlá-lo.
+
+## O que é um Sistema?
+
+Um **sistema** (*system*) é qualquer entidade que recebe um **sinal de entrada** x(t) e produz um **sinal de saída** y(t) como resposta. Essa transformação é governa por uma **regra matemática** que captura o comportamento do sistema.
+
+> **Sistema:** entidade que transforma uma entrada x(t) em uma saída y(t) por meio de uma operação matemática y(t) = H\{x(t)\}, onde H\{·\} denota o operador do sistema.
+
+<SystemBlockDiagram />
+
+A notação H\{x(t)\} = y(t) é poderosa: ela trata o sistema como um **operador** que age sobre o sinal de entrada. Dependendo da natureza desse operador, o sistema pode amplificar, filtrar, integrar, derivar ou realizar qualquer outra transformação sobre o sinal.
+
+### Sistemas em Hardware e Software
+
+Um mesmo sistema pode ser implementado de duas formas distintas:
+
+- **Hardware:** circuitos eletrônicos (resistores, capacitores, amplificadores operacionais), sistemas mecânicos (mola, massa, amortecedor), sistemas hidráulicos e outros dispositivos físicos.
+- **Software:** algoritmos executados em processadores digitais (DSP, microcontroladores, computadores), implementando operações matemáticas sobre amostras do sinal.
+
+<MarkdownTable
+  headers={["Implementação", "Exemplo", "Vantagens", "Limitações"]}
+  rows={[
+    ["**Hardware (contínuo)**", "Circuito RC, filtro LC, amp. op.", "Velocidade, sem latência computacional", "Parâmetros fixos, difícil reconfigurar"],
+    ["**Software (discreto)**", "Filtro FIR/IIR em DSP, FFT", "Flexibilidade, precisão programável", "Limitado pela taxa de amostragem e precisão numérica"],
+  ]}
+/>
+
+## Modelagem Matemática de Sistemas — O Circuito RC
+
+### O Circuito RC como Sistema
+
+O **circuito RC** é o sistema mais simples e didático para introduzir a modelagem matemática. Ele consiste em um **resistor** (resistência R) em série com um **capacitor** (capacitância C), com uma tensão de entrada x(t) aplicada ao conjunto e a tensão no capacitor sendo a saída y(t).
+
+<RCCircuitModel />
+
+### Dedução da Equação do Sistema
+
+Aplicando as leis físicas fundamentais:
+
+1. **Corrente no capacitor:** A corrente que passa pelo capacitor é proporcional à taxa de variação da tensão nele: i_C(t) = C · dy(t)/dt
+
+2. **Lei de Kirchhoff das tensões:** A soma das quedas de tensão iguala a tensão de entrada: x(t) = R·i(t) + y(t)
+
+3. **Combinando:** Como i(t) = i_C(t) = C · dy/dt, substituindo na lei de Kirchhoff:
+
+> **x(t) = RC · dy(t)/dt + y(t)**
+
+Dividindo por RC, obtemos a **equação diferencial ordinária (EDO) do sistema**:
+
+> **dy(t)/dt + (1/RC) · y(t) = (1/RC) · x(t)**
+
+Essa é uma **EDO de primeira ordem, linear, com coeficientes constantes**. Ela descreve completamente o comportamento do circuito RC para qualquer entrada x(t) e qualquer condição inicial y(0).
+
+<MarkdownTable
+  headers={["Grandeza", "Símbolo", "Significado Físico", "Unidade"]}
+  rows={[
+    ["**Resistência**", "R", "Oposição ao fluxo de corrente", "Ohm (Ω)"],
+    ["**Capacitância**", "C", "Capacidade de armazenar carga elétrica", "Farad (F)"],
+    ["**Constante de tempo**", "τ = RC", "Tempo para atingir 63% do valor final", "Segundos (s)"],
+    ["**Entrada**", "x(t)", "Tensão aplicada ao circuito", "Volt (V)"],
+    ["**Saída**", "y(t)", "Tensão no capacitor", "Volt (V)"],
+  ]}
+/>
+
+## Papel das Condições Iniciais
+
+A EDO do circuito RC (e de qualquer sistema dinâmico de ordem n) **não tem solução única** sem informação adicional. É preciso especificar o **estado inicial** do sistema — o valor de y(t) em t = 0, antes de qualquer entrada ser aplicada.
+
+Para o circuito RC de primeira ordem, a condição inicial é simplesmente **y(0)** — a tensão inicial no capacitor. Fisicamente, ela representa a carga elétrica armazenada no capacitor antes de ligarmos o circuito.
+
+<InitialConditionsEffect />
+
+Observe na visualização:
+- Para **y(0) = 0**: o capacitor começa descarregado e carrega progressivamente até o valor de regime y∞ = 1.
+- Para **y(0) > y∞**: o capacitor começa mais carregado que o regime e descarrega até y∞.
+- Para **y(0) = y∞ = 1**: o sistema já está no regime permanente e não há transitório.
+
+> **Princípio importante:** Independente da condição inicial y(0), todos os sistemas RC estáveis convergem para o mesmo regime permanente y∞ após tempo suficiente. A condição inicial apenas determina a forma do **transitório** (resposta natural).
+
+## Da Física ao Modelo Matemático
+
+<PhysicsToMathModel />
+
+O processo de modelagem matemática é universal:
+
+1. **Sistema físico:** identificar os componentes e a grandeza física de interesse
+2. **Leis físicas:** aplicar leis de conservação (Kirchhoff, Newton, Bernoulli etc.)
+3. **Equação diferencial:** combinar as leis para obter a EDO que governa o sistema
+4. **Solução:** resolver a EDO com as condições iniciais para obter y(t)
+
+<MarkdownTable
+  headers={["Sistema Físico", "Entrada x(t)", "Saída y(t)", "Equação do Sistema"]}
+  rows={[
+    ["**Circuito RC**", "Tensão aplicada", "Tensão no cap.", "RC·dy/dt + y = x"],
+    ["**Circuito RL**", "Tensão aplicada", "Corrente no ind.", "L·di/dt + Ri = x"],
+    ["**Mola–Massa**", "Força aplicada", "Deslocamento", "m·d²y/dt² + ky = x"],
+    ["**Mola–Massa–Amortecedor**", "Força aplicada", "Deslocamento", "m·ÿ + b·ẏ + ky = x"],
+    ["**Tanque de nível**", "Fluxo de entrada", "Altura do fluido", "A·dh/dt + h/R = q"],
+  ]}
+/>
+
+## Componentes da Resposta do Sistema
+
+A solução da EDO do circuito RC para uma entrada degrau x(t) = u(t) com condição inicial y(0) pode ser decomposta em duas partes:
+
+<RCCircuitResponse />
+
+**Resposta de entrada nula** (zero-input response): a parcela da saída causada *apenas* pelas condições iniciais, quando a entrada é zero. Para o RC:
+
+> **y_zi(t) = y(0) · e^(−t/RC)**
+
+**Resposta de estado nulo** (zero-state response): a parcela da saída causada *apenas* pela entrada, quando as condições iniciais são zero. Para entrada degrau:
+
+> **y_zs(t) = 1 − e^(−t/RC)**
+
+A **resposta total** é a soma das duas:
+
+> **y(t) = y_zi(t) + y_zs(t) = y(0)·e^(−t/RC) + (1 − e^(−t/RC))**
+
+Essa decomposição é a base do método de análise de sistemas lineares no domínio do tempo, que será aprofundada nos próximos capítulos.
+
+<NaturalVsForcedResponse />
+
+<MarkdownTable
+  headers={["Componente", "Notação", "Causa", "Depende de"]}
+  rows={[
+    ["**Resposta natural**", "y_n(t)", "Modos naturais do sistema (decaimento)", "Polos do sistema (raízes da equação característica)"],
+    ["**Resposta forçada**", "y_f(t)", "A entrada x(t) forçando o sistema", "Forma da entrada e resposta em frequência do sistema"],
+    ["**Resposta de entrada nula**", "y_zi(t)", "Condições iniciais com x(t) = 0", "y(0), y'(0), ..., y^(n-1)(0)"],
+    ["**Resposta de estado nulo**", "y_zs(t)", "Entrada x(t) com cond. iniciais = 0", "x(t) e resposta ao impulso h(t)"],
+  ]}
+/>
+
+> **Aviso:** Os pares natural/forçada e entrada-nula/estado-nulo são **duas decomposições diferentes** da mesma resposta total. A decomposição natural/forçada separa pela natureza da solução (homogênea vs. particular). A decomposição ZI/ZS separa pela causa (condições iniciais vs. entrada). Ambas são úteis em contextos diferentes.
+
+## Resumo da Aula
+
+Neste capítulo, introduzimos o conceito de sistema no contexto de sinais e sistemas:
+
+- **Sistema:** entidade matemática que transforma entrada x(t) em saída y(t) via operador H\{·\}. Implementável em hardware ou software.
+- **Modelagem matemática:** processo de traduzir leis físicas (Kirchhoff, Newton, etc.) em equações diferenciais ordinárias que descrevem o sistema.
+- **Circuito RC:** exemplo paradigmático — a EDO de primeira ordem RC·dy/dt + y = x captura completamente o comportamento do sistema.
+- **Condições iniciais:** estado do sistema em t = 0 (ex: tensão inicial no capacitor). Determinam o transitório (resposta natural) mas não o regime permanente em sistemas estáveis.
+- **Resposta total = y_zi + y_zs:** a resposta de entrada nula depende das condições iniciais; a resposta de estado nulo depende da entrada. A soma das duas é a resposta total.
+- **Física → Modelo:** circuito RC, RL, mola-massa, tanques de fluido — todos resultam em EDOs lineares com coeficientes constantes, analisáveis pelas mesmas ferramentas matemáticas.
+

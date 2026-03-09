@@ -1,0 +1,309 @@
+{
+  "id": "quiz-4",
+  "title": "Quiz — Classificação de Sinais",
+  "description": "Teste seus conhecimentos sobre as cinco categorias de classificação de sinais: contínuo/discreto, analógico/digital, periódico/aperiódico, energia/potência, e determinístico/aleatório.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual é a principal diferença entre um sinal contínuo no tempo x(t) e um sinal discreto no tempo x[n]?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "O sinal contínuo tem amplitude contínua, enquanto o sinal discreto tem amplitude restrita a valores inteiros",
+          "isCorrect": false,
+          "explanation": "Essa distinção diz respeito à amplitude (analógico vs. digital), não ao domínio temporal. A distinção contínuo/discreto refere-se ao domínio do tempo (todos os t ∈ ℝ versus apenas n ∈ ℤ)."
+        },
+        {
+          "id": "a2",
+          "text": "O sinal contínuo é definido para todo t ∈ ℝ, enquanto o sinal discreto é definido apenas para índices inteiros n ∈ ℤ",
+          "isCorrect": true,
+          "explanation": "Correto! A distinção é no domínio temporal: sinais contínuos existem em todo instante real t, enquanto sinais discretos x[n] existem apenas em instantes inteiros n. Nota: contínuo ≠ analógico e discreto ≠ digital."
+        },
+        {
+          "id": "a3",
+          "text": "O sinal contínuo é mais ruidoso do que o sinal discreto",
+          "isCorrect": false,
+          "explanation": "Ruído não é um critério de classificação entre contínuo e discreto. A classificação refere-se ao domínio temporal em que o sinal está definido."
+        },
+        {
+          "id": "a4",
+          "text": "O sinal contínuo só pode ser gerado por hardware, enquanto o discreto só pode ser gerado por software",
+          "isCorrect": false,
+          "explanation": "Tanto sinais contínuos quanto discretos podem ser gerados por hardware e software. A distinção é sobre o domínio temporal de definição."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Um estudante afirma: 'Todo sinal contínuo no tempo é analógico, e todo sinal discreto é digital.' Essa afirmação é:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Verdadeira, pois os dois pares de classificações são equivalentes",
+          "isCorrect": false,
+          "explanation": "Falsa. Contínuo/discreto (domínio temporal) e analógico/digital (domínio da amplitude) são classificações independentes. Um sinal pode ser contínuo e digital (ex: onda quadrada de 0 e 5 V) ou discreto e analógico (amostras de precisão infinita)."
+        },
+        {
+          "id": "a2",
+          "text": "Falsa parcialmente: sinal contínuo pode ser digital, mas sinal discreto é sempre analógico",
+          "isCorrect": false,
+          "explanation": "A afirmação é completamente falsa em ambas as direções. Um sinal discreto pode ser digital (ex: sinal PCM de áudio) e também pode ser analógico (sequência de amostras com precisão infinita)."
+        },
+        {
+          "id": "a3",
+          "text": "Falsa, pois contínuo/discreto refere-se ao domínio temporal e analógico/digital refere-se à amplitude, sendo classificações independentes",
+          "isCorrect": true,
+          "explanation": "Correto! São dois eixos de classificação ortogonais: domínio temporal (contínuo ou discreto) e domínio da amplitude (analógico ou digital). Um sinal pode ser contínuo-digital ou discreto-analógico, por exemplo."
+        },
+        {
+          "id": "a4",
+          "text": "Verdadeira apenas para sinais gerados eletronicamente",
+          "isCorrect": false,
+          "explanation": "A afirmação é falsa independentemente da origem do sinal. Contínuo ≠ analógico e discreto ≠ digital em qualquer contexto."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "O sinal x(t) = cos(2t) + cos(3t) é periódico? Se sim, qual é seu período fundamental?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Não é periódico, pois a soma de dois cossenos nunca é periódica",
+          "isCorrect": false,
+          "explanation": "A soma de dois cossenos pode ser periódica se a razão entre seus períodos for racional. Aqui T₁ = π e T₂ = 2π/3, e T₁/T₂ = 3/2 é racional, então a soma é periódica."
+        },
+        {
+          "id": "a2",
+          "text": "Sim, com período fundamental T₀ = 2π",
+          "isCorrect": true,
+          "explanation": "Correto! cos(2t) tem período T₁ = π e cos(3t) tem período T₂ = 2π/3. A razão T₁/T₂ = 3/2 é racional. O período fundamental da soma é o MMC(π, 2π/3) = 2π. Verificação: x(t + 2π) = cos(2t+4π) + cos(3t+6π) = cos(2t) + cos(3t) = x(t). ✓"
+        },
+        {
+          "id": "a3",
+          "text": "Sim, com período fundamental T₀ = π",
+          "isCorrect": false,
+          "explanation": "T₀ = π não é correto. Embora cos(2t) tenha período π, o sinal cos(3t) não satisfaz x(t + π) = x(t): cos(3(t+π)) = cos(3t + 3π) = −cos(3t) ≠ cos(3t). O período é 2π."
+        },
+        {
+          "id": "a4",
+          "text": "Sim, com período fundamental T₀ = π/6",
+          "isCorrect": false,
+          "explanation": "T₀ = π/6 é muito pequeno. O período fundamental deve satisfazer x(t + T₀) = x(t) para todo t, e T₀ deve ser o menor valor positivo com essa propriedade. O correto é T₀ = 2π."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "O sinal x(t) = e^(−2t) · u(t) é classificado como:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Sinal de potência, pois sua amplitude é sempre não negativa",
+          "isCorrect": false,
+          "explanation": "A classificação energia/potência não depende do sinal da amplitude. O sinal e^(−2t)u(t) tem energia finita: E = ∫₀^∞ e^(−4t) dt = 1/4 < ∞. Logo é sinal de energia."
+        },
+        {
+          "id": "a2",
+          "text": "Sinal de energia, pois E = ∫₀^∞ e^(−4t) dt = 1/4 < ∞",
+          "isCorrect": true,
+          "explanation": "Correto! Calculando: E = ∫₋∞^∞ |x(t)|² dt = ∫₀^∞ e^(−4t) dt = [−e^(−4t)/4]₀^∞ = 1/4 < ∞. Como E < ∞, a potência média P = 0, e o sinal é de energia."
+        },
+        {
+          "id": "a3",
+          "text": "Nem sinal de energia nem sinal de potência, pois tem amplitude variável",
+          "isCorrect": false,
+          "explanation": "Ter amplitude variável não impede a classificação como sinal de energia ou potência. A decisão depende apenas da finitude de E ou P. Aqui E = 1/4 < ∞, então é sinal de energia."
+        },
+        {
+          "id": "a4",
+          "text": "Sinal de potência, pois existe para todo t ≥ 0 (duração semi-infinita)",
+          "isCorrect": false,
+          "explanation": "Duração semi-infinita não implica sinal de potência. O que importa é o valor das integrais de energia/potência. e^(−2t) decai exponencialmente, tornando E = 1/4 finita. É sinal de energia."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Qual dos seguintes sinais é classificado como sinal de potência?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "x(t) = e^(−t)u(t)",
+          "isCorrect": false,
+          "explanation": "e^(−t)u(t) é sinal de energia: E = ∫₀^∞ e^(−2t) dt = 1/2 < ∞ e P = 0. Sinais com decaimento exponencial e duração semi-infinita são tipicamente sinais de energia."
+        },
+        {
+          "id": "a2",
+          "text": "x(t) = rect(t/T) (pulso retangular de duração T)",
+          "isCorrect": false,
+          "explanation": "O pulso retangular tem duração finita e energia E = T < ∞. É sinal de energia, não de potência."
+        },
+        {
+          "id": "a3",
+          "text": "x(t) = A · cos(ω₀t)",
+          "isCorrect": true,
+          "explanation": "Correto! A senoide tem amplitude constante e duração infinita. Sua energia E = ∫₋∞^∞ A²cos²(ω₀t) dt → ∞. Mas a potência média P = A²/2 < ∞. Logo é sinal de potência. Todos os sinais periódicos são sinais de potência."
+        },
+        {
+          "id": "a4",
+          "text": "x(t) = sinc(t) = sin(πt)/(πt)",
+          "isCorrect": false,
+          "explanation": "O sinal sinc(t) tem energia finita (E = 1 para o sinc normalizado). É sinal de energia, não de potência."
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "O sinal de voz captado por um microfone e armazenado num arquivo MP3 passa por qual sequência de classificações?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Analógico-contínuo → Digital-discreto (após conversão A/D e compressão)",
+          "isCorrect": true,
+          "explanation": "Correto! O sinal acústico é contínuo no tempo e analógico (infinitos níveis de pressão). Após a conversão A/D (amostragem + quantização), torna-se discreto no tempo e digital. A compressão MP3 mantém esse caráter discreto-digital."
+        },
+        {
+          "id": "a2",
+          "text": "Digital-discreto → Analógico-contínuo (a compressão converte para analógico)",
+          "isCorrect": false,
+          "explanation": "A compressão MP3 não converte para analógico — ela reduz o número de bits, mas o sinal permanece discreto e digital. A conversão de volta para analógico só acontece na reprodução (D/A)."
+        },
+        {
+          "id": "a3",
+          "text": "Contínuo-digital → Discreto-analógico (após processamento)",
+          "isCorrect": false,
+          "explanation": "A voz captada por microfone é analógica (não digital) e contínua no tempo. Após A/D, torna-se discreto-digital. A sequência contínuo-digital → discreto-analógico não faz sentido físico nesse contexto."
+        },
+        {
+          "id": "a4",
+          "text": "Analógico-discreto → Digital-contínuo (durante o processamento)",
+          "isCorrect": false,
+          "explanation": "A voz captada não é discreta no tempo — ela é contínua. Além disso, 'Digital-contínuo' não descreve o resultado da conversão A/D, que produz um sinal discreto-digital."
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Um sinal x(t) é classificado como 'aperiódico'. Isso significa que:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "O sinal sempre tem duração finita e é zero fora de um intervalo [t₁, t₂]",
+          "isCorrect": false,
+          "explanation": "Sinais aperiódicos podem ter duração infinita. Por exemplo, e^(−t)u(t) é aperiódico e existe para t ≥ 0 sem limite superior. 'Aperiódico' significa apenas 'não periódico', não necessariamente de duração finita."
+        },
+        {
+          "id": "a2",
+          "text": "O sinal não satisfaz x(t) = x(t + T₀) para nenhum T₀ > 0 finito",
+          "isCorrect": true,
+          "explanation": "Correto! Um sinal aperiódico é aquele para o qual não existe nenhum período fundamental T₀ > 0 tal que x(t) = x(t + T₀) para todo t. Isso inclui sinais de duração finita, sinais com decaimento e sinais aleatórios."
+        },
+        {
+          "id": "a3",
+          "text": "O sinal é necessariamente aleatório e imprevisível",
+          "isCorrect": false,
+          "explanation": "Aperiódico não implica aleatório. e^(−t)u(t) é completamente determinístico (descrito por equação exata) e ainda assim é aperiódico. Periódico/aperiódico e determinístico/aleatório são classificações independentes."
+        },
+        {
+          "id": "a4",
+          "text": "O sinal é um sinal de energia com E < ∞",
+          "isCorrect": false,
+          "explanation": "Nem todo sinal aperiódico tem energia finita. Por exemplo, u(t) (degrau unitário) é aperiódico mas é sinal de potência (P = 1/2), não de energia. A classificação energia/potência é independente da periodicidade."
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Qual é a diferença fundamental entre um sinal determinístico e um sinal aleatório?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Sinais determinísticos têm amplitude constante; sinais aleatórios têm amplitude variável",
+          "isCorrect": false,
+          "explanation": "Um sinal determinístico pode ter amplitude variável (ex: cos(t) varia de −1 a 1). A distinção é sobre previsibilidade matemática, não sobre variação de amplitude."
+        },
+        {
+          "id": "a2",
+          "text": "Sinais determinísticos são periódicos; sinais aleatórios são aperiódicos",
+          "isCorrect": false,
+          "explanation": "Determinístico não implica periódico: e^(−t)u(t) é determinístico e aperiódico. E existem processos aleatórios estacionários com componentes periódicas (como ruído de banda estreita)."
+        },
+        {
+          "id": "a3",
+          "text": "Sinais determinísticos são completamente descritos por uma equação matemática; sinais aleatórios só podem ser descritos por distribuições de probabilidade",
+          "isCorrect": true,
+          "explanation": "Correto! Em sinais determinísticos, o valor em qualquer instante t é calculável a priori por uma fórmula explícita. Em sinais aleatórios (estocásticos), o valor em t só pode ser caracterizado probabilisticamente (média, variância, função de autocorrelação etc.)."
+        },
+        {
+          "id": "a4",
+          "text": "Sinais determinísticos só existem em simulação; sinais aleatórios existem no mundo real",
+          "isCorrect": false,
+          "explanation": "Sinais determinísticos existem no mundo real (ex: sinal senoidal gerado por um oscilador de quartzo). E modelos determinísticos são usados para descrever sinais reais com alta previsibilidade. A distinção é matemática, não sobre origem física."
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "O sinal x(t) = cos(2t) tem potência média igual a:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "P = 0, pois a integral de cos é zero ao longo de períodos completos",
+          "isCorrect": false,
+          "explanation": "A potência média usa |x(t)|², não x(t). Portanto P = lim(1/2T)∫₋ₜᵀ cos²(2t) dt. Usando cos²(θ) = (1 + cos(2θ))/2, a integral do termo co-senoidal é zero e P = 1/2 ≠ 0."
+        },
+        {
+          "id": "a2",
+          "text": "P = 1/2, pois a potência de A·cos(ω₀t) é A²/2",
+          "isCorrect": true,
+          "explanation": "Correto! Para x(t) = A·cos(ω₀t) com A = 1: P = A²/2 = 1/2. Isso é calculado por P = (1/T₀)∫₀^T₀ cos²(2t) dt = (1/T₀)∫₀^T₀ (1 + cos(4t))/2 dt = 1/2. A potência da senoide é sempre A²/2."
+        },
+        {
+          "id": "a3",
+          "text": "P = 1, pois o valor máximo de cos(2t) é 1",
+          "isCorrect": false,
+          "explanation": "A potência não é o valor máximo do sinal. A potência é o valor quadrático médio (RMS²). Para cos(2t), o valor RMS é 1/√2 e a potência é (1/√2)² = 1/2."
+        },
+        {
+          "id": "a4",
+          "text": "P → ∞, pois o sinal tem duração infinita",
+          "isCorrect": false,
+          "explanation": "Duração infinita implica energia infinita, mas não potência infinita. A potência média de cos(2t) é 1/2 (finita). Sinais periódicos sempre têm potência finita, por isso são sinais de potência e não sinais de energia."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Qual das seguintes afirmações sobre a classificação de sinais é VERDADEIRA?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Um sinal periódico pode ser sinal de energia se oscilar em torno de zero",
+          "isCorrect": false,
+          "explanation": "Sinais periódicos (com período finito T₀) têm energia infinita (E → ∞) e potência média finita (P > 0). Portanto, todo sinal periódico não-nulo é sinal de potência, nunca sinal de energia — independente de oscilar em torno de zero."
+        },
+        {
+          "id": "a2",
+          "text": "Um sinal pode ser classificado simultaneamente como sinal de energia e sinal de potência",
+          "isCorrect": false,
+          "explanation": "Não é possível. Se E < ∞ (sinal de energia), então P = 0 — não satisfaz P > 0. Se P > 0 e P < ∞ (sinal de potência), então E → ∞. As duas classes são mutuamente exclusivas."
+        },
+        {
+          "id": "a3",
+          "text": "Todo sinal físico real gerado por fontes limitadas é, em última análise, um sinal de energia",
+          "isCorrect": true,
+          "explanation": "Correto! Na prática, todo sinal físico real tem início e fim (duração finita ou decaimento assintótico), o que resulta em energia finita. Os sinais de potência (como senóides perfeitas de duração infinita) são idealizações matemáticas úteis para análise, mas não existem na prática."
+        },
+        {
+          "id": "a4",
+          "text": "Um sinal aleatório não pode ser periódico",
+          "isCorrect": false,
+          "explanation": "Sinais aleatórios podem ter componentes periódicas. Por exemplo, um processo estocástico do tipo x(t) = A·cos(ω₀t + φ), onde φ é uma variável aleatória uniformemente distribuída, é ao mesmo tempo aleatório (pois φ é incógnita) e periódico (período T₀ = 2π/ω₀)."
+        }
+      ]
+    }
+  ]
+}
+
