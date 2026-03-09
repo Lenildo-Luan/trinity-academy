@@ -1,0 +1,17 @@
+[
+  {
+    "id": "introducao-sinais-sistemas",
+    "title": "Introdução a Sinais e Sistemas",
+    "description": "Compreenda as definições fundamentais de sinais e sistemas: sinais como funções portadoras de informação, sistemas como entidades que processam sinais, representações contínuas e discretas, e implementações em hardware e software.",
+    "lessons": [
+      {
+        "id": "charpter-1",
+        "title": "Definições Fundamentais de Sinais e Sistemas",
+        "description": "O que é um sinal (função do tempo, exemplos do cotidiano), o que é um sistema (transforma entrada em saída), sinais contínuos vs. discretos, implementações em hardware e software, e a cadeia de processamento de sinais.",
+        "video": null,
+        "quizId": "quiz-1"
+      }
+    ]
+  }
+]
+

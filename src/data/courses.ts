@@ -56,5 +56,14 @@ export const courses: Course[] = [
       "https://ik.imagekit.io/qfmgarse7/jordan-harrison-40XgDxBfYXM-unsplash.avif",
     available: true,
   },
+  {
+    id: "sinais-e-sistemas",
+    title: "Fundamentos de Sinais e Sistemas",
+    description:
+      "Explore os conceitos fundamentais de sinais e sistemas: definições, representações contínuas e discretas, implementações em hardware e software, e a cadeia de processamento de sinais para engenharia de computação.",
+    backgroundImage:
+      "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=2000&q=80",
+    available: true,
+  },
 ];
 

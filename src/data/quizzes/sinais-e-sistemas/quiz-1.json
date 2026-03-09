@@ -1,0 +1,309 @@
+{
+  "id": "quiz-1",
+  "title": "Quiz — Definições Fundamentais de Sinais e Sistemas",
+  "description": "Teste seus conhecimentos sobre as definições de sinal e sistema, sinais contínuos vs. discretos, implementações em hardware e software, e a cadeia de processamento de sinais.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual é a definição mais precisa de um sinal no contexto de engenharia?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Um dispositivo eletrônico que transmite dados entre dois pontos",
+          "isCorrect": false,
+          "explanation": "Um dispositivo que transmite dados é um sistema ou componente de comunicação, não um sinal. O sinal é a informação transportada."
+        },
+        {
+          "id": "a2",
+          "text": "Uma função que carrega informação, geralmente representada como função de uma variável independente como o tempo",
+          "isCorrect": true,
+          "explanation": "Correto! Um sinal é uma função que carrega informação, tipicamente descrito como x(t), onde t é a variável independente (tempo). Pode também ser função do espaço ou de outras variáveis."
+        },
+        {
+          "id": "a3",
+          "text": "Qualquer onda eletromagnética que se propaga pelo espaço",
+          "isCorrect": false,
+          "explanation": "Ondas eletromagnéticas são apenas um tipo de sinal. Sinais também podem ser pressão sonora, tensão elétrica, dados digitais, imagens, entre outros."
+        },
+        {
+          "id": "a4",
+          "text": "Um comando enviado de um computador para outro através da rede",
+          "isCorrect": false,
+          "explanation": "Isso descreve uma mensagem ou pacote de rede, não a definição geral de sinal. Sinais são um conceito mais amplo que abrange qualquer função portadora de informação."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Na notação x(t), o que representam x e t respectivamente?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "x é a frequência do sinal e t é a amplitude",
+          "isCorrect": false,
+          "explanation": "Na notação x(t), x não representa frequência e t não representa amplitude. É exatamente o contrário do papel dessas variáveis."
+        },
+        {
+          "id": "a2",
+          "text": "x é o nome do sistema e t é o tempo de processamento",
+          "isCorrect": false,
+          "explanation": "x(t) representa um sinal, não um sistema. Sistemas são representados por operadores como T{x(t)}."
+        },
+        {
+          "id": "a3",
+          "text": "x é o valor (amplitude) do sinal no instante t, e t é a variável temporal",
+          "isCorrect": true,
+          "explanation": "Correto! x(t) significa que para cada instante de tempo t, o sinal possui um valor x correspondente. É a notação padrão para sinais no domínio do tempo."
+        },
+        {
+          "id": "a4",
+          "text": "x é a posição espacial e t é a temperatura",
+          "isCorrect": false,
+          "explanation": "Embora sinais possam ser funções do espaço, na notação padrão x(t) para sinais temporais, t sempre representa o tempo e x o valor do sinal."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Qual dos seguintes NÃO é um exemplo de sinal?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "A tensão elétrica medida nos terminais de um microfone ao longo do tempo",
+          "isCorrect": false,
+          "explanation": "A tensão de um microfone é um sinal de áudio clássico — uma função do tempo que carrega informação sonora."
+        },
+        {
+          "id": "a2",
+          "text": "O eletrocardiograma (ECG) de um paciente",
+          "isCorrect": false,
+          "explanation": "O ECG é um sinal biomédico que registra a atividade elétrica do coração ao longo do tempo."
+        },
+        {
+          "id": "a3",
+          "text": "Um resistor de 10kΩ conectado a um circuito",
+          "isCorrect": true,
+          "explanation": "Correto! Um resistor é um componente físico (parte de um sistema), não um sinal. Sinais são funções que carregam informação, enquanto componentes são elementos que processam ou conduzem sinais."
+        },
+        {
+          "id": "a4",
+          "text": "A imagem capturada por uma câmera digital",
+          "isCorrect": false,
+          "explanation": "Uma imagem digital é um sinal bidimensional — uma função da posição (x, y) que carrega informação de intensidade luminosa."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Qual é a principal diferença entre um sinal em tempo contínuo x(t) e um sinal em tempo discreto x[n]?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "x(t) tem amplitude contínua enquanto x[n] só pode assumir valores 0 ou 1",
+          "isCorrect": false,
+          "explanation": "A distinção está na variável independente (tempo), não na amplitude. Sinais discretos no tempo podem ter amplitude contínua. Sinais binários (0 ou 1) são um caso especial chamado sinal digital."
+        },
+        {
+          "id": "a2",
+          "text": "x(t) é definido para todo valor real de t, enquanto x[n] é definido apenas para valores inteiros de n",
+          "isCorrect": true,
+          "explanation": "Correto! A distinção fundamental é na variável independente: x(t) existe para todo t ∈ ℝ (contínuo), enquanto x[n] existe apenas para n ∈ ℤ (discreto). Entre duas amostras consecutivas de x[n], o sinal simplesmente não está definido."
+        },
+        {
+          "id": "a3",
+          "text": "x(t) é sempre analógico e x[n] é sempre digital",
+          "isCorrect": false,
+          "explanation": "Discreto no tempo e digital não são sinônimos. Um sinal pode ser discreto no tempo mas ter amplitude contínua (não quantizada). Digital implica discreto tanto no tempo quanto na amplitude."
+        },
+        {
+          "id": "a4",
+          "text": "x(t) é representado por parênteses e x[n] por colchetes, mas matematicamente são idênticos",
+          "isCorrect": false,
+          "explanation": "A notação é diferente justamente porque os sinais são matematicamente diferentes. x(t) tem domínio nos reais (ℝ) e x[n] tem domínio nos inteiros (ℤ) — isso muda fundamentalmente a análise."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Um arquivo de áudio .wav com taxa de amostragem de 44.100 Hz representa que tipo de sinal?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Um sinal em tempo discreto x[n], pois contém amostras coletadas em instantes específicos",
+          "isCorrect": true,
+          "explanation": "Correto! Um arquivo .wav armazena 44.100 amostras por segundo — cada amostra é um valor x[n] em um instante discreto n. O sinal original (voz, música) era contínuo, mas foi amostrado pelo conversor A/D."
+        },
+        {
+          "id": "a2",
+          "text": "Um sinal em tempo contínuo x(t), pois o áudio original era uma onda sonora contínua",
+          "isCorrect": false,
+          "explanation": "Embora o áudio original fosse contínuo, após a amostragem (A/D) ele se torna discreto. O arquivo .wav armazena amostras numéricas, não uma função contínua."
+        },
+        {
+          "id": "a3",
+          "text": "Nem contínuo nem discreto — é um sinal digital binário",
+          "isCorrect": false,
+          "explanation": "Um arquivo .wav é um sinal discreto no tempo. Digital e discreto são conceitos relacionados, mas o .wav é primariamente classificado como sinal em tempo discreto."
+        },
+        {
+          "id": "a4",
+          "text": "Um sinal analógico, pois pode ser reproduzido em alto-falantes",
+          "isCorrect": false,
+          "explanation": "O fato de poder ser reproduzido em alto-falantes requer conversão D/A. O arquivo em si armazena dados discretos — números representando amostras."
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "O que define um sistema no contexto de sinais e sistemas?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Qualquer equipamento eletrônico que consome energia elétrica",
+          "isCorrect": false,
+          "explanation": "Nem todo equipamento eletrônico é um sistema no sentido de sinais e sistemas. A definição exige que haja processamento de sinais de entrada para produzir sinais de saída."
+        },
+        {
+          "id": "a2",
+          "text": "Um conjunto de componentes que armazena dados em memória",
+          "isCorrect": false,
+          "explanation": "Armazenamento de dados é uma função possível, mas a definição de sistema é mais ampla: é qualquer entidade que transforma sinais de entrada em sinais de saída."
+        },
+        {
+          "id": "a3",
+          "text": "Uma entidade que processa sinais de entrada para gerar sinais de saída, segundo uma regra definida",
+          "isCorrect": true,
+          "explanation": "Correto! Um sistema é definido pela relação y(t) = T{x(t)}, onde T é a operação que transforma a entrada x(t) na saída y(t). Pode ser hardware ou software."
+        },
+        {
+          "id": "a4",
+          "text": "Um programa de computador que executa cálculos numéricos",
+          "isCorrect": false,
+          "explanation": "Um programa pode ser uma implementação de um sistema, mas a definição de sistema é mais geral — inclui também circuitos analógicos e qualquer entidade que transforme sinais."
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual das seguintes é uma vantagem de implementar um sistema em software (algoritmo digital) em vez de hardware (circuito analógico)?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Menor latência de processamento, pois o software é mais rápido que circuitos",
+          "isCorrect": false,
+          "explanation": "Na verdade, circuitos analógicos geralmente têm latência menor (nanosegundos) que processamento em software (microssegundos a milissegundos)."
+        },
+        {
+          "id": "a2",
+          "text": "Não necessita de conversão A/D para processar sinais do mundo real",
+          "isCorrect": false,
+          "explanation": "Sistemas em software processam sinais digitais, portanto precisam sim de conversão A/D para sinais analógicos do mundo real."
+        },
+        {
+          "id": "a3",
+          "text": "Alta flexibilidade — alterar o comportamento do sistema requer apenas modificar o código",
+          "isCorrect": true,
+          "explanation": "Correto! A principal vantagem do software é a flexibilidade. Para mudar o comportamento de um filtro digital, basta alterar os coeficientes no código. Em hardware, seria necessário redesenhar e fabricar um novo circuito."
+        },
+        {
+          "id": "a4",
+          "text": "Maior precisão, pois circuitos analógicos sempre introduzem erros",
+          "isCorrect": false,
+          "explanation": "Tanto hardware quanto software têm suas fontes de erro. Digital tem erros de quantização e arredondamento, enquanto analógico tem ruído e deriva de componentes. Nenhum é universalmente mais preciso."
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Na cadeia de processamento de sinais, qual é a sequência correta das etapas?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Processamento → Sensor → D/A → A/D → Atuador",
+          "isCorrect": false,
+          "explanation": "A ordem está completamente embaralhada. O sensor deve vir primeiro (captura), seguido de A/D (digitalização), processamento, D/A (reconstrução) e atuador (saída)."
+        },
+        {
+          "id": "a2",
+          "text": "Sensor → A/D → Processamento → D/A → Atuador",
+          "isCorrect": true,
+          "explanation": "Correto! A cadeia completa é: sensor (captura do mundo real) → conversor A/D (analógico para digital) → sistema de processamento (algoritmo/DSP) → conversor D/A (digital para analógico) → atuador (saída para o mundo real)."
+        },
+        {
+          "id": "a3",
+          "text": "A/D → Sensor → Processamento → Atuador → D/A",
+          "isCorrect": false,
+          "explanation": "O sensor deve vir antes do A/D (não se pode digitalizar sem antes capturar), e o D/A deve vir antes do atuador (para converter o sinal digital de volta ao analógico)."
+        },
+        {
+          "id": "a4",
+          "text": "Sensor → Processamento → A/D → D/A → Atuador",
+          "isCorrect": false,
+          "explanation": "O A/D deve vir antes do processamento digital, não depois. O processamento computacional requer dados digitais, que são produzidos pela conversão A/D."
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Um amplificador de áudio que dobra a amplitude do sinal de entrada pode ser representado matematicamente como:",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "y(t) = x(t) + 2",
+          "isCorrect": false,
+          "explanation": "Somar 2 ao sinal é adicionar um offset (nível DC), não dobrar a amplitude. Dobrar a amplitude é multiplicar por 2."
+        },
+        {
+          "id": "a2",
+          "text": "y(t) = x(2t)",
+          "isCorrect": false,
+          "explanation": "x(2t) representa compressão temporal (o sinal é reproduzido duas vezes mais rápido), não amplificação. A amplitude não é alterada."
+        },
+        {
+          "id": "a3",
+          "text": "y(t) = 2 · x(t)",
+          "isCorrect": true,
+          "explanation": "Correto! Dobrar a amplitude significa multiplicar o sinal por 2. Este é um sistema linear simples onde T{x(t)} = 2·x(t). Cada valor do sinal de entrada é multiplicado por 2 na saída."
+        },
+        {
+          "id": "a4",
+          "text": "y(t) = x(t)²",
+          "isCorrect": false,
+          "explanation": "Elevar ao quadrado é uma operação não-linear que distorceria o sinal, não o amplificaria de forma proporcional. Para amplificação, a operação é multiplicação por uma constante."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Qual das afirmações sobre sinais e sistemas é VERDADEIRA?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Sinais existem apenas no domínio do tempo — não há sinais que sejam funções do espaço",
+          "isCorrect": false,
+          "explanation": "Imagens digitais são sinais bidimensionais no domínio do espaço: a intensidade luminosa é função da posição (x, y). Sinais podem ser funções de qualquer variável independente."
+        },
+        {
+          "id": "a2",
+          "text": "Sistemas só podem ser implementados em hardware — software apenas armazena dados",
+          "isCorrect": false,
+          "explanation": "Sistemas podem ser implementados tanto em hardware (circuitos analógicos) quanto em software (algoritmos digitais). Filtros digitais, compressores e reconhecedores de fala são todos sistemas em software."
+        },
+        {
+          "id": "a3",
+          "text": "A conversão A/D é necessária para que computadores possam processar sinais do mundo real",
+          "isCorrect": true,
+          "explanation": "Correto! Computadores operam com dados discretos (números). Para processar sinais analógicos do mundo real (tensão, pressão, som), é necessário amostrar e quantizar o sinal através de um conversor analógico-digital (A/D)."
+        },
+        {
+          "id": "a4",
+          "text": "Todo sistema transforma obrigatoriamente o sinal de entrada — a saída nunca pode ser igual à entrada",
+          "isCorrect": false,
+          "explanation": "O sistema identidade y(t) = x(t) é um sistema válido onde a saída é exatamente igual à entrada. Sistemas não precisam necessariamente modificar o sinal."
+        }
+      ]
+    }
+  ]
+}
+

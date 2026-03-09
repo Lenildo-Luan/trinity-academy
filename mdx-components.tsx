@@ -137,6 +137,14 @@ import {
   QUICHandshakeComparison,
   QUICHOLBlocking,
 } from "./src/components/ecn-fairness-quic-p5-examples";
+import {
+  SignalDefinition,
+  SignalExamples,
+  SystemInputOutput,
+  ContinuousVsDiscrete,
+  SystemHardwareSoftware,
+  SignalProcessingChain,
+} from "./src/components/signals-systems-intro-p5-examples";
 
 function getTextContent(node: ReactNode): string {
   if (typeof node === "string") return node;
@@ -372,6 +380,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     QUICArchitecture,
     QUICHandshakeComparison,
     QUICHOLBlocking,
+    SignalDefinition,
+    SignalExamples,
+    SystemInputOutput,
+    ContinuousVsDiscrete,
+    SystemHardwareSoftware,
+    SignalProcessingChain,
     ...components,
   };
 }

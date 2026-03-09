@@ -1,0 +1,181 @@
+# Definições Fundamentais de Sinais e Sistemas
+
+Quando você atende uma chamada no celular, assiste a um programa de TV ou ouve uma música em fones de ouvido, está interagindo — muitas vezes sem perceber — com **sinais** e **sistemas**. O sinal de voz que sai do microfone do seu celular, o sinal de vídeo que chega à sua televisão, as ondas sonoras captadas pelo seu fone: todos são exemplos de **sinais** sendo processados por **sistemas**. Neste primeiro capítulo, vamos estabelecer as definições fundamentais que sustentam toda a disciplina de **Sinais e Sistemas** (*Signals and Systems*), uma das bases da engenharia de computação, elétrica e de telecomunicações.
+
+## O que é um Sinal?
+
+Um **sinal** é uma função que carrega **informação**. Na maioria dos casos em engenharia, um sinal é descrito como uma função que varia no **tempo** — por isso escrevemos **x(t)**, onde *t* representa a variável temporal e *x* representa o valor do sinal naquele instante.
+
+> **Definição formal:** Um **sinal** é um conjunto de dados ou informações representado matematicamente como uma função de uma ou mais variáveis independentes. Na forma mais comum, é uma função do tempo: **x(t)**.
+
+<SignalDefinition />
+
+Observe na visualização acima como o sinal varia continuamente ao longo do eixo temporal. O ponto laranja percorre a curva, mostrando o valor instantâneo **x(t₀)** em cada momento. Essa é a essência de um sinal: para cada instante de tempo *t*, existe um valor correspondente *x(t)*.
+
+### Sinais no Cotidiano
+
+Sinais estão por toda parte. Cada vez que informação é transmitida, armazenada ou processada, há um sinal envolvido. Vejamos alguns exemplos:
+
+<SignalExamples />
+
+<MarkdownTable
+  headers={["Sinal", "Grandeza Física", "Variável Independente", "Exemplo de Uso"]}
+  rows={[
+    ["**Sinal de TV**", "Tensão elétrica / Onda eletromagnética", "Tempo", "Transmissão de vídeo e áudio por broadcast"],
+    ["**Sinal de Celular**", "Onda eletromagnética modulada", "Tempo", "Comunicação de voz e dados via rede móvel"],
+    ["**Sinal de Áudio**", "Pressão sonora / Tensão elétrica", "Tempo", "Reprodução de música, gravação de voz"],
+    ["**Sinal de ECG**", "Potencial elétrico", "Tempo", "Monitoramento cardíaco em medicina"],
+    ["**Imagem Digital**", "Intensidade luminosa", "Espaço (x, y)", "Fotografia, visão computacional"],
+    ["**Sinal de Radar**", "Onda eletromagnética refletida", "Tempo", "Detecção de objetos, controle de tráfego aéreo"],
+  ]}
+/>
+
+> **Ponto-chave:** Embora o tempo seja a variável independente mais comum, sinais também podem ser funções do espaço (imagens), da frequência ou de outras variáveis. Neste curso, focaremos predominantemente em **sinais no domínio do tempo**.
+
+### Propriedades Essenciais de Sinais
+
+Todo sinal possui características que o descrevem:
+
+- **Amplitude:** o valor do sinal em um dado instante — o "tamanho" da informação naquele ponto.
+- **Frequência:** a taxa com que o sinal oscila — quantas vezes por segundo ele se repete (medida em Hertz, Hz).
+- **Fase:** o deslocamento temporal do sinal em relação a uma referência.
+- **Energia e Potência:** medidas de quanto "conteúdo" o sinal carrega ao longo do tempo.
+
+Essas propriedades serão exploradas em profundidade nos próximos capítulos. Por ora, o importante é entender que um sinal é uma **função portadora de informação**.
+
+## Sinais em Tempo Contínuo e Tempo Discreto
+
+Uma distinção fundamental na teoria de sinais é entre sinais em **tempo contínuo** e sinais em **tempo discreto**. Essa diferença está na forma como a variável independente (o tempo) é definida.
+
+- **Sinal em tempo contínuo — x(t):** definido para **todo** valor de *t* no eixo real. A variável tempo é contínua — entre quaisquer dois instantes, sempre existem infinitos outros instantes. Exemplo: a tensão medida por um osciloscópio analógico.
+
+- **Sinal em tempo discreto — x[n]:** definido apenas para valores **inteiros** de *n*. A variável tempo é discreta — o sinal existe apenas nos instantes *n = 0, 1, 2, 3, ...*. Exemplo: amostras de áudio capturadas por um conversor analógico-digital (A/D) a 44.100 amostras por segundo.
+
+<ContinuousVsDiscrete />
+
+Compare os dois lados da visualização: à esquerda, a curva contínua está definida em **todos** os pontos; à direita, apenas os círculos (amostras) existem — entre eles, o sinal simplesmente não está definido.
+
+<MarkdownTable
+  headers={["Aspecto", "Tempo Contínuo x(t)", "Tempo Discreto x[n]"]}
+  rows={[
+    ["**Variável independente**", "t \u2208 \u211D (números reais)", "n \u2208 \u2124 (números inteiros)"],
+    ["**Notação**", "x(t) — parênteses", "x[n] — colchetes"],
+    ["**Origem**", "Grandezas físicas naturais (tensão, pressão, temperatura)", "Amostragem de sinais contínuos ou geração computacional"],
+    ["**Processamento típico**", "Circuitos analógicos (filtros, amplificadores)", "Algoritmos digitais (DSP, computadores)"],
+    ["**Exemplo**", "Sinal de voz no microfone", "Arquivo de áudio .wav (44.100 amostras/s)"],
+    ["**Representação gráfica**", "Curva suave e contínua", "Hastes (stems) com pontos isolados"],
+  ]}
+/>
+
+> **Por que essa distinção importa?** Computadores trabalham com dados **discretos** — números finitos armazenados em memória. Para processar sinais do mundo real (que são contínuos), precisamos primeiro **amostrar** (*sample*) e **quantizar** (*quantize*) o sinal, convertendo-o para o domínio discreto. Esse processo é a base do **processamento digital de sinais** (*Digital Signal Processing* — DSP).
+
+## O que é um Sistema?
+
+Agora que sabemos o que é um sinal, podemos definir o conceito complementar: o **sistema**.
+
+> **Definição formal:** Um **sistema** é uma entidade que **processa** um ou mais sinais de **entrada** para produzir um ou mais sinais de **saída**, de acordo com uma regra ou operação bem definida.
+
+Matematicamente, representamos um sistema como um operador **T** que transforma o sinal de entrada *x(t)* no sinal de saída *y(t)*:
+
+**y(t) = T\{ x(t) \}**
+
+<SystemInputOutput />
+
+Na visualização acima, observe como o sinal azul (entrada) passa pelo bloco do sistema e emerge como um sinal verde (saída) com características diferentes. O sistema **transformou** o sinal — pode tê-lo amplificado, filtrado, atrasado ou modificado de outra forma.
+
+### Exemplos de Sistemas
+
+<MarkdownTable
+  headers={["Sistema", "Entrada x(t)", "Saída y(t)", "Operação Realizada"]}
+  rows={[
+    ["**Amplificador de áudio**", "Sinal de áudio fraco", "Sinal de áudio amplificado", "Multiplicação por constante: y(t) = A \u00B7 x(t)"],
+    ["**Filtro passa-baixa**", "Sinal com ruído", "Sinal limpo (sem altas frequências)", "Remoção de componentes de alta frequência"],
+    ["**Compressor de vídeo**", "Frames de vídeo bruto", "Vídeo comprimido (H.264, H.265)", "Redução de redundância espacial e temporal"],
+    ["**Equalizador musical**", "Áudio com espectro plano", "Áudio com graves/agudos realçados", "Ajuste de ganho por faixa de frequência"],
+    ["**Controlador de motor**", "Sinal de referência (velocidade desejada)", "Sinal de controle para o motor", "Algoritmo PID de controle"],
+    ["**Detector de bordas**", "Imagem digital", "Mapa de bordas da imagem", "Operador diferencial (Sobel, Canny)"],
+  ]}
+/>
+
+> **Resumo em uma frase:** Se o **sinal** é a informação, o **sistema** é a máquina que transforma essa informação.
+
+## Implementações de Sistemas: Hardware e Software
+
+Uma característica fundamental dos sistemas é que eles podem ser implementados de duas formas distintas: em **hardware** (circuitos físicos) ou em **software** (programas de computador). Muitas vezes, o **mesmo sistema matemático** pode ter ambas as implementações.
+
+<SystemHardwareSoftware />
+
+### Sistemas em Hardware
+
+Um sistema em hardware é implementado com **componentes eletrônicos físicos**: resistores, capacitores, amplificadores operacionais, circuitos integrados. Exemplos clássicos:
+
+- **Filtro analógico RC:** um resistor e um capacitor formam um filtro passa-baixa que atenua altas frequências.
+- **Amplificador operacional:** amplifica sinais elétricos com ganho ajustável.
+- **Circuito de rádio FM:** demodula sinais eletromagnéticos para extrair o áudio.
+
+**Vantagens:** processamento em tempo real, baixa latência, alta velocidade para sinais analógicos.
+**Desvantagens:** pouca flexibilidade — alterar o comportamento exige redesenhar o circuito.
+
+### Sistemas em Software
+
+Um sistema em software é implementado com **código executado por um processador**: algoritmos em C, Python, MATLAB ou linguagens similares. Exemplos:
+
+- **Filtro digital FIR:** implementado como uma soma ponderada de amostras anteriores.
+- **Compressor de áudio MP3:** algoritmo que remove informação perceptualmente irrelevante.
+- **Reconhecimento de fala:** redes neurais que transformam sinal de áudio em texto.
+
+**Vantagens:** alta flexibilidade — alterar o comportamento é apenas mudar o código. Fácil replicação e atualização.
+**Desvantagens:** requer conversão A/D para sinais analógicos, latência de processamento.
+
+<MarkdownTable
+  headers={["Aspecto", "Hardware (Circuito Analógico)", "Software (Algoritmo Digital)"]}
+  rows={[
+    ["**Implementação**", "Componentes eletrônicos (R, C, Op-Amp)", "Código em linguagem de programação"],
+    ["**Flexibilidade**", "Baixa — exige redesenho físico", "Alta — basta alterar o código"],
+    ["**Latência**", "Muito baixa (nanosegundos)", "Variável (microssegundos a milissegundos)"],
+    ["**Tipo de sinal**", "Analógico (contínuo)", "Digital (discreto)"],
+    ["**Custo de modificação**", "Alto — novo circuito/placa", "Baixo — atualização de software"],
+    ["**Exemplo**", "Filtro RC, amplificador de áudio", "Filtro FIR, compressor MP3, IA de voz"],
+    ["**Uso típico**", "Telecomunicações, instrumentação", "Computação, multimídia, inteligência artificial"],
+  ]}
+/>
+
+> **Na prática moderna:** a grande maioria dos sistemas de engenharia combina ambas as abordagens. O sinal do mundo real é capturado por hardware (sensor), convertido para digital (A/D), processado por software, e reconvertido para analógico (D/A) para atuar no mundo real.
+
+## A Cadeia de Processamento de Sinais
+
+Entendendo sinais e sistemas individualmente, podemos agora ver como eles se conectam em uma **cadeia completa de processamento**. Essa cadeia é o modelo fundamental por trás de virtualmente todo sistema moderno de engenharia:
+
+1. **Aquisição (Sensor):** um dispositivo físico — microfone, câmera, termômetro, acelerômetro — converte uma grandeza do mundo real em um sinal elétrico analógico.
+2. **Conversão A/D:** o sinal analógico é **amostrado** e **quantizado**, transformando-se em uma sequência de números que o computador pode processar.
+3. **Processamento (Sistema):** o sinal digital é processado por um algoritmo — filtrado, comprimido, analisado, classificado — para extrair ou transformar a informação desejada.
+4. **Conversão D/A:** o sinal digital processado é reconvertido em sinal analógico.
+5. **Atuação (Saída):** um dispositivo físico — alto-falante, display, motor — converte o sinal elétrico de volta em uma grandeza perceptível no mundo real.
+
+<SignalProcessingChain />
+
+Observe os três domínios na visualização: o sinal começa no **domínio analógico** (mundo real), passa para o **domínio digital** (processamento computacional) e retorna ao **domínio analógico** (saída para o mundo real).
+
+### Exemplo Concreto: Assistente de Voz
+
+Vamos aplicar a cadeia a um exemplo que você usa todos os dias — um assistente de voz como Alexa, Siri ou Google Assistant:
+
+1. **Sensor:** o microfone do dispositivo capta as ondas sonoras da sua voz → sinal analógico de áudio.
+2. **A/D:** o conversor amostra o sinal a 16.000 amostras/s e quantiza em 16 bits → sinal digital x[n].
+3. **Sistema:** algoritmos de processamento de fala (FFT, redes neurais) transformam x[n] em texto → "Qual a previsão do tempo?".
+4. **D/A:** a resposta em texto é convertida em sinal de áudio digital (TTS) e depois em sinal analógico.
+5. **Atuador:** o alto-falante reproduz o sinal → você ouve a resposta.
+
+> **Conclusão:** a cadeia **sensor → A/D → processamento → D/A → atuador** é o modelo unificador de toda a disciplina. Cada bloco dessa cadeia envolve conceitos de sinais e sistemas que exploraremos ao longo do curso.
+
+## Resumo da Aula
+
+Neste capítulo, estabelecemos as definições fundamentais de sinais e sistemas:
+
+- **Sinal:** uma função que carrega informação, geralmente no domínio do tempo — x(t). Exemplos incluem sinais de TV, celular, áudio, ECG e imagens digitais.
+- **Propriedades de sinais:** amplitude, frequência, fase, energia e potência são as características que descrevem qualquer sinal.
+- **Tempo contínuo vs. discreto:** sinais contínuos x(t) são definidos para todo *t* real; sinais discretos x[n] existem apenas em instantes inteiros *n*. Computadores processam sinais discretos.
+- **Sistema:** uma entidade que transforma sinais de entrada em sinais de saída: y(t) = T\{x(t)\}. Exemplos incluem amplificadores, filtros, compressores e controladores.
+- **Hardware vs. Software:** sistemas podem ser implementados com circuitos físicos (baixa latência, pouca flexibilidade) ou programas de computador (alta flexibilidade, requer conversão A/D).
+- **Cadeia de processamento:** sensor → A/D → sistema (processamento) → D/A → atuador é o modelo fundamental que conecta o mundo real ao processamento digital.
+
