@@ -293,9 +293,9 @@ export function InitialConditionsEffect() {
     p.fill(90); p.textAlign(p.LEFT, p.CENTER); p.textSize(8); p.text("t", tToX(tMax) + 7, oy);
 
     // Steady-state line
-    p.stroke(60); p.strokeWeight(1); p.drawingContext.setLineDash([4, 4]);
+    p.stroke(60); p.strokeWeight(1); (p.drawingContext as CanvasRenderingContext2D).setLineDash([4, 4]);
     p.line(ox, oy - scaleY, tToX(tMax), oy - scaleY);
-    p.drawingContext.setLineDash([]);
+    (p.drawingContext as CanvasRenderingContext2D).setLineDash([]);
     p.noStroke(); p.fill(80); p.textSize(8); p.textAlign(p.RIGHT, p.CENTER);
     p.text("y_∞=1", ox - 5, oy - scaleY);
 
