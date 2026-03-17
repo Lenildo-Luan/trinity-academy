@@ -200,6 +200,16 @@ import {
   ConvolutionIntegral,
   LCITAnalysisWorkflow,
 } from "./src/components/time-domain-analysis-p5-examples";
+import {
+  PolymericMatrixStructure,
+  PropertiesComparison,
+  ReinforcementTypes,
+  MatrixComparison,
+  SMCMolding,
+  PultrusionProcess,
+  LaminateComposites,
+  SandwichPanel,
+} from "./src/components/composite-matrix-polymer-p5-examples";
 
 function getTextContent(node: ReactNode): string {
   if (typeof node === "string") return node;
@@ -482,6 +492,14 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     CharacteristicModes,
     ConvolutionIntegral,
     LCITAnalysisWorkflow,
+    PolymericMatrixStructure,
+    PropertiesComparison,
+    ReinforcementTypes,
+    MatrixComparison,
+    SMCMolding,
+    PultrusionProcess,
+    LaminateComposites,
+    SandwichPanel,
     ...components,
   };
 }

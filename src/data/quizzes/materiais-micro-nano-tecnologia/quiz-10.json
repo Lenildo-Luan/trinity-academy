@@ -1,0 +1,309 @@
+{
+  "id": "quiz-10",
+  "title": "Quiz — Materiais de Reforço: Partículas e Modificadores",
+  "description": "Teste seus conhecimentos sobre partículas como reforço, modificadores de propriedades funcionais, homogeneidade de dispersão e aplicações de compósitos híbridos.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Como partículas funcionam como reforço em uma matriz polimérica?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Partículas se alinham como fibras contínuas, transferindo carga axialmente",
+          "isCorrect": false,
+          "explanation": "Partículas não se alinham — são aleatoriamente dispersas e arredondadas. Não funcionam como fibras contínuas."
+        },
+        {
+          "id": "a2",
+          "text": "Transferem carga através de interface matriz-partícula e por bloqueio mecânico, aumentando rigidez ao restringir movimento de cadeias moleculares da matriz",
+          "isCorrect": true,
+          "explanation": "Correto! Partículas funcionam por: (1) transferência de carga interfacial (atrito entre matriz e partícula), (2) bloqueio mecânico (partículas âncoras restringem movimento molecular), (3) preenchimento de vazios (densificam estrutura). Não dependem de alinhamento — função é essencialmente isotrópica."
+        },
+        {
+          "id": "a3",
+          "text": "Partículas absorvem carga e a armazenam elasticamente, liberando depois como mola",
+          "isCorrect": false,
+          "explanation": "Partículas não armazenam e liberam carga como mola. Transferem carga, não armazenam."
+        },
+        {
+          "id": "a4",
+          "text": "Partículas reduzem resistência da matriz dilindo o material uniformemente",
+          "isCorrect": false,
+          "explanation": "Partículas bem-dispersas aumentam rigidez, não reduzem. Redução só ocorre se partículas aglomeram (formam grumos) atuando como defeitos."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Por que nanopartículas são mais eficientes como reforço do que micropartículas de mesma concentração em massa?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Porque nanopartículas são simplesmente menores — tamanho não importa para reforço",
+          "isCorrect": false,
+          "explanation": "Tamanho é CRITICALMENTE importante para nanopartículas. A razão superfície-volume muda dramaticamente em escala nano."
+        },
+        {
+          "id": "a2",
+          "text": "Nanopartículas têm razão superfície-volume extremamente alta (~10,000x maior que micropartículas), oferecendo área de interface muito maior para transferência de carga mesmo em concentrações baixas (< 5% em volume)",
+          "isCorrect": true,
+          "explanation": "Correto! Uma nanopartícula de 10 nm tem superfície ~1000x maior em relação a seu volume do que partícula de 10 μm. Essa área interfacial massiva permite reforço desproporcional — nanopartículas são revolucionárias. Exemplo: 1% de nanotubos de carbono oferece reforço comparável a 20% de vidro micrométricas."
+        },
+        {
+          "id": "a3",
+          "text": "Porque nanopartículas têm condutividade elétrica que micropartículas não têm",
+          "isCorrect": false,
+          "explanation": "Condutividade não é razão principal de eficiência de reforço. A razão é puramente geométrica: superfície-volume."
+        },
+        {
+          "id": "a4",
+          "text": "Nanopartículas não são realmente mais eficientes — diferença é apenas de marketing",
+          "isCorrect": false,
+          "explanation": "Diferença é real e mensurável. Estudos científicos comprovam que nanopartículas oferecem reforço 5-10x mais eficiente por unidade de massa."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "O que é negro-de-fumo e qual é sua principal função em compósitos polímeros?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Tinta adicional apenas para colorir de preto",
+          "isCorrect": false,
+          "explanation": "Negro-de-fumo tem múltiplas funções além de coloração. Coloração é apenas um benefício."
+        },
+        {
+          "id": "a2",
+          "text": "Partículas amorfas de carbono que oferecem: (1) coloração preta, (2) absorção UV (proteção solar), (3) condutividade elétrica controlada, (4) reforço leve de rigidez e resistência ao desgarre",
+          "isCorrect": true,
+          "explanation": "Correto! Negro-de-fumo é multifuncional. Além de preto, oferece: absorção de UV (crítico para plásticos externos expostos a sol — previne degradação), condutividade elétrica controlável (acima de concentração crítica de ~12-15%, forma rede contínua e material torna-se condutor), e reforço leve. Aplicação clássica: pneus de borracha preta."
+        },
+        {
+          "id": "a3",
+          "text": "Pigmento que oferece apenas estética, sem propriedades mecânicas",
+          "isCorrect": false,
+          "explanation": "Negro-de-fumo não é apenas pigmento — oferece propriedades funcionais mensuráveis: UV, condutividade, reforço."
+        },
+        {
+          "id": "a4",
+          "text": "Pó de carvão que torna o compósito mais macio e flexível",
+          "isCorrect": false,
+          "explanation": "Negro-de-fumo torna material MAIS rígido, não mais macio. Aumenta rigidez e resistência ao desgarre."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "O que é efeito de percolação em um compósito com negro-de-fumo?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Lentamente negro-de-fumo sai do plástico por permeação",
+          "isCorrect": false,
+          "explanation": "Percolação não é sobre \"sair\" do material — é sobre formação de rede contínua."
+        },
+        {
+          "id": "a2",
+          "text": "Acima de concentração crítica (~12-15%), partículas de carbono tocam-se formando rede contínua, resultando em transição abrupta de isolante para condutor",
+          "isCorrect": true,
+          "explanation": "Correto! Efeito de percolação é fenômeno crítico: (1) concentração baixa: partículas isoladas, material é isolante; (2) aproximando concentração crítica: transição gradual; (3) acima de concentração crítica: partículas tocam-se, rede contínua forma-se, material torna-se condutor com resistividade baixa. Transição é relativamente abrupta — degrau de resistividade."
+        },
+        {
+          "id": "a3",
+          "text": "Propriedade apenas teórica sem aplicações práticas",
+          "isCorrect": false,
+          "explanation": "Percolação tem aplicações práticas muito importantes — eletrodos de bateria, tintas condutivas, cabos com condutividade controlada."
+        },
+        {
+          "id": "a4",
+          "text": "Negro-de-fumo sempre é condutor independentemente de concentração",
+          "isCorrect": false,
+          "explanation": "Negro-de-fumo em baixa concentração é isolante — não há rede contínua. Condutor quando acima da concentração de percolação."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Por que a homogeneidade de dispersão de partículas é crítica para propriedades finais do compósito?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Dispersão não importa — resultado é o mesmo com ou sem homogeneidade",
+          "isCorrect": false,
+          "explanation": "Dispersão é absolutamente crítica. Variação de propriedades é direta consequência de má dispersão."
+        },
+        {
+          "id": "a2",
+          "text": "Boa dispersão (homogênea): todas partículas atuam como reforço, propriedades previsíveis. Má dispersão (aglomeração): grumos atuam como defeitos/concentradores de tensão, reduzindo resistência drasticamente",
+          "isCorrect": true,
+          "explanation": "Correto! Diferença é dramática: (1) homogênea: máximas propriedades, reprodutibilidade, confiança; (2) aglomerada: fraturas prematuras em torno de grumos, propriedades impredizíveis, lotes inconsistentes. Em aviação, homogeneidade é absolutamente crítica — vida de segurança depende de consistência."
+        },
+        {
+          "id": "a3",
+          "text": "Aglomeração na verdade AUMENTA propriedades porque cria \"blocos\" mais rígidos",
+          "isCorrect": false,
+          "explanation": "Aglomeração reduz propriedades. Grumos atuam como defeitos (concentradores de tensão), causando fraturas prematuras."
+        },
+        {
+          "id": "a4",
+          "text": "Propriedades mecânicas dependem apenas de quantidade total de partículas, não de como são distribuídas",
+          "isCorrect": false,
+          "explanation": "Distribuição é TÃO importante quanto quantidade. 10% bem-disperso vs. 10% aglomerado tem propriedades muito diferentes."
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual é o principal desafio em dispersar nanopartículas em uma matriz polimérica?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Nanopartículas são muito grandes para penetrar na matriz",
+          "isCorrect": false,
+          "explanation": "Nanopartículas são pequenas — muito pequenas! Problema é oposto: são tão pequenas que tendem a aglomerar por forças van der Waals."
+        },
+        {
+          "id": "a2",
+          "text": "Nanopartículas tendem a aglomerar (formar grumos) devido à alta razão superfície-volume e forças de van der Waals intensas — requer pré-tratamento com surfactantes ou processos de ultrassom para dispersão adequada",
+          "isCorrect": true,
+          "explanation": "Correto! Nanopartículas são \"pegajosas\" a nível molecular. Forças de van der Waals entre partículas são muito intensas em escala nano — elas naturalmente se agrupam. Resolver requer: (1) surfactantes (envolvem partícula, evitando aglomração), (2) ultrassom (separa grumos mecanicamente), (3) pré-dispersão em solvente antes de adicionar à resina."
+        },
+        {
+          "id": "a3",
+          "text": "Nanopartículas reagem quimicamente com a matriz e degradam",
+          "isCorrect": false,
+          "explanation": "Reação química geralmente não é problema. Aglomeração é o desafio principal."
+        },
+        {
+          "id": "a4",
+          "text": "Não há desafios reais — nanopartículas dispersam-se naturalmente",
+          "isCorrect": false,
+          "explanation": "Nanopartículas NÃO dispersam-se naturalmente — precisam de ajuda. Essa é razão pela qual muitos produtos com nanopartículas no mercado têm qualidade inconsistente."
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Quando é apropriado usar partículas em vez de fibras como reforço primário em um compósito?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Nunca — fibras são sempre superiores",
+          "isCorrect": false,
+          "explanation": "Partículas têm aplicações onde superiores: quando direção de carga é incerta, quando propriedades funcionais (não mecânicas) importam, quando custo é crítico."
+        },
+        {
+          "id": "a2",
+          "text": "Quando: (1) carregamento é multidirecional/isotrópico, (2) propriedades funcionais (condutividade, UV, cor) são importantes, (3) custo é crítico, (4) molde é complexo onde fibras não conformam bem",
+          "isCorrect": true,
+          "explanation": "Correto! Partículas dominam em: (1) aplicações isotrópicas onde direção não importa, (2) compósitos funcionais (negro-de-fumo em pneus para propriedades de desgarre), (3) aplicações de custo-crítico (CaCO3 em plásticos genéricos), (4) geometrias complexas (moldagem por injeção com fibra curta). Fibras dominam em estruturas onde direção de carga é clara."
+        },
+        {
+          "id": "a3",
+          "text": "Partículas nunca são usadas porque propriedades mecânicas são sempre inferiores",
+          "isCorrect": false,
+          "explanation": "Propriedades mecânicas de compósitos particulados são inferiores a fibrosos, MAS para aplicações que não exigem máxima resistência (a maioria), partículas oferecem balanço custo/desempenho melhor."
+        },
+        {
+          "id": "a4",
+          "text": "Apenas para prototipagem — não para produção em larga escala",
+          "isCorrect": false,
+          "explanation": "Compósitos particulados (especialmente moldagem por injeção) são IDEAIS para produção em larga escala — são processo altamente automatizado."
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "O que é um compósito híbrido e qual é sua vantagem?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Compósito que usa dois tipos de resina — uma termofixo e uma termoplástico",
+          "isCorrect": false,
+          "explanation": "Compósito híbrido não é sobre misturar dois tipos de resina. É sobre combinar diferentes TIPOS de reforço."
+        },
+        {
+          "id": "a2",
+          "text": "Compósito que combina múltiplos tipos de reforço (ex: fibra + partículas) ou múltiplos tipos de fibras (vidro + carbono), oferecendo balanço de propriedades estruturais + funcionais + custo",
+          "isCorrect": true,
+          "explanation": "Correto! Híbridos oferecem flexibilidade máxima: (1) exemplo: fibra estrutural + negro-de-fumo funcional = resistência + proteção UV + condutividade; (2) exemplo: carbono (caro, rígido) em zona crítica + vidro (barato) em zona não-crítica = balanço custo/desempenho. Hibridização é prática padrão em engenharia moderna."
+        },
+        {
+          "id": "a3",
+          "text": "Compósito que é sempre mais fraco porque propriedades são \"diluídas\"",
+          "isCorrect": false,
+          "explanation": "Compósitos híbridos bem projetados são tão fortes quanto seus melhores constituintes — ganham funcionalidade adicional."
+        },
+        {
+          "id": "a4",
+          "text": "Compósito que é usado apenas em pesquisa, não em produção real",
+          "isCorrect": false,
+          "explanation": "Compósitos híbridos são usados extensivamente em produção real (automóvel, aeronáutica, energia eólica). São prática industrial, não experimental."
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Uma carga de preenchimento (como carbonato de cálcio) é adicionada a um polímero em concentração de 30% em volume. Qual é o efeito esperado?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Propriedades mecânicas aumentam 30% porque 30% da estrutura é agora carga rígida",
+          "isCorrect": false,
+          "explanation": "Carga NÃO contribui igualmente para propriedades. Sua contribuição é muito menor."
+        },
+        {
+          "id": "a2",
+          "text": "Propriedades mecânicas reduzem ~15-25%, mas custo reduz ~40-50% — balanço aceitável quando estrutura não é crítica",
+          "isCorrect": true,
+          "explanation": "Correto! Cargas de preenchimento (CaCO3, talco) não aumentam propriedades — reduzem (~10-20% em resistência). ENTRETANTO, reduzem custo desproporcionalmente (~40-50% porque material é barato). Para aplicações onde máxima propriedade não é essencial (pratos de plástico, brinquedos, invólucros), essa é decisão racional de engenharia. Trade-off é explícito e calculado."
+        },
+        {
+          "id": "a3",
+          "text": "Propriedades não mudam — carga é neutra",
+          "isCorrect": false,
+          "explanation": "Carga afeta propriedades — geralmente reduz. Efeito é mensurável."
+        },
+        {
+          "id": "a4",
+          "text": "Propriedades aumentam porque carga oferece reforço como partículas nano",
+          "isCorrect": false,
+          "explanation": "Cargas micrométricas (como CaCO3) não oferecem reforço como nanopartículas. Suas propriedades são inferiores — principalmente efeito de redução de custo."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Um compósito particulado com aglomeração de nanopartículas de carbono é testado e falha prematuramente em teste de resistência à tração. Qual é a causa provável?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Nanopartículas de carbono são inerentemente fracas naquele tamanho",
+          "isCorrect": false,
+          "explanation": "Nanopartículas de carbono são fortes — problema não é propriedade intrínseca da partícula."
+        },
+        {
+          "id": "a2",
+          "text": "Grumos de nanopartículas aglomeradas atuam como concentradores de tensão (defeitos), iniciando fraturas em torno deles. Isso reduz resistência efetiva abaixo de material sem nanopartículas",
+          "isCorrect": true,
+          "explanation": "Correto! Aglomeração de nanopartículas é desastre para propriedades. Grumos são \"entalhes\" microscópicos que concentram tensão. Uma amostra com 2% de nanopartículas bem-dispersas é MAIS forte; mesma amostra com aglomeração é MAIS FRACA que matriz pura. Isso demonstra crítica importância de homogeneidade."
+        },
+        {
+          "id": "a3",
+          "text": "Nanopartículas reagem quimicamente com a resina e degradam",
+          "isCorrect": false,
+          "explanation": "Reação química geralmente não é problema — aglomeração é o culpado."
+        },
+        {
+          "id": "a4",
+          "text": "Nanopartículas absorvem muita umidade, enfraquecendo a matriz",
+          "isCorrect": false,
+          "explanation": "Absorção de umidade não é razão principal de falha prematura em teste de tração. Aglomeração (concentrador de tensão) é a razão."
+        }
+      ]
+    }
+  ]
+}
+

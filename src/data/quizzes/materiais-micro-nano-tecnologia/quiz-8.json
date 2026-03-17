@@ -1,0 +1,309 @@
+{
+  "id": "quiz-8",
+  "title": "Quiz — Fundamentos dos Compósitos de Matriz Polimérica",
+  "description": "Teste seus conhecimentos sobre os conceitos fundamentais de compósitos de matriz polimérica, incluindo definição, vantagens, desvantagens e tipos de matrizes.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual é a definição fundamental de um compósito de matriz polimérica?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Um material formado apenas por fibras de vidro sem nenhum aglutinante",
+          "isCorrect": false,
+          "explanation": "Um compósito de matriz polimérica requer TANTO uma matriz (resina) quanto um reforço (fibras). Sem a matriz, as fibras não transferem carga uma para a outra."
+        },
+        {
+          "id": "a2",
+          "text": "Um material bifásico onde uma resina polimérica (matriz) envolve e protege um material de reforço, criando propriedades superiores aos constituintes individuais",
+          "isCorrect": true,
+          "explanation": "Correto! Um compósito de matriz polimérica é exatamente essa combinação sinergiosa: a matriz une e protege o reforço, enquanto o reforço fornece resistência superior. O resultado é um material novo com propriedades que nenhum dos constituintes sozinho poderia oferecer."
+        },
+        {
+          "id": "a3",
+          "text": "Um tipo de metal reforçado com plástico para reduzir peso",
+          "isCorrect": false,
+          "explanation": "Um compósito de matriz polimérica não contém metal como matrix. A matriz é sempre um polímero (resina). Pode haver partículas metálicas como reforço, mas a fase contínua é polimérica."
+        },
+        {
+          "id": "a4",
+          "text": "Uma liga polimérica formada por dois polímeros misturados mecanicamente",
+          "isCorrect": false,
+          "explanation": "Um compósito de matriz polimérica não é simples mistura de dois polímeros. A estrutura é reforço (fibra ou partícula) dentro de uma matriz polimérica contínua."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Qual é a principal vantagem dos compósitos de matriz polimérica em relação ao aço em aplicações estruturais?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Maior resistência à tração absoluta",
+          "isCorrect": false,
+          "explanation": "O aço tem resistência à tração absoluta maior que a maioria dos compósitos. A vantagem dos compósitos é a RAZÃO resistência/peso, não a resistência bruta."
+        },
+        {
+          "id": "a2",
+          "text": "Custo inicial mais baixo",
+          "isCorrect": false,
+          "explanation": "Compósitos, especialmente os de alta qualidade (carbono/epóxi), custam significativamente mais que aço. Essa é uma desvantagem, não vantagem."
+        },
+        {
+          "id": "a3",
+          "text": "Leveza associada a rigidez: oferecem propriedades mecânicas similares ao aço mas com 75-80% do peso — economiza combustível em transporte aéreo e terrestre",
+          "isCorrect": true,
+          "explanation": "Correto! Um compósito de carbono pode ter a mesma rigidez (modulo) de uma peça de aço, mas pesando muito menos. Para estruturas de transporte onde peso crítico (quer dizer, menos combustível queimado), essa é a vantagem transformadora dos compósitos."
+        },
+        {
+          "id": "a4",
+          "text": "Resistência à corrosão extremamente superior",
+          "isCorrect": false,
+          "explanation": "Enquanto compósitos com resina epóxi oferecem boa resistência à corrosão, aço inoxidável pode ser igualmente resistente. Essa não é a principal vantagem."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Qual é uma desvantagem crítica dos compósitos de matriz polimérica em aplicações de alta temperatura?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "A matriz polimérica tem resistência térmica limitada (típico 200–300 °C para termofixos), enquanto metais como titânio e superligas mantêm propriedades acima de 1000 °C",
+          "isCorrect": true,
+          "explanation": "Correto! Essa é a limitação fundamental. Termofixos como epóxi degradam-se termicamente acima de ~300 °C. Para aplicações em turbinas a jato (> 1000 °C), compósitos de matriz polimérica são inadequados — requer cerâmicas ou superligas metálicas."
+        },
+        {
+          "id": "a2",
+          "text": "As fibras de vidro expandem demais com calor",
+          "isCorrect": false,
+          "explanation": "Fibras como vidro e carbono têm expansão térmica muito baixa. O problema é a MATRIZ polimérica, não as fibras."
+        },
+        {
+          "id": "a3",
+          "text": "Compósitos absorvem calor excessivamente e ficam inflamáveis",
+          "isCorrect": false,
+          "explanation": "Enquanto alguns polímeros podem ser inflamáveis, a principal limitação em alta temperatura é a DEGRADAÇÃO TÉRMICA da matriz — amolecimento e perda de propriedades mecânicas, não inflamabilidade."
+        },
+        {
+          "id": "a4",
+          "text": "A expansão térmica dos compósitos é negativa, causando contração em vez de expansão",
+          "isCorrect": false,
+          "explanation": "Expansão térmica de compósitos é positiva (expandem com calor), principalmente devido à matriz polimérica. A expansão é moderadamente alta, criando tensões residuais, mas não é negativa."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Qual é a principal característica que distingue um polímero termofixo de um termoplástico?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Termofixos contêm sempre fibra de vidro enquanto termoplásticos contêm fibra de carbono",
+          "isCorrect": false,
+          "explanation": "O tipo de fibra não define se a matriz é termofixo ou termoplástico. Ambos podem usar vidro ou carbono como reforço."
+        },
+        {
+          "id": "a2",
+          "text": "Termofixos sofrem reticulação irreversível (reação química durante cura), enquanto termoplásticos solidificam por resfriamento reversível (sem reação química)",
+          "isCorrect": true,
+          "explanation": "Correto! Essa é a distinção fundamental. Termofixo = reação química, rede permanente, não reciclável. Termoplástico = apenas resfriamento, cadeia linear, reversível e reciclável."
+        },
+        {
+          "id": "a3",
+          "text": "Termofixos são sempre mais resistentes mecanicamente",
+          "isCorrect": false,
+          "explanation": "Enquanto termofixos oferecem resistência térmica superior, termoplásticos frequentemente oferecem resistência ao impacto superior e até resistência à tração similar. A escolha entre um tipo e outro não é sobre quem é \"mais resistente\"."
+        },
+        {
+          "id": "a4",
+          "text": "Termoplásticos não podem ser misturados com reforço fibroso",
+          "isCorrect": false,
+          "explanation": "Termoplásticos podem ser misturados com fibras contínuas ou curtas. A dificuldade é apenas que sua viscosidade alta torna a impregnação mais desafiadora."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Um engenheiro precisa escolher uma matriz para um compósito estrutural de asa de aeronave. A asa sofre flexão constante, aquecimento solar moderado (~60 °C máximo), e deve durar 20+ anos. Qual matriz é mais apropriada?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Termoplástico (como PEEK), porque oferece ciclo de processamento muito rápido",
+          "isCorrect": false,
+          "explanation": "Embora PEEK ofereça rapidez de processamento, seu custo elevadíssimo (~10-20x epóxi) o torna inviável para estruturas inteiras de asa. Ciclo rápido não é prioridade se o custo total é prohibitivo."
+        },
+        {
+          "id": "a2",
+          "text": "Termofixo epóxi, porque oferece viscosidade baixa (boa impregnação), resistência térmica adequada (~200–300 °C >> 60 °C), e custo moderado",
+          "isCorrect": true,
+          "explanation": "Correto! Epóxi é o padrão industrial para asas de aeronave. Oferece: (1) baixa viscosidade permite impregnação completa de fibras, (2) resistência térmica bem acima do requerido (60 °C é muito abaixo do limite), (3) custo razoável para produção em série, (4) durabilidade comprovada (20+ anos de histórico em serviço)."
+        },
+        {
+          "id": "a3",
+          "text": "Poliéster termofixo, porque é muito mais barato que epóxi",
+          "isCorrect": false,
+          "explanation": "Embora poliéster seja mais barato, sua resistência térmica (120–150 °C) é menor que epóxi, oferecendo menos margem de segurança. Além disso, para aeronaves, custo de estrutura é menor que margem de diferença de combustível — leveza (melhor com epóxi) é prioridade."
+        },
+        {
+          "id": "a4",
+          "text": "Fenólica, porque é a mais resistente termicamente",
+          "isCorrect": false,
+          "explanation": "Embora fenólica ofereça resistência térmica superior, é frágil e propensa a trincas. Para aplicações de flexão (como asa), fragilidade é desvantagem séria. Epóxi oferece balanço melhor de resistência térmica e tenacidade."
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Por que a absorção de umidade é problema crítico para compósitos de matriz polimérica em ambiente marinho?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "A umidade corrói as fibras de vidro, enfraquecendo mecanicamente",
+          "isCorrect": false,
+          "explanation": "As fibras de vidro e carbono não são significativamente corrodas por água. O problema é na MATRIZ polimérica e interface matriz-fibra."
+        },
+        {
+          "id": "a2",
+          "text": "A matriz polimérica absorve água, que enfraquece as ligações interfaciais entre matriz e reforço (efeito de plastificação), reduzindo propriedades mecânicas progressivamente",
+          "isCorrect": true,
+          "explanation": "Correto! A água penetra na matriz polimérica (especialmente nylon e poliéster), ocupando espaço entre moléculas e enfraquecendo as ligações de hidrogênio. Esse processo chamado plastificação degrada propriedades continuamente — compósito submarino perde resistência com tempo, requerendo manutenção ou substituição periódica."
+        },
+        {
+          "id": "a3",
+          "text": "A umidade causa expansão térmica excessiva que racha a resina",
+          "isCorrect": false,
+          "explanation": "Enquanto a umidade causa alguma expansão dimensional, o mecanismo principal de degradação é a plastificação (enfraquecimento de ligações interfaciais), não fissuras por expansão."
+        },
+        {
+          "id": "a4",
+          "text": "Umidade é apenas um problema cosmético — afeta aparência, não propriedades mecânicas",
+          "isCorrect": false,
+          "explanation": "Umidade afeta propriedades mecânicas significativamente. Um compósito saturado em água pode perder 10-30% de resistência à tração — não é meramente cosmético."
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual dessas afirmações sobre reciclagem de compósitos é VERDADEIRA?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Termofixos e termoplásticos são igualmente recicláveis — ambos podem ser reprocessados indefinidamente",
+          "isCorrect": false,
+          "explanation": "Falso. Termofixos sofrem degradação durante reciclagem porque a rede reticulada se quebra irreversivelmente. Termoplásticos podem ser reprocessados múltiplas vezes sem degradação significativa."
+        },
+        {
+          "id": "a2",
+          "text": "Termofixos são completamente não-recicláveis — todo resíduo deve ser incinerado ou aterrado",
+          "isCorrect": false,
+          "explanation": "Embora termofixos não possam ser re-processados como antes, podem ser remoídos e usados como carga em novos compósitos — uma forma limitada de reciclagem, mas ainda melhor que aterro."
+        },
+        {
+          "id": "a3",
+          "text": "Termoplásticos podem ser reaquecidos e remoldados múltiplas vezes sem mudança fundamental na estrutura molecular, oferecendo reciclabilidade verdadeira",
+          "isCorrect": true,
+          "explanation": "Correto! Estrutura linear de termoplásticos (reversível) permite reaquecimento e remoldagem. Propriedades podem degradar ligeiramente com ciclos, mas o material continua funcional após reciclagem — vantagem ambiental significativa vs. termofixos."
+        },
+        {
+          "id": "a4",
+          "text": "Reciclagem de compósitos é irrelevante porque representam menos de 1% de resíduos globais",
+          "isCorrect": false,
+          "explanation": "Embora compósitos sejam pequena porcentagem atualmente, seu volume cresce rapidamente (aeronaves, energia renovável). Além disso, \"pequena % do total\" não significa \"irrelevante\" — compósitos em aterro permanecem séculos, enquanto degradação é negligenciável."
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Por que a viscosidade da matriz é crítica para qualidade do compósito final?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Viscosidade baixa permite impregnação completa de fibras com poucas bolhas de ar — essencial para máximas propriedades mecânicas",
+          "isCorrect": true,
+          "explanation": "Correto! Resina com viscosidade baixa flui facilmente entre fibras, deslocando ar e criando compósito denso. Bolhas de ar atuam como defeitos, concentram tensão e causam falha prematura. Termofixos oferecem viscosidade baixa — uma razão de sua preferência para estruturas críticas."
+        },
+        {
+          "id": "a2",
+          "text": "Viscosidade alta torna compósito mais resistente porque resina fica mais densa",
+          "isCorrect": false,
+          "explanation": "Viscosidade alta dificulta impregnação, deixando bolhas aprisionadas. Compósito com bolhas é MAIS fraco, não mais resistente. Densificação (redução de porosidade) é que torna compósito forte."
+        },
+        {
+          "id": "a3",
+          "text": "Viscosidade não importa — o resultado final é sempre idêntico independentemente",
+          "isCorrect": false,
+          "explanation": "Viscosidade é extremamente importante. Impregnação incompleta (alta viscosidade) ou instabilidade (viscosidade flutuando) causa variação de propriedades e falhas prematuras."
+        },
+        {
+          "id": "a4",
+          "text": "Viscosidade baixa causa sinergia entre fibra e resina, aumentando resistência mecanicamente",
+          "isCorrect": false,
+          "explanation": "Viscosidade baixa não cria \"sinergia extra\" — apenas permite impregnação adequada. A sinergia vem da combinação fibra+matriz, não da viscosidade per se."
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Um compósito tem absorção de umidade de 2% em peso após 1 ano em ambiente marinho tropical. Como isso afeta propriedades mecânicas?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Nenhum efeito significativo — 2% é negligenciável",
+          "isCorrect": false,
+          "explanation": "Mesmo 1-2% de água é suficiente para plastificar significativamente a matriz polimérica. Estudos mostram que 2% de absorção pode reduzir resistência à tração em 5-15% e módulo em 10-20% — definitivamente significativo."
+        },
+        {
+          "id": "a2",
+          "text": "Aumenta propriedades porque água age como plastificante, tornando material mais dúctil",
+          "isCorrect": false,
+          "explanation": "Embora água adicione alguma ductilidade (mais flexível), o efeito dominante é enfraquecimento de ligações interfaciais. Propriedades mecânicas declinam, não aumentam."
+        },
+        {
+          "id": "a3",
+          "text": "Reduz propriedades mecânicas porque água enfraquece as ligações interfaciais entre matriz e reforço, reduzindo transferência de carga",
+          "isCorrect": true,
+          "explanation": "Correto! A água absorvida pela matriz ocupa espaço molecular, enfraquecendo ligações de hidrogênio e de van der Waals que mantêm coesão. Resultado é redução mensurável de resistência, módulo e resistência ao impacto. Para ambientes marinhos longos, esse é problema de durabilidade crítico."
+        },
+        {
+          "id": "a4",
+          "text": "Melhora resistência ao impacto porque água lubrifica microdeslizamentos",
+          "isCorrect": false,
+          "explanation": "Água não melhora resistência ao impacto — enfraquece. Lubrificação é fenômeno que afeta atrito, não resistência ao impacto de estrutura."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Por que engenheiros frequentemente escolhem epóxi ao invés de poliéster para aplicações estruturais críticas (aeronaves, turbinas eólicas) apesar de epóxi custar mais?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Epóxi é sempre mais forte mecanicamente em teste simples de tensão",
+          "isCorrect": false,
+          "explanation": "Epóxi não é necessariamente mais forte em simples tensão — ambos podem ter resistência à tração similar. A diferença está em outras propriedades."
+        },
+        {
+          "id": "a2",
+          "text": "Epóxi oferece: (1) viscosidade menor (impregnação melhor), (2) resistência térmica superior (margem de segurança maior), (3) aderência melhor com reforço (interface mais forte), (4) menor absorção de umidade — conjunto de propriedades que justificam custo para aplicações críticas",
+          "isCorrect": true,
+          "explanation": "Correto! Epóxi é padrão industrial porque oferece combinação de propriedades. Custo extra (pode ser 50-100% mais caro que poliéster) é justificado pela durabilidade, confiabilidade e propriedades superiores — especialmente importante quando falha é catastrófica (queda de aeronave) ou onde manutenção é custosa (turbina eólica offshore)."
+        },
+        {
+          "id": "a3",
+          "text": "Poliéster é fraco demais para qualquer aplicação estrutural séria",
+          "isCorrect": false,
+          "explanation": "Poliéster é usado em muitas aplicações estruturais (cascos de barcos, painéis automotivos). Não é \"fraco demais\" — apenas não oferece resistência térmica e durabilidade que epóxi oferece para aplicações CRÍTICAS."
+        },
+        {
+          "id": "a4",
+          "text": "Epóxi tem cor melhor e aparência mais profissional",
+          "isCorrect": false,
+          "explanation": "Cor e aparência são fatores muito secundários na escolha de matriz. Propriedades mecânicas, térmica e ambiental dominam a seleção para aplicações estruturais."
+        }
+      ]
+    }
+  ]
+}
+

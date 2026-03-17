@@ -1,0 +1,309 @@
+{
+  "id": "quiz-11",
+  "title": "Quiz — A Matriz Polimérica: Termofixos vs. Termoplásticos",
+  "description": "Teste seus conhecimentos sobre mecanismos de cura de termofixos, solidificação de termoplásticos, propriedades comparativas e processamento.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual é a diferença fundamental no mecanismo de solidificação entre um termofixo e um termoplástico?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Ambos sofrem reação química — termofixo é mais rápido",
+          "isCorrect": false,
+          "explanation": "Ambos NÃO sofrem reação química. Termofixo sim, termoplástico não. Essa é a diferença fundamental."
+        },
+        {
+          "id": "a2",
+          "text": "Termofixo sofre reação química (reticulação) formando rede permanente; termoplástico solidifica por resfriamento (reversível), sem mudança estrutural",
+          "isCorrect": true,
+          "explanation": "Correto! Essa distinção define tudo: termofixo = reação química = rede reticulada = irreversível; termoplástico = resfriamento = cadeias lineares = reversível. Uma vez que você entende isso, todas outras diferenças seguem."
+        },
+        {
+          "id": "a3",
+          "text": "Termofixo derrete quando aquecido; termoplástico fica pegajoso mas não derrete",
+          "isCorrect": false,
+          "explanation": "Oposto: termoplástico derrete quando aquecido (cadeias se separam). Termofixo não derrete — apenas degrada."
+        },
+        {
+          "id": "a4",
+          "text": "Termofixo usa catalisador; termoplástico usa iniciadores de reação",
+          "isCorrect": false,
+          "explanation": "Terminologia confusa aqui. Ambos podem usar catalisadores, mas a diferença é qual processo ocorre (reação vs. mudança de fase), não qual iniciador é usado."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Por que a viscosidade baixa do epóxi (um termofixo) é vantajosa durante processamento?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Permite fluxo lento e controlado dentro do molde",
+          "isCorrect": false,
+          "explanation": "Fluxo lento não é vantagem — é desvantagem. Queremos que resina flua rapidamente entre fibras."
+        },
+        {
+          "id": "a2",
+          "text": "Permite impregnação completa de fibras com mínimas bolhas de ar aprisionadas — essencial para máximas propriedades mecânicas",
+          "isCorrect": true,
+          "explanation": "Correto! Viscosidade baixa é CRÍTICA porque resina pode fluir facilmente entre filamentos de fibra (espaço ~ 10 micrometros), deslocando ar. Bolhas de ar reduzem resistência em ~20-40%. Termoplásticos com viscosidade alta deixam bolhas aprisionadas — problema sério para qualidade."
+        },
+        {
+          "id": "a3",
+          "text": "Permite resfriamento mais rápido do compósito",
+          "isCorrect": false,
+          "explanation": "Viscosidade não controla velocidade de resfriamento — temperatura da matriz do molde controla. E termofixo não resfria para solidificar — cura termicamente."
+        },
+        {
+          "id": "a4",
+          "text": "Reduz custo de processamento porque requer menos energia",
+          "isCorrect": false,
+          "explanation": "Viscosidade baixa não reduz custo significativamente. Vantagem é qualidade (menos bolhas), não economia."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "O que é reticulação (cross-linking) em um polímero termofixo?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Processo onde cadeias de polímero se quebram em fragmentos menores",
+          "isCorrect": false,
+          "explanation": "Reticulação é oposto — cadeias se LIGAM covalentemente entre si, criando rede maior."
+        },
+        {
+          "id": "a2",
+          "text": "Processo onde moléculas pequenas (monômeros) ligam-se covalentemente, formando uma rede 3D contínua e permanente — uma vez reticulado, material não pode ser derretido ou remoldado",
+          "isCorrect": true,
+          "explanation": "Correto! Reticulação é reação onde monômeros com grupos reativos ligam-se em múltiplos pontos. Resultado é rede 3D conectada — estrutura muito diferente de cadeias lineares. Rede é PERMANENTE — aquecimento não desfaz ligações, apenas causa degradação térmica."
+        },
+        {
+          "id": "a3",
+          "text": "Apenas nome técnico para \"cura\" — sem significado especial",
+          "isCorrect": false,
+          "explanation": "Reticulação tem significado muito específico: formação de ligações cruzadas (cross-links) covalentes entre cadeias moleculares."
+        },
+        {
+          "id": "a4",
+          "text": "Processo onde polímero absorve água e incha",
+          "isCorrect": false,
+          "explanation": "Absorção de água é fenômeno diferente. Reticulação é sobre ligações químicas, não absorção."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Por que um termoplástico como nylon tem viscosidade mais alta que epóxi durante processamento?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Porque nylon tem densidade maior, tornando-o mais viscoso",
+          "isCorrect": false,
+          "explanation": "Densidade não controla viscosidade diretamente. Estrutura molecular controla."
+        },
+        {
+          "id": "a2",
+          "text": "Porque nylon é polímero pré-formado com cadeias longas e entrelaçadas — quando aquecido, as cadeias ainda têm alguma \"coesão\" e resistem ao fluxo mais do que monômeros pequenos de epóxi",
+          "isCorrect": true,
+          "explanation": "Correto! Nylon é polímero completo — cadeias longas se entrelaçam mecanicamente. Mesmo aquecido, cadeias ainda resistem fluxo (viscosidade alta). Epóxi é monômeros pequenos — fluem muito mais facilmente. Essa é razão que impregnação de fibra é fácil com epóxi (termofixo baixa viscosidade) e difícil com nylon (termoplástico alta viscosidade)."
+        },
+        {
+          "id": "a3",
+          "text": "Porque nylon contém aditivos espessadores que epóxi não tem",
+          "isCorrect": false,
+          "explanation": "Não são aditivos — é propriedade fundamental da estrutura molecular de termoplásticos."
+        },
+        {
+          "id": "a4",
+          "text": "Viscosidade é similar — diferença é irrelevante",
+          "isCorrect": false,
+          "explanation": "Diferença é ENORME. Epóxi pode ser 100-1000x menos viscoso que nylon em temperaturas de processamento. Diferença é absolutamente crítica para prática."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Um engenheiro precisa fazer 100,000 peças/ano. Qual tipo de matriz é mais apropriado: termofixo ou termoplástico?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Termofixo, porque propriedades são superiores",
+          "isCorrect": false,
+          "explanation": "Embora termofixo ofereça propriedades superiores, ciclo longo (horas) torna inadequado para produção em massa. Velocidade é prioridade."
+        },
+        {
+          "id": "a2",
+          "text": "Termoplástico, porque ciclo de processamento muito rápido (minutos a segundos) permite produção em massa viável — moldagem por injeção é altamente automatizada",
+          "isCorrect": true,
+          "explanation": "Correto! Para 100,000 peças/ano, velocidade é crítica. Termofixo com cura de 4-24 horas seria impossível (inventário de trabalho em processo seria gigantesco). Termoplástico com ciclo 1-3 minutos é solução padrão — é por isso que moldagem por injeção domina produção em massa."
+        },
+        {
+          "id": "a3",
+          "text": "Qualquer um oferece produção similar — não há diferença",
+          "isCorrect": false,
+          "explanation": "Diferença é DRAMÁTICA. Ciclo 1 min (termoplástico) vs. 24 horas (termofixo) = impossibilidade prática vs. viabilidade."
+        },
+        {
+          "id": "a4",
+          "text": "Depende apenas de custo — mais barato é melhor",
+          "isCorrect": false,
+          "explanation": "Custo é importante, mas ciclo de tempo é ainda mais crítico para viabilidade de produção em massa. Uma peça cara que você consegue produzir 1000/dia é melhor que peça barata que produz 10/dia."
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Por que compósitos de matriz termofixo (epóxi) podem ter tensões residuais e empenamento após cura?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Porque umidade ambiental entra na resina durante cura",
+          "isCorrect": false,
+          "explanation": "Umidade é problema pós-cura (absorção), não durante cura."
+        },
+        {
+          "id": "a2",
+          "text": "Durante reticulação, moléculas se ligam e a resina contrai — contração não é uniforme em todo volume (fibras contraem menos) criando tensões internas. Resfriamento adiciona mais tensão devido a coeficiente de expansão térmica diferente entre fibra e matriz",
+          "isCorrect": true,
+          "explanation": "Correto! Mecanismo de dois-fold: (1) contração química durante reticulação não é uniforme — causa \"puxão\" desigual criando tensões; (2) resfriamento pós-cura: fibra (ex: vidro) tem coeficiente de expansão baixo (~5 ppm/K) enquanto resina tem alto (~50 ppm/K) — ao esfriar, resina quer contrair MUITO mais que fibra, criando tensão. Resultado: peça pode empenar, pode desenvolver microtrincas — problema real em peças complexas."
+        },
+        {
+          "id": "a3",
+          "text": "Tensão residual é impossível em termofixos — apenas termoplásticos têm esse problema",
+          "isCorrect": false,
+          "explanation": "Termofixos têm MAIS problema com tensão residual (contração química) do que termoplásticos (apenas térmico)."
+        },
+        {
+          "id": "a4",
+          "text": "Tensão é controlada apenas pela resina — fibra não contribui",
+          "isCorrect": false,
+          "explanation": "Incompatibilidade fibra-matriz (diferentes coeficientes de expansão) é causa principal de tensão residual. Fibra contribui criticamente."
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Um compósito termoplástico foi aquecido acima da temperatura de transição vítrea (Tg). Que propriedades mudaram?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Nenhuma — propriedades não mudam porque é termoplástico",
+          "isCorrect": false,
+          "explanation": "Propriedades mudam dramaticamente. Aquecimento acima de Tg causa amolecimento."
+        },
+        {
+          "id": "a2",
+          "text": "Acima de Tg, material amolece — rigidez reduz drasticamente (módulo cai ~100x), resistência à tração cai, resistência ao impacto aumenta (material é mais dúctil/flexível)",
+          "isCorrect": true,
+          "explanation": "Correto! Tg é transição crítica em polímeros: abaixo de Tg, cadeias estão \"congeladas\" (rígidas, frágeis); acima de Tg, cadeias podem mover-se (flexíveis, dúcteis). Mudanças são dramáticas. Nylon tem Tg ~50 °C — usar em ambiente aquecido reduz propriedades severamente. PEEK tem Tg ~143 °C — permanece rígido em temperatura mais alta. Escolha de polímero frequentemente baseada em Tg requerida."
+        },
+        {
+          "id": "a3",
+          "text": "Propriedades aumentam porque material absorve energia térmica",
+          "isCorrect": false,
+          "explanation": "Propriedades mecânicas reduzem (não aumentam) quando aquecido acima de Tg. Energia térmica desfaz entrelaçamentos moleculares."
+        },
+        {
+          "id": "a4",
+          "text": "Material torna-se insoluvel em solventes",
+          "isCorrect": false,
+          "explanation": "Temperatura não afeta solubilidade de forma previsível — essa não é consequência de Tg."
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Por que PEEK (um termoplástico avançado) é preferido em aplicações aeroespaciais críticas apesar de custar 10-20x mais que epóxi?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Porque é mais barato — custo baixo é razão principal",
+          "isCorrect": false,
+          "explanation": "PEEK é MAS CARO, não mais barato. Apesar do custo elevado, é escolhido por propriedades."
+        },
+        {
+          "id": "a2",
+          "text": "Porque PEEK oferece: resistência térmica moderada (250 °C), resistência ao impacto superior, reciclabilidade, e capacidade de reprocessamento — para componentes críticos onde durabilidade e ciclo de vida importam mais que custo",
+          "isCorrect": true,
+          "explanation": "Correto! PEEK é escolha premium. Razões: (1) resistência térmica 250 °C é margem segura para muitas aplicações aeroespaciais; (2) resistência ao impacto superior evita falha catastrófica em impacto acidental; (3) reciclável e reprocessável — reduz resíduo e custo de ciclo de vida completo; (4) confiabilidade: histórico de 30+ anos em aviação prova confiabilidade. Para componentes como conectores de combustível, sistemas hidráulicos críticos, a margem de segurança justifica custo."
+        },
+        {
+          "id": "a3",
+          "text": "PEEK é sempre superior porque é mais novo tecnologicamente",
+          "isCorrect": false,
+          "explanation": "\"Mais novo\" não significa \"melhor em tudo\". Epóxi continua sendo excelente para muitas aplicações — PEEK é preferido onde propriedades específicas (impacto, ciclo de vida) justificam custo."
+        },
+        {
+          "id": "a4",
+          "text": "PEEK não é realmente usado em aeronaves — apenas em pesquisa",
+          "isCorrect": false,
+          "explanation": "PEEK é usado em produção real de aeronaves. Boeing, Airbus, Bombardier usam PEEK em componentes críticos."
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Como a absorção de umidade por nylon afeta suas propriedades mecânicas?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Umidade aumenta propriedades porque água atua como plastificante",
+          "isCorrect": false,
+          "explanation": "Embora água adicione alguma ductilidade, efeito dominante é enfraquecimento — propriedades mecânicas reduzem."
+        },
+        {
+          "id": "a2",
+          "text": "Água absorvida pela nylon enfraquece as ligações de hidrogênio entre cadeias (plastificação), reduzindo módulo elástico em 10-30% e resistência à tração em 5-20% dependendo de umidade relativa ambiental",
+          "isCorrect": true,
+          "explanation": "Correto! Nylon é higroscópico (absorve água). Água ocupa espaço entre cadeias, enfraquecendo coesão molecular. Efeito é mensurável: saturado em água, nylon perde 20%+ de propriedades. Por isso nylon deve ser SECO antes de processamento — secagem em estufa (~80 °C, 4 horas) remove água e recupera propriedades."
+        },
+        {
+          "id": "a3",
+          "text": "Umidade só afeta propriedades superficiais — interior do material permanece inalterado",
+          "isCorrect": false,
+          "explanation": "Água difunde-se lentamente para o interior — absorção leva semanas/meses para saturação. Quando saturado, interior também é afetado."
+        },
+        {
+          "id": "a4",
+          "text": "Nylon é impermeável — não absorve umidade",
+          "isCorrect": false,
+          "explanation": "Nylon absorve umidade significativamente. É problema bem-conhecido na indústria — preza cuidados especiais em armazenamento e processamento."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Uma peça de compósito termofixo foi aquecida a 400 °C. O que provavelmente aconteceu?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Material derreteu porque foi aquecido acima da temperatura de fusão",
+          "isCorrect": false,
+          "explanation": "Termofixo não derrete — não tem ponto de fusão. Reação é diferente."
+        },
+        {
+          "id": "a2",
+          "text": "A resina termofixo degradou termicamente (400 °C >> 200-300 °C resistência máxima) — ligações covalentes se quebraram, liberando gases. Material torna-se quebradiço, preto, e estruturalmente inútil",
+          "isCorrect": true,
+          "explanation": "Correto! Termofixos têm limite de resistência térmica definido. Acima de ~300 °C, reação de degradação ocorre — quebra de ligações covalentes, formação de radicais, escape de gases voláteis. Resultado é material carbonizado (preto), frágil, inútil. 400 °C é completamente acima do limite — destruição total de propriedades."
+        },
+        {
+          "id": "a3",
+          "text": "Material amoleceu temporariamente, mas voltou a propriedades normais quando esfriou",
+          "isCorrect": false,
+          "explanation": "Termofixo não volta a propriedades normais após degradação térmica — degradação é irreversível."
+        },
+        {
+          "id": "a4",
+          "text": "Nada aconteceu — propriedades permaneceram inalteradas",
+          "isCorrect": false,
+          "explanation": "Propriedades mudaram dramaticamente (degradação). 400 °C é destruidor para termofixo."
+        }
+      ]
+    }
+  ]
+}
+

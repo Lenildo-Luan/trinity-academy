@@ -1,0 +1,140 @@
+# Fundamentos dos Compósitos de Matriz Polimérica
+
+No curso anterior sobre sensores e atuadores, compreendemos como os materiais respondem a estímulos externos e realizam conversões de energia. Agora exploraremos um novo universo de materiais engenheirados que combinam propriedades de duas ou mais fases: os **compósitos de matriz polimérica**. Esses materiais revolucionaram indústrias inteiras, desde a aeronáutica até a construção civil, oferecendo soluções leves, resistentes e duráveis.
+
+## O Que É um Compósito de Matriz Polimérica?
+
+Um **compósito de matriz polimérica** é um material multifásico composto por uma **matriz polimérica** (a fase contínua) combinada com um **material de reforço** (a fase dispersa), frequentemente fibroso. A matriz, geralmente uma resina ou polímero puro, envolve e protege as fibras, transferindo as cargas mecânicas entre elas. O reforço, por sua vez, fornece as propriedades mecânicas superiores que dão ao compósito sua resistência e rigidez.
+
+<PolymericMatrixStructure />
+
+Esta combinação cria um material inteiramente novo — não é simplesmente a mistura mecânica dos seus componentes, mas uma sinergia onde o todo é **significativamente superior à soma das partes**.
+
+> **Definição:** Um compósito de matriz polimérica é um material bifásico constituído de uma resina polimérica (matriz) que envolve e protege um material de reforço (geralmente fibras), transferindo esforços mecânicos e criando propriedades superiores às dos constituintes individuais.
+
+## Vantagens dos Compósitos de Matriz Polimérica
+
+Os compósitos de matriz polimérica oferecem uma série de vantagens significativas sobre materiais convencionais como metais e cerâmicas:
+
+### Propriedades Mecânicas Superiores
+
+- **Resistência à tração:** As fibras contínuas podem oferecer resistências até 10 vezes maiores do que a matriz pura, dependendo da orientação e fração volumétrica de fibra.
+- **Resistência ao impacto:** A matriz polimérica absorve energia de impacto, evitando fraturas frágeis típicas de cerâmicas.
+- **Rigidez específica (rigidez por unidade de massa):** Uma viga de fibra de carbono pode ter a mesma rigidez de uma viga de aço, mas pesando muito menos — crucial para aeronaves.
+
+### Resistência à Corrosão e ao Ambiente
+
+- Matrizes poliméricas naturalmente resistem a umidade, sais e muitos solventes químicos, tornando esses materiais ideais para ambientes marinhos e estruturas expostas.
+
+### Processabilidade
+
+- A viscosidade controlada permite impregnação completa das fibras, especialmente em resinas termofixas, criando compósitos de alta qualidade.
+- Diferentes processos de fabricação (moldagem por compressão, injeção, pultrusão) permitem produção eficiente em massa.
+
+### Leveza
+
+- A densidade dos compósitos (tipicamente 1,5–2,0 g/cm³) é inferior à do alumínio (2,7 g/cm³) e muito inferior ao aço (7,85 g/cm³), reduzindo consumo de combustível em transportes.
+
+<PropertiesComparison />
+
+## Desvantagens e Limitações
+
+Apesar das vantagens, os compósitos de matriz polimérica têm limitações importantes:
+
+### Resistência Térmica Limitada
+
+- **Termofixos** (epóxi, poliéster) geralmente degradam-se acima de 200–300 °C, limitando uso em aplicações de alta temperatura (como motores de turbina a jato).
+- **Termoplásticos** toleram temperaturas ligeiramente maiores, mas ainda inferiores a cerâmicas e metais refratários.
+
+### Coeficiente de Expansão Térmica Elevado
+
+- A matriz polimérica expande e contrai significativamente com mudanças de temperatura, criando tensões residuais que podem levar a microtrincas (efeito conhecido como *matrix cracking*).
+- Essa incompatibilidade de dilatação entre matriz e reforço é um dos maiores desafios em design.
+
+### Absorção de Umidade
+
+- Polímeros absorvem água, que enfraquece as ligações interfaciais entre matriz e fibra, reduzindo propriedades mecânicas em ambientes úmidos. Essa degradação é chamada **plastificação**.
+
+### Não Reciclabilidade (Termofixos)
+
+- Compósitos termofixo são praticamente impossíveis de reciclar — uma vez curados, não podem ser reprocessados sem degradação.
+- Apenas termoplásticos oferecem alguma reciclabilidade, embora limitada.
+
+### Custo Elevado
+
+- Fibras contínuas (carbono, kevlar) e matrizes de qualidade estrutural são caras, tornando compósitos mais caros que metais para muitas aplicações.
+
+> **Desafio de Design:** Engenheiros de materiais devem constantemente balancear propriedades mecânicas superiores contra resistência térmica limitada, absorção de umidade e custo elevado.
+
+## Tipos de Matrizes Poliméricas
+
+As matrizes poliméricas dividem-se em duas grandes categorias, cada uma com características únicas de processamento e desempenho:
+
+### Termofixos (Thermosets)
+
+**Exemplos:** Epóxi, poliéster insaturado, fenólica, poliimida.
+
+**Características:**
+- Moléculas pequenas (monômeros) que sofrem **reticulação** (cross-linking) durante a cura
+- Uma vez curados, formam uma rede de ligações covalentes permanentes — **irreversível**
+- Viscosidade baixa antes da cura, facilitando impregnação de fibras
+- Resistência térmica superior (200–300 °C típico)
+- Frágeis após cura, com baixa resistência ao impacto
+- **Não recicláveis** — resíduos devem ser descartados ou remoído para carga
+
+### Termoplásticos (Thermoplastics)
+
+**Exemplos:** Nylon, polietileno, polipropileno, poli(éter-éter-cetona) — PEEK.
+
+**Características:**
+- Polímeros completamente formados antes do processamento
+- Mantêm cadeia molecular linear sem reticulação
+- Solidificam apenas por **resfriamento** — **reversível**
+- Viscosidade alta, dificultando impregnação de fibras
+- Maior resistência ao impacto e danos mecânicos
+- Processamento rápido (apenas resfriamento, sem tempo de cura)
+- **Recicláveis** — podem ser reprocessados múltiplas vezes por reaquecimento
+
+<MatrixComparison />
+
+<MarkdownTable
+  headers={["Propriedade", "Termofixo (Epóxi)", "Termoplástico (Nylon)"]}
+  rows={[
+    ["**Viscosidade antes do processamento**", "Baixa (fácil impregnação)", "Alta (difícil impregnação)"],
+    ["**Mecanismo de solidificação**", "Reticulação (reação química)", "Resfriamento (mudança de fase)"],
+    ["**Reversibilidade**", "Irreversível", "Reversível"],
+    ["**Resistência térmica**", "200–300 °C típico", "Menor, 80–150 °C típico"],
+    ["**Resistência ao impacto**", "Baixa, frágil", "Alta, tenaz"],
+    ["**Reciclabilidade**", "Não reciclável", "Reciclável"],
+    ["**Tempo de ciclo produtivo**", "Longo (4–24 horas)", "Rápido (segundos a minutos)"],
+    ["**Custo de produção**", "Moderado a alto", "Moderado"],
+    ["**Aplicações típicas**", "Aeronaves, estruturas", "Embalagens, peças automotivas"],
+  ]}
+/>
+
+## Classificação por Fração e Tipo de Reforço
+
+Os compósitos também classificam-se pela natureza do reforço:
+
+- **Fibrosos:** Reforço contínuo ou descontínuo em forma de fibras (vidro, carbono, kevlar)
+- **Particulados:** Reforço em forma de partículas dispersas (pó de cimento, areia, negro-de-fumo)
+- **Estruturais:** Combinação de compósitos em arranjos específicos (laminares, painéis sanduíche)
+
+Cada tipo oferece diferentes vantagens em propriedades mecânicas, custo e processabilidade. Nos capítulos seguintes, exploraremos cada um em detalhe.
+
+## Resumo da Aula
+
+Neste capítulo, exploramos os fundamentos dos compósitos de matriz polimérica:
+
+- **Conceito Central:** Um compósito é um material bifásico formado pela combinação de uma resina polimérica (matriz) e um material de reforço (frequentemente fibroso), que juntos criam propriedades superiores aos constituintes individuais.
+
+- **Vantagens Principais:** Propriedades mecânicas elevadas (resistência, rigidez, tenacidade), leveza, resistência à corrosão e processabilidade controlada.
+
+- **Desvantagens Críticas:** Resistência térmica limitada, elevada expansão térmica, absorção de umidade, custo alto e (para termofixos) impossibilidade de reciclagem.
+
+- **Matrizes Termofixas:** Baseadas em reticulação irreversível, oferecem resistência térmica superior, baixa viscosidade (fácil impregnação) e fragilidade, mas não são recicláveis.
+
+- **Matrizes Termoplásticas:** Solidificam por resfriamento (reversível), oferecem maior tenacidade e reciclabilidade, processamento rápido, mas alta viscosidade dificulta impregnação.
+
+- **Impacto da Combinação:** A sinergia entre matriz e reforço cria materiais com propriedades que nenhum dos constituintes sozinho poderia oferecer, revolucionando indústrias como aeronáutica, automotiva e construção civil.
+

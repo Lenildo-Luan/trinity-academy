@@ -1,0 +1,309 @@
+{
+  "id": "quiz-9",
+  "title": "Quiz — Materiais de Reforço: Fibras e Tecidos",
+  "description": "Teste seus conhecimentos sobre fibras contínuas, tecidos, mantas não-tecidas, orientação de fibras e fração volumétrica de compósitos.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual é a principal vantagem de fibras contínuas em relação a fibras curtas em compósitos?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Fibras contínuas são sempre mais baratas",
+          "isCorrect": false,
+          "explanation": "Fibras contínuas são frequentemente mais caras devido ao processamento necessário. O custo não é a vantagem."
+        },
+        {
+          "id": "a2",
+          "text": "Fibras contínuas transferem carga de forma eficiente e uniforme ao longo de toda a estrutura, oferecendo resistência mecânica máxima",
+          "isCorrect": true,
+          "explanation": "Correto! Fibras contínuas estão presentes ao longo de toda a estrutura, permitindo transferência contínua de carga. Fibras curtas têm \"pontas\" onde não há reforço — descontinuidades reduzem resistência."
+        },
+        {
+          "id": "a3",
+          "text": "Fibras contínuas absorvem menos umidade",
+          "isCorrect": false,
+          "explanation": "A absorção de umidade é propriedade da MATRIZ polimérica, não das fibras. O tipo de fibra (contínua vs. curta) não afeta absorção significativamente."
+        },
+        {
+          "id": "a4",
+          "text": "Fibras contínuas podem ser recicladas indefinidamente",
+          "isCorrect": false,
+          "explanation": "Tanto fibras contínuas quanto curtas têm limitações similares de reciclagem — está mais relacionado à matriz polimérica do que ao tipo de fibra."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Qual fibra oferece o melhor balanço entre resistência mecânica, leveza e custo para aplicações automotivas convencionais?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Fibra de carbono, porque é a mais resistente",
+          "isCorrect": false,
+          "explanation": "Carbono é a mais resistente, mas seu custo elevado (~15-20x vidro) torna-a impraticável para volume de produção automotiva em massa (~1 milhão unidades/ano). Custos de material seriam proibitivos."
+        },
+        {
+          "id": "a2",
+          "text": "Fibra de vidro, porque oferece resistência adequada, leveza aceitável, custo baixo e processamento simples",
+          "isCorrect": true,
+          "explanation": "Correto! Vidro é padrão industrial em automotiva convencional. Oferece: resistência satisfatória para componentes não-estruturais críticos (portas, painéis), custo baixo (escala de volume), e processamento simples (moldagem por injeção/compressão). Carbono é reservado para supercarros onde custo não é limitação."
+        },
+        {
+          "id": "a3",
+          "text": "Fibra de kevlar, porque é excelente para absorção de impacto",
+          "isCorrect": false,
+          "explanation": "Kevlar é excelente para impacto (coletes à prova de bala), mas seu custo elevado (~10-12x vidro) o torna inadequado para produção em massa automotiva. Seria usado em componentes específicos de supercaros, não em veículos convencionais."
+        },
+        {
+          "id": "a4",
+          "text": "Fibra natural de coco, porque é sustentável e renovável",
+          "isCorrect": false,
+          "explanation": "Embora coco seja sustentável, sua resistência mecânica é muito inferior a vidro ou carbono (~50-100x menor). Não é adequado para estruturas exigindo resistência — seria usado apenas em compósitos \"verdes\" de baixo desempenho."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Como o padrão de tecelagem de um tecido afeta propriedades do compósito?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Padrão de tecelagem não afeta propriedades mecânicas — apenas aparência visual",
+          "isCorrect": false,
+          "explanation": "O padrão de tecelagem afeta significativamente o comportamento do material. Técidos de cetim são muito mais fluidos (drapeagem); tafetá é rígido. Essas diferenças afetam conformação em moldes e propriedades."
+        },
+        {
+          "id": "a2",
+          "text": "Tecelagem simples (tela plana) oferece máxima resistência bidirecional, enquanto sarja oferece máxima drapeagem (flexibilidade) para conformação em formas complexas",
+          "isCorrect": true,
+          "explanation": "Correto! Tela simples (over-under alternado) é equilibrada e rígida — máxima resistência uniforme. Sarja (diagonal) e especialmente cetim (múltiplos fios saltados) oferecem maior drapeagem — conformam-se melhor em moldes curvos. Escolha do padrão depende de forma da peça e requisitos de resistência."
+        },
+        {
+          "id": "a3",
+          "text": "Sarja é sempre superior porque oferece diagonal visualmente interessante",
+          "isCorrect": false,
+          "explanation": "Sarja não é \"sempre superior\" — é uma escolha de trade-off. Oferece drapeagem, mas menos rigidez que tela simples. Seleção depende de aplicação, não de preferência visual."
+        },
+        {
+          "id": "a4",
+          "text": "Cetim é o pior padrão porque é muito flexível e não oferece resistência",
+          "isCorrect": false,
+          "explanation": "Cetim oferece excelente drapeagem, o que é vantajoso para peças com geometrias complexas. A flexibilidade não é \"fraqueza\" — é característica desejada para certos designs. Em aplicações de alta rigidez, no entanto, tela simples seria preferida."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Qual é a principal função de uma manta não-tecida em um compósito laminado?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Fornecer resistência axial máxima comparável a fibras contínuas alinhadas",
+          "isCorrect": false,
+          "explanation": "Mantas não-tecidas têm propriedades mecânicas ~30-50% inferiores a tecidos orientados de mesma densidade de fibra. Não são usadas para resistência primária."
+        },
+        {
+          "id": "a2",
+          "text": "Aumentar resistência ao cisalhamento entre camadas, melhorar resistência ao impacto, e permitir impregnação de resina rápida com propriedades isotrópicas",
+          "isCorrect": true,
+          "explanation": "Correto! Mantas são estrategicamente usadas (frequentemente como primeira e última camada) para: (1) resistência ao cisalhamento entre camadas (evita delaminação), (2) absorção de impacto, (3) propriedades isotrópicas (não dependem direção), (4) impregnação rápida. Camadas orientadas (0°/90°/±45°) fornecem resistência direcional; mantas fornecem proteção e robustez."
+        },
+        {
+          "id": "a3",
+          "text": "Reduzir custo adicionando volume barato ao compósito",
+          "isCorrect": false,
+          "explanation": "Mantas NÃO são usadas primariamente para reduzir custo. Seu uso é estratégico — pelas propriedades mecânicas particulares, não economia de custo. Custo não é razão principal."
+        },
+        {
+          "id": "a4",
+          "text": "Impedir entrada de umidade e corrosão ambiental na matriz polimérica",
+          "isCorrect": false,
+          "explanation": "Proteção ambiental não é função principal de mantas não-tecidas. É responsabilidade de camadas de superfície e acabamento da resina (gel coat) — não das mantas internas."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "O que é fração volumétrica de fibra (Vf) e por que importa?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Vf é a densidade da fibra em g/cm³ — maior Vf significa material mais pesado",
+          "isCorrect": false,
+          "explanation": "Vf (fração volumétrica) não é densidade — é a razão volume fibra / volume total. Não mede peso diretamente."
+        },
+        {
+          "id": "a2",
+          "text": "Vf é a razão volume de fibra / volume total do compósito. Vf típico 50-65% é ideal porque oferece balanço entre propriedades mecânicas máximas e processabilidade — Vf baixo resulta em matriz dominante, Vf alto dificulta impregnação",
+          "isCorrect": true,
+          "explanation": "Correto! Vf controla o balanço entre fibra e matriz. Baixo Vf (~30-40%): propriedades dominadas pela matriz, fácil processamento. Alto Vf (~70-75%): propriedades máximas de fibra, mas impregnação difícil, risco de vazios. A maioria dos compósitos estruturais usa 50-65%, oferecendo compromisso ótimo."
+        },
+        {
+          "id": "a3",
+          "text": "Vf é irrelevante — o resultado final é idêntico independentemente da proporção fibra/matriz",
+          "isCorrect": false,
+          "explanation": "Vf é absolutamente crítico. Determina praticamente TODAS as propriedades — resistência, módulo, absorção de umidade, processabilidade."
+        },
+        {
+          "id": "a4",
+          "text": "Vf deve ser sempre 100% (fibra pura) para máximas propriedades",
+          "isCorrect": false,
+          "explanation": "Vf 100% (fibra pura) é fisicamente impossível em compósito — não há matriz! A matriz é ESSENCIAL para transferir carga e proteger fibras. Vf máximo praticável é ~75-80% antes que porosidade se torne problema."
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual orientação de fibra oferece máxima resistência à tração na direção do carregamento?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Multidirecional (0°/±45°/90°), porque oferece propriedades balanceadas",
+          "isCorrect": false,
+          "explanation": "Multidirecional oferece balanço, mas não máxima resistência em uma direção. Unidirecional oferece máximo porque TODA fibra trabalha na mesma direção."
+        },
+        {
+          "id": "a2",
+          "text": "Bidirecional (0°/90°), porque oferece resistência em duas direções",
+          "isCorrect": false,
+          "explanation": "Bidirecional oferece resistência em duas direções, mas na direção do carregamento (digamos 0°), apenas 50% das fibras contribuem — a outra 50% está em 90°."
+        },
+        {
+          "id": "a3",
+          "text": "Unidirecional (0°), porque TODAS as fibras são alinhadas na direção do carregamento, transferindo carga com máxima eficiência",
+          "isCorrect": true,
+          "explanation": "Correto! Orientação unidirecional oferece resistência axial MÁXIMA porque cada fibra está alinhada para resistir carregamento naquela direção. Não há \"desperdício\" de fibra em outras direções. Trade-off: zero resistência perpendicular (controlada apenas pela matriz)."
+        },
+        {
+          "id": "a4",
+          "text": "Isotrópica (aleatória), porque não depende de direção e oferece balanço perfeito",
+          "isCorrect": false,
+          "explanation": "Isotrópica (aleatória) oferece propriedades medianas em TODAS direções, mas nunca máximo em NENHUMA direção em particular. Para máxima resistência axial, unidirecional domina."
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Por que fibra de carbono é preferida em aplicações aeroespaciais apesar de custar 15-20x mais que vidro?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Porque aparência de carbono é mais sofisticada visualmente",
+          "isCorrect": false,
+          "explanation": "Aparência é fator completamente secundário em aeronáutica. Propriedades mecânicas e ganho de desempenho dominam."
+        },
+        {
+          "id": "a2",
+          "text": "Porque carbono oferece módulo elástico 3-5x superior a vidro (~250 GPa vs ~73 GPa), permitindo estruturas muito mais rígidas com peso significativamente menor — economiza combustível ao longo de 20+ anos de operação, compensando custo inicial elevado",
+          "isCorrect": true,
+          "explanation": "Correto! Carbono é caro, MAS oferece rigidez extraordinária. Uma asa de carbono pesa 20-30% menos que vidro de resistência similar. Para aeronave de 200+ toneladas, essa economia de peso reduz consumo de combustível em ~10-15% sobre vida útil (20-30 anos) — economizando milhões em fuel, justificando investimento inicial em material caro."
+        },
+        {
+          "id": "a3",
+          "text": "Porque vidro não é forte o suficiente para voo seguro",
+          "isCorrect": false,
+          "explanation": "Vidro oferece resistência adequada para voo — é usado em aeronaves comerciais algumas décadas atrás. Carbono é melhor, mas vidro não é \"inadequado\"."
+        },
+        {
+          "id": "a4",
+          "text": "Porque carbono é condutivo e melhora propriedades elétricas da aeronave",
+          "isCorrect": false,
+          "explanation": "Embora carbono seja condutor (útil para proteção contra raio), essa não é razão principal de uso. A razão é rigidez extrema por peso — benefício fundamental."
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Como a orientação das fibras afeta propriedades de resistência ao cisalhamento em um compósito?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Fibras em 0° ofercem máxima resistência ao cisalhamento",
+          "isCorrect": false,
+          "explanation": "Fibras em 0° (paralelas) não resistem bem ao cisalhamento. Cisalhamento atua perpendicular às fibras — orientação 0° não ajuda."
+        },
+        {
+          "id": "a2",
+          "text": "Fibras em 90° oferecem resistência ao cisalhamento máxima",
+          "isCorrect": false,
+          "explanation": "Fibras em 90° também não resistem bem ao cisalhamento puro — estão paralelas a uma direção de força, não angled para resistir cisalhamento."
+        },
+        {
+          "id": "a3",
+          "text": "Fibras orientadas em ±45° oferecem máxima resistência ao cisalhamento, porque estão alinhadas aproximadamente nas direções das tensões de cisalhamento máximo",
+          "isCorrect": true,
+          "explanation": "Correto! Cisalhamento cria tensões em planos a ±45° às direções principais. Fibras ±45° estão alinhadas exatamente nessas direções, oferecendo máxima eficiência para resistir cisalhamento. É por isso que estruturas torcidas (como tubos, fuselagem) usam ±45° como camadas importantes."
+        },
+        {
+          "id": "a4",
+          "text": "Orientação não importa para cisalhamento — é controlado apenas pela matriz",
+          "isCorrect": false,
+          "explanation": "Orientação é crítica. Embora a matriz contribua, fibras alinhadas (±45°) transferem carga de cisalhamento muito mais eficientemente. Design de laminado com múltiplas camadas (incluindo ±45°) é essencial para resistência ao cisalhamento."
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "O que é prepreg e qual é sua principal vantagem em fabricação de compósitos?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Prepreg é fibra simplesmente misturada com resina seca — sem vantagens especiais",
+          "isCorrect": false,
+          "explanation": "Prepreg é fibra PRÉ-IMPREGNADA com resina em estágio B (parcialmente curada), armazenada em congelador para preservar propriedades. Muito diferente de fibra seca."
+        },
+        {
+          "id": "a2",
+          "text": "Prepreg é fibra pré-impregnada com resina parcialmente curada, armazenada congelada, oferecendo fração volumétrica exata, ausência de bolhas e ciclos de processamento mais rápidos — qualidade superior com menos variabilidade",
+          "isCorrect": true,
+          "explanation": "Correto! Prepreg é revolucionário: elimina necessidade de tanques de resina, garante Vf controlado (tipicamente ±2%), oferece impregnação perfeita (sem bolhas), e permite laminação rápida. Trade-off é custo elevado — prepreg é 2-3x mais caro que fibra seca + resina, mas qualidade superior justifica para aplicações críticas (aeronaves, aerospace)."
+        },
+        {
+          "id": "a3",
+          "text": "Prepreg é apenas um termo de marketing — não oferece propriedades realmente diferentes",
+          "isCorrect": false,
+          "explanation": "Prepreg oferece vantagens reais mensúráveis. Propriedades de aeronaves construídas com prepreg vs. impregnação manual são notavelmente diferentes — prepreg é superior em consistência e qualidade."
+        },
+        {
+          "id": "a4",
+          "text": "Prepreg é mais barato que fibra seca porque vem pré-processado",
+          "isCorrect": false,
+          "explanation": "Prepreg é mais CARO, não mais barato. Pré-processamento é custoso. Prepreg é escolha de qualidade, não economia."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Qual combinação de orientações de fibra oferece melhor balanço entre resistência axial, resistência transversal e resistência ao cisalhamento para um painel estrutural bidimensional?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "0° apenas — máxima resistência em uma direção",
+          "isCorrect": false,
+          "explanation": "0° apenas oferece máximo em uma direção, zero em outra — não é balanço, é extremo. Painel bidimensional precisa de resistência em múltiplas direções."
+        },
+        {
+          "id": "a2",
+          "text": "0°/90° apenas — resistência bidirecional balanceada",
+          "isCorrect": false,
+          "explanation": "0°/90° oferece bom balanço para resistência axial e transversal, mas oferece pouca resistência ao cisalhamento. Falta ±45°."
+        },
+        {
+          "id": "a3",
+          "text": "[0°/±45°/90°] — oferece resistência axial (0°), transversal (90°), e cisalhamento (±45°) para balanço ótimo de propriedades multidirecionais",
+          "isCorrect": true,
+          "explanation": "Correto! Essa é configuração padrão industrial para painéis estruturais. 0° e 90° criam balanço bidimensional; ±45° adiciona resistência ao cisalhamento e torção. Variando proporção de cada orientação, engenheiros \"sintonizam\" para carregamento específico — mais 0° para painel em flexão, mais ±45° para torção."
+        },
+        {
+          "id": "a4",
+          "text": "Isotrópico (aleatório) — oferece igualdade total em todas direções",
+          "isCorrect": false,
+          "explanation": "Isotrópico oferece igualdade, mas não otimização — propriedades são medianas em todas direções, nunca máximas em nenhuma. Laminado [0°/±45°/90°] oferece desempenho superior."
+        }
+      ]
+    }
+  ]
+}
+

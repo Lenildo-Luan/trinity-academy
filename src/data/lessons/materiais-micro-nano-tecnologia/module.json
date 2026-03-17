@@ -54,6 +54,55 @@
         "quizId": "quiz-7"
       }
     ]
+  },
+  {
+    "id": "compositos-matriz-polimerica",
+    "title": "Compósitos de Matriz Polimérica",
+    "description": "Explore os fundamentos de compósitos de matriz polimérica: reforço fibroso, matrizes termofixas e termoplásticas, processos de fabricação, e aplicações estruturais em aeronáutica, automotiva e construção.",
+    "lessons": [
+      {
+        "id": "charpter-8",
+        "title": "Fundamentos dos Compósitos de Matriz Polimérica",
+        "description": "Introdução aos compósitos de matriz polimérica: definição, vantagens (leveza, resistência mecânica), desvantagens (resistência térmica, absorção de umidade), e comparação entre matrizes termofixo e termoplástico.",
+        "video": null,
+        "quizId": "quiz-8"
+      },
+      {
+        "id": "charpter-9",
+        "title": "Materiais de Reforço: Fibras e Tecidos",
+        "description": "Estudo de fibras contínuas (vidro, carbono, kevlar, naturais), tecidos entrelaçados e mantas não-tecidas. Fração volumétrica e orientação de fibras como fatores determinantes de propriedades mecânicas.",
+        "video": null,
+        "quizId": "quiz-9"
+      },
+      {
+        "id": "charpter-10",
+        "title": "Materiais de Reforço: Partículas e Modificadores",
+        "description": "Partículas como reforço ou carga: nanopartículas, micropartículas, negro-de-fumo para proteção UV, óxidos metálicos. Importância de homogeneidade de dispersão e compósitos híbridos.",
+        "video": null,
+        "quizId": "quiz-10"
+      },
+      {
+        "id": "charpter-11",
+        "title": "A Matriz Polimérica: Termofixos vs. Termoplásticos",
+        "description": "Aprofundamento em matrizes: mecanismo de cura (reticulação) em termofixos como epóxi e poliéster; solidificação em termoplásticos como nylon e PEEK. Processamento, reciclagem e propriedades térmicas.",
+        "video": null,
+        "quizId": "quiz-11"
+      },
+      {
+        "id": "charpter-12",
+        "title": "Processos de Fabricação de Compósitos",
+        "description": "Principais processos industriais: moldagem por injeção, moldagem por compressão (SMC), pultrusão, enrolamento de filamentos, prepreg + autoclave. Seleção baseada em volume, geometria e propriedades requeridas.",
+        "video": null,
+        "quizId": "quiz-12"
+      },
+      {
+        "id": "charpter-13",
+        "title": "Compósitos Estruturais e Aplicações",
+        "description": "Compósitos laminares com múltiplas orientações e painéis sanduíche com faces e núcleo. Aplicações em aeronáutica (Boeing 787, Airbus A350), automotiva, energia renovável (turbinas eólicas) e construção civil.",
+        "video": null,
+        "quizId": "quiz-13"
+      }
+    ]
   }
 ]
 

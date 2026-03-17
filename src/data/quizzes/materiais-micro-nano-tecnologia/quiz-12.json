@@ -1,0 +1,309 @@
+{
+  "id": "quiz-12",
+  "title": "Quiz — Processos de Fabricação de Compósitos",
+  "description": "Teste seus conhecimentos sobre moldagem por injeção, moldagem por compressão, pultrusão, enrolamento de filamentos, prepreg e seleção de processos.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual é a principal vantagem da moldagem por injeção para compósitos particulados?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Oferece propriedades mecânicas máximas porque resina flui em alta pressão",
+          "isCorrect": false,
+          "explanation": "Propriedades não são máximas — são aceitáveis. Vantagem é velocidade, não propriedades pico."
+        },
+        {
+          "id": "a2",
+          "text": "Ciclo muito rápido (10-60 segundos) e altamente automatizado, permitindo produção em massa (1 milhão+ peças/ano) com custo-por-peça mínimo",
+          "isCorrect": true,
+          "explanation": "Correto! Moldagem por injeção domina quando VOLUME é alto. Ciclo rápido + automatização = throughput gigantesco. Investimento em molde é alto (R$50k-500k), mas amortizado sobre milhões de peças. Para 100 peças, custo é proibitivo; para 1 milhão, é viável."
+        },
+        {
+          "id": "a3",
+          "text": "Oferece controle total da orientação de fibra contínua",
+          "isCorrect": false,
+          "explanation": "Injeção NÃO oferece controle de fibra — fibra curta fica aleatória devido ao fluxo de alta velocidade. Isso é limitação, não vantagem."
+        },
+        {
+          "id": "a4",
+          "text": "Não requer energia térmica — processamento à temperatura ambiente",
+          "isCorrect": false,
+          "explanation": "Injeção requer aquecimento (140-300 °C dependendo de polímero) — energia térmica é necessária."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "O que é SMC (Sheet Molding Compound) e qual é seu principal caso de uso?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "É um prepreg para termoplásticos — material pré-impregnado resfriado",
+          "isCorrect": false,
+          "explanation": "SMC é para termofixos, não termoplásticos. E é preparado de forma diferente que prepreg."
+        },
+        {
+          "id": "a2",
+          "text": "Folha pré-preparada de fibra curta (25-50 mm) + resina termofixo, maturada e pronta para moldagem por compressão. Oferece ciclo 1-5 min, acabamento excelente e resistência balanceada — ideal para painéis automotivos em produção de média-alto volume",
+          "isCorrect": true,
+          "explanation": "Correto! SMC é solução \"goldilocks\" para automotiva: (1) velocidade aceitável (1-5 min/peça), (2) acabamento de fábrica em ambos os lados, (3) fácil controle de qualidade, (4) investimento de molde moderado, (5) volume adequado (10,000-100,000 peças/ano). Não é rápido como injeção (termoplástico), mas ofereceTermofixo superior."
+        },
+        {
+          "id": "a3",
+          "text": "Material para estruturas críticas de aeronaves",
+          "isCorrect": false,
+          "explanation": "SMC não é usado em aeronaves — fibra curta não oferece resistência requerida para estrutura primária. Prepreg + autoclave é padrão aeronáutico."
+        },
+        {
+          "id": "a4",
+          "text": "Apenas nome técnico para \"compósito moldado\" — sem significado especial",
+          "isCorrect": false,
+          "explanation": "SMC tem significado muito específico: pré-impregnação controlada em folha, com maturationação — processo distinto."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Por que a pultrusão é ideal para produção de perfis estruturais em alta volume?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Porque oferece propriedades mecânicas máximas em todas as direções",
+          "isCorrect": false,
+          "explanation": "Pultrusão oferece máximas propriedades APENAS na direção 0° (axial). Transversalmente é fraco. Não é para omnidirecional."
+        },
+        {
+          "id": "a2",
+          "text": "Processo contínuo (sem ciclo definido) que produz indefinidamente com fibra perfeitamente alinhada (0°) e custo de produção mínimo. Fração volumétrica é exata e controlada, propriedades são reproduzíveis",
+          "isCorrect": true,
+          "explanation": "Correto! Pultrusão é fenomenal para volume infinito e formas simples. Uma máquina produz toneladas/dia. Fibra 0° oferece resistência axial máxima (perfect para vigas, barras). Custo é tão baixo que economicamente viável mesmo com margens reduzidas. Trade-off: apenas formas simétricas (círculo, retângulo, I-beam), não complexo."
+        },
+        {
+          "id": "a3",
+          "text": "Porque oferece ciclo mais rápido que moldagem por injeção",
+          "isCorrect": false,
+          "explanation": "Pultrusão não é \"mais rápido\" em ciclo — é CONTÍNUO (sem ciclo). Conceito diferente. Ambos conseguem produzir muito por hora, de formas diferentes."
+        },
+        {
+          "id": "a4",
+          "text": "Permite controle total da orientação de fibra em múltiplas direções",
+          "isCorrect": false,
+          "explanation": "Pultrusão é limitado a 0° (direção do puxamento). Quer ±45° ou 90°? Não consegue com pultrusão."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Qual é o principal uso do enrolamento de filamentos?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Fabricar peças planas e bidimensionais",
+          "isCorrect": false,
+          "explanation": "Enrolamento de filamentos é ESPECIALIZADAMENTE para estruturas 3D cilíndricas (tubos, tanques)."
+        },
+        {
+          "id": "a2",
+          "text": "Fabricar estruturas ocas (tubos, tanques, cilindros) com controle absoluto de orientação de fibra (0°, ±45°, 90°) em cada camada, permitindo otimização para pressão interna, torção e cisalhamento combinados",
+          "isCorrect": true,
+          "explanation": "Correto! Enrolamento de filamentos é perfeitamente adequado para estruturas axissimétricas. Permite: (1) múltiplas camadas em orientações diferentes, (2) otimizar espessura por zona (mais 90° onde pressão é maior), (3) sem molde complexo (mandril removível), (4) sem desperdício de material. Aplicação clássica: tanque de pressão para gás onde (90° resiste pressão interna), (0° resiste estiramento axial), (±45° resiste torção). Engenheiro pode otimizar completamente."
+        },
+        {
+          "id": "a3",
+          "text": "Apenas para protótipos — não adequado para produção em massa",
+          "isCorrect": false,
+          "explanation": "Enrolamento de filamentos é usado em produção real de alto volume (turbinas eólicas, tubos industriais). Não é limitado a protótipos."
+        },
+        {
+          "id": "a4",
+          "text": "Oferece orientação unidirecional apenas (0°)",
+          "isCorrect": false,
+          "explanation": "Enrolamento oferece múltiplas orientações — é um dos pontos fortes. Pode-se enrolar em qualquer ângulo helicoidal ou circunferencial."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "O que é prepreg e qual é sua principal aplicação?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Fibra seca pronta para impregnação manual em tanque de resina",
+          "isCorrect": false,
+          "explanation": "Prepreg é oposto — fibra JÁ impregnada, pronta para laminação sem tanque de resina."
+        },
+        {
+          "id": "a2",
+          "text": "Fibra pré-impregnada com resina em estágio B (parcialmente curada), armazenada congelada (-18 °C), oferecendo fração volumétrica exata, ausência de bolhas e qualidade máxima. Usado em aeronaves, aerospace, aplicações críticas onde qualidade justifica custo elevado",
+          "isCorrect": true,
+          "explanation": "Correto! Prepreg é revolucionário para alta qualidade. Vantagens: (1) Vf exatamente controlado (±2%), (2) sem bolhas (impregnação de fábrica), (3) ciclos de laminação rápidos (sem impregnação manual), (4) reprodutibilidade garantida. Desvantagem: custo 2-3x mais alto. Boeing 787, Airbus A350 usam prepreg extensivamente — qualidade crítica justifica custo."
+        },
+        {
+          "id": "a3",
+          "text": "Apenas um termo de marketing para material ordinário",
+          "isCorrect": false,
+          "explanation": "Prepreg é solução técnica real com propriedades mensuráveis superiores — não é marketing."
+        },
+        {
+          "id": "a4",
+          "text": "Só pode ser usado com moldes de autoclave",
+          "isCorrect": false,
+          "explanation": "Embora prepreg seja frequentemente processado em autoclave (para qualidade máxima), pode ser usado em outros processos também (ex: moldagem manual com prensa)."
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Um engenheiro precisa fabricar 50,000 peças/ano de um compósito com resistência moderada. Qual processo é mais apropriado?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Moldagem por injeção com fibra curta — ciclo 1-3 min, altamente automatizado, custo-por-peça mínimo quando volume é alto",
+          "isCorrect": true,
+          "explanation": "Correto! 50,000 peças/ano é volume ideal para injeção. Ciclo rápido + automação = viável. Custo-por-peça é mínimo. Para resistência \"moderada\" (não crítica), injeção é perfeita. Se fosse 100,000/ano, ainda seria injeção. Se fosse 5,000/ano, mudaria para SMC ou outro. Injeção domina 10,000-1,000,000 peças/ano."
+        },
+        {
+          "id": "a2",
+          "text": "Pultrusão — oferece custo mínimo mas molde é limitado a perfis simples",
+          "isCorrect": false,
+          "explanation": "Pultrusão é apropriado apenas para perfis simples (barras, tubos). Não para peças complexas. 50,000 peças de perfil é caso ideal para pultrusão SE geometria é simples."
+        },
+        {
+          "id": "a3",
+          "text": "Prepreg + autoclave — oferece qualidade máxima",
+          "isCorrect": false,
+          "explanation": "Prepreg é para qualidade crítica (aeronaves). 50,000 peças de resistência moderada não justificam custo elevado de prepreg + autoclave. Seria economicamente inviável."
+        },
+        {
+          "id": "a4",
+          "text": "Enrolamento de filamentos — oferece propriedades estruturais",
+          "isCorrect": false,
+          "explanation": "Enrolamento é para estruturas cilíndricas (tanques, tubos). Não para peças genéricas. Seria ineficiente para aplicação geral."
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Por que o investimento em molde para moldagem por injeção é tão elevado?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Porque máquina injetora é cara",
+          "isCorrect": false,
+          "explanation": "Máquina injetora é cara, mas molde é ainda mais caro. São dois custos separados."
+        },
+        {
+          "id": "a2",
+          "text": "Molde deve ser manufaturado com tolerância extrema (±0.1 mm), cavidades múltiplas para produção eficiente (4-16 cavidades), material que resista pressão de 100-200 MPa repetidamente — requer usinagem CNC sofisticada, inspeção de qualidade, testes. Pequenas variações geométricas têm impacto enorme nas propriedades finais",
+          "isCorrect": true,
+          "explanation": "Correto! Molde de injeção é equipamento de precisão extrema. Razões de custo: (1) materiais especiais (aço temperado), (2) CNC usinagem com tolerância apertada, (3) múltiplas cavidades (2-16 tipicamente), (4) testes de validação (primeiras 100 peças), (5) documentação, (6) revisões se há problemas. Tudo somado: R$50,000-500,000+. Viável apenas se volume é muito alto — amortização por peça baixa."
+        },
+        {
+          "id": "a3",
+          "text": "Não é realmente caro — é só que fabricantes cobram muito",
+          "isCorrect": false,
+          "explanation": "Custo é real — não é simplemente \"markup\". Engenharia, usinagem, testes são investimentos reais."
+        },
+        {
+          "id": "a4",
+          "text": "Custo é fixo — não depende de quantidade de peças",
+          "isCorrect": false,
+          "explanation": "Custo total é fixo, mas custo-por-peça depende de volume. Alto volume = amortização rápida = custo por unidade baixo."
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Qual é o principal mecanismo de consolidação em moldagem por compressão (SMC)?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Resfriamento rápido solidifica a resina como em moldagem por injeção",
+          "isCorrect": false,
+          "explanation": "SMC não é sobre resfriamento — SMC usa termofixo que cura termicamente, não por resfriamento."
+        },
+        {
+          "id": "a2",
+          "text": "Calor + pressão ativam catalisador da resina termofixo, iniciando cura (reticulação) enquanto folha é pressionada, fechando todos vazios e criando peça sólida consolidada",
+          "isCorrect": true,
+          "explanation": "Correto! Mecanismo é: (1) calor (~130-180 °C) ativa catalisador; (2) pressão (~5-20 MPa) força resina a fluir, preenchendo cavidades do molde; (3) reticulação ocorre enquanto pressionado — elimina bolhas/vazios; (4) resultado é peça sólida com ambos os lados em contato com molde (excelente acabamento). Tempo de ciclo é relativamente rápido (1-5 min) porque resina já está pré-viscosizada pelo \"repouso\" pré-moldagem."
+        },
+        {
+          "id": "a3",
+          "text": "Injeção de resina sob pressão como em moldagem por injeção",
+          "isCorrect": false,
+          "explanation": "SMC não é injeção — é compressão de folha. Conceito diferente."
+        },
+        {
+          "id": "a4",
+          "text": "Apenas sobreposição de camadas sem cura ativa",
+          "isCorrect": false,
+          "explanation": "Cura é absolutamente ATIVA — catalisador é ativado por calor, necessário para solidificação."
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Em uma tubulação de alta pressão fabricada por enrolamento de filamentos, qual orientação de fibra é crítica para resistir a pressão interna?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "0° (longitudinal) — oferece máxima resistência ao longo do comprimento do tubo",
+          "isCorrect": false,
+          "explanation": "0° oferece resistência longitudinal, mas não oferece resistência à pressão radial interna. Pressão interna atua radialmente."
+        },
+        {
+          "id": "a2",
+          "text": "90° (circunferencial/hoop) — oferece máxima resistência à pressão radial interna, porque fibras circundam o tubo e resistem \"expansão\"",
+          "isCorrect": true,
+          "explanation": "Correto! Pressão interna em um cilindro causa tensão de hoop (circunferencial) — as paredes querem expandir-se. Fibras em 90° (perpendicular ao eixo, circundando) resistem diretamente essa expansão. Engenheiros dimensionam camadas 90° para suportar pressão máxima, ±45° para torção/cisalhamento, 0° para resistência longitudinal (estiragem axial). Proporção: típico 3:1 (90°:0°) para cilindro sob pressão."
+        },
+        {
+          "id": "a3",
+          "text": "±45° (helicoidal) — oferece resistência multidirecional",
+          "isCorrect": false,
+          "explanation": "±45° oferece boa multidirecional, mas não é ótimo para pressão pura. Hoop (90°) é ótimo."
+        },
+        {
+          "id": "a4",
+          "text": "Orientação não importa — qualquer ângulo oferece resistência adequada",
+          "isCorrect": false,
+          "explanation": "Orientação é ABSOLUTAMENTE crítica. Errar a orientação pode resultar em falha a pressão bem abaixo do projetado."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Um compósito foi processado por moldagem por injeção com pressão de preenchimento 150 MPa. Qual é a provável consequência?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Nenhuma — pressão não afeta propriedades finais",
+          "isCorrect": false,
+          "explanation": "Pressão afeta propriedades — causa orientação de fibra."
+        },
+        {
+          "id": "a2",
+          "text": "Pressão elevada causa orientação significativa de fibra curta na direção do fluxo, criando propriedades mecânicas **anisotrópicas** — muito mais resistente na direção do fluxo, fraco perpendicular",
+          "isCorrect": true,
+          "explanation": "Correto! Moldagem por injeção de alta pressão alinha fibra curta na direção de fluxo. Resultado: propriedades não-isotrópicas (dependem direção). Resistência axial (fluxo) pode ser 2-3x maior que transversal. Isso é factor CRÍTICO em design — engenheiros devem considerar anisotropia e posicionar peça no molde para que fluxo ocorre na direção principal de carga. Erro pode resultar em falha prematura em direção perpendicular ao fluxo."
+        },
+        {
+          "id": "a3",
+          "text": "Fibra é aleatoriamente orientada independentemente de pressão",
+          "isCorrect": false,
+          "explanation": "Fibra NÃO é aleatória — pressão de fluxo alinha. Isso é problema real em moldagem por injeção que engenheiros devem gerenciar."
+        },
+        {
+          "id": "a4",
+          "text": "Pressão elevada reduz qualidade porque causa bolhas de ar",
+          "isCorrect": false,
+          "explanation": "Pressão elevada reduz bolhas (não cria). Problemas de pressão elevada são outros (orientação de fibra, tensão residual)."
+        }
+      ]
+    }
+  ]
+}
+
