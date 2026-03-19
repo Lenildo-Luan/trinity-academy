@@ -1,0 +1,306 @@
+# Serviços e Modelos de Serviço da Camada de Rede
+
+Até aqui, estudamos a camada de transporte — como processos em hosts diferentes se comunicam através de TCP e UDP. Mas como os dados viajam entre roteadores? Como as redes roteiam pacotes? E qual é o contrato entre a camada de aplicação e a infraestrutura de rede? Essas são as questões da **camada de rede**, que neste capítulo exploraremos começando pelos **serviços de rede** que ela oferece e os **modelos de serviço** que definem o que pode ou não ser garantido.
+
+## O Papel da Camada de Rede
+
+A camada de rede é responsável por entregar pacotes do **host origem** ao **host destino**, passando por múltiplos roteadores intermediários. Diferentemente da camada de transporte (que opera em dois hosts), a camada de rede é distribuída — todo roteador na rede participa do processo.
+
+A camada de rede em um roteador realiza **duas funções críticas**:
+
+<MarkdownTable
+  headers={["Função", "Descrição", "Localização"]}
+  rows={[
+    ["**Roteamento** (Routing)", "Determinar o caminho que os pacotes devem seguir desde origem até destino usando algoritmos de roteamento", "Plano de Controle (Control Plane)"],
+    ["**Repasse** (Forwarding)", "Mover pacotes da porta de entrada para a porta de saída correta, baseado na tabela de roteamento", "Plano de Dados (Data Plane)"],
+  ]}
+/>
+
+### Analogia: Planejamento vs. Execução
+
+Imagine planejar uma viagem pelo Brasil:
+- **Roteamento** = planejamento do mapa: "Para ir de São Paulo a Rio de Janeiro, passe por Campinas, Ribeirão Preto, Uberaba, Belo Horizonte e depois Rio".
+- **Repasse** = execução prática: no anel de São Paulo, você vira à esquerda; em Campinas, você sigue em frente; em cada cidade, consulta o mapa local para saber qual caminho seguir.
+
+Da mesma forma:
+- **Roteamento**: algoritmos globais (Dijkstra, BGP) que constroem as **tabelas de roteamento** em cada roteador.
+- **Repasse**: cada roteador consulta sua tabela local (com base no endereço de destino) e envia o pacote para o "próximo passo".
+
+## Plano de Dados vs. Plano de Controle
+
+A infraestrutura de rede é frequentemente dividida em duas camadas logicamente distintas:
+
+<MarkdownTable
+  headers={["Aspecto", "Plano de Dados", "Plano de Controle"]}
+  rows={[
+    ["**O que faz**", "Encaminha pacotes indo e vindo", "Computa e distribui as tabelas de roteamento"],
+    ["**Escala de tempo**", "Microsegundos (por pacote)", "Segundos a minutos (atualiza periodicamente ou em eventos)"],
+    ["**Equipamento**", "Portas de rede, comutadores, ASICs", "CPU do roteador, software de roteamento (BGP, OSPF)"],
+    ["**Lógica**", "`if destination_in_table[x]: send_to[port_y]`", "Algoritmos complexos: Dijkstra, inundação, consenso distribuído"],
+    ["**Falhas**", "Perde pacote individual", "Pode perder a coerência da rede inteira"],
+  ]}
+/>
+
+Uma analogia: em uma loja, o **plano de dados** são os caixas (processo cada cliente rapidamente), e o **plano de controle** é a gerência (quando há apenas um caixa aberto, decide abrir mais).
+
+### Arquiteturas Modernas: SDN (Software-Defined Networking)
+
+Nas redes tradicionais, roteadores executam tanto o plano de controle (software de roteamento) quanto o plano de dados (encaminhamento de pacotes) localmente — os dois estão acoplados.
+
+A **SDN** separa essas camadas:
+- **Plano de Controle**: centralizado em um **controlador SDN** (computador remoto) que calcula as rotas e as comunica aos roteadores.
+- **Plano de Dados**: cada roteador (agora chamado "switch") apenas segue as instruções do controlador.
+
+<MarkdownTable
+  headers={["Aspecto", "Roteamento Tradicional", "SDN (Software-Defined)"]}
+  rows={[
+    ["**Localização do controle**", "Distribuído (cada roteador decide)", "Centralizado (um controlador para toda a rede)"],
+    ["**Programabilidade**", "Fixa (padrões como OSPF, BGP)", "Flexível (programar políticas customizadas)"],
+    ["**Escalabilidade**", "Complexa em redes grandes", "Simples — o controlador tem visão global"],
+    ["**Exemplo na prática**", "Internet pública (BGP)", "Data centers (OpenFlow, Kubernetes)"],
+  ]}
+/>
+
+## Modelos de Serviço da Camada de Rede
+
+O aspecto mais essencial de qualquer camada de rede é definir **o que ela promete entregar**. A Internet opera sob o modelo de **melhor esforço** (*best effort*), mas em ambientes corporativos ou especializados, outras garantias podem ser necessárias.
+
+### O Modelo Best-Effort (Sem Garantias)
+
+A Internet moderna é construída sobre o modelo **best-effort**:
+
+<MarkdownTable
+  headers={["Propriedade", "Garantia?"]}
+  rows={[
+    ["Entrega de pacotes", "❌ Não — pacotes podem ser perdidos"],
+    ["Ordem de chegada", "❌ Não — pacotes podem chegar fora de ordem"],
+    ["Timing/Latência", "❌ Não — sem limite máximo de atraso"],
+    ["Largura de banda", "❌ Não — sem garantia de throughput"],
+    ["Ausência de duplicatas", "❌ Não — pacotes podem ser duplicados"],
+  ]}
+/>
+
+Essa simplicidade é a força da Internet: qualquer máquina pode se conectar sem negociar contratos. O modelo best-effort permitiu a escalabilidade e a abertura que tornaram a Internet universal.
+
+**Mas quem é responsável pelas garantias?** Se a rede não garante confiabilidade, quem faz?
+
+- **TCP** (camada de transporte) garante entrega confiável e ordenada para aplicações que precisam.
+- **UDP** (camada de transporte) aceita o melhor esforço da rede e passa para a aplicação.
+
+### Modelos com Garantias de QoS (Qualidade de Serviço)
+
+Nem toda comunicação é criada igual. Videoconferência, voz sobre IP (VoIP) e jogos online têm requisitos diferentes de aplicações de transferência de arquivo. Para esses casos, redes corporativas e operadores de telecom implementam **Qualidade de Serviço (QoS)**.
+
+Um modelo de serviço com QoS define **garantias** como:
+
+<MarkdownTable
+  headers={["Garantia", "Significado", "Exemplo de Uso"]}
+  rows={[
+    ["**Throughput Garantido**", "A rede promete um mínimo de R bps entre dois pontos", "Videoconferência 4K exige ~25 Mbps"],
+    ["**Latência Limitada**", "Nenhum pacote levará mais de D milissegundos", "VoIP exige latência <150 ms"],
+    ["**Variação de Latência Limitada (Jitter)**", "A diferença entre o maior e menor atraso é limitada", "Áudio exige jitter baixo para sincronização"],
+    ["**Taxa de Perda Limitada**", "Máximo de x% dos pacotes podem ser perdidos", "Vídeo com perda <1% é aceitável"],
+    ["**Priorização de Pacotes**", "Pacotes marcados como prioritários têm preferência", "Telefone IP tem prioridade sobre downloads"],
+  ]}
+/>
+
+### Comparação entre Modelos
+
+<MarkdownTable
+  headers={["Modelo", "Garantias", "Complexidade", "Custo", "Exemplo na Prática"]}
+  rows={[
+    ["**Best-Effort**", "Nenhuma", "Baixa", "Baixo", "Internet pública (web, email)"],
+    ["**QoS Integrado (IntServ)**", "Reserva de recursos por fluxo", "Muito alta", "Alto", "Serviços premium em operadoras (raro)"],
+    ["**QoS Diferenciado (DiffServ)**", "Classes de serviço com prioridades", "Média", "Médio", "MPLS em redes corporativas"],
+    ["**Circuitos Virtuais**", "Conexão dedicada (lógica ou física)", "Alta", "Alto", "Telefonia (antes de VoIP)"],
+  ]}
+/>
+
+## Serviços Orientados a Conexão vs. Sem Conexão
+
+A camada de rede pode fornecer seus serviços de duas maneiras fundamentalmente diferentes:
+
+### Serviços Sem Conexão (Datagram Networks)
+
+Na abordagem **sem conexão**, cada pacote é independente:
+
+<MarkdownTable
+  headers={["Aspecto", "Detalhes"]}
+  rows={[
+    ["**Setup**", "Nenhum — o remetente simplesmente envia o pacote"],
+    ["**Roteamento**", "Cada pacote é roteado independentemente (pode seguir caminhos diferentes)"],
+    ["**Tabela de Estado**", "Roteador não mantém informação de fluxos; cada pacote é processado isoladamente"],
+    ["**Analogia**", "Sistema postal — cada carta é tratada como uma entidade independente"],
+    ["**Protocolo exemplo**", "IPv4, IPv6 (Internet)"],
+  ]}
+/>
+
+**Vantagens:**
+- ✅ Simples de implementar (sem handshake)
+- ✅ Robusto: se um roteador falha, novos pacotes encontram rotas alternativas
+- ✅ Sem overhead de gerenciamento de conexão
+- ✅ Funciona bem em redes heterogêneas (múltiplos caminhos)
+
+**Desvantagens:**
+- ❌ Pacotes podem chegar fora de ordem
+- ❌ Roteadores não sabem quantos pacotes virão (não podem reservar recursos)
+- ❌ Mais difícil implementar QoS e priorização
+
+### Serviços Orientados a Conexão (Virtual Circuits)
+
+Na abordagem **orientada a conexão**, dois hosts primeiro estabelecem uma "conexão" (circuito virtual) e depois enviam dados:
+
+<MarkdownTable
+  headers={["Fase", "O que Acontece"]}
+  rows={[
+    ["**Setup (Handshake)**", "Antes de enviar dados, fonte envia um pacote de setup que cria uma conexão lógica através da rede"],
+    ["**Transferência**", "Dados fluem pela mesma rota, em ordem, com recursos possivelmente reservados"],
+    ["**Teardown**", "Quando termina, a conexão é explicitamente fechada"],
+  ]}
+/>
+
+<MarkdownTable
+  headers={["Aspecto", "Detalhes"]}
+  rows={[
+    ["**Número de Circuito**", "Cada conexão tem um identificador único (VC ID — Virtual Circuit ID)"],
+    ["**Tabela de Roteamento**", "Mantém estado: `incoming_VC_ID → outgoing_port + outgoing_VC_ID`"],
+    ["**Analogia**", "Telefone (DDI) — disca primeiro para estabelecer conexão, depois fala"],
+    ["**Protocolo exemplo**", "ATM (Asynchronous Transfer Mode), Frame Relay, MPLS"],
+  ]}
+/>
+
+**Vantagens:**
+- ✅ Roteadores sabem antecipadamente quantos dados virão (podem reservar recursos)
+- ✅ QoS e priorização são naturais
+- ✅ Ordem garantida dos pacotes
+
+**Desvantagens:**
+- ❌ Overhead de setup/teardown
+- ❌ Se um link falha, toda a conexão quebra (menos robusto)
+- ❌ Mais complexo de implementar (estado distribuído)
+
+### Por que a Internet usa Datagrams?
+
+A Internet escolheu **datagrams** por uma razão fundamental: **escalabilidade e robustez**. Com bilhões de fluxos simultâneos, manter estado de conexão em todos os roteadores seria impossível. Além disso, a abordagem datagram permitiu que a Internet crescesse de forma descentralizada — novos roteadores poderiam ser adicionados sem coordenação global.
+
+## Problemas Práticos da Internet Best-Effort
+
+Apesar das suas vantagens, o modelo best-effort da Internet causa problemas em cenários modernos:
+
+### Congestionamento e Perdas
+
+Quando um roteador fica sobrecarregado, seus buffers enchem e pacotes são descartados. Não há mecanismo na camada de rede para avisar ao remetente — ele só descobre por timeout.
+
+### Falta de Isolamento entre Fluxos
+
+Um fluxo UDP agressivo (por exemplo, um stream de vídeo não controlado) pode monopolizar a largura de banda de um enlace, prejudicando fluxos bem-comportados (TCP).
+
+### Impossibilidade de Garantir Latência
+
+Sem reserva de recursos, não há como garantir que um pacote chegará em menos de T millisegundos. Variações de latência (jitter) prejudicam aplicações sensíveis ao tempo.
+
+### Firewall, NAT e Fragmentação
+
+O crescimento da Internet revelou problemas não previstos: firewalls bloqueiam tráfego, NAT (tradução de endereços) quebra aplicações ponto-a-ponto, e a fragmentação de pacotes é ineficiente.
+
+## Endereçamento na Camada de Rede: IPv4 vs. IPv6
+
+Para que roteadores saibam para onde enviar pacotes, a camada de rede precisa de um **esquema de endereçamento hierárquico e único**.
+
+### IPv4: O Padrão da Internet
+
+O **IPv4** usa endereços de **32 bits**, organizados em quatro octetos separados por pontos (notação decimal com ponto):
+
+```
+192.168.1.1
+```
+
+<MarkdownTable
+  headers={["Aspecto", "Detalhe"]}
+  rows={[
+    ["**Tamanho**", "32 bits = 4,3 bilhões de endereços possíveis"],
+    ["**Notação**", "`a.b.c.d` onde cada valor está entre 0 e 255"],
+    ["**Estrutura**", "Primeira parte = rede; segunda parte = host dentro da rede"],
+    ["**Máscara de Sub-rede**", "Define quantos bits identificam a rede vs. o host (ex.: `/24` = primeiros 24 bits)"],
+    ["**Exemplo**", "`192.168.1.0/24` = rede com hosts de `192.168.1.1` a `192.168.1.254`"],
+  ]}
+/>
+
+**Problema:** Com bilhões de dispositivos (smartphones, IoT, servidores), IPv4 terá seus endereços esgotados. De fato, já está em processo.
+
+### IPv6: O Futuro
+
+O **IPv6** usa **128 bits** (16 bytes), oferecendo 2^128 endereços — mais que suficiente para qualquer dispositivo concebível:
+
+```
+2001:0db8:85a3:0000:0000:8a2e:0370:7334
+```
+
+<MarkdownTable
+  headers={["Aspecto", "IPv4", "IPv6"]}
+  rows={[
+    ["**Tamanho**", "32 bits", "128 bits"],
+    ["**Notetos**", "~4 bilhões", "~3,4 × 10^38"],
+    ["**Notação**", "Decimal: `192.168.1.1`", "Hexadecimal: `2001:db8::8a2e:370:7334`"],
+    ["**Autoconfiguração**", "DHCP necessário", "Stateless autoconfiguration (SLAAC)"],
+    ["**Segurança**", "IPsec opcional", "IPsec integrado (opcional ainda)"],
+    ["**Fragmentação**", "Realizada por roteadores e hosts", "Apenas hosts (mais eficiente)"],
+  ]}
+/>
+
+### Transição IPv4 → IPv6
+
+A migração para IPv6 é gradual. Muitas abordagens intermediárias existem:
+- **Dual-stack:** routers e hosts rodando tanto IPv4 quanto IPv6 simultaneamente.
+- **Tunelamento:** pacotes IPv6 encapsulados dentro de envelopes IPv4.
+- **Tradução (NAT64):** conversão de endereços como NAT, mas entre protocolos.
+
+## Algoritmos de Roteamento
+
+Como os roteadores decidem para qual porta enviar cada pacote? Essa é a tarefa dos **algoritmos de roteamento**, que constroem e mantêm as tabelas de roteamento.
+
+### Classificação dos Algoritmos
+
+<MarkdownTable
+  headers={["Tipo", "Descrição", "Exemplo"]}
+  rows={[
+    ["**Roteamento Centralizado**", "Um servidor central computa todas as rotas e as distribui", "OSPF em redes corporativas"],
+    ["**Roteamento Distribuído**", "Cada roteador executa um algoritmo e troca informações com vizinhos", "BGP na Internet"],
+    ["**Roteamento Estático**", "Administrador configura rotas manualmente", "Redes pequenas e controladas"],
+    ["**Roteamento Dinâmico**", "Algoritmo adapta-se automaticamente a falhas e mudanças", "OSPF, BGP, RIP"],
+  ]}
+/>
+
+### Algoritmo de Dijkstra (Caminhos Mais Curtos)
+
+O algoritmo de **Dijkstra** encontra o caminho de menor custo de um nó fonte até todos os demais nós em um grafo:
+
+**Ideia:** mantém um conjunto S de nós já processados e a distância mínima de cada nó. A cada iteração, adiciona o nó mais próximo a S.
+
+### Protocolo BGP (Border Gateway Protocol)
+
+O **BGP** é o protocolo de roteamento usado para **roteamento entre domínios autônomos** (a "cola" que une a Internet):
+
+<MarkdownTable
+  headers={["Aspecto", "Detalhe"]}
+  rows={[
+    ["**Escopo**", "Roteamento entre Sistemas Autônomos (AS) — redes operadas por diferentes organizações"],
+    ["**Tipo**", "Protocolo distribuído baseado em vetores de distância (path vector)"],
+    ["**Informação trocada**", "Prefixo de rede (ex.: `192.0.2.0/24`) e lista de ASes percorridos"],
+    ["**Decisão**", "Cada AS escolhe as rotas baseado em políticas (lucro, confiança, performance)"],
+    ["**Internet moderna**", "~65.000 ASes trocam rotas globalmente usando BGP"],
+  ]}
+/>
+
+## Resumo: Do Best-Effort à Arquitetura Moderna
+
+A camada de rede conecta hosts em uma infraestrutura global através de:
+
+1. **Roteamento** (plano de controle): determina caminhos
+2. **Repasse** (plano de dados): encaminha pacotes
+3. **Endereçamento**: IPv4 (escasso) e IPv6 (futuro)
+4. **Serviços**: best-effort (simples, escalável) vs. QoS (complexo, garantido)
+
+O sucesso da Internet deve-se à simplicidade do modelo best-effort e datagram, que permitiu escalabilidade e inovação. Mas para aplicações modernas (videoconferência, IoT, cidades inteligentes), avanços como SDN, QoS baseado em aplicação e redes definidas por software estão evoluindo a camada de rede para suportar um futuro mais demandante.
+
+

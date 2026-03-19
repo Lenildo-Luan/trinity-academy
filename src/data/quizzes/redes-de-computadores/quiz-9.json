@@ -1,0 +1,109 @@
+{
+  "id": "quiz-9",
+  "title": "Quiz — Serviços e Modelos de Serviço da Camada de Rede",
+  "description": "Teste seus conhecimentos sobre a camada de rede, roteamento, repasse, modelos de serviço (best-effort vs. QoS), endereçamento IP e arquiteturas de rede.",
+  "timeLimit": 1200,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual é a principal diferença entre as funções de roteamento (routing) e repasse (forwarding) na camada de rede?",
+      "alternatives": [
+        { "id": "a1", "text": "Roteamento e repasse são sinônimos — ambos referem-se ao mesmo processo de movimentar pacotes", "isCorrect": false, "explanation": "Embora relacionados, são funções distintas. Roteamento é o planejamento global; repasse é a execução local." },
+        { "id": "a2", "text": "Roteamento determina o caminho global que os pacotes devem seguir (algoritmos globais); repasse move pacotes da entrada para saída em um roteador (execução local)", "isCorrect": true, "explanation": "Correto! Roteamento = planejamento do mapa (Dijkstra, BGP); Repasse = seguir o mapa (consultar tabela local)." },
+        { "id": "a3", "text": "Roteamento acontece apenas em gateways; repasse acontece em todos os roteadores", "isCorrect": false, "explanation": "Ambas as funções são distribuídas em todos os roteadores da rede." },
+        { "id": "a4", "text": "Repasse é responsabilidade da camada de enlace; roteamento é responsabilidade da camada de aplicação", "isCorrect": false, "explanation": "Ambas são funções da camada de rede. A camada de enlace não roteia." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Em uma arquitetura de rede tradicional, como o plano de controle (control plane) e o plano de dados (data plane) são organizados?",
+      "alternatives": [
+        { "id": "a1", "text": "Ambos são executados no kernel do SO, separados por diferentes portas de rede", "isCorrect": false, "explanation": "A separação não é apenas uma questão de portas, mas de funções e temporalidade." },
+        { "id": "a2", "text": "Plano de dados: encaminha pacotes (microsegundos, por pacote); Plano de controle: computa tabelas de roteamento (segundos/minutos, global)", "isCorrect": true, "explanation": "Correto! Plano de dados é rápido (ASIC); Plano de controle é lento (CPU com algoritmos complexos)." },
+        { "id": "a3", "text": "O plano de dados é redundante e o plano de controle é o único responsável por encaminhar dados", "isCorrect": false, "explanation": "O plano de dados é fundamental e responsável direto pelo encaminhamento." },
+        { "id": "a4", "text": "Plano de controle determina quais pacotes descartar; plano de dados encaminha o resto", "isCorrect": false, "explanation": "Ambos encaminham; o plano de controle não decide descartes — apenas computa rotas." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "O que é o Software-Defined Networking (SDN) e como difere da roteamento tradicional?",
+      "alternatives": [
+        { "id": "a1", "text": "SDN é apenas um novo nome para roteamento tradicional com mais velocidade", "isCorrect": false, "explanation": "SDN representa uma mudança fundamental na arquitetura, não apenas otimização de velocidade." },
+        { "id": "a2", "text": "SDN centraliza o plano de controle em um controlador remoto que programa os switches, enquanto roteamento tradicional é distribuído (cada roteador decide)", "isCorrect": true, "explanation": "Correto! SDN separa controle (centralizado) de dados (distribuído nos switches). Roteamento tradicional mistura ambos em cada roteador." },
+        { "id": "a3", "text": "SDN utiliza apenas IPv6 e roteamento tradicional usa apenas IPv4", "isCorrect": false, "explanation": "SDN e roteamento tradicional podem usar tanto IPv4 quanto IPv6." },
+        { "id": "a4", "text": "SDN é menos escalável que roteamento tradicional porque centraliza a lógica", "isCorrect": false, "explanation": "SDN é frequentemente mais escalável — o controlador tem visão global da rede." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Qual é o modelo de serviço padrão da Internet pública (best-effort)?",
+      "alternatives": [
+        { "id": "a1", "text": "Garante entrega confiável, ordem de chegada e limite máximo de latência", "isCorrect": false, "explanation": "Best-effort não oferece nenhuma dessas garantias." },
+        { "id": "a2", "text": "Não oferece garantias — pacotes podem ser perdidos, chegarem fora de ordem ou com atraso arbitrário", "isCorrect": true, "explanation": "Correto! Best-effort é 'faça o melhor que puder sem promessas'. As garantias (se necessárias) ficam na camada de transporte (TCP)." },
+        { "id": "a3", "text": "Garante throughput mínimo de 1 Mbps para qualquer fluxo", "isCorrect": false, "explanation": "Best-effort não oferece garantia de throughput." },
+        { "id": "a4", "text": "Oferece priorização automática de dados de voz sobre downloads", "isCorrect": false, "explanation": "Best-effort não prioriza automaticamente. Priorização requer implementação de QoS." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Qual dos seguintes é um exemplo de garantia de QoS (Qualidade de Serviço) que a camada de rede pode oferecer?",
+      "alternatives": [
+        { "id": "a1", "text": "Garantir que todos os pacotes TCP chegam sem corrupção", "isCorrect": false, "explanation": "Detecção de corrupção é função da camada de enlace; TCP se encarrega da confiabilidade." },
+        { "id": "a2", "text": "Reservar uma largura de banda mínima de 5 Mbps entre dois pontos e garantir latência menor que 50 ms", "isCorrect": true, "explanation": "Correto! QoS é sobre garantias: throughput mínimo, latência máxima, jitter limitado, etc." },
+        { "id": "a3", "text": "Garantir que UDP é mais rápido que TCP", "isCorrect": false, "explanation": "Isso não é uma garantia de QoS da camada de rede." },
+        { "id": "a4", "text": "Criptografar automaticamente todos os pacotes contra espionagem", "isCorrect": false, "explanation": "Criptografia é função de protocolos como TLS (camada de transporte/aplicação), não QoS." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual é a principal vantagem das redes sem conexão (datagram networks) sobre as orientadas a conexão (virtual circuits)?",
+      "alternatives": [
+        { "id": "a1", "text": "Datagram networks garantem ordem dos pacotes; virtual circuits permitem pacotes fora de ordem", "isCorrect": false, "explanation": "É o contrário: virtual circuits garantem ordem; datagrams permitem fora de ordem." },
+        { "id": "a2", "text": "Datagram networks são mais simples (sem setup), mais robustas a falhas de roteadores e escaláveis para bilhões de fluxos", "isCorrect": true, "explanation": "Correto! Sem estado em roteadores = sem overhead de setup/teardown e sem falhas catastróficas se um link cai." },
+        { "id": "a3", "text": "Datagram networks reservam automaticamente bandwidth; virtual circuits não", "isCorrect": false, "explanation": "É o contrário: virtual circuits permitem reserva; datagrams não." },
+        { "id": "a4", "text": "Datagram networks usam menos largura de banda porque não enviam pacotes de setup", "isCorrect": false, "explanation": "Embora verdade em termos de setup, a vantagem principal está na simplicidade e robustez, não na economia de bandwidth." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Por que a Internet escolheu usar datagrams (sem conexão) em vez de virtual circuits (orientado a conexão)?",
+      "alternatives": [
+        { "id": "a1", "text": "Virtual circuits exigem que todos os roteadores rodem processadores mais rápidos", "isCorrect": false, "explanation": "A razão não está relacionada a velocidade de processadores." },
+        { "id": "a2", "text": "Datagrams permitem escalabilidade e robustez — sem estado em roteadores para bilhões de fluxos simultâneos, e recuperação automática de falhas", "isCorrect": true, "explanation": "Correto! Manter estado de conexão em todos os roteadores seria impossível em escala global. E se um roteador falha, novos datagrams encontram rotas alternativas." },
+        { "id": "a3", "text": "Datagrams são sempre mais seguros que virtual circuits", "isCorrect": false, "explanation": "Segurança não está relacionada a ser datagram ou orientado a conexão." },
+        { "id": "a4", "text": "Porque IPv4 não suporta virtual circuits (apenas IPv6 suporta)", "isCorrect": false, "explanation": "IPv4 poderia implementar VC (Frame Relay, ATM o fazem), mas a arquitetura fundamental da Internet é datagram." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Qual é a notação de máscara de sub-rede `/24` em IPv4 e o que ela significa?",
+      "alternatives": [
+        { "id": "a1", "text": "Os primeiros 24 bits identificam a rede; os últimos 8 bits identificam o host dentro da rede", "isCorrect": true, "explanation": "Correto! `/24` = 24 bits de rede + 8 bits de host. Por exemplo, `192.168.1.0/24` tem 256 endereços (254 usáveis para hosts)." },
+        { "id": "a2", "text": "Existem 24 roteadores na rede e máximo 256 hosts", "isCorrect": false, "explanation": "A máscara `/24` define apenas a divisão rede/host, não o número de roteadores." },
+        { "id": "a3", "text": "O IP máximo na rede é 24.24.24.24 (não faz sentido)", "isCorrect": false, "explanation": "A notação `/24` não define um IP máximo dessa forma." },
+        { "id": "a4", "text": "A rede pode ter máximo 24 sub-redes diferentes", "isCorrect": false, "explanation": "Uma rede `/24` individual é uma sub-rede, não define múltiplas sub-redes." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Como IPv6 resolve o problema de esgotamento de endereços do IPv4?",
+      "alternatives": [
+        { "id": "a1", "text": "Usando compressão de endereços para armazenar múltiplos endereços em um único IP", "isCorrect": false, "explanation": "Não existe tal compressão em IPv6." },
+        { "id": "a2", "text": "Usando endereços de 128 bits em vez de 32 bits, oferecendo ~3,4 × 10^38 endereços — aproximadamente 5 × 10^28 por pessoa na Terra", "isCorrect": true, "explanation": "Correto! IPv6 oferece praticamente endereços ilimitados. Um único datacenter pode ter mais endereços IPv6 que toda a Internet IPv4." },
+        { "id": "a3", "text": "Reutilizando endereços privados (RFC 1918) de forma mais eficiente", "isCorrect": false, "explanation": "Reutilização de privados (NAT) foi uma solução temporária do IPv4, não é como IPv6 resolve." },
+        { "id": "a4", "text": "Implementando NAT64 para compartilhar endereços entre múltiplas máquinas", "isCorrect": false, "explanation": "NAT64 é uma técnica de transição IPv4→IPv6, não a solução fundamental." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "O algoritmo de Dijkstra na camada de rede é usado para:",
+      "alternatives": [
+        { "id": "a1", "text": "Detectar congestionamento em tempo real e descartar pacotes", "isCorrect": false, "explanation": "Detecção de congestionamento não é responsabilidade de Dijkstra." },
+        { "id": "a2", "text": "Encontrar o caminho de menor custo da origem até todos os outros nós, para construir a tabela de roteamento", "isCorrect": true, "explanation": "Correto! Dijkstra é um algoritmo clássico para encontrar caminhos mais curtos (menor custo). O BGP também o usa (ou versões distribuídas dele) para roteamento entre domínios." },
+        { "id": "a3", "text": "Alocar dinamicamente endereços IP para novos hosts na rede", "isCorrect": false, "explanation": "Alocação de IP é função do DHCP, não de Dijkstra." },
+        { "id": "a4", "text": "Criptografar os dados do pacote durante o transporte", "isCorrect": false, "explanation": "Criptografia não é função do algoritmo de roteamento." }
+      ]
+    }
+  ]
+}
+
