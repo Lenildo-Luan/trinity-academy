@@ -79,6 +79,12 @@ import {
 } from "./src/components/transport-layer-p5-examples";
 import { RoutingForwardingDataPlaneSimulator } from "./src/components/network-layer-p5-examples";
 import {
+  RouterArchitectureOverview,
+  MemorySwitchingSimulator,
+  BusSwitchingSimulator,
+  CrossbarSwitchingSimulator,
+} from "./src/components/router-architecture-p5-examples";
+import {
   BestEffortVsQoSGuarantees,
   DatagramVsVirtualCircuitComparison,
   CongestionAndPacketDropSimulator,
@@ -407,6 +413,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     MultiplexingDemux,
     SegmentEncapsulation,
     RoutingForwardingDataPlaneSimulator,
+    RouterArchitectureOverview,
+    MemorySwitchingSimulator,
+    BusSwitchingSimulator,
+    CrossbarSwitchingSimulator,
     BestEffortVsQoSGuarantees,
     DatagramVsVirtualCircuitComparison,
     CongestionAndPacketDropSimulator,

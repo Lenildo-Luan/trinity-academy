@@ -18,23 +18,11 @@ Um roteador é um computador especializado com uma função clara: encaminhar pa
   ]}
 />
 
-A visualização típica de um roteador moderno:
+### Visualizacao: fluxo interno entre os componentes
 
-```
-     Host A ──┐
-              ├── Porta de Entrada 1 ──┐
-              │                        │
-     Host B ──┘                        ├─── Switching Fabric ──┬── Porta de Saída 1 ──┐
-                                       │                       │                      ├── Roteador/Host Próximo
-     Host C ──┐                        │                       ├── Porta de Saída 2 ──┤
-              ├── Porta de Entrada 2 ──┤                       │                      │
-              │                        ├─── Switching Fabric ──┤
-     Host D ──┘                        │                       ├── Porta de Saída 3 ──┘
-                                       │
-              ...                      └─── Processador de Roteamento
-                                              (tabelas, protocolos)
-```
+Use a animacao abaixo para observar o caminho completo de cada pacote dentro do roteador: entrada, fabric e saida. O processador de roteamento aparece separado para reforcar que ele alimenta tabelas/politicas, mas nao participa do caminho critico de cada pacote.
 
+<RouterArchitectureOverview />
 
 ## Funcionalidades das Portas de Entrada
 
@@ -117,13 +105,6 @@ A abordagem mais simples: usar a **memória principal** como intermediária.
 3. O CPU consulta a tabela de roteamento e copia o pacote para **a localização de memória correspondente à porta de saída**.
 4. A porta de saída lê da memória e transmite o pacote.
 
-**Dados:**
-```
-Host A ──→ [Porta Entrada 1] ──barramento→ [Memória Principal] ──barramento→ [Porta Saída 2] ──→ Host B
-                                                ↑
-                                            [CPU / Tabela]
-```
-
 **Limitações:**
 - O **barramento** é o gargalo — todos os pacotes devem cruzá-lo *duas vezes* (entrada → memória → saída).
 - A memória tem uma largura de banda máxima — se um roteador tem 8 portas de 10 Gbps cada (80 Gbps total), a memória deve suportar 160 Gbps (80 Gbps entrada + 80 Gbps saída).
@@ -143,6 +124,12 @@ Host A ──→ [Porta Entrada 1] ──barramento→ [Memória Principal] ─�
   ]}
 />
 
+### Visualizacao: comutacao via memoria e gargalo central
+
+Nesta simulacao, varios fluxos chegam em paralelo, mas so um pacote por vez atravessa o ciclo completo **entrada -> memoria -> saida**. Repare como as filas de entrada crescem quando a carga aumenta.
+
+<MemorySwitchingSimulator />
+
 ### 2. Comutação via Barramento (Bus Switching)
 
 Substituir o intermediário de memória por um **barramento compartilhado** entre todas as portas.
@@ -151,14 +138,6 @@ Substituir o intermediário de memória por um **barramento compartilhado** entr
 1. Uma porta de entrada coloca um pacote no barramento com um **rótulo de destino**.
 2. Todas as portas de saída veem o pacote simultaneamente.
 3. A porta de saída **cuja identidade corresponde ao rótulo** aceita e armazena o pacote.
-
-**Dados:**
-```
-[Porta Entrada 1] ──┐
-                    ├──→ [Barramento Compartilhado] ──→ [Porta Saída 2 reconhece seu ID e aceita]
-[Porta Entrada 2] ──┘     (Todas as portas veem)        [Porta Saída 1 ignora]
-                                                        [Porta Saída 3 ignora]
-```
 
 **Limitações:**
 - O barramento ainda é um gargalo — apenas **um** pacote pode cruzá-lo por vez.
@@ -179,23 +158,18 @@ Substituir o intermediário de memória por um **barramento compartilhado** entr
   ]}
 />
 
+### Visualizacao: barramento compartilhado e arbitragem
+
+Aqui o pacote nao passa pela memoria principal, mas o barramento continua sendo um recurso unico. O roteador arbitra qual entrada transmite no instante atual, enquanto as outras esperam em fila.
+
+<BusSwitchingSimulator />
+
 ### 3. Comutação via Rede de Interconexão (Crossbar Switching)
 
 A arquitetura mais sofisticada: usar uma **rede completa de interconexão** (geralmente uma matriz cruzada) que permite **múltiplos pacotes em paralelo**.
 
 **Como funciona:**
 Uma rede de interconexão é uma **matriz N×N** de switches (cruzamentos). Cada porta de entrada está conectada a uma linha da matriz; cada porta de saída está conectada a uma coluna. Um **switch de cruzamento** em (i, j) conecta a entrada i à saída j quando necessário.
-
-**Dados:**
-```
-         Porta Saída 1    Porta Saída 2    Porta Saída 3
-                    ↑            ↑            ↑
-Porta Entrada 1 ───┼●──────────┼──────────┬──┤  (● = switch ativo)
-                    │            ├●──────┐ │
-Porta Entrada 2 ────┤            │       │ │
-                    │            │       │ │
-Porta Entrada 3 ────┤────●───────┤───────●─┘
-```
 
 **Vantagens:**
 - **Paralelismo completo**: múltiplos pacotes podem ser comuados em paralelo (ex: entrada 1→saída 2 enquanto entrada 3→saída 1).
@@ -216,6 +190,12 @@ Porta Entrada 3 ────┤────●───────┤───�
     ["**Escalabilidade**", "Boa até N=100 (N² switches)"],
   ]}
 />
+
+### Visualizacao: matriz crossbar com comutacao paralela
+
+Observe que varios pacotes podem atravessar a matriz ao mesmo tempo quando as saidas desejadas sao diferentes. Quando duas entradas disputam a mesma saida no mesmo instante, uma delas fica bloqueada e aguarda no buffer de entrada.
+
+<CrossbarSwitchingSimulator />
 
 ### Mitigando HOL Blocking em Crossbar
 
@@ -307,13 +287,16 @@ O laboratório abaixo permite explorar arquitetura, número de portas, taxa de c
 
 A arquitetura interna de um roteador balanceia **throughput, latência e custo**:
 
-| Aspecto | Solução |
-|---------|---------|
-| **Recepção de pacotes** | Portas de entrada com TCAM para roteamento rápido |
-| **Transmissão** | Portas de saída com filas inteligentes (RED, WRED) e escalonamento (QoS) |
-| **Conectividade interna** | Switching fabric (memória, barramento ou crossbar) |
-| **Escalabilidade** | Crossbar com VOQ e algoritmos de matching |
-| **Confiabilidade** | Redundância e monitoramento em tempo real |
+<MarkdownTable
+  headers={["Aspecto", "Solução"]}
+  rows={[
+    ["**Recepção de pacotes**", "Portas de entrada com TCAM para roteamento rápido"],
+    ["**Transmissão**", "Portas de saída com filas inteligentes (RED, WRED) e escalonamento (QoS)"],
+    ["**Conectividade interna**", "Switching fabric (memória, barramento ou crossbar)"],
+    ["**Escalabilidade**", "Crossbar com VOQ e algoritmos de matching"],
+    ["**Confiabilidade**", "Redundância e monitoramento em tempo real"],
+  ]}
+/>
 
 Roteadores de núcleo da Internet (backbone) usam **switching fabrics via crossbar** com dezenas de portas de alta velocidade, enquanto roteadores de acesso ou SOHO podem usar **comutação via barramento ou memória** para reduzir custos. A escolha da arquitetura reflete a missão do roteador e as restrições orçamentárias.
 
