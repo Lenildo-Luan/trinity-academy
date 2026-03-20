@@ -61,6 +61,16 @@ A **SDN** separa essas camadas:
   ]}
 />
 
+### Simulador Interativo: Roteamento e Repasse (Data Plane)
+
+Nesta visualização, cada **roteador** é um nó circular e os **links** representam as conexões entre eles. Os **pacotes** (quadrados coloridos) saem de um host origem e seguem até o host destino com base nas tabelas de roteamento de cada salto.
+
+- Clique em um roteador para abrir sua tabela de roteamento.
+- Observe que o plano de controle definiu a tabela antes, e o plano de dados apenas repassa pacote por pacote.
+- Cada fluxo usa uma cor diferente e o trajeto percorrido fica destacado.
+
+<RoutingForwardingDataPlaneSimulator />
+
 ## Modelos de Serviço da Camada de Rede
 
 O aspecto mais essencial de qualquer camada de rede é definir **o que ela promete entregar**. A Internet opera sob o modelo de **melhor esforço** (*best effort*), mas em ambientes corporativos ou especializados, outras garantias podem ser necessárias.
@@ -115,6 +125,12 @@ Um modelo de serviço com QoS define **garantias** como:
     ["**Circuitos Virtuais**", "Conexão dedicada (lógica ou física)", "Alta", "Alto", "Telefonia (antes de VoIP)"],
   ]}
 />
+
+### Visualização: Best-Effort vs QoS
+
+Compare os dois modelos lado a lado. No **best-effort**, pacotes podem desaparecer (perda aleatória) e o atraso varia mais. No lado **QoS**, há fila com prioridade e limite de buffer, o que melhora a taxa de sucesso e reduz jitter.
+
+<BestEffortVsQoSGuarantees />
 
 ## Serviços Orientados a Conexão vs. Sem Conexão
 
@@ -179,6 +195,12 @@ Na abordagem **orientada a conexão**, dois hosts primeiro estabelecem uma "cone
 - ❌ Se um link falha, toda a conexão quebra (menos robusto)
 - ❌ Mais complexo de implementar (estado distribuído)
 
+### Visualização: Datagram vs Circuito Virtual
+
+Observe como, no modo **datagram**, pacotes da mesma sequência podem seguir rotas diferentes e chegar fora de ordem. Já no **circuito virtual**, todos seguem a mesma rota lógica e chegam ordenados.
+
+<DatagramVsVirtualCircuitComparison />
+
 ### Por que a Internet usa Datagrams?
 
 A Internet escolheu **datagrams** por uma razão fundamental: **escalabilidade e robustez**. Com bilhões de fluxos simultâneos, manter estado de conexão em todos os roteadores seria impossível. Além disso, a abordagem datagram permitiu que a Internet crescesse de forma descentralizada — novos roteadores poderiam ser adicionados sem coordenação global.
@@ -190,6 +212,8 @@ Apesar das suas vantagens, o modelo best-effort da Internet causa problemas em c
 ### Congestionamento e Perdas
 
 Quando um roteador fica sobrecarregado, seus buffers enchem e pacotes são descartados. Não há mecanismo na camada de rede para avisar ao remetente — ele só descobre por timeout.
+
+<CongestionAndPacketDropSimulator />
 
 ### Falta de Isolamento entre Fluxos
 
@@ -276,6 +300,18 @@ Como os roteadores decidem para qual porta enviar cada pacote? Essa é a tarefa 
 O algoritmo de **Dijkstra** encontra o caminho de menor custo de um nó fonte até todos os demais nós em um grafo:
 
 **Ideia:** mantém um conjunto S de nós já processados e a distância mínima de cada nó. A cada iteração, adiciona o nó mais próximo a S.
+
+### Visualização: Dijkstra Passo-a-Passo
+
+Use os controles de **Play/Pause**, **Passo** e **Reiniciar** para acompanhar o algoritmo. Os nós mudam de cor durante a execução:
+
+- cinza: ainda não processado
+- amarelo: nó ativo na iteração atual
+- verde: nó já fixado com menor distância
+
+A tabela à direita mostra as distâncias e predecessores atualizados a cada iteração.
+
+<DijkstraStepByStep />
 
 ### Protocolo BGP (Border Gateway Protocol)
 

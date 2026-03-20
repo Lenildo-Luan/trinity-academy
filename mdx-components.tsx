@@ -77,6 +77,13 @@ import {
   MultiplexingDemux,
   SegmentEncapsulation,
 } from "./src/components/transport-layer-p5-examples";
+import { RoutingForwardingDataPlaneSimulator } from "./src/components/network-layer-p5-examples";
+import {
+  BestEffortVsQoSGuarantees,
+  DatagramVsVirtualCircuitComparison,
+  CongestionAndPacketDropSimulator,
+  DijkstraStepByStep,
+} from "./src/components/network-service-models-p5-examples";
 import {
   MultiplexingSender,
   DemultiplexingReceiver,
@@ -399,6 +406,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     TCPvsUDP,
     MultiplexingDemux,
     SegmentEncapsulation,
+    RoutingForwardingDataPlaneSimulator,
+    BestEffortVsQoSGuarantees,
+    DatagramVsVirtualCircuitComparison,
+    CongestionAndPacketDropSimulator,
+    DijkstraStepByStep,
     MultiplexingSender,
     DemultiplexingReceiver,
     UDPDemultiplexing,
