@@ -1,0 +1,109 @@
+{
+  "id": "quiz-10",
+  "title": "Quiz — Arquitetura de um Roteador",
+  "description": "Teste seus conhecimentos sobre a arquitetura interna de um roteador: portas de entrada e saída, elemento de comutação, tipos de switching (memória, barramento, crossbar) e seu impacto no desempenho.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual é a função primária do elemento de comutação (switching fabric) em um roteador?",
+      "alternatives": [
+        { "id": "a1", "text": "Consultar a tabela de roteamento para determinar a porta de saída", "isCorrect": false, "explanation": "A consulta da tabela de roteamento é feita pelas portas de entrada, geralmente em uma TCAM. O switching fabric apenas conecta entrada à saída determinada." },
+        { "id": "a2", "text": "Conectar portas de entrada às portas de saída, transferindo pacotes entre elas", "isCorrect": true, "explanation": "Correto! O switching fabric é o coração do roteador — sua única responsabilidade é comutar (transferir) pacotes da porta de entrada selecionada para a porta de saída selecionada." },
+        { "id": "a3", "text": "Executar protocolos de roteamento como BGP e OSPF para calcular rotas", "isCorrect": false, "explanation": "Protocolos de roteamento são executados pelo processador de roteamento (plano de controle), não pelo switching fabric." },
+        { "id": "a4", "text": "Armazenar os pacotes em buffer até que possam ser transmitidos", "isCorrect": false, "explanation": "Armazenamento em buffer é responsabilidade das portas de entrada e saída, não do switching fabric." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "O que é TCAM (Ternary Content Addressable Memory) e por que é essencial em roteadores?",
+      "alternatives": [
+        { "id": "a1", "text": "Uma memória comum que armazena a tabela de roteamento — nenhuma característica especial", "isCorrect": false, "explanation": "RAM comum seria muito lenta para roteamento — exigiria buscas sequenciais que não conseguem acompanhar o throughput de pacotes." },
+        { "id": "a2", "text": "Uma memória que realiza buscas associativas em um único ciclo de clock, permitindo busca por prefixo (CIDR) — crítico para roteamento de alta velocidade", "isCorrect": true, "explanation": "Correto! TCAM permite buscar uma entrada na tabela em tempo constante (~100-300 ns) mesmo com milhões de prefixos, comparando simultaneamente contra múltiplos padrões com wildcards." },
+        { "id": "a3", "text": "Um tipo de memória para armazenar apenas endereços IP exatos — não suporta prefixos", "isCorrect": false, "explanation": "Justamente o oposto — TCAM é essencial *porque* suporta buscas por prefixo, não apenas matches exatos." },
+        { "id": "a4", "text": "Um algoritmo de criptografia usado para proteger as tabelas de roteamento", "isCorrect": false, "explanation": "TCAM é hardware de memória, não algoritmo criptográfico." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Na comutação via memória, por que existe um gargalo?",
+      "alternatives": [
+        { "id": "a1", "text": "Porque o CPU é muito lento para processar todos os pacotes", "isCorrect": false, "explanation": "O CPU não precisa processar *todo* pacote — apenas consultar a tabela. O verdadeiro gargalo é diferente." },
+        { "id": "a2", "text": "Porque o barramento entre portas e memória tem largura de banda limitada — cada pacote deve cruzá-lo duas vezes (entrada→memória e memória→saída)", "isCorrect": true, "explanation": "Correto! Um roteador com N portas de velocidade R bps tem capacidade teórica de N×R bps, mas na comutação via memória, o barramento deve suportar 2×N×R bps (entrada + saída), criando um gargalo." },
+        { "id": "a3", "text": "Porque a memória não consegue armazenar pacotes grandes", "isCorrect": false, "explanation": "Memória moderna consegue armazenar pacotes — o problema é a largura de banda, não a capacidade." },
+        { "id": "a4", "text": "Porque cada pacote requer uma consulta separada do CPU à tabela de roteamento", "isCorrect": false, "explanation": "Mesmo que isso fosse verdade, não seria um gargalo do barramento — seria um gargalo do CPU." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Qual é o throughput máximo típico de um roteador com comutação via barramento (bus switching)?",
+      "alternatives": [
+        { "id": "a1", "text": "1-2 Gbps", "isCorrect": false, "explanation": "1-2 Gbps é típico de comutação via *memória*, não via barramento." },
+        { "id": "a2", "text": "10-20 Gbps", "isCorrect": true, "explanation": "Correto! Comutação via barramento permite throughput maior que memória, mas ainda é limitado porque apenas *um* pacote pode usar o barramento por vez. Como o barramento é compartilhado, há contenção." },
+        { "id": "a3", "text": "100+ Gbps", "isCorrect": false, "explanation": "100+ Gbps é típico de comutação via *crossbar*, que permite múltiplos pacotes em paralelo." },
+        { "id": "a4", "text": "Ilimitado — barramento não tem limite teórico", "isCorrect": false, "explanation": "Barramentos têm limite de largura de banda bem definido (ex: 20 Gbps em uma implementação típica)." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "O que é HOL (Head-of-Line) blocking em um crossbar switch?",
+      "alternatives": [
+        { "id": "a1", "text": "Quando a fila de saída fica tão cheia que nenhum pacote pode ser transmitido", "isCorrect": false, "explanation": "Isso é congestão de saída, não HOL blocking — que é um problema específico de comutação." },
+        { "id": "a2", "text": "Quando dois pacotes em uma fila de entrada querem sair por portas diferentes, mas o primeiro é bloqueado aguardando a saída correta, impedindo o segundo de prosseguir", "isCorrect": true, "explanation": "Correto! Em um crossbar sem buffering de entrada, se o primeiro pacote na fila quer sair por uma porta ocupada, nenhum outro pacote dessa entrada pode ser comuado — mesmo que quer sair por portas livres." },
+        { "id": "a3", "text": "Quando o processor de roteamento está muito ocupado para atualizar a tabela de roteamento", "isCorrect": false, "explanation": "Isso não tem relação com o crossbar — é um problema de plano de controle." },
+        { "id": "a4", "text": "Quando múltiplas entradas querem enviar para a mesma saída", "isCorrect": false, "explanation": "Múltiplas entradas para uma saída é esperado — a saída escolhe qual aceita. O HOL é um problema de filas de entrada, não de arbitragem de saída." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Como as Virtual Output Queues (VOQs) reduzem o HOL blocking em um crossbar?",
+      "alternatives": [
+        { "id": "a1", "text": "Mantendo uma fila única de entrada, mas priorizando pacotes destinados a portas livres", "isCorrect": false, "explanation": "VOQs não apenas reprioritizam — elas estruturam fundamentalmente o buffering." },
+        { "id": "a2", "text": "Mantendo uma fila **separada para cada saída** em cada entrada, permitindo que um pacote bloqueado não impeça pacotes posteriores destinados a outras saídas", "isCorrect": true, "explanation": "Correto! Com VOQs, a entrada 1 tem N filas (uma por cada saída). Um pacote na VOQ[1→2] que está bloqueado não impede um pacote na VOQ[1→3] de ser comuado se a saída 3 está disponível." },
+        { "id": "a3", "text": "Aumentando o tamanho do buffer para que nenhum pacote precise ser descartado", "isCorrect": false, "explanation": "VOQs não resolvem HOL aumentando buffer — resolvem permitindo paralelismo." },
+        { "id": "a4", "text": "Usando um algoritmo de scheduling que previne bloqueios", "isCorrect": false, "explanation": "Scheduling trabalha *com* VOQs, mas VOQs é a estrutura fundamental." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual é a principal vantagem da comutação via crossbar em relação à comutação via barramento?",
+      "alternatives": [
+        { "id": "a1", "text": "Menor custo de implementação", "isCorrect": false, "explanation": "Crossbar é mais caro — requer muitos switches e lógica de controle complexa." },
+        { "id": "a2", "text": "Menor latência, mas mesmo throughput", "isCorrect": false, "explanation": "Crossbar tem melhor latência *e* melhor throughput." },
+        { "id": "a3", "text": "Permite comutação paralela de múltiplos pacotes simultaneamente, eliminando o gargalo único do barramento", "isCorrect": true, "explanation": "Correto! No barramento, apenas um pacote por vez. No crossbar, múltiplas entradas podem enviar simultaneamente para diferentes saídas — teórico throughput = 100% da capacidade agregada." },
+        { "id": "a4", "text": "Suporta tabelas de roteamento maiores", "isCorrect": false, "explanation": "O tamanho da tabela não depende do tipo de fabric — depende da TCAM e do processador de roteamento." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Um roteador tem 8 portas de 10 Gbps cada. Qual é sua capacidade teórica de throughput agregado?",
+      "alternatives": [
+        { "id": "a1", "text": "10 Gbps (apenas uma porta ativa de cada vez)", "isCorrect": false, "explanation": "Errado — múltiplas portas podem estar ativas simultaneamente." },
+        { "id": "a2", "text": "40 Gbps (metade do total porque cada pacote entra e sai)", "isCorrect": false, "explanation": "Essa confusão surge da comutação via memória. A capacidade teórica é o total de largura de banda das portas." },
+        { "id": "a3", "text": "80 Gbps (8 × 10 Gbps) — a soma de todas as portas", "isCorrect": true, "explanation": "Correto! Capacidade teórica = soma das velocidades de todas as portas. Um roteador com 8 portas de 10 Gbps tem 80 Gbps teóricos. Se usa crossbar, pode atingir ~80 Gbps reais. Se usa barramento, talvez apenas 20 Gbps." },
+        { "id": "a4", "text": "160 Gbps (porque cada pacote deve entrar e sair, contando duplo)", "isCorrect": false, "explanation": "A capacidade não conta 'duplo' — o fluxo total é 80 Gbps." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "O que RED (Random Early Detection) faz na fila de saída de um roteador?",
+      "alternatives": [
+        { "id": "a1", "text": "Garante que todos os pacotes de alta prioridade sejam transmitidos primeiro", "isCorrect": false, "explanation": "Priorização é responsabilidade do escalonador (scheduler), não do RED." },
+        { "id": "a2", "text": "Descarta aleatoriamente pacotes quando a fila ultrapassa um limiar, em vez de esperar a fila encher completamente", "isCorrect": true, "explanation": "Correto! RED descarta pacotes *probabilisticamente* quando a fila atinge um threshold. Isso sinala gradualmente aos emissores TCP a reduzir cwnd, evitando descartes abruptos e sincronização TCP." },
+        { "id": "a3", "text": "Retransmite pacotes que foram descartados", "isCorrect": false, "explanation": "RED não retransmite — apenas descarta. Retransmissão é responsabilidade do TCP (camada de transporte)." },
+        { "id": "a4", "text": "Aumenta o tamanho da fila para aceitar mais pacotes", "isCorrect": false, "explanation": "RED faz o oposto — reduz a fila descartando pacotes precocemente." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Qual tipo de roteador usaria comutação via memória em vez de crossbar?",
+      "alternatives": [
+        { "id": "a1", "text": "Um roteador de backbone da Internet (ISP de nível 1) com dezenas de portas de alta velocidade", "isCorrect": false, "explanation": "Backbone exige máximo throughput — usa crossbar ou tecnologias ainda mais avançadas." },
+        { "id": "a2", "text": "Um roteador SOHO (Small Office/Home Office) barato com poucas portas de baixa velocidade, onde custo é mais importante que throughput máximo", "isCorrect": true, "explanation": "Correto! Roteadores antigos e baratos usam comutação via memória. Ainda funcionam bem para escritórios pequenos com tráfego moderado (ex: 4 portas de 1 Gbps). Para data centers ou ISP, seria inaceitável." },
+        { "id": "a3", "text": "Um roteador de data center que precisa de latência muito baixa", "isCorrect": false, "explanation": "Data center exige alta performance — memória tem latência moderada." },
+        { "id": "a4", "text": "Um roteador BGP que executa protocolos complexos de roteamento", "isCorrect": false, "explanation": "Complexidade de roteamento (plano de controle) é independente do tipo de fabric." }
+      ]
+    }
+  ]
+}
+

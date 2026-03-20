@@ -1,0 +1,319 @@
+# Arquitetura de um Roteador
+
+Até aqui, estudamos como os roteadores **roteiam** (plano de controle) e **repassam** (plano de dados) pacotes. Mas como exatamente um roteador está organizado internamente? Quais são seus componentes-chave? Como um roteador consegue processar milhões de pacotes por segundo, retirar-os de uma porta de entrada, consultando uma tabela de roteamento, e encaminhá-los para a porta de saída correta — tudo enquanto mantém a qualidade de serviço e evita congestionamento?
+
+Este capítulo analisa a **arquitetura interna de um roteador**: suas **portas de entrada e saída**, o **elemento de comutação** (switching fabric) que as conecta, e os diferentes **tipos de comutação** que determinam o desempenho e a capacidade de throughput de um roteador moderno.
+
+## Visão Geral da Arquitetura de um Roteador
+
+Um roteador é um computador especializado com uma função clara: encaminhar pacotes da porta de entrada para a porta de saída correta. Apesar dessa simplicidade conceitual, sua arquitetura é notavelmente sofisticada.
+
+<MarkdownTable
+  headers={["Componente", "Função Principal", "Localização"]}
+  rows={[
+    ["**Portas de Entrada** (Input Ports)", "Receber pacotes do meio físico, verificar erros e identificar a porta de saída", "Periférico — conecta a roteadores/hosts vizinhos"],
+    ["**Portas de Saída** (Output Ports)", "Enviar pacotes processados para o próximo salto (roteador ou host)", "Periférico — conecta a roteadores/hosts vizinhos"],
+    ["**Elemento de Comutação** (Switching Fabric)", "Conectar portas de entrada às portas de saída, transferindo pacotes entre elas", "Núcleo — coração do roteador"],
+    ["**Processador de Roteamento** (Routing Processor)", "Executar protocolos de roteamento (BGP, OSPF), manter tabelas de roteamento", "Control Plane — processamento periódico"],
+  ]}
+/>
+
+A visualização típica de um roteador moderno:
+
+```
+     Host A ──┐
+              ├── Porta de Entrada 1 ──┐
+              │                        │
+     Host B ──┘                        ├─── Switching Fabric ──┬── Porta de Saída 1 ──┐
+                                       │                       │                      ├── Roteador/Host Próximo
+     Host C ──┐                        │                       ├── Porta de Saída 2 ──┤
+              ├── Porta de Entrada 2 ──┤                       │                      │
+              │                        ├─── Switching Fabric ──┤
+     Host D ──┘                        │                       ├── Porta de Saída 3 ──┘
+                                       │
+              ...                      └─── Processador de Roteamento
+                                              (tabelas, protocolos)
+```
+
+
+## Funcionalidades das Portas de Entrada
+
+Uma porta de entrada não é apenas um conector físico — ela realiza várias operações em **alta velocidade** (microsegundos por pacote).
+
+<MarkdownTable
+  headers={["Operação", "Descrição", "Complexidade"]}
+  rows={[
+    ["**Terminação do Link Físico**", "Receber sinais do meio (fibra, cobre, wireless) e converter em bits", "Hardware ASIC (Application-Specific IC)"],
+    ["**Verificação de Erros**", "Checar FCS (Frame Check Sequence) e descartar quadros corrompidos", "Hardware ASIC"],
+    ["**Parsing do Cabeçalho IP**", "Extrair endereço IP de destino do pacote", "Hardware ASIC"],
+    ["**Consulta da Tabela de Roteamento** (Forwarding Table Lookup)", "Encontrar a porta de saída para o IP destino", "TCAM (Ternary CAM) — busca muito rápida"],
+    ["**Atualização de TTL**", "Decrementar TTL e descartar se TTL=0", "Hardware simples"],
+    ["**Processamento QoS**", "Classificar pacotes, marcar prioridade, descartar se necessário (AQM)", "Hardware configurable"],
+  ]}
+/>
+
+### O Gargalo: Consulta da Tabela de Roteamento
+
+A operação mais crítica é a **consulta da tabela de roteamento** — ela deve ser feita em **microsegundos** para não criar fila. Um roteador de 100 Gbps pode receber 100+ milhões de pacotes por segundo; se cada consulta levar 1 microsegundo, os pacotes chegam mais rápido que podem ser processados.
+
+**Solução:** usar **TCAM** (Ternary Content Addressable Memory), um tipo especial de memória que faz buscas *associativas* em um único ciclo de clock, em vez de buscas sequenciais. A TCAM permite buscas por **prefixo** (ex: "todos os IPs que começam com 10.0.0.0/8"), essencial para roteamento hierárquico por CIDR.
+
+<MarkdownTable
+  headers={["Tipo de Memória", "Acesso", "Tempo", "Uso"]}
+  rows={[
+    ["`RAM` (regular)", "Acesso direto (requer índice exato)", "1-10 ns", "Buffer de pacotes"],
+    ["`CAM` (Content Addressable Memory)", "Busca por conteúdo exato", "10-100 ns", "Roteamento baseado em exatidão (não comum)"],
+    ["`TCAM` (Ternary CAM)", "Busca por prefixo ou máscara (com wildcards)", "100-300 ns", "**Roteamento IPv4/IPv6 (padrão ouro)**"],
+  ]}
+/>
+
+## Funcionalidades das Portas de Saída
+
+Uma porta de saída também executa várias tarefas:
+
+<MarkdownTable
+  headers={["Operação", "Descrição"]}
+  rows={[
+    ["**Fila de Saída** (Output Queuing)", "Armazenar pacotes aguardando transmissão se a taxa de chegada exceede a taxa de saída"],
+    ["**Escalonamento** (Scheduling)", "Escolher qual pacote transmitir próximo (FIFO, Priority, WFQ)"],
+    ["**Marcação e Descarte** (Marking & Dropping)", "Marcar/descartar pacotes conforme política QoS (RED, WRED)"],
+    ["**Processamento do Link de Saída**", "Adaptar pacote ao formato do enlace (Ethernet, PPP, etc.)"],
+    ["**Terminação do Link Físico**", "Converter bits em sinais (fibra, cobre, wireless)"],
+  ]}
+/>
+
+### O Gargalo: Fila de Saída
+
+Diferentemente da fila de entrada, a fila de saída é o ponto crítico em muitos roteadores. Se múltiplas portas de entrada querem enviar para a mesma porta de saída **simultaneamente**, a porta de saída só pode transmitir a uma taxa R (a capacidade do enlace). Os pacotes excedentes são enfileirados.
+
+Se a fila cresce infinitamente, a latência explode e os pacotes são descartados. Dois algoritmos modernos evitam isso:
+
+**RED (Random Early Detection):**
+Em vez de deixar a fila encher completamente antes de descartar, o RED descarta pacotes **probabilisticamente** quando a fila atinge um limiar. Isso avalia os emissores a reduzir cwnd *antes* de a fila transbordar.
+
+**WRED (Weighted RED):**
+Versão melhorada que descarta pacotes de fluxos de baixa prioridade mais frequentemente que os de alta prioridade.
+
+<MarkdownTable
+  headers={["Algoritmo", "Política", "Benefício"]}
+  rows={[
+    ["`FIFO` + Drop-tail", "Descartar quando fila está cheia", "Simples, mas causa perdas abruptas e sincronização TCP"],
+    ["`RED`", "Descartar aleatoriamente quando fila > threshold", "Avalia fluxos gradualmente, reduz sincronização"],
+    ["`WRED`", "RED com pesos — fluxos altos descartam mais", "Diferencia qualidade de serviço por classe"],
+  ]}
+/>
+
+## O Elemento de Comutação (Switching Fabric)
+
+O **elemento de comutação** é o coração do roteador — o que conecta todas as portas de entrada às portas de saída. Existem três arquiteturas principais, cada uma com trade-offs diferentes de custo, complexidade e desempenho.
+
+### 1. Comutação via Memória (Memory Switching)
+
+A abordagem mais simples: usar a **memória principal** como intermediária.
+
+**Como funciona:**
+1. Uma porta de entrada lê um pacote do link físico.
+2. Envia o pacote via **barramento para a memória** (controlada pelo CPU).
+3. O CPU consulta a tabela de roteamento e copia o pacote para **a localização de memória correspondente à porta de saída**.
+4. A porta de saída lê da memória e transmite o pacote.
+
+**Dados:**
+```
+Host A ──→ [Porta Entrada 1] ──barramento→ [Memória Principal] ──barramento→ [Porta Saída 2] ──→ Host B
+                                                ↑
+                                            [CPU / Tabela]
+```
+
+**Limitações:**
+- O **barramento** é o gargalo — todos os pacotes devem cruzá-lo *duas vezes* (entrada → memória → saída).
+- A memória tem uma largura de banda máxima — se um roteador tem 8 portas de 10 Gbps cada (80 Gbps total), a memória deve suportar 160 Gbps (80 Gbps entrada + 80 Gbps saída).
+- Limite prático: ~1-2 Gbps de throughput total.
+
+**Vantagem:**
+- Muito simples de implementar e gerenciar.
+- Usada em roteadores antigos e baratos.
+
+<MarkdownTable
+  headers={["Métrica", "Valor"]}
+  rows={[
+    ["**Throughput máximo**", "1-2 Gbps (limitado pela memória)"],
+    ["**Latência**", "Microsegundos (moderada)"],
+    ["**Custo**", "Barato"],
+    ["**Escalabilidade**", "Ruim"],
+  ]}
+/>
+
+### 2. Comutação via Barramento (Bus Switching)
+
+Substituir o intermediário de memória por um **barramento compartilhado** entre todas as portas.
+
+**Como funciona:**
+1. Uma porta de entrada coloca um pacote no barramento com um **rótulo de destino**.
+2. Todas as portas de saída veem o pacote simultaneamente.
+3. A porta de saída **cuja identidade corresponde ao rótulo** aceita e armazena o pacote.
+
+**Dados:**
+```
+[Porta Entrada 1] ──┐
+                    ├──→ [Barramento Compartilhado] ──→ [Porta Saída 2 reconhece seu ID e aceita]
+[Porta Entrada 2] ──┘     (Todas as portas veem)        [Porta Saída 1 ignora]
+                                                        [Porta Saída 3 ignora]
+```
+
+**Limitações:**
+- O barramento ainda é um gargalo — apenas **um** pacote pode cruzá-lo por vez.
+- A latência varia conforme a contenção (quantos pacotes competem).
+- Limite prático: ~10-20 Gbps de throughput total.
+
+**Vantagem:**
+- Mais rápido que comutação via memória (sem overhead de CPU).
+- Ainda relativamente simples.
+
+<MarkdownTable
+  headers={["Métrica", "Valor"]}
+  rows={[
+    ["**Throughput máximo**", "10-20 Gbps (limitado pela contenção do barramento)"],
+    ["**Latência**", "Microsegundos (moderada, com variação)"],
+    ["**Custo**", "Moderado"],
+    ["**Escalabilidade**", "Limitada"],
+  ]}
+/>
+
+### 3. Comutação via Rede de Interconexão (Crossbar Switching)
+
+A arquitetura mais sofisticada: usar uma **rede completa de interconexão** (geralmente uma matriz cruzada) que permite **múltiplos pacotes em paralelo**.
+
+**Como funciona:**
+Uma rede de interconexão é uma **matriz N×N** de switches (cruzamentos). Cada porta de entrada está conectada a uma linha da matriz; cada porta de saída está conectada a uma coluna. Um **switch de cruzamento** em (i, j) conecta a entrada i à saída j quando necessário.
+
+**Dados:**
+```
+         Porta Saída 1    Porta Saída 2    Porta Saída 3
+                    ↑            ↑            ↑
+Porta Entrada 1 ───┼●──────────┼──────────┬──┤  (● = switch ativo)
+                    │            ├●──────┐ │
+Porta Entrada 2 ────┤            │       │ │
+                    │            │       │ │
+Porta Entrada 3 ────┤────●───────┤───────●─┘
+```
+
+**Vantagens:**
+- **Paralelismo completo**: múltiplos pacotes podem ser comuados em paralelo (ex: entrada 1→saída 2 enquanto entrada 3→saída 1).
+- Largura de banda **não compartilhada** — não há gargalo único.
+- Throughput teórico = soma de todas as taxas de entrada = **100% utilização**.
+
+**Limitações:**
+- **Bloqueio de head-of-line (HOL)**: se duas portas de entrada querem enviar para a *mesma* porta de saída, apenas uma pode passar, e a outra é bloqueada (precisa esperar na fila de entrada).
+- Arquitetura complexa — requer switches e controladores sofisticados.
+- Custo mais alto.
+
+<MarkdownTable
+  headers={["Métrica", "Valor"]}
+  rows={[
+    ["**Throughput máximo**", "Até 100% (teórico) — soma das capacidades das portas"],
+    ["**Latência**", "Nanosegundos (muito baixa)"],
+    ["**Custo**", "Alto (exige muitos switches e lógica)"],
+    ["**Escalabilidade**", "Boa até N=100 (N² switches)"],
+  ]}
+/>
+
+### Mitigando HOL Blocking em Crossbar
+
+O problema de HOL blocking (duas entradas querendo a mesma saída) pode ser reduzido com **buffering de entrada**:
+
+**Buffering de Entrada (Input Buffering):**
+- Manter uma pequena fila em cada porta de entrada para pacotes que não conseguem ser comuados imediatamente.
+- Usar **virtual output queues (VOQs)**: manter uma fila separada **para cada saída** em cada entrada.
+
+Com VOQs, o controlador do crossbar pode aplicar um **algoritmo de matching** (ex: encontrar uma correspondência bipartida máxima entre entradas bloqueadas e saídas disponíveis) para maximizar o throughput.
+
+<MarkdownTable
+  headers={["Architetura", "Buffering", "HOL Blocking", "Throughput"]}
+  rows={[
+    ["Memory", "Centralizado (memória principal)", "Não (CPU arbitra)", "Baixo"],
+    ["Bus", "Centralizado (buffer no barramento)", "Não (arbitragem simples)", "Moderado"],
+    ["Crossbar (sem VOQ)", "Nenhum ou entrada simples", "Sim — reduz throughput a ~58%", "Moderado"],
+    ["Crossbar (com VOQ)", "Separado por entrada+saída", "Mínimo — algoritmo de matching", "Alto (até ~100%)"],
+  ]}
+/>
+
+## Comparação das Três Arquiteturas
+
+<MarkdownTable
+  headers={["Característica", "Via Memória", "Via Barramento", "Via Crossbar"]}
+  rows={[
+    ["**Throughput máximo**", "1-2 Gbps", "10-20 Gbps", "100+ Gbps"],
+    ["**Latência de comutação**", "Moderada", "Baixa", "Muito baixa"],
+    ["**HOL Blocking**", "Nenhum (FIFO global)", "Nenhum", "Possível (mitigável)"],
+    ["**Escalabilidade**", "Ruim", "Limitada", "Boa"],
+    ["**Complexidade**", "Baixa", "Moderada", "Alta"],
+    ["**Custo**", "Baixo", "Moderado", "Alto"],
+    ["**Aplicação típica**", "Roteadores SOHO antigos", "Roteadores SMB/branch", "Enterprise, ISP backbone"],
+  ]}
+/>
+
+## Desempenho Geral de um Roteador
+
+O desempenho total de um roteador é determinado por três fatores principais:
+
+### 1. Throughput Agregado
+
+O **throughput agregado** é a taxa máxima em que um roteador pode processar pacotes, somando todas as portas.
+
+- **Exemplo 1**: Roteador com 4 portas de 10 Gbps cada, switching fabric via barramento.
+  - Capacidade teórica = 4 × 10 Gbps = 40 Gbps.
+  - Throughput real ≈ 20 Gbps (limitado pelo barramento).
+  - **Utilização** = 20/40 = **50%**.
+
+- **Exemplo 2**: Roteador com 48 portas de 1 Gbps cada, switching fabric via crossbar.
+  - Capacidade teórica = 48 × 1 Gbps = 48 Gbps.
+  - Throughput real ≈ 48 Gbps (nenhum gargalo).
+  - **Utilização** = 48/48 = **100%**.
+
+### 2. Latência de Encaminhamento
+
+A **latência** é o tempo entre a chegada de um pacote e sua saída. Deve ser baixo (idealmente < 1 ms) para não degradar aplicações sensíveis a atraso.
+
+<MarkdownTable
+  headers={["Componente", "Contribuição Típica"]}
+  rows={[
+    ["Propagação física (velocidade da luz)", "~3-5 ns/metro (negligenciável para roteadores)"],
+    ["Física → porta de entrada", "Microsegundos"],
+    ["Consulta de roteamento (TCAM)", "~100-300 ns"],
+    ["Comutação (via fabric)", "~nanosegundos a microsegundos (depende da arquitetura)"],
+    ["Fila de saída", "Variável (função do congestionamento)"],
+    ["Processamento do link", "Microsegundos"],
+    ["**Total** (sem congestionamento)", "**~1-10 microsegundos**"],
+  ]}
+/>
+
+### 3. Eficiência Energética
+
+Roteadores modernos, especialmente em data centers, consomem quantidades significativas de energia. A eficiência é medida em **bits por joule** — quantos bits é possível rotear por unidade de energia consumida.
+
+- Roteadores antigos (via memória): ~1 Gbit/joule.
+- Roteadores modernos (crossbar + ASIC): ~10-100 Gbit/joule.
+
+Otimizações comuns:
+- **ASIC customizado** em vez de CPU genérica.
+- **Low-power switching fabrics**.
+- **Desativação de portas não utilizadas**.
+
+## Simulação Interativa de Tráfego
+
+O laboratório abaixo permite explorar arquitetura, número de portas, taxa de chegada e distribuição de destino, com métricas em tempo real.
+
+## Resumo
+
+A arquitetura interna de um roteador balanceia **throughput, latência e custo**:
+
+| Aspecto | Solução |
+|---------|---------|
+| **Recepção de pacotes** | Portas de entrada com TCAM para roteamento rápido |
+| **Transmissão** | Portas de saída com filas inteligentes (RED, WRED) e escalonamento (QoS) |
+| **Conectividade interna** | Switching fabric (memória, barramento ou crossbar) |
+| **Escalabilidade** | Crossbar com VOQ e algoritmos de matching |
+| **Confiabilidade** | Redundância e monitoramento em tempo real |
+
+Roteadores de núcleo da Internet (backbone) usam **switching fabrics via crossbar** com dezenas de portas de alta velocidade, enquanto roteadores de acesso ou SOHO podem usar **comutação via barramento ou memória** para reduzir custos. A escolha da arquitetura reflete a missão do roteador e as restrições orçamentárias.
+

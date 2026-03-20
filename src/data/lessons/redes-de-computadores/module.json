@@ -73,6 +73,13 @@
         "description": "Conceitos de repasse (switching) e roteamento (routing), a diferença entre os planos de dados e de controle, e uma análise crítica do modelo de serviço de melhor esforço da Internet, comparando-o com outros modelos e arquiteturas que oferecem garantias de Qualidade de Serviço (QoS).",
         "video": null,
         "quizId": "quiz-9"
+      },
+      {
+        "id": "charpter-10",
+        "title": "Arquitetura de um Roteador",
+        "description": "Funções das portas de entrada e saída, e no coração do dispositivo: o elemento de comutação (switching fabric). Serão detalhados os diferentes tipos de comutação (via memória, barramento e rede de interconexão) e como eles impactam o desempenho do roteador.",
+        "video": null,
+        "quizId": "quiz-10"
       }
     ]
   }
