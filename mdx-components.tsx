@@ -85,6 +85,14 @@ import {
   CrossbarSwitchingSimulator,
 } from "./src/components/router-architecture-p5-examples";
 import {
+  LongestPrefixMatchVisualizer,
+  InputQueueContentionSimulator,
+  OutputQueueBottleneckSimulator,
+  DropTailVsRedComparator,
+  SchedulingDisciplinesComparator,
+  QueueCongestionTimelineSimulator,
+} from "./src/components/router-decision-queueing-p5-examples";
+import {
   BestEffortVsQoSGuarantees,
   DatagramVsVirtualCircuitComparison,
   CongestionAndPacketDropSimulator,
@@ -417,6 +425,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     MemorySwitchingSimulator,
     BusSwitchingSimulator,
     CrossbarSwitchingSimulator,
+    LongestPrefixMatchVisualizer,
+    InputQueueContentionSimulator,
+    OutputQueueBottleneckSimulator,
+    DropTailVsRedComparator,
+    SchedulingDisciplinesComparator,
+    QueueCongestionTimelineSimulator,
     BestEffortVsQoSGuarantees,
     DatagramVsVirtualCircuitComparison,
     CongestionAndPacketDropSimulator,

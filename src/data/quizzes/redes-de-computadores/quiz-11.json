@@ -1,0 +1,109 @@
+{
+  "id": "quiz-11",
+  "title": "Quiz — Tomada de Decisão e Enfileiramento",
+  "description": "Teste seus conhecimentos sobre encaminhamento baseado em prefixo (LPM), políticas de enfileiramento em portas de entrada e saída, e disciplinas de escalonamento (FIFO, Prioridade, RR, WFQ).",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual é o objetivo da regra de Longest Prefix Match (LPM) em uma tabela de roteamento?",
+      "alternatives": [
+        { "id": "a1", "text": "Encontrar a rota com o menor número de saltos (hops) até o destino", "isCorrect": false, "explanation": "LPM não considera número de saltos — apenas comprimento de prefixo. O cálculo de 'menor número de saltos' é feito pelo algoritmo de roteamento (ex: OSPF), não pelo LPM." },
+        { "id": "a2", "text": "Escolher a entrada da tabela com o maior número de bits coincidentes, permitindo rotas mais específicas sobrescreverem rotas genéricas", "isCorrect": true, "explanation": "Correto! LPM garante que a rota mais específica é usada. Exemplo: 10.1.1.0/24 é mais específico que 10.1.0.0/16, então um pacote para 10.1.1.5 usa a primeira rota." },
+        { "id": "a3", "text": "Balancear tráfego entre múltiplas rotas para o mesmo destino", "isCorrect": false, "explanation": "Balanceamento de carga é feito por algoritmos como ECMP (Equal Cost Multi-Path), não por LPM." },
+        { "id": "a4", "text": "Determinar a qualidade de serviço (QoS) baseada no padrão do IP de destino", "isCorrect": false, "explanation": "QoS é determinada por marcações no pacote (DSCP) e políticas de escalonamento, não por LPM." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Um roteador tem as seguintes rotas na tabela. Para um pacote destinado a 10.1.1.50, qual interface é escolhida?",
+      "alternatives": [
+        { "id": "a1", "text": "Interface 0 (10.0.0.0/8)", "isCorrect": false, "explanation": "Embora 10.1.1.50 corresponda a 10.0.0.0/8, há uma rota mais específica: 10.1.1.0/24 com 24 bits de correspondência vs. 8 bits." },
+        { "id": "a2", "text": "Interface 1 (10.1.0.0/16)", "isCorrect": false, "explanation": "Embora 10.1.1.50 corresponda a 10.1.0.0/16 (16 bits), há uma rota ainda mais específica: 10.1.1.0/24 com 24 bits." },
+        { "id": "a3", "text": "Interface 2 (10.1.1.0/24) — a rota mais específica", "isCorrect": true, "explanation": "Correto! A rota 10.1.1.0/24 tem 24 bits coincidindo, enquanto 10.1.0.0/16 tem apenas 16 e 10.0.0.0/8 tem apenas 8. LPM escolhe 24." },
+        { "id": "a4", "text": "Interface 3 (Default) — sempre usar rota padrão", "isCorrect": false, "explanation": "A rota padrão é usada apenas se nenhuma rota mais específica corresponde." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Por que os roteadores usam TCAM (Ternary Content Addressable Memory) em vez de RAM comum para consultar tabelas de roteamento?",
+      "alternatives": [
+        { "id": "a1", "text": "TCAM é mais barata que RAM", "isCorrect": false, "explanation": "Na verdade, TCAM é muito mais cara. O motivo da escolha é desempenho, não custo." },
+        { "id": "a2", "text": "TCAM permite busca por prefixo em tempo O(1) em um ciclo de clock, enquanto RAM requer buscas sequenciais O(n)", "isCorrect": true, "explanation": "Correto! Com TCAM, a busca por LPM completa em ~100-300 ns, permitindo processar milhões de pacotes por segundo. RAM sequencial levaria microsegundos — inviável para roteamento de alta velocidade." },
+        { "id": "a3", "text": "TCAM armazena mais entradas que RAM", "isCorrect": false, "explanation": "TCAM armazena menos entradas, mas busca muito mais rápido." },
+        { "id": "a4", "text": "TCAM é necessária apenas para roteadores IPv6", "isCorrect": false, "explanation": "TCAM é usado para IPv4, IPv6 e qualquer roteamento baseado em prefixo." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Uma fila de entrada em um roteador se forma principalmente quando:",
+      "alternatives": [
+        { "id": "a1", "text": "Múltiplos pacotes chegam simultaneamente de diferentes portas de entrada e todas querem sair pela mesma porta de saída", "isCorrect": true, "explanation": "Correto! Se 3 portas de entrada recebem pacotes simultaneamente, todos com destino 192.168.1.0/24 (saída 1), apenas 1 pode ser comuado por vez — os outros 2 aguardam na fila de entrada." },
+        { "id": "a2", "text": "A taxa de chegada em uma entrada excede a taxa de comutação", "isCorrect": false, "explanation": "Isso é verdadeiro, mas é uma situação rara. O cenário mais comum é múltiplas entradas para a mesma saída." },
+        { "id": "a3", "text": "O processador de roteamento está ocupado calculando novas rotas", "isCorrect": false, "explanation": "O roteamento é computado periodicamente, não a cada pacote. A consulta de tabela é feita rapidamente em TCAM." },
+        { "id": "a4", "text": "A fila de saída fica cheia e retorna pacotes à entrada", "isCorrect": false, "explanation": "Embora isso possa contribuir, filas de entrada se formam principalmente por contenção de saída, não por feedback." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Qual é a diferença entre Drop-Tail e RED (Random Early Detection) em um buffer de saída?",
+      "alternatives": [
+        { "id": "a1", "text": "Drop-Tail descarta sempre; RED nunca descarta", "isCorrect": false, "explanation": "Ambos descartam — a diferença é *quando*." },
+        { "id": "a2", "text": "Drop-Tail descarta quando fila está cheia; RED descarta probabilisticamente quando fila ultrapassa um limiar (antes de encher)", "isCorrect": true, "explanation": "Correto! Drop-Tail espera a fila ficar completamente cheia, causando perda abrupta. RED começa a descartar aleatoriamente quando a fila atinge 50% (exemplo), sinalizando gradualmente aos emissores TCP a reduzir cwnd." },
+        { "id": "a3", "text": "RED é mais agressivo — descarta mais pacotes que Drop-Tail", "isCorrect": false, "explanation": "RED é menos agressivo — descarta gradualmente em vez de abruptamente." },
+        { "id": "a4", "text": "Drop-Tail é para UDP; RED é para TCP", "isCorrect": false, "explanation": "RED é especialmente útil para TCP (desincroniza fluxos), mas qualquer política de descarte funciona com ambos." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Um roteador tem 4 portas de entrada de 10 Gbps cada e 1 porta de saída de 10 Gbps. Qual é a capacidade máxima de chegada para a porta de saída e por quanto tempo ela pode processar sem transbordar?",
+      "alternatives": [
+        { "id": "a1", "text": "Máximo 10 Gbps, pode processar indefinidamente", "isCorrect": false, "explanation": "Correto que máximo é 10 Gbps (taxa de saída), mas não indefinidamente — se chegam 40 Gbps, a fila cresce." },
+        { "id": "a2", "text": "Máximo 40 Gbps (4 × 10), pode processar enquanto fila < tamanho buffer", "isCorrect": true, "explanation": "Correto! Teoricamente, todas as 4 entradas podem enviar para a mesma saída = 40 Gbps entrada. Saída é 10 Gbps — deficit de 30 Gbps. Se buffer = 100 MB, fila enche em ~20 ms de tráfego constante." },
+        { "id": "a3", "text": "Máximo 20 Gbps (metade das entradas)", "isCorrect": false, "explanation": "Não há limite teórico de quantas entradas podem enviar para uma saída — todas podem simultaneamente." },
+        { "id": "a4", "text": "Máximo 10 Gbps sempre, porque saída é 10 Gbps", "isCorrect": false, "explanation": "A taxa de saída é 10 Gbps, mas a fila pode acumular dados a 40 Gbps por um tempo." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual é o principal problema do escalonamento por Prioridade em relação a filas de diferentes prioridades?",
+      "alternatives": [
+        { "id": "a1", "text": "Filas de alta prioridade podem sofrer latência de filas baixas", "isCorrect": false, "explanation": "Exatamente o oposto — filas de alta prioridade são servidas primeiro." },
+        { "id": "a2", "text": "Filas de baixa prioridade podem sofrer starvation — nunca serem servidas se filas altas estão sempre ativas", "isCorrect": true, "explanation": "Correto! Enquanto houver pacotes na fila de VoIP (alta prioridade), a fila de Bulk (baixa prioridade) nunca será servida. É por isso que Weighted Fair Queuing oferece garantias de alocação." },
+        { "id": "a3", "text": "É impossível implementar — requer CPU muito rápida", "isCorrect": false, "explanation": "É fácil de implementar — apenas servir a fila de mais alta prioridade não-vazia." },
+        { "id": "a4", "text": "Causa latência excessiva para todos os pacotes", "isCorrect": false, "explanation": "Na verdade, reduz latência para pacotes de alta prioridade." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Qual é a vantagem do Round Robin em relação ao escalonamento por Prioridade?",
+      "alternatives": [
+        { "id": "a1", "text": "RR oferece melhor latência para pacotes VoIP", "isCorrect": false, "explanation": "Não — Prioridade oferece melhor latência para VoIP." },
+        { "id": "a2", "text": "RR garante que todas as filas eventualmente recebem serviço, evitando starvation", "isCorrect": true, "explanation": "Correto! RR alterna entre filas: 1 pacote da fila 1, 1 da fila 2, 1 da fila 3, etc. Nenhuma fila pode ser completamente ignorada." },
+        { "id": "a3", "text": "RR é mais rápido porque não precisa comparar prioridades", "isCorrect": false, "explanation": "Ambos são rápidos — o overhead de prioridade é mínimo (1 comparação)." },
+        { "id": "a4", "text": "RR usa menos memória que Prioridade", "isCorrect": false, "explanation": "Ambos usam quantidade similar de memória (múltiplas filas)." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Em Weighted Fair Queuing (WFQ), qual é o significado de atribuir peso 0.5 a uma fila?",
+      "alternatives": [
+        { "id": "a1", "text": "A fila será servida em 50% dos ciclos, garantindo acesso a 50% da largura de banda", "isCorrect": false, "explanation": "Não exatamente — WFQ não divide igualmente por ciclo, mas por volume de dados. Um peso 0.5 com pacotes pequenos pode usar menos que 50% da banda." },
+        { "id": "a2", "text": "A fila receberá 50% da capacidade do link — garantia de largura de banda mínima", "isCorrect": true, "explanation": "Correto! WFQ oferece garantias proporcionais: peso 0.5 = 50% de banda garantida, 0.3 = 30% garantido, etc. Uma fila com peso 0.5 nunca será starved e receberá pelo menos metade da capacidade." },
+        { "id": "a3", "text": "A fila será ignorada 50% do tempo", "isCorrect": false, "explanation": "Exatamente o oposto — será *servida* proporcionalmente a seu peso." },
+        { "id": "a4", "text": "Os pacotes dessa fila serão descartados com probabilidade 50%", "isCorrect": false, "explanation": "O peso de WFQ não determina descarte — determina alocação de banda." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Qual combinação de políticas é mais apropriada para um roteador de ISP que precisa servir múltiplos clientes com diferentes SLAs (Service Level Agreements)?",
+      "alternatives": [
+        { "id": "a1", "text": "FIFO para entrada, FIFO para saída", "isCorrect": false, "explanation": "FIFO é muito simples — não oferece diferenciação de QoS entre clientes." },
+        { "id": "a2", "text": "RED para entrada, Prioridade para saída", "isCorrect": false, "explanation": "Prioridade pode causar starvation de clientes de baixa prioridade — violando seu SLA." },
+        { "id": "a3", "text": "RED para entrada (desincronizar perdas), WFQ para saída (garantir alocação proporcional)", "isCorrect": true, "explanation": "Correto! RED na entrada evita sincronização de perdas. WFQ na saída garante que cada cliente recebe sua fração contratada de banda, respeitando os SLAs. Clientes premium recebem pesos maiores." },
+        { "id": "a4", "text": "Drop-Head para entrada, Round Robin para saída", "isCorrect": false, "explanation": "Drop-Head é raro e não oferece garantias. RR trata todos igualmente — não diferencia clientes premium de básicos." }
+      ]
+    }
+  ]
+}
+

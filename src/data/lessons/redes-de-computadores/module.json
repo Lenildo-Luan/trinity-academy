@@ -80,6 +80,20 @@
         "description": "Funções das portas de entrada e saída, e no coração do dispositivo: o elemento de comutação (switching fabric). Serão detalhados os diferentes tipos de comutação (via memória, barramento e rede de interconexão) e como eles impactam o desempenho do roteador.",
         "video": null,
         "quizId": "quiz-10"
+      },
+      {
+        "id": "charpter-11",
+        "title": "Tomada de Decisão e Enfileiramento",
+        "description": "Encaminhamento baseado em destino e o conceito de correspondência de prefixo mais longo (longest prefix match). Discussão sobre os fenômenos de enfileiramento nas portas de entrada e saída, as políticas de gerenciamento de buffer (como descarte de cauda) e as disciplinas de escalonamento de pacotes (FCFS, Prioridade, Round Robin, WFQ).",
+        "video": null,
+        "quizId": "quiz-11"
+      },
+      {
+        "id": "charpter-12",
+        "title": "Endereçamento IPv4 e CIDR",
+        "description": "O endereço IP, o formato do datagrama IPv4, a estrutura de endereços (notação decimal, sub-redes) e a evolução para o CIDR (Classless InterDomain Routing),",
+        "video": null,
+        "quizId": "quiz-12"
       }
     ]
   }

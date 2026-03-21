@@ -1,0 +1,345 @@
+# Tomada de Decisão e Enfileiramento
+
+Até aqui, estudamos a **arquitetura interna de um roteador** — suas portas, o elemento de comutação e como a informação flui entre eles. Mas a pergunta essencial permanece: quando um pacote chega em uma porta de entrada, como o roteador **decide para onde enviá-lo**? E quando múltiplos pacotes chegam simultaneamente para a mesma porta de saída, qual é **transmitido primeiro**?
+
+Este capítulo responde essas questões explorando a **tomada de decisão no roteamento** (encaminhamento baseado em prefixo) e a **disciplina de enfileiramento** (como gerenciar pacotes que competem pelos mesmos recursos).
+
+## Encaminhamento Baseado em Destino
+
+O roteamento na Internet é baseado no **endereço IP de destino** do pacote. Cada roteador mantém uma **tabela de roteamento** que mapeia intervalos de endereços IPs (prefixos) para portas de saída.
+
+### Correspondência de Prefixo Mais Longo (Longest Prefix Match)
+
+Imagine um roteador com a seguinte tabela de roteamento:
+
+<MarkdownTable
+  headers={["Prefixo de Destino", "Interface de Saída"]}
+  rows={[
+    ["10.0.0.0/8", "0"],
+    ["10.1.0.0/16", "1"],
+    ["10.1.1.0/24", "2"],
+    ["10.1.2.0/24", "1"],
+    ["Default (0.0.0.0/0)", "3"],
+  ]}
+/>
+
+Agora um pacote chega com IP de destino **10.1.1.5**. Qual interface deveria usar?
+
+- Corresponde a **10.0.0.0/8**? ✓ (caminho /8 = primeiros 8 bits)
+- Corresponde a **10.1.0.0/16**? ✓ (caminho /16 = primeiros 16 bits)
+- Corresponde a **10.1.1.0/24**? ✓ (caminho /24 = primeiros 24 bits)
+- Corresponde a **10.1.2.0/24**? ✗
+
+O problema: **múltiplas corresponências**. Qual usar?
+
+**Solução:** a regra de **correspondência de prefixo mais longo (Longest Prefix Match — LPM)**. Escolha a entrada na tabela com o **maior número de bits coincidentes** — ou seja, o prefixo mais específico.
+
+Para IP **10.1.1.5**:
+- 10.0.0.0/8: match nos primeiros 8 bits
+- 10.1.0.0/16: match nos primeiros 16 bits
+- **10.1.1.0/24: match nos primeiros 24 bits** ← **VENCEDOR**
+
+Resultado: enviar para a **interface 2**.
+
+### Visualizacao: decisao por prefixo mais longo (LPM)
+
+A simulacao abaixo alterna destinos e mostra quais prefixos batem, destacando automaticamente a rota vencedora (a mais especifica).
+
+<LongestPrefixMatchVisualizer />
+
+<MarkdownTable
+  headers={["Propriedade", "Descrição"]}
+  rows={[
+    ["**Definição**", "Escolher a entrada da tabela cujo prefixo coincide com os bits mais significativos do endereço de destino"],
+    ["**Vantagem**", "Permite hierarquia de rotas — prefixos mais específicos podem sobrescrever rotas genéricas"],
+    ["**Complexidade**", "Busca por matching exato é O(1), mas busca por prefixo é O(k) onde k = número de bits. Solução: usar TCAM"],
+    ["**Exemplo prático**", "ISP X roteia 200.1.0.0/16 para um serviço; ISP Y roteia 200.1.1.0/24 (mais específico). Um pacote para 200.1.1.5 vai para Y."],
+  ]}
+/>
+
+### Algoritmo de Busca em TCAM
+
+A consulta da tabela de roteamento é a operação mais crítica — deve completar em **nanosegundos** para não atrasar pacotes. É por isso que roteadores usam **TCAM (Ternary Content Addressable Memory)**.
+
+<MarkdownTable
+  headers={["Passo", "Descrição"]}
+  rows={[
+    ["1", "Pacote chega com IP de destino (ex: 10.1.1.5)"],
+    ["2", "IP é enviado para a TCAM para busca associativa"],
+    ["3", "TCAM compara simultaneamente contra **todas** as entradas da tabela em um ciclo de clock"],
+    ["4", "TCAM retorna a entrada com **maior comprimento de prefixo** que coincide"],
+    ["5", "Roteador lê a interface de saída associada e encaminha o pacote"],
+  ]}
+/>
+
+**Comparação: busca sequencial vs. TCAM**
+
+<MarkdownTable
+  headers={["Método", "Tempo", "Escalabilidade"]}
+  rows={[
+    ["Busca sequencial (RAM)", "O(n) — até 1 microsegundo para 1000 entradas", "❌ Inviável para rotas globais (>500k entradas)"],
+    ["Árvore binária (Trie)", "O(k) onde k=32 bits para IPv4 — ~32 ciclos", "⚠️ Moderado (complexo de implementar)"],
+    ["**TCAM**", "O(1) — **100-300 ns em um ciclo**", "✓ Padrão ouro para roteadores"],
+  ]}
+/>
+
+### Estrutura da Tabela de Roteamento
+
+Um roteador típico pode ter centenas de milhares de rotas. A tabela é organizada hierarquicamente para reduzir tamanho e melhorar o LPM:
+
+<MarkdownTable
+  headers={["Nível", "Prefixo", "Rotas", "Exemplo"]}
+  rows={[
+    ["Nível 1 (Maior)", "/8", "256 possíveis", "10.0.0.0/8 → Internet americana"],
+    ["Nível 2", "/16", "~65k possíveis", "10.1.0.0/16 → Rede de empresa X"],
+    ["Nível 3", "/24", "~16M possíveis", "10.1.1.0/24 → Departamento de TI"],
+    ["Nível 4 (Menor)", "/32", "~4B possíveis (todas)", "10.1.1.5/32 → Host específico"],
+  ]}
+/>
+
+## Enfileiramento nas Portas de Entrada
+
+Um roteador recebe pacotes continuamente de links de entrada. Até que cada pacote seja processado e comuado para uma porta de saída, ele aguarda em **filas de entrada**.
+
+### Cenários de Formação de Filas de Entrada
+
+Uma fila de entrada se forma quando:
+
+1. **Múltiplos pacotes chegam simultaneamente** de diferentes portas de entrada e todas querem sair pela **mesma porta de saída**.
+   - Exemplo: 3 pacotes chegam em entradas diferentes, todos destinados a 10.2.0.0/16 (saída 1). Apenas um pode ser comuado por vez — os outros esperam.
+
+2. **A taxa de chegada em uma entrada excede a taxa de comutação** (raro, mas possível em comutação via barramento).
+
+3. **Bloqueio de comutação** — na comutação via crossbar, o HOL blocking força pacotes a esperarem nas filas de entrada.
+
+### Gerenciamento de Buffer de Entrada
+
+Cada porta de entrada tem um **buffer** (memória) limitado para armazenar pacotes enquanto esperam comutação. Se o buffer enche:
+
+**Opção 1: Drop-Tail (Descarte de Cauda)**
+- Quando o buffer está cheio, **descartar o novo pacote** que chegar.
+- Simples de implementar, mas abrupto — causa perdas sincronizadas em TCP.
+
+**Opção 2: Drop-Head**
+- Descartar o pacote **mais antigo** na fila quando buffer está cheio.
+- Reduz latência para pacotes novos, mas antigos já esperaram em vão.
+
+**Opção 3: RED (Random Early Detection)**
+- Antes da fila encher, começar a **descartar aleatoriamente** pacotes com probabilidade crescente.
+- Evita a queda abrupta e sincroniza melhor com controle de congestionamento TCP.
+
+<MarkdownTable
+  headers={["Política", "Padrão de Perda", "Comportamento TCP", "Latência Média"]}
+  rows={[
+    ["Drop-Tail", "Abrupta quando full", "Sincronização (muitos drops simultâneos)", "❌ Alta"],
+    ["Drop-Head", "Gradual (antigos primeiro)", "⚠️ Moderado", "⚠️ Moderada"],
+    ["RED", "Aleatória gradual", "✓ Desincronização (TCP reduz cwnd progressivamente)", "✓ Mais baixa"],
+  ]}
+/>
+
+### Visualizacao: contencao nas filas de entrada
+
+Observe varias entradas gerando pacotes para a mesma saida. Como apenas um fluxo atravessa o fabric por vez, as filas de entrada crescem sob contencao.
+
+<InputQueueContentionSimulator />
+
+## Enfileiramento nas Portas de Saída
+
+O enfileiramento de **saída** é muito mais crítico que o de entrada — é onde o verdadeiro gargalo ocorre.
+
+### Por Que Filas de Saída?
+
+Considere um roteador com 4 portas de entrada (10 Gbps cada) e 1 porta de saída (10 Gbps):
+
+- **Taxa agregada de chegada**: 4 × 10 Gbps = 40 Gbps
+- **Taxa de saída**: 10 Gbps
+- **Deficit**: 30 Gbps — o roteador recebe 3× mais dados que consegue transmitir!
+
+Resultado: pacotes destinados àquela saída aguardam em uma **fila de saída**. Se a taxa agregada permanecer alta, a fila cresce indefinidamente, levando a:
+- Aumento de latência (pacotes esperando mais tempo)
+- Eventual descarte (buffer de saída fica cheio)
+
+<MarkdownTable
+  headers={["Cenário", "Tempo que Fila Demora para Encher"]}
+  rows={[
+    ["Entrada constante de 40 Gbps, saída 10 Gbps, buffer = 100 MB", "~20 ms"],
+    ["Entrada em rajadas (bursty), saída 10 Gbps", "Depende do padrão de rajada"],
+  ]}
+/>
+
+### Visualizacao: gargalo de saida (4 entradas para 1 saida)
+
+Nesta simulacao, a chegada agregada e maior que a taxa de transmissao de saida, entao a fila cresce continuamente e surgem descartes.
+
+<OutputQueueBottleneckSimulator />
+
+### Políticas de Descarte
+
+Similar às entradas, diferentes políticas gerenciam filas de saída:
+
+<MarkdownTable
+  headers={["Política", "Descrição", "Quando Usar"]}
+  rows={[
+    ["**FIFO Drop-Tail**", "Descartar quando fila > threshold", "Aplicações tolerantes a perda (UDP simples)"],
+    ["**Prioridade**", "Descartar pacotes de baixa prioridade primeiro", "VoIP, videoconferência (priorizar pacotes de tempo-real)"],
+    ["**RED / WRED**", "Descartar probabilisticamente por classe", "TCP (desincroniza fluxos), QoS diferenciado"],
+  ]}
+/>
+
+### Visualizacao: Drop-Tail vs RED
+
+Compare lado a lado o comportamento do descarte abrupto (Drop-Tail) com o descarte gradual (RED) e como isso afeta a ocupacao das filas ao longo do tempo.
+
+<DropTailVsRedComparator />
+
+## Disciplinas de Escalonamento (Scheduling)
+
+Quando múltiplos pacotes aguardam em uma fila de saída, qual é **transmitido primeiro**? A **disciplina de escalonamento** (scheduling discipline) responde isso.
+
+### 1. FIFO (First-In, First-Out)
+
+O padrão mais simples: transmitir na ordem de chegada.
+
+<MarkdownTable
+  headers={["Propriedade", "Valor"]}
+  rows={[
+    ["**Ordem de transmissão**", "1º chegou, 1º sai"],
+    ["**Priorização**", "Nenhuma — todos os pacotes são iguais"],
+    ["**Latência média**", "Alta (pacotes de alta prioridade esperam pacotes lentos)"],
+    ["**Implementação**", "Muito simples — push ao final, pop do início"],
+    ["**Exemplo**", "Um caixa de banco onde não há fila prioritária"],
+  ]}
+/>
+
+**Problema:** um único pacote grande (ou fluxo lento) pode bloquear pacotes de alta prioridade.
+
+### 2. Escalonamento por Prioridade (Priority Scheduling)
+
+Manter **múltiplas filas**, cada uma com uma prioridade. Sempre servir a fila de mais alta prioridade primeiro.
+
+<MarkdownTable
+  headers={["Fila", "Tipo de Tráfego", "Exemplo"]}
+  rows={[
+    ["**Fila 1** (Mais alta)", "Voz (VoIP)", "Pacotes do Skype"],
+    ["**Fila 2**", "Vídeo", "Pacotes do YouTube"],
+    ["**Fila 3**", "Dados interativos", "SSH, chat"],
+    ["**Fila 4** (Mais baixa)", "Bulk transfer", "Torrents, backups"],
+  ]}
+/>
+
+**Algoritmo:**
+```
+while (há pacotes):
+    if (fila 1 não-vazia): enviar pacote de fila 1
+    else if (fila 2 não-vazia): enviar pacote de fila 2
+    else if (fila 3 não-vazia): enviar pacote de fila 3
+    else if (fila 4 não-vazia): enviar pacote de fila 4
+```
+
+**Vantagem:** pacotes VoIP não sofrem latência de torrents.
+
+**Problema:** *starvation* — filas de baixa prioridade podem nunca ser servidas se filas altas estão sempre ativas.
+
+### 3. Round Robin (RR)
+
+Alternar entre as filas: serve 1 pacote da fila 1, depois 1 da fila 2, depois 1 da fila 3, etc.
+
+**Vantagem:** garante que todas as filas eventualmente recebem serviço — evita starvation.
+
+**Problema:** trata todas as filas como iguais — uma fila com pacotes pequenos pode dominar o link.
+
+### 4. Weighted Fair Queuing (WFQ)
+
+Versão melhorada do Round Robin: servir filas com **pesos** (proporções) iguais a sua prioridade.
+
+**Exemplo com 3 filas:**
+
+<MarkdownTable
+  headers={["Fila", "Peso", "Significado", "Alocação"]}
+  rows={[
+    ["VoIP", "0.5", "50% da largura de banda", "Garatido 50% de capacidade"],
+    ["Vídeo", "0.3", "30% da largura de banda", "Garantido 30% de capacidade"],
+    ["Bulk", "0.2", "20% da largura de banda", "Garantido 20% de capacidade"],
+  ]}
+/>
+
+**Algoritmo (simplificado):**
+```
+Manter um contador de "desvio" para cada fila.
+Para cada slot de transmissão:
+    - Incrementar desvio de cada fila pelo seu peso
+    - Servir a fila com maior desvio
+    - Decrementar seu desvio pelo tamanho do pacote enviado
+```
+
+**Vantagem:** oferece **garantias de alocação** — nenhuma fila pode ser completamente starved.
+
+**Desvantagem:** complexidade maior — requer lógica sofisticada.
+
+### Comparação de Disciplinas
+
+<MarkdownTable
+  headers={["Disciplina", "Priorização", "Equidade", "Complexidade", "Uso Prático"]}
+  rows={[
+    ["**FIFO**", "❌ Nenhuma", "❌ Determinístico (não-equitativo)", "Muito Baixa", "Roteadores SOHO simples"],
+    ["**Prioridade**", "✓ Alta", "❌ Possível starvation", "Baixa", "Redes militares, emergência"],
+    ["**Round Robin**", "⚠️ Igual", "✓ Equitativa", "Moderada", "Timesharing de CPU"],
+    ["**WFQ**", "✓ Ponderada", "✓ Equitativa ponderada", "Alta", "**Roteadores QoS modernos**"],
+  ]}
+/>
+
+### Visualizacao: comparador de disciplinas de escalonamento
+
+Veja em paralelo como FIFO, Prioridade, Round Robin e WFQ escolhem o proximo pacote e como cada politica impacta equilibrio e latencia entre classes.
+
+<SchedulingDisciplinesComparator />
+
+## Interação entre Entrada e Saída
+
+Na prática, o enfileiramento de entrada e saída interagem:
+
+1. Um pacote chega em uma **porta de entrada**.
+2. Consulta da tabela de roteamento → determina a **porta de saída**.
+3. Se a **fila de saída está cheia**, o roteador pode:
+   - **Descartar o pacote** (drop-tail na saída)
+   - **Descartar um pacote anterior** (drop-head)
+   - **Tentar armazenar na entrada** (push-back)
+
+4. Se o pacote é armazenado, aguarda na **fila de entrada** até que a saída tenha espaço.
+5. Uma vez comuado, o pacote aguarda na **fila de saída** até ser transmitido.
+
+### Exemplo Prático: Congestionamento
+
+Um roteador recebe um **surto de tráfego** para a mesma saída:
+
+<MarkdownTable
+  headers={["Tempo (ms)", "Entrada", "Fila de Saída", "Estado"]}
+  rows={[
+    ["0-10", "100 pacotes/ms chegam", "Vazio → 100 pacotes", "Fila cresce"],
+    ["10-20", "100 pacotes/ms chegam", "200 pacotes (descartando RED)", "RED ativa — pacotes descartados probabilisticamente"],
+    ["20-30", "50 pacotes/ms chegam", "150 pacotes", "Fila ainda ativa"],
+    ["30-40", "10 pacotes/ms chegam", "100 pacotes", "Fila se esvazia gradualmente"],
+    ["40+", "5 pacotes/ms chegam", "<50 pacotes", "Transiente terminado"],
+  ]}
+/>
+
+### Visualizacao: linha do tempo do congestionamento
+
+A simulacao reproduz as fases da tabela (crescimento, RED ativo, reducao e estabilizacao), com metricas de fila e descarte em tempo real.
+
+<QueueCongestionTimelineSimulator />
+
+## Resumo: Tomada de Decisão e Enfileiramento
+
+<MarkdownTable
+  headers={["Aspecto", "Mecanismo", "Objetivo"]}
+  rows={[
+    ["**Encaminhamento**", "LPM em TCAM", "Decidir porta de saída em nanosegundos"],
+    ["**Entrada**", "RED/Drop-tail", "Gerenciar buffer limitado, evitar sincronização"],
+    ["**Saída — Descarte**", "RED/WRED", "Descartar inteligentemente sob congestionamento"],
+    ["**Saída — Escalonamento**", "FIFO/Prioridade/WFQ", "Servir pacotes segundo política de QoS"],
+  ]}
+/>
+
+A combinação desses mecanismos permite que roteadores modernos ofereçam **confiabilidade, eficiência e qualidade de serviço** mesmo sob cargas extremas.
+
