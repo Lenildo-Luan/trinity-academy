@@ -94,6 +94,13 @@
         "description": "O endereço IP, o formato do datagrama IPv4, a estrutura de endereços (notação decimal, sub-redes) e a evolução para o CIDR (Classless InterDomain Routing),",
         "video": null,
         "quizId": "quiz-12"
+      },
+      {
+        "id": "charpter-13",
+        "title": "Configuração Dinâmica de Hosts (DHCP) e Alocação de Endereços",
+        "description": "Funcionamento do DHCP (descoberta, oferta, requisição, acknowledgment) e as informações que ele pode fornecer, indo além do IP, como as redes obtêm seus blocos de endereços dos ISPs e o papel da ICANN na hierarquia de endereçamento global",
+        "video": null,
+        "quizId": "quiz-13"
       }
     ]
   }

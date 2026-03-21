@@ -1,0 +1,274 @@
+# Configuração Dinâmica de Hosts (DHCP) e Alocação de Endereços
+
+Até aqui, estudamos como os endereços IP são estruturados (IPv4, CIDR, sub-redes) e como roteadores usam esses endereços para tomar decisões de encaminhamento. Mas há uma pergunta fundamental que ainda não respondemos: **como um novo host em uma rede obtém um endereço IP?** E, em escala global, **como as redes obtêm blocos de endereços dos ISPs?** E **quem controla a hierarquia de endereçamento mundial?**
+
+Este capítulo responde essas questões explorando:
+
+1. **DHCP (Dynamic Host Configuration Protocol)** — como hosts obtêm configurações de rede automaticamente
+2. **Hierarquia de Alocação de Endereços** — como ISPs obtêm blocos de endereços
+3. **ICANN e RIRs** — as organizações que governam o espaço de endereços global
+
+## DHCP (Dynamic Host Configuration Protocol)
+
+### Por que DHCP?
+
+Sem DHCP, cada host precisaria de **configuração manual** de seu endereço IP. Imagine configurar manualmente 1.000 hosts em uma corporação — seria impraticável.
+
+O **DHCP** automatiza essa configuração, permitindo que hosts obtenham:
+- **Endereço IP** (com máscara de rede)
+- **Gateway padrão** (roteador)
+- **Servidores DNS**
+- **Tempo de servidor** (NTP)
+- E outras configurações
+
+### Arquitetura do DHCP
+
+Um **servidor DHCP** mantém um **pool de endereços** disponíveis para alocação. Quando um novo host se conecta à rede, ele inicia uma comunicação com o servidor DHCP.
+
+### Visualizacao Interativa: Pool de Enderecos DHCP
+
+Observe como leases sao alocados, renovados e reciclados quando hosts entram e saem da rede.
+
+<DhcpPoolAllocatorSimulator />
+
+<MarkdownTable
+  headers={["Componente", "Descrição", "Exemplo"]}
+  rows={[
+    ["**Servidor DHCP**", "Gerencia pool de endereços e aluga IPs para hosts", "Router doméstico ou servidor corporativo"],
+    ["**Cliente DHCP**", "Host que solicita configuração de rede", "Seu laptop, smartphone, impressora"],
+    ["**Pool de Endereços**", "Range de IPs disponíveis para alocação", "192.168.1.100 até 192.168.1.254"],
+    ["**Tempo de Lease**", "Duração pela qual um IP é emprestado", "Padrão: 2 horas a 7 dias"],
+    ["**Relay DHCP**", "Agente que forwarda mensagens DHCP em redes diferentes", "Necessário pois DHCP usa broadcast (não roteável)"],
+  ]}
+/>
+
+### Processo DHCP: DORA (Discover, Offer, Request, Acknowledge)
+
+O protocolo DHCP opera em 4 etapas:
+
+#### 1. **DISCOVER** — Cliente procura por servidor DHCP
+
+O novo cliente envia um **broadcast DHCP DISCOVER** (UDP port 67):
+
+<MarkdownTable
+  headers={["Campo", "Valor", "Explicação"]}
+  rows={[
+    ["Endereço IP origem", "0.0.0.0", "Cliente ainda não tem IP"],
+    ["Endereço IP destino", "255.255.255.255", "Broadcast na rede local"],
+    ["Endereço MAC origem", "Client MAC", "Identifica fisicamente o cliente"],
+    ["Mensagem", "\"Quem é o servidor DHCP?\"", "Solicitação genérica"],
+  ]}
+/>
+
+**Porquê 0.0.0.0?** O cliente não sabe seu IP ainda — usa 0.0.0.0 como placeholder. Porquê broadcast (255.255.255.255)? O cliente não sabe em qual segmento de rede procurar.
+
+#### 2. **OFFER** — Servidor oferece um IP
+
+O servidor DHCP responde com uma mensagem **DHCP OFFER**:
+
+<MarkdownTable
+  headers={["Campo", "Valor", "Explicação"]}
+  rows={[
+    ["IP oferecido", "192.168.1.100", "Próximo IP disponível do pool"],
+    ["Máscara de rede", "255.255.255.0", "Para comunicação na rede local"],
+    ["Gateway padrão", "192.168.1.1", "Roteador para sair da rede local"],
+    ["Servidor DNS", "8.8.8.8, 8.8.4.4", "Para resolução de nomes"],
+    ["Tempo de lease", "86.400 segundos (24h)", "Validade do empréstimo"],
+    ["Endereço MAC cliente", "Client MAC", "Confirma qual cliente está recebendo"],
+  ]}
+/>
+
+Importante: o servidor **reserva** esse IP — nenhum outro cliente receberá a mesma oferta por enquanto.
+
+#### 3. **REQUEST** — Cliente confirma a oferta
+
+O cliente envia **DHCP REQUEST**:
+
+<MarkdownTable
+  headers={["Campo", "Valor", "Explicação"]}
+  rows={[
+    ["IP solicitado", "192.168.1.100", "O IP oferecido (confirma aceitação)"],
+    ["Servidor DHCP", "192.168.1.1", "Qual servidor ofereceu"],
+    ["Mensagem", "\"Aceito este IP\"", "Confirmação"],
+  ]}
+/>
+
+**Porquê é necessário?** Em redes com múltiplos servidores DHCP, vários podem enviar OFFER. O REQUEST especifica qual oferta está sendo aceita.
+
+#### 4. **ACKNOWLEDGE** — Servidor confirma a alocação
+
+O servidor responde com **DHCP ACK**:
+
+<MarkdownTable
+  headers={["Campo", "Valor", "Explicação"]}
+  rows={[
+    ["Status", "\"Configuração aprovada\"", "IP está oficialmente alocado"],
+    ["IP", "192.168.1.100", "IP final confirmado"],
+    ["Máscara", "255.255.255.0", "Máscara de rede"],
+    ["Gateway", "192.168.1.1", "Roteador padrão"],
+    ["DNS", "8.8.8.8, 8.8.4.4", "Servidores DNS"],
+    ["Lease Duration", "86.400 segundos", "Tempo até renovação necessária"],
+  ]}
+/>
+
+**O cliente agora está configurado!** Pode se comunicar na rede local e acessar a Internet.
+
+### Visualizacao Interativa: Handshake DHCP (DORA)
+
+Veja o fluxo Discover -> Offer -> Request -> ACK e como o cliente sai de 0.0.0.0 para um IP valido.
+
+<DhcpDoraSimulator />
+
+### Renovação de Lease
+
+Um IP emprestado via DHCP **não é permanente**. O cliente deve renovar antes que o lease expire:
+
+<MarkdownTable
+  headers={["Evento", "Tempo", "Ação"]}
+  rows={[
+    ["Lease concedido", "0 horas", "IP ativo e configurado"],
+    ["Renovação T1 (50% do lease)", "12 horas (em lease de 24h)", "Cliente tenta renovar com mesmo servidor"],
+    ["Renovação T2 (87.5% do lease)", "21 horas", "Cliente pode pedir renovação a qualquer servidor DHCP"],
+    ["Lease expira", "24 horas", "Se não renovado, IP volta ao pool"],
+  ]}
+/>
+
+O servidor pode:
+- **Renovar** — alocar o mesmo IP por mais tempo (comum para hosts regulares)
+- **Recusar** — liberar o IP se o pool está cheio ou a rede foi reconfigurada
+
+### DHCP vs Configuração Estática
+
+<MarkdownTable
+  headers={["Aspecto", "DHCP Dinâmico", "Configuração Estática"]}
+  rows={[
+    ["**Automatização**", "Automático — cliente obtém IP ao conectar", "Manual — IT configura cada host"],
+    ["**Escalabilidade**", "Simples em grandes redes (100s de hosts)", "Impraticável (penoso em 10+ hosts)"],
+    ["**Flexibilidade**", "Fácil adicionar/remover hosts", "Requer ajustes manuais"],
+    ["**Previsibilidade**", "IPs mudam — pode dificultar DNS", "IPs fixos — fácil manter registros"],
+    ["**Segurança**", "Host rogue pode solicitar IP válido", "Menos risco de configuração incorreta"],
+    ["**Caso de Uso**", "Redes domésticas, corporativas, públicas", "Servidores, roteadores, impressoras"],
+  ]}
+/>
+
+**Prática Comum:** Servidores, roteadores e impressoras usam IPs **estáticos**; laptops, smartphones e convidados usam DHCP.
+
+## Hierarquia de Alocação de Endereços
+
+Até agora, vimos como **hosts obtêm IPs de um servidor DHCP local**. Mas como a rede local obtém seu **bloco de endereços** do ISP? E como o ISP obtém **o seu bloco**?
+
+A resposta é uma **hierarquia global de alocação**:
+
+### Visualizacao Interativa: Hierarquia Global de Alocacao
+
+Esta animacao mostra o fluxo descendente de blocos de endereco: ICANN -> RIRs -> ISPs -> DHCP local.
+
+<AddressAllocationHierarchyVisualizer />
+
+### Níveis da Hierarquia
+
+<MarkdownTable
+  headers={["Nível", "Organização", "O que Aloca", "Exemplo"]}
+  rows={[
+    ["**1. ICANN**", "Internet Corporation for Assigned Names and Numbers", "Espaço IPv4 global (4 bilhões de endereços)", "Responsável geral"],
+    ["**2. RIRs**", "Regional Internet Registries (5 organizações), ex: LACNIC, RIPENCC", "Grandes blocos (/8, /9) para continentes/regiões", "LACNIC aloca blocos para América Latina"],
+    ["**3. LIRs/ISPs**", "Local Internet Registries ou Internet Service Providers", "Blocos menores (/16, /20, /21) para clientes", "Seu ISP fornecedor"],
+    ["**4. Servidor DHCP**", "Empresa/universidade/lar", "Hosts individuais de um pool (/24, /25)", "Router doméstico aloca 192.168.1.x"],
+  ]}
+/>
+
+### Exemplo Prático: Rastreando um Endereço
+
+Suponha você obtém o IP **200.1.50.0/24** de seu ISP. Veja a **cadeia de alocação:**
+
+1. **ICANN** → aloca **200.0.0.0/8** a RIRs globalmente
+2. **LACNIC** (RIR da América Latina) → aloca **200.1.0.0/16** ao ISP Brasil Telecom
+3. **Brasil Telecom** (ISP) → aloca **200.1.50.0/24** à sua empresa
+4. **Sua empresa** → aloca **200.1.50.100** a um PC via DHCP
+
+Esse bloco **200.1.50.0/24** é seu — você pode subdividi-lo como quiser (DHCP, estático, etc.).
+
+### RIRs: Quem Governa o Quê?
+
+<MarkdownTable
+  headers={["RIR", "Região", "Endereço", "Responsabilidades"]}
+  rows={[
+    ["**ARIN**", "América do Norte", "arin.net", "USA, Canada, Caribe"],
+    ["**LACNIC**", "América Latina", "lacnic.net", "América Latina, Caribe (não-ARIN)"],
+    ["**RIPENCC**", "Europa", "ripe.net", "Europa, Ásia Central, Oriente Médio"],
+    ["**APNIC**", "Ásia-Pacífico", "apnic.net", "Ásia, Austrália, Oceania"],
+    ["**AFRINIC**", "África", "afrinic.net", "Toda a África"],
+  ]}
+/>
+
+**Cada RIR mantém públicos** seus registros de alocação — você pode consultar `whois 200.1.0.0` para descobrir qual ISP controla um bloco de endereços!
+
+### Esgotamento de IPv4
+
+O espaço IPv4 tem apenas **4.294.967.296** endereços (2^32). Em 2011, o **IANA (Internet Assigned Numbers Authority)** alocou o último /8 às RIRs. Agora:
+
+<MarkdownTable
+  headers={["Região", "Status", "Data de Esgotamento"]}
+  rows={[
+    ["**APNIC**", "Esgotado (último /8 em 2011)", "2011"],
+    ["**RIPENCC**", "Esgotado (último /8 em 2012)", "2012"],
+    ["**ARIN**", "Esgotado (últimos /22s disponíveis)", "2015"],
+    ["**LACNIC**", "Crítico (apenas /24s fragmentados)", "2014-2015"],
+    ["**AFRINIC**", "Menos crítico (recebeu menos)", "2019+"],
+  ]}
+/>
+
+**Solução:** **IPv6** oferece 2^128 endereços — suficiente para bilhões de bilhões de hosts. Mas a migração é lenta devido à compatibilidade com IPv4.
+
+### NAT: Estender o Espaço IPv4
+
+Enquanto IPv6 é adotado, **NAT (Network Address Translation)** permite que múltiplos hosts compartilhem um único IP público:
+
+<MarkdownTable
+  headers={["Conceito", "Descrição", "Benefício"]}
+  rows={[
+    ["**Endereço Privado**", "192.168.1.x (RFC 1918)", "Não roteável globalmente"],
+    ["**Endereço Público**", "200.1.50.1 (alocado pelo ISP)", "Roteável globalmente"],
+    ["**NAT em Router**", "Traduz 192.168.1.100 → 200.1.50.1 ao sair", "Múltiplos hosts usam 1 IP público"],
+    ["**Overhead**", "Reescrita de pacotes a cada salto", "Atraso mínimo (ms)"],
+  ]}
+/>
+
+**Seu router doméstico faz NAT:** todos os 5 dispositivos em casa (laptop, celular, tablet, etc.) compartilham um único IP público do ISP!
+
+### Visualizacao Interativa: Traducao NAT em Router
+
+Observe varios hosts privados compartilhando um unico IP publico e a tabela NAT sendo atualizada dinamicamente.
+
+<NatTranslationSimulator />
+
+## Resumo Conceitual: Da Alocação Global ao Host Local
+
+<MarkdownTable
+  headers={["Nível", "Protocolo/Órgão", "O que Faz", "Escala"]}
+  rows={[
+    ["**Global**", "ICANN", "Aloca espaço IPv4 a RIRs", "Bilhões de endereços"],
+    ["**Regional**", "RIRs (LACNIC, ARIN, etc.)", "Aloca blocos a ISPs", "Milhões de endereços"],
+    ["**ISP**", "BGP (roteamento)", "Anuncia prefixos na Internet", "Centenas de mil"],
+    ["**Local**", "DHCP", "Aloca hosts em uma rede", "Centenas ou milhares"],
+  ]}
+/>
+
+### Fluxo Completo: Do DHCP ao Mundo
+
+<DhcpToInternetFlowVisualizer />
+
+Cada camada é responsável por sua própria alocação, permitindo uma estrutura **escalável e descentralizada** — sem ela, a Internet não funcionaria em escala global.
+
+## Conclusão
+
+Neste capítulo, entendemos:
+
+1. **DHCP** automatiza a configuração de hosts em redes locais (DORA: Discover, Offer, Request, Acknowledge)
+2. **Leases** permitem reciclagem de IPs — hosts renovam antes de expiração
+3. **Hierarquia de alocação** (ICANN → RIRs → ISPs → redes locais) permite escalabilidade global
+4. **NAT** estende o espaço IPv4 limitado enquanto IPv6 é adotado
+5. O **whois** permite rastrear a propriedade de blocos de endereços IP
+
+Com essa compreensão, completamos a visão de camada de rede: roteadores decidem *para onde* enviar pacotes (LPM), endereços definem *o quê* é roteado (IPv4/CIDR), e DHCP + alocação global garantem que haja endereços suficientes para todos os hosts conectados.
+

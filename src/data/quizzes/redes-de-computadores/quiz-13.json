@@ -1,0 +1,109 @@
+{
+  "id": "quiz-13",
+  "title": "Quiz — Configuração Dinâmica de Hosts (DHCP) e Alocação de Endereços",
+  "description": "Teste seus conhecimentos sobre DHCP (processo DORA, renovação de lease), hierarquia de alocação de endereços (ICANN, RIRs, ISPs), endereços privados, NAT, e o esgotamento do espaço IPv4.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "O que significa a sigla DHCP e qual é sua principal função?",
+      "alternatives": [
+        { "id": "a1", "text": "Dynamic Host Configuration Protocol — protocolo que traduz endereços IP para DNS", "isCorrect": false, "explanation": "DHCP não traduz IPs para DNS — essa função é do DNS (Domain Name System). DHCP aloca configurações de rede." },
+        { "id": "a2", "text": "Dynamic Host Configuration Protocol — protocolo que automatiza a alocação de endereços IP e outras configurações de rede a hosts", "isCorrect": true, "explanation": "Correto! DHCP permite que um novo host obtenha automaticamente IP, máscara de rede, gateway padrão, DNS e outras configurações ao se conectar à rede — sem configuração manual." },
+        { "id": "a3", "text": "Direct Host Control Protocol — protocolo que permite ao administrador controlar hosts remotamente", "isCorrect": false, "explanation": "Isso seria função de SSH ou Telnet (Remote Access), não DHCP." },
+        { "id": "a4", "text": "Data Handling for Communication Protocol — protocolo para transferência de dados entre camadas", "isCorrect": false, "explanation": "Essa descrição é vaga e imprecisa. DHCP é especificamente sobre alocação de endereços IP." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Qual é a sequência correta de mensagens no processo DHCP conhecido como DORA?",
+      "alternatives": [
+        { "id": "a1", "text": "Detect → Offer → Request → Allocate", "isCorrect": false, "explanation": "A primeira etapa é DISCOVER (não Detect) e a última é ACKNOWLEDGE (não Allocate). DORA é específico: Discover, Offer, Request, Acknowledge." },
+        { "id": "a2", "text": "Discover → Offer → Request → Acknowledge", "isCorrect": true, "explanation": "Correto! DORA é o acrônimo que resume o processo em 4 etapas: Cliente envia DISCOVER, Servidor responde com OFFER, Cliente confirma com REQUEST, Servidor finaliza com ACK." },
+        { "id": "a3", "text": "Discover → Open → Request → Acknowledge", "isCorrect": false, "explanation": "A segunda etapa é OFFER (não Open). A sequência exata é Discover → Offer → Request → Acknowledge." },
+        { "id": "a4", "text": "Query → Offer → Request → Confirm", "isCorrect": false, "explanation": "A primeira etapa é DISCOVER (não Query) e a última é ACKNOWLEDGE (não Confirm). Esses não são os nomes oficiais das mensagens DHCP." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Durante a etapa DHCP DISCOVER, o cliente envia um broadcast. Qual é o endereço IP de origem e qual é o endereço IP de destino dessa mensagem?",
+      "alternatives": [
+        { "id": "a1", "text": "Origem: 192.168.1.x, Destino: 255.255.255.255", "isCorrect": false, "explanation": "O cliente não tem um IP válido ainda nessa etapa. Usa 0.0.0.0 como placeholder, não um IP no intervalo 192.168.1.x." },
+        { "id": "a2", "text": "Origem: 0.0.0.0, Destino: 255.255.255.255", "isCorrect": true, "explanation": "Correto! O cliente usa 0.0.0.0 como origem (não tem IP ainda) e 255.255.255.255 como destino (broadcast na rede local) para descobrir o servidor DHCP." },
+        { "id": "a3", "text": "Origem: 127.0.0.1, Destino: 255.255.255.255", "isCorrect": false, "explanation": "127.0.0.1 é loopback (localhost), não deve ser usado para procurar um servidor DHCP. O cliente usa 0.0.0.0." },
+        { "id": "a4", "text": "Origem: 0.0.0.0, Destino: 192.168.1.1", "isCorrect": false, "explanation": "O cliente não sabe qual é o endereço do servidor DHCP, logo não pode enviar para 192.168.1.1 especificamente. Usa broadcast 255.255.255.255 para encontrá-lo." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "O servidor DHCP aloca um endereço IP por um tempo limitado chamado 'lease'. Qual é o propósito de um lease ter expiração em vez de ser permanente?",
+      "alternatives": [
+        { "id": "a1", "text": "Segurança — evita que hosts rogue permaneçam na rede indefinidamente", "isCorrect": false, "explanation": "Segurança é um benefício secundário, mas o propósito principal é reutilização de IPs." },
+        { "id": "a2", "text": "Permitir reutilização de endereços IP quando hosts deixam a rede ou são desligados", "isCorrect": true, "explanation": "Correto! Um lease expirável permite que o servidor recicle IPs não usados — essencial em redes com mais hosts do que endereços disponíveis. Exemplo: ao desligar um laptop, seu IP pode ser reassinalado a outro host." },
+        { "id": "a3", "text": "Forçar hosts a se reconectarem periodicamente para manter a rede atualizada", "isCorrect": false, "explanation": "Embora exista renovação de lease, o propósito não é forçar reconexões, mas permitir reusos de IPs." },
+        { "id": "a4", "text": "Economizar espaço no servidor DHCP — deletar informações antigas", "isCorrect": false, "explanation": "Deletar informações não é o propósito. O propósito é liberar IPs para reatribuição." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Um cliente recebe um lease DHCP de 24 horas. Em que momento ele deve tentar renovar o lease (T1)?",
+      "alternatives": [
+        { "id": "a1", "text": "Após 6 horas (25% do lease)", "isCorrect": false, "explanation": "25% é muito cedo. T1 é em 50% do lease." },
+        { "id": "a2", "text": "Após 12 horas (50% do lease)", "isCorrect": true, "explanation": "Correto! T1 (primeira renovação) ocorre em 50% da duração do lease. Para um lease de 24h, T1 é em 12h. Se falhar, tenta novamente em T2 (87.5% = 21h)." },
+        { "id": "a3", "text": "Após 18 horas (75% do lease)", "isCorrect": false, "explanation": "75% é T2 (segunda tentativa de renovação), não T1. T1 é em 50%." },
+        { "id": "a4", "text": "Imediatamente após receber a alocação", "isCorrect": false, "explanation": "Renovar imediatamente não faz sentido. O cliente usa o IP por um tempo antes de renovar." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual das seguintes é a correta sequência hierárquica de alocação de endereços IP globalmente?",
+      "alternatives": [
+        { "id": "a1", "text": "ICANN → RIRs → LIRs/ISPs → Servidores DHCP locais", "isCorrect": true, "explanation": "Correto! ICANN governa globalmente, aloca blocos grandes (/8) a RIRs (ex: LACNIC), que alocam blocos menores (/16, /21) a ISPs, que alocam a empresas/escolas, que usam DHCP para alocar hosts individuais." },
+        { "id": "a2", "text": "RIRs → ICANN → ISPs → Servidores DHCP locais", "isCorrect": false, "explanation": "RIRs não governam ICANN — é o contrário. ICANN é o nível mais alto." },
+        { "id": "a3", "text": "ISPs → ICANN → RIRs → Servidores DHCP locais", "isCorrect": false, "explanation": "ISPs não distribuem endereços antes de ICANN e RIRs. A hierarquia começacom ICANN." },
+        { "id": "a4", "text": "Servidores DHCP locais → RIRs → ICANN", "isCorrect": false, "explanation": "Essa hierarquia está invertida. DHCP é o nível mais baixo, não o mais alto." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual das seguintes é a responsabilidade principal de uma RIR (Regional Internet Registry) como LACNIC?",
+      "alternatives": [
+        { "id": "a1", "text": "Fornecer acesso à Internet e manutenção de servidores DNS", "isCorrect": false, "explanation": "Fornecer acesso é função de um ISP, não de uma RIR. RIRs lidam com alocação de endereços, não com serviços de Internet." },
+        { "id": "a2", "text": "Alocar blocos de endereços IP a ISPs e outras organizações dentro de sua região", "isCorrect": true, "explanation": "Correto! LACNIC aloca blocos (/16, /20, /21) a ISPs, universidades e grandes corporações na América Latina. Outras RIRs (ARIN, RIPENCC, APNIC, AFRINIC) fazem o mesmo em suas regiões." },
+        { "id": "a3", "text": "Forçar renovação de DHCP em todos os hosts conectados", "isCorrect": false, "explanation": "RIRs não gerenciam DHCP — isso é responsabilidade de redes locais e ISPs." },
+        { "id": "a4", "text": "Executar BGP para rotear pacotes entre continentes", "isCorrect": false, "explanation": "BGP é protocolo de roteamento executado por ISPs e operadores de rede, não por RIRs." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Qual é o principal motivo pelo qual o espaço de endereços IPv4 se esgotou e por que NAT é uma solução temporária?",
+      "alternatives": [
+        { "id": "a1", "text": "IPv4 tem apenas 32 bits (4 bilhões de endereços) — insuficiente para bilhões de hosts. NAT permite múltiplos hosts compartilharem 1 IP público, estendendo o espaço até adoção de IPv6.", "isCorrect": true, "explanation": "Correto! 2^32 = 4,294,967,296 endereços. Com 8 bilhões de pessoas e múltiplos dispositivos por pessoa, IPv4 é insuficiente. NAT traduz 192.168.1.x → IP público único, reutilizando o espaço. IPv6 tem 2^128 endereços — permanente." },
+        { "id": "a2", "text": "RIRs não alocam endereços suficientemente rápido. NAT resolve isso instantaneamente.", "isCorrect": false, "explanation": "RIRs alocam conforme possível, mas o problema real é que existem mais hosts que endereços IP no espaço de 32 bits." },
+        { "id": "a3", "text": "Servidores DHCP não conseguem gerenciar leases. NAT elimina a necessidade de DHCP.", "isCorrect": false, "explanation": "DHCP e NAT são independentes — NAT não elimina DHCP, ambos coexistem." },
+        { "id": "a4", "text": "IPv4 foi projetado para redes locais apenas. NAT o estendeu globalmente.", "isCorrect": false, "explanation": "IPv4 foi projetado para escala global, mas subestimou o crescimento da Internet." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Um usuário em sua casa tem 5 dispositivos (laptop, smartphone, tablet, smart TV, impressora) conectados ao router. Todos compartilham um único endereço IP público 200.1.50.1 do ISP. Qual tecnologia permite isso?",
+      "alternatives": [
+        { "id": "a1", "text": "DHCP — servidor DHCP local aloca 192.168.1.x a cada dispositivo", "isCorrect": false, "explanation": "DHCP aloca IPs internos (192.168.1.x), não públicos. É necessário, mas não é a resposta completa." },
+        { "id": "a2", "text": "NAT (Network Address Translation) — router traduz 192.168.1.x → 200.1.50.1", "isCorrect": true, "explanation": "Correto! NAT funciona assim: (1) DHCP aloca 192.168.1.100 a laptop, 192.168.1.101 a smartphone, etc. (2) Quando saem para Internet, router substitui origem para 200.1.50.1. (3) Respostas chegam em 200.1.50.1, router revertem para 192.168.1.x original. Múltiplos hosts = 1 IP público." },
+        { "id": "a3", "text": "CIDR — dividir o /24 em 5 sub-redes /26", "isCorrect": false, "explanation": "CIDR é método de alocação de endereços, não tecnologia para compartilhar um IP. Não resolve o problema." },
+        { "id": "a4", "text": "Broadcast — router envia pacotes para todos os 5 dispositivos simultaneamente", "isCorrect": false, "explanation": "Broadcast distribui a todos, mas não permite múltiplos hosts em 1 IP. NAT é a resposta." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Um servidor corporativo deve ter sempre o mesmo endereço IP para ser contatado via DNS e suportado pelos clientes. Por que usar endereço estático em vez de DHCP para este servidor?",
+      "alternatives": [
+        { "id": "a1", "text": "DHCP é inseguro — qualquer host pode solicitar um IP", "isCorrect": false, "explanation": "DHCP pode ser securizado com DHCP Snooping. Segurança não é o motivo principal aqui." },
+        { "id": "a2", "text": "Com DHCP dinâmico, o servidor poderia receber um IP diferente ao renovar o lease — quebrando a conectividade via DNS e impactando clientes que confiam no IP anterior", "isCorrect": true, "explanation": "Correto! Um servidor crítico (ex: banco de dados) precisa de um IP previsível. Com DHCP, se o lease expira e o servidor recebe 192.168.1.150 em vez de 192.168.1.100, clientes conectados a 192.168.1.100 perderão conectividade. IP estático garante previsibilidade." },
+        { "id": "a3", "text": "DHCP usa broadcast — não funciona para servidores", "isCorrect": false, "explanation": "DHCP usa broadcast apenas na descoberta inicial, não continuamente. Não é o motivo." },
+        { "id": "a4", "text": "Estático é mais rápido que DHCP", "isCorrect": false, "explanation": "Performance não é o motivo — DHCP é feito uma vez ao iniciar. Estático apenas significa configuração manual." }
+      ]
+    }
+  ]
+}
+

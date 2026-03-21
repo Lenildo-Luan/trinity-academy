@@ -101,6 +101,14 @@ import {
   CIDRLongestPrefixMatchVisualizer,
 } from "./src/components/ipv4-cidr-p5-examples";
 import {
+  DhcpDoraSimulator,
+  DhcpDoraTimelineVisualizer,
+  AddressAllocationHierarchyVisualizer,
+  DhcpPoolAllocatorSimulator,
+  NatTranslationSimulator,
+  DhcpToInternetFlowVisualizer,
+} from "./src/components/dhcp-allocation-p5-examples";
+import {
   BestEffortVsQoSGuarantees,
   DatagramVsVirtualCircuitComparison,
   CongestionAndPacketDropSimulator,
@@ -445,6 +453,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     IPv4FragmentationSimulator,
     TTLHopsSimulator,
     CIDRLongestPrefixMatchVisualizer,
+    DhcpDoraSimulator,
+    DhcpDoraTimelineVisualizer,
+    AddressAllocationHierarchyVisualizer,
+    DhcpPoolAllocatorSimulator,
+    NatTranslationSimulator,
+    DhcpToInternetFlowVisualizer,
     BestEffortVsQoSGuarantees,
     DatagramVsVirtualCircuitComparison,
     CongestionAndPacketDropSimulator,
