@@ -121,6 +121,12 @@ import {
   DijkstraStepByStep,
 } from "./src/components/network-service-models-p5-examples";
 import {
+  RoutingTopologyR1R5Visualizer,
+  DijkstraRoutingStepSimulator,
+  DistanceVectorBellmanFordIterativeVisualizer,
+  LinkStateVsDistanceVectorConvergenceComparator,
+} from "./src/components/routing-fundamentals-p5-examples";
+import {
   MultiplexingSender,
   DemultiplexingReceiver,
   UDPDemultiplexing,
@@ -473,6 +479,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     DatagramVsVirtualCircuitComparison,
     CongestionAndPacketDropSimulator,
     DijkstraStepByStep,
+    RoutingTopologyR1R5Visualizer,
+    DijkstraRoutingStepSimulator,
+    DistanceVectorBellmanFordIterativeVisualizer,
+    LinkStateVsDistanceVectorConvergenceComparator,
     MultiplexingSender,
     DemultiplexingReceiver,
     UDPDemultiplexing,

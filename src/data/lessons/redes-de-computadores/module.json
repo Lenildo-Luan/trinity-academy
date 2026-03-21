@@ -108,6 +108,13 @@
         "description": "Duas soluções cruciais para a exaustão do espaço de endereços IPv4. Primeiro, o NAT, explicando seu funcionamento, vantagens, controvérsias e a necessidade de técnicas de NAT Traversal. Em seguida o IPv6, sua motivação, formato do datagrama, principais melhorias em relação ao IPv4 e as estratégias de transição, com foco no tunelamento.",
         "video": null,
         "quizId": "quiz-14"
+      },
+      {
+        "id": "charpter-15",
+        "title": "Fundamentos do Roteamento",
+        "description": "Teoria por trás dos algoritmos de roteamento usando grafos para modelar a rede e definir o conceito de custo de um caminho. Algoritmos de roteamento: o algoritmo de estado de enlace de Dijkstra e o algoritmo de vetor de distância (Bellman-Ford), analisando seus passos, exemplos e complexidades.",
+        "video": null,
+        "quizId": "quiz-15"
       }
     ]
   }

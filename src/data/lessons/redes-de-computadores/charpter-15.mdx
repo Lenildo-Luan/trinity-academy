@@ -1,0 +1,419 @@
+# Fundamentos do Roteamento
+
+Até aqui, estudamos como os roteadores funcionam internamente (arquitetura, comutação, enfileiramento, decisão de encaminhamento). Mas **como os roteadores decidem para qual interface um pacote deve sair?** Essa decisão é baseada em uma **tabela de roteamento**, que mapeia prefixos de destino a portas de saída.
+
+Mas de onde vem essa tabela de roteamento? **É construída dinamicamente** por algoritmos de roteamento que exploram a topologia da rede, calculam caminhos com menor custo, e adaptam-se a falhas e mudanças.
+
+Este capítulo final do módulo de Camada de Rede responde essas questões explorando:
+
+1. **Modelagem de Redes com Grafos** — representar topologia como grafo ponderado
+2. **Conceito de Custo de Caminho** — definir métrica (saltos, latência, banda)
+3. **Algoritmo de Estado de Enlace (Link State)** — Dijkstra, inundação de informação de enlace
+4. **Algoritmo de Vetor de Distância (Distance Vector)** — Bellman-Ford, descoberta distribuída
+5. **Comparação de Algoritmos** — convergência, complexidade, escolha prática
+
+## Modelagem de Redes com Grafos
+
+### Topologia de Rede como Grafo
+
+Uma rede é melhor representada como um **grafo ponderado direcionado**:
+
+<MarkdownTable
+  headers={["Elemento do Grafo", "Correspondência em Rede", "Exemplo"]}
+  rows={[
+    ["**Nó (Node/Vértice)**", "Roteador (ou host final)", "R1, R2, R3 (roteadores em uma corporação)"],
+    ["**Aresta (Edge)**", "Link direto (enlace) entre dois roteadores", "Fio Ethernet direto ou enlace WAN entre R1 e R2"],
+    ["**Peso (Weight)**", "Custo do enlace (métrica de roteamento)", "1 (salto), 10 (Mbps inverso), 5ms (latência), 100 (congestionamento)"],
+    ["**Caminho (Path)**", "Sequência de enlaces que um pacote segue", "R1 → R2 → R3 → R4 (4 saltos)"],
+    ["**Custo do Caminho**", "Soma dos pesos de todas as arestas no caminho", "Se pesos são [1, 1, 2], custo total = 4"],
+  ]}
+/>
+
+### Exemplo: Rede Corporativa
+
+Considere uma corporação com 5 roteadores:
+
+<RoutingTopologyR1R5Visualizer />
+
+**Tabela de Arestas (Enlaces):**
+
+<MarkdownTable
+  headers={["Origem", "Destino", "Peso (Custo)", "Tipo de Enlace"]}
+  rows={[
+    ["R1", "R2", "1", "Ethernet local (1 salto)"],
+    ["R1", "R3", "4", "Enlace WAN congestionado"],
+    ["R2", "R3", "2", "Enlace WAN intermediário"],
+    ["R2", "R4", "2", "Ethernet local"],
+    ["R3", "R4", "3", "Enlace WAN"],
+    ["R3", "R5", "1", "Enlace local de alta velocidade"],
+    ["R4", "R5", "5", "Enlace WAN longo/congestionado"],
+  ]}
+/>
+
+### Conceitos Importantes
+
+**1. Custo de Caminho (Path Cost)**
+
+O custo de um caminho é a **soma dos pesos de todas as arestas**:
+
+**Exemplo:** Caminhos possíveis de R1 a R5:
+- Caminho A: R1 → R3 → R5 → Custo = 4 + 1 = **5**
+- Caminho B: R1 → R2 → R3 → R5 → Custo = 1 + 2 + 1 = **4** ← Melhor!
+- Caminho C: R1 → R2 → R4 → R5 → Custo = 1 + 2 + 5 = **8**
+
+O **Caminho B é ótimo** — tem o menor custo.
+
+**2. Métrica de Custo (Peso do Enlace)**
+
+Diferentes redes escolhem diferentes métricas:
+
+<MarkdownTable
+  headers={["Métrica", "Fórmula/Cálculo", "Quando Usar", "Exemplo"]}
+  rows={[
+    ["**Saltos (Hops)**", "1 por enlace", "Redes homogêneas onde distância ≈ complexidade", "RIP: cada enlace = 1 salto"],
+    ["**Capacidade Inversa (Bandwidth)**", "10^8 / largura de banda (Mbps)", "Preferir enlaces rápidos", "OSPF: enlace 10 Mbps = peso 10^7"],
+    ["**Atraso (Latency)**", "Tempo de propagação + enfileiramento (ms)", "Aplicações sensíveis a latência", "BGP com TE: latência baixa prioritária"],
+    ["**Carga (Load)**", "Tráfego atual ÷ capacidade", "Balanceamento dinâmico de carga", "Varia a cada segundo; risco de oscilação"],
+    ["**Confiabilidade (Reliability)**", "1 / taxa de erro do enlace", "Redes onde perdas são críticas", "Redes automotivas, médicas"],
+  ]}
+/>
+
+---
+
+## Algoritmo de Estado de Enlace (Link State): Dijkstra
+
+### Conceito Geral
+
+**Link State (LS)** = cada roteador sabe o **custo de todos os seus enlaces** e **compartilha essa informação globalmente** com todos os outros roteadores.
+
+**Ideia:** Se todos conhecem a topologia completa, cada um calcula **independentemente** os caminhos mais curtos para todos os outros roteadores.
+
+**Algoritmo:** **Dijkstra** — encontra caminho mais curto em grafo ponderado.
+
+### Passos do Algoritmo de Dijkstra
+
+**Entrada:** Grafo G com nós e arestas ponderadas; nó de origem S
+
+**Saída:** Distância mínima (e caminho) de S a todos os outros nós
+
+**Pseudocódigo:**
+
+```
+1. Inicialização:
+   - D[S] = 0 (distância a si mesmo é zero)
+   - D[v] = ∞ para todo outro nó v
+   - N' = {S} (conjunto de nós já processados)
+
+2. Loop até N' = todos os nós:
+   a. Encontre nó u ∉ N' com D[u] mínimo
+   b. Adicione u a N'
+   c. Para cada vizinho v de u não em N':
+      - D[v] = min(D[v], D[u] + custo(u, v))
+      - Se D[v] foi atualizado, registre que u é predecessor de v
+```
+
+### Visualizacao Interativa: Dijkstra passo a passo
+
+Use Play/Pause para acompanhar as iteracoes automaticamente, ou avance com Passo para observar a atualizacao de cada distancia.
+
+<DijkstraRoutingStepSimulator />
+
+### Exemplo Passo a Passo: Calcular Caminhos de R1
+
+Usaremos a rede corporativa anterior. Objetivo: encontrar caminho mais curto de **R1** a todos os outros roteadores.
+
+**Estado Inicial:**
+
+<MarkdownTable
+  headers={["Nó", "Distância (D)", "Visitado (N')?", "Predecessor"]}
+  rows={[
+    ["R1", "0", "Sim", "—"],
+    ["R2", "∞", "Não", "—"],
+    ["R3", "∞", "Não", "—"],
+    ["R4", "∞", "Não", "—"],
+    ["R5", "∞", "Não", "—"],
+  ]}
+/>
+
+**Iteração 1:** Processe nó com D mínimo não visitado
+
+Mínimo não visitado = R2 (D=1) ou R3 (D=4)? R2 é vizinho direto com custo 1.
+
+<MarkdownTable
+  headers={["Nó", "Distância (D)", "Visitado (N')?", "Predecessor"]}
+  rows={[
+    ["R1", "0", "Sim", "—"],
+    ["R2", "1", "Sim ← (visitado nesta iteração)", "R1"],
+    ["R3", "min(∞, 0+4) = 4", "Não", "R1"],
+    ["R4", "min(∞, 0+∞) = ∞", "Não", "—"],
+    ["R5", "∞", "Não", "—"],
+  ]}
+/>
+
+Explicação:
+- R1 tem vizinhos diretos: R2 (custo 1) e R3 (custo 4)
+- D[R2] = min(∞, 0 + 1) = 1 ← atualizado
+- D[R3] = min(∞, 0 + 4) = 4 ← atualizado
+- Visitamos R2 (tem distância menor: 1 < 4)
+
+**Iteração 2:** Processe R3 (próximo mínimo = 4, não visitado)
+
+<MarkdownTable
+  headers={["Nó", "Distância (D)", "Visitado (N')?", "Predecessor"]}
+  rows={[
+    ["R1", "0", "Sim", "—"],
+    ["R2", "1", "Sim", "R1"],
+    ["R3", "4", "Sim ← (visitado nesta iteração)", "R1"],
+    ["R4", "min(∞, 1+2) = 3", "Não", "R2"],
+    ["R5", "min(∞, 4+1) = 5", "Não", "R3"],
+  ]}
+/>
+
+Explicação:
+- R2 tem vizinhos (além de R1 já visitado): R3 (custo 2) e R4 (custo 2)
+- D[R3] já visitado, pulamos
+- D[R4] = min(∞, 1 + 2) = 3 ← atualizado (via R2)
+- R3 tem vizinhos (além de R1 já visitado): R2 (já visitado), R4 (custo 3), R5 (custo 1)
+- D[R4] = min(3, 4 + 3) = 3 (via R2 é melhor)
+- D[R5] = min(∞, 4 + 1) = 5 ← atualizado (via R3)
+
+**Iteração 3:** Processe R4 (próximo mínimo = 3, não visitado)
+
+<MarkdownTable
+  headers={["Nó", "Distância (D)", "Visitado (N')?", "Predecessor"]}
+  rows={[
+    ["R1", "0", "Sim", "—"],
+    ["R2", "1", "Sim", "R1"],
+    ["R3", "4", "Sim", "R1"],
+    ["R4", "3", "Sim ← (visitado nesta iteração)", "R2"],
+    ["R5", "min(5, 3+5) = 5", "Não", "R3"],
+  ]}
+/>
+
+Explicação:
+- R4 tem vizinhos: R2 (já visitado), R3 (já visitado), R5 (custo 5)
+- D[R5] = min(5, 3 + 5) = 5 (via R3 é melhor ou igual)
+
+**Iteração 4:** Processe R5 (último não visitado, D = 5)
+
+<MarkdownTable
+  headers={["Nó", "Distância (D)", "Visitado (N')?", "Predecessor"]}
+  rows={[
+    ["R1", "0", "Sim", "—"],
+    ["R2", "1", "Sim", "R1"],
+    ["R3", "4", "Sim", "R1"],
+    ["R4", "3", "Sim", "R2"],
+    ["R5", "5", "Sim ← (visitado nesta iteração)", "R3"],
+  ]}
+/>
+
+**Resultado Final: Tabela de Roteamento para R1**
+
+<MarkdownTable
+  headers={["Destino", "Custo Total", "Próximo Salto (Next Hop)", "Caminho Completo"]}
+  rows={[
+    ["R1", "0", "—", "R1"],
+    ["R2", "1", "R2 (direto)", "R1 → R2"],
+    ["R3", "4", "R3 (direto)", "R1 → R3"],
+    ["R4", "3", "R2", "R1 → R2 → R4"],
+    ["R5", "5", "R3", "R1 → R3 → R5"],
+  ]}
+/>
+
+### Complexidade de Dijkstra
+
+<MarkdownTable
+  headers={["Implementação", "Tempo", "Espaço", "Observação"]}
+  rows={[
+    ["Versão simples (array)", "O(N²)", "O(N)", "N = número de roteadores; adequado para N < 1000"],
+    ["Versão com heap", "O((N + E) log N)", "O(N + E)", "E = número de enlaces; melhor para grafos esparsos"],
+    ["Versão com Fibonacci heap", "O(E + N log N)", "O(N + E)", "Ótimo teoricamente, raro na prática"],
+  ]}
+/>
+
+**Para Internet global (~20k roteadores BGP):** Dijkstra é **muito caro** — impossível fazer a cada segundo globalmente.
+
+---
+
+## Algoritmo de Vetor de Distância (Distance Vector): Bellman-Ford
+
+### Conceito Geral
+
+**Distance Vector (DV)** = contraste com Link State.
+
+- **Link State:** "Eu conheço a topologia completa" → Dijkstra global
+- **Distance Vector:** "Eu só conheço meus vizinhos" → descoberta distribuída
+
+**Ideia:** Cada roteador mantém um vetor de distâncias até todos os destinos e **periodicamente compartilha com vizinhos**. Vizinhos atualizam seus vetores baseado na informação recebida.
+
+**Algoritmo:** **Bellman-Ford** — encontra caminhos mais curtos em grafos com pesos negativos (não usados aqui) ou positivos.
+
+### Equação de Bellman-Ford
+
+Para cada destino d:
+
+```
+D_x[d] = min(D_v[d] + custo(x, v)) para todos vizinhos v de x
+```
+
+Significado:
+- **D_x[d]** = distância mínima de x até d
+- **D_v[d]** = distância mínima de v até d (informado pelo vizinho v)
+- **custo(x, v)** = custo do enlace direto de x para v
+- Escolher vizinho v que minimiza a expressão = próximo salto
+
+### Exemplo Passo a Passo: Rede Corporativa
+
+Mesma rede anterior. Vamos calcular iterativamente o vetor de distância para cada roteador.
+
+**Estado Inicial (t=0):** Cada roteador conhece apenas seus vizinhos diretos
+
+### Visualizacao Interativa: Vetor de Distancia por rodadas
+
+Observe a matriz por rodada `t=0..N`. Celulas em amarelo indicam valores que mudaram naquela iteracao.
+
+<DistanceVectorBellmanFordIterativeVisualizer />
+
+<MarkdownTable
+  headers={["Roteador", "Para R1", "Para R2", "Para R3", "Para R4", "Para R5"]}
+  rows={[
+    ["R1", "0", "1 (direto)", "4 (direto)", "∞", "∞"],
+    ["R2", "1 (direto)", "0", "2 (direto)", "2 (direto)", "∞"],
+    ["R3", "4 (direto)", "2 (direto)", "0", "3 (direto)", "1 (direto)"],
+    ["R4", "∞", "2 (direto)", "3 (direto)", "0", "5 (direto)"],
+    ["R5", "∞", "∞", "1 (direto)", "5 (direto)", "0"],
+  ]}
+/>
+
+**t=1:** Roteadores compartilham vetores; todos atualizam
+
+Usando a equação de Bellman-Ford:
+
+**Para R1 até R4:**
+- D_1[4] = min(
+  - D_2[4] + custo(1,2) = ∞ + 1 = ∞,
+  - D_3[4] + custo(1,3) = 3 + 4 = 7
+  ) = 7
+- Mas espera! R2 conhece R4 direto? Sim! D_2[4] = 2.
+- Reconsiderando: D_1[4] = min(D_2[4] + 1, D_3[4] + 4) = min(2 + 1, 3 + 4) = min(3, 7) = **3**
+
+<MarkdownTable
+  headers={["Roteador", "Para R1", "Para R2", "Para R3", "Para R4", "Para R5"]}
+  rows={[
+    ["R1", "0", "1", "4", "3 ← (via R2)", "min(4+1, ...) = 5 ← (via R3)"],
+    ["R2", "1", "0", "2", "2", "min(2+3, ...) = 5 ← (via R3)"],
+    ["R3", "4", "2", "0", "3", "1"],
+    ["R4", "min(1+2, 2+2, ...) = 3 ← (via R2)", "2", "3", "0", "5"],
+    ["R5", "min(1+4, ...) = 5 ← (via R3)", "min(1+2, ...) = 3 ← (via R3)", "1", "5", "0"],
+  ]}
+/>
+
+**t=2:** Outra rodada de compartilhamento
+
+Agora R5 sabe que R1 é alcançável via R3 com custo 5. R4 pode atualizar:
+
+<MarkdownTable
+  headers={["Roteador", "Para R1", "Para R2", "Para R3", "Para R4", "Para R5"]}
+  rows={[
+    ["R1", "0", "1", "4", "3", "5"],
+    ["R2", "1", "0", "2", "2", "3 ← (via R3 descobriu em t=1)"],
+    ["R3", "4", "2", "0", "3", "1"],
+    ["R4", "3", "2", "3", "0", "min(5, 3+1) = 4 ← (melhorou via R3→R5)"],
+    ["R5", "min(5, 1+4) = 5", "min(3, 1+2) = 3", "1", "min(5, 1+3) = 4 ← (melhorou)", "0"],
+  ]}
+/>
+
+**t=3:** Convergência
+
+Após mais iterações, todos os vetores estabilizam — nenhuma mudança. Algoritmo **convergiu**.
+
+**Tabela de Roteamento Final para R4 (exemplo):**
+
+<MarkdownTable
+  headers={["Destino", "Custo Total", "Próximo Salto", "Caminho"]}
+  rows={[
+    ["R1", "3", "R2", "R4 → R2 → R1"],
+    ["R2", "2", "R2 (direto)", "R4 → R2"],
+    ["R3", "3", "R3 (direto)", "R4 → R3"],
+    ["R4", "0", "—", "R4"],
+    ["R5", "4", "R3", "R4 → R3 → R5"],
+  ]}
+/>
+
+### Complexidade e Convergência de DV
+
+<MarkdownTable
+  headers={["Aspecto", "Dijkstra (Link State)", "Bellman-Ford (Distance Vector)"]}
+  rows={[
+    ["**Computação**", "Centralizada — cada nó roda Dijkstra", "Distribuída — cada nó coopera com vizinhos"],
+    ["**Convergência**", "Uma execução = resultado final", "Iterativo — O(N) iterações no pior caso"],
+    ["**Complexidade por iteração**", "O(N²) ou O(E log N)", "O(N × E) distribuído = cada vizinho faz O(1)"],
+    ["**Mensagens**", "Todos os nós inundam estado de enlace", "Apenas vizinhos trocam vetores"],
+    ["**Problema: Loops**", "Não — topologia global garante Dijkstra correto", "Sim — antes de convergência, loops possíveis"],
+    ["**Problema: Contagem ao Infinito**", "Não", "Sim — se link falha, pode levar O(N) rodadas para reconhecer"],
+  ]}
+/>
+
+### Problema: Contagem ao Infinito (Count-to-Infinity)
+
+**Cenário:** Enlace R3-R5 falha. R1 aprendera: D_1[5] = 5 via R3.
+
+**t=0:** R3 nota falha, marca D_3[5] = ∞
+
+**t=1:** R3 comunica aos vizinhos "R5 agora é ∞ para mim"
+- Mas R2 ainda tem D_2[5] = 3 (antigo)
+- R3 recebe de R2: D_2[5] + custo(3,2) = 3 + 2 = 5
+- R3 pensa: "Ah! Posso chegar R5 via R2!" D_3[5] = 5
+
+**t=2:** R3 comunica "R5 é 5 para mim" para R2
+- R2 pensa: "Posso chegar via R3!" D_2[5] = 5 + 2 = 7
+
+**t=3:** Continua aumentando: 9, 11, 13... até atingir ∞
+
+**Solução:** **Split Horizon com Poison Reverse** — Se R2 aprendeu R5 via R3, nunca informa R3 sobre R5. Quebra loops.
+
+---
+
+## Comparação e Conclusão
+
+### Visualizacao Interativa: Convergencia Link State vs Distance Vector
+
+Esta comparacao lado a lado destaca por que LS costuma convergir mais rapido do que DV para a mesma topologia.
+
+<LinkStateVsDistanceVectorConvergenceComparator />
+
+<MarkdownTable
+  headers={["Critério", "Dijkstra (Link State)", "Bellman-Ford (Distance Vector)"]}
+  rows={[
+    ["**Exemplos Práticos**", "OSPF (Open Shortest Path First)", "RIP (Routing Information Protocol)"],
+    ["**Escalabilidade (Internet)**", "Melhor — usado globalmente em ISPs", "Limitado — RIP max 15 saltos, obsoleto em núcleo"],
+    ["**Convergência**", "Rápida (1 execução)", "Lenta (O(N) iterações)"],
+    ["**Uso de Memória**", "Toda topologia", "Apenas vizinhos + vetores"],
+    ["**Robustez a Falhas**", "Bom — inundação de atualizações", "Problema — contagem ao infinito sem split horizon"],
+    ["**Configuração**", "Mais complexo", "Mais simples"],
+    ["**Recomendação**", "Usar em redes modernas", "Histórico; entender conceito"],
+  ]}
+/>
+
+---
+
+## Resumo: Fundamentos do Roteamento
+
+**1. Modelagem:** Redes = grafos ponderados; custo = soma de pesos de enlaces
+
+**2. Dijkstra (Link State):** Cada roteador conhece topologia global, calcula independentemente caminhos mais curtos. Rápido mas exige conhecimento completo.
+
+**3. Bellman-Ford (DV):** Roteadores cooperam iterativamente; cada um aprende de vizinhos. Distribuído mas lento; risco de loops antes de convergência.
+
+**4. Prática:** Redes modernas (ISPs, corporações) usam OSPF (Link State). RIP (DV) é legado. BGP é híbrido com política.
+
+---
+
+## Questões Desafio
+
+1. Por que Dijkstra é centralizado, mas DV é distribuído? Qual é a vantagem prática de cada um?
+2. Se um enlace falha, como Dijkstra se recupera vs. DV? Qual é mais rápido?
+3. Qual é a diferença entre "custo do enlace" (peso) e "custo do caminho" (soma)?
+4. Split Horizon resolve completamente o problema de contagem ao infinito? Por quê?
+5. Como BGP (usado na Internet) é diferente de OSPF e RIP?
+

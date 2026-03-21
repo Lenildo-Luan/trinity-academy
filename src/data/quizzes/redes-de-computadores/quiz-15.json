@@ -1,0 +1,109 @@
+{
+  "id": "quiz-15",
+  "title": "Quiz — Fundamentos do Roteamento",
+  "description": "Teste seus conhecimentos sobre modelagem de redes com grafos, algoritmo de estado de enlace (Dijkstra), algoritmo de vetor de distância (Bellman-Ford), conceitos de custo de caminho, métricas de roteamento, convergência e problemas práticos como contagem ao infinito.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Em uma rede modelada como grafo ponderado, qual é a diferença fundamental entre 'custo do enlace' e 'custo do caminho'?",
+      "alternatives": [
+        { "id": "a1", "text": "Custo do enlace é o peso de uma aresta individual; custo do caminho é a soma dos pesos de todas as arestas de origem a destino", "isCorrect": true, "explanation": "Correto! Enlace = aresta individual (ex: R1→R2 tem custo 1). Caminho = sequência de arestas (ex: R1→R2→R4 tem custo 1+2=3). Encontrar caminho com menor custo é o objetivo do roteamento." },
+        { "id": "a2", "text": "Custo do caminho é a métrica instantânea; custo do enlace é a métrica média histórica", "isCorrect": false, "explanation": "Não — ambos podem ser instância ou média. Diferença é estrutural: enlace é aresta, caminho é sequência de arestas." },
+        { "id": "a3", "text": "Custo do enlace é para camada 2; custo do caminho é para camada 3", "isCorrect": false, "explanation": "Ambos são conceitos de roteamento (camada 3/rede). Camada 2 tem switching, não roteamento." },
+        { "id": "a4", "text": "Não há diferença — são sinônimos", "isCorrect": false, "explanation": "Há diferença clara: uma aresta tem um peso; múltiplas arestas formam caminho com peso agregado." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Um algoritmo de roteamento Link State (como Dijkstra) diferencia-se de Distance Vector (como Bellman-Ford) principalmente em quê?",
+      "alternatives": [
+        { "id": "a1", "text": "Link State: cada roteador conhece a topologia **completa** e calcula caminhos independentemente; Distance Vector: cada roteador conhece apenas vizinhos diretos e aprende iterativamente", "isCorrect": true, "explanation": "Correto! LS = 'conheço tudo, calculo tudo'. Ex: R1 em OSPF executa Dijkstra com grafo completo. DV = 'conheço vizinhos, pergunto a eles, aprendo'. Ex: R1 em RIP pede a R2 e R3 suas distâncias a tudo, atualiza seu vetor. Iterativo e distribuído." },
+        { "id": "a2", "text": "Link State usa grafos; Distance Vector usa matrizes", "isCorrect": false, "explanation": "Ambos usam representações matemáticas. Diferença não é representação — é conhecimento (global vs. local)." },
+        { "id": "a3", "text": "Link State é para IPv4; Distance Vector é para IPv6", "isCorrect": false, "explanation": "Ambos funcionam com IPv4 e IPv6. Diferença é algoritmo, não versão IP." },
+        { "id": "a4", "text": "Link State converge mais lentamente porque compartilha muita informação", "isCorrect": false, "explanation": "Inverso — LS converge **rápido** (1 execução) porque tem topologia global. DV converge **lentamente** (O(N) iterações)." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "No algoritmo de Dijkstra, qual é a função da variável N' (conjunto de nós visitados)?",
+      "alternatives": [
+        { "id": "a1", "text": "Rastrear quais nós já foram processados com distância final calculada; a cada iteração, adicionar o nó não visitado com distância mínima", "isCorrect": true, "explanation": "Correto! N' começa com {origem}. A cada iteração: (1) encontrar nó u ∉ N' com D[u] mínimo, (2) adicionar u a N', (3) atualizar distâncias de vizinhos de u. Quando N' = todos os nós, Dijkstra termina com todas as distâncias finais." },
+        { "id": "a2", "text": "Lista de nós que falharam e devem ser ignorados", "isCorrect": false, "explanation": "N' não rastreia falhas — rastreia convergência. Todos os nós são processados." },
+        { "id": "a3", "text": "Conjunto de enlaces (arestas) já explorados", "isCorrect": false, "explanation": "N' é conjunto de **nós**, não enlaces. Arestas são exploradas quando visitamos nós." },
+        { "id": "a4", "text": "Fila de nós esperando para serem processados", "isCorrect": false, "explanation": "N' não é fila — é conjunto de nós **já processados**, não em espera." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Executando Dijkstra em uma rede, chegamos a um ponto onde temos D[R1]=0, D[R2]=5, D[R3]=∞, D[R4]=3, D[R5]=8, e N'={R1, R4}. Qual nó será processado na próxima iteração?",
+      "alternatives": [
+        { "id": "a1", "text": "R3, porque tem distância infinita (precisa ser alcançado)", "isCorrect": false, "explanation": "Dijkstra escolhe o nó com distância **mínima**, não máxima. R3 com ∞ só será visitado se for reachable (cousto finito de outro nó)." },
+        { "id": "a2", "text": "R2, porque é o próximo alfabeticamente", "isCorrect": false, "explanation": "Dijkstra não ordena alfabeticamente — ordena por distância." },
+        { "id": "a3", "text": "R2, porque tem a distância mínima entre os não visitados (5 < 8)", "isCorrect": true, "explanation": "Correto! Entre {R2, R3, R5} (não em N'), a distância mínima é D[R2]=5. Então processamos R2 na próxima iteração, adicionamos a N' e atualizamos distâncias de vizinhos de R2." },
+        { "id": "a4", "text": "R5, porque é o mais recentemente adicionado a D", "isCorrect": false, "explanation": "Recência não importa — apenas distância." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Na equação de Bellman-Ford, D_x[d] = min(D_v[d] + custo(x, v)) para todos vizinhos v, o que representa 'D_v[d]'?",
+      "alternatives": [
+        { "id": "a1", "text": "Distância mínima do **vizinho v até o destino d**, compartilhada por v com x", "isCorrect": true, "explanation": "Correto! Bellman-Ford é distribuído: D_v[d] é a informação que o vizinho v reportou ('posso chegar d com custo D_v[d]'). X usa isso: 'se v diz que chega d com custo D_v[d], então eu chego via v com custo D_v[d] + custo(x,v)'. Escolhe vizinho que minimiza isso." },
+        { "id": "a2", "text": "Distância de x até vizinho v (custo do enlace direto)", "isCorrect": false, "explanation": "Isso é custo(x, v). D_v[d] é informação sobre **d**, não sobre v." },
+        { "id": "a3", "text": "Histórico da distância de x a d em iterações anteriores", "isCorrect": false, "explanation": "D_v[d] é informação **atual** de v, não histórico de x." },
+        { "id": "a4", "text": "Distância máxima que v pode reportar para d", "isCorrect": false, "explanation": "D_v[d] é a distância que v reportou, não máxima." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Em um algoritmo Distance Vector, qual é o problema de 'contagem ao infinito' e quando ocorre?",
+      "alternatives": [
+        { "id": "a1", "text": "Quando um enlace falha, o destino é marcado ∞, mas vizinhos podem ainda ter rotas antigas, criando loop de atualizações onde custo aumenta indefinidamente até atingir ∞", "isCorrect": true, "explanation": "Correto! Exemplo: R3-R5 falha. R3 marca D_3[5]=∞. Mas R2 ainda tem D_2[5]=3 (antigo). R3 recebe D_2[5]=3, atualiza D_3[5]=5. R2 recebe de R3 D_3[5]=5, atualiza D_2[5]=7. Loop: 3→5→7→9→...→∞. Leva O(N) iterações (ou infinito sem limite)." },
+        { "id": "a2", "text": "Quando não há limite de roteadores na rede", "isCorrect": false, "explanation": "Contagem ao infinito não é sobre quantidade de roteadores — é sobre loop de atualizações." },
+        { "id": "a3", "text": "Quando topologia é muito grande para algoritmo processar", "isCorrect": false, "explanation": "Isso seria problema de escala, não contagem ao infinito." },
+        { "id": "a4", "text": "Nunca ocorre em Bellman-Ford moderno", "isCorrect": false, "explanation": "Ocorre, mas é mitigado por técnicas como Split Horizon com Poison Reverse e limite máximo de saltos." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Split Horizon com Poison Reverse é uma técnica para resolver contagem ao infinito. O que ela faz?",
+      "alternatives": [
+        { "id": "a1", "text": "Se R2 aprendeu rota para destino d **via R3**, então R2 nunca informa R3 sobre essa rota (ou informa como ∞ — 'poison')", "isCorrect": true, "explanation": "Correto! Evita loop: R3 não receberá de volta sua própria informação. Exemplo: R2 aprendeu R5 via R3. Não informa R3 'posso chegar R5', prevenindo o loop R3→R2→R3→R2. Não resolve 100% (pode haver loops longos), mas quebra loops simples." },
+        { "id": "a2", "text": "Descarta todas as atualizações que vêm de roteadores vizinhos", "isCorrect": false, "explanation": "Não — apenas descarta (ou marca ∞) rotas aprendidas **via esse vizinho** quando informar de volta." },
+        { "id": "a3", "text": "Limita o máximo de saltos em qualquer rota para 15", "isCorrect": false, "explanation": "Limitar saltos máximos é técnica separada (RIP usa 15). Split Horizon é sobre evitar informar para origem." },
+        { "id": "a4", "text": "Usa criptografia para proteger atualizações de roteamento", "isCorrect": false, "explanation": "Segurança é diferente de loop prevention. Split Horizon é sobre topologia lógica, não criptografia." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Comparando complexidade computacional: Dijkstra (versão simples com array) vs. Bellman-Ford iterativo em DV, qual é mais eficiente para N roteadores?",
+      "alternatives": [
+        { "id": "a1", "text": "Dijkstra é O(N²) por execução (centralizada), mas 1 execução resolve tudo. DV é O(N × #iterações) distribuído, com até O(N) iterações = O(N²) total, mas com latência distribuída", "isCorrect": true, "explanation": "Correto! Ambos têm complexidade quadrática: Dijkstra: 1 × O(N²). DV: O(N) iterações × O(algo) por iteração = O(N²) no pior caso. Mas Dijkstra é centralizado (um roteador executa), enquanto DV é distribuído (todos calculam em paralelo, apenas vizinhos se comunicam). Para Internet, DV é ineficiente apesar de paralelismo." },
+        { "id": "a2", "text": "Dijkstra é sempre mais rápido porque não itera", "isCorrect": false, "explanation": "Não simplesmente. DV é distribuído — múltiplos roteadores calculam em paralelo. Mas o tempo de **convergência global** em DV é lento." },
+        { "id": "a3", "text": "DV é sempre mais rápido porque envolve menos roteadores", "isCorrect": false, "explanation": "DV envolve todos os roteadores iterativamente — não 'menos'." },
+        { "id": "a4", "text": "Não há diferença — ambos usam O(N²)", "isCorrect": false, "explanation": "Ambos são O(N²) assintoticamente, mas Dijkstra é 1 execução; DV é iterativo. Diferença prática é significativa." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "OSPF (Open Shortest Path First) é um protocolo de roteamento baseado em qual algoritmo, e por quê foi escolhido para redes modernas de ISPs?",
+      "alternatives": [
+        { "id": "a1", "text": "Baseado em Dijkstra (Link State). Escolhido porque converge rapidamente, suporta topologias grandes, e permite política de roteamento sofisticada", "isCorrect": true, "explanation": "Correto! OSPF = Link State. Razões: (1) Convergência rápida — um cálculo resolve tudo, (2) Escalável — ISPs com 10k+ roteadores (DV seria O(10k) iterações = inviável), (3) Flexibilidade — áreas hierárquicas reduzem complexidade, (4) Métrica configurável (bandwidth, latência, etc.)." },
+        { "id": "a2", "text": "Baseado em Bellman-Ford. Escolhido porque é mais simples", "isCorrect": false, "explanation": "OSPF é Link State (Dijkstra), não DV (Bellman-Ford). Simplici-dade é para RIP, que é legado." },
+        { "id": "a3", "text": "Baseado em algoritmo proprietário exclusivo da Cisco", "isCorrect": false, "explanation": "OSPF é padrão aberto (RFC). Não é proprietário." },
+        { "id": "a4", "text": "Baseado em hashmap de roteadores para lookup O(1)", "isCorrect": false, "explanation": "OSPF usa topologia e Dijkstra, não hashmap lookup." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Se um roteador executa Dijkstra com grafo completo de N=100 roteadores e E=200 enlaces usando versão simples (array), qual é o tempo aproximado esperado em operações básicas (1 operação = ~0.1 nanosegundos em CPU moderna)?",
+      "alternatives": [
+        { "id": "a1", "text": "O(N²) = 10.000 operações ≈ 1 microsegundo", "isCorrect": true, "explanation": "Correto! Dijkstra simples: O(N²) com N=100 → 100² = 10.000 operações. A ~10 GHz (1 operação / 0.1 ns), leva 10.000 × 0.1 ns = 1 microsegundo. Negligenciável. Um roteador pode executar centenas de vezes por segundo se necessário." },
+        { "id": "a2", "text": "O(E log N) = 200 × log(100) ≈ 1.300 operações ≈ 130 nanosegundos", "isCorrect": false, "explanation": "Isso é complexidade de versão com heap (melhor assintoticamente), não versão simples. Mesmo assim, ainda negligenciável." },
+        { "id": "a3", "text": "O(N × E) = 100 × 200 = 20.000 operações ≈ 2 microsegundos", "isCorrect": false, "explanation": "Isso seria Bellman-Ford. Dijkstra simples é O(N²) = 10.000." },
+        { "id": "a4", "text": "O(2^N) = 1.2 × 10^30 operações ≈ anos de computação", "isCorrect": false, "explanation": "Isso seria força bruta (verificar todos os caminhos). Dijkstra é polinomial, não exponencial." }
+      ]
+    }
+  ]
+}
+
