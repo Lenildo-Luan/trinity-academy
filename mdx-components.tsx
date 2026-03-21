@@ -109,6 +109,12 @@ import {
   DhcpToInternetFlowVisualizer,
 } from "./src/components/dhcp-allocation-p5-examples";
 import {
+  NatPacketFlowVisualizer,
+  NatTableDynamicSimulator,
+  SLAACAutoConfigSimulator,
+  DualStackTransitionSimulator,
+} from "./src/components/nat-ipv6-p5-examples";
+import {
   BestEffortVsQoSGuarantees,
   DatagramVsVirtualCircuitComparison,
   CongestionAndPacketDropSimulator,
@@ -459,6 +465,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     DhcpPoolAllocatorSimulator,
     NatTranslationSimulator,
     DhcpToInternetFlowVisualizer,
+    NatPacketFlowVisualizer,
+    NatTableDynamicSimulator,
+    SLAACAutoConfigSimulator,
+    DualStackTransitionSimulator,
     BestEffortVsQoSGuarantees,
     DatagramVsVirtualCircuitComparison,
     CongestionAndPacketDropSimulator,

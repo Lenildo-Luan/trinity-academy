@@ -1,0 +1,109 @@
+{
+  "id": "quiz-14",
+  "title": "Quiz — NAT (Network Address Translation) e IPv6",
+  "description": "Teste seus conhecimentos sobre NAT (funcionamento, tabelas NAT, tipos), endereços privados RFC 1918, técnicas de NAT Traversal (STUN, TURN, hole punching), IPv6 (endereçamento de 128 bits, SLAAC, Flow Label), e estratégias de transição IPv4→IPv6 (Dual-Stack, Tunelamento, NAT64).",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "O que significa NAT (Network Address Translation) e qual é seu propósito principal na Internet moderna?",
+      "alternatives": [
+        { "id": "a1", "text": "Network Access Tunnel — protocolo que cria conexões criptografadas entre redes", "isCorrect": false, "explanation": "Isso descreve VPN (Virtual Private Network), não NAT. NAT é sobre reescrita de endereços, não criptografia ou tunelamento." },
+        { "id": "a2", "text": "Network Address Translation — tecnologia que permite múltiplos hosts privados compartilharem um único IP público através de reescrita dinâmica de endereços e portas nos cabeçalhos dos pacotes", "isCorrect": true, "explanation": "Correto! NAT reescreve (IP privado:porta) → (IP público:porta) ao sair, e reverte ao retornar. Isso permite 5 dispositivos em casa (192.168.1.x) compartilharem 1 IP público (200.1.50.1) do ISP." },
+        { "id": "a3", "text": "Name Address Translator — protocolo que converte nomes de domínios para endereços IP", "isCorrect": false, "explanation": "Isso é DNS (Domain Name System), não NAT. DNS resolvi nomes em IPs; NAT traduz endereços nos cabeçalhos de pacotes." },
+        { "id": "a4", "text": "Necessary Access Table — lista de permissões que controla quais endereços podem se comunicar", "isCorrect": false, "explanation": "Isso é mais próximo de uma firewall rule ou ACL (Access Control List), não NAT." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "De acordo com RFC 1918, quais dos seguintes intervalos de endereços IP são **privados** e não roteáveis globalmente na Internet pública?",
+      "alternatives": [
+        { "id": "a1", "text": "10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16", "isCorrect": true, "explanation": "Correto! RFC 1918 define exatamente esses 3 intervalos como privados: (1) 10.0.0.0 – 10.255.255.255, (2) 172.16.0.0 – 172.31.255.255, (3) 192.168.0.0 – 192.168.255.255. ISPs nunca roteiam esses endereços." },
+        { "id": "a2", "text": "127.0.0.0/8, 192.168.0.0/16, 224.0.0.0/4", "isCorrect": false, "explanation": "127.0.0.0/8 é loopback (localhost, não privado). 224.0.0.0/4 é multicast (não privado). Apenas 192.168.0.0/16 está correto." },
+        { "id": "a3", "text": "169.254.0.0/16, 192.168.0.0/16, 198.51.100.0/24", "isCorrect": false, "explanation": "169.254.0.0/16 é link-local (APIPA, não RFC 1918). 198.51.100.0/24 é documentação (não privado). Essa combinação está errada." },
+        { "id": "a4", "text": "0.0.0.0/8, 10.0.0.0/8, 255.255.255.0/24", "isCorrect": false, "explanation": "0.0.0.0/8 é reservado (não privado). 255.255.255.0/24 é parte do broadcast (não privado). Apenas 10.0.0.0/8 está correto." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Um laptop em uma rede doméstica (192.168.1.100) inicia uma conexão HTTP com um servidor remoto (8.8.8.8:80). Qual é o primeiro passo que o router NAT executa?",
+      "alternatives": [
+        { "id": "a1", "text": "Bloqueia o pacote — endereços privados não podem se comunicar com a Internet pública", "isCorrect": false, "explanation": "NAT não bloqueia — é justamente para permitir essa comunicação! NAT reescreve o pacote." },
+        { "id": "a2", "text": "Encapsula o pacote IPv4 em IPv6 para compatibilidade", "isCorrect": false, "explanation": "Isso é tunelamento IPv4-em-IPv6 (6to4), não NAT. NAT reescreve em nível de endereço/porta, não encapsula." },
+        { "id": "a3", "text": "Intercepta o pacote, reescreve a origem de 192.168.1.100 para seu IP público (ex: 200.1.50.1), aloca uma porta pública (ex: 40000), e cria uma entrada na tabela NAT: (192.168.1.100:54321) ↔ (200.1.50.1:40000)", "isCorrect": true, "explanation": "Correto! Esse é exatamente o processo NAT: (1) Intercepta saída, (2) Reescreve origem privada para pública, (3) Aloca porta pública, (4) Armazena mapeamento na tabela para revertê-lo quando a resposta chegar." },
+        { "id": "a4", "text": "Encaminha o pacote diretamente sem modificação — o servidor remoto descobrirá sozinho o endereço privado via DNS reverso", "isCorrect": false, "explanation": "DNS reverso resolve nomes, não endereços. Além disso, 192.168.1.100 não é roteável publicamente — o pacote seria descartado por qualquer roteador upstream." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Quando o servidor remoto (8.8.8.8) responde ao laptop, para qual endereço ele envia a resposta e qual é o papel do router NAT?",
+      "alternatives": [
+        { "id": "a1", "text": "Servidor responde a 192.168.1.100 — router NAT não faz nada, pois é tráfego de entrada", "isCorrect": false, "explanation": "Servidor remoto não conhece 192.168.1.100 (endereço privado não roteável). Ele responde ao único IP que viu: 200.1.50.1. Router NAT reverte o mapeamento." },
+        { "id": "a2", "text": "Servidor responde a 200.1.50.1 (IP público) — router NAT consulta sua tabela NAT, encontra o mapeamento (200.1.50.1:40000 ↔ 192.168.1.100:54321), reescreve de volta e entrega ao laptop", "isCorrect": true, "explanation": "Correto! (1) Servidor vê 200.1.50.1:40000 como origem, responde para lá. (2) Router recebe resposta em 200.1.50.1:40000. (3) Consulta tabela: encontra 192.168.1.100:54321. (4) Reescreve destino de 200.1.50.1:40000 → 192.168.1.100:54321. (5) Laptop recebe transparentemente." },
+        { "id": "a3", "text": "Servidor responde a 200.1.50.1, mas router NAT descarta o pacote porque tráfego de entrada é proibido por padrão", "isCorrect": false, "explanation": "Router NAT permite entrada se existe mapeamento correspondente na tabela. Tráfego **sem mapeamento** é bloqueado, mas essa resposta está mapeada." },
+        { "id": "a4", "text": "Servidor não responde — NAT quebra a comunicação duplex", "isCorrect": false, "explanation": "NAT suporta comunicação duplex completa para conexões iniciadas localmente (cliente → servidor). Quebra apenas se host externo tentar iniciar (sem port forwarding)." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Qual é a diferença fundamental entre NAT do tipo 'Full Cone' e 'Symmetric NAT'?",
+      "alternatives": [
+        { "id": "a1", "text": "Full Cone aloca uma porta pública fixa para cada porta privada; Symmetric NAT aloca portas diferentes conforme destino externo", "isCorrect": true, "explanation": "Correto! Full Cone: (IP:porta privado) → (IP público:porta fixa). Qualquer host externo pode enviar para essa porta pública. Symmetric NAT: mesmo IP:porta privado → portas públicas diferentes dependendo do destino (192.168.1.100:5000 → 200.1.50.1:40000 para 8.8.8.8, mas 200.1.50.1:40001 para 1.1.1.1). Symmetric é maximamente restritivo — P2P praticamente impossível." },
+        { "id": "a2", "text": "Full Cone é para hosts; Symmetric NAT é para roteadores", "isCorrect": false, "explanation": "Ambos são tipos de comportamento NAT em roteadores, não diferença entre hosts e dispositivos." },
+        { "id": "a3", "text": "Full Cone suporta IPv4; Symmetric NAT suporta IPv6", "isCorrect": false, "explanation": "Ambos são conceitos IPv4 NAT. Diferença não é sobre versão de protocolo." },
+        { "id": "a4", "text": "Full Cone usa UDP; Symmetric NAT usa TCP", "isCorrect": false, "explanation": "Ambos aplicam a TCP e UDP. Diferença não é sobre camada de transporte." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Um aplicativo P2P (como BitTorrent) atrás de um router NAT Restricted Cone quer aceitar conexões de entrada de pares. Qual técnica permite isso automaticamente sem configuração manual do router?",
+      "alternatives": [
+        { "id": "a1", "text": "UPnP (Universal Plug and Play) — aplicação solicita ao router para abrir uma porta dinâmica e mapear entrada automaticamente", "isCorrect": true, "explanation": "Correto! UPnP permite que aplicações abram portas programaticamente: BitTorrent diz ao router 'abra-me a porta 6881 e mapeie 200.1.50.1:6881 → 192.168.1.100:6881'. Nenhuma configuração manual. Se router tiver UPnP habilitado, funciona; caso contrário, precisa de port forwarding manual." },
+        { "id": "a2", "text": "STUN (Simple Traversal of UDP over NAT) — servidor STUN informa o IP público e porta, aplicação compartilha com pares que se conectam", "isCorrect": false, "explanation": "STUN apenas descobre (IP público : porta); não abre portas. Ainda depende de P2P hole punching ou se router já permite entrada." },
+        { "id": "a3", "text": "TURN (Traversal Using Relays around NAT) — servidor TURN retransmite conexões", "isCorrect": false, "explanation": "TURN funciona mas é overkill — servidor caro. UPnP é mais simples e direto para aplicações que precisam de entrada." },
+        { "id": "a4", "text": "Hole Punching — aplicação envia pacotes simultaneamente para vários pares para criar 'buracos' no NAT", "isCorrect": false, "explanation": "Hole punching é **tentativa** de criar caminho direto, mas sucesso depende de tipo NAT (falha em Symmetric). UPnP é mais confiável." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual é o principal problema arquitectural que NAT introduz à Internet, violando o princípio end-to-end original?",
+      "alternatives": [
+        { "id": "a1", "text": "NAT reescreve pacotes — viola a suposição de que dois hosts podem se comunicar diretamente sem intermediários modificando dados", "isCorrect": true, "explanation": "Correto! RFC 1958 pressupõe end-to-end: host A e host B conversam diretamente. NAT quebra isso: intermediários (routers) reescrevem headers. Consequência: aplicações P2P que dependem de comunicação direta falham; hosts externos não conseguem iniciar conexões sem port forwarding." },
+        { "id": "a2", "text": "NAT usa mais CPU que roteadores normais", "isCorrect": false, "explanation": "Performance é uma consequência, não o problema arquitetural fundamental." },
+        { "id": "a3", "text": "NAT requer DHCP para funcionar", "isCorrect": false, "explanation": "NAT e DHCP são independentes — NAT trabalha com IPs estáticos também." },
+        { "id": "a4", "text": "NAT não suporta multicast", "isCorrect": false, "explanation": "Multicast tem limitações próprias, não é um problema específico de NAT." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "IPv6 usa 128 bits para endereçamento. Quantos endereços únicos IPv6 existem, e como isso compara com IPv4?",
+      "alternatives": [
+        { "id": "a1", "text": "IPv6 tem 2^128 ≈ 3,4 × 10^38 endereços; IPv4 tem 2^32 ≈ 4,3 × 10^9. IPv6 é ~7,9 × 10^28 vezes maior", "isCorrect": true, "explanation": "Correto! 2^128 / 2^32 = 2^96 ≈ 7,9 × 10^28. Para uma população de 8 bilhões, IPv6 oferece ~4,2 × 10^28 endereços por pessoa. IPv4 oferece ~0,5 endereços por pessoa (razão do NAT). Abundância vs escassez." },
+        { "id": "a2", "text": "IPv6 tem 2^64 endereços (dobro do IPv4)", "isCorrect": false, "explanation": "Não — IPv6 é 128 bits, não 64. Você pode estar confundindo com CIDR notation ou tamanho de prefixo." },
+        { "id": "a3", "text": "IPv4 tem mais endereços porque é mais recente", "isCorrect": false, "explanation": "Inverso — IPv4 é mais antigo (1981) e subdimensionado. IPv6 é mais recente (1995) e vastamente maior." },
+        { "id": "a4", "text": "Numero de endereços IPv6 é apenas suficiente para ~100 bilhões de hosts", "isCorrect": false, "explanation": "Muito maior — 3,4 × 10^38 é astronomicamente maior que 100 bilhões (10^11)." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "SLAAC (Stateless Address Auto-Configuration) é a capacidade de um host IPv6 se auto-configurar. Quais são os 3 passos principais?",
+      "alternatives": [
+        { "id": "a1", "text": "Host contata servidor DHCP → DHCP fornece IP + máscara + gateway → Host configura e pronto", "isCorrect": false, "explanation": "Isso é DHCP (stateful) — exatamente o que SLAAC evita. SLAAC é **stateless** — nenhum servidor necessário." },
+        { "id": "a2", "text": "(1) Host gera link-local (fe80::{MAC}) localmente, (2) Host envia Router Solicitation (RA) para obter prefixo, (3) Host concatena prefixo + interface ID para formar IP global único", "isCorrect": true, "explanation": "Correto! SLAAC elimina necessidade de DHCP: (1) Link-local fe80::1234:5678:90ab:cdef gerado sem servidor (derivado de MAC), (2) Router responde com prefixo (ex: 2001:db8::/64) via RA, (3) Host cria IP global 2001:db8::1234:5678:90ab:cdef. Automático, descentralizado, sem servidor." },
+        { "id": "a3", "text": "(1) Host escuta broadcast de prefixos, (2) Host replica prefixo, (3) Host descarta link-local e usa apenas global", "isCorrect": false, "explanation": "Hosts não descartam link-local — ambos coexistem. Além disso, descrição é imprecisa." },
+        { "id": "a4", "text": "(1) Host envia DHCP Discover (como IPv4), (2) Servidor DHCPv6 responde, (3) Host configura", "isCorrect": false, "explanation": "Isso é DHCPv6 (stateful) — complementar a SLAAC, não SLAAC em si. SLAAC é stateless e sem servidor." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Um ISP oferece transição IPv4→IPv6 usando 'Dual-Stack'. O que significa e qual é a vantagem?",
+      "alternatives": [
+        { "id": "a1", "text": "Host roda IPv4 e IPv6 simultaneamente — aplicação tenta IPv6, se falha volta a IPv4. Permite transição gradual sem desconectar usuários IPv4", "isCorrect": true, "explanation": "Correto! Dual-Stack: host tem tanto IPv4 (192.168.1.100) quanto IPv6 (2001:db8::100). Conectividade a servidores modernos (Google, Facebook) via IPv6 direto; fallback a IPv4 para legados. Nenhuma quebra — ambos funcionam. Transição suave." },
+        { "id": "a2", "text": "Usar duas pilhas de protocolos (TCP+UDP em IPv4 e TCP+UDP em IPv6) para redundância", "isCorrect": false, "explanation": "TCP/UDP funcionam em ambos IPv4 e IPv6 — não há 'duas pilhas'. Dual-Stack é sobre ter duas versões do IP, não múltiplas transportes." },
+        { "id": "a3", "text": "Router aloca half do tráfego a IPv4 e half a IPv6", "isCorrect": false, "explanation": "Dual-Stack não força divisão 50-50. Preferência é tipicamente IPv6 se disponível, IPv4 se falha." },
+        { "id": "a4", "text": "NAT64 que traduz IPv4 ↔ IPv6 automaticamente na rede", "isCorrect": false, "explanation": "NAT64 é estratégia separada de tradução, não Dual-Stack. Dual-Stack é host rodando ambas versões, não tradução intermediária." }
+      ]
+    }
+  ]
+}
+

@@ -101,6 +101,13 @@
         "description": "Funcionamento do DHCP (descoberta, oferta, requisição, acknowledgment) e as informações que ele pode fornecer, indo além do IP, como as redes obtêm seus blocos de endereços dos ISPs e o papel da ICANN na hierarquia de endereçamento global",
         "video": null,
         "quizId": "quiz-13"
+      },
+      {
+        "id": "charpter-14",
+        "title": "NAT (Network Address Translation) e IPv6",
+        "description": "Duas soluções cruciais para a exaustão do espaço de endereços IPv4. Primeiro, o NAT, explicando seu funcionamento, vantagens, controvérsias e a necessidade de técnicas de NAT Traversal. Em seguida o IPv6, sua motivação, formato do datagrama, principais melhorias em relação ao IPv4 e as estratégias de transição, com foco no tunelamento.",
+        "video": null,
+        "quizId": "quiz-14"
       }
     ]
   }
