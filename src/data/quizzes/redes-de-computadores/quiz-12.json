@@ -1,0 +1,109 @@
+{
+  "id": "quiz-12",
+  "title": "Quiz — Endereçamento IPv4 e CIDR",
+  "description": "Teste seus conhecimentos sobre endereçamento IPv4, estrutura de datagramas, sub-redes, máscaras de rede, CIDR (Classless InterDomain Routing), endereços especiais, e fragmentação de datagramas.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual é o tamanho de um endereço IPv4 em bits?",
+      "alternatives": [
+        { "id": "a1", "text": "16 bits", "isCorrect": false, "explanation": "16 bits são usados em alguns protocolos de rede, mas não para IPv4. IPv4 usa 32 bits." },
+        { "id": "a2", "text": "32 bits", "isCorrect": true, "explanation": "Correto! Um endereço IPv4 tem exatamente 32 bits, frequentemente representados em notação decimal com pontos (ex: 192.168.1.1) com 4 octetos de 8 bits cada." },
+        { "id": "a3", "text": "64 bits", "isCorrect": false, "explanation": "64 bits é o tamanho de um endereço IPv6, não IPv4." },
+        { "id": "a4", "text": "24 bits", "isCorrect": false, "explanation": "24 bits representam apenas 3 octetos (ex: 192.168.1) — insuficiente para endereçamento único na Internet." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Qual é o intervalo de valores para cada octeto em um endereço IPv4 expresso em notação decimal com pontos?",
+      "alternatives": [
+        { "id": "a1", "text": "0-127", "isCorrect": false, "explanation": "0-127 é apenas metade do intervalo de um octeto (8 bits)." },
+        { "id": "a2", "text": "0-256", "isCorrect": false, "explanation": "Um octeto tem 8 bits, então 2^8 = 256 valores possíveis, mas começando do 0: 0-255 (não 0-256)." },
+        { "id": "a3", "text": "0-255", "isCorrect": true, "explanation": "Correto! Cada octeto tem 8 bits, representando 2^8 = 256 valores possíveis (0 a 255). Exemplo: 192.168.1.1 tem octetos 192, 168, 1, 1." },
+        { "id": "a4", "text": "1-254", "isCorrect": false, "explanation": "1-254 é usado para endereços de host em uma sub-rede /24, não para todos os octetos de um endereço IP." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Um endereço IP é 192.168.1.100 e a máscara de rede é 255.255.255.0 (/24). Qual é o endereço de rede (network address)?",
+      "alternatives": [
+        { "id": "a1", "text": "192.168.1.0", "isCorrect": true, "explanation": "Correto! Para encontrar o endereço de rede, aplique AND bitwise entre IP e máscara. 255.255.255.0 significa que os primeiros 24 bits são de rede — logo, 192.168.1.0 (setando os últimos 8 bits para 0)." },
+        { "id": "a2", "text": "192.168.1.100", "isCorrect": false, "explanation": "Este é o IP do host, não o endereço de rede. O endereço de rede tem todos os bits de host zerados." },
+        { "id": "a3", "text": "192.168.1.255", "isCorrect": false, "explanation": "Este é o endereço broadcast, não o endereço de rede. Broadcast tem todos os bits de host como 1." },
+        { "id": "a4", "text": "192.168.0.0", "isCorrect": false, "explanation": "Esta seria a rede de um /23, não um /24. Com máscara /24, apenas o último octeto é zerado." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Quantos hosts podem ser endereçados em uma rede /25 (máscara 255.255.255.128)?",
+      "alternatives": [
+        { "id": "a1", "text": "256 hosts", "isCorrect": false, "explanation": "256 hosts seria uma rede /24. Um /25 é metade de um /24." },
+        { "id": "a2", "text": "512 hosts", "isCorrect": false, "explanation": "512 hosts seria uma rede /23. Um /25 tem 2^(32-25) = 2^7 = 128 endereços." },
+        { "id": "a3", "text": "128 hosts (incluindo rede e broadcast)", "isCorrect": false, "explanation": "Tecnicamente correto em contagem total de endereços, mas o termo 'hosts' refere-se aos endereços usáveis (128 - 2 = 126)." },
+        { "id": "a4", "text": "126 hosts usáveis (128 - 2 = 1 rede, 1 broadcast)", "isCorrect": true, "explanation": "Correto! Um /25 tem 2^7 = 128 endereços totais. Subtraindo o endereço de rede e o endereço broadcast, restam 126 endereços usáveis para hosts." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "O que é CIDR (Classless InterDomain Routing) e qual é sua principal vantagem?",
+      "alternatives": [
+        { "id": "a1", "text": "Um protocolo de roteamento que substitui BGP na Internet", "isCorrect": false, "explanation": "CIDR não é um protocolo de roteamento — é um método de alocação de endereços. BGP continua sendo o protocolo de roteamento inter-AS." },
+        { "id": "a2", "text": "Um método que permite máscaras de rede de qualquer tamanho, eliminando classes rígidas (A, B, C) e permitindo agregação de rotas", "isCorrect": true, "explanation": "Correto! CIDR permite prefixos arbitrários (/8 a /32), não apenas os /8, /16, /24 das classes. Isso elimina desperdício e permite agregar múltiplas redes pequenas em um prefixo maior (ex: 200.1.0.0/21 em vez de 8 entradas /24)." },
+        { "id": "a3", "text": "Um algoritmo para detectar fragmentação de pacotes", "isCorrect": false, "explanation": "CIDR não está relacionado com fragmentação. Fragmentação é tratada pelos campos DF, MF, e Fragment Offset do datagrama IPv4." },
+        { "id": "a4", "text": "Uma técnica para encriptar endereços IP na Internet", "isCorrect": false, "explanation": "CIDR não oferece segurança — é apenas um esquema de alocação de endereços." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Um ISP precisa alugar endereços IP de uma RIR. Atualmente tem 10 clientes, cada um needing ~300 hosts. Usando classes tradicionais (sem CIDR), quantos endereços seriam alocados? Usando CIDR, qual seria a alocação eficiente?",
+      "alternatives": [
+        { "id": "a1", "text": "Classes: 10 × 65.536 = 655.360. CIDR: 10 × 512 = 5.120", "isCorrect": true, "explanation": "Correto! Com classes, 300 hosts exigem uma Classe B (/16 = 65.536 endereços). Com CIDR, um /23 (2 × 256 = 512) é suficiente. Economia: 655.360 vs. 5.120 = 98% de redução!" },
+        { "id": "a2", "text": "Classes: 10 × 256 = 2.560. CIDR: 10 × 256 = 2.560", "isCorrect": false, "explanation": "Ambos usariam /24, que só tem 256 endereços totais e não comporta 300 hosts. E classes nunca usariam /24 — usariam /16." },
+        { "id": "a3", "text": "Classes: 10 × 16.777.216 = 167 bilhões. CIDR: 10 × 512 = 5.120", "isCorrect": false, "explanation": "Classe A (/8) é muito maior do que necessário. Classe B (/16 = 65.536) seria escolhida para 300 hosts." },
+        { "id": "a4", "text": "Classes e CIDR resultam no mesmo uso de endereços", "isCorrect": false, "explanation": "Classes são muito rígidas — resultam em desperdício massivo. CIDR permite alocação exata à necessidade." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual das seguintes é uma faixa de endereços privados (RFC 1918) que NÃO é roteável na Internet pública?",
+      "alternatives": [
+        { "id": "a1", "text": "10.0.0.0/8", "isCorrect": true, "explanation": "Correto! RFC 1918 define 3 faixas privadas: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16. Nenhuma é roteável globalmente — um ISP descartará pacotes originários ou destinados a esses intervalos." },
+        { "id": "a2", "text": "8.8.8.8", "isCorrect": false, "explanation": "8.8.8.8 é o DNS público do Google — é um endereço público roteável." },
+        { "id": "a3", "text": "1.1.1.1", "isCorrect": false, "explanation": "1.1.1.1 é o DNS público de Cloudflare — é um endereço público." },
+        { "id": "a4", "text": "200.1.0.0/16", "isCorrect": false, "explanation": "200.x.x.x é uma faixa pública usada em alguns ISPs. Não está reservada como privada." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Um datagrama IPv4 tem 3000 bytes de tamanho total (incluindo cabeçalho) e será transmitido através de um link com MTU 1500. Quantos fragmentos serão necessários?",
+      "alternatives": [
+        { "id": "a1", "text": "1 fragmento (sem necessidade de fragmentar)", "isCorrect": false, "explanation": "3000 bytes > 1500 bytes MTU — fragmentação é necessária." },
+        { "id": "a2", "text": "2 fragmentos", "isCorrect": true, "explanation": "Correto! Com MTU 1500, cada fragmento pode ter até 1500 bytes. Um datagrama de 3000 bytes será dividido em 2 fragmentos: um com ~1500 bytes (payload 1480) e outro com ~1500 bytes (payload 1520 incluindo cabeçalho). Total = 2." },
+        { "id": "a3", "text": "3 fragmentos", "isCorrect": false, "explanation": "3 fragmentos seria necessário para 4500 bytes (3 × 1500). Para 3000 bytes, 2 fragmentos são suficientes." },
+        { "id": "a4", "text": "4 fragmentos", "isCorrect": false, "explanation": "4 fragmentos seria exagerado para apenas 3000 bytes." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Qual é o propósito do campo TTL (Time To Live) em um datagrama IPv4?",
+      "alternatives": [
+        { "id": "a1", "text": "Indicar quanto tempo os dados devem ser entregues (latência máxima)", "isCorrect": false, "explanation": "TTL não controla latência — controla hops. A latência é afetada por atrasos de propagação e processamento, não por TTL." },
+        { "id": "a2", "text": "Contar o tempo total que um datagramaestá na rede em milissegundos", "isCorrect": false, "explanation": "TTL é em hops (saltos), não em tempo absoluto. Apesar do nome enganoso, TTL decrementa a cada roteador, não por segundo." },
+        { "id": "a3", "text": "Contar hops (saltos) e evitar loops infinitos — decrementa a cada roteador, eliminando o datagrama quando = 0", "isCorrect": true, "explanation": "Correto! TTL começa com um valor típico (64 ou 255) e decrementa em 1 a cada roteador. Quando TTL = 0, o roteador descarta o datagrama, impedindo loops infinitos (ex: rotas circulares malconfigadas)." },
+        { "id": "a4", "text": "Priorizar datagramas — TTL maior = maior prioridade", "isCorrect": false, "explanation": "Prioridade é estabelecida pelo campo ToS/DSCP, não por TTL." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Qual das seguintes é uma vantagem de usar Path MTU Discovery (PMTUD) em vez de deixar fragmentação ocorrer naturalmente?",
+      "alternatives": [
+        { "id": "a1", "text": "Reduz o overhead de processamento em roteadores — eles não precisam fragmentar", "isCorrect": true, "explanation": "Correto! PMTUD permite que o host descubra o MTU do caminho enviando datagramas com DF (Don't Fragment) e reduzindo o tamanho se receber ICMP Fragmentation Required. Isso evita que roteadores intermediários fragmentem — reduz processamento (CPU) e overhead de cabeçalhos repetidos." },
+        { "id": "a2", "text": "Aumenta a confiabilidade da entrega de pacotes", "isCorrect": false, "explanation": "PMTUD não melhora confiabilidade — apenas evita fragmentação. Confiabilidade é competência do TCP." },
+        { "id": "a3", "text": "Permite enviar datagramas maiores que 1500 bytes", "isCorrect": false, "explanation": "PMTUD não permite enviar datagramas maiores — faz exatamente o oposto: reduz o tamanho para caber no MTU." },
+        { "id": "a4", "text": "Encripta o datagrama para evitar monitoramento", "isCorrect": false, "explanation": "PMTUD não oferece segurança — é apenas um mecanismo de descoberta de tamanho." }
+      ]
+    }
+  ]
+}
+

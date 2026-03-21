@@ -1,0 +1,289 @@
+# Endereçamento IPv4 e CIDR
+
+Até aqui, estudamos como roteadores **decidem** para onde enviar um pacote (LPM), como **enfileiram** pacotes (FIFO, Prioridade, WFQ) e como **comutam** dados entre portas. Mas há uma pergunta fundamental que não respondemos ainda: **como um roteador sabe que um pacote pertence a qual rede?** E **como os endereços IP são alocados e organizados?**
+
+Este capítulo responde essas questões explorando o **endereço IP**, o **formato do datagrama IPv4**, a estrutura de **sub-redes**, e a evolução para o **CIDR (Classless InterDomain Routing)** — o padrão que torna possível usar o espaço de endereços da Internet de forma eficiente.
+
+## O Endereço IP e o Datagrama IPv4
+
+### O que é um Endereço IP?
+
+Um **endereço IP (Internet Protocol)** é um identificador único de 32 bits (em IPv4) atribuído a cada interface de rede. É o endereço usado para rotear dados através da Internet.
+
+A representação em **notação decimal com pontos** (dotted-decimal notation) torna os endereços legíveis para humanos:
+
+<MarkdownTable
+  headers={["Formato", "Exemplo", "Intervalo por Octeto"]}
+  rows={[
+    ["Binário (32 bits)", "11000000.10101000.00000001.00000001", "0-1 em cada bit"],
+    ["Decimal com pontos", "192.168.1.1", "0-255 em cada octeto"],
+    ["Hexadecimal", "0xC0A80101", "0x00-0xFF em cada octeto"],
+  ]}
+/>
+
+### Estrutura do Datagrama IPv4
+
+O datagrama IPv4 é dividido em **cabeçalho** e **carga útil** (payload). O cabeçalho contém informações essenciais para o roteamento:
+
+<MarkdownTable
+  headers={["Campo", "Tamanho", "Descrição"]}
+  rows={[
+    ["**Version (V)**", "4 bits", "Versão do IP — sempre 4 para IPv4"],
+    ["**Header Length (HLEN)**", "4 bits", "Comprimento do cabeçalho em palavras de 32 bits (mínimo 5 = 20 bytes)"],
+    ["**Type of Service (ToS)**", "8 bits", "Marca a prioridade e requisitos de QoS (agora DSCP + ECN)"],
+    ["**Total Length**", "16 bits", "Tamanho total do datagrama (cabeçalho + dados), máximo 65535 bytes"],
+    ["**Identification**", "16 bits", "Número único para esta datagrama; ajuda a reconhecer fragmentos"],
+    ["**Flags**", "3 bits", "DF (Don't Fragment), MF (More Fragments), Reserved"],
+    ["**Fragment Offset**", "13 bits", "Deslocamento deste fragmento em relação ao datagrama original"],
+    ["**Time to Live (TTL)**", "8 bits", "Decrementa a cada salto (roteador); elimina quando = 0"],
+    ["**Protocol**", "8 bits", "Identifica protocolo da camada superior (6 = TCP, 17 = UDP, 1 = ICMP)"],
+    ["**Header Checksum**", "16 bits", "Checksum do cabeçalho apenas (recalculado a cada salto)"],
+    ["**Source Address**", "32 bits", "Endereço IP da origem"],
+    ["**Destination Address**", "32 bits", "Endereço IP do destino"],
+    ["**Options**", "0-40 bytes", "Opcional; pode incluir timestamp, rota definida pela origem, etc."],
+  ]}
+/>
+
+Apenas os campos **Source Address** e **Destination Address** são cruciais para roteamento. Os roteadores consultam apenas o **destino** para decidir para onde enviar — a origem é usada para rotas de retorno.
+
+### Visualização da Estrutura do Datagrama IPv4
+
+<IPv4HeaderDiagram />
+
+### Visualizacao Interativa: TTL por Saltos
+
+O TTL evita loops de roteamento infinitos, decrementando a cada roteador ate chegar a zero.
+
+<TTLHopsSimulator />
+
+## Sub-redes e Máscaras
+
+Um **endereço IP** tem dois componentes lógicos:
+1. **Porção de Rede (Network Portion)** — identificar a rede
+2. **Porção de Host (Host Portion)** — identificar um host específico dentro da rede
+
+Essa divisão é feita usando uma **máscara de rede** (netmask).
+
+### Máscaras de Rede e Notação CIDR
+
+Uma **máscara de rede** é um padrão de 32 bits onde **1s representam bits de rede** e **0s representam bits de host**.
+
+<MarkdownTable
+  headers={["Notação", "Máscara em Decimal", "Máscara em Binário", "Bits de Rede", "Bits de Host"]}
+  rows={[
+    ["/8 (Classe A)", "255.0.0.0", "11111111.00000000.00000000.00000000", "8", "24"],
+    ["/16 (Classe B)", "255.255.0.0", "11111111.11111111.00000000.00000000", "16", "16"],
+    ["/24 (Classe C)", "255.255.255.0", "11111111.11111111.11111111.00000000", "24", "8"],
+    ["/25", "255.255.255.128", "11111111.11111111.11111111.10000000", "25", "7"],
+    ["/30", "255.255.255.252", "11111111.11111111.11111111.11111100", "30", "2"],
+  ]}
+/>
+
+**Exemplo de sub-rede /24:**
+
+Consideremos a rede **192.168.1.0/24**:
+
+- **Endereço de rede**: 192.168.1.0 (bits de host = 0)
+- **Máscara**: 255.255.255.0
+- **Bits de rede**: primeiros 24 bits = 192.168.1
+- **Bits de host**: últimos 8 bits = 0-255
+- **Endereços válidos para hosts**: 192.168.1.1 até 192.168.1.254
+- **Endereço broadcast**: 192.168.1.255 (todos os bits de host = 1)
+
+O endereço 192.168.1.100 pertence a esta sub-rede? **Sim**, porque os primeiros 24 bits (192.168.1) coincidem.
+
+O endereço 192.168.2.100 pertence a esta sub-rede? **Não**, porque o terceiro octeto é 2, não 1.
+
+### Cálculo de Endereço de Rede
+
+Para encontrar o **endereço de rede** (network address) de um IP em uma sub-rede, aplique a **máscara com AND bitwise**:
+
+<MarkdownTable
+  headers={["Componente", "Valor", "Binário"]}
+  rows={[
+    ["**IP**", "192.168.1.100", "11000000.10101000.00000001.01100100"],
+    ["**Máscara (/24)**", "255.255.255.0", "11111111.11111111.11111111.00000000"],
+    ["**AND (resultado)**", "192.168.1.0", "11000000.10101000.00000001.00000000"],
+  ]}
+/>
+
+### Visualizacao Interativa: AND Bitwise
+
+Compare os bits do IP, mascara e resultado para ver exatamente quais bits de host sao zerados.
+
+<BitwiseAndMaskVisualizer />
+
+### Classes de Endereços IPv4 (Histórico)
+
+Historicamente, o IPv4 foi dividido em **classes** (A, B, C, D, E) com base nos primeiros bits. Esse esquema é **obsoleto** mas ainda aparece em contextos históricos:
+
+<MarkdownTable
+  headers={["Classe", "Intervalo de Primeiro Octeto", "Máscara Padrão", "Bits de Rede", "Hosts por Rede"]}
+  rows={[
+    ["**Classe A**", "0-127", "255.0.0.0 (/8)", "8 bits", "~16 milhões"],
+    ["**Classe B**", "128-191", "255.255.0.0 (/16)", "16 bits", "~65 mil"],
+    ["**Classe C**", "192-223", "255.255.255.0 (/24)", "24 bits", "254"],
+    ["**Classe D**", "224-239", "Multicast", "—", "Não aplicável"],
+    ["**Classe E**", "240-255", "Reservado (pesquisa)", "—", "Não aplicável"],
+  ]}
+/>
+
+**Problema com Classes:** uma organização que precisava de 300 hosts precisava alugar uma rede Classe B com ~65.000 endereços — desperdiço massivo. Isso motivou a adoção do **CIDR**.
+
+## CIDR (Classless InterDomain Routing)
+
+O **CIDR**, padronizado em 1993 (RFC 1519), elimina as classes rígidas e permite **máscaras de rede de qualquer tamanho**. Isso revolucionou a eficiência do uso de endereços IP.
+
+### Conceito de CIDR
+
+Em vez de estar preso a classes predefinidas (/8, /16, /24), o CIDR permite qualquer prefixo:
+
+- **10.0.0.0/8** — Rede com 2^24 = 16.777.216 hosts
+- **172.16.0.0/12** — Rede com 2^20 = 1.048.576 hosts
+- **192.168.0.0/16** — Rede com 2^16 = 65.536 hosts
+- **10.10.10.0/24** — Rede com 2^8 = 256 hosts
+- **203.0.113.128/25** — Rede com 2^7 = 128 hosts
+
+Para uma organização que precisa de 300 hosts, aloque um **/23** (2 × 256 = 512 hosts) em vez de um /16 — uma economia de 99% de espaço de endereços.
+
+### Agregação de Rotas (Route Aggregation)
+
+O CIDR também permitiu **agregação de rotas**: múltiplas redes pequenas podem ser anunciadas como um único prefixo, reduzindo o tamanho das tabelas de roteamento.
+
+**Exemplo:**
+
+Um ISP em São Paulo tem 8 sub-redes:
+
+- 200.1.0.0/24
+- 200.1.1.0/24
+- 200.1.2.0/24
+- 200.1.3.0/24
+- 200.1.4.0/24
+- 200.1.5.0/24
+- 200.1.6.0/24
+- 200.1.7.0/24
+
+Em vez de 8 entradas na tabela de roteamento global, o ISP anuncia um único prefixo:
+
+- **200.1.0.0/21** — que engloba todas as 8 redes
+
+Os roteadores globais precisam de apenas **1 entrada** em vez de **8**. A economia é multiplicada por milhões quando consideramos todos os ISPs do mundo.
+
+### Visualizacao Interativa: Agregacao CIDR
+
+Veja a transicao entre anunciar 8 prefixos /24 separadamente e anunciar um unico superprefixo /21.
+
+<CIDRAggregationVisualizer />
+
+### Propriedades de CIDR
+
+<MarkdownTable
+  headers={["Propriedade", "Descrição"]}
+  rows={[
+    ["**Flexibilidade**", "Máscaras de qualquer tamanho (/1 até /32), não apenas /8, /16, /24"],
+    ["**Alocação Eficiente**", "Redes dimensionadas exatamente para necessidade; elimina desperdiço de Classe B"],
+    ["**Agregação de Rotas**", "Múltiplas redes contíguas podem ser anunciadas como um prefixo maior"],
+    ["**Notação CIDR**", "Endereço/prefixo (ex: 192.168.0.0/22) — fácil leitura"],
+    ["**Compatibilidade**", "CIDR é agnóstico ao provedor — ISP A em SP pode rotear para ISP B no RJ com máxima flexibilidade"],
+  ]}
+/>
+
+### Visualizacao Interativa: CIDR com Longest Prefix Match
+
+No encaminhamento real, a agregacao convive com rotas mais especificas. Esta simulacao mostra como o roteador escolhe o maior prefixo que casa com o destino.
+
+<CIDRLongestPrefixMatchVisualizer />
+
+## Endereços Especiais e Reservados
+
+Nem todos os 2^32 ~4 bilhões de endereços IPv4 são usáveis para hosts. Alguns intervalos têm significados especiais:
+
+<MarkdownTable
+  headers={["Intervalo", "Tamanho", "Designação", "Uso"]}
+  rows={[
+    ["**0.0.0.0/8**", "16 M", "This Network", "IP origem em DHCP, roteamento padrão"],
+    ["**10.0.0.0/8**", "16 M", "Privado (RFC 1918)", "Redes corporativas internas"],
+    ["**127.0.0.0/8**", "16 M", "Loopback", "Localhost (127.0.0.1); auto-referência"],
+    ["**169.254.0.0/16**", "64 K", "Link-local (APIPA)", "Auto-configuração sem DHCP"],
+    ["**172.16.0.0/12**", "1 M", "Privado (RFC 1918)", "Redes corporativas internas"],
+    ["**192.0.2.0/24**", "256", "Documentação", "Exemplos em RFCs (TEST-NET-1)"],
+    ["**192.168.0.0/16**", "64 K", "Privado (RFC 1918)", "Redes domésticas (WiFi, LANs)"],
+    ["**224.0.0.0/4**", "268 M", "Multicast", "Grupos de multicast para múltiplos receptores"],
+    ["**240.0.0.0/4**", "268 M", "Reservado", "Pesquisa; não deve ser usado"],
+    ["**255.255.255.255/32**", "1", "Broadcast", "Broadcast na rede local (todos os hosts)"],
+  ]}
+/>
+
+### Endereços Privados (RFC 1918)
+
+O **RFC 1918** reservou três intervalos de endereços **privados** (não roteáveis na Internet pública):
+
+<MarkdownTable
+  headers={["Intervalo", "Máscara Padrão", "Hosts Disponíveis", "Caso de Uso"]}
+  rows={[
+    ["10.0.0.0 até 10.255.255.255", "/8", "16.777.214", "Grandes corporações, data centers"],
+    ["172.16.0.0 até 172.31.255.255", "/12", "1.048.574", "Médias corporações, kubernetes"],
+    ["192.168.0.0 até 192.168.255.255", "/16", "65.534", "Redes domésticas, pequenas empresas"],
+  ]}
+/>
+
+Esses endereços privados **não são roteáveis na Internet global** — um ISP descarta qualquer pacote com origem ou destino nesses intervalos. Organisações usam **NAT (Network Address Translation)** para traduzir endereços privados em públicos ao acessar a Internet.
+
+## Fragmentação e Reassembly
+
+O **MTU (Maximum Transmission Unit)** de um link é o tamanho máximo de um frame que pode ser transmitido. Para Ethernet, o MTU típico é **1500 bytes**.
+
+Se um datagrama IPv4 (20 bytes de cabeçalho + payload) exceder o MTU de um link, o roteador deve **fragmentar** o datagrama em múltiplos fragmentos, cada um com seu próprio cabeçalho.
+
+### Exemplo de Fragmentação
+
+Suponha um datagrama de 4000 bytes total (20 bytes cabeçalho + 3980 bytes de dados) ser enviado através de um link com MTU 1500:
+
+- **Fragment 1:** bytes 0-1479 de dados + cabeçalho (Total = 1499 bytes)
+  - Offset = 0
+  - Flags: MF = 1 (mais fragmentos vêm)
+- **Fragment 2:** bytes 1480-2959 de dados + cabeçalho (Total = 1499 bytes)
+  - Offset = 185 (1480/8)
+  - Flags: MF = 1
+- **Fragment 3:** bytes 2960-3979 de dados + cabeçalho (Total = 1039 bytes)
+  - Offset = 370 (2960/8)
+  - Flags: MF = 0 (último fragmento)
+
+### Visualizacao Interativa: Fragmentacao por MTU
+
+Altere mentalmente o MTU e observe como o datagrama e quebrado em fragmentos com offsets e flag MF.
+
+<IPv4FragmentationSimulator />
+
+Todos os fragmentos compartilham o mesmo **Identification**, permitindo o receptor **remontar** (reassemble) o datagrama original na camada de rede.
+
+### Problemas de Fragmentação
+
+<MarkdownTable
+  headers={["Problema", "Impacto", "Solução"]}
+  rows={[
+    ["Overhead de cabeçalho repetido", "Cada fragmento tem cabeçalho — menos espaço para dados", "Path MTU Discovery (PMTUD)"],
+    ["Perda de um fragmento perde todo o datagrama", "Se 1 de 3 fragmentos é perdido, toda a mensagem falha", "TCP retransmite o datagrama inteiro"],
+    ["Processamento em cascata", "Roteadores intermediários precisam fragmentar novamente se MTU diminui", "Evitar fragmentação no caminho com PMTUD"],
+  ]}
+/>
+
+Para evitar fragmentação, os hosts usam **Path MTU Discovery (PMTUD)**: enviam um datagrama com o bit DF (Don't Fragment) ativado; se um roteador não pode transmitir, retorna ICMP "Destination Unreachable (Fragmentation Required)" — o host reduz o tamanho e retenta.
+
+## Resumo Conceitual: Do Endereço IP ao Roteamento
+
+<MarkdownTable
+  headers={["Conceito", "Definição", "Exemplo"]}
+  rows={[
+    ["**Endereço IP**", "Identificador de 32 bits para uma interface de rede", "192.168.1.100"],
+    ["**Sub-rede**", "Grupo de endereços IP com mesma porção de rede", "192.168.1.0/24 (256 endereços)"],
+    ["**Máscara de Rede**", "Padrão de bits que separa rede de host", "255.255.255.0 (/24)"],
+    ["**CIDR**", "Método de alocação de endereços sem classes rígidas", "200.1.0.0/21 (8 redes de /24)"],
+    ["**Agregação de Rotas**", "Anunciar múltiplas redes pequenas como um prefixo maior", "ISP anuncia /21 para economizar espaço na tabela"],
+    ["**Fragmentação**", "Dividir datagrama em múltiplos fragmentos se exceder MTU", "4000 bytes → 3 fragmentos em MTU 1500"],
+    ["**PMTUD**", "Descobrir o MTU do caminho para evitar fragmentação", "Reduzir tamanho de datagramas até não ser necessário fragmentar"],
+  ]}
+/>
+
+Com essa compreensão de endereçamento IPv4 e CIDR, temos a base para entender como a **tabela de roteamento** (capítulo anterior) funciona: cada entrada mapeia um **prefixo CIDR** para uma porta de saída, e o roteador usa **LPM** para escolher a rota mais específica. E é por isso que **agregação de rotas** é crucial — permite que roteadores globais escalem sem colapsar sob o peso de bilhões de rotas individuais.
+

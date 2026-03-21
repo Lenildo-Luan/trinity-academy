@@ -93,6 +93,14 @@ import {
   QueueCongestionTimelineSimulator,
 } from "./src/components/router-decision-queueing-p5-examples";
 import {
+  IPv4HeaderDiagram,
+  BitwiseAndMaskVisualizer,
+  CIDRAggregationVisualizer,
+  IPv4FragmentationSimulator,
+  TTLHopsSimulator,
+  CIDRLongestPrefixMatchVisualizer,
+} from "./src/components/ipv4-cidr-p5-examples";
+import {
   BestEffortVsQoSGuarantees,
   DatagramVsVirtualCircuitComparison,
   CongestionAndPacketDropSimulator,
@@ -431,6 +439,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     DropTailVsRedComparator,
     SchedulingDisciplinesComparator,
     QueueCongestionTimelineSimulator,
+    IPv4HeaderDiagram,
+    BitwiseAndMaskVisualizer,
+    CIDRAggregationVisualizer,
+    IPv4FragmentationSimulator,
+    TTLHopsSimulator,
+    CIDRLongestPrefixMatchVisualizer,
     BestEffortVsQoSGuarantees,
     DatagramVsVirtualCircuitComparison,
     CongestionAndPacketDropSimulator,
