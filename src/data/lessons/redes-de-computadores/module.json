@@ -115,6 +115,13 @@
         "description": "Teoria por trás dos algoritmos de roteamento usando grafos para modelar a rede e definir o conceito de custo de um caminho. Algoritmos de roteamento: o algoritmo de estado de enlace de Dijkstra e o algoritmo de vetor de distância (Bellman-Ford), analisando seus passos, exemplos e complexidades.",
         "video": null,
         "quizId": "quiz-15"
+      },
+      {
+        "id": "charpter-16",
+        "title": "Desafios e Comparação de Algoritmos",
+        "description": "Oscilações de rota no algoritmo de estado de enlace e o problema da contagem ao infinito no algoritmo de vetor de distância. Comparação direta entre as abordagens de estado de enlace (LS) e vetor de distância (DV), suas diferenças em termos de complexidade de mensagens, velocidade de convergência e robustez.",
+        "video": null,
+        "quizId": "quiz-16"
       }
     ]
   }

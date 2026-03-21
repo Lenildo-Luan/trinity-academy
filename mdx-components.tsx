@@ -127,6 +127,15 @@ import {
   LinkStateVsDistanceVectorConvergenceComparator,
 } from "./src/components/routing-fundamentals-p5-examples";
 import {
+  RouteOscillationVisualizer,
+  CountToInfinityVisualizer,
+  OspfVsRipConvergenceRaceVisualizer,
+  MultipathLoadDistributionVisualizer,
+  DistanceVectorLoopTopologyVisualizer,
+  OspfAreasHierarchyVisualizer,
+  BgpAsPathPolicyVisualizer,
+} from "./src/components/routing-challenges-p5-examples";
+import {
   MultiplexingSender,
   DemultiplexingReceiver,
   UDPDemultiplexing,
@@ -483,6 +492,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     DijkstraRoutingStepSimulator,
     DistanceVectorBellmanFordIterativeVisualizer,
     LinkStateVsDistanceVectorConvergenceComparator,
+    RouteOscillationVisualizer,
+    CountToInfinityVisualizer,
+    OspfVsRipConvergenceRaceVisualizer,
+    MultipathLoadDistributionVisualizer,
+    DistanceVectorLoopTopologyVisualizer,
+    OspfAreasHierarchyVisualizer,
+    BgpAsPathPolicyVisualizer,
     MultiplexingSender,
     DemultiplexingReceiver,
     UDPDemultiplexing,

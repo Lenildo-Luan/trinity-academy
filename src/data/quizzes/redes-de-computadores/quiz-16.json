@@ -1,0 +1,309 @@
+{
+  "id": "quiz-16",
+  "title": "Quiz — Desafios e Comparação de Algoritmos",
+  "description": "Teste seus conhecimentos sobre oscilações de rota em Link State, contagem ao infinito em Distance Vector, técnicas de mitigação (Split Horizon, damping, multipath), comparação prática entre OSPF e RIP, e o papel de BGP na Internet.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "O que causa oscilação de rota em um algoritmo de Link State quando a métrica é dinâmica?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Dijkstra converge em 1 execução, causando mudanças de rota **instantâneas e globais** quando métrica muda. Se dois caminhos ficam com custo igual, todos os roteadores comudam simultaneamente, criando loop de tráfego entre caminhos",
+          "isCorrect": true,
+          "explanation": "Correto! Quando métrica reflete congestionamento em tempo real, Dijkstra reexecuta constantemente. Todos comudam de rota ao mesmo tempo para o mesmo 'novo' caminho ótimo. Se esse caminho fica congestionado, métrica sobe novamente, todos comudam de volta. Oscilação rápida e sincronizada = instabilidade."
+        },
+        {
+          "id": "a2",
+          "text": "Link State itera múltiplas vezes, então cada iteração pode escolher caminho diferente",
+          "isCorrect": false,
+          "explanation": "Não — Link State não itera. Dijkstra é 1 execução. Distance Vector é que itera (e tem problema diferente: contagem ao infinito)."
+        },
+        {
+          "id": "a3",
+          "text": "Rotas dinâmicas causam timeouts que levam ao descarte de pacotes",
+          "isCorrect": false,
+          "explanation": "Timeouts são sintoma, não causa de oscilação. Oscilação é sobre escolha de rota, não perda de pacotes."
+        },
+        {
+          "id": "a4",
+          "text": "Link State não consegue lidar com topologia muda em tempo real",
+          "isCorrect": false,
+          "explanation": "Link State lida bem com mudanças de topologia (enlaces falhando). Problema é **métrica dinâmica** mudando frequentemente, não topologia."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Qual é a primeira mitigação prática recomendada para evitar oscilação de rota em OSPF?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Usar métricas **estáticas ou lentamente variáveis**, não baseadas em congestionamento instantâneo (ex: capacidade fixa em Mbps, não banda atual)",
+          "isCorrect": true,
+          "explanation": "Correto! OSPF típico usa custo = 10^8 / largura_banda (em Mbps). Largura de banda é **fixa** por enlace físico, não muda frequentemente. Se usar métrica que muda a cada segundo (como congestionamento), causará Dijkstra reexecutar constantemente → oscilação. Métrica estável = rota estável."
+        },
+        {
+          "id": "a2",
+          "text": "Desabilitar Dijkstra durante mudanças de métrica",
+          "isCorrect": false,
+          "explanation": "Impossível — Dijkstra é parte essencial do Link State. Não pode ser desabilitado."
+        },
+        {
+          "id": "a3",
+          "text": "Usar Distance Vector em vez de Link State",
+          "isCorrect": false,
+          "explanation": "Trocar para DV introduziria **outro problema**: contagem ao infinito, convergência lenta. Não é solução."
+        },
+        {
+          "id": "a4",
+          "text": "Duplicar todas as rotas para criar caminho de backup",
+          "isCorrect": false,
+          "explanation": "Múltiplos caminhos (multipath) é uma **segunda técnica** de mitigação, não a primeira. Primeira é usar métrica estável."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "O que é 'damping' (amortecimento) em roteamento, e por que reduz oscilação?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Não recomputar/republcar rotas imediatamente quando métrica muda. Esperar interval (ex: 5s) antes de propagar mudança. Mudanças transitórias são ignoradas; apenas mudanças **duradouras** propagam",
+          "isCorrect": true,
+          "explanation": "Correto! Se métrica muda por 1 segundo (transiente), damping ignora. Se muda por 5+ segundos (duradouro), propaga. Resultado: menos recomputações, menos oscilação. Trade-off: roteamento leva mais tempo para se adaptar a mudanças reais (mas evita falsas mudanças)."
+        },
+        {
+          "id": "a2",
+          "text": "Reduzir frequência de Dijkstra — execute apenas 1x por minuto, não 1x por segundo",
+          "isCorrect": false,
+          "explanation": "Isso é **periodic timer**, não damping. Damping é baseado em **detecção de mudança transiente**, não tempo fixo."
+        },
+        {
+          "id": "a3",
+          "text": "Aumentar peso de todas as arestas para absorver variações",
+          "isCorrect": false,
+          "explanation": "Aumentar peso uniformemente não reduz oscilação — ainda muda todos os roteadores simultaneamente."
+        },
+        {
+          "id": "a4",
+          "text": "Enviar ACKs para confirmar recebimento de atualização de métrica",
+          "isCorrect": false,
+          "explanation": "ACKs não são sobre amortecimento. Amortecimento é sobre esperar mudanças duradouras."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Qual é o problema clássico do Distance Vector chamado 'contagem ao infinito'?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Quando um enlace falha, o destino é marcado ∞. Vizinhos ainda têm rotas antigas via roteador que falhou. Eles compartilham essas rotas uns com os outros, criando loop: A→B→C→A, onde custo aumenta (3→5→7→...) até convergir para ∞. Pode levar O(N) iterações",
+          "isCorrect": true,
+          "explanation": "Correto! Exemplo: R1-R2-R3-R4, enlace R3-R4 falha. R3 marca D_3[4] = ∞. Mas R2 tem D_2[4] = 1 (antigo, via R3). R2 recebe de R3 'R4 é ∞', então R2 atualiza. MAS se topologia tem loop (ex: R1.5 também conectado), R1.5 pode informar R2 'posso chegar R4', e R2 pensa 'posso chegar via R1.5'. Cria loop: 3→4→5→6→...→∞. RIP limita a 15 para resolver."
+        },
+        {
+          "id": "a2",
+          "text": "Quando há infinitos roteadores na rede",
+          "isCorrect": false,
+          "explanation": "Contagem ao infinito não é sobre quantidade de roteadores. Ocorre mesmo com poucos roteadores se houver loop."
+        },
+        {
+          "id": "a3",
+          "text": "Quando Bellman-Ford não consegue computar com pesos negativos",
+          "isCorrect": false,
+          "explanation": "Roteamento não usa pesos negativos. Bellman-Ford em roteamento sempre tem pesos positivos."
+        },
+        {
+          "id": "a4",
+          "text": "Quando todos os roteadores simultaneamente tentam rotear para o mesmo destino",
+          "isCorrect": false,
+          "explanation": "Tráfego concentrado é congestionamento, não contagem ao infinito. Contagem ao infinito é sobre **convergência lenta de protocolo**, não tráfego."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Como 'Split Horizon com Poison Reverse' resolve contagem ao infinito? E por que não resolve 100%?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Se um roteador **aprendeu rota via vizinho**, nunca informa **esse vizinho** sobre a rota (informa ∞ — 'poison'). Quebra loops simples (A→B→A), mas não loops longos (A→B→C→A) — esses ainda aumentam custo lentamente até ∞",
+          "isCorrect": true,
+          "explanation": "Correto! Split Horizon quebra loops **diretos** (2-nós): se A aprendeu de B, não informa B de volta. Previne oscilação rápida A→B→A. Mas com 3+ nós em loop, ainda pode haver contagem ao infinito, só que mais lentamente. RIP adiciona limite 15 saltos para garantir convergência."
+        },
+        {
+          "id": "a2",
+          "text": "Delay todas as atualizações de rota em 1 segundo, prevenindo loops imediatos",
+          "isCorrect": false,
+          "explanation": "Isso é damping, não Split Horizon. Split Horizon é específico a evitar re-informar roteador de origem."
+        },
+        {
+          "id": "a3",
+          "text": "Estabelece timeout global — se métrica não converge em N segundos, aborta",
+          "isCorrect": false,
+          "explanation": "Timeout é backup. Split Horizon é prevenção estrutural."
+        },
+        {
+          "id": "a4",
+          "text": "Usa criptografia para validar origem de mensagens de roteamento",
+          "isCorrect": false,
+          "explanation": "Criptografia é segurança, não prevenção de contagem ao infinito."
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Por que RIP limita-se a máximo de 15 saltos, e qual é o impacto prático?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Limite garante que contagem ao infinito converge em no máximo 15 iterações. Qualquer rota com >15 saltos é marcada inacessível (∞). Impacto: redes maiores que 15 saltos são **impossíveis em RIP**",
+          "isCorrect": true,
+          "explanation": "Correto! Sem limite, contagem ao infinito pode teoricamente demorar infinito. Com limite 15, em pior caso leva 15 iterações (cada iteração aumenta custo em 1, até atingir 16=∞). Impacto: força limite de tamanho de rede. Por isso RIP é **obsoleto** — internets modernas têm 20k+ roteadores BGP; RIP seria inviável."
+        },
+        {
+          "id": "a2",
+          "text": "Limite economiza memória — evita armazenar rotas muito longas",
+          "isCorrect": false,
+          "explanation": "Economia de memória é benéfico, mas não é a razão principal. Razão principal é convergência de contagem ao infinito."
+        },
+        {
+          "id": "a3",
+          "text": "Limite reduz latência de propagação — rotas curtas são mais rápidas",
+          "isCorrect": false,
+          "explanation": "Comprimento de rota não é impedimento a propagação (ambas têm custo similar em delay)."
+        },
+        {
+          "id": "a4",
+          "text": "RIP foi projetado para redes com máximo 15 roteadores",
+          "isCorrect": false,
+          "explanation": "RIP foi projetado para redes pequenas a médias, mas limite de 15 saltos permite ~30+ roteadores em teoria. Problema é que com contagem ao infinito, limite prático é bem menor."
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Comparando convergência após uma falha de enlace: OSPF (Link State) vs. RIP (Distance Vector), qual converge mais rápido e por quê?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "OSPF converge em ~300ms-1s (1 execução de Dijkstra). RIP converge em ~3-15s (múltiplas iterações de Bellman-Ford). LS é centralizado (rápido), DV é distribuído (lento)",
+          "isCorrect": true,
+          "explanation": "Correto! Quando enlace falha: OSPF = roteador detecta, inunda nova topologia, todos reexecutam Dijkstra 1x com topologia corrigida = **rápido**. RIP = roteadores atualizam incrementalmente, cada rodada um roteador aprende da vizinhança = **lento** (O(N) iterações). Para usuário, OSPF falha de ~300ms são imperceptíveis; RIP falhas de 15s causam timeout de TCP (conexões caem)."
+        },
+        {
+          "id": "a2",
+          "text": "RIP converge mais rápido porque transmite menos dados (apenas vizinhos, não topologia completa)",
+          "isCorrect": false,
+          "explanation": "Volume de dados não é fator limitante. Fator é **iterações** — RIP precisa de O(N) iterações de propagação; OSPF é 1."
+        },
+        {
+          "id": "a3",
+          "text": "Ambos convergem no mesmo tempo; diferença é que OSPF usa menos banda",
+          "isCorrect": false,
+          "explanation": "Convergência é diferente. OSPF é ~10x mais rápido."
+        },
+        {
+          "id": "a4",
+          "text": "RIP converge mais rápido porque usa damping automático",
+          "isCorrect": false,
+          "explanation": "RIP não usa damping padrão. Damping é técnica auxiliar, não essencial."
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "OSPF usa áreas hierárquicas para escalabilidade. O que é uma 'Backbone Area (Area 0)' e qual é seu papel?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Area 0 é a área central que conecta todas as outras áreas. Roteadores em areas periféricas rodam Dijkstra dentro de sua área + contam com ABRs (roteadores de borda de área) para entregar tráfego inter-área via Area 0",
+          "isCorrect": true,
+          "explanation": "Correto! OSPF divide rede em áreas para reduzir complexidade. Area 0 (backbone) é a 'coluna vertebral'. Áreas 1-65535 são periféricas. Roteador em Area 1 roda Dijkstra **apenas** com roteadores da Area 1 (não precisa conhecer toda a rede). Para alcançar Area 2, passa por ABR (Area Border Router) que conecta Area 1 ↔ Area 0 ↔ Area 2. Escalabilidade: em vez de 1 Dijkstra com 10k nós, roda N Dijkstras menores com ~100 nós cada."
+        },
+        {
+          "id": "a2",
+          "text": "Area 0 é backup — usada apenas quando outras áreas falham",
+          "isCorrect": false,
+          "explanation": "Area 0 é ativa sempre, não backup. É coluna vertebral."
+        },
+        {
+          "id": "a3",
+          "text": "Area 0 armazena tabelas de roteamento de todos os roteadores",
+          "isCorrect": false,
+          "explanation": "Area 0 não armazena. Cada roteador armazena sua própria tabela. Area 0 é conceitual (topologia)."
+        },
+        {
+          "id": "a4",
+          "text": "Area 0 usa Distance Vector, enquanto áreas periféricas usam Link State",
+          "isCorrect": false,
+          "explanation": "Todas as áreas em OSPF usam Link State (Dijkstra). Não há mistura de algoritmos."
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "BGP (Border Gateway Protocol) não escolhe 'caminho mais curto' — escolhe por política. Qual é a razão principal para essa abordagem?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "BGP conecta domínios autônomos (AS) de **diferentes organizações** com **interesses comerciais conflitantes**. Uma ISP pode preferir **não rotear via concorrente** mesmo se mais curto. Política (comercial, segurança) prevalece sobre métrica técnica",
+          "isCorrect": true,
+          "explanation": "Correto! Internet não é rede única — é federação de 65k+ AS independentes (Google, AT&T, China Telecom, etc.). Cada um tem políticas: Google pode dizer 'não rotear via China Telecom' (geopolítica), ou 'cobrar premium se rotear via concorrente' (comercial). Se usássemos Link State puro (cada AS conheceria topologia completa), perderia-se privacidade (competitors conheceriam capacidade de link) e flexibilidade (não poderia aplicar política). BGP rastreia caminho (AS_PATH) e filtragem manual, permitindo essas políticas."
+        },
+        {
+          "id": "a2",
+          "text": "Roteadores BGP não têm poder computacional para executar Dijkstra em escala global",
+          "isCorrect": false,
+          "explanation": "Computação é um fator, mas não o principal. Razão principal é política comercial/segurança."
+        },
+        {
+          "id": "a3",
+          "text": "BGP usa algoritmo de roteamento proprietário diferente de Link State e Distance Vector",
+          "isCorrect": false,
+          "explanation": "BGP é protocol que rastreia caminho + aplica política. Algoritmo subjacente é menos importante que a política."
+        },
+        {
+          "id": "a4",
+          "text": "BGP precisa suportar roteadores muito antigos que não conseguem rodar Dijkstra",
+          "isCorrect": false,
+          "explanation": "Compatibilidade com hardware antigo é fator de design, mas não razão principal."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Por que a Internet adota Link State (OSPF) **dentro de domínios** mas BGP (policy-driven) **entre domínios**?",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Interior (OSPF): rápida convergência, escalável, métrica técnica. Exterior (BGP): flexibilidade política (não rotear via concorrente), privacidade (não divulgar topologia), controle administrativo",
+          "isCorrect": true,
+          "explanation": "Correto! Dentro de um ISP (ex: AT&T): todos confiam uns nos outros, objetivo é **melhor desempenho** → use OSPF rápido. Entre ISPs: não confiam, objetivos conflitantes (comercial) → use BGP com política. Se usasse OSPF globalmente: (1) cada ISP publicaria topologia completa (privacidade comprometida), (2) Dijkstra com 60k AS seria impossível computacionalmente, (3) não poderia aplicar política (é comercial urgente). BGP permite tudo isso via controle manual de rotas."
+        },
+        {
+          "id": "a2",
+          "text": "Interior usa OSPF porque é mais recente; exterior usa BGP porque é legado",
+          "isCorrect": false,
+          "explanation": "BGP é tão antigo quanto OSPF (1989). Escolha não é por antiguidade."
+        },
+        {
+          "id": "a3",
+          "text": "Interior usa OSPF porque roteadores internos são mais rápidos; exterior usa BGP porque roteadores são lentos",
+          "isCorrect": false,
+          "explanation": "Performance de roteador não é fator diferenciador."
+        },
+        {
+          "id": "a4",
+          "text": "Interior usa OSPF para segurança; exterior usa BGP para escalabilidade",
+          "isCorrect": false,
+          "explanation": "Inverso — OSPF é escalável por área hierárquica, BGP é por política. Segurança não é diferença principal."
+        }
+      ]
+    }
+  ]
+}
+
