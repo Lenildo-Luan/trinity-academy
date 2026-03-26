@@ -1,0 +1,296 @@
+# Roteamento Inter-AS com BGP
+
+Até aqui, explorámos como roteadores **dentro de um domínio administrativo (AS)** colaboram usando protocolos como OSPF para encontrar caminhos com menor custo. Mas a Internet é composta por **dezenas de milhares de ASes autônomos** — Google, AT&T, Level3, universidades, empresas — que **não confiam uns nos outros** e têm **objetivos conflitantes**.
+
+Como esses domínios autônomos coordenam o roteamento global? A resposta é **BGP (Border Gateway Protocol)**, que é fundamentalmente diferente de OSPF por um motivo crítico: **não busca caminho mais curto, mas caminho aceitável segundo políticas**.
+
+Este capítulo final do módulo explora:
+
+1. **Necessidade de Roteamento Inter-AS** — por que Dijkstra não funciona globalmente
+2. **BGP: Visão Geral** — um protocolo baseado em **políticas**, não em métricas
+3. **Tipos de Sessões BGP** — eBGP (externo) vs. iBGP (interno)
+4. **Atributos de Rota e Seleção** — como BGP escolhe entre múltiplos caminhos
+5. **Roteamento Batata Quente (Hot-Potato)** — estratégia prática de seleção de rotas
+6. **Exemplo End-to-End** — um pacote percorrendo múltiplos ASes
+
+---
+
+## Por que não OSPF Global?
+
+Antes de entender BGP, é essencial compreender **por que Dijkstra falha em escala global**.
+
+### Problema 1: Escalabilidade
+
+Se toda a Internet rodasse um único OSPF:
+
+<MarkdownTable
+  headers={["Métrica", "Impacto"]}
+  rows={[
+    ["Número de roteadores", "~1 milhão de roteadores globalmente"],
+    ["Complexidade de Dijkstra", "O(N²) = 10^12 operações por execução"],
+    ["Frequência", "Dijkstra reexecutado a cada mudança (segundos)"],
+    ["Resultado", "Impossível — CPU saturada em inundação de mensagens"],
+  ]}
+/>
+
+**Solução**: Dividir em ASes que rodam OSPF localmente (escalável) + BGP entre ASes (tolerante a escala).
+
+### Problema 2: Conflito de Políticas
+
+Imagine Dijkstra global onde:
+- **Google**: "Prefiro rota direta via AT&T (parceiro) em vez de via Verizon"
+- **Verizon**: "Prefiro **não** rotear tráfego de Google se a alternativa é via AT&T"
+- **Regulador brasileiro**: "Tráfego deve passar por backbone brasileiro, não direto para EUA"
+
+Dijkstra não pode codificar **preferências arbitrárias**. Ele apenas encontra "caminho mais curto" baseado em métrica única. Mas roteamento global não é sobre custo — é sobre **negociação bilateral**.
+
+### Problema 3: Heterogeneidade Administrativa
+
+Cada AS quer **ocultar sua topologia interna** dos outros:
+- Google não quer que Verizon saiba exatamente como seus roteadores estão organizados
+- ISPs não querem publicar sua capacidade real (informação estratégica)
+
+Dijkstra **requer** que toda a topologia seja conhecida. BGP **apenas** anuncia **destinos alcançáveis**, não topologia completa.
+
+---
+
+## BGP: Border Gateway Protocol
+
+### Definição e Características
+
+**BGP (Border Gateway Protocol)** é um protocolo de roteamento **entre ASes** que determina caminhos baseado em **políticas administrativas**, não em métricas de custo.
+
+<MarkdownTable
+  headers={["Característica", "Descrição"]}
+  rows={[
+    ["**Algoritmo**", "Não é Dijkstra nem Bellman-Ford — é **seleção de rota por política**"],
+    ["**Padrão**", "RFC 4271 (BGP-4, padrão atual desde 1994)"],
+    ["**Escopo**", "Inter-AS — conecta domínios autônomos"],
+    ["**Métrica**", "Sem métrica de custo; em vez disso, **atributos de rota** (AS-PATH, preferência local, etc.)"],
+    ["**Modelo de Confiança**", "Desconfiança — pode haver manipulação de rotas (BGPSEC em desenvolvimento)"],
+    ["**Operação**", "Incremental: roteadores anunciam apenas **prefixos alcançáveis** e como alcançá-los"],
+  ]}
+/>
+
+### Sessões BGP: eBGP vs. iBGP
+
+BGP opera através de **sessões TCP** entre roteadores, que se dividem em dois tipos:
+
+<MarkdownTable
+  headers={["Tipo", "eBGP (External BGP)", "iBGP (Internal BGP)"]}
+  rows={[
+    ["**O que conecta**", "Roteadores de ASes **diferentes**", "Roteadores do **mesmo AS**"],
+    ["**Localização**", "Fronteira do AS (roteador de borda)", "Interior do AS"],
+    ["**Objetivo**", "Aprender e anunciar rotas externas", "Distribuir rotas aprendidas via eBGP para roteadores internos"],
+    ["**Exemplo**", "R1 (Google) ↔ R2 (AT&T) — conexão física direta", "R3 (Google) ↔ R4 (Google) — não necessariamente vizinhos diretos"],
+    ["**Peer (vizinho) ASN**", "Diferente (ex: AS15169 ↔ AS701)", "Mesmo AS (ex: AS15169 ↔ AS15169)"],
+  ]}
+/>
+
+### Topologia Conceitual de Sessões BGP
+
+<BgpSessionsTopologyVisualizer />
+
+- **eBGP**: R1 (Google) conectado diretamente via fibra a R2 (AT&T)
+  - R1 anuncia: "Google prefixo 8.8.8.0/24 é alcançável via AS15169"
+  - R2 anuncia: "AT&T prefixo 12.0.0.0/8 é alcançável via AS701"
+
+- **iBGP**: R1 informa R3 via sessão interna TCP (não necessariamente vizinhos):
+  - R1 → R3: "Ele de rotas externas aprendidas via eBGP"
+  - R3 agora sabe: "8.8.8.0/24 é alcançável, e para chegar, siga para R1"
+
+---
+
+## Anúncio e Aprendizado de Rotas
+
+### Seleção de Rota: Uma Rota Anunciada por um Vizinho eBGP
+
+Quando R1 (Google) recebe uma mensagem BGP de R2 (AT&T):
+
+R1 traduz internamente:
+- **Próximo Salto (NEXT-HOP)**: R2 (o roteador AT&T que anunciou)
+- **AS-PATH**: [AS701] (caminho de ASes até o prefixo)
+- **Prefixo**: 12.0.0.0/8
+
+### Estrutura de Mensagem BGP
+
+BGP comunica através de mensagens com atributos:
+
+<MarkdownTable
+  headers={["Atributo", "Tipo", "Descrição"]}
+  rows={[
+    ["**Prefixo (NLRI)**", "Obrigatório", "Rota sendo anunciada, ex: 192.168.0.0/24"],
+    ["**AS-PATH**", "Obrigatório", "Sequência de ASes desde origem até destino, ex: [701, 15169]"],
+    ["**NEXT-HOP**", "Obrigatório", "Próximo roteador a seguir (gateway para alcançar a rota)"],
+    ["**LOCAL-PREF**", "Opcional (padrão 100)", "Preferência local — quanto maior, melhor; rotas internas têm pref. 100"],
+    ["**MULTI-EXIT-DISC (MED)**", "Opcional", "Métrica sugerida pelo peer externo ('use minha entrada preferida')"],
+    ["**Comunidades**", "Opcional", "Tags para políticas (ex: 'anuncia apenas a clientes, não a competitors')"],
+    ["**Origem**", "Obrigatório", "Como a rota foi aprendida (IGP, EGP, incompleta)"],
+  ]}
+/>
+
+### Anúncio de Rota entre ASes
+
+Quando Google quero anunciar seu prefixo 8.8.8.0/24 para AT&T:
+
+<BgpRouteAnnouncementVisualizer />
+
+AT&T R2 recebe e **repassa os atributos** internamente via iBGP (como NEXT-HOP e LOCAL-PREF), enquanto o AS-PATH segue representando a origem da rota.
+
+---
+
+## Seleção de Rota: O Algoritmo BGP
+
+Quando um roteador BGP recebe **múltiplas rotas** para o **mesmo prefixo** (ex: dois ISPs anunciando 192.168.0.0/24), como decide qual usar?
+
+### Processo de Decisão (Decision Process)
+
+<MarkdownTable
+  headers={["Passo", "Critério", "Ação"]}
+  rows={[
+    ["1", "**Reach­a­bilidade (Feasibility)**", "Descarta rotas inalcançáveis ou com loop (AS-PATH contém meu próprio AS)"],
+    ["2", "**LOCAL-PREF máximo**", "Entre rotas viáveis, escolhe a com maior LOCAL-PREF (preferência local)"],
+    ["3", "**AS-PATH mais curto**", "Se tie em LOCAL-PREF, escolhe rota com menor número de ASes (AS-PATH mais curto)"],
+    ["4", "**ORIGIN**", "Se tie, prefere IGP > EGP > Incompleta"],
+    ["5", "**MED mínimo**", "Se tie, aceita sugestão do peer externo (MED): menor MED = melhor"],
+    ["6", "**Tipo de Peer eBGP**", "Se tie, prefere rota via eBGP (externo) sobre iBGP (interno)"],
+    ["7", "**IGP (roteador mais próximo)**", "Se tie, escolhe aquela para a qual caminho intra-AS (IGP) é mais curto"],
+    ["8", "**BGP Identifier**", "Se persistir tie, usa ID do roteador BGP do peer (tipicamente IP)"],
+  ]}
+/>
+
+### Exemplo Concreto de Seleção
+
+**Cenário**: Google (R1) recebe 2 rotas para 12.0.0.0/8 (rede AT&T):
+
+**Rota A** (via Verizon):
+- Prefixo: 12.0.0.0/8
+- AS-PATH: [AS701, AS22927]  (comprimento 2)
+- LOCAL-PREF: 100
+- MED: -
+
+**Rota B** (via Level3):
+- Prefixo: 12.0.0.0/8
+- AS-PATH: [AS3356, AS701]  (comprimento 2)
+- LOCAL-PREF: 100
+- MED: -
+
+**Decisão**:
+1. Ambas viáveis ✓
+2. LOCAL-PREF empate (100 = 100)
+3. **AS-PATH empate** (2 = 2)
+4. ORIGIN empate
+5. MED não disponível
+6. Ambas eBGP
+
+Se **nenhum critério técnico** decide, Google usa critério administrativo ou BGP ID. Mas normalmente, **LOCAL-PREF é configurado explicitamente** para resolver disputes, ex: "prefer Verizon" (LOCAL-PREF = 150) vs. "Level3 as backup" (LOCAL-PREF = 100).
+
+### Visualizacao Interativa: Politica e AS-PATH
+
+<BgpAsPathPolicyVisualizer />
+
+---
+
+## Roteamento Batata Quente (Hot-Potato Routing)
+
+Um conceito prático em BGP: quando múltiplas rotas externas são viáveis, **prefira sair de seu AS pelo caminho mais rápido**.
+
+### O Problema: Custo Interno de Sair do AS
+
+Suponha um ISP com:
+- **Entrada NYC**: conexão a múltiplos ASes via NYC
+- **Entrada Miami**: conexão a múltiplos ASes via Miami
+
+O ISP aprende via BGP: "Prefixo 192.0.2.0/24 é alcançável via NYC e também via Miami".
+
+Qual escolher?
+
+**Batata Quente**: "Hot potato — não segure a batata quente! Saia de meu AS rápido (baixo custo intra-AS), não importa se a batata vai 'queimar' no AS vizinho."
+
+### Algoritmo
+
+1. **Aprender via BGP**: Múltiplas rotas externas para o mesmo prefixo
+2. **Verificar custo intra-AS**: Qual é o custo (via OSPF) para chegar ao **próximo salto (NEXT-HOP)** de cada rota?
+3. **Preferir custo intra-AS menor**: Escolher rota cuja saída do AS é mais próxima
+
+**Exemplo**:
+
+<HotPotatoRoutingVisualizer />
+
+### Implicação: Não Otimiza Globalmente
+
+Hot-potato é **egoísta**:
+- ISP otimiza **seu próprio custo** (sair rápido)
+- Ignora que rota **global** pode ser não-ideal
+- Exemplo: "Via NYC é mais rápido para mim, mas via Miami seria mais rápido globalmente"
+
+---
+
+## Controle de Tráfego com BGP
+
+BGP não apenas roteia — também pode **manipular tráfego** para/de um AS:
+
+### Técnicas Comuns
+
+<MarkdownTable
+  headers={["Técnica", "Como Funciona", "Propósito"]}
+  rows={[
+    ["**Não Anunciar Rota**", "AS X não anuncia prefixo P externamente", "Manter tráfego interno (não quer que externos saibam chegar P)"],
+    ["**Anunciar Apenas via Um Peer**", "Anuncia prefixo apenas via um vizinho eBGP, não outros", "Concentrar tráfego em um caminho específico"],
+    ["**Prepend AS-PATH**", "Artificialmente aumenta AS-PATH (ex: [701, 701, 15169] em vez de [701, 15169])", "Desincentivar outros ASes de usar essa rota ('caminho longo')"],
+    ["**Settar LOCAL-PREF**", "LOCAL-PREF baixa para rota menos desejada", "Preferir uma entrada/saída sobre outra"],
+    ["**Communities**", "Tags que dispararam políticas nos peers (ex: 'don't export to competitors')", "Coordenar políticas entre ASes"],
+  ]}
+/>
+
+---
+
+## Exemplo End-to-End: Pacote Atravessando Múltiplos ASes
+
+Vamos rastrear um pacote de um cliente da Verizon (AS701) acessando Google (AS15169):
+
+**Host**: 208.67.1.1 (Verizon)
+**Servidor**: 8.8.8.1 (Google)
+
+### Visualizacao Interativa: Fluxo End-to-End Entre ASes
+
+<InterAsPacketFlowVisualizer />
+
+No fluxo direto, o pacote segue as etapas host local -> roteamento intra-AS (OSPF) -> borda -> inter-AS (BGP) -> borda destino -> intra-AS destino (OSPF). O caminho de resposta usa o mesmo principio, em sentido inverso.
+
+---
+
+## Resumo: BGP vs. OSPF
+
+<MarkdownTable
+  headers={["Aspecto", "OSPF (Intra-AS)", "BGP (Inter-AS)"]}
+  rows={[
+    ["**Objetivo**", "Encontrar caminho com menor custo", "Encontrar caminho aceitável por politica"],
+    ["**Algoritmo**", "Link State (Dijkstra)", "Seleção por atributos (não otimização)"],
+    ["**Métrica**", "Custo (bandwidth, latência)", "Sem métrica; atributos de rota (AS-PATH, LOCAL-PREF)"],
+    ["**Escopo**", "Um AS", "Múltiplos ASes"],
+    ["**Confiança**", "Roteadores confiam uns nos outros", "Desconfiança — pode haver manipulação"],
+    ["**Convergência**", "Rápida (segundos)", "Lenta (minutos)"],
+    ["**Tabelas**", "LSDB (topologia completa)", "RIB (apenas destinos alcançáveis)"],
+  ]}
+/>
+
+---
+
+## Conclusão: Roteamento Hierárquico da Internet
+
+A Internet é um exemplo magistral de **hierarquia e separação de responsabilidades**:
+
+1. **Camada de Aplicação/Transporte** (TCP/UDP): Garante confiabilidade ponto-a-ponto
+2. **Camada de Rede Intra-AS** (OSPF): Encontra caminhos ótimos dentro de domínios confiáveis
+3. **Camada de Rede Inter-AS** (BGP): Negocia entre domínios autônomos com política
+
+**Nesta jornada de 8 capítulos** sobre a camada de transporte e rede, aprendemos:
+- Como processos se comunicam (TCP/UDP)
+- Como roteadores encontram caminhos (algoritmos)
+- Como a Internet se organiza (ASes e hierarquia)
+- Como pacotes atravessam o mundo (roteamento distribuído)
+
+**Cada camada resolve seu problema próprio** — e juntas, criam uma rede global resiliente, escalável e aberta.
+
+

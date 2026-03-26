@@ -1,0 +1,118 @@
+# Princípios e Etapas do Processamento de Termofixos
+
+O processamento de polímeros termofixos segue um padrão bem definido que envolve múltiplas etapas, desde a preparação do pré-polímero até a cura final. Nesta aula, vamos compreender os mecanismos químicos, cinéticos e práticos que governam o processamento de termofixos.
+
+## O Pré-polímero: O Ponto de Partida
+
+Antes de qualquer processamento, o termofixo existe como um **pré-polímero** — uma molécula de baixa massa molar com grupos funcionais reativos pendentes. Esses pré-polímeros podem estar em dois estados:
+
+- **Líquido**: Resinas epóxicas ou poliésteres insaturados em forma de resina viscosa à temperatura ambiente
+- **Sólido de baixo ponto de fusão**: Fenol-formaldeído ou poliimidas parcialmente curadas, que amolecem apenas com aquecimento moderado
+
+### Componentes do Pré-polímero
+
+<MarkdownTable
+  headers={["Componente", "Função", "Exemplos"]}
+  rows={[
+    ["**Resina Base**", "Fornece a cadeia polimérica principal", "Bisfenol A (epóxi), poliéster insaturado"],
+    ["**Agente de Cura (Endurecedor)**", "Inicia e catalisa a reação de reticulação", "Amina alifática, anidrido, peroxidase orgânica"],
+    ["**Acelerador**", "Aumenta a velocidade da reação de cura", "Cobalto, ureia"],
+    ["**Cargas (Fillers)**", "Reduz custo e melhora propriedades", "Carbonato de cálcio, sílica, talco"],
+    ["**Plastificantes**", "Aumenta flexibilidade e processabilidade", "Ésteres de ftalato, citrato"],
+    ["**Inibidor**", "Controla a reação para evitar cura prematura", "Hidroquinona, fenol"]
+  ]}
+/>
+
+## Etapas Principais do Processamento
+
+O processamento de um termofixo segue duas fases distintas:
+
+### **Fase 1: Preparação do Pré-polímero**
+
+Nesta etapa, os componentes (resina base, agente de cura, cargas, etc.) são misturados para formar uma mistura homogênea. O tempo de início da cura (denominado **pot life** ou **gel time**) determina quanto tempo o operador tem para trabalhar com a mistura antes que ela se torne muito viscosa.
+
+**Fatores que afetam o pot life:**
+
+- **Temperatura**: Aumentar a temperatura reduz dramaticamente o pot life
+- **Tipo e quantidade de catalisador**: Um acelerador mais ativo reduz o pot life
+- **Inibidor**: Adicionar um inibidor prolonga o pot life para maior flexibilidade de processamento
+
+### **Fase 2: Cura (Polimerização e Reticulação)**
+
+A cura é o processo pelo qual o pré-polímero se transforma em uma rede polimérica tridimensional através de reações químicas. Essa etapa é **irreversível** e é ativada por:
+
+- **Calor**: A maioria das reações de cura requer aquecimento para ocorrer
+- **Catalisadores/Iniciadores**: Moléculas que iniciam as reações de ligação cruzada
+- **Pressão**: Em alguns processos, a pressão auxilia a homogeneização e reduz porosidade
+
+## Mecanismos de Cura
+
+Diferentes sistemas de termofixos usam diferentes mecanismos de cura:
+
+### **1. Cura por Adição (Reação Exotérmica)**
+
+Típico em **resinas epóxicas**, onde a resina epóxida reage com o agente de cura (como aminas) em uma reação de adição. O processo é **exotérmico**, liberando calor significativo.
+
+$$\text{Epóxido} + \text{Amina} \rightarrow \text{Álcool Secundário/Terciário} + \text{Ligações Cruzadas}$$
+
+### **2. Cura por Condensação (Reação de Síntese)**
+
+Típico em **poliésteres insaturados** e **fenólicos**, onde moléculas pequenas (como água ou álcool) são liberadas durante a formação de ligações.
+
+$$\text{Poliéster + Peróxido} \rightarrow \text{Rede Reticulada} + \text{H}_2\text{O}$$
+
+### **3. Cura por Polimerização Iniciada por Peróxido**
+
+O peróxido orgânico se decompõe termicamente, criando radicais livres que iniciam polimerização em cadeias insaturadas.
+
+## Cinética de Cura: Grau de Cura e Conversão
+
+O **grau de cura (α)** é a fração de grupos reativos que já participaram da reação. Varia de 0 (não curado) a 1 (completamente curado).
+
+<MarkdownTable
+  headers={["Grau de Cura", "Estado do Material", "Propriedades Mecânicas", "Aplicação Prática"]}
+  rows={[
+    ["α < 0,5", "Gel — ainda pegajoso", "Muito baixa rigidez", "Moldagem ainda em andamento"],
+    ["0,5 < α < 0,9", "Parcialmente curado", "Aumentando gradualmente", "Desmoldagem possível"],
+    ["α ≈ 1,0", "Completamente curado", "Máximas propriedades", "Fim do processamento"],
+    ["α > 1,0 (degradação)", "Carbonização", "Propriedades degradadas", "Evitar sobreaquecimento"]
+  ]}
+/>
+
+## Perfil de Temperatura e Cura
+
+Os processos de cura seguem um **perfil de temperatura** cuidadosamente planejado:
+
+1. **Ramp-up (Subida)**: Aquecimento gradual até atingir a temperatura de cura (10–30°C/min típico)
+2. **Hold (Patamar)**: Manutenção de temperatura constante durante o tempo de cura (variável conforme resina)
+3. **Cool-down (Resfriamento)**: Resfriamento lento para evitar gradientes térmicos e tensões residuais
+
+Uma taxa de aquecimento muito rápida pode causar:
+- **Bolhas de ar aprisionadas** (porosidade)
+- **Reações de cura muito rápidas** (liberação excessiva de calor)
+- **Gradientes térmicos** que geram tensões internas
+
+## Exotermicidade e Gestão de Calor
+
+Muitas reações de cura (especialmente em epóxicos) são **altamente exotérmicas**, liberando grande quantidade de calor. Em moldes espessos ou peças grandes, esse calor pode:
+
+- Causar **pontos quentes** que levam a cura não uniforme
+- Danificar o **molde** se não for controlado
+- Criar **tensões residuais** por diferenças de temperatura
+
+### Estratégias de Controle:
+
+- **Cura em múltiplos estágios**: Cura parcial em temperatura baixa, depois cura final em temperatura mais alta
+- **Moldes com sistema de resfriamento**: Passagem de água ou ar controlado através do molde
+- **Diluentes inertes**: Reduzem a concentração de resina, diminuindo a exotermicidade por unidade de volume
+
+## Resumo da Aula
+
+- **Pré-polímeros** são misturas de resina base, agente de cura, acelerador, cargas e aditivos
+- **Pot life** é o tempo disponível para processar a mistura antes da cura
+- **Cura** ocorre por adição, condensação ou polimerização com radicais livres
+- **Grau de cura (α)** define o estágio de transformação do material
+- **Perfil de temperatura** (ramp-up, hold, cool-down) é crítico para qualidade final
+- **Exotermicidade** requer gestão cuidadosa de calor em peças espessas
+- Próximos capítulos exploram as **técnicas específicas** de processamento
+

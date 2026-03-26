@@ -1,0 +1,109 @@
+{
+  "id": "quiz-17",
+  "title": "Quiz — Técnicas de Processamento para Termofixos II: Compressão, Transferência e Estereolitografia",
+  "description": "Teste seus conhecimentos sobre moldagem por compressão, transferência, e estereolitografia, comparando suas características.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual é a principal vantagem de moldagem por compressão em relação a casting?",
+      "alternatives": [
+        { "id": "a1", "text": "Ciclos de cura mais longos", "isCorrect": false, "explanation": "Compressão tém ciclos MAIS CURTOS, não longos." },
+        { "id": "a2", "text": "Alta pressão (20–100 MPa) reduz porosidade e acelera cura significativamente", "isCorrect": true, "explanation": "Correto! Pressão comprime bolhas, melhora contato material-molde, e acelera cinética de cura." },
+        { "id": "a3", "text": "Molde é mais barato de fabricar", "isCorrect": false, "explanation": "Molde de compressão deve resistir a alta pressão, então é MAIS caro, não barato." },
+        { "id": "a4", "text": "Material não precisa ser pré-aquecido", "isCorrect": false, "explanation": "Ambos requerem aquecimento; compressão não elimina essa etapa." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "No processamento SMC (Sheet Molding Compound), qual é o estado inicial do material?",
+      "alternatives": [
+        { "id": "a1", "text": "Pó fino disperso em ar", "isCorrect": false, "explanation": "SMC começa como folha semi-sólida, não pó." },
+        { "id": "a2", "text": "Folha pré-impregnada com fibra e resina parcialmente curada", "isCorrect": true, "explanation": "Correto! SMC é folha contendo fibra curta, resina insaturada e cargas, parcialmente gelificada." },
+        { "id": "a3", "text": "Líquido não-viscoso que deve ser despejado no molde", "isCorrect": false, "explanation": "SMC é semi-sólido, não líquido livre." },
+        { "id": "a4", "text": "Compósito já completamente curado pronto para usar", "isCorrect": false, "explanation": "SMC não é pré-curado; está em estado de possibilidade de cura." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Qual é a diferença principal entre moldagem por TRANSFERÊNCIA vs. moldagem por COMPRESSÃO?",
+      "alternatives": [
+        { "id": "a1", "text": "Transferência não usa pressão", "isCorrect": false, "explanation": "Transferência usa pressão; é método intermediário." },
+        { "id": "a2", "text": "Transferência usa êmbolo em cilindro plastificador; compressão usa prensa hidráulica simples", "isCorrect": true, "explanation": "Correto! Transferência cria pressão via êmbolo linear em cilindro; compressão via prensa fechando." },
+        { "id": "a3", "text": "Transferência é usada apenas para materiais termoplásticos", "isCorrect": false, "explanation": "Transferência é para TERMOFIXOS; não é usado para termoplásticos." },
+        { "id": "a4", "text": "Transferência produz peças com qualidade inferior", "isCorrect": false, "explanation": "Transferência produz qualidade comparável ou superior a compressão em certos casos." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Por que moldagem por TRANSFERÊNCIA é MELHOR para componentes reforçados com FIBRA em comparação com injeção?",
+      "alternatives": [
+        { "id": "a1", "text": "Fibras podem ser mais compridas sem ser quebradas pelo movimento do parafuso giratório de injeção", "isCorrect": true, "explanation": "Correto! Êmbolo linear de transferência é gentil; parafuso giratório de injeção quebra fibras longas." },
+        { "id": "a2", "text": "Transferência não usa pressão, evitando danos", "isCorrect": false, "explanation": "Transferência SIM usa pressão; a diferença é o tipo de movimento." },
+        { "id": "a3", "text": "Fibras em transferência não absorvem umidade", "isCorrect": false, "explanation": "Absorção de umidade não é afetada pelo método de processamento." },
+        { "id": "a4", "text": "Transferência aquece fibras de forma uniforme", "isCorrect": false, "explanation": "Aquecimento não é diferente; o fator é cisalhamento." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Qual é a resolução típica de estereolitografia (SLA) comparada com moldagem por injeção?",
+      "alternatives": [
+        { "id": "a1", "text": "SLA: ~100 μm; Injeção: ~25 μm (injeção é melhor)", "isCorrect": false, "explanation": "Inverso! SLA é MUITO superior em resolução." },
+        { "id": "a2", "text": "SLA: 25–100 μm; Injeção: 100–500 μm (SLA é MUITO melhor)", "isCorrect": true, "explanation": "Correto! SLA oferece resolução EXCELENTE de detalhes (até 25 μm); injeção é ~100–500 μm." },
+        { "id": "a3", "text": "Ambas têm resolução similar", "isCorrect": false, "explanation": "SLA é superior por ordens de magnitude em resolução." },
+        { "id": "a4", "text": "Resolução depende apenas do polímero, não do processo", "isCorrect": false, "explanation": "Processo é determinante; SLA usa luz focada (alta resolução); injeção tem limitações por gates/runners." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Por que estereolitografia (SLA) é IDEAL para prototipagem mas LIMITADA para produção em massa?",
+      "alternatives": [
+        { "id": "a1", "text": "Equipamento caro, velocidade lenta, resinas caras, propriedades mecânicas inferiores", "isCorrect": true, "explanation": "Correto! SLA é excelente para PROTÓTIPOS (horas, geometria complexa) mas inviável para PRODUÇÃO (custo, velocidade)." },
+        { "id": "a2", "text": "SLA não pode processar termofixos", "isCorrect": false, "explanation": "SLA usa resinas termofixas fotossensíveis; processam sim." },
+        { "id": "a3", "text": "Peças de SLA não podem ser tratadas termicamente", "isCorrect": false, "explanation": "Peças SLA podem receber pós-cura térmica." },
+        { "id": "a4", "text": "Impressoras SLA são tão boas quanto injeção em custo", "isCorrect": false, "explanation": "Custo de impressora SLA é MUITO mais alto que prensa de injeção." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual é o propósito da 'pós-cura' em peças fabricadas por estereolitografia?",
+      "alternatives": [
+        { "id": "a1", "text": "Remover resina não-curada residual", "isCorrect": false, "explanation": "Remoção de resina é feita por limpeza ANTES de pós-cura." },
+        { "id": "a2", "text": "Completar a cura UV pela exposição prolongada a forno UV, aumentando propriedades mecânicas", "isCorrect": true, "explanation": "Correto! Pós-cura em forno UV melhora grau de cura, aumentando rigidez e dureza." },
+        { "id": "a3", "text": "Remover suportes de sacrifício", "isCorrect": false, "explanation": "Suportes são removidos antes de pós-cura, mecanicamente." },
+        { "id": "a4", "text": "Colorir a peça", "isCorrect": false, "explanation": "Cor é determinada pela resina escolhida, não por pós-cura." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Comparando compressão, transferência e injeção para termofixos, qual oferece MELHOR distribuição de fibra longa sem quebra?",
+      "alternatives": [
+        { "id": "a1", "text": "Injeção; parafuso giratório distribui fibra uniformemente", "isCorrect": false, "explanation": "Injeção quebra fibras longas pelo cisalhamento do parafuso." },
+        { "id": "a2", "text": "Compressão; sem movimento forçado", "isCorrect": false, "explanation": "Compressão é simples, mas enchimento não-uniforme pode danificar fibra." },
+        { "id": "a3", "text": "Transferência; êmbolo linear aplica pressão gentilmente sem quebrar fibra", "isCorrect": true, "explanation": "Correto! Transferência combina pressão (bom enchimento) com movimento suave (fibra preservada)." },
+        { "id": "a4", "text": "Todas são equivalentes em fibra", "isCorrect": false, "explanation": "Não são equivalentes; transferência é claramente melhor para fibra longa." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Em qual cenário a estereolitografia (SLA) seria MAIS VALIOSA comparada a moldagem tradicional?",
+      "alternatives": [
+        { "id": "a1", "text": "Produção em massa de componentes simples", "isCorrect": false, "explanation": "Injeção é melhor para produção em massa." },
+        { "id": "a2", "text": "Geometria muito complexa com detalhes finos (< 100 μm) precisando de prototipagem rápida", "isCorrect": true, "explanation": "Correto! SLA brilha em geometria complexa, prototipagem rápida, e resolução superior." },
+        { "id": "a3", "text": "Componentes simples para uso industrial", "isCorrect": false, "explanation": "Componentes simples são melhor processados por moldagem convenção." },
+        { "id": "a4", "text": "Produção onde custo de material é crítico", "isCorrect": false, "explanation": "SLA é CARO em material; inadequado para custo-crítico." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Qual técnica você escolheria para fabricar 100 protótipos de um componente estrutural aeronáutico de epóxi em 2 semanas?",
+      "alternatives": [
+        { "id": "a1", "text": "Moldagem por compressão; ciclos rápidos", "isCorrect": false, "explanation": "Compressão requer molde (2–4 semanas para fabricar) + cura lenta; muito tempo." },
+        { "id": "a2", "text": "Estereolitografia (SLA); prototipagem rápida, sem molde necessário, geometria complexa", "isCorrect": true, "explanation": "Correto! SLA é ideal: imprime em horas, nenhum molde, iteração rápida." },
+        { "id": "a3", "text": "Casting; molde simples, rápido", "isCorrect": false, "explanation": "Casting tem porosidade e variabilidade inadequada para crítico aeronáutico." },
+        { "id": "a4", "text": "Injeção de termofixo; melhor qualidade final", "isCorrect": false, "explanation": "Injeção requer 2–4 semanas apenas para molde; não cabe no prazo." }
+      ]
+    }
+  ]
+}
+

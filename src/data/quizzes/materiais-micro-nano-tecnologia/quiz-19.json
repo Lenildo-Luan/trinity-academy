@@ -1,0 +1,109 @@
+{
+  "id": "quiz-19",
+  "title": "Quiz — Introdução ao Processamento de Polímeros Termoplásticos",
+  "description": "Teste seus conhecimentos sobre termoplásticos, estrutura molecular, propriedades e comparação com termofixos.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual é a característica ESTRUTURAL FUNDAMENTAL que distingue termoplásticos de termofixos?",
+      "alternatives": [
+        { "id": "a1", "text": "Termoplásticos têm ligações covalentes cruzadas entre cadeias", "isCorrect": false, "explanation": "Isso descreve termofixos, não termoplásticos." },
+        { "id": "a2", "text": "Termoplásticos têm CADEIAS LINEARES com apenas forças van der Waals entre elas, SEM reticulação", "isCorrect": true, "explanation": "Correto! Cadeias independentes ligadas apenas por forças fracas; permite amolecimento reversível." },
+        { "id": "a3", "text": "Termoplásticos têm estrutura cristalina perfeita", "isCorrect": false, "explanation": "Cristalinidade varia; muitos termoplásticos são parcialmente amorfos." },
+        { "id": "a4", "text": "Termoplásticos são sempre menos densos", "isCorrect": false, "explanation": "Densidade não é característica definitória; depende do tipo específico." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "O que ocorre quando um termoplástico é aquecido acima de sua Tg (temperatura de transição vítrea)?",
+      "alternatives": [
+        { "id": "a1", "text": "Material vira pó; estrutura se desintegra", "isCorrect": false, "explanation": "Não desintegra; transição de estado físico apenas." },
+        { "id": "a2", "text": "Cadeias poliméricas ganham mobilidade; material transiciona de rígido para borrachóide", "isCorrect": true, "explanation": "Correto! Acima de Tg, cadeias se movem; material fica flexível, mas estrutura permanece intacta." },
+        { "id": "a3", "text": "Material funde completamente como líquido", "isCorrect": false, "explanation": "Fusão completa ocorre apenas acima de Tm (ponto de fusão), não Tg." },
+        { "id": "a4", "text": "Ligações químicas se quebram", "isCorrect": false, "explanation": "Tg não quebra ligações; afeta mobilidade de cadeias." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Qual é a vantagem MAIS SIGNIFICATIVA dos termoplásticos em relação a termofixos?",
+      "alternatives": [
+        { "id": "a1", "text": "Menor custo de produção", "isCorrect": false, "explanation": "Custo varia; termoplásticos processados podem ser caros." },
+        { "id": "a2", "text": "Resistência térmica permanente em altas temperaturas", "isCorrect": false, "explanation": "Termofixos oferecem melhor resistência térmica." },
+        { "id": "a3", "text": "REVERSIBILIDADE: podem ser reciclados/refundidos múltiplas vezes sem perder propriedades fundamentais", "isCorrect": true, "explanation": "Correto! Reciclabilidade é vantagem única de termoplásticos; refundição não danifica permanentemente." },
+        { "id": "a4", "text": "Maior rigidez estrutural", "isCorrect": false, "explanation": "Termofixos oferem melhor rigidez." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "O que é 'absorção de umidade' em termoplásticos e por que é problemática?",
+      "alternatives": [
+        { "id": "a1", "text": "Material absorve água do ambiente, causando inchamento dimensional e degradação de propriedades", "isCorrect": true, "explanation": "Correto! Umidade causa perda de propriedades mecânicas, especialmente em poliamidas (nylon)." },
+        { "id": "a2", "text": "Material é impermeável a água", "isCorrect": false, "explanation": "Muitos termoplásticos ABSORVEM umidade; impermeável é a exceção." },
+        { "id": "a3", "text": "Umidade melhora flexibilidade do material", "isCorrect": false, "explanation": "Umidade causa degradação, não melhoria." },
+        { "id": "a4", "text": "Apenas termoplásticos sofrem; termofixos não", "isCorrect": false, "explanation": "Ambas as classes podem absorver umidade." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Entre os termoplásticos comuns, qual oferece MELHOR resistência térmica contínua?",
+      "alternatives": [
+        { "id": "a1", "text": "Polietileno (PE) — Tg ~-120°C", "isCorrect": false, "explanation": "PE tem resistência térmica muito limitada." },
+        { "id": "a2", "text": "Poliamida (Nylon) — Tg 40–90°C, Tm 220–260°C", "isCorrect": false, "explanation": "Nylon tem boa resistência, mas PEEK é superior." },
+        { "id": "a3", "text": "PEEK (Poli-éter-éter-cetona) — Tg ~150°C, serviço contínuo até 250°C", "isCorrect": true, "explanation": "Correto! PEEK é o termoplástico com maior resistência térmica; supera muitos termofixos em aplicações." },
+        { "id": "a4", "text": "Poliestireno (PS) — Tg 90–100°C", "isCorrect": false, "explanation": "PS tem resistência térmica moderada." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Por que é crítico controlar o 'encolhimento' (shrinkage) após processamento de termoplástico?",
+      "alternatives": [
+        { "id": "a1", "text": "Encolhimento não-uniforme cria tensões residuais, empenamento e possível falha", "isCorrect": true, "explanation": "Correto! Resfriamento desigual causa encolhimento diferencial, gerando stress que pode levar a trincas." },
+        { "id": "a2", "text": "Encolhimento reduz a cor final", "isCorrect": false, "explanation": "Encolhimento afeta dimensões, não cor." },
+        { "id": "a3", "text": "Encolhimento melhora propriedades mecânicas", "isCorrect": false, "explanation": "Encolhimento desigual prejudica propriedades." },
+        { "id": "a4", "text": "Encolhimento é irrelevante se o molde for bem feito", "isCorrect": false, "explanation": "Mesmo molde preciso não evita encolhimento; controle de resfriamento é necessário." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual é a limitação térmica MAIS IMPORTANTE de termoplásticos comparado a termofixos?",
+      "alternatives": [
+        { "id": "a1", "text": "Termoplásticos degradam a temperaturas moderadamente altas (150–300°C)", "isCorrect": true, "explanation": "Correto! Enquanto termofixos podem servir a 200–300°C+, termoplásticos é muito limitado." },
+        { "id": "a2", "text": "Termoplásticos não podem ser aquecidos", "isCorrect": false, "explanation": "Termoplásticos PRECISAM ser aquecidos para processar; a questão é limite superior." },
+        { "id": "a3", "text": "Termoplásticos perdem cor com aquecimento", "isCorrect": false, "explanation": "Degradação térmica vai além de cor; afeta propriedades mecânicas." },
+        { "id": "a4", "text": "Não há limitação; termoplásticos e termofixos são similares", "isCorrect": false, "explanation": "Diferença é SIGNIFICATIVA e bem documentada." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "O que significa 'Tg' (Temperatura de Transição Vítrea) e qual sua importância?",
+      "alternatives": [
+        { "id": "a1", "text": "Ponto exato de fusão total do material", "isCorrect": false, "explanation": "Tg não é fusão; é transição de ESTADO FÍSICO de rígido para flexível." },
+        { "id": "a2", "text": "Temperatura abaixo da qual material é rígido e frágil; acima fica borrachóide", "isCorrect": true, "explanation": "Correto! Tg marca transição de vidro para elastômero; é limite prático de uso." },
+        { "id": "a3", "text": "Temperatura a qual degradação começa", "isCorrect": false, "explanation": "Degradação começa bem acima de Tg; é temperatura de decomposição térmica." },
+        { "id": "a4", "text": "Propriedade que não afeta processamento", "isCorrect": false, "explanation": "Tg é FUNDAMENTAL para processamento; define temperatura de moldagem." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Qual é a característica que torna policarbonato (PC) adequado para aplicações que requerem transparência e resistência mecânica?",
+      "alternatives": [
+        { "id": "a1", "text": "Estrutura cristalina perfeita", "isCorrect": false, "explanation": "PC é amorfo, não cristalino; cristalinidade reduziria transparência." },
+        { "id": "a2", "text": "Cadeias aromáticas rígidas fornecem resistência; estrutura amorfa permite transparência", "isCorrect": true, "explanation": "Correto! Estrutura molecular de PC oferece rara combinação de rigidez + clareza óptica." },
+        { "id": "a3", "text": "Alta densidade", "isCorrect": false, "explanation": "Densidade não é fator; é estrutura molecular que importa." },
+        { "id": "a4", "text": "Capacidade única de ser reciclado", "isCorrect": false, "explanation": "Reciclabilidade é comum aos termoplásticos; não é unique ao PC." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Para uma aplicação estrutural automotiva onde resistência térmica contínua de 150°C é requerida, qual é preferível: termoplástico ou termofixo?",
+      "alternatives": [
+        { "id": "a1", "text": "Termoplástico sempre; é mais fácil de reciclar", "isCorrect": false, "explanation": "Reciclagem é valiosa, mas não supera insuficiência térmica." },
+        { "id": "a2", "text": "Termofixo, porque oferece estabilidade térmica contínua superior e propriedades estruturais mantidas a 150°C", "isCorrect": true, "explanation": "Correto! A 150°C, termoplástico perde propriedades (próximo a Tm); termofixo permanece estruturalmente íntegro." },
+        { "id": "a3", "text": "Ambos são equivalentes a 150°C", "isCorrect": false, "explanation": "Não são equivalentes; termofixo é claramente superior nessa faixa térmica." },
+        { "id": "a4", "text": "Termoplástico, porque ciclos de processamento são mais rápidos", "isCorrect": false, "explanation": "Velocidade de processamento não supera inadequação térmica para aplicação estrutural." }
+      ]
+    }
+  ]
+}
+

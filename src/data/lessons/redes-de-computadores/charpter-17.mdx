@@ -1,0 +1,279 @@
+# Hierarquia e Roteamento Intra-AS
+
+Até aqui, estudamos os algoritmos fundamentais de roteamento — Link State (Dijkstra) e Distance Vector (Bellman-Ford). Mas como esses algoritmos são aplicados em redes tão grandes quanto a **Internet**? Com centenas de milhares de roteadores, executar um único algoritmo globalmente seria computacionalmente impossível: convergência seria lenta, tráfego de mensagens de roteamento consumiria banda, e falhas em uma pequena parte impactariam toda a rede.
+
+A solução é **hierarquia**. Dividimos a Internet em domínios autônomos, cada um rodando seu próprio protocolo de roteamento internamente. Este capítulo explora essa organização e apresenta **OSPF (Open Shortest Path First)**, o principal protocolo de roteamento intra-AS (dentro de um domínio).
+
+Abordaremos:
+
+1. **Sistemas Autônomos (AS)** — o que são, por que existem, e como os identifica
+2. **Roteamento Intra-AS vs. Inter-AS** — divisão de responsabilidades
+3. **Protocolo OSPF** — estrutura, operação Link State, e hierarquia intra-AS
+4. **Conceito de Área** — como OSPF escala internamente
+5. **Comparação com RIP** — por que OSPF ganhou (quando RIP era o padrão)
+
+---
+
+## O Conceito de Sistema Autônomo (AS)
+
+### O que é um AS?
+
+Um **Sistema Autônomo (AS)** é uma **coleção de roteadores** sob **controle administrativo único** que operam **uma política de roteamento comum**. Em outras palavras: a rede de uma empresa, um ISP, ou uma instituição.
+
+**Analogia**: Pense em cada AS como uma "corporação de roteadores". Internamente, eles trabalham juntos coordenadamente. Externamente, negociam com outras corporações (outros ASes).
+
+<MarkdownTable
+  headers={["Característica", "Descrição", "Exemplo"]}
+  rows={[
+    ["**Controle Administrativo**", "Uma única entidade (empresa, ISP) toma decisões sobre roteamento", "Google gerencia seus ASes; AT&T gerencia seus ASes"],
+    ["**Identificador AS (ASN)**", "Número único de 16 ou 32 bits atribuído pela IANA", "AS65001 (Google), AS701 (AT&T), AS8452 (Twitter)"],
+    ["**Politica de Roteamento**", "Regras internas sobre como trafego flui dentro do AS", "Exemplo: 'sempre prefira o caminho de menor latência'"],
+    ["**Invisibilidade Interna**", "Estrutura interna do AS é invisível para ASes externos", "Outro AS não sabe (nem precisa saber) como Google organiza seus roteadores"],
+  ]}
+/>
+
+### Identificação de ASes: ASN
+
+Cada AS possui um **número de Sistema Autônomo (ASN)**, atribuído pela **IANA (Internet Assigned Numbers Authority)**:
+
+- **Faixa antiga (16 bits)**: 0 a 65.535
+  - 64.512–65.534: ASes privadas (analogia com IPs privados 192.168.x.x)
+- **Faixa nova (32 bits)**: 0 a 4.294.967.295 (BGP4)
+
+**Exemplos reais:**
+- AS15169: Google
+- AS701: AT&T
+- AS2386: Level3
+- AS3356: CenturyLink
+
+A estrutura é hierárquica: IANA delega blocos para RIRs (Regional Internet Registries), que delegam para ISPs e corporações.
+
+### Topologia Conceitual de ASes
+
+Imagine a Internet como um grafo onde **nós são ASes** e **arestas são conexões físicas**:
+
+<MarkdownTable
+  headers={["Nível", "Entidades", "Exemplos", "Protocolo de Roteamento Intra-AS"]}
+  rows={[
+    ["**Global (Inter-AS)**", "Dezenas de milhares de ASes", "AS de operadoras, universidades, corporações", "BGP (Border Gateway Protocol)"],
+    ["**Regional (Intra-AS)**", "Centenas a milhares de roteadores por AS", "Roteadores de um ISP ou empresa", "OSPF, IS-IS, RIP (legado)"],
+    ["**Local (Intra-roteador)**", "Portas e interfaces de um roteador", "Ethernet, WAN, fibra", "Sem protocolo — hardware direto"],
+  ]}
+/>
+
+---
+
+## Roteamento Intra-AS vs. Inter-AS
+
+### Divisão de Funções
+
+A Internet usa **dois níveis de roteamento**:
+
+<MarkdownTable
+  headers={["Aspecto", "Roteamento Intra-AS", "Roteamento Inter-AS"]}
+  rows={[
+    ["**Escopo**", "Dentro de um AS — roteadores under a single admin", "Entre ASes — cada AS negocia com outros"],
+    ["**Objetivo**", "Encontrar caminhos com menor custo (least cost)", "Encontrar caminhos VIÁVEIS respeitando políticas"],
+    ["**Métrica**", "Atraso, saltos, banda (técnica)", "Preferências administrativas (política: 'não quero trafego via AS adversário')"],
+    ["**Protocolo exemplo**", "OSPF (Link State), RIP (Distance Vector)", "BGP (Policy-based)"],
+    ["**Convergência**", "Rápida (segundos)", "Lenta (minutos, devido a negociações)"],
+    ["**Escala**", "Até ~100k roteadores em grandes ASes", "Dezenas de milhares de ASes"],
+    ["**Saudações**", "Roteadores dentro do AS confiam uns nos outros", "ASes não confiam — protocolo defensivo"],
+  ]}
+/>
+
+### Exemplo: Pacote de Empresa A para Empresa B
+
+Suponha um pacote do servidor web em uma corporação (AS1000) para um servidor em outro empresa (AS2000):
+
+### Visualizacao Interativa: Fluxo Entre ASes
+
+Nesta animacao, acompanhe o pacote saindo do host em AS1000, atravessando o ISP intermediario (AS3000) e chegando ao host em AS2000. O painel indica quando o encaminhamento e decidido por OSPF (intra-AS) e quando e decidido por BGP (inter-AS).
+
+<InterAsPacketFlowVisualizer />
+
+**Observação**: Cada AS usa seu próprio protocolo intra-AS (aqui OSPF) independentemente. BGP "cola" os ASes juntos.
+
+---
+
+## Open Shortest Path First (OSPF)
+
+### O que é OSPF?
+
+**OSPF (Open Shortest Path First)** é o protocolo de roteamento intra-AS mais implantado em redes corporativas e de ISPs. Suas características:
+
+- **Algoritmo**: Link State (executa Dijkstra localmente)
+- **Padrão aberto**: RFC 2328 (IPv4), RFC 5340 (IPv6)
+- **Escalável**: Hierarquia com áreas reduz complexidade
+- **Convergência rápida**: Reage rapidamente a falhas
+- **Métrica flexível**: Não apenas saltos, mas banda, atraso, etc.
+
+### Comparação: OSPF vs. RIP
+
+<MarkdownTable
+  headers={["Aspecto", "RIP", "OSPF"]}
+  rows={[
+    ["**Algoritmo**", "Distance Vector (Bellman-Ford)", "Link State (Dijkstra)"],
+    ["**Métrica**", "Apenas contagem de saltos (max=15)", "Custo do enlace (inversamente proporcional à banda)"],
+    ["**Convergência**", "Lenta — O(N) iterações", "Rápida — 1 execução (segundos)"],
+    ["**Mensagens**", "Enviadas a cada 30 segundos (todo vizinho)", "Apenas quando mudanças ocorrem + Hello periódicos"],
+    ["**Escalabilidade**", "Baixa — máx. 15 saltos limita tamanho", "Alta — suporta milhares de roteadores"],
+    ["**Hierarquia**", "Não — rede plana", "Sim — áreas para escalar"],
+    ["**Autenticação**", "MD5 (RIPv2)", "MD5, SHA"],
+    ["**Status atual**", "Legado — raramente usado", "Padrão em redes corporativas"],
+  ]}
+/>
+
+### Estrutura de Mensagens OSPF
+
+OSPF comunica usando **5 tipos de mensagens**:
+
+<MarkdownTable
+  headers={["Tipo", "Nome Completo", "Propósito"]}
+  rows={[
+    ["**1**", "Hello", "Descoberta de vizinhos e heartbeat (periódico, ex: 10s)"],
+    ["**2**", "Database Description (DBD)", "Resumo da topologia conhecida (durante sincronização)"],
+    ["**3**", "Link State Request (LSR)", "Solicitar informações específicas sobre enlace"],
+    ["**4**", "Link State Update (LSU)", "Inundar a rede com informações sobre enlace (quando muda)"],
+    ["**5**", "Link State Acknowledgment (LSAck)", "Confirmar recebimento de LSU"],
+  ]}
+/>
+
+### Operação: Descoberta e Sincronização
+
+Quando um novo roteador (R1) entra em uma rede OSPF:
+
+1. **Hello (Segundos 0-10)**: R1 envia "Hello" em interfaces local
+   - Descobre vizinhos (R2, R3)
+   - Estabelece relacionamento (adjacency)
+   - Acorda vizinhos: "Eu sou R1 em área X"
+
+2. **Database Description (Segundos 10-15)**: R1 e vizinhos trocam **resumo** de topologia
+   - R1: "Eu conheço enlaces: R1-R2, R1-R4, R2-R3, ..."
+   - R2: "Eu conheço: R2-R3, R2-R5, ..."
+   - Comparando: ambos identificam o que está desatualizado
+
+3. **Link State Request**: Se R1 está desatualizado, pede informações específicas
+
+4. **Link State Update**: R2 envia as informações pedidas
+
+5. **Acknowledgment**: R1 confirma recebimento
+
+6. **Dijkstra Execution**: R1 executa Dijkstra com topologia sincronizada
+
+Desde então: mensagens Hello periódicas (ex: 10s) mantêm vizinhança viva. Mudanças (novo enlace, falha) disparam inundação de LSU.
+
+### Visualizacao Interativa: Dijkstra Passo a Passo
+
+Use os controles de Play/Pause/Passo para acompanhar a execucao do algoritmo no grafo e observar como `N'`, `D[]` e os predecessores vao sendo atualizados.
+
+<DijkstraRoutingStepSimulator />
+
+---
+
+## Hierarquia em OSPF: Conceito de Área
+
+### Por que Áreas?
+
+Executar Dijkstra com **todos os roteadores** da Internet em um único AS seria impossível. Mesmo em um grande AS (ex: Google com ~100k roteadores), a topologia é tão grande que inundação de informações consumiria toda a banda de roteamento.
+
+A solução: dividir o AS em **áreas**.
+
+### O que é uma Área?
+
+Uma **área** é um **subconjunto de roteadores** dentro de um AS que executa **Dijkstra em conjunto**.
+
+<MarkdownTable
+  headers={["Elemento", "Descrição", "Exemplo"]}
+  rows={[
+    ["**Identificador**", "Número de 32 bits (escrito como IP, ex: 0.0.0.1)", "Área 0 (backbone), Área 1, Área 2, etc."],
+    ["**Roteadores**", "Múltiplos roteadores que sincronizam banco de dados", "Área 1: 50 roteadores no São Paulo"],
+    ["**Link State Database (LSDB)**", "Banco de dados da topologia compartilhado por todos", "Cada roteador em Área 1 sabe exatamente onde todos os 50 roteadores estão"],
+    ["**Dijkstra Local**", "Cada roteador executa Dijkstra sobre a LSDB local", "Roteador A em Área 1 calcula: 'melhor caminho para B = via C'"],
+  ]}
+/>
+
+### Topologia Hierárquica: Área 0 (Backbone)
+
+Todas as áreas **devem estar conectadas à Área 0** (chamada **backbone**):
+
+**Regra crítica**: Tráfego entre áreas **deve passar pela Área 0**. Não há atalhos diretos entre áreas sem passar pelo backbone.
+
+### Visualizacao Interativa: Hierarquia de Areas OSPF
+
+Nesta visualizacao, a Area 0 aparece como backbone, com ABRs conectando as areas perifericas. Isso ajuda a enxergar por que o custo de sincronizacao cai quando a topologia e hierarquica.
+
+<OspfAreasHierarchyVisualizer />
+
+### Roteadores Especiais em OSPF
+
+<MarkdownTable
+  headers={["Tipo de Roteador", "Localização", "Função"]}
+  rows={[
+    ["**Roteador Interno (IR)**", "Dentro de uma área única", "Executa Dijkstra local, conhece topologia da área completamente"],
+    ["**Roteador de Borda de Área (ABR)**", "Conecta a Área 0 com outras áreas", "Sintetiza topologia: 'Área 1 pode chegar Área 2 via mim com custo X'"],
+    ["**Roteador de Borda do AS (ASBR)**", "Conecta o AS a outro AS externo", "Importa rotas de BGP para OSPF, ou exporta"],
+    ["**Roteador Backbone**", "Qualquer roteador dentro da Área 0", "Participa do Dijkstra do backbone"],
+  ]}
+/>
+
+### Redução de Complexidade com Áreas
+
+<MarkdownTable
+  headers={["Métrica", "Sem Áreas (Flat OSPF)", "Com Áreas (Hierárquico OSPF)"]}
+  rows={[
+    ["**Topologia a sincronizar**", "Tudo — todos os roteadores", "Apenas roteadores da área local + resumo de outras"],
+    ["**Tamanho da LSDB**", "O(N) — linear com número total", "O(A) per área, onde A = roteadores na área"],
+    ["**Execuções Dijkstra**", "1 global", "1 por área + Dijkstra no backbone"],
+    ["**Tráfego de mensagens**", "Alto — inundação global", "Reduzido — inundação local + resumos entre áreas"],
+    ["**Escalabilidade**", "Até ~100 roteadores (prático)", "Até ~10k+ roteadores com hierarquia"],
+  ]}
+/>
+
+### Exemplo: Comunicação Inter-Área
+
+Suponha pacote de R1 (Área 1) para R6 (Área 2):
+
+1. **R1 consulta LSDB local**: "Como chegar Área 2?"
+2. **ABR da Área 1** sintetizou: "Posso chegar Área 2 via Roteador ABR-1-0 com custo 5"
+3. **R1 roteia para ABR-1-0**
+4. **ABR-1-0 muda de modo**: agora está em Dijkstra do backbone
+5. **Backbone diz**: "ABR-2-0 é roteador de borda para Área 2, pode chegar com custo 3"
+6. **Pacote vai para ABR-2-0**
+7. **ABR-2-0** já sabe como chegar R6 (está em Área 2)
+8. **Pacote chega a R6**
+
+### Visualizacao Interativa: Fluxo Inter-Area
+
+Dispare a animacao para ver o pacote saindo da Area 1, cruzando a Area 0 por ABRs e chegando na Area 2. O painel lateral mostra cada etapa do lookup e encaminhamento.
+
+<OspfInterAreaFlowVisualizer />
+
+---
+
+## Resumo: OSPF em Ação
+
+<MarkdownTable
+  headers={["Etapa", "Ação", "Protocolo"]}
+  rows={[
+    ["1. Descoberta", "R1 envia Hello, descobre R2, R3 (vizinhos)", "OSPF Hello Messages"],
+    ["2. Sincronização", "R1 troca DBD com R2: 'Eu conheço enlaces A, B, C; você?'", "OSPF DBD + LSR/LSU"],
+    ["3. Dijkstra Local", "R1 executa Dijkstra com sua LSDB", "Algoritmo Dijkstra"],
+    ["4. Tabela de Roteamento", "R1 popula tabela: 'Para chegar destino X, use saída Y'", "RIB (Routing Information Base)"],
+    ["5. Mudança (ex: link falha)", "R2 inunda LSU: 'Link R2-R3 falhou!'", "OSPF LSU Flooding"],
+    ["6. Reconvergência", "Todos reexecutam Dijkstra com nova topologia", "Dijkstra + tabela atualizada"],
+  ]}
+/>
+
+---
+
+## Resumo do Capítulo
+
+- **Sistema Autônomo**: Domínio administrativo único, identificado por ASN
+- **Roteamento Intra-AS**: Encontra caminhos com menor custo (OSPF, RIP)
+- **Roteamento Inter-AS**: Negocia entre domínios (BGP) — próximo capítulo
+- **OSPF**: Link State moderno, escalável, baseado em Dijkstra
+- **Hierarquia**: Áreas reduzem complexidade; Área 0 é backbone
+- **Convergência**: Rápida em OSPF (segundos), permiting network resilience
+
+

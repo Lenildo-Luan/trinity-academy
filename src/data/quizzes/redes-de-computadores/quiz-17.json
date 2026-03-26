@@ -1,0 +1,109 @@
+{
+  "id": "quiz-17",
+  "title": "Quiz — Hierarquia e Roteamento Intra-AS",
+  "description": "Teste seus conhecimentos sobre Sistemas Autônomos (AS), roteamento intra-AS, protocolo OSPF, conceito de áreas, hierarquia em OSPF, comparação com RIP, e como roteadores de borda coordenam entre ASes.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Um Sistema Autônomo (AS) é melhor descrito como:",
+      "alternatives": [
+        { "id": "a1", "text": "Uma coleção de roteadores sob controle administrativo único que operam uma política de roteamento comum", "isCorrect": true, "explanation": "Correto! AS é a definição clássica: domínio de controle administrativo único (ex: Google, AT&T, uma universidade). Todos os roteadores dentro coordenam-se via protocolo intra-AS (OSPF). Identificado por ASN (número único)." },
+        { "id": "a2", "text": "Uma rede fisica contigua de roteadores conectados por um unico tipo de enlace", "isCorrect": false, "explanation": "Não — AS não é sobre topologia física, é sobre **controle administrativo**. Roteadores no AS podem estar em cidades diferentes, com vários tipos de enlace." },
+        { "id": "a3", "text": "Um protocolo de roteamento como BGP ou OSPF", "isCorrect": false, "explanation": "AS não é protocolo — AS é domínio administrativo. OSPF é protocolointra-AS; BGP é inter-AS." },
+        { "id": "a4", "text": "Sinônimo de 'switch de rede' ou 'roteador central'", "isCorrect": false, "explanation": "AS pode conter múltiplos roteadores e switches. Não é sinônimo de um equipamento." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Qual é o intervalo de ASN (Número de Sistema Autônomo) tradicional (16 bits) e que faixa é reservada para ASes privadas?",
+      "alternatives": [
+        { "id": "a1", "text": "0 a 65.535; faixa privada é 64.512 a 65.534", "isCorrect": true, "explanation": "Correto! ASNs 16-bit vão de 0 a 2^16-1 = 65.535. Faixa privada (analogia com RFC 1918 IPs): 64.512 a 65.534 — usada em redes internas que não precisam anunciar globalmente, similar a 192.168.0.0/16." },
+        { "id": "a2", "text": "0 a 32.768; faixa privada é 1.024 a 2.048", "isCorrect": false, "explanation": "Números incorretos — limite 16-bit é 65.535, faixa privada real é muito maior." },
+        { "id": "a3", "text": "0 a 100.000; faixa privada é 1 a 1.000", "isCorrect": false, "explanation": "16-bit só vai até 65.535, não 100.000." },
+        { "id": "a4", "text": "Não há padrão — depende do fabricante do roteador", "isCorrect": false, "explanation": "Há padrão definido por IANA — é número de 16 bits (ou 32 com BGP-4 moderno)." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "OSPF é um protocolo de roteamento baseado em qual algoritmo, e qual é sua principal vantagem em relação ao RIP?",
+      "alternatives": [
+        { "id": "a1", "text": "Link State (Dijkstra); convergência muito mais rápida e escala para redes maiores", "isCorrect": true, "explanation": "Correto! OSPF executa Dijkstra (uma execução = rápida convergência, ~segundos). RIP usa Bellman-Ford iterativo (O(N) iterações = lento, minutos). Além disso, OSPF métrica é baseada em enlace (bandwidth), não apenas saltos, e suporta áreas para escalar a >100k roteadores." },
+        { "id": "a2", "text": "Distance Vector (Bellman-Ford); mais simples de configurar", "isCorrect": false, "explanation": "OSPF é Link State (Dijkstra), não DV. RIP que é DV (simples mas lento)." },
+        { "id": "a3", "text": "Link State (Dijkstra); compatível com IPv6 enquanto RIP não é", "isCorrect": false, "explanation": "OSPF é LS, isso é correto. Mas RIPv2 também suporta IPv6 via RIPng. Não é a vantagem principal." },
+        { "id": "a4", "text": "Usa criptografia MD5 para segurança, enquanto RIP não", "isCorrect": false, "explanation": "RIPv2 também suporta MD5. Segurança não é vantagem primária — é **convergência e escala**." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Em OSPF, qual é o propósito da **Área 0 (Backbone)** e por que ela é essencial?",
+      "alternatives": [
+        { "id": "a1", "text": "Área 0 é o núcleo; todas as outras áreas devem conectar a ela. Tráfego inter-área passa **obrigatoriamente** pelo Backbone", "isCorrect": true, "explanation": "Correto! Regra fundamental: não há atalhos diretos entre áreas sem passar por Área 0. Isso garante hierarquia: tráfego A1↔A2 vai A1→Backbone→A2. Mantém escalabilidade — se houvesse atalhos, precisaríamos de Dijkstra global." },
+        { "id": "a2", "text": "Área 0 é para roteadores com maior capacidade (mais memoria/CPU)", "isCorrect": false, "explanation": "Área 0 não é escolhida por capacidade — é padrão hierárquico de design (RFC 2328)." },
+        { "id": "a3", "text": "Área 0 é apenas para backup; roteadores usam Área 1 normalmente", "isCorrect": false, "explanation": "Área 0 é primária, não backup. Tráfego inter-área passa por ela." },
+        { "id": "a4", "text": "Pode haver múltiplas Área 0 desconectadas em uma rede OSPF", "isCorrect": false, "explanation": "Deve haver **apenas uma Área 0 conexa**. Múltiplas Área 0s desconectadas violariam contrato OSPF." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Um **Area Border Router (ABR)** em OSPF conecta qual tipo de áreas, e qual é sua função principal?",
+      "alternatives": [
+        { "id": "a1", "text": "Conecta Área 0 (Backbone) com outras áreas; sintetiza topologia (anuncia 'Área 1 está alcançável com custo X' para outras áreas)", "isCorrect": true, "explanation": "Correto! ABR fica na fronteira: tem interfaces em Área 0 e em outras áreas. Executa Dijkstra em cada área. Para anunciar entre áreas, sintetiza: 'Resume da Área 1: prefixos 10.0.0.0/16, 10.1.0.0/16 são alcançáveis via mim'. Reduz complexidade — Área 2 não precisa conhecer topologia completa de Área 1." },
+        { "id": "a2", "text": "Conecta dois ASes diferentes; participa de eBGP", "isCorrect": false, "explanation": "Isso é **ASBR (Autonomous System Border Router)**, não ABR. ABR é intra-AS (entre áreas OSPF), ASBR é inter-AS (BGP)." },
+        { "id": "a3", "text": "Conecta roteadores internos de uma área ao núcleo da área", "isCorrect": false, "explanation": "Isso seria roteador interno (IR) ou backbone router — não ABR. ABR conecta **áreas** diferentes." },
+        { "id": "a4", "text": "Existe um por AS, responsável por toda comunicação externa", "isCorrect": false, "explanation": "Pode haver múltiplos ABRs (um por interface inter-área). Em um AS grande, múltiplos ABRs fazem load balancing." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Por que OSPF com hierarquia de áreas **reduz complexidade** em relação a OSPF plano (sem áreas)?",
+      "alternatives": [
+        { "id": "a1", "text": "Cada área sincroniza LSDB localmente; Dijkstra é executado por área, não globalmente; tráfego de mensagens é contido à área", "isCorrect": true, "explanation": "Correto! Sem áreas: LSDB = topologia global (O(N) tamanho), Dijkstra executa sobre tudo, inundação LSU vai a todos. Com áreas: LSDB por área (O(A) onde A = roteadores na área), Dijkstra local + sincronização inter-área via resumos. Exemplo: 10.000 roteadores em 100 áreas = 100 roteadores/área = Dijkstra O(100²) = 10.000 vs. O(10.000²) = 100M sem áreas." },
+        { "id": "a2", "text": "Áreas permitem usar RIP dentro da área, que é mais simples", "isCorrect": false, "explanation": "Cada área ainda usa OSPF completo. Não é híbrido OSPF+RIP." },
+        { "id": "a3", "text": "Áreas eliminam necessidade de roteador Backbone", "isCorrect": false, "explanation": "Área 0 (Backbone) é **essencial** em design hierárquico — não é eliminada." },
+        { "id": "a4", "text": "Áreas só funcionam em redes com menos de 1000 roteadores", "isCorrect": false, "explanation": "Áreas são usadas em redes **grandes** — exatamente para escalar acima de 1000." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual é a ordem de operação quando um novo roteador (R1) entra em uma rede OSPF com vizinhos R2 e R3?",
+      "alternatives": [
+        { "id": "a1", "text": "1) Hello (descoberta), 2) DBD (troca de resumo), 3) LSR (requisição), 4) LSU (atualização), 5) Ack (confirmação), 6) Dijkstra", "isCorrect": true, "explanation": "Correto! Sequência padrão: Hello descobre vizinhos e inicia relação. DBD (Database Description) = cada lado resumo: 'sou R1, conheço enlaces X, Y, Z'. Comparação identifica gaps. LSR (Link State Request) = 'você tem informação sobre enlace Z que não tenho'. LSU = envio de informação. Ack = confirmação. Finalmente Dijkstra com LSDB sincronizado." },
+        { "id": "a2", "text": "1) DBD, 2) Hello, 3) Dijkstra, 4) LSU", "isCorrect": false, "explanation": "Ordem incorreta — Hello vem **antes** de DBD (precisa descobrir vizinhos antes de trocar dados)." },
+        { "id": "a3", "text": "1) Dijkstra, 2) Hello, 3) LSU", "isCorrect": false, "explanation": "Dijkstra é **ultimo** passo, quando LSDB está sincronizado. Não faz sentido rodar antes." },
+        { "id": "a4", "text": "1) Hello, 2) Dijkstra, 3) DBD", "isCorrect": false, "explanation": "Hello descobrir, mas Dijkstra precisa de LSDB completo (após DBD/LSU). Ordem errada." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "O roteador de borda do AS (ASBR) é responsável por qual função em relação a BGP e OSPF?",
+      "alternatives": [
+        { "id": "a1", "text": "Conectar o AS a ASes externos via eBGP; importar rotas externas em OSPF interno via iBGP", "isCorrect": true, "explanation": "Correto! ASBR fica na fronteira AS: uma interface para eBGP (conecta roteador de AS externo), outra para iBGP/OSPF interno. ASBR aprende rotas externas via BGP, depois as redistribui aos roteadores internos via iBGP. Exemplo: Google ASBR conecta a Verizon via eBGP, depois Google R1 aprende via iBGP: 'rede Verizon é alcançável'." },
+        { "id": "a2", "text": "Executar Dijkstra para todo AS", "isCorrect": false, "explanation": "Todos os roteadores em OSPF executam Dijkstra — não só ASBR. Além disso, ASBR é para inter-AS (BGP), não intra-AS (OSPF)." },
+        { "id": "a3", "text": "Servir como backup caso o ABR falhe", "isCorrect": false, "explanation": "ASBR e ABR são papéis independentes. ASBR é inter-AS (BGP), ABR é inter-área (OSPF)." },
+        { "id": "a4", "text": "Filtrar tráfego entre o AS e mundo externo", "isCorrect": false, "explanation": "ASBR roteia/importa, não filtra. Filtragem é função de firewall/política, não ASBR." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Comparando OSPF flat (sem áreas) com OSPF hierárquico (com áreas), qual afirmação é correta?",
+      "alternatives": [
+        { "id": "a1", "text": "OSPF flat: Dijkstra é O(N²) com topologia completa. OSPF com áreas: múltiplos Dijkstra O(A²) por área reduz custo, mas adiciona latência inter-área", "isCorrect": true, "explanation": "Correto! Trade-off: OSPF flat = 1 Dijkstra rápido sobre N roteadores (O(N²)), mas precisa sincronizar topologia gigante. Áreas = N Dijkstra sobre A roteadores (O(A²) cada, total O(N × A) em agregado, tipicamente < O(N²)), **mas** pacotes inter-área têm latência de saltos adicionais (via ABR). Vale a pena em redes grandes." },
+        { "id": "a2", "text": "OSPF com áreas é sempre mais rápido que flat, sem desvantagens", "isCorrect": false, "explanation": "Áreas tem custo: latência intra-roteador adicional (saltos via ABR), configuração mais complexa. Não é 'sem desvantagens'." },
+        { "id": "a3", "text": "OSPF flat não escalada a mais de 100 roteadores; áreas são obrigatórias após isso", "isCorrect": false, "explanation": "OSPF flat pode funcionar com mais roteadores teoricamente, mas na prática CPU saturaria. Áreas são **recomendadas** em >100, não obrigatórias." },
+        { "id": "a4", "text": "Áreas requerem protocolo diferente (não é mais OSPF puro)", "isCorrect": false, "explanation": "Áreas são **parte de OSPF** desde RFC 2328. Ainda é OSPF — apenas com hierarquia intra-AS." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Em um cenário com 3 áreas (0, 1, 2) em um AS, e um pacote deve ir de roteador R1 (Área 1) para roteador R6 (Área 2), qual é o caminho que o pacote segue?",
+      "alternatives": [
+        { "id": "a1", "text": "R1 → [via OSPF Área 1] → ABR-1-0 → [via OSPF Backbone] → ABR-2-0 → [via OSPF Área 2] → R6", "isCorrect": true, "explanation": "Correto! Caminho obrigatório inter-área: R1 encontra rota para R6 em LSDB local de Área 1. LSDB diz 'R6 está em Área 2, alcançável via ABR-2-0 com custo X'. R1 roteia para ABR-1-0 (o roteador borda da Área 1). ABR-1-0 está em Backbone, vê que ABR-2-0 é melhor próximo salto. ABR-2-0 então roteia internamente (Área 2) para R6. Sem atalhos diretos — Backbone é intermediário obrigatório." },
+        { "id": "a2", "text": "R1 → R6 direto (se conectados)", "isCorrect": false, "explanation": "Se R1 e R6 estão em áreas **diferentes**, não podem rotear direto. Devem passar pelo Backbone." },
+        { "id": "a3", "text": "R1 → [Dijkstra global] → R6 (todos em uma LSDB)", "isCorrect": false, "explanation": "OSPF com áreas **não** executa Dijkstra global — é distribuído por área. Seria OSPF flat, não hierárquico." },
+        { "id": "a4", "text": "R1 → ABR-0 → [via RIP ou BGP] → ABR-2-0 → R6", "isCorrect": false, "explanation": "Ainda é OSPF entre áreas. Não muda para RIP/BGP internamente. OSPF sincroniza ABRs via Backbone (Área 0)." }
+      ]
+    }
+  ]
+}
+

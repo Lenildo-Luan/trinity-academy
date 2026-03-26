@@ -133,6 +133,11 @@ import {
   MultipathLoadDistributionVisualizer,
   DistanceVectorLoopTopologyVisualizer,
   OspfAreasHierarchyVisualizer,
+  OspfInterAreaFlowVisualizer,
+  BgpSessionsTopologyVisualizer,
+  BgpRouteAnnouncementVisualizer,
+  HotPotatoRoutingVisualizer,
+  InterAsPacketFlowVisualizer,
   BgpAsPathPolicyVisualizer,
 } from "./src/components/routing-challenges-p5-examples";
 import {
@@ -498,6 +503,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     MultipathLoadDistributionVisualizer,
     DistanceVectorLoopTopologyVisualizer,
     OspfAreasHierarchyVisualizer,
+    OspfInterAreaFlowVisualizer,
+    BgpSessionsTopologyVisualizer,
+    BgpRouteAnnouncementVisualizer,
+    HotPotatoRoutingVisualizer,
+    InterAsPacketFlowVisualizer,
     BgpAsPathPolicyVisualizer,
     MultiplexingSender,
     DemultiplexingReceiver,

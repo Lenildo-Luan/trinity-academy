@@ -1,0 +1,109 @@
+{
+  "id": "quiz-18",
+  "title": "Quiz — Processamento de Espumas Poliméricas",
+  "description": "Teste seus conhecimentos sobre espumas poliméricas, mecanismos de formação, estrutura celular e aplicações.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "O que define uma espuma polimérica estruturalmente?",
+      "alternatives": [
+        { "id": "a1", "text": "Polímero com estrutura completamente vazia (100% gás)", "isCorrect": false, "explanation": "Espuma contém matriz SÓLIDA + gás; nunca é 100% vazia." },
+        { "id": "a2", "text": "Matriz sólida de polímero contendo gás disperso em forma de células (50–99% volume)", "isCorrect": true, "explanation": "Correto! Espuma é compósito de sólido + gás; a fração de gás varia de 50% a 99%." },
+        { "id": "a3", "text": "Polímero com baixa densidade apenas", "isCorrect": false, "explanation": "Baixa densidade é consequência, não definição." },
+        { "id": "a4", "text": "Polímero modificado termicamente sem mudança estrutural", "isCorrect": false, "explanation": "Espuma tem mudança estrutural significativa (células)." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Qual é a diferença FUNCIONAL entre células abertas e células fechadas em espuma?",
+      "alternatives": [
+        { "id": "a1", "text": "Abertas: gás pode fluir entre células; Fechadas: gás aprisionado em cada célula", "isCorrect": true, "explanation": "Correto! Abertas = interconexão de poros, fluidos fluem; Fechadas = isoladas, gás preso." },
+        { "id": "a2", "text": "Abertas: apenas ar; Fechadas: apenas nitrogênio", "isCorrect": false, "explanation": "Tipo de gás não determina abertas/fechadas; é a conectividade." },
+        { "id": "a3", "text": "Abertas: maior densidade; Fechadas: menor densidade", "isCorrect": false, "explanation": "Densidade não depende de abertas/fechadas; ambas podem ser leves." },
+        { "id": "a4", "text": "Não há diferença funcional significativa", "isCorrect": false, "explanation": "Há diferenças MUITO significativas em isolamento, absorção, drenagem." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Qual é a vantagem de CÉLULAS FECHADAS para isolamento térmico?",
+      "alternatives": [
+        { "id": "a1", "text": "Gás aprisionado (ar ou N₂) é excelente isolante, impedindo convecção", "isCorrect": true, "explanation": "Correto! Ar/N₂ em células fechadas não circula, oferecendo isolação térmica superior." },
+        { "id": "a2", "text": "Células fechadas absorvem calor melhor", "isCorrect": false, "explanation": "Células fechadas REFLETEM/IMPEDEM calor, não absorvem." },
+        { "id": "a3", "text": "Células fechadas tem maior condutividade térmica", "isCorrect": false, "explanation": "Oposto! Fechadas têm MENOR condutividade (isolante)." },
+        { "id": "a4", "text": "Células fechadas não permitem condensação", "isCorrect": false, "explanation": "Enquanto células fechadas ajudam, condensação depende de outros fatores." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Qual é a função de um 'agente espumante físico' em processamento de espuma?",
+      "alternatives": [
+        { "id": "a1", "text": "Criar reação química que libera gás", "isCorrect": false, "explanation": "Isso é agente QUÍMICO, não físico." },
+        { "id": "a2", "text": "Gás dissolvido que se expande quando pressão é reduzida ou temperatura aumenta", "isCorrect": true, "explanation": "Correto! Agentes físicos (CO₂, N₂, hidrocarbonetos) são dissolvidos sob pressão, expandem ao liberar." },
+        { "id": "a3", "text": "Modificar viscosidade do polímero", "isCorrect": false, "explanation": "Viscosidade é controlada por temperatura/composição, não agente espumante." },
+        { "id": "a4", "text": "Catalisar cura do polímero", "isCorrect": false, "explanation": "Agentes espumantes não catalisam cura." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Qual é a reação típica para agente espumante QUÍMICO (ex.: azodicarbonamida)?",
+      "alternatives": [
+        { "id": "a1", "text": "Combustão simples liberando CO₂", "isCorrect": false, "explanation": "Decomposição térmica, não combustão; requer temperatura controlada." },
+        { "id": "a2", "text": "Decomposição térmica liberando N₂, CO, CO₂, criando bolhas enquanto polímero amolece", "isCorrect": true, "explanation": "Correto! Azodicarbonamida se decompõe termicamente, liberando gases que criam bolhas." },
+        { "id": "a3", "text": "Reação com água ambiental liberando vapor", "isCorrect": false, "explanation": "Agentes químicos não reagem com água ambiental; reagem termicamente." },
+        { "id": "a4", "text": "Cristalização que pula estrutura de célula", "isCorrect": false, "explanation": "Não há cristalização; é decomposição química." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual é a vantagem de espumação IN SITU (dois componentes se misturam e criam espuma) em poliuretano?",
+      "alternatives": [
+        { "id": "a1", "text": "Não requer equipamento de espumação", "isCorrect": false, "explanation": "Equipamento é necessário para mistura e molde." },
+        { "id": "a2", "text": "Reação polimerização + liberação de CO₂ ocorrem simultaneamente, criando espuma eficientemente", "isCorrect": true, "explanation": "Correto! CO₂ produzido durante reticulação do poliuretano cria bolhas in situ." },
+        { "id": "a3", "text": "Resulta em espuma com maior densidade", "isCorrect": false, "explanation": "Espumação in situ produz espuma LEVE, não densa." },
+        { "id": "a4", "text": "Não requer inibidor ou controle de pot life", "isCorrect": false, "explanation": "Mesmo em in situ, controle de cinética é importante." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Por que 'UMIDADE' é um parâmetro crítico e deve ser controlado em processamento de poliuretano?",
+      "alternatives": [
+        { "id": "a1", "text": "Umidade dilui a resina", "isCorrect": false, "explanation": "Umidade não dilui; reage com isocianato." },
+        { "id": "a2", "text": "Água reage com isocianato, gerando gás CO₂ EXTRA, causando espumação descontrolada", "isCorrect": true, "explanation": "Correto! H₂O + -N=C=O → CO₂ + uréia; umidade causa espumação não-intencional." },
+        { "id": "a3", "text": "Umidade melhora propriedades finais", "isCorrect": false, "explanation": "Umidade não intencional degradata propriedades." },
+        { "id": "a4", "text": "Umidade apenas afeta cor final", "isCorrect": false, "explanation": "Efeito é muito maior que cor; afeta cinética e estrutura." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Qual propriedade torna espumas de POLIURETANO ideais para absorção ACÚSTICA?",
+      "alternatives": [
+        { "id": "a1", "text": "Células abertas interconectadas que dissipam energia sonora por fricção", "isCorrect": true, "explanation": "Correto! Células abertas interconectadas permitem som penetrar e dissipar energia por atrito." },
+        { "id": "a2", "text": "Densidade muito alta", "isCorrect": false, "explanation": "Espuma acústica é LEVE, não densa." },
+        { "id": "a3", "text": "Moléculas de PU ressoam em frequências de som", "isCorrect": false, "explanation": "Ressonância molecular não é mecanismo; é absorção por fricção." },
+        { "id": "a4", "text": "Capacidade de refletir ondas sonoras", "isCorrect": false, "explanation": "Refleção seria isolação; absorção dissipa energia." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Qual é a densidade típica de uma espuma polimérica comparada com polímero sólido?",
+      "alternatives": [
+        { "id": "a1", "text": "Espuma: 1000–1500 kg/m³; Sólido: 30–300 kg/m³", "isCorrect": false, "explanation": "Inverso! Espuma é MUITO mais leve." },
+        { "id": "a2", "text": "Espuma: 30–300 kg/m³; Sólido: 1000–1500 kg/m³ (espuma é 30–50x MAIS LEVE)", "isCorrect": true, "explanation": "Correto! Espuma pode ser 1–3% densidade do sólido, dependendo da fração de gás." },
+        { "id": "a3", "text": "Ambas têm densidade similar", "isCorrect": false, "explanation": "Diferença é DRAMÁTICA." },
+        { "id": "a4", "text": "Densidade depende apenas da cor, não do tipo", "isCorrect": false, "explanation": "Densidade depende da fração de gás, não de cor." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Para uma aplicação de 'isolamento térmico de tanque de combustível de aeronave', qual tipo de espuma e estrutura celular seria ideal?",
+      "alternatives": [
+        { "id": "a1", "text": "Espuma de PU com células abertas", "isCorrect": false, "explanation": "Células abertas permitem absorção de água (combustível); inadequado." },
+        { "id": "a2", "text": "Espuma de epóxi com células fechadas — excelente isolação térmica, resistência estrutural", "isCorrect": false, "explanation": "Epóxi é bom, mas custo é proibitivo para grande volume." },
+        { "id": "a3", "text": "Espuma de poliuretano com CÉLULAS FECHADAS — isolação térmica, impermeabilidade a combustível", "isCorrect": true, "explanation": "Correto! Células fechadas impedem absorção; PU oferece isolação + compatibilidade com combustível." },
+        { "id": "a4", "text": "Espuma sintática (microesferas em matriz sólida)", "isCorrect": false, "explanation": "Sintática é usada para aplicações de compressão/submarina, não isolação térmica." }
+      ]
+    }
+  ]
+}
+

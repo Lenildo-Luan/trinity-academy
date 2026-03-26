@@ -1,0 +1,175 @@
+# Técnicas de Processamento para Termoplásticos I: Extrusão
+
+A **extrusão** é uma das técnicas mais importantes e versáteis para processar polímeros termoplásticos. Diferentemente de moldagem por injeção (que cria peças discretas em cavidades), extrusão produz **formas contínuas ou semi-contínuas** como filmes, chapas, tubos, perfis e fibras.
+
+## Princípio Básico da Extrusão
+
+Na extrusão, um termoplástico sólido (geralmente em grânulos ou pó) é:
+
+1. **Carregado** em um cilindro aquecido (extrusor)
+2. **Aquecido e plastificado** enquanto é empurrado por um parafuso giratório
+3. **Forçado** através de uma **matriz (die)** que define a forma
+4. **Resfriado** e solidificado em sua forma final
+
+O processo é **semi-contínuo**: matéria-prima sólida entra continuamente e produto contínuo é extruidado.
+
+## Componentes Principais do Extrusor
+
+### **1. Cilindro (Barrel)**
+Recipiente aquecido que contém o parafuso. Equipado com:
+- **Zonas de aquecimento**: Tipicamente 3–5 zonas de temperatura independente
+- **Resistências elétricas**: Fornecem calor
+- **Sistemas de resfriamento**: Água ou ar controlam temperatura
+
+### **2. Parafuso (Screw)**
+Elemento rotativo dentro do cilindro que:
+- **Transporta** material sólido da zona de alimentação
+- **Compacta** material, expulsando ar
+- **Aquece** material por compressão e atrito
+- **Bombeia** material fundido através da matriz
+
+**Partes do Parafuso:**
+
+<MarkdownTable
+  headers={["Zona", "Função", "Diâmetro do Parafuso", "Características"]}
+  rows={[
+    ["**Zona de Alimentação**", "Recebe grânulos e transporta para zona de compressão", "Profundidade de raiz = 100% do passo", "Baixa temperatura, apenas transporte"],
+    ["**Zona de Compressão**", "Reduz espaço disponível, compacta material, expulsa ar", "Profundidade de raiz diminui gradualmente", "Temperatura aumenta, pressão aumenta"],
+    ["**Zona de Dosagem (Metering)**", "Regulariza fluxo, homogeneiza polímero fundido", "Profundidade de raiz = 70–80% da alimentação", "Temperatura alta, pressão máxima"]
+  ]}
+/>
+
+### **3. Matriz (Die)**
+Forma e dimensiona o perfil final. Exemplos:
+- **Matriz redonda**: Produz fios ou tubos
+- **Matriz plana/fenda**: Produz filmes ou chapas
+- **Matriz de perfil complexo**: Produz canais, asas, etc.
+
+### **4. Sistema de Resfriamento**
+Após a matriz, o material extrudado é resfriado para solidificar:
+- **Ar**: Ventiladores para resfriamento rápido
+- **Água**: Tanques ou sprays para resfriamento intensivo
+- **Vácuo**: Em alguns casos, para melhorar qualidade de superfície
+
+### **5. Sistema de Tração (Haul-off)**
+Puxa o material extrudado a velocidade controlada, permitindo controle de dimensões finais.
+
+## Perfil de Temperatura na Extrusão
+
+<MarkdownTable
+  headers={["Zona", "Temperatura Típica (°C)", "Propósito"]}
+  rows={[
+    ["**Zona 1 (Alimentação)**", "Tg + 20–40", "Aquecimento gradual, reduz choque térmico"],
+    ["**Zona 2 (Compressão)**", "Tm - 20–40", "Plastificação completa, fusão total"],
+    ["**Zona 3 (Metering)**", "Tm - 10–30", "Máxima fluidez, homogeneidade"],
+    ["**Zona 4 (Pré-matriz)**", "Tm - 20–40", "Pequeno resfriamento para estabilizar fluxo"],
+    ["**Matriz (Die)**", "Tm + 10–30", "Mantém material fundido, evita solidificação prematura"]
+  ]}
+/>
+
+A temperatura em cada zona é crítica: muito baixa causa "travamento" (jam), muito alta causa degradação.
+
+## Etapas do Processo de Extrusão
+
+1. **Carregamento**: Grânulos são despejados no funil de alimentação
+2. **Transporte e Plastificação**: O parafuso rotativo aquece, compacta e transporta material
+3. **Extrusão**: Material fundido é bombeado através da matriz
+4. **Resfriamento**: Material sai da matriz e é resfriado (ar, água ou combinado)
+5. **Tração**: Haul-off puxa material a velocidade controlada
+6. **Cortagem/Bobinamento**: Material é cortado em pedaços ou enrolado em bobina
+
+## Tipos de Produtos de Extrusão
+
+### **Filmes (Films)**
+Espessura: 10–500 μm
+- Produção em linha: cilindros ou tubos grandes são esticados até espessura desejada
+- Aplicações: Embalagens, sacolas, isolação elétrica
+
+### **Chapas (Sheets)**
+Espessura: 0.5–5 mm
+- Produção em linha com rolos de calibração
+- Aplicações: Thermoforming, componentes estruturais, painéis
+
+### **Perfis (Profiles)**
+Formas complexas customizadas
+- Exemplos: Trilhos de alumínio revestidos com plástico, selantes de portas, molduras
+- Aplicações: Construção, automotiva, eletrônica
+
+### **Tubos (Tubes)**
+Diâmetros de milímetros a metros
+- Matriz com núcleo central cria abertura
+- Aplicações: Tubulações de água, ar comprimido, aplicações médicas
+
+### **Fibras (Fibers)**
+Diâmetro: 10–100 μm
+- Matriz com múltiplos pequenos orifícios
+- Aplicações: Têxteis, compósitos reforçados, não-tecidos
+
+## Parâmetros Críticos de Extrusão
+
+<MarkdownTable
+  headers={["Parâmetro", "Efeito de Aumentar", "Controle Prático"]}
+  rows={[
+    ["**RPM do Parafuso**", "Mais fluxo, menos tempo de residência, melhor homogeneização", "50–500 RPM típico"],
+    ["**Temperatura**", "Menor viscosidade, melhor fluidez, risco de degradação", "Monitorar com termocouples"],
+    ["**Velocidade de Tração**", "Material mais fino (menor espessura), menos denso", "Sincronizar com parafuso"],
+    ["**Pressão de Matriz**", "Indica resistência; alta pressão = material viscoso ou matriz entupida", "Monitorar e ajustar RPM"],
+    ["**Profundidade do Parafuso**", "Mais profundo = maior espaço, fluxo mais suave, menos mistura", "Geometria fixa do parafuso"]
+  ]}
+/>
+
+## Problemas Comuns na Extrusão
+
+| Problema | Causa Provável | Solução |
+|----------|---|---|
+| **Material quebradiço** | Degradação térmica, tempo de residência muito longo | Reduzir temperatura, aumentar RPM |
+| **Superfície áspera** | Temperatura baixa demais, cisalhamento excessivo | Aumentar temperatura, ajustar matriz |
+| **Variação de dimensões** | Pressão instável, velocidade de tração incorreta | Sincronizar haul-off com parafuso |
+| **Bolhas no material** | Umidade no material, ar aprisionado | Secar polímero antes, usar desgaseificador |
+| **Fluxo desigual** | Matriz entupida parcialmente | Limpar matriz, ajustar temperatura |
+| **Torque muito alto** | Material muito viscoso, temperatura baixa | Aumentar temperatura ou reduzir RPM |
+
+## Extrusão de Múltiplos Componentes
+
+### **Coextrusão**
+Múltiplos extrusores trabalham juntos para extruidar camadas diferentes simultaneamente:
+
+- Extrusor 1: Material de custo baixo (núcleo)
+- Extrusor 2: Material de qualidade superior (superfície)
+- Resultado: Produto com camadas de diferentes polímeros
+
+**Vantagens:**
+- Otimiza custo (núcleo barato, superfície de qualidade)
+- Combina propriedades (rigidez + flexibilidade, barragem química)
+
+### **Extrusão de Compósitos**
+Fibra curta (vidro ou carbono) é misturada com termoplástico:
+- Aumenta rigidez e resistência
+- Reduz expansão térmica
+- Aplicações: Peças automotivas, componentes estruturais
+
+## Aplicações Industriais Principais
+
+<MarkdownTable
+  headers={["Aplicação", "Produto Típico", "Polímero", "Volume Anual Aprox."]}
+  rows={[
+    ["**Filmes Alimentares**", "Embalagens, sacolas plásticas", "PE, PP", "Milhões de toneladas"],
+    ["**Tubulações**", "Encanamento água, drenagem", "PVC, PE", "Centenas de mil toneladas"],
+    ["**Fios Elétricos**", "Isolação de cabos de cobre", "PVC, XLPE", "Centenas de mil toneladas"],
+    ["**Perfis de Construção**", "Trilhos, molduras, selantes", "Poliuretano, PVC", "Dezenas de mil toneladas"],
+    ["**Fibras Têxteis**", "Poliéster, polipropileno", "PET, PP", "Milhões de toneladas"],
+    ["**Chapas Rígidas**", "Embalagens rígidas, painéis", "PS, ABS", "Centenas de mil toneladas"]
+  ]}
+/>
+
+## Resumo da Aula
+
+- **Extrusão** é um processo semi-contínuo que produz formas longas: filmes, tubos, perfis, fibras
+- **Componentes principais**: cilindro aquecido, parafuso plasticador, matriz, sistema de resfriamento e tração
+- **Parafuso** tem três zonas: alimentação, compressão e metering
+- **Temperatura** deve ser cuidadosamente controlada em múltiplas zonas
+- **Produtos** variam desde filmes finos até tubos grossos, dependendo da matriz
+- **Parâmetros críticos**: RPM, temperatura, velocidade de tração, pressão de matriz
+- **Problemas comuns** como degradação, variação dimensional e bolhas têm soluções específicas
+- Próximo capítulo: **Injeção e Moldagem por Sopro** — técnicas discretas (peça por peça)
+

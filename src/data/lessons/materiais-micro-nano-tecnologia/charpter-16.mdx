@@ -1,0 +1,139 @@
+# Técnicas de Processamento para Termofixos I: Casting e Moldagem por Injeção
+
+Neste capítulo, exploraremos as duas técnicas mais fundamentais de processamento de polímeros termofixos: **moldagem por fundição (casting)** e **moldagem por injeção (injection molding)**. Ambas são processos versáteis aplicáveis a uma ampla gama de geometrias e volumes de produção.
+
+## Moldagem por Fundição (Casting)
+
+A **moldagem por fundição** é a técnica mais simples para processar termofixos, especialmente resinas epóxicas e poliésteres insaturados.
+
+### Princípio Básico
+
+Na fundição, a resina líquida não curada é simplesmente **vertida em um molde** aberto ou fechado e deixada curar sob calor controlado. Não há aplicação de pressão significativa.
+
+<MarkdownTable
+  headers={["Etapa", "Descrição", "Parâmetros Críticos"]}
+  rows={[
+    ["**1. Preparação do Molde**", "Molde limpo, secos e, frequentemente, revestido com desmoldante", "Limpeza sem resíduos, seleção apropriada de desmoldante"],
+    ["**2. Mistura da Resina**", "Resina base e agente de cura são misturados, geralmente com vácuo para remover bolhas", "Proporção exata, tempo de mistura, remoção de bolhas"],
+    ["**3. Vertedura**", "A mistura é vertida lentamente no molde", "Velocidade de vertedura, prevenção de bolhas entrantes"],
+    ["**4. Cura Ambiental**", "Cura em temperatura ambiente ou em estufa a 50–80°C", "Temperatura, umidade, tempo de cura"],
+    ["**5. Desmoldagem**", "Remoção da peça do molde", "Força de desmoldagem, possíveis danos à peça"]
+  ]}
+/>
+
+### Vantagens
+
+- **Equipamento simples**: Requer apenas molde e estufa
+- **Baixo custo inicial**: Moldes podem ser fabricados com técnicas simples
+- **Sem pressão**: Reduz complexidade de equipamento
+- **Flexibilidade de design**: Geometrias complexas são viáveis
+- **Ideal para prototipagem**: Ciclos rápidos para validar designs
+
+### Desvantagens
+
+- **Porosidade elevada**: Bolhas de ar aprisionadas durante vertedura e cura
+- **Contração não uniforme**: Diferentes taxas de cura em diferentes regiões geram tensões residuais
+- **Produtividade baixa**: Cada ciclo de cura pode durar horas ou dias
+- **Controle de qualidade difícil**: Variabilidade entre peças
+- **Resíduos de resina**: Não curada que escorre do molde é difícil de reutilizar
+
+### Aplicações Típicas
+
+- Peças decorativas e artísticas
+- Protótipos de engenharia
+- Encapsulação de componentes eletrônicos (pequeno volume)
+- Moldes mestres para outros processos
+- Peças estruturais não-críticas em baixo volume
+
+## Moldagem por Injeção (Injection Molding) — Termofixos
+
+A **moldagem por injeção para termofixos** é um processo cíclico onde o pré-polímero é aquecido, injetado sob alta pressão em um molde fechado e curado dentro do molde.
+
+### Diferenças com Injeção de Termoplásticos
+
+É crítico entender que injeção de termofixos é fundamentalmente diferente de injeção de termoplásticos:
+
+<MarkdownTable
+  headers={["Aspecto", "Termofixos", "Termoplásticos"]}
+  rows={[
+    ["**Objetivo do Aquecimento**", "Fluidificar pré-polímero e iniciar cura", "Apenas fluidificar para moldagem"],
+    ["**Reação Química**", "Ocorre durante moldagem (cura parcial)", "Nenhuma reação química"],
+    ["**Molde Aquecido**", "Sim, 150–200°C típico", "Não, mantém resfriamento"],
+    ["**Tempo no Molde**", "Horas (cura completa)", "Segundos a minutos"],
+    ["**Pós-cura**", "Frequentemente necessária", "Raramente necessária"],
+    ["**Controle de Viscosidade**", "Temperatura + tempo de cura", "Apenas temperatura"],
+    ["**Ejeção**", "Peça parcialmente curada, duros", "Peça solidificada completamente"]
+  ]}
+/>
+
+### Etapas do Processo
+
+1. **Plastificação**: Pré-polímero é carregado no cilindro aquecido (80–120°C) e amolecido
+2. **Injeção**: Parafuso injeta a mistura sob alta pressão (50–150 MPa) para dentro do molde fechado
+3. **Cura Parcial no Molde**: O molde quente (150–200°C) inicia e continua a cura
+4. **Ejeção**: Após tempo determinado (30 min a 2 horas), a peça é ejetada ainda parcialmente curada
+5. **Pós-cura**: Frequentemente, a peça é aquecida em estufa para completar a cura
+
+### Vantagens
+
+- **Produção em série**: Ciclos repetitivos permitem alta produtividade
+- **Menor porosidade**: Pressão ajuda a remover bolhas
+- **Geometrias precisas**: Controle dimensional melhorado vs. casting
+- **Automação possível**: Processos podem ser parcialmente automatizados
+- **Adequado para pequenas a médias séries**: Volumes de 100s a 1000s de peças
+
+### Desvantagens
+
+- **Investimento em molde elevado**: Moldes precisam resistir a alta pressão e temperatura
+- **Equipamento complexo**: Máquinas de injeção são caras
+- **Retenção no molde**: Requer gerenciamento de peças não completamente curadas
+- **Pot life limitado**: A resina pode começar a curar no cilindro quente
+- **Desperdício na injeção**: Sprue (canal de injeção) e gates são perdidos
+
+### Variações do Processo
+
+#### **Injection Molding com Recobrimento (Overmolding)**
+Uma segunda resina (geralmente um elastômero termofixo) é injetada sobre a primeira para criar peças com diferentes propriedades.
+
+#### **Injection Molding com Reforço**
+Fibras curtas (chopped fiber) podem ser adicionadas antes da injeção para aumentar rigidez.
+
+## Comparação: Casting vs. Moldagem por Injeção
+
+<MarkdownTable
+  headers={["Critério", "Casting", "Injeção"]}
+  rows={[
+    ["**Custo de Ferramenta**", "Baixo", "Alto"],
+    ["**Custo Peça Unitária**", "Alto (sem economia de escala)", "Baixo (com volume)"],
+    ["**Tempo de Ciclo**", "Longo (horas/dias)", "Médio (30 min–2 h)"],
+    ["**Volume Ideal**", "Prototipagem, <100 peças", "Série, 100s–10k peças"],
+    ["**Porosidade**", "Alta", "Baixa–média"],
+    ["**Precisão Dimensional**", "Baixa–média", "Média–alta"],
+    ["**Complexidade Geométrica**", "Alta flexibilidade", "Limitada por desmoldagem"],
+    ["**Tempo até Produção**", "Dias a semanas", "Semanas a meses"],
+    ["**Resistência Final**", "Adequada", "Excelente"],
+    ["**Aplicações Típicas**", "Arte, prototipagem, encapsulação", "Eletrônicos, automotiva, indústria"]
+  ]}
+/>
+
+## Controle de Qualidade no Processamento
+
+Independentemente da técnica, os seguintes parâmetros devem ser monitorados:
+
+- **Temperatura do molde**: Verificar com termocouples em múltiplos pontos
+- **Pressão de injeção**: Registrar pressão máxima e tempo sob pressão
+- **Tempo de cura**: Registrar tempo total no molde
+- **Dimensões finais**: Medir com calibres após cura completa
+- **Porosidade**: Inspeção visual ou por ultrassom para detectar vazios
+- **Dureza**: Shore D ou outras escalas de dureza
+- **Resistência adesiva**: Se aplicável, testar resistência de junções
+
+## Resumo da Aula
+
+- **Casting** é o método mais simples, adequado para prototipagem e baixo volume
+- **Moldagem por injeção** de termofixos é mais complexa, adequada para séries maiores
+- Injeção de termofixos é fundamentalmente diferente de termoplásticos: reação química ocorre no molde
+- **Casting** oferece flexibilidade mas sofre com porosidade e variabilidade
+- **Injeção** oferece melhor precisão e consistência, mas requer investimento em molde
+- Próximos capítulos exploram técnicas mais avançadas para termofixos
+

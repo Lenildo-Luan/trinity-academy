@@ -122,6 +122,20 @@
         "description": "Oscilações de rota no algoritmo de estado de enlace e o problema da contagem ao infinito no algoritmo de vetor de distância. Comparação direta entre as abordagens de estado de enlace (LS) e vetor de distância (DV), suas diferenças em termos de complexidade de mensagens, velocidade de convergência e robustez.",
         "video": null,
         "quizId": "quiz-16"
+      },
+      {
+        "id": "charpter-17",
+        "title": "Hierarquia e Roteamento Intra-AS",
+        "description": "Sistemas Autônomos (AS) e a necessidade de roteamento intra e inter-AS. Focaremos nos protocolos intra-AS, apresentando o OSPF (Open Shortest Path First) como o principal exemplo de protocolo de estado de enlace, incluindo sua operação hierárquica dentro de um AS.",
+        "video": null,
+        "quizId": "quiz-17"
+      },
+      {
+        "id": "charpter-18",
+        "title": "Roteamento Inter-AS com BGP",
+        "description": "BGP (Border Gateway Protocol), os diferentes tipos de sessões (eBGP e iBGP), a estrutura de suas mensagens e os atributos cruciais das rotas (AS-PATH, NEXT-HOP). Como o BGP permite o roteamento baseado em políticas e como ocorre a seleção de rotas, incluindo estratégias como o roteamento batata quente (hot-potato routing).",
+        "video": null,
+        "quizId": "quiz-18"
       }
     ]
   }

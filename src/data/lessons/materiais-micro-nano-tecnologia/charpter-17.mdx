@@ -1,0 +1,172 @@
+# Técnicas de Processamento para Termofixos II: Compressão, Transferência e Estereolitografia
+
+Neste capítulo, exploraremos três técnicas avançadas de processamento de termofixos que oferecem maior controle, pressão controlada e até processamento por luz. Essas técnicas são fundamentais para aplicações de alto desempenho em aeronáutica, energia e eletrônica.
+
+## Moldagem por Compressão (Compression Molding)
+
+A **moldagem por compressão** é uma técnica clássica onde o pré-polímero é colocado em um molde aberto, o molde é fechado sob pressão elevada, e a cura ocorre sob calor e pressão.
+
+### Etapas do Processo
+
+<MarkdownTable
+  headers={["Etapa", "Descrição", "Detalhes Técnicos"]}
+  rows={[
+    ["**1. Carregamento**", "Pré-polímero seco (pó, grânulo ou prepreg) é colocado na cavidade do molde inferior", "Volume deve ser suficiente; excesso causará rebarbas"],
+    ["**2. Fechamento do Molde**", "Molde superior desce sobre o material", "Velocidade de fechamento: 10–50 mm/s típico"],
+    ["**3. Aplicação de Pressão**", "Pressão hidráulica aplicada (20–100 MPa típico)", "Pressão elevada reduz porosidade e tempo de cura"],
+    ["**4. Cura sob Calor e Pressão**", "Molde mantido a 150–200°C com pressão constante", "Tempo: 1–10 minutos, dependendo da resina"],
+    ["**5. Alívio de Pressão e Ejeção**", "Pressão liberada gradualmente, molde aberto, peça ejetada", "Ejeção suave evita danos à peça"]
+  ]}
+/>
+
+### Tipos de Pré-polímeros para Compressão
+
+**1. Moldagem de Pó (Powder Molding)**
+- Pré-polímero em forma de pó fino (resina fenólica, melamínica)
+- Rápida cura por alta pressão
+- Ideal para peças pequenas a médias
+
+**2. Moldagem de Prepreg Seco**
+- Tecido ou fibra já impregnada com resina parcialmente curada
+- Reduz tempo de processamento
+- Melhor controle de fração volumétrica de fibra
+
+**3. Moldagem com Reforço Contínuo (SMC — Sheet Molding Compound)**
+- Folha de material que combina fibra, resina e cargas
+- Posicionada no molde e curada sob pressão
+- Excelente para peças automotivas
+
+### Vantagens
+
+- **Alta pressão**: Reduz drasticamente porosidade e vazios
+- **Ciclos rápidos**: Cura acelerada por pressão (minutos vs. horas em casting)
+- **Bom controle dimensional**: Pressão mantém peça com dimensões precisas
+- **Menos desperdício**: Excesso mínimo fora da cavidade
+- **Ideal para fibras**: Permite moldagem com reforço contínuo
+
+### Desvantagens
+
+- **Custo de molde elevado**: Moldes devem resistir a pressão extrema
+- **Equipamento pesado**: Prensas hidráulicas robustas são caras
+- **Geometrias limitadas**: Paredes finas e reentrâncias são difíceis
+- **Rebarbas**: Excesso de material escapa, criando rebarbas que devem ser removidas
+- **Capacidade produtiva**: Ciclos são mais rápidos, mas prensa tem tempo de ociosidade
+
+### Aplicações Típicas
+
+- Peças automotivas (paredes de motores, engrenagens)
+- Componentes estruturais de aeronaves (painéis, suportes)
+- Isoladores elétricos de alta tensão
+- Componentes de máquinas elétricas (estators)
+- Peças para indústria de energia
+
+## Moldagem por Transferência (Transfer Molding)
+
+A **moldagem por transferência** combina características da injeção e da compressão. O pré-polímero é aquecido em um cilindro e transferido por pressão para o molde quente.
+
+### Etapas do Processo
+
+1. **Carregamento de Matéria-Prima**: Pré-polímero é colocado em um cilindro aquecido (plastificador)
+2. **Aquecimento e Amolecimento**: Material é aquecido sem iniciar reação de cura significativa
+3. **Transferência Forçada**: Êmbolo empurra o material através de um sprue e para dentro do molde fechado
+4. **Cura no Molde**: Molde quente cura o material enquanto mantém pressão
+5. **Ejeção**: Peça é removida
+
+### Diferenças com Outros Métodos
+
+<MarkdownTable
+  headers={["Aspecto", "Transferência", "Injeção", "Compressão"]}
+  rows={[
+    ["**Pressão**", "Alta (50–100 MPa)", "Muito alta (100–150 MPa)", "Média–alta (20–100 MPa)"],
+    ["**Fonte de Pressão**", "Êmbolo em cilindro plastificador", "Parafuso rotatório", "Prensa hidráulica"],
+    ["**Aplicação de Força**", "Linear", "Linear e giratória", "Linear simples"],
+    ["**Controle de Viscosidade**", "Temperatura do cilindro e tempo", "Velocidade do parafuso + temperatura", "Pressão e temperatura"],
+    ["**Velocidade de Enchimento**", "Moderada", "Muito rápida", "Lenta"],
+    ["**Melhor para**", "Peças com reforço fibrado", "Peças precisas, sem reforço", "Peças pequenas, pó"]
+  ]}
+/>
+
+### Vantagens
+
+- **Pressão controlada**: Intermediária entre injeção e compressão
+- **Melhor para reforço fibrado**: Movimento mais suave reduz quebra de fibras comparado com injeção
+- **Enchimento completo do molde**: Menos air traps que compressão simples
+- **Ciclos moderados**: Mais rápido que casting, mais lento que injeção
+
+### Desvantagens
+
+- **Desperdício no sprue**: Material no canal de injeção não é recuperado
+- **Equipamento especializado**: Máquinas transfer são menos comuns que prensas
+- **Controle complexo**: Requer sincronização de múltiplos parâmetros
+
+## Estereolitografia (Stereolithography — SLA)
+
+A **estereolitografia** é um processo de manufatura aditiva que cura resinas fotossensíveis camada por camada usando luz ultravioleta (UV) ou laser.
+
+### Princípio Básico
+
+1. **Resina Fotossensível**: Uma resina epóxica ou acrilato contém **fotoiniciadores** — moléculas que, quando expostas a UV/laser, iniciam polimerização
+2. **Varredura por Luz**: Um laser UV ou luz estruturada varre a superfície da resina, curando apenas as regiões desejadas
+3. **Construção Camada por Camada**: A plataforma desce, uma nova camada de resina é aplicada, e o processo se repete
+4. **Limpeza e Pós-cura**: A peça finalizada é removida da resina não curada, limpa e pode receber pós-cura em forno UV
+
+### Tipos de SLA
+
+**1. SLA com Laser Pontual**
+- Laser UV varre ponto a ponto
+- Resolução: até 25 micrometros em XY
+- Mais lento (horas para peças grandes)
+
+**2. SLA com Projeção (DLP/LCD)**
+- Máscara digital projeta a forma inteira de cada camada
+- Resolução: 25–100 micrometros
+- Mais rápido que laser pontual
+
+### Vantagens
+
+- **Resolução extremamente alta**: Detalhes finos de 25–100 μm
+- **Geometrias complexas**: Qualquer forma gerada por CAD é viável
+- **Prototipagem rápida**: Peças em horas vs. dias/semanas
+- **Sem molde**: Não requer ferramenta, ideal para iteração rápida
+- **Material com propriedades previsíveis**: Resinas SLA têm propriedades caracterizadas
+
+### Desvantagens
+
+- **Custo de impressora elevado**: Equipamentos especializados são caros
+- **Resinas caras**: Material de SLA custa muito mais que resina comum
+- **Pós-processamento**: Limpeza e pós-cura em forno UV são necessárias
+- **Propriedades mecânicas**: Geralmente inferiores a termofixos curados termicamente
+- **Absorção de umidade**: Resinas SLA absorvem umidade, afetando propriedades
+
+### Aplicações
+
+- Protótipos de engenharia funcionais
+- Modelos para moldagem (master pattern)
+- Peças customizadas em baixo volume
+- Componentes biocompatíveis (resinas especiais)
+- Moldes para casting em areia (padrão perdido)
+
+## Seleção da Técnica Apropriada
+
+<MarkdownTable
+  headers={["Critério", "Casting", "Injeção", "Compressão", "Transferência", "SLA"]}
+  rows={[
+    ["**Volume (peças)**", "<100", "100s–10k", "100s–5k", "50s–2k", "<100"],
+    ["**Tempo até 1ª peça**", "Dias", "Semanas", "Semanas", "Semanas", "Horas"],
+    ["**Custo de Ferramenta**", "Muito baixo", "Alto", "Alto", "Alto", "Nenhum"],
+    ["**Custo por Peça**", "Alto", "Baixo", "Médio–baixo", "Médio", "Alto"],
+    ["**Porosidade Final**", "Alta", "Média", "Baixa", "Média–baixa", "Nenhuma"],
+    ["**Reforço Fibrado**", "Não", "Limitado", "Sim", "Sim", "Não"],
+    ["**Resolução**", "Baixa", "Média–alta", "Média", "Média", "Muito alta"],
+    ["**Pós-processamento**", "Mínimo", "Remoção de gate", "Remoção de rebaba", "Remoção de sprue", "Limpeza + pós-cura"]
+  ]}
+/>
+
+## Resumo da Aula
+
+- **Compressão** oferece alta pressão, ciclos rápidos e adequada para reforço fibrado
+- **Transferência** combina benefícios de injeção e compressão, com movimento gentil para fibras
+- **Estereolitografia** permite prototipagem rápida com geometrias complexas sem molde
+- Seleção depende de **volume, prazo, custo de ferramenta e propriedades finais requeridas**
+- Próximos capítulos abordam **espumas poliméricas** e transição para **termoplásticos**
+

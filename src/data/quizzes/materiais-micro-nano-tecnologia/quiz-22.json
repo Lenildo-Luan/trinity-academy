@@ -1,0 +1,109 @@
+{
+  "id": "quiz-22",
+  "title": "Quiz — Técnicas de Processamento para Termoplásticos III: Termoformagem e Moldagem a Vácuo",
+  "description": "Teste seus conhecimentos sobre termoformagem, moldagem a vácuo, aplicações e comparação de técnicas.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual é a matéria-prima inicial em termoformagem?",
+      "alternatives": [
+        { "id": "a1", "text": "Grânulos sólidos de termoplástico", "isCorrect": false, "explanation": "Grânulos são matéria prima para extrusão/injeção, não termoformagem." },
+        { "id": "a2", "text": "Chapa ou filme termoplástico PRÉ-FABRICADO", "isCorrect": true, "explanation": "Correto! Termoformagem começa com material já semi-processado (chapa ou filme)." },
+        { "id": "a3", "text": "Resina líquida não-curada", "isCorrect": false, "explanation": "Resina líquida é para moldagem (casting, injeção)." },
+        { "id": "a4", "text": "Fibra reforçada", "isCorrect": false, "explanation": "Fibra não é ponto de partida para termoformagem." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Em termoformagem, qual é o estado IDEAL da chapa durante conformação?",
+      "alternatives": [
+        { "id": "a1", "text": "Sólida e rígida (abaixo de Tg)", "isCorrect": false, "explanation": "Abaixo de Tg, material não se conforma." },
+        { "id": "a2", "text": "Completamente fluida (acima de Tm)", "isCorrect": false, "explanation": "Acima de Tm, controle de espessura é perdido." },
+        { "id": "a3", "text": "Entre Tg e Tm — FLEXÍVEL mas ESTRUTURALMENTE MANTIDA, sem fluidez excessiva", "isCorrect": true, "explanation": "Correto! Nessa faixa, chapa é borrachóide; conforma sem perder propriedades." },
+        { "id": "a4", "text": "Parcialmente cristalizada", "isCorrect": false, "explanation": "Cristalinidade não é relevante para estado termodinâmico." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Qual é a PRINCIPAL DESVANTAGEM de Vacuum Forming (vácuo puro)?",
+      "alternatives": [
+        { "id": "a1", "text": "Molde é muito caro de fabricar", "isCorrect": false, "explanation": "Molde de vacuum forming é BARATO." },
+        { "id": "a2", "text": "Espessura NÃO-UNIFORME — fino nos pontos altos, espesso nos fundos (falta de força de moldagem uniforme)", "isCorrect": true, "explanation": "Correto! Vácuo (~80 kPa) é força limitada; não distribui material uniformemente." },
+        { "id": "a3", "text": "Material degrada termicamente", "isCorrect": false, "explanation": "Degradação não é inerente a vácuo." },
+        { "id": "a4", "text": "Ciclos de produção são muito longos", "isCorrect": false, "explanation": "Ciclos são razoavelmente rápidos." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Qual é a VANTAGEM de Pressure Forming (ar pressurizado) sobre Vacuum Forming?",
+      "alternatives": [
+        { "id": "a1", "text": "Molde é mais barato", "isCorrect": false, "explanation": "Pressure forming requer molde mais robusto (côncavo), mais caro." },
+        { "id": "a2", "text": "MELHOR reprodução de detalhes finos e distribuição de espessura mais UNIFORME", "isCorrect": true, "explanation": "Correto! Pressão (1–5 bar) fornece força bem distribuída, melhorando acabamento." },
+        { "id": "a3", "text": "Ciclos muito mais rápidos", "isCorrect": false, "explanation": "Ciclos são similares." },
+        { "id": "a4", "text": "Sem risco de empenamento", "isCorrect": false, "explanation": "Empenamento pode ocorrer em ambas as técnicas." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "O que é 'contra-molde' em termoformagem e qual sua vantagem?",
+      "alternatives": [
+        { "id": "a1", "text": "Segundo molde que prensa de cima para CONTROLE MÁXIMO de espessura (duas superfícies de qualidade)", "isCorrect": true, "explanation": "Correto! Contra-molde permite conformação entre dois moldes, controlando espessura com precisão." },
+        { "id": "a2", "text": "Sistema de resfriamento do molde", "isCorrect": false, "explanation": "Contra-molde não é sistema de resfriamento." },
+        { "id": "a3", "text": "Tipo de chapa especial", "isCorrect": false, "explanation": "Contra-molde é ferramenta, não material." },
+        { "id": "a4", "text": "Técnica para remover bolhas de ar", "isCorrect": false, "explanation": "Contra-molde não remove bolhas; impede formação." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual é o problema comum 'AIR TRAPS' (ar aprisionado) em termoformagem e como evitar?",
+      "alternatives": [
+        { "id": "a1", "text": "Ar fica preso entre chapa e molde; evitar aumentando pressão/vácuo gradualmente", "isCorrect": true, "explanation": "Correto! Ar deve ter caminho de escape; aplicação gradual permite ar sair." },
+        { "id": "a2", "text": "Ar no fornecimento de pressão; usar compressor de qualidade", "isCorrect": false, "explanation": "Qualidade de ar é outra questão; air traps é na conformação." },
+        { "id": "a3", "text": "Umidade no material; secar chapa antes de usar", "isCorrect": false, "explanation": "Umidade é questão diferente." },
+        { "id": "a4", "text": "Sem solução; air traps são inevitáveis", "isCorrect": false, "explanation": "Air traps CAN ser minimizados com técnica apropriada." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual é a aplicação MAIS COMUM de termoformagem?",
+      "alternatives": [
+        { "id": "a1", "text": "Prototipagem de aeronaves", "isCorrect": false, "explanation": "Aeronaves usam técnicas mais sofisticadas." },
+        { "id": "a2", "text": "Embalagens alimentares (clamshells, bandejas) — produção em massa, baixo custo", "isCorrect": true, "explanation": "Correto! Termoformagem domina embalagem alimentar por custo e velocidade." },
+        { "id": "a3", "text": "Componentes automotivos estruturais", "isCorrect": false, "explanation": "Automotiva estrutural usa injeção ou compressão." },
+        { "id": "a4", "text": "Fibras têxteis", "isCorrect": false, "explanation": "Têxteis não são feitos por termoformagem." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "O que diferencia 'moldagem a VÁCUO' de termoformagem padrão?",
+      "alternatives": [
+        { "id": "a1", "text": "Nenhuma diferença; são sinônimos", "isCorrect": false, "explanation": "Moldagem a vácuo é variante especializada de termoformagem." },
+        { "id": "a2", "text": "Vácuo é força PRIMÁRIA (não pressão positiva); moldes abertos; material mais fino; ciclos rápidos", "isCorrect": true, "explanation": "Correto! Moldagem a vácuo usa vácuo puro (~95 kPa) como força principal, simplificando equipamento." },
+        { "id": "a3", "text": "Vácuo produz peças completamente sólidas", "isCorrect": false, "explanation": "Vácuo também produz peças ocas/conformadas, não sólidas." },
+        { "id": "a4", "text": "Vácuo é para materiais termofixos, não termoplásticos", "isCorrect": false, "explanation": "Vácuo é para TERMOPLÁSTICOS." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Qual é a causa de 'ENCOLHIMENTO' (SHRINKAGE) após termoformagem e como minimizar?",
+      "alternatives": [
+        { "id": "a1", "text": "Resfriamento desigual causa contração não-uniforme; minimizar mantendo molde a temperatura uniforme mais tempo", "isCorrect": true, "explanation": "Correto! Encolhimento vem de resfriamento rápido desigual; tempo em molde reduz variação." },
+        { "id": "a2", "text": "Pressão muito alta causa encolhimento", "isCorrect": false, "explanation": "Pressão alta na verdade reduz encolhimento." },
+        { "id": "a3", "text": "Material de qualidade inferior", "isCorrect": false, "explanation": "Qualidade não é fator; é cinética de resfriamento." },
+        { "id": "a4", "text": "Sem solução; encolhimento é inevitável", "isCorrect": false, "explanation": "Encolhimento pode ser minimizado com controle de resfriamento." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Para produção de 500,000 embalagens clamshell alimentares por ano com tolerâncias moderadas, qual técnica escolher?",
+      "alternatives": [
+        { "id": "a1", "text": "Moldagem por injeção — melhor qualidade", "isCorrect": false, "explanation": "Injeção é sobre-projetado (e caro) para aplicação de embalagem." },
+        { "id": "a2", "text": "Termoformagem — velocidade alta, custo molde baixo, adequado para tolerâncias moderadas", "isCorrect": true, "explanation": "Correto! Termoformagem é ideal para embalagem em volume alto com flexibilidade de design." },
+        { "id": "a3", "text": "Casting — mais barato", "isCorrect": false, "explanation": "Casting é para termofixos, não termoplásticos de embalagem." },
+        { "id": "a4", "text": "Moldagem a vácuo — máxima precisão", "isCorrect": false, "explanation": "Vácuo é mais básico; termoformagem com pressão é melhor para volume alto." }
+      ]
+    }
+  ]
+}
+

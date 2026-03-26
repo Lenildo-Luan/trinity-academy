@@ -861,6 +861,609 @@ export function OspfAreasHierarchyVisualizer() {
   return <P5Sketch setup={setup} draw={draw} height={258} />;
 }
 
+export function OspfInterAreaFlowVisualizer() {
+  const buttons: Button[] = [];
+
+  const steps = [
+    "1) R1 consulta LSDB local",
+    "2) R1 envia para ABR-1-0",
+    "3) ABR-1-0 usa Area 0",
+    "4) Backbone encaminha pacote",
+    "5) Backbone envia para ABR-2-0",
+    "6) ABR-2-0 entra na Area 2",
+    "7) ABR-2-0 envia para R6",
+    "8) R6 recebe o pacote",
+  ];
+
+  let playing = true;
+  let stepIndex = 0;
+  let lastTick = 0;
+
+  const setup = (p: p5) => {
+    p.textFont("monospace");
+  };
+
+  const draw = (p: p5) => {
+    p.background(2, 7, 19);
+    buttons.length = 0;
+
+    if (playing && p.frameCount - lastTick > 34) {
+      stepIndex = (stepIndex + 1) % steps.length;
+      lastTick = p.frameCount;
+    }
+
+    p.noStroke();
+    p.fill(205);
+    p.textAlign(p.LEFT, p.TOP);
+    p.textSize(11);
+    p.text("Fluxo inter-area (Area 1 -> Area 0 -> Area 2)", 18, 14);
+    p.fill(132);
+    p.textSize(8.4);
+    p.text("Pacote sai de R1, cruza ABRs no backbone e chega em R6.", 18, 30);
+
+    const areaCard = (
+      x: number,
+      y: number,
+      w: number,
+      h: number,
+      label: string,
+      color: [number, number, number],
+    ) => {
+      p.fill(color[0], color[1], color[2], 28);
+      p.stroke(color[0], color[1], color[2], 120);
+      p.rect(x, y, w, h, 8);
+      p.noStroke();
+      p.fill(color[0], color[1], color[2]);
+      p.textSize(8.4);
+      p.text(label, x + 8, y + 8);
+    };
+
+    areaCard(70, 58, 180, 132, "Area 1", [120, 180, 255]);
+    areaCard(276, 96, 190, 58, "Area 0 (Backbone)", [190, 190, 210]);
+    areaCard(492, 58, 180, 132, "Area 2", [120, 220, 145]);
+
+    const r1: Node = { id: "R1", x: 130, y: 124 };
+    const abr10: Node = { id: "A1", x: 224, y: 124 };
+    const b0: Node = { id: "B0", x: 372, y: 124 };
+    const abr20: Node = { id: "A2", x: 518, y: 124 };
+    const r6: Node = { id: "R6", x: 622, y: 124 };
+
+    const activeSeg =
+      stepIndex <= 1 ? 0 : stepIndex <= 4 ? 1 : stepIndex <= 6 ? 2 : 2;
+
+    drawEdge(p, r1, abr10, activeSeg === 0 ? [120, 220, 255] : [120, 170, 220], 5, activeSeg === 0 ? 0.7 : 0.22);
+    drawEdge(p, abr10, b0, activeSeg === 1 ? [255, 220, 110] : [120, 170, 220], 3, activeSeg === 1 ? 0.7 : 0.22);
+    drawEdge(p, b0, abr20, activeSeg === 1 ? [255, 220, 110] : [120, 170, 220], 3, activeSeg === 1 ? 0.7 : 0.22);
+    drawEdge(p, abr20, r6, activeSeg === 2 ? [120, 220, 145] : [120, 170, 220], 1, activeSeg === 2 ? 0.7 : 0.22);
+
+    drawNode(p, r1, [140, 190, 255]);
+    drawNode(p, abr10, [255, 210, 110]);
+    drawNode(p, b0, [185, 190, 215]);
+    drawNode(p, abr20, [255, 210, 110]);
+    drawNode(p, r6, [140, 220, 160]);
+
+    p.noStroke();
+    p.fill(170);
+    p.textSize(8);
+    p.textAlign(p.CENTER, p.TOP);
+    p.text("ABR-1-0", abr10.x, abr10.y + 22);
+    p.text("ABR-2-0", abr20.x, abr20.y + 22);
+
+    let px = r1.x;
+    let py = r1.y;
+    if (stepIndex === 1) {
+      const t = ((p.frameCount - lastTick + 34) % 34) / 34;
+      px = p.lerp(r1.x, abr10.x, t);
+      py = p.lerp(r1.y, abr10.y, t);
+    } else if (stepIndex === 3 || stepIndex === 4) {
+      const t = ((p.frameCount - lastTick + 34) % 34) / 34;
+      if (stepIndex === 3) {
+        px = p.lerp(abr10.x, b0.x, t);
+        py = p.lerp(abr10.y, b0.y, t);
+      } else {
+        px = p.lerp(b0.x, abr20.x, t);
+        py = p.lerp(b0.y, abr20.y, t);
+      }
+    } else if (stepIndex === 6) {
+      const t = ((p.frameCount - lastTick + 34) % 34) / 34;
+      px = p.lerp(abr20.x, r6.x, t);
+      py = p.lerp(abr20.y, r6.y, t);
+    } else if (stepIndex >= 7) {
+      px = r6.x;
+      py = r6.y;
+    } else if (stepIndex === 2) {
+      px = abr10.x;
+      py = abr10.y;
+    } else if (stepIndex === 5) {
+      px = abr20.x;
+      py = abr20.y;
+    }
+
+    p.fill(120, 220, 255);
+    p.circle(px, py - 14, 10);
+
+    const panelX = 700;
+    const panelY = 14;
+    const panelW = p.width - panelX - 14;
+    p.fill(12, 20, 35);
+    p.stroke(120, 145, 175, 90);
+    p.rect(panelX, panelY, panelW, 210, 8);
+
+    p.noStroke();
+    p.fill(195);
+    p.textAlign(p.LEFT, p.TOP);
+    p.textSize(9);
+    p.text(`Passo atual: ${stepIndex + 1}/8`, panelX + 10, panelY + 12);
+
+    steps.forEach((item, idx) => {
+      p.fill(idx === stepIndex ? 255 : 140);
+      p.text(item, panelX + 10, panelY + 30 + idx * 18);
+    });
+
+    drawButton(p, buttons, "toggle", panelX + 10, panelY + 180, playing ? "Pause" : "Play", playing);
+    drawButton(p, buttons, "step", panelX + 110, panelY + 180, "Passo", false);
+    drawButton(p, buttons, "reset", panelX + 210, panelY + 180, "Reiniciar", false);
+  };
+
+  const mousePressed = (p: p5) => {
+    const hit = hitButton(p, buttons);
+    if (!hit) return;
+
+    if (hit.id === "toggle") {
+      playing = !playing;
+      return;
+    }
+
+    if (hit.id === "step") {
+      stepIndex = (stepIndex + 1) % steps.length;
+      return;
+    }
+
+    if (hit.id === "reset") {
+      stepIndex = 0;
+      playing = false;
+    }
+  };
+
+  return <P5Sketch setup={setup} draw={draw} mousePressed={mousePressed} height={236} />;
+}
+
+export function BgpSessionsTopologyVisualizer() {
+  const setup = (p: p5) => {
+    p.textFont("monospace");
+  };
+
+  const draw = (p: p5) => {
+    p.background(2, 7, 19);
+
+    p.noStroke();
+    p.fill(205);
+    p.textAlign(p.LEFT, p.TOP);
+    p.textSize(11);
+    p.text("Topologia conceitual de sessoes BGP", 18, 14);
+    p.fill(132);
+    p.textSize(8.3);
+    p.text("eBGP conecta ASes diferentes; iBGP distribui rotas dentro do mesmo AS.", 18, 30);
+
+    const asCard = (x: number, y: number, w: number, h: number, label: string, c: [number, number, number]) => {
+      p.fill(c[0], c[1], c[2], 26);
+      p.stroke(c[0], c[1], c[2], 120);
+      p.rect(x, y, w, h, 8);
+      p.noStroke();
+      p.fill(c[0], c[1], c[2]);
+      p.textSize(8.5);
+      p.text(label, x + 8, y + 8);
+    };
+
+    asCard(60, 54, 300, 150, "Google AS15169", [120, 180, 255]);
+    asCard(410, 54, 300, 150, "AT&T AS701", [255, 185, 120]);
+
+    const r1: Node = { id: "R1", x: 155, y: 106 };
+    const r3: Node = { id: "R3", x: 275, y: 150 };
+    const r2: Node = { id: "R2", x: 475, y: 106 };
+    const r4: Node = { id: "R4", x: 565, y: 138 };
+    const r5: Node = { id: "R5", x: 655, y: 138 };
+
+    drawEdge(p, r1, r2, [255, 220, 110], 1, 0.7);
+    drawEdge(p, r1, r3, [120, 175, 220], 1, 0.35);
+    drawEdge(p, r2, r4, [120, 175, 220], 1, 0.35);
+    drawEdge(p, r4, r5, [120, 175, 220], 1, 0.35);
+
+    drawNode(p, r1, [140, 190, 255]);
+    drawNode(p, r3, [140, 190, 255]);
+    drawNode(p, r2, [255, 195, 130]);
+    drawNode(p, r4, [255, 195, 130]);
+    drawNode(p, r5, [255, 195, 130]);
+
+    p.noStroke();
+    p.fill(255, 220, 110);
+    p.textAlign(p.CENTER, p.TOP);
+    p.textSize(8.2);
+    p.text("eBGP", (r1.x + r2.x) / 2, 80);
+
+    p.fill(140);
+    p.text("iBGP", (r1.x + r3.x) / 2, 132);
+    p.text("iBGP", (r2.x + r4.x) / 2, 118);
+
+    p.textAlign(p.LEFT, p.TOP);
+    p.fill(130);
+    p.textSize(8.2);
+    p.text("R1 anuncia 8.8.8.0/24 para R2 via eBGP.", 18, 214);
+    p.text("R1 replica rotas externas para R3 via iBGP.", 18, 228);
+  };
+
+  return <P5Sketch setup={setup} draw={draw} height={250} />;
+}
+
+export function BgpRouteAnnouncementVisualizer() {
+  const buttons: Button[] = [];
+  const steps = [
+    "R2 anuncia prefixo 12.0.0.0/8 para R1",
+    "R1 define NEXT-HOP=R2 e AS-PATH=[701]",
+    "R1 anuncia 8.8.8.0/24 para R2",
+    "R2 redistribui para R4 (iBGP)",
+  ];
+
+  let stepIndex = 0;
+  let playing = true;
+  let lastTick = 0;
+
+  const setup = (p: p5) => {
+    p.textFont("monospace");
+  };
+
+  const draw = (p: p5) => {
+    p.background(2, 7, 19);
+    buttons.length = 0;
+
+    if (playing && p.frameCount - lastTick > 40) {
+      stepIndex = (stepIndex + 1) % steps.length;
+      lastTick = p.frameCount;
+    }
+
+    const r1: Node = { id: "R1", x: 170, y: 114 };
+    const r2: Node = { id: "R2", x: 360, y: 114 };
+    const r4: Node = { id: "R4", x: 560, y: 114 };
+
+    p.noStroke();
+    p.fill(205);
+    p.textAlign(p.LEFT, p.TOP);
+    p.textSize(11);
+    p.text("Anuncio e aprendizado de rotas BGP", 18, 14);
+    p.fill(132);
+    p.textSize(8.2);
+    p.text("Observe prefixo, AS-PATH e NEXT-HOP mudando ao longo das etapas.", 18, 30);
+
+    drawEdge(p, r1, r2, stepIndex === 0 || stepIndex === 2 ? [255, 220, 110] : [120, 170, 220], 1, stepIndex === 0 || stepIndex === 2 ? 0.7 : 0.22);
+    drawEdge(p, r2, r4, stepIndex === 3 ? [120, 220, 145] : [120, 170, 220], 1, stepIndex === 3 ? 0.7 : 0.22);
+
+    drawNode(p, r1, [140, 190, 255]);
+    drawNode(p, r2, [255, 195, 130]);
+    drawNode(p, r4, [255, 195, 130]);
+
+    let from = r2;
+    let to = r1;
+    if (stepIndex === 2) {
+      from = r1;
+      to = r2;
+    } else if (stepIndex === 3) {
+      from = r2;
+      to = r4;
+    }
+
+    const t = ((p.frameCount - lastTick + 40) % 40) / 40;
+    const px = p.lerp(from.x, to.x, t);
+    const py = p.lerp(from.y, to.y, t);
+    p.noStroke();
+    p.fill(120, 220, 255);
+    p.circle(px, py - 16, 10);
+
+    const panelX = 18;
+    const panelY = 178;
+    p.fill(12, 20, 35);
+    p.stroke(120, 145, 175, 90);
+    p.rect(panelX, panelY, p.width - 36, 130, 8);
+
+    p.noStroke();
+    p.fill(195);
+    p.textAlign(p.LEFT, p.TOP);
+    p.textSize(8.8);
+    p.text(`Etapa ${stepIndex + 1}/4: ${steps[stepIndex]}`, panelX + 10, panelY + 12);
+
+    const attrs =
+      stepIndex <= 1
+        ? [
+            "Prefixo: 12.0.0.0/8",
+            "AS-PATH: [701]",
+            "NEXT-HOP: R2",
+          ]
+        : stepIndex === 2
+          ? [
+              "Prefixo: 8.8.8.0/24",
+              "AS-PATH: [15169]",
+              "NEXT-HOP: R1",
+            ]
+          : [
+              "Prefixo: 8.8.8.0/24",
+              "AS-PATH: [15169]",
+              "NEXT-HOP: R1 (via R2)",
+              "LOCAL-PREF: 75",
+            ];
+
+    attrs.forEach((line, idx) => {
+      p.fill(140);
+      p.text(line, panelX + 10, panelY + 32 + idx * 15);
+    });
+
+    drawButton(p, buttons, "toggle", panelX + 10, panelY + 98, playing ? "Pause" : "Play", playing);
+    drawButton(p, buttons, "step", panelX + 112, panelY + 98, "Passo", false);
+    drawButton(p, buttons, "reset", panelX + 214, panelY + 98, "Reiniciar", false);
+  };
+
+  const mousePressed = (p: p5) => {
+    const hit = hitButton(p, buttons);
+    if (!hit) return;
+    if (hit.id === "toggle") {
+      playing = !playing;
+      return;
+    }
+    if (hit.id === "step") {
+      stepIndex = (stepIndex + 1) % steps.length;
+      return;
+    }
+    if (hit.id === "reset") {
+      stepIndex = 0;
+      playing = false;
+    }
+  };
+
+  return <P5Sketch setup={setup} draw={draw} mousePressed={mousePressed} height={320} />;
+}
+
+export function HotPotatoRoutingVisualizer() {
+  const buttons: Button[] = [];
+  let preferNyc = true;
+
+  const setup = (p: p5) => {
+    p.textFont("monospace");
+  };
+
+  const draw = (p: p5) => {
+    p.background(2, 7, 19);
+    buttons.length = 0;
+
+    const core: Node = { id: "CORE", x: 170, y: 124 };
+    const nyc: Node = { id: "NYC", x: 360, y: 84 };
+    const mia: Node = { id: "MIA", x: 360, y: 164 };
+    const dst: Node = { id: "DST", x: 560, y: 124 };
+
+    const nycCost = preferNyc ? 5 : 60;
+    const miaCost = preferNyc ? 50 : 8;
+    const chooseNyc = nycCost <= miaCost;
+
+    p.noStroke();
+    p.fill(205);
+    p.textAlign(p.LEFT, p.TOP);
+    p.textSize(11);
+    p.text("Hot-potato routing: sair rapido do AS", 18, 14);
+    p.fill(132);
+    p.textSize(8.2);
+    p.text("BGP desempata por menor custo IGP ate o NEXT-HOP de saida.", 18, 30);
+
+    drawEdge(p, core, nyc, chooseNyc ? [120, 220, 145] : [120, 170, 220], nycCost, chooseNyc ? 0.7 : 0.2);
+    drawEdge(p, core, mia, !chooseNyc ? [120, 220, 145] : [120, 170, 220], miaCost, !chooseNyc ? 0.7 : 0.2);
+    drawEdge(p, nyc, dst, chooseNyc ? [255, 220, 110] : [120, 170, 220], 1, chooseNyc ? 0.7 : 0.2);
+    drawEdge(p, mia, dst, !chooseNyc ? [255, 220, 110] : [120, 170, 220], 1, !chooseNyc ? 0.7 : 0.2);
+
+    drawNode(p, core, [140, 190, 255]);
+    drawNode(p, nyc, [255, 195, 130]);
+    drawNode(p, mia, [255, 195, 130]);
+    drawNode(p, dst, [140, 220, 160]);
+
+    const source = chooseNyc ? nyc : mia;
+    const t = (p.frameCount % 45) / 45;
+    const px = p.lerp(core.x, source.x, t);
+    const py = p.lerp(core.y, source.y, t);
+    p.noStroke();
+    p.fill(120, 220, 255);
+    p.circle(px, py - 14, 10);
+
+    p.fill(135);
+    p.textAlign(p.LEFT, p.TOP);
+    p.textSize(8.5);
+    p.text(`Custo IGP para NYC: ${nycCost} ms`, 18, 214);
+    p.text(`Custo IGP para MIA: ${miaCost} ms`, 18, 228);
+    p.fill(chooseNyc ? 120 : 255, chooseNyc ? 220 : 180, chooseNyc ? 145 : 120);
+    p.text(`Saida escolhida: ${chooseNyc ? "NYC" : "MIA"}`, 18, 242);
+
+    drawButton(p, buttons, "toggle", 18, 264, "Alternar cenario", false);
+  };
+
+  const mousePressed = (p: p5) => {
+    const hit = hitButton(p, buttons);
+    if (!hit) return;
+    if (hit.id === "toggle") {
+      preferNyc = !preferNyc;
+    }
+  };
+
+  return <P5Sketch setup={setup} draw={draw} mousePressed={mousePressed} height={300} />;
+}
+
+export function InterAsPacketFlowVisualizer() {
+  const buttons: Button[] = [];
+
+  const steps = [
+    "Host AS1000 -> Roteador interno (OSPF)",
+    "Roteador interno -> Borda AS1000 (OSPF)",
+    "Borda AS1000 escolhe caminho BGP",
+    "Saida AS1000 -> AS3000",
+    "AS3000 encaminha internamente",
+    "Borda AS3000 -> Borda AS2000 (BGP)",
+    "Borda AS2000 -> host destino (OSPF)",
+  ];
+
+  let stepIndex = 0;
+  let playing = true;
+  let lastTick = 0;
+
+  const setup = (p: p5) => {
+    p.textFont("monospace");
+  };
+
+  const draw = (p: p5) => {
+    p.background(2, 7, 19);
+    buttons.length = 0;
+
+    if (playing && p.frameCount - lastTick > 36) {
+      stepIndex = (stepIndex + 1) % steps.length;
+      lastTick = p.frameCount;
+    }
+
+    const card = (
+      x: number,
+      y: number,
+      w: number,
+      h: number,
+      label: string,
+      color: [number, number, number],
+    ) => {
+      p.fill(color[0], color[1], color[2], 25);
+      p.stroke(color[0], color[1], color[2], 120);
+      p.rect(x, y, w, h, 8);
+      p.noStroke();
+      p.fill(color[0], color[1], color[2]);
+      p.textAlign(p.LEFT, p.TOP);
+      p.textSize(8.5);
+      p.text(label, x + 8, y + 8);
+    };
+
+    p.noStroke();
+    p.fill(205);
+    p.textAlign(p.LEFT, p.TOP);
+    p.textSize(11);
+    p.text("Fluxo de pacote entre ASes (AS1000 -> AS3000 -> AS2000)", 18, 14);
+    p.fill(132);
+    p.textSize(8.2);
+    p.text("OSPF atua dentro de cada AS e BGP decide os saltos entre ASes.", 18, 30);
+
+    card(30, 58, 250, 130, "AS1000 (origem)", [120, 180, 255]);
+    card(320, 58, 210, 130, "AS3000 (ISP)", [255, 185, 120]);
+    card(570, 58, 250, 130, "AS2000 (destino)", [120, 220, 145]);
+
+    const h1: Node = { id: "H1", x: 74, y: 124 };
+    const i1: Node = { id: "I1", x: 150, y: 124 };
+    const b1: Node = { id: "B1", x: 245, y: 124 };
+    const p3: Node = { id: "P3", x: 425, y: 124 };
+    const b3: Node = { id: "B3", x: 512, y: 124 };
+    const b2: Node = { id: "B2", x: 610, y: 124 };
+    const h2: Node = { id: "H2", x: 770, y: 124 };
+
+    drawEdge(p, h1, i1, stepIndex === 0 ? [120, 220, 255] : [120, 165, 210], 1, stepIndex === 0 ? 0.7 : 0.2);
+    drawEdge(p, i1, b1, stepIndex === 1 ? [120, 220, 255] : [120, 165, 210], 1, stepIndex === 1 ? 0.7 : 0.2);
+    drawEdge(p, b1, p3, stepIndex === 3 ? [255, 200, 110] : [120, 165, 210], 1, stepIndex === 3 ? 0.7 : 0.2);
+    drawEdge(p, p3, b3, stepIndex === 4 ? [255, 200, 110] : [120, 165, 210], 1, stepIndex === 4 ? 0.7 : 0.2);
+    drawEdge(p, b3, b2, stepIndex === 5 ? [255, 200, 110] : [120, 165, 210], 1, stepIndex === 5 ? 0.7 : 0.2);
+    drawEdge(p, b2, h2, stepIndex === 6 ? [120, 220, 145] : [120, 165, 210], 1, stepIndex === 6 ? 0.7 : 0.2);
+
+    drawNode(p, h1, [140, 190, 255]);
+    drawNode(p, i1, [140, 190, 255]);
+    drawNode(p, b1, [255, 210, 110]);
+    drawNode(p, p3, [255, 180, 130]);
+    drawNode(p, b3, [255, 210, 110]);
+    drawNode(p, b2, [255, 210, 110]);
+    drawNode(p, h2, [140, 220, 160]);
+
+    p.noStroke();
+    p.fill(170);
+    p.textAlign(p.CENTER, p.TOP);
+    p.textSize(8);
+    p.text("Host", h1.x, h1.y + 22);
+    p.text("Interno", i1.x, i1.y + 22);
+    p.text("Borda", b1.x, b1.y + 22);
+    p.text("Core ISP", p3.x, p3.y + 22);
+    p.text("Borda", b3.x, b3.y + 22);
+    p.text("Borda", b2.x, b2.y + 22);
+    p.text("Host", h2.x, h2.y + 22);
+
+    p.fill(140);
+    p.textAlign(p.LEFT, p.TOP);
+    p.text("OSPF", 90, 172);
+    p.text("BGP", 324, 172);
+    p.text("OSPF", 690, 172);
+
+    let from = h1;
+    let to = i1;
+    if (stepIndex === 1) {
+      from = i1;
+      to = b1;
+    } else if (stepIndex === 2) {
+      from = b1;
+      to = b1;
+    } else if (stepIndex === 3) {
+      from = b1;
+      to = p3;
+    } else if (stepIndex === 4) {
+      from = p3;
+      to = b3;
+    } else if (stepIndex === 5) {
+      from = b3;
+      to = b2;
+    } else if (stepIndex >= 6) {
+      from = b2;
+      to = h2;
+    }
+
+    const t = stepIndex === 2 ? 1 : ((p.frameCount - lastTick + 36) % 36) / 36;
+    const px = p.lerp(from.x, to.x, t);
+    const py = p.lerp(from.y, to.y, t);
+    p.fill(120, 220, 255);
+    p.circle(px, py - 14, 10);
+
+    const panelX = 18;
+    const panelY = 200;
+    p.fill(12, 20, 35);
+    p.stroke(120, 145, 175, 90);
+    p.rect(panelX, panelY, p.width - 36, 98, 8);
+
+    p.noStroke();
+    p.fill(195);
+    p.textAlign(p.LEFT, p.TOP);
+    p.textSize(9);
+    p.text(`Etapa ${stepIndex + 1}/${steps.length}: ${steps[stepIndex]}`, panelX + 10, panelY + 12);
+
+    p.fill(135);
+    p.textSize(8.2);
+    p.text("Rota escolhida por BGP: AS1000 -> AS3000 -> AS2000", panelX + 10, panelY + 30);
+
+    drawButton(p, buttons, "toggle", panelX + 10, panelY + 62, playing ? "Pause" : "Play", playing);
+    drawButton(p, buttons, "step", panelX + 112, panelY + 62, "Passo", false);
+    drawButton(p, buttons, "reset", panelX + 214, panelY + 62, "Reiniciar", false);
+  };
+
+  const mousePressed = (p: p5) => {
+    const hit = hitButton(p, buttons);
+    if (!hit) return;
+
+    if (hit.id === "toggle") {
+      playing = !playing;
+      return;
+    }
+
+    if (hit.id === "step") {
+      stepIndex = (stepIndex + 1) % steps.length;
+      return;
+    }
+
+    if (hit.id === "reset") {
+      stepIndex = 0;
+      playing = false;
+    }
+  };
+
+  return <P5Sketch setup={setup} draw={draw} mousePressed={mousePressed} height={312} />;
+}
+
 export function BgpAsPathPolicyVisualizer() {
   const buttons: Button[] = [];
   let policyBlockCompetitor = true;

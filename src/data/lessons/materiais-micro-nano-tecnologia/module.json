@@ -103,6 +103,76 @@
         "quizId": "quiz-13"
       }
     ]
+  },
+  {
+    "id": "processamento-polimeros",
+    "title": "Processamento de Polímeros",
+    "description": "ste módulo é dedicado ao estudo das principais técnicas de processamento de materiais poliméricos, dividindo-se em dois grandes grupos: polímeros termofixos e termoplásticos",
+    "lessons": [
+      {
+        "id": "charpter-14",
+        "title": "Introdução ao Processamento de Polímeros Termofixos",
+        "description": " Este capítulo define os polímeros termofixos (ou termorrígidos), materiais que sofrem uma reação química de cura (formação de ligações cruzadas) quando aquecidos, tornando-se rígidos e infusíveis.",
+        "video": null,
+        "quizId": "quiz-14"
+      },
+      {
+        "id": "charpter-15",
+        "title": "Princípios e Etapas do Processamento de Termofixos",
+        "description": "Detalharemos o processo de produção dos termofixos, que geralmente ocorre em duas etapas: primeiro, a preparação de um pré-polímero de baixa massa molar (líquido ou sólido de baixo ponto de fusão); segundo, o processamento desse pré-polímero em um molde, onde a cura é ativada por calor e/ou catalisadores, muitas vezes com aplicação de pressão.",
+        "video": null,
+        "quizId": "quiz-15"
+      },
+      {
+        "id": "charpter-16",
+        "title": "Técnicas de Processamento para Termofixos I",
+        "description": "Exploraremos as primeiras técnicas de processamento para termofixos. Serão detalhados a Modelagem por Fundição (Casting) , onde a resina líquida é simplesmente vertida em um molde sem pressão, e a Modelagem por Injeção, um processo cíclico onde o material é amolecido e injetado sob alta pressão em um molde.",
+        "video": null,
+        "quizId": "quiz-16"
+      },
+      {
+        "id": "charpter-17",
+        "title": "Técnicas de Processamento para Termofixos II",
+        "description": "Daremos continuidade às técnicas de processamento de termofixos, focando em métodos de moldagem por compressão, transferência e estereolitografia.",
+        "video": null,
+        "quizId": "quiz-17"
+      },
+      {
+        "id": "charpter-18",
+        "title": "Processamento de Espumas Poliméricas",
+        "description": "Este capítulo aborda a produção de espumas (plásticos celulares ou expandidos), materiais que contêm gás em seu interior, conferindo propriedades como isolamento térmico e acústico.",
+        "video": null,
+        "quizId": "quiz-18"
+      },
+      {
+        "id": "charpter-19",
+        "title": "Introdução ao Processamento de Polímeros Termoplásticos",
+        "description": "Voltamos nossa atenção para os termoplásticos, polímeros que amolecem quando aquecidos e solidificam quando resfriados, de forma reversível.",
+        "video": null,
+        "quizId": "quiz-19"
+      },
+      {
+        "id": "charpter-20",
+        "title": "Técnicas de Processamento para Termoplásticos I",
+        "description": "Iniciamos a exploração das principais técnicas de processamento de termoplásticos. O foco será na Extrusão, um processo semi-contínuo onde o material é plastificado e forçado através de uma matriz para produzir perfis, filmes, chapas e tubos.",
+        "video": null,
+        "quizId": "quiz-20"
+      },
+      {
+        "id": "charpter-21",
+        "title": "Técnicas de Processamento para Termoplásticos II",
+        "description": "Detalharemos outras técnicas cruciais para termoplásticos, a Moldagem por Injeção e a Moldagem por Sopro.",
+        "video": null,
+        "quizId": "quiz-21"
+      },
+      {
+        "id": "charpter-22",
+        "title": "Técnicas de Processamento para Termoplásticos III",
+        "description": "Concluímos o módulo com técnicas de conformação a partir de chapas e filmes, a Termoformagem e a Modelagem a Vácuo.",
+        "video": null,
+        "quizId": "quiz-22"
+      }
+    ]
   }
 ]
 

@@ -1,0 +1,109 @@
+{
+  "id": "quiz-16",
+  "title": "Quiz — Técnicas de Processamento para Termofixos I: Casting e Moldagem por Injeção",
+  "description": "Teste seus conhecimentos sobre casting, injeção de termofixos, suas vantagens/desvantagens e diferenças fundamentais.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "No processo de moldagem por fundição (casting), qual é o papel da pressão?",
+      "alternatives": [
+        { "id": "a1", "text": "Pressão alta (100+ MPa) força o material no molde", "isCorrect": false, "explanation": "Casting não usa pressão significativa; por isso é considerado 'moldagem aberta'." },
+        { "id": "a2", "text": "Nenhuma pressão significativa é aplicada; resina é simplesmente vertida e cura sob calor", "isCorrect": true, "explanation": "Correto! Casting é moldagem PASSIVA — apenas gravidade e calor; sem pressão aplicada." },
+        { "id": "a3", "text": "Pressão leve (~10 kPa) para remover bolhas de ar", "isCorrect": false, "explanation": "Mesmo pressão de vácuo (~80 kPa) não é aplicada em casting simples." },
+        { "id": "a4", "text": "Pressão é usada apenas durante desmoldagem para soltar a peça", "isCorrect": false, "explanation": "Desmoldagem usa força mecânica simples, não pressão hidráulica." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Qual é a principal desvantagem do casting em comparação com injeção?",
+      "alternatives": [
+        { "id": "a1", "text": "Custo de equipamento muito mais alto", "isCorrect": false, "explanation": "Casting é na verdade MAIS BARATO em equipamento." },
+        { "id": "a2", "text": "Porosidade elevada por bolhas de ar aprisionadas durante vertedura e cura", "isCorrect": true, "explanation": "Correto! Ausência de pressão em casting resulta em muitas bolhas de ar presas, reduzindo qualidade." },
+        { "id": "a3", "text": "Inadequado para prototipagem rápida", "isCorrect": false, "explanation": "Casting é IDEAL para prototipagem por baixo custo de molde e flexibilidade." },
+        { "id": "a4", "text": "Impossibilidade de usar reforço fibrado", "isCorrect": false, "explanation": "Fibers podem ser adicionadas em casting, embora menos comum que injeção." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Qual é a diferença FUNDAMENTAL entre injeção de termofixos vs. injeção de termoplásticos?",
+      "alternatives": [
+        { "id": "a1", "text": "Termoplásticos usam pressão mais alta", "isCorrect": false, "explanation": "Pressão é similar em ambos; a diferença é química, não pressão." },
+        { "id": "a2", "text": "Termofixos sofrem reação química de cura NO MOLDE; termoplásticos apenas fundem e resfria", "isCorrect": true, "explanation": "Correto! Termofixos CURAM (reticulação) enquanto no molde; termoplásticos apenas solidificam." },
+        { "id": "a3", "text": "Termoplásticos têm ciclos mais longos que termofixos", "isCorrect": false, "explanation": "Oposto! Termofixos têm ciclos LONGOS (cura no molde), termoplásticos são RÁPIDOS." },
+        { "id": "a4", "text": "Molde para termofixos não requer resfriamento", "isCorrect": false, "explanation": "Ambos usam resfriamento; a diferença é o propósito (cura vs. solidificação)." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Qual é o tempo típico em MOLDE para injeção de termofixos vs. termoplásticos?",
+      "alternatives": [
+        { "id": "a1", "text": "Termofixos: 10–60 seg; Termoplásticos: 30 min–2 horas", "isCorrect": false, "explanation": "Inverso! Termofixos ficam MAIS TEMPO no molde." },
+        { "id": "a2", "text": "Termofixos: 30 min–2 horas (para cura); Termoplásticos: 10–60 segundos (para resfriamento)", "isCorrect": true, "explanation": "Correto! Termofixos requerem horas para cura química; termoplásticos apenas minutos para solidificar." },
+        { "id": "a3", "text": "Ambos requerem ~5–10 minutos no molde", "isCorrect": false, "explanation": "Tempos são MUITO diferentes;" },
+        { "id": "a4", "text": "Depende apenas do tamanho da peça, não do tipo de polímero", "isCorrect": false, "explanation": "Tipo de polímero (termofixo vs. termoplástico) é DETERMINANTE do tempo." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Por que pós-cura é frequentemente necessária para injeção de termofixos, mas raramente para termoplásticos?",
+      "alternatives": [
+        { "id": "a1", "text": "Termoplásticos degradam se aquecidos novamente", "isCorrect": false, "explanation": "Termoplásticos podem ser aquecidos novamente sem degradação (até seu ponto de fusão)." },
+        { "id": "a2", "text": "Termofixos ejetados estão apenas PARCIALMENTE curados no molde; pós-cura completa a cura química", "isCorrect": true, "explanation": "Correto! Tempo em molde é limitado; cura não atingiu 100%; pós-cura em estufa completa." },
+        { "id": "a3", "text": "Termoplásticos já atingem propriedades máximas após resfriamento", "isCorrect": false, "explanation": "Isso é parcialmente correto para termoplásticos, mas não explica por que termofixos PRECISAM de pós-cura." },
+        { "id": "a4", "text": "Razões econômicas apenas; pós-cura é opcional", "isCorrect": false, "explanation": "Pós-cura não é opcional para termofixos; é necessário para qualidade e propriedades finais." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual problema ocorre comumente quando o 'pot life' da resina termofixo é muito curto durante injeção?",
+      "alternatives": [
+        { "id": "a1", "text": "Material solidifica no cilindro aquecido antes de ser injetado", "isCorrect": true, "explanation": "Correto! Pot life curto significa reação de cura começa rapidamente; em cilindro quente, material pode 'travar' antes injeção." },
+        { "id": "a2", "text": "Peça não cura completamente no molde", "isCorrect": false, "explanation": "Pot life curto não impede cura; afeta processabilidade ANTES de injetar." },
+        { "id": "a3", "text": "A peça final fica muito quebradiça", "isCorrect": false, "explanation": "Fragilidade pode resultado de outros fatores, não diretamente de pot life curto." },
+        { "id": "a4", "text": "Equipamento de injeção não consegue fechamento de molde rápido", "isCorrect": false, "explanation": "Fechamento rápido não resolve pot life; são problemas separados." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual vantagem o casting oferece sobre injeção em cenário de PROTOTIPAGEM RÁPIDA?",
+      "alternatives": [
+        { "id": "a1", "text": "Qualidade final superior", "isCorrect": false, "explanation": "Injeção oferece qualidade superior." },
+        { "id": "a2", "text": "Molde pode ser fabricado em DIAS com técnicas simples (ex.: impressão 3D, usinagem), não SEMANAS", "isCorrect": true, "explanation": "Correto! Casting requer molde simples (~1–7 dias); injeção requer molde robusto (~2–4 semanas)." },
+        { "id": "a3", "text": "Ciclos de produção mais rápidos", "isCorrect": false, "explanation": "Injeção tem ciclos MAIS RÁPIDOS por peça." },
+        { "id": "a4", "text": "Peças podem ser recicladas mais facilmente", "isCorrect": false, "explanation": "Reciclagem é igualmente difícil para ambos (termofixos)." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Em injeção de termofixos, qual é o propósito da 'válvula de retenção' na ponta do parafuso?",
+      "alternatives": [
+        { "id": "a1", "text": "Reduzir exotermia durante processamento", "isCorrect": false, "explanation": "Válvula de retenção não afeta exotermia." },
+        { "id": "a2", "text": "Impedir backflow (refluxo) de material durante injeção, mantendo pressão", "isCorrect": true, "explanation": "Correto! Válvula permite material avançar mas impede refluxo, aumentando eficiência de injeção." },
+        { "id": "a3", "text": "Filtrar contaminantes e bolhas de ar", "isCorrect": false, "explanation": "Filtração não é função de válvula de retenção; essa é função de screens no cilindro." },
+        { "id": "a4", "text": "Controlar viscosidade do material fundido", "isCorrect": false, "explanation": "Viscosidade é controlada por temperatura, não pela válvula de retenção." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Por que 'rebarbas' são mais comuns em moldagem por compressão (alternativa) do que em casting?",
+      "alternatives": [
+        { "id": "a1", "text": "Casting tem melhor design de molde", "isCorrect": false, "explanation": "Design de molde não é a razão." },
+        { "id": "a2", "text": "Compressão aplica pressão mecânica que força material a extravazar nas bordas; casting não tem pressão", "isCorrect": true, "explanation": "Correto! Alta pressão em compressão força excesso de material para fora da cavidade, criando rebarbas." },
+        { "id": "a3", "text": "Resina em compressão tem viscosidade diferente", "isCorrect": false, "explanation": "Viscosidade não explica rebarbas; é a pressão aplicada." },
+        { "id": "a4", "text": "Moldes de compressão usam tolerâncias menos rigorosas", "isCorrect": false, "explanation": "Tolerância é um fator, mas a razão primária é a pressão aplicada." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Comparando casting e injeção, qual escolher para produção de 500 peças automotivas estruturais de epóxi alta-performance?",
+      "alternatives": [
+        { "id": "a1", "text": "Casting; é mais barato por peça", "isCorrect": false, "explanation": "Para 500 peças com alta-performance, injeção oferece melhor qualidade apesar custo molde inicial." },
+        { "id": "a2", "text": "Injeção; oferece melhor qualidade, menos porosidade, e ciclos mais rápidos apesar custo molde inicial alto", "isCorrect": true, "explanation": "Correto! Para volume 500 + requerimento estrutural, injeção supera casting em qualidade/confiabilidade." },
+        { "id": "a3", "text": "Casting; não requer molde caro, reduz custo total", "isCorrect": false, "explanation": "Custo total com baixa qualidade/porosidade não compensa." },
+        { "id": "a4", "text": "Ambas são equivalentes; escolher apenas por custo", "isCorrect": false, "explanation": "Qualidade de injeção é significativamente superior para aplicação estrutural." }
+      ]
+    }
+  ]
+}
+

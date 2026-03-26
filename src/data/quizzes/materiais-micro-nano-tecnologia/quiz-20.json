@@ -1,0 +1,109 @@
+{
+  "id": "quiz-20",
+  "title": "Quiz — Técnicas de Processamento para Termoplásticos I: Extrusão",
+  "description": "Teste seus conhecimentos sobre extrusão, componentes da máquina, parâmetros de processamento e aplicações.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "O que diferencia extrusão de moldagem por injeção em relação à natureza do produto?",
+      "alternatives": [
+        { "id": "a1", "text": "Extrusão produz peças discretas; injeção produz perfis contínuos", "isCorrect": false, "explanation": "Inverso! Extrusão produz CONTÍNUO; injeção produz DISCRETAS (um por um)." },
+        { "id": "a2", "text": "Extrusão produz formas CONTÍNUAS ou semi-contínuas (filmes, tubos, perfis); injeção produz peças discretas em cavidades", "isCorrect": true, "explanation": "Correto! Extrusão é processo semi-contínuo; injeção é cíclico com uma peça por ciclo." },
+        { "id": "a3", "text": "Extrusão é apenas para materiais rígidos", "isCorrect": false, "explanation": "Extrusão pode processar qualquer termoplástico, rígido ou flexível." },
+        { "id": "a4", "text": "Injeção e extrusão produzem produtos similares", "isCorrect": false, "explanation": "Produtos são fundamentalmente diferentes em natureza." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Qual é o PAPEL PRINCIPAL do parafuso (screw) em um extrusor?",
+      "alternatives": [
+        { "id": "a1", "text": "Apenas misturar aditivos com a resina", "isCorrect": false, "explanation": "Mistura é uma função, mas não a principal." },
+        { "id": "a2", "text": "TRANSPORTAR, AQUECER via fricção/compressão, e BOMBEAR material fundido através da matriz", "isCorrect": true, "explanation": "Correto! Parafuso tem três funções: transporte (zona alimentação), aquecimento (zona compressão), e bombeamento (zona metering)." },
+        { "id": "a3", "text": "Apenas regular temperatura do material", "isCorrect": false, "explanation": "Temperatura é controlada pelas zonas de aquecimento do cilindro, não apenas parafuso." },
+        { "id": "a4", "text": "Moldar o perfil final", "isCorrect": false, "explanation": "Matriz molda o perfil, não o parafuso." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Qual é a FUNÇÃO da 'zona de compressão' do parafuso em extrusão?",
+      "alternatives": [
+        { "id": "a1", "text": "Resfriar o material para evitar degradação", "isCorrect": false, "explanation": "Zona de compressão AQUECE (por fricção), não resfria." },
+        { "id": "a2", "text": "Reduzir espaço disponível para compactar material, expulsar ar aprisionado e aumentar temperatura por compressão", "isCorrect": true, "explanation": "Correto! Zona de compressão reduz profundidade do parafuso gradualmente, selando ar e gerando calor." },
+        { "id": "a3", "text": "Apenas transportar material do funil", "isCorrect": false, "explanation": "Isso é função da zona de alimentação." },
+        { "id": "a4", "text": "Filtrar contaminantes", "isCorrect": false, "explanation": "Filtragem é função de screens separados." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "O que ocorre se a 'PRESSÃO DE MATRIZ' for muito alta durante extrusão?",
+      "alternatives": [
+        { "id": "a1", "text": "Mais material é extrudado (maior fluxo)", "isCorrect": false, "explanation": "Pressão alta realmente REDUZ fluxo ou causa travamento." },
+        { "id": "a2", "text": "Indica resistência elevada no molde; pode significar entupimento, viscosidade alta, ou matriz inadequada", "isCorrect": true, "explanation": "Correto! Pressão alta de matriz não é desejável; força ajuste de RPM, temperatura, ou investigação de entupimento." },
+        { "id": "a3", "text": "Material extrudado tem qualidade superior", "isCorrect": false, "explanation": "Pressão muito alta pode causar degradação." },
+        { "id": "a4", "text": "Sem efeito significativo no processo", "isCorrect": false, "explanation": "Pressão de matriz é parâmetro crítico de monitoramento." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Qual problema resulta de 'TEMPERATURA BAIXA DEMAIS' em zona de extrusão?",
+      "alternatives": [
+        { "id": "a1", "text": "Material flui demais, degradação térmica", "isCorrect": false, "explanation": "Isso resulta de TEMPERATURA ALTA, não baixa." },
+        { "id": "a2", "text": "Material não se fluidifica suficientemente; 'travamento' (jam), pressão alta, torque excessivo", "isCorrect": true, "explanation": "Correto! Temperatura baixa mantém material muito viscoso; não flui adequadamente." },
+        { "id": "a3", "text": "Resfriamento muito rápido causa empenamento", "isCorrect": false, "explanation": "Resfriamento rápido não é relacionado a temperatura baixa NA EXTRUSÃO." },
+        { "id": "a4", "text": "Perda de cor do produto", "isCorrect": false, "explanation": "Cor é controlada por aditivos, não por temperatura de extrusão." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual é o propósito do 'sistema de tração (haul-off)' na extrusão?",
+      "alternatives": [
+        { "id": "a1", "text": "Aquecer o material", "isCorrect": false, "explanation": "Tração não aquece; apenas puxa material." },
+        { "id": "a2", "text": "PUXAR material extrudado a velocidade controlada, permitindo controlar espessura e dimensões finais", "isCorrect": true, "explanation": "Correto! Sincronizando haul-off com velocidade de parafuso, controla-se espessura e densidade do produto." },
+        { "id": "a3", "text": "Cortar o material em pedaços", "isCorrect": false, "explanation": "Tração não corta; corte é etapa separada." },
+        { "id": "a4", "text": "Resfriar o material rapidamente", "isCorrect": false, "explanation": "Resfriamento é feito por ar/água; tração apenas puxa." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "O que é 'coextrusão' e qual é sua vantagem principal?",
+      "alternatives": [
+        { "id": "a1", "text": "Múltiplos extrusores trabalham juntos para extruidar camadas diferentes de materiais SIMULTANEAMENTE", "isCorrect": true, "explanation": "Correto! Coextrusão permite núcleo (material barato) + superfície (qualidade/propriedade superior)." },
+        { "id": "a2", "text": "Extrusão em múltiplas máquinas em série", "isCorrect": false, "explanation": "Não é serial; é simultâneo em UMA máquina." },
+        { "id": "a3", "text": "Extrusão de fibra de vidro", "isCorrect": false, "explanation": "Extrusão de compósito é diferente de coextrusão." },
+        { "id": "a4", "text": "Método de reciclagem de resíduos", "isCorrect": false, "explanation": "Coextrusão pode usar reciclados, mas não é seu propósito único." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Qual é a causa MORE comum de 'BOLHAS DE AR' em produto extrudado?",
+      "alternatives": [
+        { "id": "a1", "text": "Temperatura muito alta no cilindro", "isCorrect": false, "explanation": "Temperatura alta não captura ar; material muito fluido." },
+        { "id": "a2", "text": "Umidade no material ou ar aprisionado não removido suficientemente na zona de alimentação/compressão", "isCorrect": true, "explanation": "Correto! Ar não pode escapar se zona de compressão não compacta suficientemente; umidade libera vapor." },
+        { "id": "a3", "text": "Pressão de matriz muito alta", "isCorrect": false, "explanation": "Pressão alta não causa ar; realmente ajuda removê-lo." },
+        { "id": "a4", "text": "Velocidade de haul-off muito lenta", "isCorrect": false, "explanation": "Velocidade de tração não captura ar; é etapa posterior." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Qual produto de extrusão seria IDEAL para ser fabricado em linha CONTÍNUA sem corte?",
+      "alternatives": [
+        { "id": "a1", "text": "Peças discretas de brinquedos", "isCorrect": false, "explanation": "Brinquedos são peças discretas; inadequados para extrusão contínua." },
+        { "id": "a2", "text": "Fios elétricos com isolação de PVC — produção contínua, bobinamento direto", "isCorrect": true, "explanation": "Correto! Fios/cabos são produto típico de extrusão contínua; saem do extrusor e são enrolados." },
+        { "id": "a3", "text": "Garrafas plásticas", "isCorrect": false, "explanation": "Garrafas são melhor feitas por sopro; requerem preforma discreta." },
+        { "id": "a4", "text": "Engrenagens de precisão", "isCorrect": false, "explanation": "Engrenagens requerem moldagem discreta; inadequadas para extrusão." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Se um filme extrudado mostra VARIAÇÃO DE ESPESSURA ao longo do comprimento, qual é o causa mais provável?",
+      "alternatives": [
+        { "id": "a1", "text": "Matriz está entupida parcialmente, causando fluxo desigual", "isCorrect": false, "explanation": "Entupimento causa pressão alta; menos diretamente relacionado a variação de espessura." },
+        { "id": "a2", "text": "Fluxo de parafuso DESINCRONIZADO com haul-off, ou pressão de matriz instável", "isCorrect": true, "explanation": "Correto! Se RPM varia ou tração é inconstante, espessura varia; sincronização é crítica." },
+        { "id": "a3", "text": "Temperatura do molde muito baixa", "isCorrect": false, "explanation": "Temperatura do molde (pós-extrusão) não causa variação de espessura durante extrusão." },
+        { "id": "a4", "text": "Aditivo de cor foi adicionado", "isCorrect": false, "explanation": "Cor não afeta espessura." }
+      ]
+    }
+  ]
+}
+

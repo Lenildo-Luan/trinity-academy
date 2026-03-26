@@ -1,0 +1,109 @@
+{
+  "id": "quiz-15",
+  "title": "Quiz — Princípios e Etapas do Processamento de Termofixos",
+  "description": "Teste seus conhecimentos sobre pré-polímeros, componentes, cura, cinética e perfis de temperatura.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "O que é um pré-polímero em relação a um polímero termofixo completamente curado?",
+      "alternatives": [
+        { "id": "a1", "text": "Um polímero que é 50% curado e pode ser curado novamente aquecendo", "isCorrect": false, "explanation": "Pré-polímero não está parcialmente curado; está completamente descurado." },
+        { "id": "a2", "text": "Uma molécula de baixa massa molar com grupos funcionais reativos, pronta para sofrer polimerização e reticulação", "isCorrect": true, "explanation": "Correto! Pré-polímero é o estado inicial antes de cura — cadeias curtas com grupos pendentes para reagir." },
+        { "id": "a3", "text": "Um polímero que perdeu suas propriedades mecânicas durante armazenamento", "isCorrect": false, "explanation": "Pré-polímeros são estáveis durante armazenamento (sem cura prematura) se preservados corretamente." },
+        { "id": "a4", "text": "Um material que pode sofrer degradação térmica ao atingir temperatura de cura", "isCorrect": false, "explanation": "Degradação é um risco, mas não é a definição de pré-polímero." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Qual é o papel dos 'aceleradores' em uma mistura pré-polímero termofixo?",
+      "alternatives": [
+        { "id": "a1", "text": "Aumentar a viscosidade inicial para melhor moldabilidade", "isCorrect": false, "explanation": "Aceleradores não afetam viscosidade inicial; afetam velocidade de reação." },
+        { "id": "a2", "text": "Aumentar a velocidade da reação de cura, reduzindo pot life", "isCorrect": true, "explanation": "Correto! Aceleradores (ex.: cobalto) catalizam reação, fazendo material curar mais rápido, reduzindo tempo de trabalho." },
+        { "id": "a3", "text": "Melhorar a resistência final do material depois de curado", "isCorrect": false, "explanation": "Aceleradores afetam cinética, não propriedades finais significativamente." },
+        { "id": "a4", "text": "Prevenir a absorção de umidade durante cura", "isCorrect": false, "explanation": "Prevenção de umidade não é função de aceleradores; é controle ambiental." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Em um pré-polímero epóxi, o que são 'inibidores' e qual é sua função?",
+      "alternatives": [
+        { "id": "a1", "text": "Compostos que aumentam a temperatura de cura final", "isCorrect": false, "explanation": "Inibidores não aumentam temperatura; reduzem velocidade de reação." },
+        { "id": "a2", "text": "Compostos que retardam ou controlam o início da reação de cura, aumentando pot life", "isCorrect": true, "explanation": "Correto! Inibidores (ex.: hidroquinona) abrandam reação, dando mais tempo para processar antes de gelificar." },
+        { "id": "a3", "text": "Compostos que reduzem a absorção de umidade do material curado", "isCorrect": false, "explanation": "Inibidores não afetam absorção de umidade do polímero curado." },
+        { "id": "a4", "text": "Aditivos que melhoram a coloração visual da resina", "isCorrect": false, "explanation": "Cor é controlada por pigmentos, não inibidores." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "O que caracteriza o mecanismo de 'cura por adição' típico em resinas epóxicas?",
+      "alternatives": [
+        { "id": "a1", "text": "Liberação de moléculas pequenas como água ou álcool como subproduto", "isCorrect": false, "explanation": "Isso é cura por CONDENSAÇÃO, não adição." },
+        { "id": "a2", "text": "Reação exotérmica onde grupos epóxido reagem com aminas criando ligações cruzadas", "isCorrect": true, "explanation": "Correto! Cura por adição em epóxi: resina epóxida + amina → álcool secundário + ligações cruzadas." },
+        { "id": "a3", "text": "Decomposição térmica de peróxido orgânico liberando radicais livres", "isCorrect": false, "explanation": "Isso é cura por iniciação por peróxido, típica em poliésteres insaturados." },
+        { "id": "a4", "text": "Reação que ocorre apenas em temperaturas acima de 300°C", "isCorrect": false, "explanation": "Cura por adição em epóxi ocorre em 100–200°C; não requer 300°C." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Qual é o significado do 'grau de cura' (α) no contexto de cura de termofixos?",
+      "alternatives": [
+        { "id": "a1", "text": "A percentagem de calor aplicado que foi convertido em energia química", "isCorrect": false, "explanation": "Grau de cura não é sobre conversão de calor em energia." },
+        { "id": "a2", "text": "A fração de grupos reativos que já participaram da reação de polimerização/reticulação", "isCorrect": true, "explanation": "Correto! α varia de 0 (não curado) a 1 (completamente curado); mede progresso da reação." },
+        { "id": "a3", "text": "A dureza final medida em Shore D após processamento completo", "isCorrect": false, "explanation": "Dureza é uma propriedade final, não o significado de grau de cura." },
+        { "id": "a4", "text": "A razão entre massa de catalisador e massa de resina base", "isCorrect": false, "explanation": "Isso é razão estequiométrica, não grau de cura." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Em um perfil de temperatura de cura típico, qual é o propósito da 'fase de hold' (patamar)?",
+      "alternatives": [
+        { "id": "a1", "text": "Resfriar o material para evitar degradação", "isCorrect": false, "explanation": "Resfriamento é o terceiro estágio (cool-down), não hold." },
+        { "id": "a2", "text": "Manter temperatura constante para permitir que a reação de cura atinja conversão desejada", "isCorrect": true, "explanation": "Correto! Hold mantém material a temperatura constante, permitindo cinética de reação atingir grau de cura apropriado." },
+        { "id": "a3", "text": "Remover gases dissolvidos no pré-polímero", "isCorrect": false, "explanation": "Remoção de gás ocorre antes ou durante aquecimento inicial, não durante hold." },
+        { "id": "a4", "text": "Evitar que a peça inche durante cura", "isCorrect": false, "explanation": "Hold ajuda manter dimensões uniformes, mas não é seu propósito principal." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Por que uma taxa de aquecimento muito RÁPIDA (ex.: 100°C/min) pode causar problemas em peças termofixas espessas?",
+      "alternatives": [
+        { "id": "a1", "text": "O material vai degradar instantaneamente", "isCorrect": false, "explanation": "Taxa rápida não causa degradação automática." },
+        { "id": "a2", "text": "Pode causar bolhas de ar aprisionadas, gradientes térmicos e reações muito rápidas gerando heat localizados", "isCorrect": true, "explanation": "Correto! Aquecimento rápido causa: (1) ar preso, (2) gradientes internos (superfície quente, centro frio), (3) reação exotérmica violenta." },
+        { "id": "a3", "text": "O material não vai curar completamente", "isCorrect": false, "explanation": "Cura ocorre, mas com problemas de qualidade." },
+        { "id": "a4", "text": "A reciclagem posterior fica impossível", "isCorrect": false, "explanation": "Taxa aquecimento não afeta reciclabilidade posterior." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "O que é 'exotermicidade' em uma reação de cura e por que é problemática em peças espessas?",
+      "alternatives": [
+        { "id": "a1", "text": "Perda de calor do material para o ambiente", "isCorrect": false, "explanation": "Exotérmico é liberação de calor, não perda; isso seria endotérmico." },
+        { "id": "a2", "text": "A reação de cura libera calor, criando 'pontos quentes' em peças espessas, danificando molde e criando tensões", "isCorrect": true, "explanation": "Correto! Reações exotérmicas (ex.: epóxi) liberam calor significativo; em espessura grande, calor se acumula, causando problemas." },
+        { "id": "a3", "text": "A absorção de calor externo necessária para ativar a cura", "isCorrect": false, "explanation": "Isso seria endotérmico, não exotérmico." },
+        { "id": "a4", "text": "A necessidade de aquecer o material acima de sua temperatura de degradação", "isCorrect": false, "explanation": "Isso não é exotermicidade; é risco de degradação." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Qual estratégia é comumente usada para controlar a exotermicidade em peças grandes de epóxi?",
+      "alternatives": [
+        { "id": "a1", "text": "Aumentar a temperatura do molde para acelerar cura", "isCorrect": false, "explanation": "Aumentar temperatura agravaria o problema exotérmico." },
+        { "id": "a2", "text": "Usar cura em múltiplos estágios (baixa temperatura primeiro, depois temperatura mais alta) ou moldes com resfriamento ativo", "isCorrect": true, "explanation": "Correto! Cura em estágios permite dissipação de calor; sistema de resfriamento do molde Remove exotermia." },
+        { "id": "a3", "text": "Aumentar a quantidade de inibidor para retardar cura", "isCorrect": false, "explanation": "Enquanto inibidor retarda cura, não é a estratégia mais eficaz para controlar exotermia." },
+        { "id": "a4", "text": "Adicionar água ao pré-polímero para absorver calor", "isCorrect": false, "explanation": "Água reagiria com epóxi ou mudaria suas propriedades; não é solução viável." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Em qual cenário a cura em múltiplos estágios é mais importante: uma peça delgada de epóxi (5 mm) ou uma peça espessa (50 mm)?",
+      "alternatives": [
+        { "id": "a1", "text": "Peça delgada; o calor se dissipa mais lentamente em material fino", "isCorrect": false, "explanation": "Material fino dissipa calor MAIS rapidamente, não lentamente." },
+        { "id": "a2", "text": "Peça espessa; o calor exotérmico se acumula no interior sem dissipação adequada", "isCorrect": true, "explanation": "Correto! Peça espessa (50 mm) tem isolamento térmico interno; calor de reação exotérmica se acumula perigosamente." },
+        { "id": "a3", "text": "Ambas requerem igualmente; a espessura não afeta exotermia", "isCorrect": false, "explanation": "Espessura afeta dramaticamente como calor é dissipado ou acumulado." },
+        { "id": "a4", "text": "Nenhuma delas; múltiplos estágios só são usados para cura química diferente", "isCorrect": false, "explanation": "Múltiplos estágios são usados especificamente para gerenciar exotermia em peças espessas." }
+      ]
+    }
+  ]
+}
+

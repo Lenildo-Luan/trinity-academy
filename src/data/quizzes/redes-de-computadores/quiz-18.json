@@ -1,0 +1,109 @@
+{
+  "id": "quiz-18",
+  "title": "Quiz — Roteamento Inter-AS com BGP",
+  "description": "Teste seus conhecimentos sobre Border Gateway Protocol (BGP), Sistemas Autônomos, sessões eBGP e iBGP, atributos de rota (AS-PATH, NEXT-HOP, LOCAL-PREF, MED), algoritmo de seleção de rota, roteamento batata quente (hot-potato), e políticas de roteamento inter-AS.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual é a diferença fundamental entre um protocolo de roteamento intra-AS (como OSPF) e um protocolo inter-AS (como BGP)?",
+      "alternatives": [
+        { "id": "a1", "text": "OSPF busca encontrar o caminho com menor custo (métrica). BGP busca encontrar caminho aceitável segundo políticas administrativas", "isCorrect": true, "explanation": "Correto! OSPF = otimização técnica (Dijkstra minimiza custo). BGP = negociação administrativa (Google diz 'prefiro via Verizon', AT&T diz 'não quero via competitor'). BGP não usa métrica única — usa atributos (AS-PATH, LOCAL-PREF) que refletem **política**." },
+        { "id": "a2", "text": "OSPF é mais rápido; BGP é mais seguro", "isCorrect": false, "explanation": "OSPF é rápido (segundos). BGP é **lento** em convergência (minutos). Segurança é separada (BGPSEC em desenvolvimento). Diferença não é velocidade/segurança — é objetivo (custo vs. política)." },
+        { "id": "a3", "text": "OSPF usa Distance Vector; BGP usa Link State", "isCorrect": false, "explanation": "Inverso — OSPF usa Link State (Dijkstra). BGP usa seleção por atributos (nem LS nem DV). RIP que usa DV." },
+        { "id": "a4", "text": "OSPF funciona apenas com IPv4; BGP suporta IPv4 e IPv6", "isCorrect": false, "explanation": "Ambos suportam IPv4 e IPv6. Diferença é escopo e objetivo, não versão IP." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "O que é uma sessão **eBGP** (External BGP) e qual é seu propósito?",
+      "alternatives": [
+        { "id": "a1", "text": "Sessão entre roteadores de ASes **diferentes**, conectados fisicamente na fronteira; aprende e anuncia rotas externas", "isCorrect": true, "explanation": "Correto! eBGP = roteador de borda AS1 conectado (via TCP port 179) direto com roteador de borda AS2. Trocar mensagens: AS1 anuncia 'prefixo 8.8.0.0/8 via AS15169', AS2 anuncia 'prefixo 12.0.0.0/8 via AS701'. Isso aprende topologia inter-AS." },
+        { "id": "a2", "text": "Sessão entre roteadores do **mesmo AS**, que trocar informações localmente", "isCorrect": false, "explanation": "Isso é **iBGP** (Internal BGP), não eBGP. eBGP é entre ASes diferentes." },
+        { "id": "a3", "text": "Backup de eBGP ativo quando eBGP falha", "isCorrect": false, "explanation": "Sem tal conceito. eBGP e iBGP são tipos diferentes, não backup." },
+        { "id": "a4", "text": "Protocolo legado — BGP moderno só usa iBGP", "isCorrect": false, "explanation": "eBGP é essencial — é como inter-AS communication. Sem eBGP, nenhum AS comunica com outro." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "O que é **AS-PATH** em uma rota BGP e por que é importante?",
+      "alternatives": [
+        { "id": "a1", "text": "Sequência de ASes desde origem até destino (ex: [701, 15169]); detecta loops (se meu ASN está em PATH, descarta) e permite seleção (prefere PATH mais curto)", "isCorrect": true, "explanation": "Correto! AS-PATH é a 'rota de ASes'. Exemplo: rota para 8.8.0.0/8 tem AS-PATH [15169] (Google originou). Se trafego passa via Verizon, AS-PATH vira [701, 15169]. Importância: (1) **Loop prevention**: Se meu AS (ex: 2386 Level3) vê [701, 15169, 2386], reconhece ciclo — descarta, (2) **Policy/Seleção**: AS-PATH curto indica 'direto' (preferível); AS-PATH longo indica 'distante'." },
+        { "id": "a2", "text": "Métrica de largura de banda disponível no caminho", "isCorrect": false, "explanation": "AS-PATH não é métrica de banda. É **lista de ASes**. Banda é informação diferente (não tipicamente propagada em BGP)." },
+        { "id": "a3", "text": "Endereço IP do próximo roteador BGP na sequência", "isCorrect": false, "explanation": "Isso é **NEXT-HOP**, não AS-PATH. AS-PATH é sequência de ASes (AS-NUMBERs), não IPs." },
+        { "id": "a4", "text": "Identificador único de uma rota BGP no banco de dados", "isCorrect": false, "explanation": "Rotas são identificadas por **prefixo** (ex: 8.8.0.0/24), não por AS-PATH. AS-PATH é atributo de uma rota." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Se um roteador BGP recebe múltiplas rotas para o mesmo prefixo, qual é o **primeiro critério** no algoritmo de seleção de rota?",
+      "alternatives": [
+        { "id": "a1", "text": "Verificar viabilidade (reachability): descartar se há loop (ASN próprio em AS-PATH) ou se NEXT-HOP é inalcançável", "isCorrect": true, "explanation": "Correto! Primeiro filtro: é rota **válida**? Se meu AS está em AS-PATH, é loop — descarta. Se NEXT-HOP não é alcançável (não em tabela de roteamento intra-AS), descarta. Apenas rotas viáveis entram no 'torneio' de seleção. Depois de filtrar loops/inviáveis, aplica LOCAL-PREF, AS-PATH, etc." },
+        { "id": "a2", "text": "Escolher a rota com **LOCAL-PREF máximo** (preferência local)", "isCorrect": false, "explanation": "LOCAL-PREF é **segundo** critério (após viabilidade). Deve-se descartar loops/inviáveis ANTES de considerar preferências." },
+        { "id": "a3", "text": "Escolher a rota com **AS-PATH mais curto**", "isCorrect": false, "explanation": "AS-PATH curto é terceiro critério (após LOCAL-PREF). Viabilidade vem primeiro." },
+        { "id": "a4", "text": "Usar a rota que chegou **primeiro** (FIFO)", "isCorrect": false, "explanation": "BGP não usa FIFO. Usa critérios bem-definidos (RFC 4271). Ordem de chegada não importa." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "**LOCAL-PREF** é um atributo BGP. Qual é sua escala típica (padrão), e ele favorece valores altos ou baixos?",
+      "alternatives": [
+        { "id": "a1", "text": "Escala 0-4.294.967.295 (32 bits), padrão 100; **maior LOCAL-PREF é preferível** (favorece valores altos)", "isCorrect": true, "explanation": "Correto! LOCAL-PREF padrão é 100. Se rota A tem LOCAL-PREF 150 e rota B tem 100, **escolhe A** (150 > 100). Usado para política local: 'prefiro sair via NYC (LOCAL-PREF 150) em vez de Miami (100)'. Roteadores internos via iBGP respeitam esta preferência local." },
+        { "id": "a2", "text": "Escala 0-255 (8 bits), padrão 50; **menor LOCAL-PREF é preferível** (favorece valores baixos)", "isCorrect": false, "explanation": "Escala errada (é 32 bits) e direção errada (maior é melhor, não menor)." },
+        { "id": "a3", "text": "Escala 1-16 (4 bits), padrão 8; não afeta seleção (apenas informativo)", "isCorrect": false, "explanation": "Tudo errado — escala, padrão, impacto. LOCAL-PREF é 32 bits, padrão 100, e CRÍTICO para seleção." },
+        { "id": "a4", "text": "Escala 0-65.535 (16 bits), padrão 32768; valor médio é melhor", "isCorrect": false, "explanation": "Escala incorreta (é 32 bits). Não há preferência por 'médio' — quanto maior, melhor." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual é o atributo **MED (Multi-Exit Discriminator)** e em qual situação é útil?",
+      "alternatives": [
+        { "id": "a1", "text": "Sugestão do AS **externo** ao preferir uma de suas múltiplas saídas; usado se outras rotas estão empatadas (ex: 'prefira entrada Dallas em vez de NYC')", "isCorrect": true, "explanation": "Correto! MED é **sugestão de entrada preferida do peer externo**. Exemplo: AT&T conecta Google via 2 links: NYC e Miami. AT&T envia via NYC com MED=50, via Miami com MED=100. Google vê empate em LOCAL-PREF/AS-PATH, aplica MED: escolhe NYC (50 < 100, menor MED = melhor). Permite AT&T influenciar onde Google entra em sua rede." },
+        { "id": "a2", "text": "Métrica de latência do enlace eBGP", "isCorrect": false, "explanation": "MED não é latência — é número administrativo configurável. Pode refletir latência, mas não é obrigatório." },
+        { "id": "a3", "text": "Identificador único de cada rota (similar a route distinguisher)", "isCorrect": false, "explanation": "MED não é ID único — múltiplas rotas podem ter mesmo MED. É só preferência." },
+        { "id": "a4", "text": "Obrigatório em todo anúncio BGP; sem MED, rota é invalida", "isCorrect": false, "explanation": "MED é **opcional**. Se ausente, valor padrão é 0. Rota é válida mesmo sem MED." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "O que é **roteamento batata quente** (hot-potato routing) em BGP?",
+      "alternatives": [
+        { "id": "a1", "text": "Quando múltiplas rotas externas são viáveis, preferir sair de seu AS pelo caminho mais rápido (menor custo intra-AS para NEXT-HOP)", "isCorrect": true, "explanation": "Correto! Estratégia egoísta: ISP aprende rotas via NYC (5ms intra-AS) e Miami (50ms intra-AS). Ambas viáveis. Usa custo OSPF interno (IGP cost) para NEXT-HOP: NYC = 5, Miami = 50 → escolhe NYC. **Sai rápido (hot potato), deixando Miami livre**. Não otimiza globalmente — otimiza seu custo interno." },
+        { "id": "a2", "text": "Protocolo de segurança para detectar falsificação de rota BGP", "isCorrect": false, "explanation": "Segurança BGP é BGPSEC (assimetrias RSA). Hot-potato é **estratégia de seleção**, não segurança." },
+        { "id": "a3", "text": "Descarte aleatório de pacotes BGP para reduzir congestionamento", "isCorrect": false, "explanation": "Hot-potato não descarta — é estratégia de escolha de rota. Sem descarte." },
+        { "id": "a4", "text": "Mecanismo de BGP para detectar e prevenir loops infinitos", "isCorrect": false, "explanation": "Prevenção de loop é via AS-PATH. Hot-potato é estratégia de seleção (depois de loops descartados)." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Um ISP tem duas entradas para um prefixo: via eBGP AS701 e via eBGP AS3356. Ambas têm LOCAL-PREF 100, AS-PATH comprimento 1 ([AS701] vs. [AS3356]). Como o roteador BGP faz desempate?",
+      "alternatives": [
+        { "id": "a1", "text": "Verifica custo intra-AS para NEXT-HOP de cada rota (hot-potato); escolhe rota com menor custo IGP", "isCorrect": true, "explanation": "Correto! Após empate em LOCAL-PREF (100=100) e AS-PATH (1=1), o algoritmo BGP (RFC 4271, passo 7) aplica 'IGP metric to NEXT-HOP': executa tabela OSPF interna e vê qual NEXT-HOP é mais próximo. Exemplo: NEXT-HOP para AS701=10ms IGP, NEXT-HOP para AS3356=50ms IGP → escolhe AS701 (10 < 50). Isso é hot-potato." },
+        { "id": "a2", "text": "Escolhe a primeira rota recebida (FIFO)", "isCorrect": false, "explanation": "BGP não usa FIFO — tem algoritmo determinístico. Vários critérios antes de FIFO." },
+        { "id": "a3", "text": "Escolhe com base em Origem do atributo (IGP > EGP > Incompleta)", "isCorrect": false, "explanation": "Origem é **quarto** critério (após LOCAL-PREF e AS-PATH). No caso (ambas eBGP), Origem é provável IGP para ambas — ainda empatado." },
+        { "id": "a4", "text": "O administrador deve configurar manualmente; BGP sozinho não pode desempatar", "isCorrect": false, "explanation": "BGP **pode** desempatar automaticamente usando IGP cost (hot-potato). Manual é opcional, para override." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Um AS quer **desencorajar** outros ASes de usar uma certa rota. Qual atributo BGP ou técnica pode ser usada?",
+      "alternatives": [
+        { "id": "a1", "text": "**Prepend AS-PATH**: artificialmente aumentar AS-PATH (ex: [701, 701, 701, 15169]) para parecer 'distante', desencorajando seleção", "isCorrect": true, "explanation": "Correto! Se Google quer desencorajar rota via AT&T, modifica AS-PATH: em vez de [701, 15169], anuncia [701, 701, 701, 15169]. Outro AS vê comprimento 4 em vez de 2 → menos atrativo. Combinado: AS-PATH curto (Google) vs. AS-PATH longo (AT&T prepended) → outros preferem Google, reduzindo trafego via AT&T. Tática comum." },
+        { "id": "a2", "text": "Settar LOCAL-PREF para 1 (mínimo), forçando peers a rejeitar rota", "isCorrect": false, "explanation": "LOCAL-PREF é intra-AS — afeta roteadores internos, não peers externos. Externos não 'veem' LOCAL-PREF." },
+        { "id": "a3", "text": "Enviar mensagem BGP REVOKE que desfaz anúncio", "isCorrect": false, "explanation": "Técnica seria **não anunciar** (withdrawal), não REVOKE (não é comando BGP padrão)." },
+        { "id": "a4", "text": "Usar MED = infinito para indicar 'não use'", "isCorrect": false, "explanation": "MED não tem valor 'infinito' padrão. Se AS quer rejeitar, simples não anuncia." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Rastreando um pacote de 208.67.1.1 (Verizon) para 8.8.8.1 (Google): qual é a sequência de **tabelas de roteamento consultadas** conforme o pacote atravessa diferentes entidades?",
+      "alternatives": [
+        { "id": "a1", "text": "1) Tabela intra-AS Verizon (OSPF), 2) Tabela BGP no Border Router Verizon (rota para 8.8.0.0/8), 3) Tabela intra-AS Google (OSPF), 4) Servidor recebe", "isCorrect": true, "explanation": "Correto! Host em Verizon → tabela OSPF local (Verizon): '8.8.0.0/8 é externa, encaminha para Border Router'. Border Router Verizon → tabela BGP: '8.8.0.0/8 via AS15169, NEXT-HOP é Google router IP 10.x.x.x'. Pacote vai para Google Border Router (enlace direto Verizon-Google). Google Border Router → tabela OSPF de Google: '8.8.8.1 é servidor em datacenter DC1'. Encaminha intra-AS Google até DC1. Servidor recebe." },
+        { "id": "a2", "text": "1) BGP em todo lugar, 2) Sem envolvimento de OSPF", "isCorrect": false, "explanation": "BGP é apenas inter-AS. Dentro de cada AS, OSPF (ou outro intra-AS) é usado. Ambos juntos." },
+        { "id": "a3", "text": "1) Tabela ARP, 2) Tabela BGP, 3) Tabela TCP", "isCorrect": false, "explanation": "ARP é camada 2 (MAC resolution), não roteamento. TCP é camada 4 (transporte). Roteamento é camada 3 (IP)." },
+        { "id": "a4", "text": "1) Google OSPF diretamente (pacote vai direto), sem Verizon OSPF", "isCorrect": false, "explanation": "Host é em Verizon, precisa sair de Verizon primeiro (via OSPF Verizon). Não pode pular para Google OSPF antes de sair." }
+      ]
+    }
+  ]
+}
+

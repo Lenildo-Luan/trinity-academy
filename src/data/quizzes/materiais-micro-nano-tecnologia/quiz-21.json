@@ -1,0 +1,109 @@
+{
+  "id": "quiz-21",
+  "title": "Quiz — Técnicas de Processamento para Termoplásticos II: Moldagem por Injeção e Sopro",
+  "description": "Teste seus conhecimentos sobre injeção de termoplásticos, moldagem por sopro e suas variantes.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual é a RAZÃO PRINCIPAL para a temperatura do MOLDE ser muito mais BAIXA em injeção de termoplásticos vs. termofixos?",
+      "alternatives": [
+        { "id": "a1", "text": "Termoplásticos degradam se aquecidos", "isCorrect": false, "explanation": "Termoplásticos podem ser aquecidos; a razão é outra." },
+        { "id": "a2", "text": "Molde aquecido em termofixos é necessário para CURA; em termoplásticos, resfriamento RÁPIDO solidifica material", "isCorrect": true, "explanation": "Correto! Termofixos precisam de calor para polimerização; termoplásticos apenas precisam solidificar." },
+        { "id": "a3", "text": "Termoplásticos não necessitam de molde", "isCorrect": false, "explanation": "Termoplásticos PRECISAM de molde." },
+        { "id": "a4", "text": "Economia de energia", "isCorrect": false, "explanation": "Economia é consequência, não razão fundamental." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Em injeção de termoplástico, qual é o propósito da PRESSÃO DE 'COMPACTAÇÃO' (packing)?",
+      "alternatives": [
+        { "id": "a1", "text": "Apenas acelerar o ciclo de moldagem", "isCorrect": false, "explanation": "Compactação não acelera; adiciona tempo." },
+        { "id": "a2", "text": "Manter pressão após molde estar cheio para COMPENSAR CONTRAÇÃO durante resfriamento inicial, melhorando qualidade", "isCorrect": true, "explanation": "Correto! Compactação preenche cavidades geradas por encolhimento do material, reduzindo vazios." },
+        { "id": "a3", "text": "Forçar material em todos detalhes do molde", "isCorrect": false, "explanation": "Injeção força material; compactação tem propósito diferente." },
+        { "id": "a4", "text": "Remover bolhas de ar após injeção", "isCorrect": false, "explanation": "Bolhas remobidas durante injeção; compactação tem outro propósito." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Qual problema em peça injetada é CAUSADO por resfriamento desigual?",
+      "alternatives": [
+        { "id": "a1", "text": "Superfície áspera ou com marcas de fluxo", "isCorrect": false, "explanation": "Marcas de fluxo vêm de resfriamento superficial rápido, mas empenamento é resultado de desigualdade." },
+        { "id": "a2", "text": "Empenamento (warping) — deformação dimensonal não-uniforme por stress residual", "isCorrect": true, "explanation": "Correto! Resfriamento desigual causa contração não-uniforme, gerando stress que distorce peça." },
+        { "id": "a3", "text": "Cor desigual", "isCorrect": false, "explanation": "Cor não é afetada por resfriamento." },
+        { "id": "a4", "text": "Fragilidade excessiva", "isCorrect": false, "explanation": "Fragilidade é controlada por temperatura de processamento, não resfriamento." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "O que caracteriza a moldagem por SOPRO? Qual tipo de peça é ideal?",
+      "alternatives": [
+        { "id": "a1", "text": "Produz peças SÓLIDAS com espessura variável", "isCorrect": false, "explanation": "Sopro produz PEÇAS OCAS, não sólidas." },
+        { "id": "a2", "text": "Sopro produz peças OCAS (garrafas, tanques) pela inflação de preforma com ar comprimido", "isCorrect": true, "explanation": "Correto! Sopro especializa em formas ocas; ar expande material contra molde." },
+        { "id": "a3", "text": "Sopro é especializado em peças de complexidade extrema", "isCorrect": false, "explanation": "Sopro é limitado a formas basicamente cilíndricas/ovais." },
+        { "id": "a4", "text": "Sopro requer pressão muito alta (>100 MPa)", "isCorrect": false, "explanation": "Sopro usa pressão moderada (2–8 MPa)." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Qual é a VANTAGEM PRINCIPAL de Injection Blow Molding (IBM) sobre Extrusion Blow Molding (EBM)?",
+      "alternatives": [
+        { "id": "a1", "text": "Equipamento mais simples e barato", "isCorrect": false, "explanation": "IBM é mais complexo, não simples." },
+        { "id": "a2", "text": "Espessura MUITO MAIS UNIFORME da parede; possibilita formas mais complexas", "isCorrect": true, "explanation": "Correto! IBM permite controle de espessura preforma; EBM tem fundo espesso, topo fino." },
+        { "id": "a3", "text": "Ciclos de produção mais rápidos", "isCorrect": false, "explanation": "IBM tem ciclos MAIS LENTOS (múltiplas etapas)." },
+        { "id": "a4", "text": "Melhor reciclagem do material não-usado", "isCorrect": false, "explanation": "Reciclagem é similar; diferença é em eficiência de utilização de material." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "O que caracteriza 'Stretch Blow Molding' (SBM) e por que melhora propriedades?",
+      "alternatives": [
+        { "id": "a1", "text": "Preforma é apenas aquecida e soprada normalmente", "isCorrect": false, "explanation": "SBM é mais do que aquecimento + sopro." },
+        { "id": "a2", "text": "Preforma é ESTICADA AXIALMENTE enquanto SOPRADA RADIALMENTE, orientando cadeias moleculares, melhorando resistência e reduzindo peso", "isCorrect": true, "explanation": "Correto! Estiramento orienta polímero; garrafas PET SBM são típicas e têm propriedades superiores." },
+        { "id": "a3", "text": "Pressão de ar é muito mais alta", "isCorrect": false, "explanation": "Pressão de ar é similar; é o estiramento que muda." },
+        { "id": "a4", "text": "Material é aquecido a temperatura mais alta", "isCorrect": false, "explanation": "Temperatura é controlada, mas não é o diferencial." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual é o maior PROBLEMA PRÁTICO de moldagem por injeção que SIM ocorre mas em MENOR grau em sopro?",
+      "alternatives": [
+        { "id": "a1", "text": "Sobrecarga de ciclos produtivos", "isCorrect": false, "explanation": "Ambos têm cargas similares." },
+        { "id": "a2", "text": "REBARBAS e GATES visíveis — resíduo de material em pontos de injeção", "isCorrect": true, "explanation": "Correto! Injeção deixa gates/rebarbas óbvios; sopro tem costura menos visível." },
+        { "id": "a3", "text": "Degradação térmica do material", "isCorrect": false, "explanation": "Ambos têm risco similar." },
+        { "id": "a4", "text": "Impossibilidade de produzir peças ocas", "isCorrect": false, "explanation": "Injeção pode produzir peças ocas com interiores complexos; sopro é especializado em ocas simples." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Em uma peça soprada que apresenta 'LINHAS DE COSTURA' visível, qual é a causa?",
+      "alternatives": [
+        { "id": "a1", "text": "Material não-uniforme ou contaminado", "isCorrect": false, "explanation": "Contaminação causaria outros problemas." },
+        { "id": "a2", "text": "Parting line (linha de divisão do molde) onde duas metades se unem; material não se funde completamente ali", "isCorrect": true, "explanation": "Correto! Linha de costura é onde molde se divide; resfriamento rápido ali impede fusão completa." },
+        { "id": "a3", "text": "Ar entrou durante sopro", "isCorrect": false, "explanation": "Ar dentro não causa linha visível externamente." },
+        { "id": "a4", "text": "Preforma teve defeito antes do sopro", "isCorrect": false, "explanation": "Preforma defeituosa causaria outras falhas além de linhas de costura." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Para produção de 1 MILHÃO de garrafas de bebida PET por ano, qual técnica seria ideal?",
+      "alternatives": [
+        { "id": "a1", "text": "Extrusion Blow Molding (EBM)", "isCorrect": false, "explanation": "EBM é mais lento; SBM é mais eficiente para volume altíssimo." },
+        { "id": "a2", "text": "Injection Blow Molding (IBM)", "isCorrect": false, "explanation": "IBM é mais lento e caro para alto volume." },
+        { "id": "a3", "text": "Stretch Blow Molding (SBM) — propriedades superiores, ciclos rápidos, densidade reduzida", "isCorrect": true, "explanation": "Correto! SBM domina mercado de bebidas; ciclos de ~60–90 segundos, eficiente para 1M+ peças/ano." },
+        { "id": "a4", "text": "Moldagem por injeção", "isCorrect": false, "explanation": "Injeção não é para peças ocas em volume altíssimo." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Se um produto injetado apresenta 'SHORT SHOT' (preenchimento incompleto), qual é a ação CORRETA?",
+      "alternatives": [
+        { "id": "a1", "text": "Reduzir temperatura do molde", "isCorrect": false, "explanation": "Temperatura baixa pode agravar; aumentar ajuda." },
+        { "id": "a2", "text": "Aumentar pressão de injeção, tempo de injeção, ou temperatura de resina; verificar se molde tem entupimento", "isCorrect": true, "explanation": "Correto! Short shot significa material não preenche molde completamente; mais pressão/calor/tempo ajuda." },
+        { "id": "a3", "text": "Reduzir a quantidade de resina carregada", "isCorrect": false, "explanation": "Reduzir resina agravaria short shot." },
+        { "id": "a4", "text": "Usar molde diferente", "isCorrect": false, "explanation": "Ajustes de parâmetros resolvem antes de trocar molde." }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,109 @@
+{
+  "id": "quiz-14",
+  "title": "Quiz — Introdução ao Processamento de Polímeros Termofixos",
+  "description": "Teste seus conhecimentos sobre termofixos, sua estrutura molecular, propriedades e comparação com termoplásticos.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "O que diferencia fundamentalmente um polímero termofixo de um termoplástico?",
+      "alternatives": [
+        { "id": "a1", "text": "Termofixos são sempre mais baratos", "isCorrect": false, "explanation": "O custo não é uma diferença fundamental; termoplásticos são frequentemente mais caros por unidade." },
+        { "id": "a2", "text": "Termofixos formam redes 3D reticuladas irreversíveis através de cura química", "isCorrect": true, "explanation": "Correto! A reticulação irreversível é a característica que define termofixos — cadeias são ligadas permanentemente." },
+        { "id": "a3", "text": "Termofixos são sempre mais leves que termoplásticos", "isCorrect": false, "explanation": "Não há relação necessária entre ser termofixo/termoplástico e leveza; ambos podem ser leves ou pesados." },
+        { "id": "a4", "text": "Termofixos não podem ser reciclados, mas termoplásticos também não", "isCorrect": false, "explanation": "Termoplásticos podem ser reciclados por refusão; termofixos têm reciclagem muito limitada." }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Qual é a principal vantagem dos polímeros termofixos em relação aos termoplásticos?",
+      "alternatives": [
+        { "id": "a1", "text": "Ciclos de processamento mais rápidos", "isCorrect": false, "explanation": "Termofixos têm ciclos mais LONGOS devido à cura; termoplásticos têm ciclos rápidos." },
+        { "id": "a2", "text": "Excelente estabilidade térmica e rigidez estrutural mantidas em altas temperaturas", "isCorrect": true, "explanation": "Correto! A rede reticulada oferece estabilidade térmica superior, mantendo propriedades acima de 150–200°C." },
+        { "id": "a3", "text": "Maior facilidade de reciclagem", "isCorrect": false, "explanation": "Termofixos são muito difíceis de reciclar comparado a termoplásticos que podem ser refundidos." },
+        { "id": "a4", "text": "Menor absorção de umidade do ambiente", "isCorrect": false, "explanation": "Muitos termofixos absorvem mais umidade que certos termoplásticos; absorção varia por tipo específico." }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Qual das seguintes NOT é uma desvantagem dos polímeros termofixos?",
+      "alternatives": [
+        { "id": "a1", "text": "Fragilidade após cura completa", "isCorrect": false, "explanation": "Fragilidade é definitivamente uma desvantagem; a rede reticulada rígida é susceptível a trincas." },
+        { "id": "a2", "text": "Impossibilidade de reciclagem e refusão", "isCorrect": false, "explanation": "Impossibilidade de reciclar é uma desvantagem bem conhecida." },
+        { "id": "a3", "text": "Ciclos de processamento muito rápidos", "isCorrect": true, "explanation": "Correto! Ciclos RÁPIDOS seria uma VANTAGEM, não uma desvantagem. Termofixos têm ciclos LONGOS." },
+        { "id": "a4", "text": "Absorção de umidade que pode degradar propriedades", "isCorrect": false, "explanation": "Absorção de umidade é uma desvantagem bem documentada em termofixos." }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Qual é o papel do 'agente de cura' em um pré-polímero termofixo?",
+      "alternatives": [
+        { "id": "a1", "text": "Armazenar o material em forma sólida", "isCorrect": false, "explanation": "O agente de cura não é responsável por armazenamento; esse é papel de inibidores." },
+        { "id": "a2", "text": "Iniciar e catalisar a reação de reticulação que transforma o pré-polímero em rede 3D", "isCorrect": true, "explanation": "Correto! O agente de cura (endurecedor) reage com a resina base para criar ligações cruzadas." },
+        { "id": "a3", "text": "Reduzir o custo total do material", "isCorrect": false, "explanation": "Embora economicamente relevante, o papel funcional do agente de cura é iniciar cura, não reduzir custo." },
+        { "id": "a4", "text": "Colorir o material para identificação visual", "isCorrect": false, "explanation": "Corantes são separados de agentes de cura; a cor não é a função do agente de cura." }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "O que é 'pot life' no contexto de processamento de termofixos?",
+      "alternatives": [
+        { "id": "a1", "text": "O tempo que a peça permanece no molde durante cura", "isCorrect": false, "explanation": "Esse é o 'cure time', não o pot life." },
+        { "id": "a2", "text": "O tempo disponível para trabalhar com a mistura pré-polímero antes que ela comece a curar irreversivelmente", "isCorrect": true, "explanation": "Correto! Pot life é a 'gel time' — período entre mistura e início da cura química." },
+        { "id": "a3", "text": "A temperatura máxima que a resina pode atingir antes de degradar", "isCorrect": false, "explanation": "Isso seria 'decomposition temperature', não pot life." },
+        { "id": "a4", "text": "A viscosidade inicial do pré-polímero líquido", "isCorrect": false, "explanation": "Embora viscosidade afete processabilidade, pot life é especificamente sobre tempo de trabalho." }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Qual das seguintes matrizes termofixas oferece a MAIOR resistência térmica de serviço?",
+      "alternatives": [
+        { "id": "a1", "text": "Poliéster insaturado (Tg ≈ 100–150°C)", "isCorrect": false, "explanation": "Poliéster tem limite térmico moderado." },
+        { "id": "a2", "text": "Epóxi (Tg ≈ 150–200°C)", "isCorrect": false, "explanation": "Epóxi tem boa resistência térmica, mas não a melhor entre termofixos." },
+        { "id": "a3", "text": "Fenólico (Tg > 200°C, excelente resistência ao fogo)", "isCorrect": false, "explanation": "Fenólico tem ótima resistência, mas poliimida supera." },
+        { "id": "a4", "text": "Poliimida (Tg 250–300°C, aplicações aeroespaciais)", "isCorrect": true, "explanation": "Correto! Poliimida é a matriz termofixa com maior resistência térmica contínua entre as comuns." }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Por que é importante controlar a contração volumétrica durante a cura de um termofixo?",
+      "alternatives": [
+        { "id": "a1", "text": "Porque a contração causa perda de cor do material", "isCorrect": false, "explanation": "Contração não causa perda de cor; pigmentos permanecem no material." },
+        { "id": "a2", "text": "Porque contração desigual gera tensões residuais e possíveis trincas e empenamento", "isCorrect": true, "explanation": "Correto! Contração não-uniforme cria stress interno que pode levar a falha posterior." },
+        { "id": "a3", "text": "Porque a contração reduz a força de adesão do material", "isCorrect": false, "explanation": "Enquanto contração pode afetar adesão em algumas interfaces, a razão principal é stress residual." },
+        { "id": "a4", "text": "Porque reduz o tempo de cura necessário", "isCorrect": false, "explanation": "Contração não afeta tempo de cura; o efeito é no stress residual, não na cinética." }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Qual característica da matriz de poliéster insaturado a torna adequada para aplicações de custo moderado em comparação com epóxi?",
+      "alternatives": [
+        { "id": "a1", "text": "Resistência térmica muito superior", "isCorrect": false, "explanation": "Poliéster tem resistência térmica INFERIOR a epóxi, não superior." },
+        { "id": "a2", "text": "Custo significativamente mais baixo e menor tempo de cura", "isCorrect": true, "explanation": "Correto! Poliéster é mais barato e pode curar mais rapidamente, compensando contração maior." },
+        { "id": "a3", "text": "Absorção de umidade muito reduzida", "isCorrect": false, "explanation": "Poliéster absorve umidade comparavelmente a epóxi." },
+        { "id": "a4", "text": "Não requer agente de cura separado", "isCorrect": false, "explanation": "Poliéster ainda requer catalisador/agente de cura como qualquer termofixo." }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Em qual aplicação industrial a excelente isolação elétrica dos termofixos é MAIS crítica?",
+      "alternatives": [
+        { "id": "a1", "text": "Embalagens alimentares", "isCorrect": false, "explanation": "Isolação elétrica é irrelevante para embalagens alimentares." },
+        { "id": "a2", "text": "Placas de circuito impresso (PCB) e isoladores de alta tensão", "isCorrect": true, "explanation": "Correto! PCBs e isoladores de alta tensão requerem excelente isolação elétrica e resistência à degradação." },
+        { "id": "a3", "text": "Construção de edifícios", "isCorrect": false, "explanation": "Enquanto isolação elétrica é valiosa, aplicações de construção focam mais em isolação térmica." },
+        { "id": "a4", "text": "Pneus de veículos", "isCorrect": false, "explanation": "Pneus não requerem isolação elétrica especial." }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Compare: Um termofixo epóxi com reforço de fibra de carbono vs. um termoplástico reforçado com fibra de vidro para uma asa de aeronave que opera a 120°C. Qual escolher e por quê?",
+      "alternatives": [
+        { "id": "a1", "text": "Termoplástico, porque é mais fácil de reciclar se danificado", "isCorrect": false, "explanation": "Reciclagem é importante, mas não é o critério primário para asa de aeronave estrutural." },
+        { "id": "a2", "text": "Termofixo epóxi, porque oferece melhor rigidez, estabilidade térmica a 120°C e propriedades comprovadas em aeronáutica", "isCorrect": true, "explanation": "Correto! Para aplicação estrutural aeronáutica, epóxi + fibra carbono supera termoplástico em rigidez e confiabilidade térmica." },
+        { "id": "a3", "text": "Termoplástico, porque tem ciclos de processamento mais rápidos na manufatura", "isCorrect": false, "explanation": "Enquanto ciclo rápido é vantajoso, segurança estrutural é mais importante para asa de aeronave." },
+        { "id": "a4", "text": "Ambos são equivalentes; a escolha é apenas de custo", "isCorrect": false, "explanation": "Não são equivalentes; epóxi + fibra carbono oferece propriedades estruturais superiores para essa aplicação." }
+      ]
+    }
+  ]
+}
+
