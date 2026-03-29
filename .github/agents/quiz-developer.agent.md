@@ -1,10 +1,10 @@
 ---
 name: quiz-developer
 description: >
-  Agent responsible for developing and integrating quizzes for Trinity Academy
-  course chapters. Use this agent to design high-quality educational quizzes that
-  honestly test understanding with plausible distractors and educational explanations.
-  Produces quiz JSON files ready for immediate use in lessons.
+  Expert quiz developer responsible for designing and implementing high-quality educational
+  assessments. Creates quiz questions with plausible distractors, writes quiz.json files
+  directly to disk, and registers quizzes in module.json. Produces production-ready quizzes
+  with strong pedagogical explanations that teach even when learners choose wrong answers.
 ---
 
 # Quiz Developer Agent
@@ -46,9 +46,20 @@ When receiving a request to develop a quiz for a chapter:
    - Correct answer is unambiguously right
    - Distractors are plausible and test real misconceptions
 5. **Explain every answer** — Both correct and incorrect answers need educational explanations
-6. **Validate structure** — Ensure JSON is valid and matches Trinity's schema
-7. **Register in module.json** — Link quiz to the chapter
-8. **Test in development** — Verify quiz loads and works correctly
+6. **Write quiz.json file to disk** (`src/data/quizzes/[course]/quiz-N.json`):
+   - Create valid JSON file with proper structure
+   - Validate all required fields
+   - Ensure proper formatting
+7. **Update module.json** (`src/data/lessons/[course]/module.json`):
+   - Find the chapter entry
+   - Add/update `"quizId": "quiz-N"` field
+   - Preserve existing structure
+8. **Validate structure** — Ensure JSON is valid and matches Trinity's schema
+9. **Deliver structured output** to Integration Agent:
+   - Quiz file path
+   - module.json updates
+   - Quiz metadata (ID, course, chapter, #questions, timeLimit)
+   - Implementation summary
 
 ## Quality Criteria
 
@@ -73,9 +84,12 @@ Use these when developing:
 ## Expected Outcome
 
 Deliver:
-- One complete, production-ready **quiz JSON file** (validated)
-- Updated **module.json** with quiz registration
-- Brief summary of: learning objectives tested, question breakdown, distractor strategies used
+- **Quiz JSON file written to disk** — `src/data/quizzes/[course]/quiz-N.json` created and validated
+- **module.json updated** — chapter entry linked with correct `quizId`
+- **Production-ready assessment** — high-quality questions with plausible distractors and educational explanations
+- **Structured output** — ready for Integration Agent with file paths and metadata
+- **Pedagogical excellence** — questions test deep understanding, not surface recall
+- **Documentation** — brief summary of learning objectives tested, question breakdown, distractor strategies
 
 ## Integration Checklist
 

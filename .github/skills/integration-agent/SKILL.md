@@ -1,259 +1,351 @@
 ---
 name: integration-agent
 description: >
-  Integration orchestrator for lesson creation pipeline. Use this skill whenever
-  the integration agent needs to write lesson files, update metadata, register
-  components, and validate builds. Handles atomic file writes, module.json updates,
-  mdx-components.tsx registration, and build validation. The skill ensures all
-  upstream agent outputs (content, visuals, quiz) are correctly integrated into
-  the Trinity Academy codebase.
+  Integration orchestrator for lesson creation pipeline. Coordinates and validates
+  outputs from upstream agents (content, visuals, quiz), writes them atomically to
+  disk, updates metadata, and ensures the build passes. Responsible only for
+  orchestration and validation — NOT for writing content, visuals, or quiz logic.
 ---
 
 # Integration Agent Skill
 
-You are an **Integration Orchestrator** for the lesson creation pipeline. Your job is to take the outputs from all upstream agents (content, visuals, quiz) and **integrate them atomically** into the Trinity Academy codebase.
+You are an **Integration Orchestrator** for the lesson creation pipeline. Your job is to:
 
-You do not create content. You do not design visuals. You do not write quiz logic. You are responsible for:
+1. **Receive outputs** from upstream agents (Writer, P5 Developer, Quiz Developer)
+2. **Write files atomically** — all files to disk in correct locations
+3. **Update metadata** — register lesson in module.json
+4. **Validate build** — ensure `npx next build` passes
+5. **Report success or failure** — clearly and with actionable errors
 
-1. **Writing files atomically** — create the 3 new files with proper structure
-2. **Updating metadata** — register the lesson in module.json
-3. **Registering components** — add imports and exports in mdx-components.tsx
-4. **Validating the build** — ensure `npx next build` passes
-5. **Error handling** — rollback or report failures clearly
+You do **NOT** create content, design visuals, or write quiz logic. That is the responsibility of specialized agents.
 
 ---
 
 ## Your Role in the Pipeline
 
 ```
-[Content Agent] → mdx.md
-[Visual Agent]  → specs + annotated mdx
-[P5 Agent]      → tsx component file
-[Quiz Agent]    → quiz.json
-        ↓↓↓↓
+[Writer Agent] → .mdx file content
+[P5 Developer] → .tsx component + mdx-components.tsx updates
+[Quiz Developer] → quiz.json file + module.json patch
+       ↓↓↓
 [You — Integration Agent]
-  • Write all files to disk
-  • Update metadata files
+  • Validate all inputs are complete
+  • Write all files atomically
+  • Update metadata (module.json)
+  • Register components (mdx-components.tsx)
   • Validate build
   • Report success/failure
-        ↓
-[Git workflow] → automatic commit/PR
+       ↓
+[Lesson Live] → integrated in Trinity Academy
 ```
 
 ---
 
-## Step 1 — Receive Integration State
+## Step 1 — Receive and Validate Integration Inputs
 
-You receive a state object with:
+You receive structured outputs from three upstream agents:
+
+### From Writer Agent
 
 ```typescript
-interface IntegrationState {
-  course: string;           // e.g., "redes-de-computadores"
-  chapterId: string;        // e.g., "charpter-4"
-  chapterTitle: string;     // e.g., "Protocolo DNS"
-  description: string;      // lesson description
-  quizId: string;          // e.g., "quiz-4"
-  mdxContent: string;      // full MDX content
-  p5ComponentsCode: string; // full TSX file content
-  p5ComponentNames: string[]; // exported component names
-  quizData: Quiz;          // parsed quiz JSON
+interface WriterOutput {
+  courseId: string;        // e.g., "redes-de-computadores"
+  chapterId: string;       // e.g., "chapter-1"
+  chapterTitle: string;    // e.g., "Introdução ao Roteamento"
+  description: string;     // One-line summary (for metadata)
+  mdxContent: string;      // Full .mdx file content
 }
 ```
+
+### From P5 Developer Agent
+
+```typescript
+interface P5Output {
+  componentFileName: string;      // e.g., "lesson-1-p5-examples.tsx"
+  componentFileContent: string;   // Full TSX file content
+  componentNames: string[];       // e.g., ["MyVisualization", "AnotherComponent"]
+  mdxComponentsUpdates: {
+    importStatement: string;      // Import line to add
+    registrations: string[];      // Component names to register
+  };
+}
+```
+
+### From Quiz Developer Agent
+
+```typescript
+interface QuizOutput {
+  quizId: string;              // e.g., "quiz-1"
+  quizFileContent: string;     // Full quiz.json content (already valid JSON)
+  moduleJsonPatch: {
+    courseId: string;
+    chapterId: string;
+    quizId: string;
+  };
+}
+```
+
+---
+
+### Validation Checklist
+
+Before proceeding, verify:
+
+- [ ] **Writer output exists** and mdxContent is non-empty
+- [ ] **P5 output exists** (if visualizations are needed) with valid componentFileContent
+- [ ] **Quiz output exists** with valid quizFileContent
+- [ ] **Course ID matches** across all inputs
+- [ ] **Chapter ID matches** across all inputs
+- [ ] **Quiz ID format** is `quiz-N`
+- [ ] **Component names** are valid identifiers (CamelCase, no spaces)
+
+If any validation fails, **stop and report error with missing/invalid fields.**
 
 ---
 
 ## Step 2 — Write Files Atomically
 
-**Skill: `writeFilesAtomically`**
+Write files in this order. **Stop immediately on first error** — do not proceed.
 
-Write three new files in this order (stop on first error):
+### File 1: MDX Lesson File
 
-1. **p5 components file**: `src/components/[topic]-p5-examples.tsx`
-   - Full file path: `src/components/{topic-from-chapterId}-p5-examples.tsx`
-   - Extract topic name from chapterId (e.g., "charpter-4" → "lesson-4")
-   - Content: p5ComponentsCode (already complete with imports)
-   - Ensure directory exists
+**Path:** `src/data/lessons/{courseId}/{chapterId}.mdx`
 
-2. **MDX lesson file**: `src/data/lessons/{course}/{chapterId}.mdx`
-   - Full file path: `src/data/lessons/{course}/{chapterId}.mdx`
-   - Content: mdxContent (already validated)
-   - Ensure directory exists
+```bash
+# Example paths
+src/data/lessons/redes-de-computadores/chapter-1.mdx
+src/data/lessons/redes-de-computadores/chapter-2.mdx
+```
 
-3. **Quiz JSON file**: `src/data/quizzes/{course}/{quizId}.json`
-   - Full file path: `src/data/quizzes/{course}/{quizId}.json`
-   - Content: JSON.stringify(quizData, null, 2) + newline at EOF
-   - Ensure directory exists
-   - Validate JSON structure before writing
+**Actions:**
+1. Ensure directory exists: `src/data/lessons/{courseId}/`
+2. Write `mdxContent` to file
+3. Ensure file ends with newline
 
 **Error handling:**
-- If any file write fails, report which file and why
-- Do NOT proceed to Step 3 if any file write fails
+- If directory doesn't exist, create it
+- If file already exists, overwrite (use caution; consider warning)
+- If write fails, report: `FileWriteError: Failed to write {path}. Reason: {error}`
+
+---
+
+### File 2: P5 Component File
+
+**Path:** `src/components/{componentFileName}`
+
+**Example:** `src/components/lesson-1-p5-examples.tsx`
+
+**Actions:**
+1. Ensure directory exists: `src/components/`
+2. Write `componentFileContent` to file
+3. Ensure file ends with newline
+
+**Error handling:**
+- If file already exists, provide option to overwrite or append
+- If write fails, report: `FileWriteError: Failed to write {path}`
+
+---
+
+### File 3: Quiz JSON File
+
+**Path:** `src/data/quizzes/{courseId}/{quizId}.json`
+
+**Example:** `src/data/quizzes/redes-de-computadores/quiz-4.json`
+
+**Actions:**
+1. Ensure directory exists: `src/data/quizzes/{courseId}/`
+2. Validate JSON structure (parse and re-stringify to ensure validity)
+3. Write JSON with 2-space indentation
+4. Ensure file ends with newline
+
+**Error handling:**
+- If JSON is malformed, report: `JSONError: Invalid quiz JSON. {parse error details}`
+- If file already exists, provide option to overwrite
+- If write fails, report: `FileWriteError: Failed to write {path}`
 
 ---
 
 ## Step 3 — Update module.json
 
-**Skill: `updateModuleJson`**
+**Path:** `src/data/lessons/{courseId}/module.json`
 
-File: `src/data/lessons/{course}/module.json`
+### Algorithm
 
-### Algorithm:
+1. **Read and parse** the module.json file as JSON array
+2. **Find or create** the module that should contain this chapter
+   - Modules are objects with structure:
+     ```json
+     {
+       "id": "module-name",
+       "title": "Module Title",
+       "lessons": [ /* chapter entries */ ]
+     }
+     ```
+   - If multiple modules exist, you may need to ask context for which module contains this chapter
+   - If no module exists, report error: module.json structure unexpected
 
-1. **Read the file** — parse as JSON array
-2. **Find or create module** — locate the module that should contain this lesson
-   - If the module exists, find it by the first element's `id` (usually semantic like "camada-de-transporte")
-   - If no module exists, you may need to create one (but this should be rare — coordinate with context)
-3. **Create lesson entry**:
+3. **Find or create chapter entry** in the module's `lessons` array:
    ```json
    {
      "id": "{chapterId}",
      "title": "{chapterTitle}",
      "description": "{description}",
-     "video": null,
      "quizId": "{quizId}"
    }
    ```
-4. **Insert into module.lessons array** — append at the end
-5. **Write back** — JSON.stringify with proper formatting (2-space indent, ensure_ascii=false for Portuguese)
 
-### Validation:
-- Ensure no duplicate `id` within the same module
-- Ensure `quizId` matches the quiz file name created in Step 2
-- Ensure `description` is non-empty (max 200 chars for SEO)
+4. **Validate**:
+   - No duplicate chapter IDs
+   - `quizId` matches the quiz file created in Step 2
+   - All required fields present
+
+5. **Write back** with 2-space indentation and newline at EOF
 
 **Error handling:**
-- If file doesn't exist, report error with instruction to create module.json manually
-- If JSON is malformed, report parsing error and line number
-- If duplicate ID detected, report conflict
+- If file doesn't exist, report: `FileReadError: module.json not found at {path}`
+- If JSON is malformed, report: `JSONError: module.json has invalid JSON at line {N}`
+- If duplicate chapter ID, report: `ValidationError: Chapter ID {chapterId} already exists in module`
+- If quizId format invalid, report: `ValidationError: Quiz ID must match pattern quiz-N`
 
 ---
 
 ## Step 4 — Update mdx-components.tsx
 
-**Skill: `updateMdxComponentsTs`**
+**Path:** `mdx-components.tsx` (project root)
 
-File: `mdx-components.tsx` (root of project)
+This is **delicate**. Follow carefully.
 
-This is the **most delicate step**. You must add imports and component registrations without breaking existing code.
+### Algorithm
 
-### Algorithm:
-
-1. **Read the file**
-2. **Extract component names** from `p5ComponentNames` array
-3. **Generate import statement**:
+1. **Read** the file
+2. **Verify `useMDXComponents` function exists** — if not, report error and stop
+3. **Verify `...components,` spread operator exists** — must be the last item in return object
+4. **Add import** at the top after the last p5-examples import:
    ```typescript
    import {
-     ComponentName1,
-     ComponentName2,
-     ComponentName3,
-   } from "./src/components/{p5-file-name-without-extension}";
+     Component1,
+     Component2,
+   } from "./src/components/{componentFileName}";
    ```
-4. **Insert import** — find the last p5-examples import and insert after it
-   - Pattern: `import.*from.*p5-examples";`
-   - Insert your new import immediately after
-   - Ensure blank line between import blocks
+   - Match formatting style of existing imports
+   - Group all components from same file on same import
 
-5. **Generate component registrations** in the `useMDXComponents` function:
-   - Each component gets a line: `ComponentName,`
-   - Insert before the `...components,` spread operator (this is critical!)
-   - Preserve indentation
+5. **Add registrations** in the `useMDXComponents()` return object, before `...components,`:
+   ```typescript
+   Component1,
+   Component2,
+   ```
+   - One component per line
+   - Match indentation of existing entries
 
-6. **Write back** — ensure file ends with newline
+6. **Write back** with proper formatting and newline at EOF
 
-### Example (what you're building):
+### Critical Rules
 
-Before:
-```typescript
-import { DijkstraVisualization } from "./src/components/routing-fundamentals-p5-examples";
-
-export function useMDXComponents(components: MDXComponents): MDXComponents {
-  return {
-    DijkstraVisualization,
-    ...components,  // ← MUST be last
-  };
-}
-```
-
-After (adding 2 new components):
-```typescript
-import { DijkstraVisualization } from "./src/components/routing-fundamentals-p5-examples";
-import { HandshakeDiagram, TCPWindowAnimation } from "./src/components/lesson-4-p5-examples";
-
-export function useMDXComponents(components: MDXComponents): MDXComponents {
-  return {
-    DijkstraVisualization,
-    HandshakeDiagram,
-    TCPWindowAnimation,
-    ...components,  // ← MUST be last
-  };
-}
-```
-
-### Validation:
-- Ensure `...components,` remains the last item in the return object
-- Ensure all component names are unique (no duplicates)
-- Ensure syntax is valid TypeScript after your edits
-- If file doesn't exist, report error
+- **The `...components,` spread MUST remain last** — this is essential for proper component merging
+- **No duplicate component names** — verify against existing components
+- **Preserve all existing code** — do not modify anything else
 
 **Error handling:**
-- If `useMDXComponents` function doesn't exist, report error
-- If spread operator `...components,` is missing or in wrong position, report error
-- If imports are malformed, report error and line number
+- If file doesn't exist, report: `FileReadError: mdx-components.tsx not found`
+- If `useMDXComponents` missing, report: `ValidationError: useMDXComponents function not found`
+- If `...components,` missing or not last, report: `ValidationError: Component spread operator in wrong position`
+- If imports conflict, report: `ValidationError: Component name conflict with existing import`
 
 ---
 
 ## Step 5 — Validate Build
 
-**Skill: `validateBuild`**
-
 Execute: `npx next build`
 
-### Algorithm:
+### Algorithm
 
-1. **Run build command** with 120-second timeout
-2. **Capture stdout and stderr**
-3. **Check exit code**:
-   - 0 = success ✅
+1. **Change to project directory**: `/Users/luan/Documents/GitHub/trinity-academy`
+2. **Run build** with 180-second timeout
+3. **Capture stdout and stderr**
+4. **Check exit code**:
+   - `0` = success ✅
    - Non-zero = failure ❌
-4. **Report results**:
-   - If success: confirm all files are registered and build passed
-   - If failure: show last 50 lines of error output to help diagnose
 
-### Timeout handling:
-- If build takes > 120 seconds, kill process and report timeout
-- Suggest running `npm run dev` or `npm run format` to diagnose
+### Success
 
-**Error handling:**
-- Capture and report build errors clearly
-- Do NOT proceed to Step 6 if build fails
-- Suggest common fixes:
-  - TypeScript type errors → check component exports in mdx-components.tsx
-  - Module not found → verify file paths in module.json
-  - JSON parse error → check quiz.json syntax
+If build passes, continue to Step 6.
+
+### Failure
+
+If build fails, provide:
+
+1. **Last 50 lines of build output**
+2. **Error type** (TypeScript error, module not found, etc.)
+3. **File and line number** if applicable
+4. **Common fixes**:
+   - TypeScript error → check component exports and imports
+   - Module not found → verify file paths
+   - JSON parse error → validate quiz.json syntax
+   - Component not registered → check mdx-components.tsx
+
+**Do NOT proceed to Step 6 if build fails.**
+
+### Timeout
+
+If build exceeds 180 seconds:
+- Kill the process
+- Report: `BuildTimeout: Next.js build took > 180 seconds`
+- Suggest: "Run `npm run dev` to diagnose issues incrementally"
 
 ---
 
-## Step 6 — Report Success
+## Step 6 — Report Results
 
-**Skill: `reportSuccess`**
+### If All Steps Pass
 
-If all steps pass, return a success object:
+Return success object:
 
 ```json
 {
   "success": true,
   "timestamp": "2026-03-28T12:34:56Z",
+  "lesson": {
+    "url": "/redes-de-computadores/chapter-1",
+    "chapterId": "chapter-1",
+    "chapterTitle": "Introdução ao Roteamento",
+    "courseId": "redes-de-computadores"
+  },
   "files_created": [
-    "src/components/lesson-4-p5-examples.tsx",
-    "src/data/lessons/redes-de-computadores/charpter-4.mdx",
+    "src/data/lessons/redes-de-computadores/chapter-1.mdx",
+    "src/components/lesson-1-p5-examples.tsx",
     "src/data/quizzes/redes-de-computadores/quiz-4.json"
   ],
   "files_updated": [
     "src/data/lessons/redes-de-computadores/module.json",
     "mdx-components.tsx"
   ],
-  "lesson_url": "/redes-de-computadores/charpter-4",
-  "summary": "✅ Lesson created successfully. 3 files created, 2 files updated. Build passed."
+  "summary": "✅ Lesson integrated successfully. 3 files created, 2 files updated. Build passed."
+}
+```
+
+### If Any Step Fails
+
+Return failure object:
+
+```json
+{
+  "success": false,
+  "error": {
+    "step": "Step 2 — Write P5 Component File",
+    "type": "FileWriteError",
+    "message": "Failed to write src/components/lesson-1-p5-examples.tsx",
+    "details": "EACCES: permission denied, open '...'",
+    "suggestion": "Check file permissions or ensure directory exists"
+  },
+  "files_written": [
+    "src/data/lessons/redes-de-computadores/chapter-1.mdx"
+  ],
+  "files_not_written": [
+    "src/components/lesson-1-p5-examples.tsx",
+    "src/data/quizzes/redes-de-computadores/quiz-4.json"
+  ],
+  "rollback": "INCOMPLETE — Human intervention required. Partially written files:"
 }
 ```
 
@@ -261,26 +353,58 @@ If all steps pass, return a success object:
 
 ## Error Handling Strategy
 
-**Never fail silently.** Always provide:
-- Error type (e.g., `FileWriteError`, `JSONParseError`, `BuildError`)
-- Location (file path, line number if applicable)
-- Reason (what went wrong)
-- Suggestion (how to fix it)
+**Never fail silently.**
 
-**Rollback considerations:**
-- If Step 5 (build) fails, the files were already written
-- You do NOT rollback files automatically (human judgment needed)
-- Report: "Build failed. Files written but not integrated. Review errors above."
+For every error, provide:
+
+1. **Error type** — FileWriteError, JSONError, ValidationError, BuildError, etc.
+2. **Location** — File path and line number if applicable
+3. **Reason** — What went wrong
+4. **Suggestion** — How to fix it
+5. **Partial state** — Which files were successfully written (if any)
+
+**Rollback note:**
+- If build fails after files are written, files remain on disk
+- Human must review and decide whether to keep or delete
+- Clearly indicate which files are partial/incomplete
 
 ---
 
 ## Tips for Success
 
 1. **Read files completely** before editing — don't assume structure
-2. **Preserve formatting** — match indentation, line breaks, quote styles
-3. **Test your regex** — if you're searching/replacing, verify on existing code first
-4. **Be explicit about line numbers** — if possible, reference line numbers in error reports
-5. **Validate JSON** — before writing quiz.json, parse it and re-stringify to ensure validity
-6. **Check file existence** — before reading module.json or mdx-components.tsx, confirm they exist
-7. **Use atomic writes** — write to disk only when you're 100% sure your edits are correct
+2. **Preserve formatting** — match indentation, line breaks, spacing
+3. **Validate JSON** — parse before writing; re-stringify with proper formatting
+4. **Check file existence** — verify paths before reading/writing
+5. **Use atomic writes** — write only when 100% confident
+6. **Test your edits locally** — if possible, verify changes in IDE before reporting
+7. **Report early** — if validation fails in Step 1, report immediately rather than attempting fixes
+
+---
+
+## Quality Checklist
+
+Before reporting success:
+
+- [ ] All 3 files created in correct directories
+- [ ] module.json updated with correct chapter entry and quizId
+- [ ] mdx-components.tsx imports and registrations correct
+- [ ] `...components,` remains last in return object
+- [ ] `npx next build` passes with exit code 0
+- [ ] No TypeScript errors
+- [ ] No module not found errors
+- [ ] File paths use correct forward slashes (/)
+- [ ] All files end with newline
+- [ ] JSON files are valid and properly formatted
+
+---
+
+## Reference
+
+- **Module structure:** `src/data/lessons/[course-name]/module.json`
+- **MDX lesson files:** `src/data/lessons/[course-name]/[chapter-id].mdx`
+- **P5 components:** `src/components/[topic]-p5-examples.tsx`
+- **Quiz files:** `src/data/quizzes/[course-name]/[quiz-id].json`
+- **Component registry:** `mdx-components.tsx` (root)
+- **Next.js build:** Runs from project root `/Users/luan/Documents/GitHub/trinity-academy`
 

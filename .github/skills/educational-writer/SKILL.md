@@ -138,6 +138,144 @@ Every lesson article must follow a clear structure. Adapt the depth to the conte
 
 ---
 
+## Step 7 — Write MDX File to Disk
+
+You are responsible for **creating the MDX lesson file** yourself.
+
+### File Location and Naming
+
+**Path:** `src/data/lessons/[course-name]/[chapter-id].mdx`
+
+**Example:** `src/data/lessons/redes-de-computadores/chapter-1.mdx`
+
+**Guidelines:**
+- `[course-name]` — matches course ID from module structure (e.g., `redes-de-computadores`)
+- `[chapter-id]` — matches lesson/chapter ID (e.g., `chapter-1`, `charpter-4`)
+- File extension: `.mdx` (not `.md`)
+
+### File Structure
+
+Your MDX file should have this structure:
+
+```mdx
+# Lesson Title
+
+[Hook/opening paragraph]
+
+## Learning Objectives
+
+- By the end of this lesson, you will be able to [action verb] ...
+- ...
+
+## [Section 1 Title]
+
+[Content with explanations, examples, and apply patterns]
+
+### Visual Specification (if applicable)
+
+{{
+TYPE: [Static Illustration | Animation | Interactive Visualization | Step-by-Step Animation]
+TITLE: ComponentNameHere
+EDUCATIONAL PURPOSE: ...
+CANVAS SIZE: 700x400
+VISUAL DESCRIPTION: ...
+INITIAL STATE: ...
+BEHAVIOR: ...
+LABELS AND TEXT ON CANVAS: ...
+EDUCATIONAL ANNOTATIONS: ...
+ACCESSIBILITY NOTES: ...
+}}
+
+[Text referencing the visualization]
+
+<ComponentNameHere />
+
+## [More Sections as Needed]
+
+...
+
+## Summary
+
+[3-5 key takeaways]
+
+## What's Next
+
+[Bridge to next lesson]
+```
+
+### About Visual Specifications
+
+If your lesson includes **interactive visualizations or diagrams**:
+
+1. **Insert visual specification blocks** in `{{ }}` as shown above
+2. **The Design Annotator** will refine these specs
+3. **The P5.js Developer** will build the component from the spec
+4. **You reference the component** in your text using `<ComponentName />`
+
+If you don't have visual specs yet, you can:
+- Write placeholder comments (`<!-- TODO: Add visualization for concept X -->`)
+- The Integration Agent will coordinate with other agents to build them
+
+### Writing Conventions in MDX
+
+- **Code blocks** — Use triple backticks with language:
+  ```mdx
+  ```javascript
+  console.log("Hello");
+  ```
+  ```
+
+- **Images** — Use Markdown image syntax with dimensions:
+  ```mdx
+  ![Alt text|1000x500](image.png)
+  ```
+  For theme-aware images (light/dark mode):
+  ```mdx
+  ![Alt text|1000x500](image.{scheme}.png)
+  ```
+  Then provide `image.light.png` and `image.dark.png`
+
+- **LaTeX math** — Wrapped in `$...$` (inline) or `$$...$$` (block):
+  ```mdx
+  The formula is $E = mc^2$.
+  
+  $$
+  \frac{d}{dx}(f(x)) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
+  $$
+  ```
+
+---
+
+## Step 8 — Output and Summary
+
+When submitting your work to the **Integration Agent**, provide:
+
+1. **File path**: `src/data/lessons/[course-name]/[chapter-id].mdx`
+2. **Chapter metadata**:
+   - `chapterTitle` — Title of the lesson
+   - `chapterId` — Chapter identifier
+   - `courseId` — Course identifier
+   - `description` — One-sentence summary (for SEO/metadata)
+
+3. **Visual specifications** (if included):
+   - List of `{{ }}` specs in the content
+   - Component names needed
+   - Any notes for the P5.js Developer
+
+4. **A brief summary** of what was written:
+   - Learning objectives covered
+   - Key concepts taught
+   - Any pedagogical patterns used
+   - Estimated read time
+
+The **Integration Agent** will:
+- Write the .mdx file to disk atomically
+- Coordinate with P5.js and Quiz agents if needed
+- Validate the build passes
+- Report success or failure
+
+---
+
 ## Pedagogical Principles
 
 These principles guide every decision about structure, language, and depth:

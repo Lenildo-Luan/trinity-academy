@@ -480,17 +480,93 @@ Before considering the component complete:
 
 ---
 
-## Step 12 — Output and Handoff
+## Step 12 — Write Component File to Disk
 
-When submitting your work, provide:
+You are responsible for **creating or updating** the component file yourself.
 
-1. **The component file** (updated if adding to existing, or new if creating a new topic file).
-2. **Updates to `mdx-components.tsx`** showing the new imports and registrations.
-3. **A brief summary** of what was implemented:
+### If Adding to Existing File
+
+1. **Read the file** at `src/components/[topic]-p5-examples.tsx`
+2. **Insert your new components** as named exports after existing components
+3. **Ensure all imports are present** at the top (`"use client"`, `p5`, `P5Sketch`, `useRef`, `useState`, etc.)
+4. **Write the file back** with proper formatting
+
+### If Creating a New Topic File
+
+1. **Create file** at `src/components/[topic]-p5-examples.tsx`
+2. **Include header** with `"use client"` and necessary imports
+3. **Export components** as named exports
+4. **Ensure consistent structure** with existing component files
+
+---
+
+## Step 13 — Update mdx-components.tsx
+
+You must **update this file yourself** to register your components.
+
+### Algorithm
+
+1. **Read** `mdx-components.tsx` from project root
+2. **Add import statement** for your components after the last p5-examples import:
+   ```typescript
+   import { MyComponent1, MyComponent2 } from "./src/components/[topic]-p5-examples";
+   ```
+3. **Add component registrations** in the `useMDXComponents()` return object, before `...components,`:
+   ```typescript
+   MyComponent1,
+   MyComponent2,
+   ```
+4. **Preserve the `...components,` spread operator** as the last item (critical!)
+5. **Write the file back** with proper formatting
+
+### Example
+
+Before:
+```typescript
+import { DijkstraVisualization } from "./src/components/routing-fundamentals-p5-examples";
+
+export function useMDXComponents(components: MDXComponents): MDXComponents {
+  return {
+    DijkstraVisualization,
+    ...components,
+  };
+}
+```
+
+After:
+```typescript
+import { DijkstraVisualization } from "./src/components/routing-fundamentals-p5-examples";
+import { MyNewComponent1, MyNewComponent2 } from "./src/components/my-topic-p5-examples";
+
+export function useMDXComponents(components: MDXComponents): MDXComponents {
+  return {
+    DijkstraVisualization,
+    MyNewComponent1,
+    MyNewComponent2,
+    ...components,
+  };
+}
+```
+
+---
+
+## Step 14 — Output and Summary
+
+When submitting your work to the **Integration Agent**, provide:
+
+1. **Component file path**: `src/components/[topic]-p5-examples.tsx`
+2. **Component names** (list of all exported components)
+3. **mdx-components.tsx changes** (the imports and registrations you made)
+4. **A brief summary** of what was implemented:
    - Component names
    - Specs addressed
    - Any deviations from the spec (with justification)
    - Known limitations or accessibility notes
+
+The **Integration Agent** will:
+- Write both files to disk atomically
+- Validate the build passes
+- Report success or failure
 
 ---
 

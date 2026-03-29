@@ -453,16 +453,123 @@ For annotated examples and deeper patterns, see:
 
 ---
 
-## Summary: Your Workflow
+---
 
-1. **Understand the learning objective** — What concept/skill should this quiz test?
-2. **Design one question at a time** — Correct answer first, then distractors
-3. **Write strong distractors** — Each should reflect a real misconception
-4. **Explain every answer** — Correct and incorrect answers need explanations
-5. **Validate JSON** — Ensure structure matches Trinity's schema
-6. **Register in module.json** — Link quiz to the chapter
-7. **Test in development** — Verify quiz loads and works in browser
+## Step 7 — Write Quiz JSON File to Disk
 
-**Remember:** A great quiz is a teaching tool, not just an assessment. Every explanation is a chance to deepen understanding.
+You are responsible for **creating the quiz JSON file** yourself.
 
+### File Location and Naming
 
+**Path:** `src/data/quizzes/[course-name]/[quiz-id].json`
+
+**Example:** `src/data/quizzes/redes-de-computadores/quiz-4.json`
+
+**Guidelines:**
+- `[course-name]` — matches course ID (e.g., `redes-de-computadores`)
+- `[quiz-id]` — format: `quiz-N` where N is the quiz number (e.g., `quiz-1`, `quiz-15`)
+- File extension: `.json`
+
+### File Structure and Validation
+
+Your quiz JSON must follow this exact structure:
+
+```json
+{
+  "id": "quiz-4",
+  "title": "Quiz — Chapter Title",
+  "description": "One sentence about what this quiz covers.",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "The question text as a clear prompt.",
+      "alternatives": [
+        {
+          "id": "a1",
+          "text": "Answer option text",
+          "isCorrect": true,
+          "explanation": "Why this is correct and what concept it validates."
+        },
+        {
+          "id": "a2",
+          "text": "Answer option text (plausible distractor)",
+          "isCorrect": false,
+          "explanation": "Why this is wrong. What misconception does it test?"
+        }
+      ]
+    }
+  ]
+}
+```
+
+**Validation checklist before writing:**
+
+- [ ] `id` follows pattern `quiz-N`
+- [ ] `title` includes "Quiz —" prefix
+- [ ] `description` is one sentence, max 200 chars
+- [ ] `timeLimit` is reasonable (typically 90 seconds per question)
+- [ ] All questions have unique `id` (`q1`, `q2`, etc.)
+- [ ] Each question has exactly 4 alternatives (or consistent count)
+- [ ] Exactly ONE alternative per question has `isCorrect: true`
+- [ ] ALL alternatives (correct + incorrect) have `explanation` fields
+- [ ] No JSON syntax errors (proper escaping of quotes, line breaks, etc.)
+
+---
+
+## Step 8 — Register Quiz in module.json
+
+You are responsible for **updating** the module.json file to link the quiz to its chapter.
+
+### Algorithm
+
+1. **Read** `src/data/lessons/[course-name]/module.json`
+2. **Find the chapter entry** that should link to this quiz (match by `id`)
+3. **Add or update** the `quizId` field:
+   ```json
+   {
+     "id": "chapter-4",
+     "title": "Chapter Title",
+     "description": "...",
+     "quizId": "quiz-4"
+   }
+   ```
+4. **Ensure the chapter entry has all required fields**:
+   - `id` — chapter identifier
+   - `title` — chapter title
+   - `description` — brief summary
+   - `quizId` — the quiz ID you created (e.g., `quiz-4`)
+5. **Write the file back** with proper JSON formatting (2-space indentation)
+
+### Validation
+
+- Verify the `quizId` matches the filename of your quiz JSON (without `.json`)
+- Ensure no duplicate chapter IDs
+- Ensure the module array is valid JSON
+
+---
+
+## Step 9 — Output and Summary
+
+When submitting your work to the **Integration Agent**, provide:
+
+1. **Quiz file path**: `src/data/quizzes/[course-name]/[quiz-id].json`
+2. **Module.json updates**: Which chapter was linked and `quizId` value
+3. **Quiz metadata**:
+   - Quiz ID
+   - Course ID
+   - Chapter being tested
+   - Number of questions
+   - Time limit
+
+4. **A brief summary** of what was created:
+   - Learning objectives tested
+   - Question types and difficulty distribution
+   - Any pedagogical patterns used (e.g., misconception testing)
+   - Notes on explanation quality
+
+The **Integration Agent** will:
+- Write the quiz.json file to disk atomically
+- Update module.json to register the quiz
+- Validate the build passes
+- Report success or failure
