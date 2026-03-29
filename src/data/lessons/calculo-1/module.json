@@ -1,0 +1,33 @@
+[
+  {
+    "id": "funcoes-reais",
+    "title": "Funções Reais de uma Variável Real",
+    "description": "Fundamentos do curso: definição, tipos e transformações de funções reais",
+    "lessons": []
+  },
+  {
+    "id": "limites",
+    "title": "Limites",
+    "description": "Conceito intuitivo e formal de limite, técnicas algébricas e limites no infinito",
+    "lessons": []
+  },
+  {
+    "id": "continuidade",
+    "title": "Continuidade",
+    "description": "Definição de continuidade, tipos de descontinuidade e o Teorema do Valor Intermediário",
+    "lessons": []
+  },
+  {
+    "id": "derivadas",
+    "title": "Derivadas e Regras de Derivação",
+    "description": "Conceito de derivada, regras de diferenciação e derivadas de ordem superior",
+    "lessons": []
+  },
+  {
+    "id": "aplicacoes-derivada",
+    "title": "Aplicações da Derivada",
+    "description": "Taxas relacionadas, análise de funções, extremos e problemas de otimização",
+    "lessons": []
+  }
+]
+

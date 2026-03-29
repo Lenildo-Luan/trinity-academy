@@ -65,5 +65,12 @@ export const courses: Course[] = [
       "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=2000&q=80",
     available: true,
   },
+  {
+    id: "calculo-1",
+    title: "Cálculo 1",
+    description:
+      "Funções reais de uma variável real, limites, continuidade e derivadas com aplicações em problemas de engenharia.",
+    backgroundImage: "https://ik.imagekit.io/qfmgarse7/calculus.avif",
+    available: true,
+  },
 ];
-
