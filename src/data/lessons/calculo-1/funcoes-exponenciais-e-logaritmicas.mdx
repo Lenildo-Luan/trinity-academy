@@ -1,0 +1,285 @@
+# Funções Exponenciais e Logarítmicas
+
+Um biólogo observa que uma colônia de bactérias dobra a cada hora. Um engenheiro civil projeta uma fundação e precisa entender como a força de um terremoto decai com a distância do epicentro. Um eletricista dimensiona um circuito RC e precisa saber como a carga no capacitor diminui quando desconectado. Um médico administra um medicamento e acompanha como sua concentração no sangue cai ao longo do tempo. Todos esses cenários envolvem **crescimento exponencial** ou **decaimento exponencial**.
+
+Neste capítulo, vamos explorar funções exponenciais e seus "opostos" — as funções logarítmicas. Vamos entender por que essas funções aparecem naturalmente em praticamente toda aplicação de engenharia, e descobrir a belíssima relação entre elas.
+
+## Objetivos de Aprendizado
+
+Ao final deste capítulo, você será capaz de:
+
+- **Reconhecer** funções exponenciais em modelos de crescimento e decaimento
+- **Calcular e interpretar** a base, a constante de decaimento, e as taxas de crescimento
+- **Resolver equações exponenciais** convertendo-as em equações logarítmicas
+- **Aplicar propriedades** de logaritmos para simplificar expressões
+- **Modelar** problemas de engenharia (circuitos RC, população, radioatividade) com exponenciais
+- **Entender** a relação inversa entre exponencial e logaritmo
+
+## Funções Exponenciais
+
+Uma **função exponencial** tem a forma:
+
+$$f(x) = a \cdot b^x$$
+
+onde a ≠ 0, b > 0 e b ≠ 1.
+
+- **a:** coeficiente (geralmente o valor inicial quando x = 0)
+- **b:** base (determina a taxa de crescimento ou decaimento)
+- **x:** expoente (variável independente)
+
+Se b > 1: função **cresce exponencialmente**
+Se 0 < b < 1: função **decresce exponencialmente** (decai)
+
+### Características Principais
+
+**Domínio:** ℝ (todos os reais)
+
+**Imagem:** 
+- Se a > 0: (0, ∞) — sempre positivo
+- Se a < 0: (-∞, 0) — sempre negativo
+
+**Ponto inicial:** f(0) = a · b⁰ = a
+
+**Comportamento:**
+- Se b > 1 e a > 0: cresce para +∞, toca eixo x apenas no infinito
+- Se 0 < b < 1 e a > 0: decai para 0, toca eixo x apenas no infinito
+- A função *nunca* cruza o eixo x (valor sempre diferente de zero)
+
+**Assíntota horizontal:** y = 0
+
+### Exemplo 1: Crescimento de População
+
+Uma bactéria se divide a cada 30 minutos. Se começamos com 100 bactérias, quantas temos após t horas?
+
+A cada 30 minutos, o número dobra: multiplicamos por 2.
+Em t horas, temos t/(0,5) = 2t períodos de 30 minutos.
+
+$$N(t) = 100 \cdot 2^{2t}$$
+
+- Após 1 hora (t = 1): N(1) = 100 · 2² = 400 bactérias
+- Após 2 horas (t = 2): N(2) = 100 · 2⁴ = 1600 bactérias
+- Após 3 horas: N(3) = 100 · 2⁶ = 6400 bactérias
+
+O crescimento é explosivo! Isso é o que significa **crescimento exponencial**.
+
+### Exemplo 2: Decaimento Radioativo
+
+O carbono-14 é usado em datação arqueológica. Sua meia-vida é 5730 anos (tempo para metade da quantidade radioativa desaparecer).
+
+Se temos M₀ gramas de C-14 inicialmente, depois de t anos:
+
+$$M(t) = M_0 \left(\frac{1}{2}\right)^{t/5730}$$
+
+ou equivalentemente:
+
+$$M(t) = M_0 \cdot 0,5^{t/5730}$$
+
+- Após 5730 anos: M(5730) = M₀ · 0,5 = 50% da quantidade original
+- Após 11460 anos: M(11460) = M₀ · (0,5)² = 25% da quantidade original
+- Quanto mais tempo passa, menos C-14 fica, mas nunca chega a zero
+
+<ExponentialDecay />
+
+### Exemplo 3: Circuito RC (Carregamento de Capacitor)
+
+Quando um capacitor carrega através de um resistor, a voltagem V(t) é:
+
+$$V(t) = V_f(1 - e^{-t/RC})$$
+
+- $V_f$: voltagem final (limite máximo)
+- R: resistência
+- C: capacitância
+- RC: constante de tempo τ
+
+Quando descarrega:
+
+$$V(t) = V_0 e^{-t/RC}$$
+
+A voltagem decai exponencialmente com constante de tempo τ = RC.
+
+- Se τ = 1 segundo e V₀ = 10V:
+  - Após 1s: V(1) = 10 · e⁻¹ ≈ 3,68V (37% da inicial)
+  - Após 2s: V(2) = 10 · e⁻² ≈ 1,35V (13% da inicial)
+  - Após 5s: V(5) = 10 · e⁻⁵ ≈ 0,067V (praticamente desapareceu)
+
+## A Base Natural e (número de Euler)
+
+Das todas as bases possíveis b > 1, existe uma base especial que torna exponenciais e decaimento especialmente simples em cálculo: **e ≈ 2,71828...**
+
+É a base natural do logaritmo, frequentemente denotada por e (Euler).
+
+$$f(x) = a e^{x}$$
+
+ou com decaimento:
+
+$$f(x) = a e^{-\lambda x}$$
+
+### Por que e é especial?
+
+1. **Derivada simples:** A derivada de $e^x$ é exatamente $e^x$ (a função é sua própria taxa de mudança!)
+2. **Aparece naturalmente** em processos contínuos: circuitos elétricos, reações químicas, radioatividade
+3. **Simplifica fórmulas** em cálculo e equações diferenciais
+
+Você vera isso com muito mais detalhe nos próximos capítulos.
+
+## Funções Logarítmicas
+
+Um logaritmo é a **operação inversa da exponencial**.
+
+Se $b^y = x$, então $\log_b(x) = y$ (logaritmo de base b)
+
+**Definição:** O **logaritmo de base b** de x é o expoente y tal que b elevado a y é igual a x.
+
+$$\log_b(x) = y \iff b^y = x$$
+
+### Notação
+
+- $\log_{10}(x)$ ou $\log(x)$: logaritmo comum (base 10)
+- $\log_2(x)$ ou $\lg(x)$: logaritmo binário (base 2, usado em computação)
+- $\ln(x)$: logaritmo natural (base e), o mais importante em engenharia
+
+Nós usaremos principalmente **ln(x)**.
+
+### Exemplos de Logaritmos
+
+- $\log_{10}(100) = 2$ porque $10^2 = 100$
+- $\log_2(8) = 3$ porque $2^3 = 8$
+- $\ln(e) = 1$ porque $e^1 = e$
+- $\ln(1) = 0$ porque $e^0 = 1$
+- $\ln(e^5) = 5$ porque temos exatamente essa relação inversa
+
+### Domínio e Imagem
+
+**Domínio de $\log_b(x)$:** (0, ∞) — apenas números *positivos*
+- Não podemos tirar logaritmo de zero ou números negativos (em ℝ)
+
+**Imagem:** ℝ (todos os reais)
+- Logaritmos podem ser negativos, zero ou positivos
+
+**Assíntota vertical:** x = 0
+
+**Ponto especial:** $\log_b(1) = 0$ (toda base elevada a 0 é 1)
+
+### Características do Gráfico de ln(x)
+
+- Começa em (-∞, 0) quando x → 0⁺
+- Passa pelo ponto (1, 0)
+- Cresce lentamente para +∞
+- Concavidade para baixo (cresce cada vez mais lentamente)
+- Aproxima-se verticalmente do eixo y conforme x → 0⁺
+
+<ExponentialLogInverse />
+
+## Propriedades de Logaritmos
+
+Os logaritmos possuem propriedades que transformam operações multiplicativas em aditivas — essa é sua superioridade histórica (antes de calculadoras):
+
+**1. Logaritmo do produto:**
+$$\log_b(xy) = \log_b(x) + \log_b(y)$$
+
+Exemplo: $\ln(5 \cdot 7) = \ln(5) + \ln(7)$
+
+**2. Logaritmo do quociente:**
+$$\log_b\left(\frac{x}{y}\right) = \log_b(x) - \log_b(y)$$
+
+Exemplo: $\ln\left(\frac{10}{3}\right) = \ln(10) - \ln(3)$
+
+**3. Logaritmo de potência:**
+$$\log_b(x^n) = n \log_b(x)$$
+
+Exemplo: $\ln(x^5) = 5\ln(x)$
+
+**4. Mudança de base:**
+$$\log_b(x) = \frac{\ln(x)}{\ln(b)} = \frac{\log(x)}{\log(b)}$$
+
+Permite converter entre bases diferentes.
+
+**5. Inversão:**
+$$e^{\ln(x)} = x \quad \text{e} \quad \ln(e^x) = x$$
+
+O exponencial "desfaz" o logaritmo e vice-versa.
+
+### Aplicação: Resolvendo Equações Exponenciais
+
+Para resolver equações como $2^x = 50$, use logaritmos:
+
+$$2^x = 50$$
+$$\ln(2^x) = \ln(50)$$
+$$x \ln(2) = \ln(50)$$
+$$x = \frac{\ln(50)}{\ln(2)} = \frac{3,912}{0,693} \approx 5,64$$
+
+## Exemplo 4: Decaimento com Logaritmo
+
+Temos um sinal de rádio cuja intensidade I(d) em função da distância d do transmissor é:
+
+$$I(d) = I_0 \left(\frac{1}{2}\right)^{d/10}$$
+
+onde a meia-vida de distância é 10 km.
+
+**Pergunta:** A que distância a intensidade cai para 10% da original?
+
+$$I(d) = 0,1 I_0$$
+$$I_0 \left(\frac{1}{2}\right)^{d/10} = 0,1 I_0$$
+$$\left(\frac{1}{2}\right)^{d/10} = 0,1$$
+$$\ln\left(\left(\frac{1}{2}\right)^{d/10}\right) = \ln(0,1)$$
+$$\frac{d}{10} \ln(0,5) = \ln(0,1)$$
+$$\frac{d}{10} \cdot (-0,693) = -2,303$$
+$$d = \frac{-2,303}{-0,0693} \times 10 \approx 33,2 \text{ km}$$
+
+## Exemplo 5: Escala de Decibéis (Acústica)
+
+O nível de som em decibéis (dB) é definido por:
+
+$$L = 10 \log_{10}\left(\frac{I}{I_0}\right)$$
+
+onde I é a intensidade do som e $I_0 = 10^{-12}$ W/m² é uma referência.
+
+- **Sussurro:** I = 10⁻¹¹ W/m² → L = 10 log₁₀(0,1) = -10 dB (?)
+- **Conversação normal:** I = 10⁻⁶ W/m² → L = 10 log₁₀(10⁶) = 60 dB
+- **Música alta:** I = 10⁻² W/m² → L = 10 log₁₀(10¹⁰) = 100 dB
+- **Dano auditivo:** I = 10 W/m² → L = 10 log₁₀(10¹³) = 130 dB
+
+A escala logarítmica comprime uma variação enorme de intensidades em números pequenos e compreensíveis.
+
+## Exemplo 6: Circuitos RC Revisitado
+
+Quando um capacitor descarrega:
+
+$$V(t) = V_0 e^{-t/\tau}$$
+
+Se queremos saber **em quanto tempo a voltagem cai para metade**:
+
+$$\frac{V_0}{2} = V_0 e^{-t/\tau}$$
+$$\frac{1}{2} = e^{-t/\tau}$$
+$$\ln(0,5) = -\frac{t}{\tau}$$
+$$t = -\tau \ln(0,5) = \tau \ln(2) \approx 0,693\tau$$
+
+Se τ = 1 segundo: a voltagem cai para metade em 0,693 segundos.
+
+## Exponenciais em Escala Logarítmica
+
+Um truque valioso: se você desenha uma função exponencial em um gráfico onde o eixo y é logarítmico, a curva vira uma **reta**!
+
+Isso porque:
+$$y = ae^{bx}$$
+$$\ln(y) = \ln(a) + bx$$
+
+Agora $\ln(y)$ é linear em x. Engenheiros usam esse truque para:
+1. Identificar rapidamente padrões exponenciais em dados
+2. Estimar parâmetros a e b a partir de gráficos
+3. Visualizar melhor dados que variam em grandes escalas
+
+## Resumo
+
+| Aspecto | Exponencial | Logaritmo |
+|--------|-----------|-----------|
+| **Forma** | $f(x) = ae^{bx}$ | $f(x) = \ln(x)$ |
+| **Domínio** | ℝ | (0, ∞) |
+| **Imagem** | (0, ∞) ou (-∞, 0) | ℝ |
+| **Inversão** | $e^{\ln(x)} = x$ | $\ln(e^x) = x$ |
+| **Crescimento** | Rápido se b > 0 | Lento (concavo) |
+| **Aplicações** | Crescimento, decaimento radioativo, circuitos RC | Escala dB, datação carbono, problemas inversos |
+
+## Ponte para o Próximo Capítulo
+
+Exponenciais e logaritmos são poderosos, mas existem outras funções periódicas igualmente essenciais em engenharia: o seno, cosseno, tangente e suas inversas. Essas funções descrevem oscilações, ondas, movimento circular — praticamente tudo que oscila ou vibra. No próximo capítulo, vamos explorar **funções trigonométricas e suas inversas**, e descobrir como a composição de funções nos permite criar modelos ainda mais sofisticados.

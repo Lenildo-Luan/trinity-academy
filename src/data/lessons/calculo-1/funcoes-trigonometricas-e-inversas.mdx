@@ -1,0 +1,301 @@
+# Funções Trigonométricas e Inversas
+
+Um motor elétrico que gira cria uma oscilação senoidal na voltagem de saída. As asas de um avião vibram seguindo padrões sinusoidais. As ondas de rádio são construídas com senos e cossenos. A posição de um pêndulo segue uma função seno ao longo do tempo. Na engenharia, praticamente tudo que oscila, vibra ou gira pode ser descrito com **funções trigonométricas**.
+
+Neste capítulo, vamos rever (e aprofundar) seno, cosseno e tangente, entender seus períodos e amplitudes, descobrir as funções trigonométricas inversas, e aprender como **compor funções** para criar modelos ainda mais sofisticados.
+
+## Objetivos de Aprendizado
+
+Ao final deste capítulo, você será capaz de:
+
+- **Reconhecer** funções trigonométricas em modelos de movimento periódico e oscilação
+- **Determinar** amplitude, período, fase e deslocamento vertical a partir de uma fórmula
+- **Esboçar** gráficos de seno, cosseno e tangente com transformações
+- **Aplicar** funções trigonométricas inversas (arcsin, arccos, arctan) para resolver problemas
+- **Compor funções** — f(g(x)) — e entender por que isso importa
+- **Modelar** fenômenos cíclicos com funções trigonométricas
+
+## Revisão Rápida: Definições em um Triângulo Retângulo
+
+Para um ângulo θ em um triângulo retângulo:
+
+$$\sin(\theta) = \frac{\text{oposto}}{\text{hipotenusa}}, \quad \cos(\theta) = \frac{\text{adjacente}}{\text{hipotenusa}}, \quad \tan(\theta) = \frac{\text{oposto}}{\text{adjacente}}$$
+
+Mas para o cálculo, vamos pensar em **radianos** e entender essas funções no **círculo unitário** — um círculo de raio 1 centrado na origem.
+
+### O Círculo Unitário
+
+Um ponto P sobre o círculo unitário, a um ângulo θ do eixo x positivo, tem coordenadas:
+
+$$P = (\cos(\theta), \sin(\theta))$$
+
+Conforme θ varia de 0 a 2π radianos (uma volta completa):
+- O seno oscila entre -1 e 1
+- O cosseno oscila entre -1 e 1
+- Ambos completam um ciclo
+
+<UnitCircleInteractive />
+
+## Funções Seno e Cosseno
+
+A **forma geral** de uma função senoidal é:
+
+$$f(x) = A \sin(B(x - C)) + D$$
+
+ou com cosseno:
+
+$$f(x) = A \cos(B(x - C)) + D$$
+
+Cada parâmetro tem um significado:
+
+- **A:** **Amplitude** — metade da distância entre o máximo e mínimo
+  - |A| = máximo - metade da variação total
+  - Se A < 0: função é refletida verticalmente
+
+- **B:** Afeta o **período**
+  - Período = 2π/|B|
+  - Se B > 1: ciclo mais rápido
+  - Se 0 < B < 1: ciclo mais lento
+
+- **C:** **Deslocamento de fase** (horizontal)
+  - Nega-se: se está (x - C), a função se move C para a direita
+  - Se está (x + C), a função se move C para a esquerda
+
+- **D:** **Deslocamento vertical**
+  - Eixo de oscilação sai de y = 0 e vai para y = D
+  - Máximo: D + |A|
+  - Mínimo: D - |A|
+
+### Exemplo 1: Movimento de Um Pêndulo
+
+Um pêndulo oscila com comprimento L = 1 metro. O deslocamento angular θ(t) (em radianos) é:
+
+$$\theta(t) = 0,5 \cos\left(\sqrt{\frac{g}{L}} t\right)$$
+
+onde g ≈ 9,8 m/s².
+
+- **Amplitude:** 0,5 radianos
+- **Período:** $\frac{2\pi}{\sqrt{g/L}} = 2\pi\sqrt{\frac{1}{9,8}} \approx 2,0$ segundos
+- **Significado:** A cada 2 segundos, o pêndulo volta à mesma posição
+- **Deslocamento:** Máximo +0,5 rad, mínimo -0,5 rad (oscila simetricamente)
+
+### Exemplo 2: Voltagem em Circuito AC
+
+A voltagem em uma tomada residencial (110V, 60 Hz) é:
+
+$$V(t) = 155 \sin(2\pi \cdot 60 \cdot t) = 155 \sin(120\pi t)$$
+
+- **Amplitude:** 155 V (pico)
+- **Frequência:** 60 Hz (ciclos por segundo)
+- **Período:** 1/60 ≈ 0,0167 segundos
+- **RMS (efetivo):** 110 V ≈ 155/√2 (isso é o que a tomada "realmente fornece")
+
+A função sem deslocamento D porque oscila simetricamente em torno de 0V.
+
+### Exemplo 3: Temperatura Semanal
+
+A temperatura média diária em uma cidade durante o ano segue aproximadamente:
+
+$$T(t) = 20 + 10 \sin\left(\frac{2\pi(t - 80)}{365}\right)$$
+
+onde t é o dia do ano (1 a 365).
+
+- **Deslocamento vertical (D = 20):** Temperatura média é 20°C
+- **Amplitude (A = 10):** Varia 10°C acima e abaixo da média
+- **Máxima:** 20 + 10 = 30°C
+- **Mínima:** 20 - 10 = 10°C
+- **Período (2π/B):** 365 dias (um ano)
+- **Deslocamento de fase (C = 80):** Pico em dia 80 (aproximadamente 21 de março, primavera no hemisfério norte)
+
+## Função Tangente
+
+A **tangente** é definida como:
+
+$$\tan(x) = \frac{\sin(x)}{\cos(x)}$$
+
+Características principais:
+
+- **Domínio:** $\mathbb{R} \setminus \{\pi/2 + k\pi\}$ — todos exceto onde cos(x) = 0
+- **Período:** π (não 2π como seno/cosseno!)
+- **Assíntotas verticais:** em x = π/2 + kπ
+- **Passa pela origem:** tan(0) = 0
+- **Crescente em cada intervalo** entre assíntotas
+
+A tangente é especialmente útil para ângulos (inclinação) e taxas de mudança.
+
+<SinCosTanComparison />
+
+### Exemplo 4: Inclinação de Uma Rampa
+
+Se uma rampa faz ângulo θ com a horizontal:
+
+$$\text{inclinação} = \tan(\theta)$$
+
+- θ = 0°: tan(0) = 0 (horizontal, sem inclinação)
+- θ = 45°: tan(π/4) = 1 (elevação = afastamento)
+- θ = 30°: tan(π/6) ≈ 0,577 (sobe 1 a cada ~1,73 afastamentos)
+- θ → 90°: tan(θ) → ∞ (fica vertical)
+
+## Funções Trigonométricas Inversas
+
+As funções trigonométricas inversas respondem: "Qual ângulo produz este seno/cosseno/tangente?"
+
+### arcsin (ou sin⁻¹)
+
+$$y = \arcsin(x) \iff \sin(y) = x$$
+
+- **Domínio:** [-1, 1]
+- **Imagem:** [-π/2, π/2]
+- **Exemplo:** arcsin(0,5) = π/6 (30°) porque sin(π/6) = 0,5
+
+### arccos (ou cos⁻¹)
+
+$$y = \arccos(x) \iff \cos(y) = x$$
+
+- **Domínio:** [-1, 1]
+- **Imagem:** [0, π]
+- **Exemplo:** arccos(0,5) = π/3 (60°) porque cos(π/3) = 0,5
+
+### arctan (ou tan⁻¹)
+
+$$y = \arctan(x) \iff \tan(y) = x$$
+
+- **Domínio:** ℝ
+- **Imagem:** (-π/2, π/2)
+- **Exemplo:** arctan(1) = π/4 (45°) porque tan(π/4) = 1
+- **Assíntotas horizontais:** y = ±π/2
+
+<InverseTrigonometric />
+
+### Exemplo 5: Encontrando o Ângulo
+
+Um engenheiro observa que um sinal tem amplitude 10 V e defasagem de 3 V positivos em relação ao esperado. Qual é o deslocamento de fase?
+
+Se o sinal esperado é $s(t) = 10\sin(t)$ mas você mede $s(t) = 10\sin(t - \phi) + 3$:
+
+$$3 = 10\sin(-\phi)$$
+$$\sin(-\phi) = 0,3$$
+$$-\phi = \arcsin(0,3) \approx 0,3047 \text{ rad}$$
+$$\phi \approx -0,3047 \text{ rad} \approx -17,5°$$
+
+O sinal está adiantado em 17,5°.
+
+## Composição de Funções
+
+Frequentemente na engenharia, você não aplica uma única função, mas uma sequência de transformações. Isso é **composição de funções**.
+
+**Definição:** Se f e g são funções, a composição (f ∘ g)(x) é:
+
+$$(f \circ g)(x) = f(g(x))$$
+
+"Primeiro aplique g a x, depois aplique f ao resultado."
+
+### Leitura de Composição
+
+Na expressão f(g(x)):
+- g é a função "interna" ou "de dentro"
+- f é a função "externa" ou "de fora"
+- Você sempre aplica de dentro para fora
+
+### Exemplo 6: Filtragem de Sinal
+
+Um engenheiro aplica duas transformações a um sinal x:
+
+1. **Primeiro:** amplifica por um fator de 2: g(x) = 2x
+2. **Depois:** aplica um filtro não-linear: f(u) = 1/(1 + u²)
+
+A composição é:
+
+$$(f \circ g)(x) = f(g(x)) = f(2x) = \frac{1}{1 + (2x)^2} = \frac{1}{1 + 4x^2}$$
+
+Se x = 0,5: 
+- g(0,5) = 2(0,5) = 1
+- f(1) = 1/(1 + 1) = 0,5
+- Logo (f ∘ g)(0,5) = 0,5
+
+### Exemplo 7: Deslocamento Temporal
+
+Se uma função f(t) representa posição no tempo, mas o sistema sofre um atraso de τ segundos:
+
+$$\text{Sinal atrasado} = f(t - \tau)$$
+
+Isso é uma composição com g(t) = t - τ.
+
+Se f(t) = 10 sin(t) e τ = π/4 segundos:
+$$f(t - \pi/4) = 10\sin(t - \pi/4)$$
+
+O sinal oscila da mesma forma, mas começa 1/8 de ciclo depois.
+
+### Exemplo 8: Onda Modulada
+
+Uma onda portadora é multiplicada por um envelope:
+
+$$s(t) = A(t) \cdot \sin(\omega t)$$
+
+onde A(t) é a amplitude que varia no tempo.
+
+Se A(t) = e^(-t/τ) (amplitude decai exponencialmente):
+
+$$s(t) = e^{-t/\tau} \sin(\omega t)$$
+
+Isso é uma multiplicação de funções (um tipo especial de composição em contexto operacional).
+
+## Exemplo 9: Pêndulo com Amortecimento
+
+Um pêndulo real não oscila para sempre — o ar e o atrito reduzem a amplitude:
+
+$$\theta(t) = \theta_0 e^{-t/\tau} \cos(\omega t + \phi)$$
+
+- $\theta_0$: amplitude inicial
+- τ: constante de tempo de amortecimento
+- ω: frequência angular de oscilação
+- φ: fase inicial
+
+Essa é uma composição de:
+- Decaimento exponencial: $e^{-t/\tau}$ (envelope)
+- Oscilação: $\cos(\omega t + \phi)$ (portadora)
+
+O resultado é uma oscilação cuja amplitude diminui gradualmente.
+
+<DampedPendulum />
+
+## Identidades Trigonométricas (Referência)
+
+Você não precisa memorizar, mas é bom saber que existem:
+
+**Pitagórica:**
+$$\sin^2(\theta) + \cos^2(\theta) = 1$$
+
+**Soma de ângulos:**
+$$\sin(A + B) = \sin A \cos B + \cos A \sin B$$
+$$\cos(A + B) = \cos A \cos B - \sin A \sin B$$
+
+**Dobro do ângulo:**
+$$\sin(2\theta) = 2\sin(\theta)\cos(\theta)$$
+$$\cos(2\theta) = \cos^2(\theta) - \sin^2(\theta)$$
+
+## Resumo
+
+| Função | Período | Domínio | Máx/Mín | Assíntotas |
+|--------|---------|---------|---------|-----------|
+| **sin(x)** | 2π | ℝ | ±1 | Nenhuma |
+| **cos(x)** | 2π | ℝ | ±1 | Nenhuma |
+| **tan(x)** | π | $\mathbb{R} \setminus \{\pi/2 + k\pi\}$ | ±∞ | x = π/2 + kπ |
+| **arcsin(x)** | — | [-1,1] | [-π/2, π/2] | Nenhuma |
+| **arccos(x)** | — | [-1,1] | [0, π] | Nenhuma |
+| **arctan(x)** | — | ℝ | (-π/2, π/2) | y = ±π/2 |
+
+**Forma geral de função senoidal:**
+$$f(x) = A\sin(B(x - C)) + D$$
+
+- A: amplitude
+- B: período = 2π/|B|
+- C: deslocamento de fase
+- D: deslocamento vertical
+
+**Composição:** (f ∘ g)(x) = f(g(x))
+- Aplique g primeiro (de dentro), depois f (de fora)
+
+## Ponte para o Próximo Capítulo
+
+Você agora tem uma caixa de ferramentas poderosa: polinômios, racionais, exponenciais, logaritmos, e trigonométricas. Mas funções nem sempre vêm em sua forma "padrão" — frequentemente precisamos transformá-las: deslocar, refletir, esticar. No próximo capítulo, vamos explorar **transformações de funções**, aprender a reconhecer funções pares e ímpares, e estudar injetividade e sobrejetividade — os alicerces para composição e inversão de funções.

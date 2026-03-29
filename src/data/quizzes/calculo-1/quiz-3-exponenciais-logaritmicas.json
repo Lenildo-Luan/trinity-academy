@@ -1,0 +1,310 @@
+{
+  "id": "quiz-3-exponenciais-logaritmicas",
+  "courseId": "calculo-1",
+  "title": "Funções Exponenciais e Logarítmicas",
+  "description": "Compreenda crescimento e decaimento exponencial, logaritmos e suas aplicações em engenharia",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "text": "Uma bactéria se divide a cada hora. Se começamos com 1000 bactérias, qual é a função que modela N(t) após t horas?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "N(t) = 1000 + 2^t"
+        },
+        {
+          "id": "b",
+          "text": "N(t) = 1000 · 2^t"
+        },
+        {
+          "id": "c",
+          "text": "N(t) = 2000 · t"
+        },
+        {
+          "id": "d",
+          "text": "N(t) = 1000^t"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Crescimento exponencial com duplicação significa multiplicar por 2 a cada período. A forma é N(t) = N₀ · 2^t, onde N₀ = 1000. Portanto, N(t) = 1000 · 2^t. A adição (opção a) seria crescimento linear, não exponencial."
+    },
+    {
+      "id": "q2",
+      "text": "Um capacitor descarrega seguindo V(t) = V₀ e^(-t/RC). Qual é a voltagem após t = RC segundos?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "V₀ (voltagem original)"
+        },
+        {
+          "id": "b",
+          "text": "V₀/e ≈ 0,368 V₀"
+        },
+        {
+          "id": "c",
+          "text": "V₀/2 (metade)"
+        },
+        {
+          "id": "d",
+          "text": "0 (completamente descarregado)"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "V(RC) = V₀ e^(-RC/RC) = V₀ e^(-1) = V₀/e ≈ 0,368 V₀. A constante de tempo τ = RC é o tempo em que o capacitor descarrega para ~37% da voltagem original, não 50%. Este é um conceito fundamental em circuitos eletrônicos."
+    },
+    {
+      "id": "q3",
+      "text": "Se log₁₀(x) = 2, qual é o valor de x?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "x = 2"
+        },
+        {
+          "id": "b",
+          "text": "x = 10"
+        },
+        {
+          "id": "c",
+          "text": "x = 100"
+        },
+        {
+          "id": "d",
+          "text": "x = 20"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "log₁₀(x) = 2 significa 10² = x, logo x = 100. O logaritmo é a operação inversa da exponencial: se log_b(y) = x, então b^x = y."
+    },
+    {
+      "id": "q4",
+      "text": "Qual é a relação inversa entre as funções f(x) = e^x e g(x) = ln(x)?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "São funções completamente diferentes sem relação"
+        },
+        {
+          "id": "b",
+          "text": "g = -f (uma é a negativa da outra)"
+        },
+        {
+          "id": "c",
+          "text": "g é a função inversa de f: f(g(x)) = x e g(f(x)) = x"
+        },
+        {
+          "id": "d",
+          "text": "São funções paralelas (sempre mesma distância)"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "ln(x) é o logaritmo natural, e é a inversa de e^x. Podemos verificar: f(g(x)) = e^(ln(x)) = x e g(f(x)) = ln(e^x) = x. Graficamente, elas são reflexões uma da outra sobre a reta y = x."
+    },
+    {
+      "id": "q5",
+      "text": "Um material radioativo tem meia-vida de 10 anos. Qual fração resta após 30 anos?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "1/2"
+        },
+        {
+          "id": "b",
+          "text": "1/3"
+        },
+        {
+          "id": "c",
+          "text": "1/8"
+        },
+        {
+          "id": "d",
+          "text": "1/6"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Meia-vida de 10 anos significa M(t) = M₀(1/2)^(t/10). Após 30 anos = 3 meia-vidas: M(30) = M₀(1/2)³ = M₀/8. Este é um aplicação direta do decaimento exponencial em datação arqueológica e nuclear."
+    },
+    {
+      "id": "q6",
+      "text": "Qual propriedade de logaritmos justifica log_b(xy) = log_b(x) + log_b(y)?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Propriedade distributiva da multiplicação"
+        },
+        {
+          "id": "b",
+          "text": "Propriedade associativa da adição"
+        },
+        {
+          "id": "c",
+          "text": "Propriedade de exponenciais: b^(a+b) = b^a · b^b"
+        },
+        {
+          "id": "d",
+          "text": "Definição de logaritmo e propriedade de exponenciais"
+        }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Se u = log_b(x) e v = log_b(y), então b^u = x e b^v = y. Logo xy = b^u · b^v = b^(u+v). Aplicando logaritmo: log_b(xy) = u + v = log_b(x) + log_b(y). Esta é a razão pela qual logaritmos foram historicamente tão poderosos: convertiam multiplicação em adição."
+    },
+    {
+      "id": "q7",
+      "text": "Se a população cresce como P(t) = 5000 · 1,03^t (3% ao ano), em quantos anos aproximadamente a população dobra?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "23 anos"
+        },
+        {
+          "id": "b",
+          "text": "34 anos"
+        },
+        {
+          "id": "c",
+          "text": "46 anos"
+        },
+        {
+          "id": "d",
+          "text": "69 anos"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Precisamos resolver P(t) = 10000: 5000 · 1,03^t = 10000 → 1,03^t = 2. Aplicando logaritmo: t · ln(1,03) = ln(2) → t = ln(2)/ln(1,03) ≈ 0,693/0,0296 ≈ 23,4 anos. Esta é a 'regra do 72': tempo de dobro ≈ 72/(taxa em %)."
+    },
+    {
+      "id": "q8",
+      "text": "Qual é o domínio da função f(x) = ln(x - 3)?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "ℝ (todos os reais)"
+        },
+        {
+          "id": "b",
+          "text": "[0, ∞)"
+        },
+        {
+          "id": "c",
+          "text": "(3, ∞)"
+        },
+        {
+          "id": "d",
+          "text": "[-3, ∞)"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "O logaritmo natural é definido apenas para argumentos positivos. Portanto, x - 3 > 0, ou seja, x > 3. O domínio é (3, ∞) (intervalo aberto, não incluindo 3)."
+    },
+    {
+      "id": "q9",
+      "text": "Se ln(x) = 2, qual é o valor aproximado de x?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "x ≈ 2"
+        },
+        {
+          "id": "b",
+          "text": "x ≈ 7,4"
+        },
+        {
+          "id": "c",
+          "text": "x ≈ 0,69"
+        },
+        {
+          "id": "d",
+          "text": "x ≈ 20"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "ln(x) = 2 significa e² = x. Como e ≈ 2,718, temos e² ≈ 7,389 ≈ 7,4. O logaritmo natural 'desfaz' a exponencial de base e."
+    },
+    {
+      "id": "q10",
+      "text": "Uma equação exponencial é 2^x = 8. Qual é o valor de x?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "x = 2"
+        },
+        {
+          "id": "b",
+          "text": "x = 3"
+        },
+        {
+          "id": "c",
+          "text": "x = 4"
+        },
+        {
+          "id": "d",
+          "text": "x = 8"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "2^x = 8 = 2³, logo x = 3. Para resolver equações exponenciais, é útil reconhecer potências (8 = 2³, 9 = 3², etc.). Ou aplicar logaritmo: x = log₂(8) = 3."
+    },
+    {
+      "id": "q11",
+      "text": "A intensidade do som em decibéis é I_dB = 10 log₁₀(I/I₀), onde I₀ é uma intensidade de referência. Se a intensidade aumenta 10 vezes, quantos decibéis aumentam?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "1 dB"
+        },
+        {
+          "id": "b",
+          "text": "10 dB"
+        },
+        {
+          "id": "c",
+          "text": "20 dB"
+        },
+        {
+          "id": "d",
+          "text": "100 dB"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Se I' = 10I, então ΔI_dB = 10 log₁₀(10I/I₀) - 10 log₁₀(I/I₀) = 10[log₁₀(10I) - log₁₀(I)] = 10 log₁₀(10) = 10 · 1 = 10 dB. Esta é a razão pela qual a escala de decibéis é logarítmica: cada aumento de 10x em intensidade corresponde a +10 dB."
+    },
+    {
+      "id": "q12",
+      "text": "Qual propriedade de logaritmos permite resolver 3^(2x) = 27?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "log_b(xy) = log_b(x) + log_b(y)"
+        },
+        {
+          "id": "b",
+          "text": "log_b(x^n) = n · log_b(x)"
+        },
+        {
+          "id": "c",
+          "text": "log_b(x/y) = log_b(x) - log_b(y)"
+        },
+        {
+          "id": "d",
+          "text": "b^(log_b(x)) = x"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Aplicando logaritmo em ambos os lados: log₃(3^(2x)) = log₃(27) → 2x · log₃(3) = log₃(3³) → 2x · 1 = 3 → x = 1,5. A propriedade log_b(x^n) = n·log_b(x) é crucial para resolver equações exponenciais com expoentes variáveis."
+    }
+  ]
+}
+

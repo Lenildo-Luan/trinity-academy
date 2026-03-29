@@ -1,0 +1,310 @@
+{
+  "id": "quiz-1-introducao-a-funcoes",
+  "courseId": "calculo-1",
+  "title": "Introdução a Funções",
+  "description": "Teste sua compreensão sobre definição, notação e aplicações de funções",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "text": "Um engenheiro analisa um circuito onde a corrente I (em amperes) depende da voltagem V (em volts) pela lei de Ohm: I(V) = V/R, onde R = 50 Ω. Qual é a imagem dessa função quando o domínio é [0, 100]?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "[0, 2] amperes"
+        },
+        {
+          "id": "b",
+          "text": "[0, 50] amperes"
+        },
+        {
+          "id": "c",
+          "text": "[0, 100] amperes"
+        },
+        {
+          "id": "d",
+          "text": "ℝ (todos os reais)"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": "A imagem é o conjunto de valores de *saída* que realmente ocorrem. Quando V varia de 0 a 100, I = V/50 varia de 0/50 = 0 até 100/50 = 2. Portanto, a imagem é [0, 2]. O contradomínio poderia ser ℝ, mas a imagem é apenas os valores que aparecem."
+    },
+    {
+      "id": "q2",
+      "text": "Considere a função f(x) = √(x - 3). Qual é o domínio dessa função?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "ℝ (todos os reais)"
+        },
+        {
+          "id": "b",
+          "text": "[3, ∞)"
+        },
+        {
+          "id": "c",
+          "text": "(-∞, 3]"
+        },
+        {
+          "id": "d",
+          "text": "[0, ∞)"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "O domínio é o conjunto de valores de entrada permitidos. Como não podemos calcular raiz quadrada de números negativos em ℝ, precisamos de x - 3 ≥ 0, ou seja, x ≥ 3. O domínio é [3, ∞)."
+    },
+    {
+      "id": "q3",
+      "text": "Um servidor consome potência P(x) = 50 + 0,002x² watts, onde x é o número de requisições por segundo. O que significa f(300) = 230?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "O servidor consome 300 watts quando há 230 requisições por segundo"
+        },
+        {
+          "id": "b",
+          "text": "O servidor consome 230 watts quando há 300 requisições por segundo"
+        },
+        {
+          "id": "c",
+          "text": "Há 230 requisições por segundo quando o servidor consome 300 watts"
+        },
+        {
+          "id": "d",
+          "text": "A taxa de mudança da potência é 230 W por requisição"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "A notação f(300) = 230 significa que quando a entrada é 300, a saída é 230. Já que x é o número de requisições e P é a potência, isso significa 300 requisições por segundo resultam em 230 watts."
+    },
+    {
+      "id": "q4",
+      "text": "Qual dos seguintes gráficos NÃO representa uma função?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Uma reta diagonal passando pelo origem y = 2x"
+        },
+        {
+          "id": "b",
+          "text": "Um círculo com centro na origem: x² + y² = 1"
+        },
+        {
+          "id": "c",
+          "text": "Uma parábola abrindo para cima: y = x²"
+        },
+        {
+          "id": "d",
+          "text": "Uma curva exponencial: y = 2^x"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Um círculo não passa no teste da reta vertical: uma reta vertical intersecta um círculo em dois pontos (exceto nas extremidades), violando a definição de função (cada entrada deve produzir exatamente uma saída). Os outros são funções válidas."
+    },
+    {
+      "id": "q5",
+      "text": "Um engenheiro está modelando a eficiência η de um motor em função da carga L. Ele escreve η(L) para representar a eficiência quando a carga é L. Se η(80) = 0,92, qual é a interpretação correta?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "A carga é 0,92 quando a eficiência é 80"
+        },
+        {
+          "id": "b",
+          "text": "A eficiência é 92% quando a carga é 80 unidades"
+        },
+        {
+          "id": "c",
+          "text": "O motor perde 8% de eficiência em 80 unidades"
+        },
+        {
+          "id": "d",
+          "text": "η multiplicado por 80 é igual a 0,92"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "η(80) = 0,92 significa que quando L = 80, η = 0,92. Logo, com carga de 80 unidades, a eficiência é 0,92 ou 92%."
+    },
+    {
+      "id": "q6",
+      "text": "Qual afirmação sobre domínio, contradomínio e imagem está correta?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Imagem e contradomínio são sempre iguais"
+        },
+        {
+          "id": "b",
+          "text": "Domínio é o conjunto de valores de saída possíveis"
+        },
+        {
+          "id": "c",
+          "text": "A imagem está sempre contida no contradomínio"
+        },
+        {
+          "id": "d",
+          "text": "Contradomínio é sempre ℝ"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Por definição, Im(f) ⊆ Contradomínio(f). A imagem é um subconjunto de todos os valores 'permitidos' (contradomínio). Os outros enunciados são falsos: imagem ≠ contradomínio em geral, domínio é entrada (não saída), e contradomínio nem sempre é ℝ."
+    },
+    {
+      "id": "q7",
+      "text": "Uma função f tem domínio [0, 10] e contradomínio ℝ. Se f(x) = 2^x, qual é a imagem?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "[0, 10]"
+        },
+        {
+          "id": "b",
+          "text": "[1, 1024]"
+        },
+        {
+          "id": "c",
+          "text": "[2^0, 2^10] = [1, 1024]"
+        },
+        {
+          "id": "d",
+          "text": "(0, 1024)"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "A imagem é o conjunto de saídas que realmente ocorrem. Como x ∈ [0, 10] e f(x) = 2^x, temos f(0) = 1 (mínimo) e f(10) = 1024 (máximo). A função exponencial é contínua e crescente, então a imagem é [1, 1024]."
+    },
+    {
+      "id": "q8",
+      "text": "Um sensor de temperatura mede T(h) = 20 - 0,005h, onde h é a altura em metros e T é temperatura em °C. Qual é a altura em que o sensor marca 10°C?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "h = 1000 metros"
+        },
+        {
+          "id": "b",
+          "text": "h = 2000 metros"
+        },
+        {
+          "id": "c",
+          "text": "h = 3000 metros"
+        },
+        {
+          "id": "d",
+          "text": "h = 4000 metros"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Precisamos resolver T(h) = 10: 20 - 0,005h = 10 → 0,005h = 10 → h = 10/0,005 = 2000 metros. Este é um exemplo de usar a função como modelo para resolver um problema real."
+    },
+    {
+      "id": "q9",
+      "text": "Qual das funções a seguir tem domínio ℝ \\ {0} (todos os reais exceto zero)?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "f(x) = x²"
+        },
+        {
+          "id": "b",
+          "text": "f(x) = 1/x"
+        },
+        {
+          "id": "c",
+          "text": "f(x) = √x"
+        },
+        {
+          "id": "d",
+          "text": "f(x) = |x|"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "f(x) = 1/x é indefinida em x = 0 (divisão por zero), então seu domínio é ℝ \\ {0}. As outras funções são definidas para todos os reais (ou para x ≥ 0 no caso da raiz quadrada)."
+    },
+    {
+      "id": "q10",
+      "text": "Um modelo de propagação de doença prevê que o número de infectados é N(t) = N₀ · 2^(t/5), onde t é dias e N₀ é número inicial. Se começamos com 100 infectados, qual é N(10)?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "200 infectados"
+        },
+        {
+          "id": "b",
+          "text": "400 infectados"
+        },
+        {
+          "id": "c",
+          "text": "800 infectados"
+        },
+        {
+          "id": "d",
+          "text": "1000 infectados"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "N(10) = 100 · 2^(10/5) = 100 · 2² = 100 · 4 = 400. A população dobra a cada 5 dias, então em 10 dias (2 períodos de 5 dias), ela quadruplica."
+    },
+    {
+      "id": "q11",
+      "text": "Em relação ao teste da reta vertical, qual é a afirmação verdadeira?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Um gráfico é uma função se toda reta vertical o intersecta em exatamente um ponto"
+        },
+        {
+          "id": "b",
+          "text": "Um gráfico é uma função se toda reta horizontal o intersecta em exatamente um ponto"
+        },
+        {
+          "id": "c",
+          "text": "Um gráfico é uma função se nenhuma reta vertical o intersecta"
+        },
+        {
+          "id": "d",
+          "text": "O teste da reta vertical determina o contradomínio"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Um gráfico representa uma função se toda reta vertical o intersecta em NO MÁXIMO um ponto (alguns gráficos têm pontos onde a reta não intersecta). O teste da reta vertical verifica a definição fundamental: cada entrada (x) deve ter exatamente uma saída (y)."
+    },
+    {
+      "id": "q12",
+      "text": "Qual contexto de engenharia melhor ilustra por que funções são importantes?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Contar o número de dias em um mês"
+        },
+        {
+          "id": "b",
+          "text": "Relacionar a deflexão de uma viga com a carga aplicada para prever comportamento estrutural"
+        },
+        {
+          "id": "c",
+          "text": "Memorizar a sequência numérica 1, 2, 3, 4..."
+        },
+        {
+          "id": "d",
+          "text": "Aprender a história da matemática"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "As funções são essenciais em engenharia porque modelam como uma quantidade depende de outra (relações causa-efeito). Compreender como a deflexão varia com a carga permite aos engenheiros projetar estruturas seguras. Este é o poder prático das funções."
+    }
+  ]
+}
+

@@ -1,0 +1,282 @@
+# Tipos de Funções
+
+Uma função polinomial descreve como a força de flexão aumenta com a carga em uma viga. Uma função racional modela como a eficiência de um motor cai com o aumento de temperatura. Uma função de raiz quadrada prevê o tempo para descarregar um capacitor. Na engenharia, você vai encontrar sempre os mesmos "tipos" de funções — e ser capaz de reconhecê-los rapidamente é uma habilidade que vai poupar você de muito trabalho.
+
+Neste capítulo, vamos estudar os tipos de funções mais comuns: polinomiais, racionais, raízes, valor absoluto e definidas por partes. Vamos aprender como identificar cada uma, esboçar seus gráficos e analisar seu comportamento apenas observando a forma algébrica ou gráfica.
+
+## Objetivos de Aprendizado
+
+Ao final deste capítulo, você será capaz de:
+
+- **Classificar** uma função em um dos tipos principais (polinomial, racional, raiz, valor absoluto, por partes)
+- **Esboçar** o gráfico de cada tipo, mesmo sem uma calculadora
+- **Identificar** características do gráfico (zeros, assíntotas, descontinuidades) a partir da fórmula
+- **Analisar** o comportamento global de uma função observando seu gráfico
+- **Modelar** situações de engenharia usando o tipo de função apropriado
+
+## Funções Polinomiais
+
+Uma **função polinomial** é uma soma finita de potências de x, cada uma com um coeficiente:
+
+$$f(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0$$
+
+onde n ≥ 0 é um inteiro e $a_n \neq 0$.
+
+- O número n é o **grau** do polinômio
+- O coeficiente $a_n$ é o **coeficiente líder**
+- O **domínio** de qualquer função polinomial é sempre ℝ (todos os reais)
+
+### Características por Grau
+
+**Grau 0 (Constante):** f(x) = c
+- Gráfico: reta horizontal
+- Exemplo: f(x) = 5 (voltagem constante)
+
+**Grau 1 (Linear):** f(x) = ax + b
+- Gráfico: reta inclinada
+- a > 0: função crescente | a < 0: função decrescente
+- Exemplo: f(x) = 2x + 10 (temperatura como função do tempo em um aquecedor)
+
+**Grau 2 (Quadrática):** f(x) = ax² + bx + c
+- Gráfico: parábola
+- a > 0: "abre para cima" (valor mínimo) | a < 0: "abre para baixo" (valor máximo)
+- Vértice em x = -b/(2a)
+- Exemplo: f(x) = -4.9t² + 20t + 2 (altura de uma bola lançada com atrito do ar)
+
+**Grau 3 (Cúbica):** f(x) = ax³ + bx² + cx + d
+- Gráfico: forma de "S"
+- Pode ter 1 ou 3 raízes reais
+- Exemplo: f(x) = x³ - 3x (comportamento não-linear de certos sistemas)
+
+**Grau ≥ 4:**
+- Comportamento cada vez mais complexo
+- Podem ter múltiplos "bumps" e "vales"
+
+### Análise Gráfica de Polinômios
+
+Características importantes que você pode identificar *sem calcular*:
+
+1. **Zeros (raízes):** Onde o gráfico cruza o eixo x (onde f(x) = 0)
+2. **Comportamento nas extremidades:** Para x → ±∞, o termo de maior grau domina
+   - Se grau é ímpar: f(x) vai de -∞ a +∞ (ou vice versa)
+   - Se grau é par: f(x) vai para +∞ ou -∞ em ambos os lados
+3. **Multiplicidade de raízes:** Se (x - r) aparece k vezes:
+   - k ímpar: gráfico *atravessa* o eixo em r
+   - k par: gráfico *toca* o eixo em r mas não atravessa
+
+### Exemplo 1: Polinômio Cúbico
+
+Considere f(x) = (x + 2)(x - 1)²(x - 3):
+
+- **Raízes:** x = -2 (multiplicidade 1), x = 1 (multiplicidade 2), x = 3 (multiplicidade 1)
+- **Comportamento:** 
+  - Em x = -2: atravessa o eixo ✓
+  - Em x = 1: toca e rebota ✓
+  - Em x = 3: atravessa o eixo ✓
+- **Extremidades:** Grau 4 com coeficiente positivo → f(x) → +∞ quando x → ±∞
+
+## Funções Racionais
+
+Uma **função racional** é o quociente de dois polinômios:
+
+$$f(x) = \frac{p(x)}{q(x)}$$
+
+onde p(x) e q(x) são polinômios e q(x) ≠ 0.
+
+- **Domínio:** Todos os reais *exceto* os valores que fazem q(x) = 0
+- **Descontinuidades:** Aparecem onde o denominador se anula
+
+### Comportamento Especial: Assíntotas
+
+As funções racionais frequentemente têm **assíntotas** — linhas que o gráfico se aproxima mas nunca toca.
+
+**Assíntota Vertical:** Aparece em x = a quando q(a) = 0 mas p(a) ≠ 0
+- O gráfico vai para +∞ ou -∞ quando x se aproxima de a
+- Exemplo: f(x) = 1/x tem assíntota vertical em x = 0
+
+**Assíntota Horizontal:** Limita o comportamento quando x → ±∞
+- Comparar graus de p(x) e q(x):
+  - Grau de p < Grau de q: assíntota em y = 0
+  - Grau de p = Grau de q: assíntota em y = (coeficiente líder de p) / (coeficiente líder de q)
+  - Grau de p > Grau de q: não há assíntota horizontal (mas pode haver oblíqua)
+
+### Exemplo 2: Função Racional Simples
+
+$$f(x) = \frac{2x + 1}{x - 3}$$
+
+- **Domínio:** ℝ \ {3}
+- **Assíntota vertical:** x = 3 (denominador = 0)
+- **Assíntota horizontal:** Graus iguais (1 = 1) → y = 2/1 = 2
+- **Zero:** 2x + 1 = 0 → x = -1/2
+- **Interpretação engenharia:** Pode representar ganho de um filtro em função da frequência
+
+### Exemplo 3: Modelagem de Eficiência
+
+A eficiência η de um sistema térmico em função da potência P (em kW) é:
+
+$$\eta(P) = \frac{100P}{P + 20}$$
+
+- **Domínio:** P > 0 (potência positiva)
+- **Assíntota horizontal:** y = 100 (máxima eficiência teórica)
+- **Significado:** Conforme P aumenta, η se aproxima de 100%, mas nunca alcança
+- **Observação gráfica:** Você vê que o sistema melhora mas com retornos decrescentes
+
+## Funções de Raiz
+
+Uma **função de raiz** tem a forma:
+
+$$f(x) = \sqrt[n]{x} \text{ ou } f(x) = x^{1/n}$$
+
+onde n ≥ 2 é um inteiro.
+
+- **Raiz quadrada:** $f(x) = \sqrt{x}$
+- **Raiz cúbica:** $f(x) = \sqrt[3]{x}$
+
+### Domínio
+
+- **Raiz de índice par** (√, ⁴√, ...): Domínio é [0, ∞) (não-negativas)
+  - Não podemos tirar raiz quadrada de números negativos (em ℝ)
+  
+- **Raiz de índice ímpar** (∛, ⁵√, ...): Domínio é ℝ (todos os reais)
+  - Podemos tirar raiz cúbica de negativos: ∛(-8) = -2
+
+### Características do Gráfico
+
+- **√x:** Começa em (0,0), cresce mas cada vez mais lentamente, concavidade para baixo
+- **∛x:** Passa por (-∞, -∞), (0, 0), (+∞, +∞), concavidade muda em (0,0)
+
+<RootFunctionsComparison />
+
+### Exemplo 4: Tempo de Descarga de Capacitor
+
+A voltagem V(t) que fica em um capacitor conforme ele descarrega é:
+
+$$V(t) = V_0 e^{-t/RC}$$
+
+Mas se rearranjarmos para encontrar o tempo necessário para atingir uma certa voltagem:
+
+$$t = RC \cdot \ln\left(\frac{V_0}{V}\right)$$
+
+Se considerarmos como a voltagem varia com o tempo para uma carga usando raiz:
+$$V(t) = V_0 \sqrt{\frac{RC}{t + RC}}$$
+
+O comportamento de raiz nos diz: o tempo cresce, mas cada unidade adicional de tempo reduz menos a voltagem.
+
+## Funções de Valor Absoluto
+
+O **valor absoluto** de x, denotado |x|, é:
+
+$$|x| = \begin{cases} x & \text{se } x \geq 0 \\ -x & \text{se } x < 0 \end{cases}$$
+
+Uma **função de valor absoluto** contém |x| ou |expressão| em sua fórmula.
+
+### Características
+
+- Sempre não-negativa: |x| ≥ 0 para todo x
+- O gráfico é em forma de "V" ou variações dela
+- Ponto de mudança de comportamento (normalmente) em x = 0 ou onde a expressão interna = 0
+- Domínio geralmente é ℝ
+
+### Exemplo 5: Valor Absoluto Básico
+
+$$f(x) = |x|$$
+
+- **Domínio:** ℝ
+- **Imagem:** [0, ∞)
+- **Gráfico:** V com vértice em (0, 0)
+- **Duas "metades":** 
+  - Para x ≥ 0: f(x) = x (reta crescente)
+  - Para x < 0: f(x) = -x (reta decrescente)
+
+### Exemplo 6: Aplicação de Engenharia
+
+O erro e(x) na medição de uma sensor em função da temperatura x é:
+
+$$e(x) = 0,5|x - 25|$$
+
+- Equilíbrio perfeito em x = 25°C (erro = 0)
+- Erro aumenta linearmente em qualquer direção (acima ou abaixo de 25°C)
+- A forma de V mostra simetria: tanto +10°C quanto +15°C geram o mesmo erro
+
+### Transformações de |x|
+
+Pequenas mudanças na fórmula criam gráficos diferentes:
+- **f(x) = |x| + k:** V sobe k unidades
+- **f(x) = |x - h|:** V se move h unidades para a direita
+- **f(x) = -|x|:** V inverte (forma de ∧)
+- **f(x) = a|x|:** V fica mais agudo (a > 1) ou mais largo (0 < a < 1)
+
+## Funções Definidas por Partes
+
+Uma **função definida por partes** usa regras diferentes em intervalos diferentes:
+
+$$f(x) = \begin{cases} \text{fórmula 1} & \text{se } x \in \text{intervalo 1} \\ \text{fórmula 2} & \text{se } x \in \text{intervalo 2} \\ \cdots \end{cases}$$
+
+- Cada "pedaço" é uma função diferente
+- Domínio é a união de todos os intervalos
+
+### Exemplo 7: Tarifa de Energia Elétrica
+
+A conta de luz mensal C(x) baseada em consumo x (em kWh) é:
+
+$$C(x) = \begin{cases} 10 + 0,05x & \text{se } 0 \leq x \leq 100 \\ 10 + 5 + 0,08(x - 100) & \text{se } x > 100 \end{cases}$$
+
+Ou simplificando:
+
+$$C(x) = \begin{cases} 10 + 0,05x & \text{se } x \leq 100 \\ 15 + 0,08(x - 100) & \text{se } x > 100 \end{cases}$$
+
+- De 0 a 100 kWh: taxa menor, cliente paga pouco
+- Acima de 100 kWh: taxa maior, cliente paga mais por cada kWh extra
+- Descontinuidade em x = 100? Não! A função é contínua (veremos depois por quê)
+
+### Exemplo 8: Limitador de Sinal
+
+Um amplificador de áudio que limita o sinal para evitar distorção:
+
+$$f(x) = \begin{cases} -5 & \text{se } x < -5 \\ x & \text{se } -5 \leq x \leq 5 \\ 5 & \text{se } x > 5 \end{cases}$$
+
+- Para sinais pequenos (entre -5 e 5): passa sem alteração
+- Para sinais grandes: é "cortado" em ±5
+- Gráfico em forma de S achatada
+
+<PiecewiseFunctionExample />
+
+## Análise Gráfica: Lendo a História
+
+Quando você vê o gráfico de uma função, você pode descobrir muito:
+
+1. **Tipo de função:**
+   - V ou ∧ = valor absoluto
+   - Parábola = quadrática
+   - Reta = linear
+   - Curva suave = polinômio de grau alto ou transcendental
+   - Assíntotas visíveis = racional
+   - Saltos = por partes
+
+2. **Domínio:**
+   - Onde existem pontos no gráfico?
+   - Há buracos (valores excluídos)?
+
+3. **Imagem:**
+   - Qual é o maior valor y que o gráfico atinge?
+   - Qual é o menor?
+   - O gráfico é limitado ou vai para infinito?
+
+4. **Comportamento:**
+   - A função é crescente ou decrescente?
+   - Há intervalos onde muda de comportamento?
+   - Há simetrias (gráfico é par ou ímpar)?
+
+## Resumo
+
+| Tipo | Forma Geral | Domínio Típico | Características Visuais |
+|------|-----------|---|---|
+| **Polinomial** | $a_n x^n + \cdots + a_0$ | ℝ | Suave, sem buracos ou saltos |
+| **Racional** | p(x)/q(x) | ℝ \ \{zeros de q\} | Assíntotas verticais/horizontais |
+| **Raiz** | $x^{1/n}$ | [0,∞) se n par; ℝ se n ímpar | Curva suave, crescimento lento |
+| **Valor Absoluto** | \|f(x)\| | Frequentemente ℝ | Forma de V ou V invertido |
+| **Por Partes** | Regras diferentes por intervalo | União dos intervalos | Possíveis saltos ou cantos |
+
+## Ponte para o Próximo Capítulo
+
+Agora que você reconhece os tipos principais de funções, vamos mergulhar em dois tipos especiais e extremamente importantes: as **funções exponenciais e logarítmicas**. Essas funções descrevem crescimento de bactérias, decaimento radioativo, circuitos RC e muito mais — e você vai descobrir uma relação belíssima entre exponenciais e logaritmos.

@@ -1,0 +1,311 @@
+{
+  "id": "quiz-2-tipos-de-funcoes",
+  "courseId": "calculo-1",
+  "title": "Tipos de Funções",
+  "description": "Domine a classificação, análise gráfica e comportamento de polinomiais, racionais, raízes e funções por partes",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "text": "Uma função polinomial tem grau ímpar (ex: f(x) = x³ - 2x). O que você pode afirmar sobre seu comportamento nas extremidades?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "f(x) → +∞ quando x → -∞ e f(x) → +∞ quando x → +∞"
+        },
+        {
+          "id": "b",
+          "text": "f(x) → -∞ quando x → -∞ e f(x) → -∞ quando x → +∞"
+        },
+        {
+          "id": "c",
+          "text": "f(x) → -∞ quando x → -∞ e f(x) → +∞ quando x → +∞ (ou oposto, dependendo do coeficiente líder)"
+        },
+        {
+          "id": "d",
+          "text": "O comportamento nas extremidades é sempre zero"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Polinômios de grau ímpar vão para infinitos opostos nas duas extremidades. Se o coeficiente líder é positivo: f(x) → -∞ quando x → -∞ e f(x) → +∞ quando x → +∞. Se negativo, o oposto. Este é o comportamento fundamental que distingue polinômios pares de ímpares."
+    },
+    {
+      "id": "q2",
+      "text": "Considere a função racional f(x) = (x + 2)/(x - 3). Qual é a assíntota vertical?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "x = -2"
+        },
+        {
+          "id": "b",
+          "text": "x = 2"
+        },
+        {
+          "id": "c",
+          "text": "x = 3"
+        },
+        {
+          "id": "d",
+          "text": "Não tem assíntota vertical"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Assíntotas verticais ocorrem onde o denominador é zero mas o numerador não é. Aqui, x - 3 = 0 em x = 3, e 3 + 2 = 5 ≠ 0, então x = 3 é uma assíntota vertical. O zero do numerador (x = -2) é na verdade um zero da função, não uma assíntota."
+    },
+    {
+      "id": "q3",
+      "text": "Para a função racional f(x) = (2x² + 3x)/(x³ - 1), qual é a assíntota horizontal?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "y = 2"
+        },
+        {
+          "id": "b",
+          "text": "y = 1"
+        },
+        {
+          "id": "c",
+          "text": "y = 0"
+        },
+        {
+          "id": "d",
+          "text": "Não tem assíntota horizontal"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Assíntotas horizontais dependem do grau de numerador e denominador. Numerador tem grau 2, denominador tem grau 3. Quando grau(numerador) < grau(denominador), a assíntota é y = 0. Intuitivamente, o denominador cresce muito mais rápido, fazendo a função inteira tender a zero."
+    },
+    {
+      "id": "q4",
+      "text": "Um polinômio p(x) = (x - 1)(x + 2)²(x - 3)³ tem como zeros. Qual dessas afirmações é verdadeira?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "O gráfico atravessa o eixo x em x = 1, toca em x = -2 e atravessa em x = 3"
+        },
+        {
+          "id": "b",
+          "text": "O gráfico atravessa em x = 1, atravessa em x = -2 e toca em x = 3"
+        },
+        {
+          "id": "c",
+          "text": "O gráfico toca o eixo em todos os três zeros"
+        },
+        {
+          "id": "d",
+          "text": "O gráfico atravessa em x = -2 e toca nos outros dois"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": "A multiplicidade determina o comportamento: multiplicidade ímpar → atravessa; multiplicidade par → toca. Aqui: (x-1) tem multiplicidade 1 (ímpar, atravessa), (x+2)² tem multiplicidade 2 (par, toca), (x-3)³ tem multiplicidade 3 (ímpar, atravessa)."
+    },
+    {
+      "id": "q5",
+      "text": "Qual é o domínio da função f(x) = √(4 - x²)?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "ℝ (todos os reais)"
+        },
+        {
+          "id": "b",
+          "text": "[0, 4]"
+        },
+        {
+          "id": "c",
+          "text": "[-2, 2]"
+        },
+        {
+          "id": "d",
+          "text": "(-∞, 0]"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Para a raiz ser real, precisamos 4 - x² ≥ 0, ou seja, x² ≤ 4. Isso significa |x| ≤ 2, ou -2 ≤ x ≤ 2. O domínio é [-2, 2]. Note que este é o gráfico de um semicírculo!"
+    },
+    {
+      "id": "q6",
+      "text": "Uma função definida por partes é f(x) = {x² se x < 1; 2x se x ≥ 1}. Qual é f(1)?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "1"
+        },
+        {
+          "id": "b",
+          "text": "2"
+        },
+        {
+          "id": "c",
+          "text": "Indefinido (não existe)"
+        },
+        {
+          "id": "d",
+          "text": "3"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Em x = 1, precisamos usar a segunda fórmula (pois x ≥ 1), então f(1) = 2(1) = 2. A função é contínua neste ponto (o limite da esquerda é 1, mas o valor é 2 - na verdade há um salto). Importante: sempre cheque qual fórmula se aplica no ponto desejado!"
+    },
+    {
+      "id": "q7",
+      "text": "Em uma função polinomial de grau 2, qual é o número máximo de zeros reais?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "0 (nenhum)"
+        },
+        {
+          "id": "b",
+          "text": "1"
+        },
+        {
+          "id": "c",
+          "text": "2"
+        },
+        {
+          "id": "d",
+          "text": "3"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Um polinômio de grau n tem no máximo n zeros reais (pelo Teorema Fundamental da Álgebra). Uma quadrática (grau 2) pode ter 0, 1 ou 2 zeros reais. Exemplo: x² + 1 tem 0 zeros reais, (x-1)² tem 1 (com multiplicidade 2), x² - 1 tem 2 zeros reais."
+    },
+    {
+      "id": "q8",
+      "text": "A função f(x) = 1/(x² + 1) é racional. Qual é seu domínio?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "ℝ ∖ {1} (todos exceto 1)"
+        },
+        {
+          "id": "b",
+          "text": "ℝ ∖ {-1} (todos exceto -1)"
+        },
+        {
+          "id": "c",
+          "text": "ℝ (todos os reais)"
+        },
+        {
+          "id": "d",
+          "text": "[-1, 1]"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Apesar de ser racional, o denominador x² + 1 nunca é zero (pois x² ≥ 0 sempre, então x² + 1 ≥ 1 > 0). Logo, não há valores excluídos, e o domínio é ℝ. Esta é uma função racional sem assíntotas verticais!"
+    },
+    {
+      "id": "q9",
+      "text": "Compare os gráficos de f(x) = x² e g(x) = (x - 2)². O que ocorreu?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "g é f deslocado 2 para cima"
+        },
+        {
+          "id": "b",
+          "text": "g é f deslocado 2 para a esquerda"
+        },
+        {
+          "id": "c",
+          "text": "g é f deslocado 2 para a direita"
+        },
+        {
+          "id": "d",
+          "text": "g é f refletido sobre o eixo x"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "A transformação f(x - 2) desploca o gráfico 2 unidades para a *direita*. O vértice de f(x) = x² está em (0, 0), enquanto o vértice de g(x) = (x-2)² está em (2, 0). Este é um exemplo de deslocamento horizontal com sinal 'invertido'."
+    },
+    {
+      "id": "q10",
+      "text": "Uma tarifa de energia elétrica é: C(x) = {0,10x se 0 ≤ x ≤ 100; 10 + 0,08(x - 100) se x > 100}, onde x é kWh. Qual é o custo em 150 kWh?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "R$15,00"
+        },
+        {
+          "id": "b",
+          "text": "R$14,00"
+        },
+        {
+          "id": "c",
+          "text": "R$20,00"
+        },
+        {
+          "id": "d",
+          "text": "R$24,00"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Para x = 150 > 100, usamos a segunda fórmula: C(150) = 10 + 0,08(150 - 100) = 10 + 0,08(50) = 10 + 4 = 14. Nota: a função é contínua em x = 100, então não há 'salto' de preço (aspecto importante em modelos realistas)."
+    },
+    {
+      "id": "q11",
+      "text": "Qual tipo de função é mais apropriado para modelar a deflexão de uma viga sob carga?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Linear (primeiro grau)"
+        },
+        {
+          "id": "b",
+          "text": "Quadrática (segundo grau)"
+        },
+        {
+          "id": "c",
+          "text": "Cúbica (terceiro grau)"
+        },
+        {
+          "id": "d",
+          "text": "Racional"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Pela teoria de flexão de vigas (Euler-Bernoulli), a deflexão y(x) satisfaz uma equação diferencial cuja solução é uma função polinomial. Para vigas simples, a deflexão é típicamente cúbica ou quartica, não linear ou quadrática."
+    },
+    {
+      "id": "q12",
+      "text": "Para a função f(x) = (x² - 4)/(x - 2), qual é o 'verdadeiro' domínio a considerar em engenharia?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "ℝ (todos os reais, sem restrições)"
+        },
+        {
+          "id": "b",
+          "text": "ℝ \\ {2} (todos exceto x = 2)"
+        },
+        {
+          "id": "c",
+          "text": "ℝ (podemos 'simplificar' para f(x) = x + 2 exceto em x = 2)"
+        },
+        {
+          "id": "d",
+          "text": "[0, ∞)"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Tecnicamente, f(x) = (x²-4)/(x-2) = (x-2)(x+2)/(x-2) = x+2 para x ≠ 2. Mas o domínio original é ℝ\\{2} (há uma descontinuidade removível em x=2). Em engenharia, você deve respeitar o domínio original a menos que haja contexto para 'redefinir' a função em x=2."
+    }
+  ]
+}
+
+

@@ -1,0 +1,374 @@
+# Transformações e Análise de Funções
+
+Você já conhece os tipos principais de funções: polinomiais, racionais, exponenciais, logarítmicas e trigonométricas. Mas na prática, essas funções raramente aparecem em sua forma "padrão" — elas sofrem transformações. Uma parábola é deslocada para cima, um seno é esticado e defasado, uma exponencial é refletida. Essas transformações não mudam a *natureza fundamental* da função, mas alteram drasticamente seu gráfico e comportamento.
+
+Neste capítulo final do módulo, vamos dominar as transformações de funções, aprender a reconhecer funções pares e ímpares, entender injetividade e sobrejetividade, e resolver problemas de engenharia com revisão integrada.
+
+## Objetivos de Aprendizado
+
+Ao final deste capítulo, você será capaz de:
+
+- **Aplicar e descrever** transformações (deslocamentos, reflexões, estiramentos) a funções conhecidas
+- **Esboçar gráficos** transformados a partir do gráfico original
+- **Identificar** funções pares e ímpares e explorar suas simetrias
+- **Determinar** se uma função é injetiva (one-to-one) ou sobrejetiva (onto)
+- **Encontrar** funções inversas quando elas existem
+- **Resolver** problemas de engenharia combinando conceitos do módulo
+- **Analisar** o comportamento global de funções complexas
+
+## Transformações de Funções
+
+Se você conhece o gráfico de y = f(x), pode prever como o gráfico de y = f(x - h) + k se parece. As transformações seguem regras simples:
+
+### 1. Deslocamento Horizontal
+
+**f(x - h) deslocamento h para a direita**
+**f(x + h) deslocamento h para a esquerda**
+
+⚠️ **Atenção:** o sinal é invertido! 
+
+- y = (x - 3)² é a parábola y = x² deslocada 3 para a *direita*
+- y = (x + 2)² é a parábola y = x² deslocada 2 para a *esquerda*
+
+**Intuição:** Se você quer que f(x - h) tenha o mesmo valor que f(0), você precisa que x - h = 0, ou seja, x = h. Então o ponto (0, f(0)) da função original vai para (h, f(0)) na transformada.
+
+### 2. Deslocamento Vertical
+
+**f(x) + k deslocamento k para cima**
+**f(x) - k deslocamento k para baixo**
+
+Aqui o sinal funciona normalmente:
+- y = x² + 5 é a parábola y = x² deslocada 5 para *cima*
+- y = sin(x) - 2 é o seno deslocado 2 para *baixo*
+
+### 3. Reflexão Vertical (Espelho sobre Eixo x)
+
+**-f(x) reflete o gráfico sobre o eixo x**
+
+- Se f(x) ≥ 0, então -f(x) ≤ 0
+- O ponto (a, b) vira (a, -b)
+- Exemplo: y = -x² é uma parábola abrindo para baixo (versão refletida de y = x²)
+
+### 4. Reflexão Horizontal (Espelho sobre Eixo y)
+
+**f(-x) reflete o gráfico sobre o eixo y**
+
+- A esquerda vira direita e vice-versa
+- Exemplo: y = e^(-x) é a exponencial refletida (decai para a direita)
+
+### 5. Estiramentos Verticais
+
+**a·f(x) com a > 1 estica para cima** (mais "pico")
+**a·f(x) com 0 < a < 1 comprime para baixo** (mais "achatado")
+
+- y = 3sin(x) oscila entre -3 e 3 (3 vezes maior que y = sin(x))
+- y = 0,5sin(x) oscila entre -0,5 e 0,5 (metade da amplitude)
+
+### 6. Estiramentos Horizontais
+
+**f(b·x) com b > 1 comprime para cima** (ciclo mais rápido)
+**f(x/b) com b > 1 estica para cima** (ciclo mais lento)
+
+⚠️ **Atenção:** O efeito é oposto do que você pode intuir!
+
+- y = sin(2x) completa um ciclo em π (metade do período de sin(x))
+- y = sin(x/2) completa um ciclo em 4π (o dobro do período de sin(x))
+
+<FunctionTransformations />
+
+### Exemplo 1: Construindo Uma Transformação Passo a Passo
+
+Comece com f(x) = |x|. Queremos desenhar:
+
+$$g(x) = -2|x - 1| + 3$$
+
+**Passos:**
+1. Deslocar direita 1: |x - 1|
+2. Refletir verticalmente: -|x - 1|
+3. Esticar verticalmente (×2): -2|x - 1|
+4. Deslocar para cima 3: -2|x - 1| + 3
+
+**Vértice:** Comece em (0, 0) para |x|
+- Após passo 1: (1, 0)
+- Após passo 2: (1, 0) (reflexão vertical passa por 0)
+- Após passo 3: (1, 0) (estiramento passa por 0)
+- Após passo 4: (1, 3)
+
+**Inclinações:** A função |x| tem inclinação ±1. Após reflexão e esticamento ×2, tem inclinação ±(-2).
+
+**Gráfico:** V invertido (∧) com vértice em (1, 3), abrindo para baixo.
+
+### Exemplo 2: Transformação de Função Racional
+
+$$h(x) = \frac{2}{x + 3} - 1$$
+
+Começando com f(x) = 1/x:
+
+1. **Deslocar esquerda 3:** $\frac{1}{x + 3}$ (assíntota vertical em x = -3)
+2. **Esticar verticalmente ×2:** $\frac{2}{x + 3}$
+3. **Deslocar para baixo 1:** $\frac{2}{x + 3} - 1$ (assíntota horizontal em y = -1)
+
+**Domínio:** ℝ \ {-3}
+**Assíntotas:** x = -3 (vertical), y = -1 (horizontal)
+**Ponto especial:** Quando x = 0: h(0) = 2/3 - 1 = -1/3
+
+## Funções Pares e Ímpares
+
+Algumas funções têm **simetrias especiais** que facilitam análise e cálculo.
+
+### Funções Pares
+
+Uma função é **par** se:
+$$f(-x) = f(x) \text{ para todo x no domínio}$$
+
+- **Simetria:** O gráfico é simétrico sobre o eixo y
+- **Interpretação:** Valores opostos de entrada produzem o mesmo valor de saída
+- **Exemplos:** 
+  - f(x) = x² (parábola)
+  - f(x) = cos(x) (cosseno)
+  - f(x) = |x| (valor absoluto)
+
+### Funções Ímpares
+
+Uma função é **ímpar** se:
+$$f(-x) = -f(x) \text{ para todo x no domínio}$$
+
+- **Simetria:** O gráfico é simétrico sobre a origem (rotação 180°)
+- **Interpretação:** Valores opostos de entrada produzem saídas opostas
+- **Exemplos:**
+  - f(x) = x³ (cúbica)
+  - f(x) = sin(x) (seno)
+  - f(x) = 1/x (hipérbole)
+
+### Teste Prático
+
+Para verificar paridade:
+
+**Par:** Substitua x por -x. Se obtiver a mesma função, é par.
+
+Exemplo: f(x) = x⁴ + 2x²
+$$f(-x) = (-x)^4 + 2(-x)^2 = x^4 + 2x^2 = f(x) \checkmark$$
+
+**Ímpar:** Substitua x por -x e coloque um negativo em evidência. Se obtiver -f(x), é ímpar.
+
+Exemplo: f(x) = x³ - x
+$$f(-x) = (-x)^3 - (-x) = -x^3 + x = -(x^3 - x) = -f(x) \checkmark$$
+
+**Nem par nem ímpar:** A maioria das funções.
+
+Exemplo: f(x) = x² + x
+$$f(-x) = (-x)^2 + (-x) = x^2 - x \neq f(x) \text{ e } \neq -f(x)$$
+
+### Aplicações em Engenharia
+
+- **Funções pares:** Descrevem fenômenos simétricos (vibração de uma corda fixa em ambas as extremidades)
+- **Funções ímpares:** Descrevem fenômenos antissimétricos (oscilação desbalanceada)
+
+<EvenOddFunctions />
+
+## Injetividade (Funções One-to-One)
+
+Uma função é **injetiva** (ou "um-para-um") se valores diferentes de entrada produzem valores diferentes de saída:
+
+$$\text{Se } x_1 \neq x_2, \text{ então } f(x_1) \neq f(x_2)$$
+
+Equivalentemente: Se f(x₁) = f(x₂), então x₁ = x₂.
+
+### Teste da Reta Horizontal
+
+**Uma função é injetiva se, e somente se, toda reta horizontal a intersecta em no máximo um ponto.**
+
+(Recorde-se: o teste da reta *vertical* verifica se é função; o teste da reta *horizontal* verifica se é injetiva.)
+
+### Exemplos
+
+- **f(x) = x² NÃO é injetiva** em ℝ
+  - f(-2) = 4 e f(2) = 4 (mesma saída, entradas diferentes)
+  - Reta horizontal y = 4 intersecta em dois pontos
+
+- **f(x) = x³ é injetiva** em ℝ
+  - Toda reta horizontal intersecta apenas uma vez
+  - Se x₁³ = x₂³, então x₁ = x₂
+
+- **f(x) = sin(x) NÃO é injetiva** em ℝ
+  - sin(π/6) = sin(5π/6) = 0,5
+  - Mas se restringir ao domínio [-π/2, π/2], fica injetiva
+
+### Por que Importa?
+
+Uma função injetiva tem **função inversa**. Se f é injetiva, existe f⁻¹ tal que:
+
+$$f(f^{-1}(x)) = x \quad \text{e} \quad f^{-1}(f(x)) = x$$
+
+A inversa "desfaz" a função original.
+
+## Sobrejetividade (Funções Onto)
+
+Uma função f: A → B é **sobrejetiva** se toda elemento de B é imagem de algum elemento de A:
+
+$$\text{Para todo } y \in B, \text{ existe } x \in A \text{ tal que } f(x) = y$$
+
+Em outras palavras: **a imagem é igual ao contradomínio.**
+
+### Exemplos
+
+- **f(x) = x²** com contradomínio ℝ NÃO é sobrejetiva
+  - Imagem: [0, ∞)
+  - Nenhum número negativo é imagem de ninguém
+
+- **f(x) = x²** com contradomínio [0, ∞) É sobrejetiva
+  - Imagem: [0, ∞)
+  - Agora contradomínio = imagem ✓
+
+- **f(x) = x³** com contradomínio ℝ É sobrejetiva
+  - Imagem: ℝ (cúbica alcança tudo)
+  - Para todo y ∈ ℝ, existe x = ∛y tal que f(x) = y
+
+### Por que Importa?
+
+Para que uma função tenha inversa, ela precisa ser:
+1. **Injetiva:** Diferentes entradas → diferentes saídas
+2. **Sobrejetiva:** Toda saída possível é alcançada
+
+Uma função com ambas as propriedades é **bijetiva** e tem inversa garantida.
+
+## Encontrando Funções Inversas
+
+Se f é injetiva e sobrejetiva, sua inversa f⁻¹ pode ser encontrada:
+
+**Método algébrico:**
+1. Escreva y = f(x)
+2. Resolva para x em termos de y
+3. Troque x ↔ y
+4. O resultado é y = f⁻¹(x)
+
+### Exemplo 3: Inversa de Uma Função Linear
+
+$$f(x) = 2x + 3$$
+
+1. y = 2x + 3
+2. Resolve para x: x = (y - 3)/2
+3. Troque: y = (x - 3)/2
+4. Logo: $f^{-1}(x) = \frac{x - 3}{2}$
+
+**Verificação:** 
+- $f(f^{-1}(x)) = f\left(\frac{x-3}{2}\right) = 2 \cdot \frac{x-3}{2} + 3 = x - 3 + 3 = x$ ✓
+
+### Exemplo 4: Inversa com Restrição de Domínio
+
+$$f(x) = x^2 \text{ com domínio } [0, \infty)$$
+
+1. y = x²
+2. Resolve para x: x = √y (pegamos a raiz positiva porque domínio é [0,∞))
+3. Troque: y = √x
+4. Logo: $f^{-1}(x) = \sqrt{x}$ com domínio [0, ∞)
+
+A restrição é **crucial**: sem ela, x² não seria injetiva.
+
+## Análise Global de Funções: Integração de Conceitos
+
+Quando você vê uma função na prática, você deve saber analisar:
+
+1. **Tipo básico:** Polinomial? Racional? Exponencial? Trigonométrica?
+2. **Transformações aplicadas:** Deslocamentos? Reflexões? Estiramentos?
+3. **Domínio:** Onde a função está definida?
+4. **Imagem:** Qual é o conjunto de saídas?
+5. **Zeros:** Onde f(x) = 0?
+6. **Crescimento:** Onde é crescente/decrescente? (pré-cálculo)
+7. **Simetria:** É par ou ímpar?
+8. **Injetividade/Sobrejetividade:** Tem inversa?
+9. **Comportamento extremo:** O que acontece quando x → ±∞?
+10. **Assíntotas:** Horizontais, verticais, oblíquas?
+
+### Exemplo 5: Análise Completa
+
+Analize f(x) = e^(-x/2) cos(x):
+
+1. **Tipo:** Composição/produto de exponencial e trigonométrica
+2. **Transformações:** Exponencial com decaimento (factor -1/2), cosseno normal
+3. **Domínio:** ℝ (exponencial + cosseno ambas definidas em ℝ)
+4. **Imagem:** [-e^(-x/2), e^(-x/2)] conforme x varia (limitado pelo envelope exponencial)
+5. **Zeros:** cos(x) = 0, ou seja, x = π/2 + kπ. Multiplicado por e^(-x/2) > 0, zeros são em x = π/2, 3π/2, 5π/2, ...
+6. **Crescimento:** Oscila, mas amplitude decai (será mais lentamente crescente nos períodos iniciais onde cos é crescente e e^(-x/2) é grande)
+7. **Simetria:** Nem par nem ímpar (produto de funções com paridades diferentes)
+8. **Injetividade:** NÃO injetiva (oscila, múltiplas entradas dão mesma saída)
+9. **Comportamento extremo:** 
+   - x → -∞: e^(-x/2) → ∞, cos(x) oscila → oscilação com amplitude crescente
+   - x → ∞: e^(-x/2) → 0, cos(x) oscila → oscilação com amplitude → 0
+10. **Assíntotas:** y = 0 horizontal (quando x → ∞)
+
+<DampedOscillationAnalysis />
+
+## Problemas de Engenharia: Revisão Integrada
+
+### Exemplo 6: Projeto de Rampa de Acesso
+
+Uma rampa de acesso a um prédio deve:
+- Começar no nível do piso (0 m)
+- Alcançar altura de 1 m
+- Ter comprimento total máximo de 10 m
+- Ter inclinação máxima de tan⁻¹(0,15) ≈ 8,5° (código de acessibilidade)
+
+Se a rampa for linear:
+$$h(x) = \frac{1}{10}x = 0,1x$$
+
+Inclinação: tan(θ) = 0,1 → θ ≈ 5,7° < 8,5° ✓
+
+Se a rampa for parabólica para suavizar o final:
+$$h(x) = a(x/10)^2 + b(x/10) + c$$
+
+Com h(0) = 0, h(10) = 1 e "suave" na origem, você pode escolher a forma.
+
+### Exemplo 7: Carregamento de Bateria
+
+A carga Q(t) em uma bateria durante carregamento é:
+
+$$Q(t) = Q_{\max}(1 - e^{-t/\tau})$$
+
+- Q_max = 100% (carga máxima)
+- τ = 1 hora (constante de tempo)
+
+**Análise:**
+- Domínio: [0, ∞)
+- Imagem: [0, Q_max)
+- Nunca alcança 100% (assintótico)
+- Após 1 hora (t = τ): Q(1) = Q_max(1 - e⁻¹) ≈ 0,63 Q_max = 63%
+- Após 5 horas (t = 5τ): Q(5) = Q_max(1 - e⁻⁵) ≈ 0,993 Q_max ≈ 99,3%
+
+Se você inverter para encontrar "tempo para alcançar 80%":
+$$0,8 Q_{\max} = Q_{\max}(1 - e^{-t/\tau})$$
+$$0,8 = 1 - e^{-t/\tau}$$
+$$e^{-t/\tau} = 0,2$$
+$$-\frac{t}{\tau} = \ln(0,2) \approx -1,609$$
+$$t \approx 1,609\tau \approx 1,6 \text{ horas}$$
+
+## Resumo de Transformações
+
+| Transformação | Função Original | Função Transformada | Efeito |
+|---|---|---|---|
+| Deslo. direita h | f(x) | f(x - h) | Gráfico move h unidades à direita |
+| Deslo. esquerda h | f(x) | f(x + h) | Gráfico move h unidades à esquerda |
+| Deslo. cima k | f(x) | f(x) + k | Gráfico move k unidades para cima |
+| Deslo. baixo k | f(x) | f(x) - k | Gráfico move k unidades para baixo |
+| Reflexão vertical | f(x) | -f(x) | Gráfico reflete sobre eixo x |
+| Reflexão horizontal | f(x) | f(-x) | Gráfico reflete sobre eixo y |
+| Estico vertical a | f(x) | a·f(x) | Multiplica todas as alturas por a |
+| Estico horizontal b | f(x) | f(b·x) | Ciclos b vezes mais rápidos |
+
+## Resumo de Propriedades
+
+**Função par:** f(-x) = f(x) → simétrica sobre eixo y
+**Função ímpar:** f(-x) = -f(x) → simétrica sobre origem
+**Injetiva:** Teste da reta horizontal (≤1 intersecção) → tem inversa
+**Sobrejetiva:** Imagem = contradomínio → alcança tudo
+**Bijetiva:** Injetiva + sobrejetiva → tem inversa única
+
+## Ponte para o Cálculo
+
+Você domina agora os fundamentos sobre funções — tipos, transformações, propriedades, simetrias. Nos próximos módulos, você vai:
+1. **Limites:** Como funções se comportam nas "bordas" (x → ∞, descontinuidades)
+2. **Continuidade:** Quando funções não têm "saltos" ou "buracos"
+3. **Derivadas:** Como funções *mudam* — taxas de variação instantâneas
+4. **Integrais:** Áreas sob curvas, acumulação de quantidades
+
+Todos esses conceitos se constroem sobre a compreensão profunda de funções que você desenvolveu aqui. Parabéns por completar o módulo de Funções Reais!

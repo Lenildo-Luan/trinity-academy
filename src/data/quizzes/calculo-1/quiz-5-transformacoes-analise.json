@@ -1,0 +1,310 @@
+{
+  "id": "quiz-5-transformacoes-analise",
+  "courseId": "calculo-1",
+  "title": "Transformações e Análise de Funções",
+  "description": "Aplique transformações, identifique simetrias, injetividade e resolva problemas integrados de engenharia",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "text": "Se f(x) = x², qual é a função g(x) obtida após deslocar f para a direita 3 unidades e para cima 2 unidades?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "g(x) = (x - 3)² + 2"
+        },
+        {
+          "id": "b",
+          "text": "g(x) = (x + 3)² + 2"
+        },
+        {
+          "id": "c",
+          "text": "g(x) = (x - 3)² - 2"
+        },
+        {
+          "id": "d",
+          "text": "g(x) = (x + 3)² - 2"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Deslocar para a direita 3: substitua x por (x - 3). Deslocar para cima 2: adicione 2. Logo, g(x) = (x - 3)² + 2. Lembre-se: o sinal é 'invertido' para deslocamentos horizontais: direita usa (x - h), esquerda usa (x + h)."
+    },
+    {
+      "id": "q2",
+      "text": "A função f(x) = x³ é par ou ímpar?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Par (simetria sobre eixo y)"
+        },
+        {
+          "id": "b",
+          "text": "Ímpar (simetria sobre origem)"
+        },
+        {
+          "id": "c",
+          "text": "Nem par nem ímpar"
+        },
+        {
+          "id": "d",
+          "text": "Ambas (par e ímpar)"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Função ímpar: f(-x) = -f(x). Para f(x) = x³: f(-x) = (-x)³ = -x³ = -f(x). ✓ Ímpar. Geometricamente, x³ é simétrica sobre a origem (rotação 180°). Teste visual: (1,1) e (-1,-1) estão na curva."
+    },
+    {
+      "id": "q3",
+      "text": "Qual função é par?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "f(x) = sin(x)"
+        },
+        {
+          "id": "b",
+          "text": "f(x) = cos(x)"
+        },
+        {
+          "id": "c",
+          "text": "f(x) = tan(x)"
+        },
+        {
+          "id": "d",
+          "text": "f(x) = e^x"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "cos(-x) = cos(x) (função par). sen(-x) = -sen(x) (ímpar). tan(-x) = -tan(x) (ímpar). e^(-x) ≠ ± e^x (nenhuma). Cosseno é a única função trigonométrica primária que é par."
+    },
+    {
+      "id": "q4",
+      "text": "A função f(x) = x² é injetiva (um-para-um)?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Sim, é injetiva em ℝ"
+        },
+        {
+          "id": "b",
+          "text": "Não, não é injetiva em ℝ (f(-2) = f(2) = 4)"
+        },
+        {
+          "id": "c",
+          "text": "Injetiva apenas para x > 0"
+        },
+        {
+          "id": "d",
+          "text": "Nunca é injetiva"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Injetiva significa: diferentes entradas → diferentes saídas. Mas f(-2) = 4 = f(2), então não é injetiva em ℝ. Porém, se restringirmos o domínio a [0, ∞), a função fica injetiva. O teste da reta horizontal: uma reta horizontal cruza a parábola em 2 pontos (não é injetiva)."
+    },
+    {
+      "id": "q5",
+      "text": "A função f(x) = x³ é sobrejetiva quando o contradomínio é ℝ?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Não, a imagem é apenas números positivos"
+        },
+        {
+          "id": "b",
+          "text": "Não, a imagem não cobre ℝ"
+        },
+        {
+          "id": "c",
+          "text": "Sim, a imagem é ℝ (cúbica alcança todos os reais)"
+        },
+        {
+          "id": "d",
+          "text": "Sim, mas apenas para x > 0"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Sobrejetiva: imagem = contradomínio. Para f(x) = x³, a imagem é ℝ (a função atinge qualquer número real y ao resolver y = x³, ou x = ∛y). Logo, é sobrejetiva sobre ℝ. Combinado com injetiva, f(x) = x³ é bijetiva e tem inversa f⁻¹(x) = ∛x."
+    },
+    {
+      "id": "q6",
+      "text": "Qual é a inversa da função f(x) = 2x + 3?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "f⁻¹(x) = 2x - 3"
+        },
+        {
+          "id": "b",
+          "text": "f⁻¹(x) = (x - 3)/2"
+        },
+        {
+          "id": "c",
+          "text": "f⁻¹(x) = (x + 3)/2"
+        },
+        {
+          "id": "d",
+          "text": "f⁻¹(x) = x/2 - 3"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Método: escreva y = 2x + 3, resolva para x: x = (y - 3)/2. Troque x e y: y = (x - 3)/2. Logo, f⁻¹(x) = (x - 3)/2. Verificação: f(f⁻¹(x)) = 2((x-3)/2) + 3 = x - 3 + 3 = x ✓"
+    },
+    {
+      "id": "q7",
+      "text": "Se f(x) = 3x² + 1, qual é f(2x)?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "f(2x) = 3(2x)² + 1 = 12x² + 1"
+        },
+        {
+          "id": "b",
+          "text": "f(2x) = 6x² + 1"
+        },
+        {
+          "id": "c",
+          "text": "f(2x) = 3x² + 2"
+        },
+        {
+          "id": "d",
+          "text": "f(2x) = 12x + 1"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Substituição: f(2x) = 3(2x)² + 1 = 3 · 4x² + 1 = 12x² + 1. Note que f(2x) ≠ 2f(x) (a multiplicação não é linear). Isso é importante ao analisar estiramentos horizontais: f(bx) comprime o gráfico horizontalmente."
+    },
+    {
+      "id": "q8",
+      "text": "O gráfico de y = -f(x) é obtido a partir de y = f(x) por qual transformação?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Deslocamento para baixo"
+        },
+        {
+          "id": "b",
+          "text": "Reflexão sobre o eixo x"
+        },
+        {
+          "id": "c",
+          "text": "Reflexão sobre o eixo y"
+        },
+        {
+          "id": "d",
+          "text": "Esticamento vertical"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Multiplicar por -1: y → -y inverte o sinal. O ponto (a, b) vira (a, -b). O gráfico é espelhado sobre o eixo x (a linha y = 0). Exemplo: -sin(x) é uma onda senoidal de cabeça para baixo."
+    },
+    {
+      "id": "q9",
+      "text": "Para a transformação f(x) = -2(x + 1)² + 3, qual é o vértice da parábola?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "(-1, 3)"
+        },
+        {
+          "id": "b",
+          "text": "(1, 3)"
+        },
+        {
+          "id": "c",
+          "text": "(-1, -3)"
+        },
+        {
+          "id": "d",
+          "text": "(1, -3)"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Forma de vértice: f(x) = a(x - h)² + k tem vértice em (h, k). Aqui, f(x) = -2(x - (-1))² + 3, logo vértice é (-1, 3). O coeficiente -2 indica que abre para baixo (e é 2x mais 'apertada' que x²)."
+    },
+    {
+      "id": "q10",
+      "text": "Um engenheiro analisa uma ponte com deflexão y(x) = -0,001(x)(L-x), onde L = 100m e x é posição. Qual é a simetria do gráfico?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Simétrica sobre x = 0 (par)"
+        },
+        {
+          "id": "b",
+          "text": "Simétrica sobre x = 50 (eixo de simetria no meio)"
+        },
+        {
+          "id": "c",
+          "text": "Sem simetria particular (ímpar)"
+        },
+        {
+          "id": "d",
+          "text": "Simétrica sobre a origem"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "A função y(x) = -0,001x(100-x) é simétrica sobre x = 50 (o ponto médio). Você pode expandir: y(x) = -0,001(100x - x²) é uma parábola com vértice em x = 50 (eixo de simetria). Em engenharia estrutural, essa simetria é esperada por causa da carga uniforme na ponte."
+    },
+    {
+      "id": "q11",
+      "text": "Qual é o resultado de compor f(g(x)), se f(u) = u² e g(x) = x + 1?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "f(g(x)) = x² + 1"
+        },
+        {
+          "id": "b",
+          "text": "f(g(x)) = (x + 1)² = x² + 2x + 1"
+        },
+        {
+          "id": "c",
+          "text": "f(g(x)) = x + 1"
+        },
+        {
+          "id": "d",
+          "text": "f(g(x)) = x² + 2"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Composição: f(g(x)) = f(x+1) = (x+1)² = x² + 2x + 1. A ordem importa: g(f(x)) = g(x²) = x² + 1, que é diferente! Composição não é comutativa em geral."
+    },
+    {
+      "id": "q12",
+      "text": "Um sistema de controle tem função de transferência G(s) = 1/(s+2). Qual é a interpretação do 'polo' em s = -2?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Um zero da função (onde G = 0)"
+        },
+        {
+          "id": "b",
+          "text": "Uma singularidade onde a função é indefinida e que afeta a estabilidade do sistema"
+        },
+        {
+          "id": "c",
+          "text": "O ganho do sistema"
+        },
+        {
+          "id": "d",
+          "text": "A amplitude máxima"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Em sistemas de controle, polos são as raízes do denominador. Em s = -2, G é indefinida. A localização dos polos (real negativo, neste caso) determina se o sistema é estável ou não. Polos no semiplano direito (parte real positiva) indicam instabilidade."
+    }
+  ]
+}
+

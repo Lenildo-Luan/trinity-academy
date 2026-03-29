@@ -1,0 +1,310 @@
+{
+  "id": "quiz-4-trigonometricas-inversas",
+  "courseId": "calculo-1",
+  "title": "Funções Trigonométricas e Inversas",
+  "description": "Domine seno, cosseno, tangente, inversas trigonométricas e composição de funções para modelar fenômenos cíclicos",
+  "timeLimit": 900,
+  "questions": [
+    {
+      "id": "q1",
+      "text": "Uma voltagem AC em uma residência é V(t) = 155 sin(120πt) volts. Qual é o período dessa função?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "T = 1/60 segundo"
+        },
+        {
+          "id": "b",
+          "text": "T = 60 segundos"
+        },
+        {
+          "id": "c",
+          "text": "T = 120π segundos"
+        },
+        {
+          "id": "d",
+          "text": "T = 155 segundos"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Para uma função sin(Bx), o período é T = 2π/B. Aqui, B = 120π, então T = 2π/(120π) = 1/60 segundo. Isso corresponde a 60 Hz (60 ciclos por segundo), que é a frequência padrão de eletricidade em muitos países."
+    },
+    {
+      "id": "q2",
+      "text": "Se cos(θ) = 0,6, qual é sen(θ) em um triângulo retângulo (θ no primeiro quadrante)?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "sen(θ) = 0,4"
+        },
+        {
+          "id": "b",
+          "text": "sen(θ) = 0,8"
+        },
+        {
+          "id": "c",
+          "text": "sen(θ) ≈ 0,94"
+        },
+        {
+          "id": "d",
+          "text": "sen(θ) = 0,36"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Pela identidade pitagórica: sin²(θ) + cos²(θ) = 1. Se cos(θ) = 0,6, então sin²(θ) = 1 - 0,36 = 0,64, logo sin(θ) = 0,8 (positivo no primeiro quadrante). Este é o triângulo 3-4-5 escalado."
+    },
+    {
+      "id": "q3",
+      "text": "Para a função f(x) = 2 sin(x - π/4) + 3, qual é a amplitude?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "1"
+        },
+        {
+          "id": "b",
+          "text": "2"
+        },
+        {
+          "id": "c",
+          "text": "3"
+        },
+        {
+          "id": "d",
+          "text": "5"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Para f(x) = A sin(B(x - C)) + D, a amplitude é |A|. Aqui, A = 2, então a amplitude é 2. A função oscila 2 unidades acima e abaixo de seu eixo de oscilação (que é y = 3)."
+    },
+    {
+      "id": "q4",
+      "text": "Qual é o domínio da função f(x) = arcsin(x)?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "ℝ (todos os reais)"
+        },
+        {
+          "id": "b",
+          "text": "[-1, 1]"
+        },
+        {
+          "id": "c",
+          "text": "[0, π]"
+        },
+        {
+          "id": "d",
+          "text": "[-π/2, π/2]"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "arcsin(x) é a inversa de sin(x). Como o seno só produz valores em [-1, 1], o domínio de arcsin é [-1, 1]. A imagem de arcsin é [-π/2, π/2]."
+    },
+    {
+      "id": "q5",
+      "text": "Se arctan(x) = π/4, qual é o valor de x?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "x = 0"
+        },
+        {
+          "id": "b",
+          "text": "x = 1"
+        },
+        {
+          "id": "c",
+          "text": "x = π/4"
+        },
+        {
+          "id": "d",
+          "text": "x = √2"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "arctan(x) = π/4 significa tan(π/4) = x. Sabemos que tan(π/4) = 1 (em um triângulo retângulo isósceles). Portanto, x = 1."
+    },
+    {
+      "id": "q6",
+      "text": "Um pêndulo oscila com θ(t) = 0,3 cos(3t) radianos. Qual é a frequência angular?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "ω = 0,3 rad/s"
+        },
+        {
+          "id": "b",
+          "text": "ω = 3 rad/s"
+        },
+        {
+          "id": "c",
+          "text": "ω = 1/3 rad/s"
+        },
+        {
+          "id": "d",
+          "text": "ω = 0,1 rad/s"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Para θ(t) = A cos(ωt), a frequência angular é ω. Aqui, ω = 3 rad/s. Frequência angular é diferente de amplitude (A = 0,3) ou período (T = 2π/3 ≈ 2,09 s)."
+    },
+    {
+      "id": "q7",
+      "text": "Qual é o período da função f(x) = tan(2x)?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "π"
+        },
+        {
+          "id": "b",
+          "text": "π/2"
+        },
+        {
+          "id": "c",
+          "text": "2π"
+        },
+        {
+          "id": "d",
+          "text": "π/4"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "O período de tan(Bx) é π/|B|. Para tan(2x), B = 2, então T = π/2. Nota: tangente tem período π, não 2π como seno e cosseno. Portanto, comprimir horizontalmente por 2 reduz o período para π/2."
+    },
+    {
+      "id": "q8",
+      "text": "Se uma função é f(g(x)), o que podemos dizer sobre sua ordem de execução?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Executamos f primeiro, depois g"
+        },
+        {
+          "id": "b",
+          "text": "Executamos g primeiro, depois f"
+        },
+        {
+          "id": "c",
+          "text": "Executamos ambas simultaneamente"
+        },
+        {
+          "id": "d",
+          "text": "A ordem não importa"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Em composição f(g(x)), lemos 'de dentro para fora'. Primeiro aplicamos g a x, depois aplicamos f ao resultado. Exemplo: se f(u) = u² e g(x) = 3x, então f(g(x)) = (3x)² = 9x². Note que g(f(x)) = 3x² é diferente!"
+    },
+    {
+      "id": "q9",
+      "text": "Uma onda é modulada: s(t) = e^(-t/2) sin(5t). O que representa e^(-t/2)?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "A amplitude da onda"
+        },
+        {
+          "id": "b",
+          "text": "O envelope decrescente que limita a oscilação"
+        },
+        {
+          "id": "c",
+          "text": "A frequência da oscilação"
+        },
+        {
+          "id": "d",
+          "text": "O deslocamento de fase"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Este é um produto de funções: uma exponencial decrescente e^(-t/2) multiplica uma onda senoidal sin(5t). O termo exponencial atua como 'envelope', reduzindo a amplitude da oscilação ao longo do tempo. Esta é a composição multiplicativa que modela amortecimento em sistemas físicos."
+    },
+    {
+      "id": "q10",
+      "text": "Se cos(α) = -0,5 e α está no segundo quadrante, qual é α em radianos?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "α = π/3"
+        },
+        {
+          "id": "b",
+          "text": "α = 2π/3"
+        },
+        {
+          "id": "c",
+          "text": "α = 5π/6"
+        },
+        {
+          "id": "d",
+          "text": "α = 4π/3"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": "cos(2π/3) = -0,5. No segundo quadrante (π/2 < α < π), cosseno é negativo. O ângulo de referência é π/3, então α = π - π/3 = 2π/3 radianos. Esta é a função inversa: α = arccos(-0,5) = 2π/3."
+    },
+    {
+      "id": "q11",
+      "text": "Uma temperatura varia como T(t) = 20 + 10 sin(π(t-80)/182.5), onde t é o dia do ano. Qual é a amplitude?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "10°C"
+        },
+        {
+          "id": "b",
+          "text": "20°C"
+        },
+        {
+          "id": "c",
+          "text": "30°C"
+        },
+        {
+          "id": "d",
+          "text": "182.5°C"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Para T(t) = 20 + 10 sin(...), a amplitude é |10| = 10. O deslocamento vertical é 20 (temperatura média). A função oscila entre 20 - 10 = 10°C e 20 + 10 = 30°C ao longo do ano."
+    },
+    {
+      "id": "q12",
+      "text": "Para encontrar o ângulo que um engenheiro deve inclinar uma rampa de altura 1m e comprimento 2m, qual função trigonométrica usar?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "θ = sin⁻¹(1/2)"
+        },
+        {
+          "id": "b",
+          "text": "θ = cos⁻¹(1/2)"
+        },
+        {
+          "id": "c",
+          "text": "θ = tan⁻¹(1/2)"
+        },
+        {
+          "id": "d",
+          "text": "θ = sin⁻¹(2)"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Em um triângulo retângulo, sen(θ) = oposto/hipotenusa = 1/2. Logo, θ = arcsin(1/2) = π/6 = 30°. Nota: alguns interpretariam como tan⁻¹(1/√3) usando altura vs distância horizontal, mas a interpretação geométrica direta usa o comprimento como hipotenusa."
+    }
+  ]
+}
+

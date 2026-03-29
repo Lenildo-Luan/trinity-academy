@@ -35,6 +35,73 @@ export type QuizValidationResult = {
   errors: QuizValidationError[];
 };
 
+function normalizeQuizData(data: unknown): unknown {
+  if (!data || typeof data !== 'object') {
+    return data;
+  }
+
+  const quiz = data as {
+    questions?: Array<
+      | {
+          id?: string;
+          question?: string;
+          alternatives?: Alternative[];
+        }
+      | {
+          id?: string;
+          text?: string;
+          options?: Array<{ id?: string; text?: string }>;
+          correctAnswer?: string;
+          explanation?: string;
+        }
+    >;
+  };
+
+  if (!Array.isArray(quiz.questions)) {
+    return data;
+  }
+
+  const normalizedQuestions = quiz.questions.map((question) => {
+    if (
+      question &&
+      typeof question === 'object' &&
+      'question' in question &&
+      'alternatives' in question
+    ) {
+      return question;
+    }
+
+    if (
+      question &&
+      typeof question === 'object' &&
+      'text' in question &&
+      'options' in question &&
+      Array.isArray(question.options)
+    ) {
+      const alternatives = question.options.map((option) => ({
+        id: option.id ?? '',
+        text: option.text ?? '',
+        isCorrect: option.id === question.correctAnswer,
+        explanation:
+          option.id === question.correctAnswer ? question.explanation : undefined,
+      }));
+
+      return {
+        id: question.id ?? '',
+        question: question.text ?? '',
+        alternatives,
+      };
+    }
+
+    return question;
+  });
+
+  return {
+    ...(data as Record<string, unknown>),
+    questions: normalizedQuestions,
+  };
+}
+
 /**
  * Valida a estrutura completa de um quiz
  * @param data - Dados do quiz a serem validados
@@ -42,16 +109,17 @@ export type QuizValidationResult = {
  */
 export function validateQuizData(data: unknown): QuizValidationResult {
   const errors: QuizValidationError[] = [];
+  const normalizedData = normalizeQuizData(data);
 
   // Verifica se é um objeto
-  if (!data || typeof data !== 'object') {
+  if (!normalizedData || typeof normalizedData !== 'object') {
     return {
       isValid: false,
       errors: [{ field: 'quiz', message: 'Dados do quiz inválidos ou ausentes' }],
     };
   }
 
-  const quiz = data as Partial<Quiz>;
+  const quiz = normalizedData as Partial<Quiz>;
 
   // Validar campos obrigatórios do quiz
   if (!quiz.id || typeof quiz.id !== 'string') {
@@ -156,13 +224,12 @@ export function validateQuizData(data: unknown): QuizValidationResult {
 export async function getQuiz(module: string, quizId: string): Promise<Quiz | null> {
   try {
     const quiz = await import(`@/data/quizzes/${module}/${quizId}.json`);
-    const quizData = quiz.default;
+    const quizData = normalizeQuizData(quiz.default);
 
     // Validar estrutura do quiz
     const validation = validateQuizData(quizData);
 
     if (!validation.isValid) {
-      const errorMessages = validation.errors.map(e => `${e.field}: ${e.message}`).join('; ');
       console.error(
         `Quiz "${quizId}" contém dados inválidos:\n`,
         validation.errors.map(e => `  - ${e.field}: ${e.message}`).join('\n')

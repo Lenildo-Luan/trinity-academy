@@ -1,0 +1,154 @@
+# Introdução a Funções
+
+Quando um engenheiro projeta um circuito eletrônico, precisa entender como a tensão de saída depende da tensão de entrada. Quando um engenheiro civil analisa uma ponte, precisa saber como a força em um cabo varia com o comprimento dele. Quando um engenheiro de sistemas configura servidores, precisa compreender como o tempo de resposta muda com o número de requisições simultâneas. Todas essas situações descrevem relações entre quantidades — relações que chamamos de **funções**. 
+
+Neste capítulo, vamos aprender a definição precisa de função, estudar os conceitos de domínio, contradomínio e imagem, e descobrir por que entender funções é essencial para modelar o mundo real como engenheiros.
+
+## Objetivos de Aprendizado
+
+Ao final deste capítulo, você será capaz de:
+
+- **Definir formalmente** uma função e reconhecer relações que são (ou não são) funções
+- **Identificar e especificar** o domínio, contradomínio e imagem de uma função
+- **Aplicar o teste da reta vertical** para verificar se um gráfico representa uma função
+- **Reconhecer** a notação f(x) e interpretar seu significado
+- **Argumentar** por que funções são modelos poderosos para problemas de engenharia
+
+## O que é uma Função?
+
+Intuitivamente, uma função é uma "máquina" que transforma entrada em saída: você alimenta um valor na entrada e a função produz exatamente um valor na saída.
+
+**Definição:** Uma **função** f de um conjunto A para um conjunto B é uma correspondência que associa a cada elemento x em A exatamente um elemento f(x) em B.
+
+Escrevemos isso como:
+$$f: A \to B$$
+
+Ou em notação de seta:
+$$x \mapsto f(x)$$
+
+### Elementos de uma Função
+
+Toda função tem três componentes essenciais:
+
+1. **Domínio (A):** O conjunto de todos os valores de entrada *possíveis* — os valores que você é *permitido* colocar na função.
+   - Notação: Dom(f) ou D(f)
+   - Na prática para engenheiros: "Que valores fazem sentido?"
+
+2. **Contradomínio (B):** O conjunto de todos os valores de saída *permitidos* — não necessariamente todos usados.
+   - Às vezes é definido pela natureza do problema (ex: se estamos medindo temperatura, o contradomínio poderia ser ℝ)
+   
+3. **Imagem (ou Conjunto Imagem):** O conjunto de todos os valores de saída que *realmente ocorrem*.
+   - Notação: Im(f) ou Img(f)
+   - Sempre: Im(f) ⊆ B (a imagem está contida no contradomínio)
+
+### Exemplo 1: Função de Resistência Elétrica
+
+Considere uma resistência de níquel-cromo usado em um forno industrial. A resistência elétrica R (em ohms) depende da temperatura T (em °C):
+
+$$R(T) = R_0(1 + \alpha T)$$
+
+onde R₀ = 100 Ω e α = 0,0006 °C⁻¹ é o coeficiente de temperatura.
+
+- **Domínio:** T ∈ [0, 1200] °C (a resistência se destrói acima de 1200°C)
+- **Contradomínio:** ℝ (qualquer número real)
+- **Imagem:** R ∈ [100, 172] Ω (apenas os valores que a resistência realmente alcança nesse intervalo de temperatura)
+- **Função:** f(T) = 100(1 + 0,0006T)
+
+### Exemplo 2: Processamento de Sinais
+
+Um engenheiro de sistemas processa áudio digital. A função que normaliza um sinal é:
+
+$$f(x) = \frac{x}{|x|_{\max}}$$
+
+onde x é um valor de amplitude e |x|ₘₐₓ é a amplitude máxima do sinal.
+
+- **Domínio:** Todos os números reais *exceto zero* (não podemos dividir por zero)
+  - Dom(f) = ℝ \ {0}
+- **Contradomínio:** ℝ
+- **Imagem:** (-1, 1) — valores normalizados entre -1 e 1
+
+## Notação f(x) e Valor da Função
+
+A notação **f(x)** significa "o valor que a função f assume quando a entrada é x".
+
+- f é o *nome da função*
+- x é a *variável independente* (entrada)
+- f(x) é o *valor da função* em x (saída)
+
+### Exemplo 3: Interpretando f(x)
+
+Suponha que a potência consumida por um servidor (em watts) é descrita por:
+
+$$f(x) = 50 + 0,002x^2$$
+
+onde x é o número de requisições por segundo.
+
+- f(100) = 50 + 0,002(100)² = 50 + 20 = **70 W**
+  - "Quando 100 requisições chegam por segundo, o servidor consome 70 watts"
+
+- f(500) = 50 + 0,002(500)² = 50 + 500 = **550 W**
+  - "Quando 500 requisições chegam por segundo, o servidor consome 550 watts"
+
+O número dentro dos parênteses não é "f vezes x" — é "f de x", o valor de f no ponto x.
+
+## O Teste da Reta Vertical
+
+Como identificar se um gráfico representa uma função? Usamos o **teste da reta vertical**:
+
+> **Teste da Reta Vertical:** Um gráfico no plano cartesiano representa uma função se, e somente se, toda reta vertical o intersecta em *no máximo um ponto*.
+
+**Por quê?** Se uma reta vertical intersectasse o gráfico em dois pontos diferentes, isso significaria que um mesmo valor de entrada x produziria dois valores de saída diferentes — violando a definição de função.
+
+### Exemplos Visuais
+
+<VerticalLineTest />
+
+### Exemplo 4: Identificar Funções
+
+Qual desses gráficos representa uma função?
+
+1. **y = x²** (parábola) → Uma reta vertical toca em *um ponto* → É função ✓
+2. **x² + y² = 1** (círculo) → Uma reta vertical toca em *dois pontos* (exceto nas extremidades) → Não é função ✗
+3. **x = 2** (reta vertical) → Uma reta vertical coincide com o gráfico inteiro → Não é função (infinitos pontos) ✗
+4. **y = √x** (raiz quadrada) → Uma reta vertical toca em *um ponto* → É função ✓
+
+## Por que Funções Importam em Engenharia
+
+### 1. **Modelagem de Relações Causa-Efeito**
+
+Toda vez que uma quantidade depende de outra, temos uma função:
+- Voltagem depende de corrente (Lei de Ohm: V = IR)
+- Deflexão de uma viga depende de carga aplicada
+- Taxa de contaminação depende da concentração química
+- Throughput de rede depende de latência
+
+### 2. **Previsão e Otimização**
+
+Uma vez que temos a função que descreve um sistema, podemos:
+- **Prever:** "Se aumentarmos a corrente para 10A, qual será a voltagem?"
+- **Otimizar:** "Qual entrada maximiza a saída útil?"
+- **Analisar limites:** "O que acontece quando a entrada cresce infinitamente?"
+
+### 3. **Comunicação Precisa**
+
+Quando um engenheiro escreve f(x) = 5x + 10, todos entendem exatamente a relação entre entrada e saída. É uma linguagem universal.
+
+### 4. **Concatenação de Sistemas**
+
+Engenheiros frequentemente conectam sistemas em série:
+- Entrada → [Sistema 1: função f] → [Sistema 2: função g] → Saída
+- Isso corresponde à *composição de funções* (que estudaremos depois)
+
+## Resumo
+
+- Uma **função** f: A → B associa cada elemento de A a *exatamente um* elemento de B.
+- **Domínio:** valores de entrada permitidos
+- **Contradomínio:** valores de saída permitidos
+- **Imagem:** valores de saída que realmente ocorrem
+- **Teste da reta vertical:** se qualquer reta vertical intersecta o gráfico em mais de um ponto, não é função
+- **Notação f(x):** valor que a função f assume na entrada x
+- Funções são ferramentas poderosas para modelar sistemas reais em engenharia
+
+## Ponte para o Próximo Capítulo
+
+Agora que você entende o que é uma função, vamos explorar os **tipos de funções** mais importantes: funções polinomiais, racionais, raízes, valor absoluto e definidas por partes. Cada tipo tem características únicas que aparecem frequentemente em problemas de engenharia, e aprender a identificá-las rapidamente será uma habilidade essencial.

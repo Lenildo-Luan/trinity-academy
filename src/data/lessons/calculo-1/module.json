@@ -3,7 +3,43 @@
     "id": "funcoes-reais",
     "title": "Funções Reais de uma Variável Real",
     "description": "Fundamentos do curso: definição, tipos e transformações de funções reais",
-    "lessons": []
+    "lessons": [
+      {
+        "id": "introducao-a-funcoes",
+        "title": "Introdução a Funções",
+        "slug": "introducao-a-funcoes",
+        "description": "Definição de função, domínio, contradomínio e imagem. Notação f(x), teste da reta vertical e importância de funções em modelagem de engenharia.",
+        "quizId": "quiz-1-introducao-a-funcoes"
+      },
+      {
+        "id": "tipos-de-funcoes",
+        "title": "Tipos de Funções",
+        "slug": "tipos-de-funcoes",
+        "description": "Funções polinomiais, racionais, de raiz, valor absoluto e definidas por partes. Identificação, esboço de gráficos e análise de comportamento.",
+        "quizId": "quiz-2-tipos-de-funcoes"
+      },
+      {
+        "id": "funcoes-exponenciais-e-logaritmicas",
+        "title": "Funções Exponenciais e Logarítmicas",
+        "slug": "funcoes-exponenciais-e-logaritmicas",
+        "description": "Crescimento e decaimento exponencial, número de Euler e, logaritmos naturais. Aplicações em circuitos RC, radioatividade e modelagem populacional.",
+        "quizId": "quiz-3-exponenciais-logaritmicas"
+      },
+      {
+        "id": "funcoes-trigonometricas-e-inversas",
+        "title": "Funções Trigonométricas e Inversas",
+        "slug": "funcoes-trigonometricas-e-inversas",
+        "description": "Seno, cosseno, tangente e suas inversas. Amplitude, período e transformações. Composição de funções e aplicações em oscilações e movimento periódico.",
+        "quizId": "quiz-4-trigonometricas-inversas"
+      },
+      {
+        "id": "transformacoes-e-analise-de-funcoes",
+        "title": "Transformações e Análise de Funções",
+        "slug": "transformacoes-e-analise-de-funcoes",
+        "description": "Deslocamentos, reflexões e estiramentos. Funções pares e ímpares. Injetividade, sobrejetividade e funções inversas. Análise global e revisão do módulo.",
+        "quizId": "quiz-5-transformacoes-analise"
+      }
+    ]
   },
   {
     "id": "limites",
