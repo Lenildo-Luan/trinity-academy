@@ -6,6 +6,46 @@ import { P5Sketch } from "./p5-sketch";
 
 type Bounds = { xMin: number; xMax: number; yMin: number; yMax: number };
 
+const BOARD_BG: [number, number, number] = [2, 7, 19];
+const PANEL_BG: [number, number, number] = [15, 20, 35];
+const PANEL_STROKE: [number, number, number] = [80, 100, 140];
+const AXIS_NEUTRAL: [number, number, number] = [110, 130, 160];
+const GRID_NEUTRAL: [number, number, number] = [55, 70, 95];
+const TEXT_PRIMARY: [number, number, number] = [215, 225, 240];
+const TEXT_SECONDARY: [number, number, number] = [150, 170, 200];
+
+function drawBoardChrome(p: p5, title: string, footer: string) {
+  p.background(...BOARD_BG);
+
+  p.noStroke();
+  p.fill(...PANEL_BG);
+  p.rect(10, 8, p.width - 20, 28, 8);
+  p.rect(10, p.height - 34, p.width - 20, 24, 8);
+
+  p.fill(...TEXT_PRIMARY);
+  p.textAlign(p.CENTER, p.CENTER);
+  p.textSize(12);
+  p.text(title, p.width / 2, 22);
+
+  p.fill(180, 130, 255);
+  p.textSize(10);
+  p.text(footer, p.width / 2, p.height - 22);
+}
+
+function drawOverlay(p: p5, text: string, color: [number, number, number], x = 14, y = 44) {
+  p.noStroke();
+  p.fill(...PANEL_BG);
+  p.rect(x, y, Math.min(p.width - 28, Math.max(170, text.length * 6.4)), 24, 6);
+  p.stroke(color[0], color[1], color[2], 90);
+  p.noFill();
+  p.rect(x, y, Math.min(p.width - 28, Math.max(170, text.length * 6.4)), 24, 6);
+  p.noStroke();
+  p.fill(...color);
+  p.textAlign(p.LEFT, p.CENTER);
+  p.textSize(11);
+  p.text(text, x + 8, y + 12);
+}
+
 function mapX(p: p5, x: number, b: Bounds, pad: number) {
   return p.map(x, b.xMin, b.xMax, pad, p.width - pad);
 }
@@ -22,10 +62,15 @@ function clearDash(p: p5) {
   (p.drawingContext as CanvasRenderingContext2D).setLineDash([]);
 }
 
-function drawAxes(p: p5, b: Bounds, pad = 36) {
-  p.background(248, 250, 252);
+function drawAxes(p: p5, b: Bounds, pad = 36, title = "", footer = "") {
+  drawBoardChrome(p, title, footer);
 
-  p.stroke(230);
+  p.fill(...PANEL_BG);
+  p.stroke(PANEL_STROKE[0], PANEL_STROKE[1], PANEL_STROKE[2], 90);
+  p.strokeWeight(1);
+  p.rect(pad - 8, pad - 8, p.width - pad * 2 + 16, p.height - pad * 2 + 16, 10);
+
+  p.stroke(GRID_NEUTRAL[0], GRID_NEUTRAL[1], GRID_NEUTRAL[2], 140);
   p.strokeWeight(1);
   for (let x = Math.ceil(b.xMin); x <= b.xMax; x += 1) {
     const sx = mapX(p, x, b, pad);
@@ -36,7 +81,7 @@ function drawAxes(p: p5, b: Bounds, pad = 36) {
     p.line(pad, sy, p.width - pad, sy);
   }
 
-  p.stroke(120);
+  p.stroke(...AXIS_NEUTRAL);
   p.strokeWeight(1.5);
   if (b.yMin <= 0 && b.yMax >= 0) {
     p.line(pad, mapY(p, 0, b, pad), p.width - pad, mapY(p, 0, b, pad));
@@ -51,7 +96,7 @@ export function VerticalLineTest() {
   const b: Bounds = { xMin: -8, xMax: 8, yMin: -6, yMax: 6 };
 
   const draw = (p: p5) => {
-    drawAxes(p, b);
+    drawAxes(p, b, 36, "Teste da Reta Vertical", "Clique no canvas para mover a reta e contar intersecoes");
     const pad = 36;
 
     p.noFill();
@@ -96,17 +141,15 @@ export function VerticalLineTest() {
 
     if (lineX >= 3.2 && lineX <= 7.2) intersections += 1;
 
-    p.noStroke();
-    p.fill(intersections <= 1 ? 22 : 220, intersections <= 1 ? 163 : 38, intersections <= 1 ? 74 : 38);
-    p.textSize(13);
-    p.textAlign(p.LEFT);
-    p.text(`Intersecoes: ${intersections}`, 12, 20);
+    drawOverlay(p, `Intersecoes: ${intersections}`, intersections <= 1 ? [100, 200, 100] : [255, 180, 50]);
 
-    p.fill(80);
+    p.noStroke();
+    p.fill(...TEXT_SECONDARY);
     p.textSize(11);
-    p.text("Azul: parabola", 12, p.height - 34);
-    p.text("Vermelho: circulo", 120, p.height - 34);
-    p.text("Verde: reta", 230, p.height - 34);
+    p.textAlign(p.LEFT, p.CENTER);
+    p.text("Azul: parabola", 14, p.height - 22);
+    p.text("Laranja: circulo", 132, p.height - 22);
+    p.text("Verde: reta", 258, p.height - 22);
   };
 
   const mousePressed = (p: p5) => {
@@ -119,15 +162,20 @@ export function VerticalLineTest() {
 
 export function RootFunctionsComparison() {
   const draw = (p: p5) => {
-    p.background(248, 250, 252);
+    drawBoardChrome(p, "Comparacao de Funcoes Raiz", "Esquerda: raiz quadrada | Direita: raiz cubica");
     const pad = 34;
     const half = p.width / 2;
 
     const left: Bounds = { xMin: -0.2, xMax: 6.2, yMin: -0.2, yMax: 3.2 };
     const right: Bounds = { xMin: -6.2, xMax: 6.2, yMin: -2.2, yMax: 2.2 };
 
+    p.noStroke();
+    p.fill(...PANEL_BG);
+    p.rect(12, 36, half - 18, p.height - 80, 10);
+    p.rect(half + 6, 36, half - 18, p.height - 80, 10);
+
     p.push();
-    p.stroke(220);
+    p.stroke(GRID_NEUTRAL[0], GRID_NEUTRAL[1], GRID_NEUTRAL[2], 120);
     for (let i = 0; i <= 6; i++) {
       const sx = p.map(i, left.xMin, left.xMax, pad, half - pad);
       p.line(sx, pad, sx, p.height - pad);
@@ -136,7 +184,7 @@ export function RootFunctionsComparison() {
       const sy = p.map(j, left.yMin, left.yMax, p.height - pad, pad);
       p.line(pad, sy, half - pad, sy);
     }
-    p.stroke(120);
+    p.stroke(...AXIS_NEUTRAL);
     p.line(pad, p.map(0, left.yMin, left.yMax, p.height - pad, pad), half - pad, p.map(0, left.yMin, left.yMax, p.height - pad, pad));
     p.line(p.map(0, left.xMin, left.xMax, pad, half - pad), pad, p.map(0, left.xMin, left.xMax, pad, half - pad), p.height - pad);
 
@@ -149,12 +197,13 @@ export function RootFunctionsComparison() {
     }
     p.endShape();
     p.noStroke();
-    p.fill(80);
-    p.text("sqrt(x) - dominio [0, +inf)", pad, 20);
+    p.fill(...TEXT_SECONDARY);
+    p.textSize(11);
+    p.text("sqrt(x) - dominio [0, +inf)", pad, 26);
     p.pop();
 
     p.push();
-    p.stroke(220);
+    p.stroke(GRID_NEUTRAL[0], GRID_NEUTRAL[1], GRID_NEUTRAL[2], 120);
     for (let i = -6; i <= 6; i++) {
       const sx = p.map(i, right.xMin, right.xMax, half + pad, p.width - pad);
       p.line(sx, pad, sx, p.height - pad);
@@ -163,12 +212,12 @@ export function RootFunctionsComparison() {
       const sy = p.map(j, right.yMin, right.yMax, p.height - pad, pad);
       p.line(half + pad, sy, p.width - pad, sy);
     }
-    p.stroke(120);
+    p.stroke(...AXIS_NEUTRAL);
     p.line(half + pad, p.map(0, right.yMin, right.yMax, p.height - pad, pad), p.width - pad, p.map(0, right.yMin, right.yMax, p.height - pad, pad));
     p.line(p.map(0, right.xMin, right.xMax, half + pad, p.width - pad), pad, p.map(0, right.xMin, right.xMax, half + pad, p.width - pad), p.height - pad);
 
     p.noFill();
-    p.stroke(14, 116, 144);
+    p.stroke(255, 180, 50);
     p.strokeWeight(2);
     p.beginShape();
     for (let x = -6; x <= 6; x += 0.03) {
@@ -176,8 +225,9 @@ export function RootFunctionsComparison() {
     }
     p.endShape();
     p.noStroke();
-    p.fill(80);
-    p.text("cbrt(x) - dominio R", half + pad, 20);
+    p.fill(...TEXT_SECONDARY);
+    p.textSize(11);
+    p.text("cbrt(x) - dominio R", half + pad, 26);
     p.pop();
   };
 
@@ -189,7 +239,7 @@ export function PiecewiseFunctionExample() {
   const bounds: Bounds = { xMin: 0, xMax: 220, yMin: 0, yMax: 35 };
 
   const draw = (p: p5) => {
-    drawAxes(p, bounds, 40);
+    drawAxes(p, bounds, 40, "Funcao por Partes (Tarifa de Energia)", "Compare os dois trechos e o ponto de mudanca");
     p.noFill();
     p.stroke(37, 99, 235);
     p.strokeWeight(2.5);
@@ -208,13 +258,11 @@ export function PiecewiseFunctionExample() {
     }
     p.endShape();
 
-    p.fill(220, 38, 38);
+    p.fill(255, 180, 50);
     p.noStroke();
     p.circle(mapX(p, threshold, bounds, 40), mapY(p, yThreshold, bounds, 40), 8);
 
-    p.fill(80);
-    p.textSize(12);
-    p.text(`Ponto de mudanca: ${threshold} kWh`, 14, 20);
+    drawOverlay(p, `Ponto de mudanca: ${threshold} kWh`, [180, 130, 255]);
   };
 
   return (
@@ -240,7 +288,7 @@ export function ExponentialDecay() {
   const bounds: Bounds = { xMin: 0, xMax: 23000, yMin: 0, yMax: 105 };
 
   const draw = (p: p5) => {
-    drawAxes(p, bounds, 44);
+    drawAxes(p, bounds, 44, "Decaimento Exponencial", "Linhas-guia marcam 1, 2 e 3 meias-vidas");
     p.noFill();
     p.stroke(37, 99, 235);
     p.strokeWeight(2.5);
@@ -251,7 +299,7 @@ export function ExponentialDecay() {
     }
     p.endShape();
 
-    p.stroke(220, 38, 38, 150);
+    p.stroke(255, 180, 50, 150);
     p.strokeWeight(1.3);
     withDash(p, [5, 5]);
     [0.5, 0.25, 0.125].forEach((f, i) => {
@@ -262,10 +310,7 @@ export function ExponentialDecay() {
     });
     clearDash(p);
 
-    p.noStroke();
-    p.fill(80);
-    p.textSize(12);
-    p.text(`Meia-vida: ${halfLife} anos`, 14, 20);
+    drawOverlay(p, `Meia-vida: ${halfLife} anos`, [100, 200, 100]);
   };
 
   return (
@@ -292,9 +337,9 @@ export function ExponentialLogInverse() {
   const bounds = useMemo<Bounds>(() => ({ xMin: -3 / zoom, xMax: 4 / zoom, yMin: -3 / zoom, yMax: 4 / zoom }), [zoom]);
 
   const draw = (p: p5) => {
-    drawAxes(p, bounds, 42);
+    drawAxes(p, bounds, 42, "Exponencial x Logaritmo", "Curvas inversas refletidas em relacao a y=x");
 
-    p.stroke(148, 163, 184);
+    p.stroke(...TEXT_SECONDARY);
     p.strokeWeight(1.5);
     withDash(p, [4, 4]);
     p.line(mapX(p, bounds.xMin, bounds, 42), mapY(p, bounds.xMin, bounds, 42), mapX(p, bounds.xMax, bounds, 42), mapY(p, bounds.xMax, bounds, 42));
@@ -318,15 +363,13 @@ export function ExponentialLogInverse() {
 
     const e = Math.E;
     p.noStroke();
-    p.fill(220, 38, 38);
+    p.fill(255, 180, 50);
     p.circle(mapX(p, 0, bounds, 42), mapY(p, 1, bounds, 42), 7);
     p.circle(mapX(p, 1, bounds, 42), mapY(p, 0, bounds, 42), 7);
     p.circle(mapX(p, 1, bounds, 42), mapY(p, e, bounds, 42), 7);
     p.circle(mapX(p, e, bounds, 42), mapY(p, 1, bounds, 42), 7);
 
-    p.fill(80);
-    p.textSize(12);
-    p.text("azul: e^x | verde: ln(x) | cinza: y=x", 12, 20);
+    drawOverlay(p, "azul: e^x | verde: ln(x) | cinza: y=x", [180, 130, 255]);
   };
 
   return (
@@ -352,19 +395,24 @@ export function UnitCircleInteractive() {
   const [theta, setTheta] = useState(Math.PI / 4);
 
   const draw = (p: p5) => {
-    p.background(248, 250, 252);
+    drawBoardChrome(p, "Circulo Unitario e Projecoes", "Marcador conecta angulo no circulo com seno e cosseno");
     const leftW = p.width * 0.48;
     const cx = leftW / 2;
     const cy = p.height / 2;
     const r = Math.min(leftW, p.height) * 0.32;
 
-    p.stroke(220);
+    p.noStroke();
+    p.fill(...PANEL_BG);
+    p.rect(12, 40, leftW - 16, p.height - 84, 10);
+    p.rect(leftW + 8, 40, p.width - leftW - 20, p.height - 84, 10);
+
+    p.stroke(GRID_NEUTRAL[0], GRID_NEUTRAL[1], GRID_NEUTRAL[2], 120);
     for (let i = -2; i <= 2; i++) {
       p.line(cx - r * 1.3, cy + i * (r / 2), cx + r * 1.3, cy + i * (r / 2));
       p.line(cx + i * (r / 2), cy - r * 1.3, cx + i * (r / 2), cy + r * 1.3);
     }
 
-    p.stroke(120);
+    p.stroke(...AXIS_NEUTRAL);
     p.strokeWeight(1.5);
     p.line(cx - r * 1.3, cy, cx + r * 1.3, cy);
     p.line(cx, cy - r * 1.3, cx, cy + r * 1.3);
@@ -379,7 +427,7 @@ export function UnitCircleInteractive() {
     p.fill(37, 99, 235);
     p.circle(px, py, 9);
 
-    p.stroke(220, 38, 38);
+    p.stroke(255, 180, 50);
     withDash(p, [4, 4]);
     p.line(px, py, px, cy);
     p.stroke(16, 185, 129);
@@ -392,15 +440,15 @@ export function UnitCircleInteractive() {
     const gh = p.height - 60;
     const gyc = gy0 + gh / 2;
 
-    p.stroke(220);
+    p.stroke(GRID_NEUTRAL[0], GRID_NEUTRAL[1], GRID_NEUTRAL[2], 120);
     for (let i = 0; i <= 4; i++) {
       p.line(gx0 + (gw / 4) * i, gy0, gx0 + (gw / 4) * i, gy0 + gh);
     }
-    p.stroke(120);
+    p.stroke(...AXIS_NEUTRAL);
     p.line(gx0, gyc, gx0 + gw, gyc);
 
     p.noFill();
-    p.stroke(220, 38, 38);
+    p.stroke(255, 180, 50);
     p.beginShape();
     for (let t = 0; t <= Math.PI * 2; t += 0.03) {
       p.vertex(gx0 + (t / (Math.PI * 2)) * gw, gyc - Math.sin(t) * (gh * 0.38));
@@ -421,9 +469,11 @@ export function UnitCircleInteractive() {
     clearDash(p);
 
     p.noStroke();
-    p.fill(80);
-    p.textSize(12);
-    p.text(`theta=${theta.toFixed(2)} | sin=${Math.sin(theta).toFixed(3)} | cos=${Math.cos(theta).toFixed(3)}`, 10, 20);
+    drawOverlay(
+      p,
+      `theta=${theta.toFixed(2)} | sin=${Math.sin(theta).toFixed(3)} | cos=${Math.cos(theta).toFixed(3)}`,
+      [0, 150, 255],
+    );
   };
 
   return (
@@ -450,7 +500,7 @@ export function SinCosTanComparison() {
   const bounds = useMemo<Bounds>(() => ({ xMin: 0, xMax: cycles * Math.PI * 2, yMin: -3.2, yMax: 3.2 }), [cycles]);
 
   const draw = (p: p5) => {
-    drawAxes(p, bounds, 42);
+    drawAxes(p, bounds, 42, "Seno, Cosseno e Tangente", "Assintotas da tangente aparecem em destaque");
 
     p.noFill();
     p.stroke(37, 99, 235);
@@ -468,7 +518,7 @@ export function SinCosTanComparison() {
     }
     p.endShape();
 
-    p.stroke(220, 38, 38);
+    p.stroke(255, 180, 50);
     for (let k = 0; k < cycles * 2; k++) {
       const a = k * Math.PI + 0.04;
       const c = (k + 1) * Math.PI - 0.04;
@@ -482,17 +532,14 @@ export function SinCosTanComparison() {
       p.endShape();
 
       const asym = (k + 0.5) * Math.PI;
-      p.stroke(220, 38, 38, 110);
+      p.stroke(180, 130, 255, 120);
       withDash(p, [4, 4]);
       p.line(mapX(p, asym, bounds, 42), 42, mapX(p, asym, bounds, 42), p.height - 42);
       clearDash(p);
-      p.stroke(220, 38, 38);
+      p.stroke(255, 180, 50);
     }
 
-    p.noStroke();
-    p.fill(80);
-    p.textSize(12);
-    p.text("azul: sin | verde: cos | vermelho: tan", 12, 20);
+    drawOverlay(p, "azul: sin | verde: cos | laranja: tan", [180, 130, 255]);
   };
 
   return (
@@ -519,7 +566,7 @@ export function InverseTrigonometric() {
   const [mode, setMode] = useState<"arcsin" | "arccos" | "arctan">("arcsin");
 
   const draw = (p: p5) => {
-    p.background(248, 250, 252);
+    drawBoardChrome(p, "Funcoes Trigonometricas Inversas", "Selecione a curva e explore o valor de x");
     const cardW = p.width / 3;
 
     const drawCard = (i: number, label: string, fn: "arcsin" | "arccos" | "arctan") => {
@@ -529,11 +576,11 @@ export function InverseTrigonometric() {
       const y1 = p.height - 28;
       const b: Bounds = fn === "arctan" ? { xMin: -3, xMax: 3, yMin: -2, yMax: 2 } : { xMin: -1.2, xMax: 1.2, yMin: -2, yMax: 3.5 };
 
-      p.stroke(228);
-      p.noFill();
+      p.fill(...PANEL_BG);
+      p.stroke(PANEL_STROKE[0], PANEL_STROKE[1], PANEL_STROKE[2], 100);
       p.rect(x0, y0, x1 - x0, y1 - y0, 8);
 
-      p.stroke(120);
+      p.stroke(...AXIS_NEUTRAL);
       p.line(p.map(0, b.xMin, b.xMax, x0 + 10, x1 - 10), y0 + 10, p.map(0, b.xMin, b.xMax, x0 + 10, x1 - 10), y1 - 10);
       p.line(x0 + 10, p.map(0, b.yMin, b.yMax, y1 - 10, y0 + 10), x1 - 10, p.map(0, b.yMin, b.yMax, y1 - 10, y0 + 10));
 
@@ -563,9 +610,9 @@ export function InverseTrigonometric() {
       }
 
       p.noStroke();
-      p.fill(80);
+      p.fill(...TEXT_SECONDARY);
       p.textSize(12);
-      p.text(label, x0 + 10, 20);
+      p.text(label, x0 + 10, 26);
     };
 
     drawCard(0, "arcsin(x)", "arcsin");
@@ -599,9 +646,9 @@ export function DampedPendulum() {
 
   const bounds: Bounds = { xMin: 0, xMax: 20, yMin: -1.2, yMax: 1.2 };
   const draw = (p: p5) => {
-    drawAxes(p, bounds, 42);
+    drawAxes(p, bounds, 42, "Pendulo Amortecido", "Envelope exponencial limita a oscilacao");
 
-    p.stroke(148, 163, 184);
+    p.stroke(...TEXT_SECONDARY);
     withDash(p, [4, 4]);
     p.noFill();
     p.beginShape();
@@ -622,10 +669,7 @@ export function DampedPendulum() {
     }
     p.endShape();
 
-    p.noStroke();
-    p.fill(80);
-    p.textSize(12);
-    p.text(`tau = ${tau.toFixed(1)}`, 12, 20);
+    drawOverlay(p, `tau = ${tau.toFixed(1)}`, [100, 200, 100]);
   };
 
   return (
@@ -649,10 +693,10 @@ export function FunctionTransformations() {
 
   const bounds: Bounds = { xMin: -8, xMax: 8, yMin: -6, yMax: 10 };
   const draw = (p: p5) => {
-    drawAxes(p, bounds, 42);
+    drawAxes(p, bounds, 42, "Transformacoes de Funcoes", "Cinza: base | Azul: funcao transformada");
 
     p.noFill();
-    p.stroke(180);
+    p.stroke(...TEXT_SECONDARY);
     p.strokeWeight(2);
     p.beginShape();
     for (let x = -8; x <= 8; x += 0.03) {
@@ -671,10 +715,7 @@ export function FunctionTransformations() {
     }
     p.endShape();
 
-    p.noStroke();
-    p.fill(80);
-    p.textSize(12);
-    p.text(`g(x) = ${flipY ? "-" : ""}${a.toFixed(1)} f(${b.toFixed(1)}(x-${h.toFixed(1)})) + ${k.toFixed(1)}`, 12, 20);
+    drawOverlay(p, `g(x) = ${flipY ? "-" : ""}${a.toFixed(1)} f(${b.toFixed(1)}(x-${h.toFixed(1)})) + ${k.toFixed(1)}`, [180, 130, 255]);
   };
 
   return (
@@ -696,7 +737,7 @@ export function EvenOddFunctions() {
   const bounds: Bounds = { xMin: -6, xMax: 6, yMin: -6, yMax: 10 };
 
   const draw = (p: p5) => {
-    drawAxes(p, bounds, 42);
+    drawAxes(p, bounds, 42, "Funcoes Pares e Impares", "Observe a simetria conforme o modo selecionado");
 
     p.noFill();
     p.stroke(37, 99, 235);
@@ -711,7 +752,7 @@ export function EvenOddFunctions() {
     }
     p.endShape();
 
-    p.stroke(16, 185, 129, 120);
+    p.stroke(180, 130, 255, 130);
     withDash(p, [4, 4]);
     if (mode === "par") {
       p.line(mapX(p, 0, bounds, 42), 42, mapX(p, 0, bounds, 42), p.height - 42);
@@ -721,10 +762,7 @@ export function EvenOddFunctions() {
     }
     clearDash(p);
 
-    p.noStroke();
-    p.fill(80);
-    p.textSize(12);
-    p.text(mode === "par" ? "f(-x)=f(x)" : mode === "impar" ? "f(-x)=-f(x)" : "sem simetria", 12, 20);
+    drawOverlay(p, mode === "par" ? "f(-x)=f(x)" : mode === "impar" ? "f(-x)=-f(x)" : "sem simetria", [100, 200, 100]);
   };
 
   return (
@@ -745,9 +783,9 @@ export function DampedOscillationAnalysis() {
   const bounds: Bounds = { xMin: 0, xMax: 18, yMin: -1.3, yMax: 1.3 };
 
   const draw = (p: p5) => {
-    drawAxes(p, bounds, 42);
+    drawAxes(p, bounds, 42, "Analise de Oscilacao Amortecida", "Corte em 5% mostra o tempo de acomodacao");
 
-    p.stroke(148, 163, 184);
+    p.stroke(...TEXT_SECONDARY);
     withDash(p, [4, 4]);
     p.noFill();
     p.beginShape();
@@ -769,16 +807,17 @@ export function DampedOscillationAnalysis() {
 
     const tCut = -Math.log(0.05) / lambda;
     if (tCut < 18) {
-      p.stroke(245, 158, 11);
+      p.stroke(255, 180, 50);
       withDash(p, [5, 5]);
       p.line(mapX(p, tCut, bounds, 42), 42, mapX(p, tCut, bounds, 42), p.height - 42);
       clearDash(p);
     }
 
-    p.noStroke();
-    p.fill(80);
-    p.textSize(12);
-    p.text(`lambda=${lambda.toFixed(2)} | omega=${omega.toFixed(2)} | periodo=${(2 * Math.PI / omega).toFixed(2)}s`, 12, 20);
+    drawOverlay(
+      p,
+      `lambda=${lambda.toFixed(2)} | omega=${omega.toFixed(2)} | periodo=${(2 * Math.PI / omega).toFixed(2)}s`,
+      [180, 130, 255],
+    );
   };
 
   return (
