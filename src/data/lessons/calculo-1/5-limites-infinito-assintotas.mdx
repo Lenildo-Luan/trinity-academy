@@ -1,0 +1,263 @@
+# Limites no Infinito e Assíntotas
+
+Até agora, exploramos limites quando x se aproxima de um ponto finito a. Mas muitas perguntas práticas envolvem o comportamento de funções conforme x cresce ou decresce infinitamente. Como a voltagem se estabiliza em um circuito de longa duração? Como a população de uma bactéria se aproxima de uma capacidade de carga? Como um algoritmo se comporta com entradas muito grandes?
+
+Essas perguntas exigem que entendamos **limites no infinito** e o conceito intimamente relacionado de **assíntotas** — linhas imaginárias que um gráfico se aproxima indefinidamente sem nunca atingir.
+
+## Objetivos de Aprendizado
+
+Ao final deste capítulo, você será capaz de:
+
+- **Calcular limites** quando x → +∞ ou x → -∞
+- **Identificar assíntotas horizontais** e determinar seu comportamento
+- **Identificar assíntotas verticais** usando limites laterais infinitos
+- **Identificar assíntotas oblíquas** para funções racionais específicas
+- **Comparar taxas de crescimento** de funções polinomiais, exponenciais e logarítmicas
+- **Aplicar essas ferramentas** para entender o comportamento de sistemas de longa duração
+
+## Limites Conforme x → +∞
+
+Quando dizemos que x → +∞, significa que x cresce indefinidamente. A questão é: para onde vai f(x)?
+
+### Definição Formal
+
+$$\lim_{x \to +\infty} f(x) = L$$
+
+significa que para todo ε > 0, existe N > 0 tal que:
+Se x > N, então |f(x) - L| < ε.
+
+Em outras palavras: para x suficientemente grande, f(x) fica arbitrariamente perto de L.
+
+### Exemplo 1: Função Racional Simples
+
+Considere:
+$$f(x) = \frac{1}{x}$$
+
+Conforme x cresce (x → ∞), a fração 1/x fica cada vez menor, aproximando-se de 0:
+
+| x | f(x) |
+|---|---|
+| 10 | 0,1 |
+| 100 | 0,01 |
+| 1000 | 0,001 |
+| 1000000 | 0,000001 |
+
+Portanto:
+$$\lim_{x \to +\infty} \frac{1}{x} = 0$$
+
+### Exemplo 2: Função Exponencial Decrescente
+
+$$f(x) = e^{-x}$$
+
+Conforme x → ∞, e^{-x} = 1/e^x → 0 (porque e^x cresce infinitamente):
+$$\lim_{x \to +\infty} e^{-x} = 0$$
+
+### Exemplo 3: Limite Infinito em x → ∞
+
+$$f(x) = x^2$$
+
+Conforme x → ∞, x² também cresce infinitamente:
+$$\lim_{x \to +\infty} x^2 = +\infty$$
+
+(Formalmente: para todo M > 0, existe N tal que x > N ⟹ x² > M)
+
+### Exemplo 4: Função Oscilatória Limitada
+
+$$f(x) = \sin(x)$$
+
+Conforme x cresce, sin(x) continua oscilando entre -1 e +1 indefinidamente. Não converge para nenhum valor:
+$$\lim_{x \to +\infty} \sin(x) \text{ não existe}$$
+
+## Assíntotas Horizontais
+
+Uma **assíntota horizontal** é uma linha y = L tal que:
+$$\lim_{x \to +\infty} f(x) = L \quad \text{ou} \quad \lim_{x \to -\infty} f(x) = L$$
+
+O gráfico se aproxima indefinidamente dessa linha conforme x cresce (ou decresce) mas nunca a atinge (em geral).
+
+### Encontrar Assíntotas Horizontais de Funções Racionais
+
+Para uma razão de polinômios:
+$$f(x) = \frac{a_n x^n + \ldots + a_1 x + a_0}{b_m x^m + \ldots + b_1 x + b_0}$$
+
+**Regra Prática:**
+
+1. **Se n < m** (grau do numerador < grau do denominador):
+   Assíntota horizontal: y = 0
+
+2. **Se n = m** (graus iguais):
+   Assíntota horizontal: y = aₙ/bₘ (razão dos coeficientes principais)
+
+3. **Se n > m** (grau do numerador > grau do denominador):
+   Sem assíntota horizontal (pode haver assíntota oblíqua)
+
+### Exemplo 5: Assíntota Horizontal com n < m
+
+$$f(x) = \frac{x + 1}{x^2 + 2}$$
+
+Aqui, grau do numerador = 1, grau do denominador = 2.
+Como 1 < 2: assíntota horizontal é y = 0.
+
+Verifique:
+$$\lim_{x \to \infty} \frac{x + 1}{x^2 + 2} = \lim_{x \to \infty} \frac{x/x^2 + 1/x^2}{1 + 2/x^2} = \lim_{x \to \infty} \frac{1/x + 1/x^2}{1 + 2/x^2} = \frac{0}{1} = 0$$
+
+### Exemplo 6: Assíntota Horizontal com n = m
+
+$$f(x) = \frac{3x^2 + 2x - 1}{2x^2 - x + 5}$$
+
+Numerador grau = 2, denominador grau = 2.
+Como os graus são iguais: assíntota horizontal é y = 3/2 (razão dos coeficientes principais).
+
+Verifique (dividindo por x²):
+$$\lim_{x \to \infty} \frac{3 + 2/x - 1/x^2}{2 - 1/x + 5/x^2} = \frac{3}{2}$$
+
+### Exemplo 7: Circuito RC com Condição Inicial
+
+Lembre-se do capítulo anterior:
+$$V(t) = V_{\max}(1 - e^{-t/RC})$$
+
+Conforme t → ∞, e^{-t/RC} → 0, portanto:
+$$\lim_{t \to \infty} V(t) = V_{\max}$$
+
+**Interpretação:** A voltagem se aproxima assintoticamente de V_max. Há uma assíntota horizontal em y = V_max.
+
+## Limites Infinitos e Assíntotas Verticais
+
+Uma **assíntota vertical** é uma linha vertical x = a onde:
+$$\lim_{x \to a^-} f(x) = \pm \infty \quad \text{ou} \quad \lim_{x \to a^+} f(x) = \pm \infty$$
+
+### Exemplo 8: Assíntota Vertical Simples
+
+$$f(x) = \frac{1}{x - 2}$$
+
+Conforme x → 2 pela esquerda, x - 2 → 0⁻, então 1/(x-2) → -∞:
+$$\lim_{x \to 2^-} \frac{1}{x - 2} = -\infty$$
+
+Conforme x → 2 pela direita, x - 2 → 0⁺, então 1/(x-2) → +∞:
+$$\lim_{x \to 2^+} \frac{1}{x - 2} = +\infty$$
+
+**Conclusão:** Assíntota vertical em x = 2.
+
+Graficamente, o gráfico salta de -∞ para +∞ em x = 2, aproximando-se indefinidamente da linha vertical x = 2 de ambos os lados.
+
+### Exemplo 9: Assíntota Vertical de Função Logarítmica
+
+$$f(x) = \ln(x)$$
+
+O domínio é x > 0. Conforme x → 0⁺:
+$$\lim_{x \to 0^+} \ln(x) = -\infty$$
+
+**Assíntota vertical:** x = 0 (o eixo y).
+
+## Comparação de Taxas de Crescimento
+
+Diferentes tipos de funções crescem em velocidades diferentes. Entender essa hierarquia é crucial em ciência da computação (análise de algoritmos) e engenharia (modelagem de sistemas).
+
+### Ordem de Crescimento (Da Mais Lenta Para a Mais Rápida)
+
+$$\text{Constante} \ll \log(x) \ll x^a \ll e^x \ll x! \ll e^{e^x}$$
+
+(Aqui, ≪ significa "cresce muito mais lentamente que".)
+
+### Exemplo 10: Comparando Crescimento
+
+$$\lim_{x \to \infty} \frac{\ln(x)}{x}$$
+
+Logaritmo cresce mais lentamente que qualquer potência de x. Por L'Hôpital (que veremos depois), ou divisão intuitiva:
+
+$$\lim_{x \to \infty} \frac{\ln(x)}{x} = 0$$
+
+$$\lim_{x \to \infty} \frac{x^2}{e^x}$$
+
+Exponencial cresce mais rápido que qualquer polinômio:
+
+$$\lim_{x \to \infty} \frac{x^2}{e^x} = 0$$
+
+$$\lim_{x \to \infty} \frac{e^x}{x!}$$
+
+Fatorial cresce mais rápido que exponencial:
+
+$$\lim_{x \to \infty} \frac{e^x}{x!} = 0$$
+
+### Visualização Intuitiva
+
+{{ Growth rates visualization }}
+
+Imagine uma corrida onde cada função é um corredor:
+- **Logaritmo** é o mais lento (cresce, mas gradualmente)
+- **Polinômios** aceleram conforme o grau aumenta
+- **Exponencial** deixa todos para trás a uma velocidade crescente
+- **Fatorial** é incrivelmente mais rápido que exponencial
+
+## Assíntotas Oblíquas (Slant Asymptotes)
+
+Se o grau do numerador é *exatamente um* a mais que o grau do denominador, há uma assíntota oblíqua.
+
+### Exemplo 11: Encontrar Assíntota Oblíqua
+
+$$f(x) = \frac{x^2 + 2x + 1}{x + 1}$$
+
+Aqui, grau(numerador) = 2, grau(denominador) = 1. Fazemos divisão polinomial:
+
+$$\frac{x^2 + 2x + 1}{x + 1} = x + 1 + \frac{0}{x + 1} = x + 1$$
+
+(Na verdade, isso se simplifica! Note que x² + 2x + 1 = (x+1)².)
+
+Portanto, não há assíntota oblíqua — a função é simplesmente y = x + 1 com um buraco em x = -1.
+
+Mas considere um exemplo mais genuíno:
+
+$$f(x) = \frac{x^2 + 1}{x - 1}$$
+
+Divisão polinomial:
+$$\frac{x^2 + 1}{x - 1} = x + 1 + \frac{2}{x - 1}$$
+
+Conforme x → ∞, o termo 2/(x-1) → 0, portanto:
+$$\lim_{x \to \infty} \left[f(x) - (x + 1)\right] = \lim_{x \to \infty} \frac{2}{x - 1} = 0$$
+
+**Assíntota oblíqua:** y = x + 1
+
+O gráfico se aproxima dessa reta conforme x → ±∞.
+
+## Comportamento Assintótico em Sistemas Físicos
+
+### Exemplo: Circuito RL (Resistor-Indutor)
+
+A corrente em um circuito RL é:
+$$i(t) = \frac{V}{R}\left(1 - e^{-Rt/L}\right)$$
+
+Conforme t → ∞:
+$$\lim_{t \to \infty} i(t) = \frac{V}{R}$$
+
+**Interpretação:** Inicialmente, a corrente cresce, mas eventualmente se estabiliza em V/R (Lei de Ohm do estado estacionário). O comportamento transiente desaparece, deixando apenas o regime permanente.
+
+### Exemplo: Crescimento Logístico
+
+Uma população com capacidade de carga:
+$$P(t) = \frac{K}{1 + Ae^{-rt}}$$
+
+Conforme t → ∞:
+$$\lim_{t \to \infty} P(t) = K$$
+
+**Interpretação:** A população cresce inicialmente, mas se aproxima assintoticamente da capacidade de carga K. Há duas assíntotas: y = 0 (para t → -∞) e y = K (para t → ∞).
+
+## Estratégia Prática: Analisar Comportamento de Longo Prazo
+
+1. **Para x → ∞:** Identifique o termo dominante (mais crescente)
+2. **Para f(x) → ∞:** Procure por divisão por zero ou crescimento exponencial
+3. **Para assíntotas:** Procure por valores que a função se aproxima sem atingir
+4. **Para aplicações:** Pergunte-se "o que acontece em tempo longo ou em escala grande?"
+
+## Resumo
+
+- **Limites no infinito** descrevem o comportamento de funções conforme x cresce
+- **Assíntotas horizontais** (y = L) ocorrem quando lim(x→±∞) f(x) = L
+- **Assíntotas verticais** (x = a) ocorrem quando lim(x→a±) f(x) = ±∞
+- **Assíntotas oblíquas** ocorrem quando grau(numerador) = grau(denominador) + 1
+- **Comparação de crescimento:** Logaritmo < Polinômio < Exponencial < Fatorial
+- Essas ferramentas são vitais para entender o comportamento de longo prazo em física, engenharia e computação
+
+## Próximo Passo
+
+Você agora compreende o comportamento de funções em todos os cenários — em pontos finitos, no infinito, com saltos e oscilações. Um padrão importante emerge quando uma função é "bem-comportada" — sem saltos, sem assíntotas verticais. No próximo capítulo, exploramos a noção de **continuidade** e descobriremos que ela é simplesmente um limite no seu melhor.
+

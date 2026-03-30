@@ -1,0 +1,242 @@
+# O Teorema do Sanduíche e Limites Especiais
+
+Até agora, aplicamos técnicas diretas para calcular limites: leis algébricas, manipulação de formas indeterminadas, análise de assíntotas. Mas alguns limites são mais evasivos — não se sujeitam a fatoração ou racionalização. Quando uma função oscila ou é "espremida" entre outras, precisamos de uma ferramenta diferente: o **Teorema do Sanduíche** (também chamado Teorema da Compressão ou do Envio).
+
+Neste capítulo final sobre limites, exploraremos esse teorema poderoso e suas aplicações mais importantes — incluindo dois limites especiais que aparecem em toda análise e engenharia.
+
+## Objetivos de Aprendizado
+
+Ao final deste capítulo, você será capaz de:
+
+- **Entender e aplicar** o Teorema do Sanduíche para calcular limites indiretos
+- **Calcular** o limite especial lim(x→0) sin(x)/x e sua importância em engenharia
+- **Calcular** o limite especial lim(n→∞) (1 + 1/n)ⁿ (definição do número e)
+- **Aplicar** esses limites a problemas de engenharia em processamento de sinais e crescimento
+- **Reconhecer** quando o Teorema do Sanduíche é apropriado
+
+## O Teorema do Sanduíche (Teorema da Compressão)
+
+### Enunciado
+
+> **Teorema do Sanduíche:** Suponha que f(x), g(x) e h(x) são funções tais que:
+>
+> 1. g(x) ≤ f(x) ≤ h(x) para todo x em algum intervalo aberto contendo a (exceto possivelmente em a)
+> 2. lim(x→a) g(x) = L e lim(x→a) h(x) = L (as funções "pão" convergem ao mesmo limite)
+>
+> Então: lim(x→a) f(x) = L
+
+Em outras palavras: se uma função fica "espremida" entre duas outras funções que convergem ao mesmo valor, a função espremida também converge a esse valor.
+
+### Intuição Geométrica
+
+{{ Squeeze theorem visualization }}
+
+Imagine:
+- g(x) é o "pão inferior" — sempre menor que f(x)
+- h(x) é o "pão superior" — sempre maior que f(x)
+- f(x) é o "recheio" — preso no meio
+- Quando os dois pães convergem para o mesmo ponto L, o recheio não tem escapatória — deve convergir para L também
+
+### Por Que Funciona (Esboço de Prova)
+
+Fixe ε > 0. Como lim g(x) = L, existe δ₁ tal que se 0 < |x - a| < δ₁, então |g(x) - L| < ε, ou L - ε < g(x).
+
+Como lim h(x) = L, existe δ₂ tal que se 0 < |x - a| < δ₂, então |h(x) - L| < ε, ou h(x) < L + ε.
+
+Escolha δ = min(δ₁, δ₂). Então, se 0 < |x - a| < δ:
+$$L - \varepsilon < g(x) \leq f(x) \leq h(x) < L + \varepsilon$$
+
+Portanto, |f(x) - L| < ε. ✓
+
+## Aplicação 1: Função Oscilatória Limitada
+
+### Exemplo 1: lim(x→0) x · sin(1/x)
+
+Recorde que sin(1/x) oscila infinitamente perto de x = 0, então o limite não existe diretamente.
+
+**Solução:**
+
+Sabemos que |sin(u)| ≤ 1 para todo u. Portanto:
+$$-1 \leq \sin(1/x) \leq 1$$
+
+Multiplicar por x (sendo cuidadoso com o sinal):
+- Se x > 0: -x ≤ x · sin(1/x) ≤ x
+- Se x < 0: x ≤ x · sin(1/x) ≤ -x
+
+Em ambos os casos, |x · sin(1/x)| ≤ |x|.
+
+Portanto:
+$$-|x| \leq x \cdot \sin(1/x) \leq |x|$$
+
+Agora aplicar o Teorema do Sanduíche com g(x) = -|x| e h(x) = |x|:
+$$\lim_{x \to 0} (-|x|) = 0 \quad \text{e} \quad \lim_{x \to 0} |x| = 0$$
+
+Logo:
+$$\lim_{x \to 0} x \cdot \sin(1/x) = 0$$
+
+**Interpretação:** Uma função oscilante fica "espremida" por duas funções lineares convergentes. A oscilação é dominada pela amplitude decrescente.
+
+## Limite Especial 1: lim(x→0) sin(x)/x
+
+Este é talvez o limite mais importante em cálculo — aparece em toda análise de sinais, ótica e vibrações.
+
+### O Limite
+
+$$\lim_{x \to 0} \frac{\sin(x)}{x} = 1$$
+
+(Note: x deve estar em radianos!)
+
+### Prova Usando o Teorema do Sanduíche
+
+Considere a geometria de um círculo unitário (raio = 1):
+
+Quando um ângulo é x (em radianos):
+- Comprimento do arco circular: x
+- Altura do triângulo: sin(x)
+- Altura da reta tangente: tan(x)
+
+Pela geometria, temos:
+$$\sin(x) < x < \tan(x)$$
+
+(para 0 < x < π/2)
+
+Dividir por sin(x):
+$$1 < \frac{x}{\sin(x)} < \frac{\tan(x)}{\sin(x)} = \frac{1}{\cos(x)}$$
+
+Inverter (revertendo desigualdades):
+$$\cos(x) < \frac{\sin(x)}{x} < 1$$
+
+Conforme x → 0⁺:
+$$\lim_{x \to 0^+} \cos(x) = 1 \quad \text{e} \quad \lim_{x \to 0^+} 1 = 1$$
+
+Pelo Teorema do Sanduíche:
+$$\lim_{x \to 0^+} \frac{\sin(x)}{x} = 1$$
+
+Para x → 0⁻, use a paridade: sin(-x)/(-x) = sin(x)/x, portanto o limite pela esquerda também é 1. ✓
+
+### Importância em Engenharia: Processamento de Sinais
+
+Na transformada de Fourier e análise de frequência, a função sinc(x) = sin(πx)/(πx) aparece constantemente. A propriedade lim(x→0) sinc(x) = 1 garante que:
+
+- A função é contínua em x = 0 (podemos definir sinc(0) = 1)
+- A integral da sinc (largura de banda) é bem-definida
+- Filtros passa-baixa baseados em sinc funcionam adequadamente
+
+### Corolário: sin(x) ≈ x para x Pequeno
+
+Porque lim(x→0) sin(x)/x = 1, para valores de x próximos de 0:
+$$\sin(x) \approx x \quad \text{(x em radianos)}$$
+
+Isso é explorado constantemente em engenharia:
+- **Oscilações pequenas:** Para θ pequeno, sin(θ) ≈ θ, então equações de movimento simplificam
+- **Óptica:** Aproximação de ângulos pequenos em difração
+- **Teoria de Controle:** Linearização em torno de um ponto de operação
+
+## Limite Especial 2: lim(n→∞) (1 + 1/n)ⁿ = e
+
+Este limite define o número de Euler, e ≈ 2,71828..., a base de logaritmos naturais e exponenciais.
+
+### O Limite
+
+$$\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n = e$$
+
+Ou equivalentemente (mudança de variável x = 1/n):
+$$\lim_{x \to 0^+} (1 + x)^{1/x} = e$$
+
+### Por Que e É Especial?
+
+O número e surge naturalmente em muitos contextos:
+
+1. **Crescimento contínuo:** Se algo cresce a uma taxa proporcional ao seu tamanho (como juros compostos), e a taxa é 100% ao ano, com composição contínua, o crescimento final é e.
+
+2. **Derivada da exponencial:** d/dx(eˣ) = eˣ — é a única base onde a derivada é a própria função.
+
+3. **Descaimento radioativo:** Atividade A(t) = A₀ e^{-λt}
+
+### Prova Intuitiva (Não Rigorosa)
+
+Considere composição anual vs. contínua de juros:
+- Taxa anual r = 100% = 1
+- Investimento inicial: $1
+- Após 1 ano com composição anual: $2
+- Após 1 ano com composição semestral: (1 + 1/2)² = 2,25
+- Após 1 ano com composição trimestral: (1 + 1/4)⁴ ≈ 2,44
+- Após 1 ano com composição mensal (n=12): (1 + 1/12)¹² ≈ 2,613
+- Após 1 ano com composição diária (n=365): (1 + 1/365)³⁶⁵ ≈ 2,7146
+- Limite (n → ∞, composição contínua): e ≈ 2,71828
+
+A tabela mostra convergência para e:
+
+| n | (1 + 1/n)ⁿ |
+|---|---|
+| 1 | 2 |
+| 10 | 2,594 |
+| 100 | 2,705 |
+| 1000 | 2,717 |
+| 10000 | 2,71815 |
+| ∞ | e ≈ 2,71828 |
+
+### Generalização: Crescimento Exponencial
+
+Para qualquer taxa r de crescimento contínuo:
+$$\lim_{n \to \infty} \left(1 + \frac{r}{n}\right)^n = e^r$$
+
+Exemplo: Crescimento bacteriano a 50% ao ano com composição contínua após 1 ano é e^{0,5} ≈ 1,649 (64,9% de crescimento).
+
+## Aplicação: Análise de Circuitos e Sistemas
+
+### Exemplo: Circuito RC em Regime Transiente
+
+A tensão em um capacitor carregando é:
+$$V(t) = V_{\max}(1 - e^{-t/RC})$$
+
+Conforme t → ∞:
+$$\lim_{t \to \infty} V(t) = V_{\max}(1 - 0) = V_{\max}$$
+
+A constante de tempo τ = RC é crucial:
+$$V(\tau) = V_{\max}(1 - e^{-1}) = V_{\max}(1 - 1/e) ≈ 0,632 V_{\max}$$
+
+Em uma constante de tempo, o capacitor carrega para 63,2% de sua voltagem máxima. Essa é uma propriedade universal derivada do limite especial.
+
+### Exemplo: Dinâmica de População com Crescimento Logístico
+
+A população cresce como:
+$$P(t) = \frac{K}{1 + (K/P_0 - 1)e^{-rt}}$$
+
+Conforme t → ∞, e^{-rt} → 0, então P(t) → K. A população se aproxima da capacidade de carga.
+
+## Estratégia de Estudo: Reconhecendo Quando Usar Cada Técnica
+
+| Situação | Técnica | Exemplo |
+|---|---|---|
+| Forma 0/0 com polinômios | Fatoração | (x²-1)/(x-1) → 2 |
+| Forma 0/0 com raízes | Racionalização | (√x - 1)/(x - 1) |
+| Função oscilatória limitada | Teorema do Sanduíche | x·sin(1/x) → 0 |
+| sin(x)/x perto de 0 | Limite especial | = 1 |
+| Crescimento contínuo | Número e | (1+1/n)ⁿ → e |
+| x → ∞, razão de polinômios | Dividir pela maior potência | (3x²)/(2x²) → 3/2 |
+
+## Resumo
+
+- O **Teorema do Sanduíche** determina o limite de uma função espremida entre duas outras que convergem ao mesmo valor
+- **lim(x→0) sin(x)/x = 1** é fundamental em processamento de sinais e oscilações
+- Para valores pequenos, **sin(x) ≈ x** (radianos)
+- **lim(n→∞) (1 + 1/n)ⁿ = e** define o número de Euler, crucial em crescimento exponencial e decaimento
+- Esses limites especiais aparecem onipresentemente na análise de sistemas físicos
+- O número e é a base natural para exponenciais e logaritmos naturais
+
+## Conclusão do Módulo de Limites
+
+Você completou o módulo de limites — o fundamento de todo cálculo. Você agora entende:
+
+1. **Intuitivamente:** O que é um limite e por que importa
+2. **Formalmente:** A definição ε-δ e como provar limites rigorosamente
+3. **Praticamente:** Como calcular limites usando leis, manipulação algébrica e técnicas especiais
+4. **Aplicadamente:** Como limites descrevem comportamento de sistemas reais
+
+## Próximo Módulo: Continuidade
+
+Limites responderam à pergunta: "O que acontece perto de um ponto?" A continuidade responde: "Como uma função se comporta *em* um ponto, considerando vizinhanças?"
+
+A continuidade é simplesmente: lim(x→a) f(x) = f(a) — o limite iguala o valor. Veremos que funções contínuas têm propriedades poderosas, como o Teorema do Valor Intermediário, que garantem que soluções para problemas existem. Continuidade é onde a análise rigorosa encontra a geometria intuitiva.
+

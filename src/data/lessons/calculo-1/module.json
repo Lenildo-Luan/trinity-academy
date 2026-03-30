@@ -45,7 +45,50 @@
     "id": "limites",
     "title": "Limites",
     "description": "Conceito intuitivo e formal de limite, técnicas algébricas e limites no infinito",
-    "lessons": []
+    "lessons": [
+      {
+        "id": "limite-conceito-intuitivo",
+        "title": "O Conceito Intuitivo de Limite",
+        "slug": "1-limite-conceito-intuitivo",
+        "description": "O que significa f(x) se aproximar de L conforme x → a. Limites laterais (esquerda e direita). Exploração gráfica e numérica. Definição informal.",
+        "quizId": "quiz-limites-1-conceito-intuitivo"
+      },
+      {
+        "id": "limite-definicao-formal",
+        "title": "A Definição Formal de Limite",
+        "slug": "2-limite-definicao-formal",
+        "description": "Definição epsilon-delta (ε-δ). Compreensão da relação precisão-tolerância. Provas simples com funções lineares.",
+        "quizId": "quiz-limites-2-definicao-formal"
+      },
+      {
+        "id": "leis-limites",
+        "title": "Leis de Limites e Álgebra de Limites",
+        "slug": "3-leis-limites",
+        "description": "Regras de soma, produto, quociente e potência para limites. Limites de funções compostas. Aplicação das leis para calcular limites sem gráficos.",
+        "quizId": "quiz-limites-3-leis"
+      },
+      {
+        "id": "formas-indeterminadas",
+        "title": "Formas Indeterminadas e Técnicas Algébricas",
+        "slug": "4-formas-indeterminadas",
+        "description": "Formas 0/0 e ∞/∞. Métodos de fatoração, racionalização e simplificação. Limites com raízes quadradas e polinômios de grau superior.",
+        "quizId": "quiz-limites-4-formas-indeterminadas"
+      },
+      {
+        "id": "limites-infinito-assintotas",
+        "title": "Limites no Infinito e Assíntotas",
+        "slug": "5-limites-infinito-assintotas",
+        "description": "Comportamento de funções conforme x → ±∞. Assíntotas horizontais e verticais. Comparação de taxas de crescimento polinomial, exponencial e logarítmica.",
+        "quizId": "quiz-limites-5-infinito-assintotas"
+      },
+      {
+        "id": "teorema-sanduiche",
+        "title": "O Teorema do Sanduíche e Limites Especiais",
+        "slug": "6-teorema-sanduiche-limites-especiais",
+        "description": "Teorema do Sanduíche. Limites especiais: lim(sin(x)/x) quando x→0, lim(1 + 1/n)ⁿ e o número e. Aplicações em análise de sinais.",
+        "quizId": "quiz-limites-6-sanduiche-especiais"
+      }
+    ]
   },
   {
     "id": "continuidade",

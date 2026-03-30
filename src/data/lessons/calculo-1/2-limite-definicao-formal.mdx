@@ -1,0 +1,199 @@
+# A Definição Formal de Limite
+
+Na aula anterior, entendemos intuitivamente que um limite descreve o comportamento de uma função conforme nos aproximamos de um ponto. Mas intuição, embora essencial, não é suficiente para *provar* que um limite existe ou para construir uma matemática rigorosa. Neste capítulo, vamos explorar a **definição epsilon-delta** (ε-δ) — o coração da análise matemática e a ferramenta que transforma "parece que converge" em "converge definitivamente".
+
+Essa definição pode parecer intimidadora à primeira vista, mas ela formaliza exatamente a intuição que desenvolvemos: podemos controlar quão próximo f(x) fica de L escolhendo x suficientemente próximo de a.
+
+## Objetivos de Aprendizado
+
+Ao final deste capítulo, você será capaz de:
+
+- **Interpretar e explicar** a definição epsilon-delta de limite em seus próprios termos
+- **Entender a relação** entre tolerância (ε) e proximidade (δ)
+- **Aplicar a definição** para provar limites simples (particularmente com funções lineares)
+- **Reconhecer** quando um limite não existe usando a definição formal
+- **Conectar** a intuição gráfica com o rigor matemático
+
+## A Definição Epsilon-Delta Formal
+
+> **Definição (ε-δ de limite):** Seja f uma função definida em um intervalo aberto contendo a (exceto possivelmente em a). O número L é o **limite** de f(x) conforme x tende a a, escrito $$\lim_{x \to a} f(x) = L$$, se para **todo** ε > 0 (epsilon, tolerância), **existe** um δ > 0 (delta, proximidade) tal que:
+>
+> Se 0 < |x - a| < δ, então |f(x) - L| < ε.
+
+Em símbolos matemáticos:
+$$\lim_{x \to a} f(x) = L \iff \forall \varepsilon > 0, \exists \delta > 0 : 0 < |x - a| < \delta \Rightarrow |f(x) - L| < \varepsilon$$
+
+### Desembrulhando a Definição
+
+Essa definição é compacta, então vamos desenrolá-la peça por peça:
+
+**1. "Para todo ε > 0"**
+- Ε (epsilon) representa uma *tolerância* — quão perto queremos que f(x) esteja de L
+- A frase "para todo" significa: não importa quão pequeno você escolha ε, a seguinte propriedade deve ser verdadeira
+- Se a definição funciona para ε = 0,1, ε = 0,001, ε = 0,0001, e assim por diante, ela funciona para *todos* os ε positivos
+
+**2. "Existe um δ > 0"**
+- δ (delta) representa uma *proximidade* — quão perto x deve estar de a
+- O δ depende de ε: se você quer um ε menor (mais rigoroso), você pode precisar de um δ menor (mais próximo de a)
+- δ é sempre uma resposta positiva, mesmo que não saibamos seu valor exato
+
+**3. "0 < |x - a| < δ"**
+- |x - a| é a distância entre x e a
+- "0 < |x - a|" significa x ≠ a — estamos *perto* de a, mas não exatamente em a
+- "... < δ" significa essa distância é menor que δ
+
+**4. "Então |f(x) - L| < ε"**
+- |f(x) - L| é a distância entre f(x) e L
+- Se x está a menos de δ unidades de a, garantimos que f(x) está a menos de ε unidades de L
+- Essa é a recompensa: controle sobre o resultado se controlarmos a entrada
+
+### O Que a Definição NÃO Diz
+
+- **Não diz que δ é único.** Se δ = 0,01 funciona para um dado ε, então δ = 0,005 também funciona
+- **Não diz que devemos encontrar δ explicitamente.** Só precisamos provar que ele existe
+- **Não menciona f(a).** Pode ser que f(a) = L, f(a) ≠ L, ou f(a) não exista — não importa
+- **Não é um processo infinito.** Não estamos somando infinitos termos ou passando ao limite de verdade — estamos definindo um conceito com precisão
+
+## Analogia: O Jogo Epsilon-Delta
+
+Imagine um jogo entre dois jogadores:
+
+**Seu Oponente (ε):** Ele desafia você, dizendo: "Prove que lim(x→a) f(x) = L. Você precisa manter f(x) dentro de L ± ε (uma banda de tolerância)."
+
+**Você (δ):** Você responde: "Nenhum problema. Se você me permitir manter x dentro de a ± δ (uma zona próxima a a), posso garantir que f(x) fica dentro de L ± ε."
+
+**A Vitória:** Você *sempre* tem uma resposta para qualquer desafio ε que seu oponente lança (até o ε mais minúsculo). Se você conseguir vencer para *qualquer* ε > 0, o limite existe.
+
+**A Derrota:** Se seu oponente encontrar um ε > 0 para o qual você *não consegue* encontrar um δ que funcione, o limite não existe.
+
+## Prova com Funções Lineares
+
+Vamos provar nosso primeiro limite usando ε-δ. Considere:
+$$\lim_{x \to 3} (2x - 1) = 5$$
+
+**Prova:**
+
+Fixe ε > 0 arbitrário. Preciso encontrar δ > 0 tal que:
+Se 0 < |x - 3| < δ, então |(2x - 1) - 5| < ε
+
+Simplificar o lado direito:
+$$|2x - 1 - 5| = |2x - 6| = |2(x - 3)| = 2|x - 3|$$
+
+Portanto, preciso:
+$$2|x - 3| < \varepsilon$$
+$$|x - 3| < \frac{\varepsilon}{2}$$
+
+Então, escolho:
+$$\delta = \frac{\varepsilon}{2}$$
+
+**Verificação:** Se 0 < |x - 3| < δ = ε/2, então:
+$$|f(x) - L| = |2x - 6| = 2|x - 3| < 2 \cdot \frac{\varepsilon}{2} = \varepsilon$$
+
+Como consegui encontrar tal δ para qualquer ε > 0, o limite está provado. ✓
+
+**Observe:** A chave foi manipular a expressão |f(x) - L| algebricamente para deixá-la na forma k|x - a|, onde k é uma constante. Então, δ = ε/k.
+
+## Exemplo 2: Quando o Limite NÃO Existe
+
+Vamos provar que um certo limite *não* existe usando ε-δ. Considere:
+$$\lim_{x \to 0} \lfloor x \rfloor = ? \text{ (função piso)}$$
+
+**Afirmação:** Este limite não existe.
+
+**Prova (por contradição):** Suponha que o limite existe e é igual a L para algum número real L.
+
+Escolha ε = 0,4. Pela definição, deveria existir δ > 0 tal que:
+Se 0 < |x - 0| < δ, então |⌊x⌋ - L| < 0,4
+
+Agora, considere dois valores:
+- Para x = 0,1 (onde x > 0): ⌊0,1⌋ = 0
+- Para x = -0,1 (onde x < 0): ⌊-0,1⌋ = -1
+
+Ambos satisfazem |x| < δ (se δ > 0,1). Portanto:
+- |⌊0,1⌋ - L| < 0,4 ⟹ |0 - L| < 0,4 ⟹ L ∈ (-0,4, 0,4)
+- |⌊-0,1⌋ - L| < 0,4 ⟹ |-1 - L| < 0,4 ⟹ L ∈ (-1,4, -0,6)
+
+Mas (-0,4, 0,4) ∩ (-1,4, -0,6) = ∅ (vazio). Não existe L que satisfaça ambas as condições. Contradição!
+
+Portanto, não existe limite. ✓
+
+**Insight:** A função piso salta em x = 0, e a magnitude do salto (1) é maior que qualquer tolerância que conseguimos escolher.
+
+## Interpretação Gráfica
+
+{{ Epsilon-Delta visualization with interactive sliders }}
+
+Imagine o gráfico de y = f(x):
+
+1. **Desenhe a banda horizontal** y = L ± ε (a zona de tolerância para y)
+2. **Encontre a zona vertical** x = a ± δ (a zona de proximidade para x)
+3. **Verifique:** Todo ponto do gráfico de f dentro da zona x = a ± δ (exceto talvez em x = a) deve estar dentro da banda y = L ± ε
+
+Se você conseguir fazer isso para *qualquer* escolha de ε (não importa quão pequena a banda), então o limite existe.
+
+## Propriedades Importantes da Definição
+
+### 1. Unicidade do Limite
+Se lim(x→a) f(x) = L e lim(x→a) f(x) = M, então L = M.
+
+*Prova intuitiva:* Se houvesse dois limites diferentes L e M, poderíamos escolher ε tão pequeno que as bandas L ± ε e M ± ε não se sobrepusessem. Mas então f(x) não poderia estar em ambas para x perto de a, contradizendo que ambos são limites.
+
+### 2. Limites Laterais e o Limite Bilateral
+- lim(x→a) f(x) = L se e somente se lim(x→a⁻) f(x) = L e lim(x→a⁺) f(x) = L
+- Formalmente: você escolhe δ que funciona de ambos os lados
+
+### 3. Preservação da Desigualdade
+Se lim(x→a) f(x) = L > 0, então existe δ > 0 tal que f(x) > 0 para 0 < |x - a| < δ.
+
+*Aplicação:* Em controle, se um valor limite é positivo (crescimento), sabemos que próximo do ponto, o sistema também cresce.
+
+## Limites Infinitos e Limites no Infinito
+
+A definição ε-δ também se estende:
+
+**Limite Infinito:**
+$$\lim_{x \to a} f(x) = +\infty$$
+significa que para todo M > 0, existe δ > 0 tal que:
+Se 0 < |x - a| < δ, então f(x) > M
+
+(Em outras palavras: f cresce arbitrariamente grande perto de a.)
+
+**Limite no Infinito:**
+$$\lim_{x \to +\infty} f(x) = L$$
+significa que para todo ε > 0, existe N > 0 tal que:
+Se x > N, então |f(x) - L| < ε
+
+(Em outras palavras: conforme x cresce, f(x) se aproxima de L.)
+
+Exploraremos essas variações em detalhes em capítulos posteriores.
+
+## Por Que Isso Importa: Rigor em Engenharia
+
+Na engenharia, quando dizemos "o sistema converge para um estado estável", precisamos de certeza — não apenas aparência. A definição ε-δ nos dá:
+
+- **Precisão:** Podemos especificar exatamente quão perto do ponto estável queremos estar
+- **Garantia:** Uma vez provada, sabemos que para *qualquer* nível de exatidão, nossa proximidade ao estado estável pode ser mantida
+- **Prova:** Não há ambiguidade — ou conseguimos encontrar δ para todo ε, ou não conseguimos
+
+## Estratégia de Prova: Um Algoritmo
+
+Para provar lim(x→a) f(x) = L:
+
+1. **Comece com |f(x) - L| < ε** (o que você quer provar)
+2. **Manipule algebricamente** até obter |x - a| < alguma expressão em ε
+3. **Escolha δ** igual a essa expressão
+4. **Verifique:** Funciona para todo ε > 0? (Especialmente para ε muito pequeno)
+
+## Resumo
+
+- A **definição ε-δ** formaliza o conceito intuitivo de limite com precisão
+- **ε** (epsilon) é a tolerância desejada no resultado; **δ** (delta) é a proximidade necessária na entrada
+- A definição requer que para *todo* ε > 0, exista um δ correspondente — isso garante convergência verdadeira
+- **Provas** envolvem manipulação algébrica para expressar |f(x) - L| em termos de |x - a|
+- O **limite é único** — não pode haver dois valores diferentes
+- Essa definição é o fundamento de toda análise moderna e essencial para engenheiros que precisam de garantias rigorosas
+
+## Próximo Passo
+
+Com o rigor formal em mãos, estamos prontos para aprender **regras práticas** para calcular limites. A definição ε-δ é poderosa, mas provar cada limite manualmente é tedioso. No próximo capítulo, descobriremos que limites seguem **leis algébricas simples** que nos permitem computar limites rapidamente e com confiança.
+

@@ -1,0 +1,226 @@
+# O Conceito Intuitivo de Limite
+
+Imagine um engenheiro trabalhando em um sistema de controle de temperatura. A medida que o tempo aproxima-se de um certo instante, como o sistema se comporta? Ou considere um engenheiro de telecomunicações que se pergunta: conforme aumentamos a frequência de um sinal, como a amplitude se aproxima de determinado valor? Essas perguntas — sobre o comportamento de uma quantidade conforme algo se aproxima de um ponto — estão no coração de um conceito fundamental: o **limite**.
+
+Neste capítulo, vamos construir uma compreensão intuitiva do que significa "uma função se aproxima de um valor". Exploraremos limites laterais (pela esquerda e pela direita), usaremos gráficos e tabelas numéricas, e estabeleceremos uma definição informal que nos preparará para o rigor formal nos próximos capítulos.
+
+## Objetivos de Aprendizado
+
+Ao final deste capítulo, você será capaz de:
+
+- **Interpretar graficamente** o comportamento de uma função conforme x se aproxima de um ponto a
+- **Calcular numericamente** como f(x) se comporta quando x está próximo de a
+- **Distinguir entre** f(a) (o valor *em* a) e o limite quando x → a (o comportamento *próximo* de a)
+- **Reconhecer e interpretar** limites laterais: lim(x→a⁻) f(x) e lim(x→a⁺) f(x)
+- **Aplicar a definição informal de limite** para verificar se um limite existe
+- **Identificar casos** onde o limite não existe
+
+## Motivação: Por que Limites Importam
+
+### Velocidade Instantânea
+
+Suponha que você rastreia a posição de um veículo autônomo:
+$$s(t) = 5t^2 \text{ metros (t em segundos)}$$
+
+Qual é a velocidade *no instante* t = 2 segundos?
+
+Você não pode simplesmente calcular a velocidade "em um ponto do tempo" — velocidade instantânea é um conceito que exige que vejamos como a posição *muda* conforme o tempo se aproxima de t = 2. Isso é exatamente o que os limites descrevem.
+
+### Comportamento de Sinais
+
+Em engenharia de sinais, frequentemente perguntamos: "Conforme a frequência cresce infinitamente grande, qual é o ganho do filtro?" Essa pergunta só faz sentido usando limites.
+
+### Análise de Sistemas
+
+Em sistemas de controle, queremos saber se um sistema se estabiliza em um certo valor conforme o tempo avança. Novamente: limites.
+
+## Introdução Intuitiva: O Que É Um Limite?
+
+Intuitivamente, dizemos que:
+
+> **A função f(x) tem limite L quando x aproxima-se de a** se, conforme x fica cada vez mais próximo de a, f(x) fica cada vez mais próximo de L.
+
+Escrevemos:
+$$\lim_{x \to a} f(x) = L$$
+
+Leia como: "O limite de f(x) quando x tende a a é L."
+
+### Pontos Essenciais
+
+1. **x aproxima-se de a, mas pode não chegar em a**
+   - Pode ser que f não esteja nem definida em a
+   - Estamos interessados no comportamento *próximo* de a, não *em* a
+   - Portanto, f(a) pode não existir, ou ser diferente de L
+
+2. **f(x) aproxima-se de L indefinidamente**
+   - Conforme x ficar mais próximo de a, f(x) fica mais próximo de L
+   - f(x) nunca precisa atingir L exatamente (mas se atingir, isso é fine)
+
+3. **O limite deve ser o mesmo de ambos os lados**
+   - Ao aproximar-se de a pela esquerda, f(x) deve aproximar-se de L
+   - Ao aproximar-se de a pela direita, f(x) deve aproximar-se do mesmo L
+   - Se os dois lados convergem para valores diferentes, o limite não existe
+
+## Exploração Numérica: Entender Limites com Tabelas
+
+Vamos considerar uma função clássica:
+$$f(x) = \frac{x^2 - 1}{x - 1}$$
+
+Note que essa função não está definida em x = 1 (teríamos 0/0). Mas o que acontece conforme x se aproxima de 1?
+
+Vamos criar uma tabela numérica. Aproxime-se de x = 1 **pela esquerda** (x < 1):
+
+| x | f(x) |
+|---|---|
+| 0,9 | 1,9 |
+| 0,99 | 1,99 |
+| 0,999 | 1,999 |
+| 0,9999 | 1,9999 |
+
+Aproxime-se de x = 1 **pela direita** (x > 1):
+
+| x | f(x) |
+|---|---|
+| 1,1 | 2,1 |
+| 1,01 | 2,01 |
+| 1,001 | 2,001 |
+| 1,0001 | 2,0001 |
+
+**Observação:** De ambos os lados, f(x) se aproxima de 2. Mesmo que f(1) não exista, dizemos que:
+$$\lim_{x \to 1} \frac{x^2 - 1}{x - 1} = 2$$
+
+Você verá posteriormente que essa função se simplifica:
+$$\frac{x^2 - 1}{x - 1} = \frac{(x-1)(x+1)}{x-1} = x + 1 \text{ (para } x \neq 1\text{)}$$
+
+Portanto, o limite é f(1) + 1 = 1 + 1 = 2. Mas essa simplificação algébrica é um *método* para calcular limites — o conceito de limite em si é sobre comportamento, não sobre simplificação.
+
+## Exploração Gráfica: Visualizando Limites
+
+{{ IntuitiveLimit visualization with interactive graph }}
+
+Quando você traça o gráfico de f(x) = (x² - 1)/(x - 1), vê uma reta y = x + 1, mas com um "buraco" em x = 1 (porque a função não está definida lá). Conforme você se aproxima do buraco, o gráfico se aproxima do ponto (1, 2).
+
+### Características Gráficas de Um Limite
+
+- Se você coloca seu dedo em x = a e o move lentamente em direção a a, a função f(x) o "puxa" em direção a y = L
+- Se f(a) existe e é diferente de L, há um "buraco" ou "salto" no ponto (a, f(a))
+- Se f(a) = L, o ponto está preenchido; se f(a) ≠ L ou não existe, há um buraco
+
+## Limites Laterais (Unilaterais)
+
+Frequentemente, o comportamento pela esquerda e pela direita é importante separadamente:
+
+**Limite pela esquerda:**
+$$\lim_{x \to a^-} f(x) = L$$
+"Conforme x aproxima-se de a *pela esquerda*, f(x) aproxima-se de L"
+
+**Limite pela direita:**
+$$\lim_{x \to a^+} f(x) = L$$
+"Conforme x aproxima-se de a *pela direita*, f(x) aproxima-se de L"
+
+### Relação Entre Limite e Limites Laterais
+
+O limite **existe e é igual a L** se e somente se:
+$$\lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x) = L$$
+
+Se os limites laterais forem diferentes, o limite não existe.
+
+## Exemplo 1: Salto Descontínuo
+
+Considere uma função comum em processamento de sinais — um degrau eletrônico:
+
+$$f(x) = \begin{cases}
+1 & \text{se } x < 0 \\
+3 & \text{se } x \geq 0
+\end{cases}$$
+
+O que acontece conforme x → 0?
+
+- **Pela esquerda:** conforme x aproxima-se de 0 por valores negativos, f(x) = 1. Então:
+  $$\lim_{x \to 0^-} f(x) = 1$$
+
+- **Pela direita:** conforme x aproxima-se de 0 por valores positivos, f(x) = 3. Então:
+  $$\lim_{x \to 0^+} f(x) = 3$$
+
+Como 1 ≠ 3, o limite no ponto não existe:
+$$\lim_{x \to 0} f(x) \text{ não existe}$$
+
+Note que f(0) = 3 — o valor da função em x = 0 é definido — mas isso é *diferente* do limite. O limite não existe porque os dois lados convergem para valores diferentes.
+
+## Exemplo 2: Comportamento de Circuito RC
+
+Um circuito resistor-capacitor carrega com a tensão:
+$$V(t) = V_{\max}(1 - e^{-t/RC})$$
+
+onde R é resistência, C é capacitância, e t é tempo.
+
+Conforme t → ∞ (tempo muito longo):
+$$\lim_{t \to \infty} V(t) = V_{\max}(1 - 0) = V_{\max}$$
+
+**Interpretação:** O capacitor eventualmente carrega até a tensão máxima. O limite descreve esse comportamento de longo prazo.
+
+## Exemplo 3: Função Contínua (Sem Quebras)
+
+Considere f(x) = x² + 2x. Qual é o limite quando x → 1?
+
+- Pela esquerda: conforme x aproxima-se de 1 por baixo, f(x) aproxima-se de 1 + 2 = 3
+- Pela direita: conforme x aproxima-se de 1 por cima, f(x) aproxima-se de 1 + 2 = 3
+- Em x = 1: f(1) = 1 + 2 = 3
+
+Aqui:
+$$\lim_{x \to 1} (x^2 + 2x) = 3 = f(1)$$
+
+O limite *existe*, é *único*, e é igual ao valor da função no ponto. Quando isso acontece, dizemos que a função é *contínua* em x = 1 (exploraremos continuidade em profundidade no próximo módulo).
+
+## Definição Informal de Limite
+
+Agora que desenvolvemos intuição, aqui está uma definição informal, mas precisa:
+
+> **Definição Informal:** O número L é o **limite** de f(x) quando x tende a a, denotado $$\lim_{x \to a} f(x) = L$$, se conforme x se aproxima de a (mas permanece diferente de a), os valores de f(x) se aproximam arbitrariamente de L. Dizemos também que f(x) "converge a L conforme x → a".
+
+**Componentes-chave:**
+
+1. **"Conforme x se aproxima de a":** x pode estar à esquerda ou à direita, mas cada vez mais próximo
+2. **"Permanece diferente de a":** Podemos estar olhando para valores arbitrariamente próximos a a, mas nunca realmente em a
+3. **"Arbitrariamente perto de L":** Para qualquer nível de precisão que você escolha, f(x) chega naquele nível (em breve formalizaremos isso com ε-δ)
+4. **"De ambos os lados":** O limite deve existir e ser o mesmo vindo da esquerda e da direita
+
+## Casos em Que o Limite NÃO Existe
+
+### 1. Limites Laterais Diferentes
+$$\lim_{x \to a^-} f(x) \neq \lim_{x \to a^+} f(x)$$
+Exemplo: função degrau em x = 0.
+
+### 2. Comportamento Oscilatório Selvagem
+Considere:
+$$f(x) = \sin(1/x) \text{ quando } x \to 0$$
+
+Conforme x → 0, o termo 1/x cresce infinitamente, e sin(1/x) oscila cada vez mais rapidamente entre -1 e +1. Não há nenhum valor único que f(x) se aproxime. O limite não existe.
+
+{{ Oscillatory limit visualization }}
+
+### 3. Crescimento/Decrecimento Infinito
+$$\lim_{x \to 0^+} \frac{1}{x} = +\infty$$
+
+Aqui, a função cresce sem limite. Dizemos que o limite é "infinito" (mais precisamente: o limite não existe porque ±∞ não é um número real). Exploraremos essa notação em capítulos posteriores.
+
+## Estratégia de Estudo: Construindo Intuição
+
+Para cada função e ponto de interesse:
+
+1. **Graficamente:** Desenhe ou visualize o gráfico. Onde está o "alvo"?
+2. **Numericamente:** Construa uma tabela aproximando-se pela esquerda e direita. Os valores convergem para o mesmo número?
+3. **Simbolicamente:** Procure por simplificações ou padrões algébricos
+
+## Resumo
+
+- O **limite** de f(x) conforme x → a é o valor que f(x) se aproxima quando x se aproxima de a
+- **Limites laterais** (esquerda e direita) devem ser iguais para que o limite exista
+- f(a) pode não existir, ser diferente de L, ou ser igual a L — nenhum desses casos impede que o limite exista ou tenha um valor específico
+- **Aproximação numérica** e **visualização gráfica** são ferramentas poderosas para entender o comportamento de limites
+- O limite é um conceito fundamental que diferencia cálculo de álgebra — estamos olhando para *comportamento próximo*, não apenas para *valores em*
+
+## Próximo Passo
+
+Agora que entendemos intuitivamente o que é um limite, precisamos de uma definição *formal* e *precisa* que nos permita provar que um limite existe ou calcular seu valor com certeza. No próximo capítulo, exploraremos a famosa definição epsilon-delta (ε-δ) de limite — o fundamento rigoroso sobre o qual toda a análise se constrói.
+

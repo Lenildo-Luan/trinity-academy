@@ -1,0 +1,216 @@
+# Leis de Limites e Álgebra de Limites
+
+Provar cada limite usando a definição ε-δ é rigoroso, mas extremamente tedioso. Se você tivesse que fazer isso toda vez, o cálculo seria impraticável. Felizmente, limites seguem **leis algébricas elegantes** que permitem decompor problemas complexos em partes simples. Neste capítulo, exploraremos essas leis — ferramentas poderosas que transformam "como provo isso?" em "como calculo isso?"
+
+## Objetivos de Aprendizado
+
+Ao final deste capítulo, você será capaz de:
+
+- **Aplicar as leis fundamentais** de limites (soma, produto, quociente) para simplificar expressões
+- **Usar a regra da potência** e **raiz** para limites
+- **Calcular limites de funções compostas** usando a regra da composição
+- **Combinar múltiplas leis** para resolver limites complexos
+- **Identificar situações** onde as leis não se aplicam diretamente (próximo capítulo: formas indeterminadas)
+
+## As Leis Fundamentais
+
+Assuma que os seguintes limites existem e são finitos:
+$$\lim_{x \to a} f(x) = L \quad \text{e} \quad \lim_{x \to a} g(x) = M$$
+
+### Lei 1: Limite de uma Constante
+$$\lim_{x \to a} c = c$$
+(onde c é uma constante)
+
+A função constante simplesmente retorna c, então quando x se aproxima de a, o limite é c.
+
+**Exemplo:** lim(x→5) 7 = 7 (sempre)
+
+### Lei 2: Limite da Função Identidade
+$$\lim_{x \to a} x = a$$
+
+Quando x se aproxima de a, x é aproximadamente a.
+
+**Exemplo:** lim(x→3) x = 3
+
+### Lei 3: Limite da Soma (ou Diferença)
+$$\lim_{x \to a} [f(x) + g(x)] = L + M$$
+
+O limite da soma é a soma dos limites (e analogamente para subtração).
+
+**Intuição:** Se f(x) está próximo de L e g(x) está próximo de M, então f(x) + g(x) está próximo de L + M.
+
+**Exemplo:**
+$$\lim_{x \to 2} (x^2 + 3x) = \lim_{x \to 2} x^2 + \lim_{x \to 2} 3x = 4 + 6 = 10$$
+
+### Lei 4: Limite do Produto (Multiplicação)
+$$\lim_{x \to a} [f(x) \cdot g(x)] = L \cdot M$$
+
+O limite do produto é o produto dos limites.
+
+**Intuição:** Duas quantidades perto de seus limites, multiplicadas, resultam em um valor perto do produto dos limites.
+
+**Exemplo:**
+$$\lim_{x \to 3} [x \cdot (x + 1)] = \left[\lim_{x \to 3} x\right] \cdot \left[\lim_{x \to 3} (x+1)\right] = 3 \cdot 4 = 12$$
+
+**Cuidado:** Essa lei é válida quando *ambos* os limites individuais existem e são finitos. Se um deles for infinito ou não existir, precisa-se de mais cuidado.
+
+### Lei 5: Limite da Potência
+$$\lim_{x \to a} [f(x)]^n = \left[\lim_{x \to a} f(x)\right]^n = L^n$$
+(onde n é um inteiro positivo)
+
+Elev a função a uma potência, e você pode aplicar a potência ao limite.
+
+**Exemplo:**
+$$\lim_{x \to 2} (x + 1)^3 = \left[\lim_{x \to 2} (x+1)\right]^3 = 3^3 = 27$$
+
+### Lei 6: Limite do Quociente (Divisão)
+$$\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{L}{M} \quad \text{(contanto que } M \neq 0\text{)}$$
+
+O limite do quociente é o quociente dos limites — *mas apenas se o denominador não converge para zero*.
+
+**Intuição:** Se f(x) → L e g(x) → M ≠ 0, então f(x)/g(x) → L/M.
+
+**Exemplo:**
+$$\lim_{x \to 1} \frac{x^2 + 2}{x + 3} = \frac{\lim_{x \to 1} (x^2 + 2)}{\lim_{x \to 1} (x + 3)} = \frac{1 + 2}{1 + 3} = \frac{3}{4}$$
+
+**Cuidado:** Se o denominador converge para zero e o numerador não, o limite é infinito (ou não existe). Se ambos convergem para zero, temos uma **forma indeterminada** (próximo capítulo).
+
+### Lei 7: Limite da Raiz
+$$\lim_{x \to a} \sqrt[n]{f(x)} = \sqrt[n]{\lim_{x \to a} f(x)} = \sqrt[n]{L}$$
+(onde n é um inteiro positivo, e L ≥ 0 se n for par)
+
+A raiz n-ésima do limite é o limite da raiz n-ésima.
+
+**Exemplo:**
+$$\lim_{x \to 4} \sqrt{x + 5} = \sqrt{\lim_{x \to 4} (x + 5)} = \sqrt{4 + 5} = \sqrt{9} = 3$$
+
+### Lei 8: Limite de uma Função Composta
+$$\lim_{x \to a} f(g(x)) = f\left(\lim_{x \to a} g(x)\right) = f(M)$$
+(contanto que f seja contínua em M)
+
+Se g(x) → M conforme x → a, e f é contínua em M, então f(g(x)) → f(M).
+
+**Intuição:** Você pode calcular o limite de g, depois aplicar f ao resultado.
+
+**Exemplo:**
+$$\lim_{x \to 2} \sin(x^2) = \sin\left(\lim_{x \to 2} x^2\right) = \sin(4)$$
+
+(Assumindo que seno é contínuo em 4, o que é verdadeiro.)
+
+**Nota:** A continuidade de f é crucial aqui. Se f tiver um salto em M, essa lei pode falhar.
+
+## Estratégia Prática: Aplicar as Leis Sequencialmente
+
+Para calcular um limite:
+
+1. **Tente substituição direta:** Substitua x = a em f(x). Se obtiver um número definido (não 0/0 ou ∞/∞), esse é o limite.
+
+2. **Se a substituição funcionar, use as leis:** Decomponha usando soma, produto, etc.
+
+3. **Se obter uma forma indeterminada, manipule algebricamente** (próximo capítulo).
+
+### Exemplo 1: Aplicação Direta das Leis
+
+Calcular:
+$$\lim_{x \to 3} \frac{x^2 - 5x + 2}{x - 1}$$
+
+**Solução:**
+
+Verificar substituição direta:
+$$\frac{3^2 - 5(3) + 2}{3 - 1} = \frac{9 - 15 + 2}{2} = \frac{-4}{2} = -2$$
+
+Como o denominador não é zero, as leis se aplicam:
+$$\lim_{x \to 3} \frac{x^2 - 5x + 2}{x - 1} = \frac{\lim_{x \to 3} (x^2 - 5x + 2)}{\lim_{x \to 3} (x - 1)}$$
+
+$$= \frac{\left[\lim_{x \to 3} x\right]^2 - 5 \lim_{x \to 3} x + \lim_{x \to 3} 2}{\lim_{x \to 3} x - \lim_{x \to 3} 1}$$
+
+$$= \frac{3^2 - 5(3) + 2}{3 - 1} = \frac{9 - 15 + 2}{2} = -2$$
+
+O limite é **-2**.
+
+### Exemplo 2: Limite de uma Função Composta
+
+Calcular:
+$$\lim_{x \to 1} e^{x^2 + 2x}$$
+
+**Solução:**
+
+Aqui, temos e (função exponencial, contínua em toda parte) composta com x² + 2x.
+
+$$\lim_{x \to 1} e^{x^2 + 2x} = e^{\lim_{x \to 1} (x^2 + 2x)}$$
+
+Calcular o expoente:
+$$\lim_{x \to 1} (x^2 + 2x) = 1^2 + 2(1) = 3$$
+
+Portanto:
+$$\lim_{x \to 1} e^{x^2 + 2x} = e^3$$
+
+### Exemplo 3: Limite com Raiz
+
+Calcular:
+$$\lim_{x \to 9} \sqrt{2x + 7}$$
+
+**Solução:**
+
+A raiz quadrada é contínua onde definida (x ≥ 0):
+$$\lim_{x \to 9} \sqrt{2x + 7} = \sqrt{\lim_{x \to 9} (2x + 7)}$$
+
+$$= \sqrt{2(9) + 7} = \sqrt{18 + 7} = \sqrt{25} = 5$$
+
+## Exemplo 4: Limite de um Produto com Limite Infinito
+
+Calcular:
+$$\lim_{x \to 0^+} x \cdot \sin\left(\frac{1}{x}\right)$$
+
+**Discussão:**
+
+Aqui, não podemos simplesmente usar a lei do produto porque sin(1/x) não tem limite (oscila infinitamente perto de x = 0).
+
+Porém, sabemos que:
+$$-1 \leq \sin\left(\frac{1}{x}\right) \leq 1$$
+
+Portanto:
+$$-x \leq x \cdot \sin\left(\frac{1}{x}\right) \leq x$$
+
+Conforme x → 0⁺, tanto -x quanto x convergem para 0. Pelo **Teorema do Sanduíche** (que exploraremos em breve), o termo do meio também converge para 0:
+$$\lim_{x \to 0^+} x \cdot \sin\left(\frac{1}{x}\right) = 0$$
+
+**Lição:** Às vezes, precisamos de ferramentas além das leis básicas.
+
+## Aplicação: Análise de Sistemas em Tempo Real
+
+### Exemplo: Resposta de um Filtro
+
+A resposta em frequência de um filtro de primeira ordem é:
+$$H(f) = \frac{1}{1 + j \cdot 2\pi f \cdot RC}$$
+
+Onde:
+- f é frequência
+- j = √(-1) (número complexo)
+- R, C são resistência e capacitância
+
+Você quer saber: Como o ganho |H(f)| se comporta quando f é muito alta?
+
+$$\lim_{f \to \infty} |H(f)| = \lim_{f \to \infty} \frac{1}{\sqrt{1 + (2\pi f RC)^2}}$$
+
+Para f muito alto, (2π f RC)² >> 1, portanto:
+$$\lim_{f \to \infty} |H(f)| = \lim_{f \to \infty} \frac{1}{2\pi f RC} = 0$$
+
+**Interpretação:** Em frequências muito altas, o filtro atenua completamente o sinal (ganho → 0). Isso é exatamente o que queremos em um filtro passa-baixa.
+
+## Resumo das Leis
+
+<MarkdownTable headers={["Lei", "Formulação", "Condições"]} rows={[["Soma", "lim(f + g) = L + M", "L, M finitos"], ["Produto", "lim(f · g) = L · M", "L, M finitos"], ["Quociente", "lim(f/g) = L/M", "L, M finitos, M ≠ 0"], ["Potência", "lim[f^n] = L^n", "n inteiro, L finito"], ["Raiz", "lim(∜f) = ∜L", "L ≥ 0 se n par"], ["Composição", "lim f(g(x)) = f(M)", "g(x) → M, f contínua em M"], ["Constante", "lim c = c", "Sempre"], ["Identidade", "lim x = a", "Sempre"]]} />
+
+## Resumo
+
+- **As leis de limites** permitem calcular limites por decomposição, sem usar ε-δ toda vez
+- **Substituição direta** funciona quando f é contínua no ponto (quando não há divisão por zero ou outras singularidades)
+- **Composição de funções** preserva limites quando a função externa é contínua
+- **Limites infinitos e formas indeterminadas** requerem técnicas especiais (próxima aula)
+- Essas leis são a base para calcular rapidamente em engenharia
+
+## Próximo Passo
+
+Nem todo limite pode ser calculado por substituição direta. Quando encontramos **formas indeterminadas** como 0/0, ∞/∞, ou 0 · ∞, as leis básicas falham. No próximo capítulo, aprenderemos técnicas **algébricas poderosas** — fatoração, racionalização e simplificação — para lidar com esses casos desafiadores.
+
