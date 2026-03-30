@@ -71,6 +71,26 @@ The skill file (`SKILL.md`) contains:
 
 ## Key Concepts
 
+### Sinais e Sistemas Baseline (Required)
+
+When building visuals for **Sinais e Sistemas** (or visuals that should feel consistent with that course), match the same visual language used in:
+
+- `src/components/signals-systems-intro-p5-examples.tsx`
+- `src/components/signal-classification-p5-examples.tsx`
+- `src/components/signal-energy-power-p5-examples.tsx`
+- `src/components/signal-models-p5-examples.tsx`
+- `src/components/signal-operations-p5-examples.tsx`
+
+Use these defaults unless the spec explicitly overrides them:
+
+- **Style:** dark "board" canvas (`background(2, 7, 19)`) with elevated panels (`fill(15, 20, 35)`) and thin rounded cards.
+- **Palette roles:** blue for base/reference signal, amber for comparison/emphasis, green for result/conclusion, violet for formula/theory callouts, neutral gray for axes/help text.
+- **Light/dark behavior:** keep the in-canvas palette semantically consistent across site themes; if a spec asks for light-mode visuals, preserve role mapping (base/comparison/result/formula) while shifting neutrals to lighter backgrounds and darker text.
+- **Typography and spacing:** monospace labels, compact title strip at top (`y≈6-10`), instructional footer at bottom (`y≈h-6`), and safe margins (`~8-16px`) around panels.
+- **Controls layout:** prefer minimal controls and guided animations; if controls are needed, keep them directly below canvas in a single compact row with PT-BR labels and a clear reset/default action.
+- **Animation pacing:** smooth low-speed loops (`time += 0.01-0.02`) with didactic pauses/highlights; avoid rapid or decorative motion.
+- **Pedagogical interaction pattern:** emphasize compare-and-contrast panels, original→transform progression, and always show the mathematical meaning (formula/value box) near the active visual change.
+
 ### State Management
 - Use `useRef` for state that persists across p5 frames (not `useState`)
 - `useState` causes React re-renders, which break p5 instances

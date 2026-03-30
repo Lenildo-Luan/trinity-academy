@@ -345,6 +345,49 @@ Will the visualization change or animate?
 
 ## Color & Typography Quick Reference
 
+### Sinais e Sistemas Pattern Preset
+
+When implementing visuals for the `sinais-e-sistemas` course, use this preset unless the spec says otherwise.
+
+### Visual style baseline
+
+- Dark board canvas: `p.background(2, 7, 19)`
+- Elevated panels: `p.fill(15, 20, 35)` + low-alpha accent stroke
+- Top title strip and bottom takeaway strip are both expected
+- Dense but readable composition with 8-16px panel/card margins
+
+### Semantic accent mapping
+
+| Role | RGB | Typical use in Sinais e Sistemas |
+|------|-----|-----------------------------------|
+| Base/reference | (0, 150, 255) | Original signal, main curve, primary concept |
+| Comparison/emphasis | (255, 180, 50) | Alternative case, moving marker, warning comparison |
+| Result/conclusion | (100, 200, 100) | Sampled value, validated output, positive state |
+| Formula/theory callout | (180, 130, 255) | Formula bars, boxed conceptual summary |
+| Neutral guide | (50-100 range) | Axes, ticks, helper labels, secondary text |
+
+### Light/Dark behavior
+
+- Default is dark-first inside the canvas (matches current Sinais e Sistemas components).
+- If light canvas is explicitly required, swap only background/neutral tones.
+- Keep semantic role colors stable across themes so meaning does not change.
+
+### Animation and interaction cadence
+
+- Default speed: gentle (`time += 0.01-0.02`).
+- Prefer one primary moving element at a time.
+- Favor guided demonstrations (automatic sweeps, progressive highlights) over heavy control surfaces.
+- If controls are necessary, keep a compact row below the canvas (1-3 controls + reset).
+
+### Pedagogical interaction patterns to reuse
+
+- Compare-and-contrast panels (e.g., contínuo vs discreto, analógico vs digital).
+- Original-to-transformed stacked progression (x(t) -> transformed form).
+- Animated sampling marker + numeric readout for instantaneous interpretation.
+- Bottom formula/takeaway box that states the formal conclusion in PT-BR.
+
+---
+
 ### Trinity's Standard Colors (RGB for p5)
 
 | Name | Hex | RGB |
@@ -380,6 +423,7 @@ Browse these existing components for reference patterns:
 - **Animation:** `routing-fundamentals-p5-examples.tsx` (Dijkstra visualization)
 - **Interactive:** `image-digitization-p5-examples.tsx` (adjust bit depth, see colors)
 - **Step-by-Step:** Any component with "Previous/Next" buttons
+- **Sinais e Sistemas baseline:** `signals-systems-intro-p5-examples.tsx`, `signal-classification-p5-examples.tsx`, `signal-energy-power-p5-examples.tsx`, `signal-models-p5-examples.tsx`, `signal-operations-p5-examples.tsx`
 
 All are in `src/components/[topic]-p5-examples.tsx`.
 

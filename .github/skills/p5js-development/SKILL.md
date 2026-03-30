@@ -69,6 +69,37 @@ You work downstream of the design-annotator agent, who has already identified wh
 - Comments in code can be English or Portuguese; prefer consistency with existing code.
 - UI text labels (on canvas) follow the spec's language requirement.
 
+### Match the Sinais e Sistemas Visual System (Mandatory When Applicable)
+
+For new visuals in `sinais-e-sistemas` lessons, or any lesson that asks for that same look-and-feel, mirror the patterns already used in:
+
+- `src/components/signals-systems-intro-p5-examples.tsx`
+- `src/components/signal-classification-p5-examples.tsx`
+- `src/components/signal-energy-power-p5-examples.tsx`
+- `src/components/signal-models-p5-examples.tsx`
+- `src/components/signal-operations-p5-examples.tsx`
+
+Apply this baseline by default (unless the spec explicitly overrides it):
+
+- **Canvas style:** dark teaching-board base (`p.background(2, 7, 19)`) with elevated rounded panels (`p.fill(15, 20, 35)` + soft accent stroke).
+- **Semantic colors:**
+  - base/reference signal: blue `(0, 150, 255)`
+  - comparison/highlight: amber `(255, 180, 50)`
+  - result/validated output: green `(100, 200, 100)`
+  - formula/theory callout: violet `(180, 130, 255)`
+  - axes/helper text: neutral grays `(50-100 range)`
+- **Typography/spacing:** `monospace` text, title at top (`textSize 12-14`), explanatory footer (`textSize 8-9` near `h - 6`), and 8-16px internal margins.
+- **Pedagogical framing:** show the concept, then transformation, then explicit conclusion (equation/result box). Prioritize educational signal over decorative graphics.
+- **Motion profile:** slow and readable progression (`time += 0.01-0.02`), no abrupt camera-like motion, and visible pause points for interpretation.
+
+### Light/Dark Palette Behavior
+
+Sinais e Sistemas components are dark-first inside the canvas. Keep role-based color consistency in both themes:
+
+- If no explicit theme requirement exists, keep the standard dark board palette for consistency with existing lessons.
+- If a spec explicitly asks for light-mode canvas styling, switch only neutrals/backgrounds (light bg + dark text), while preserving role colors (blue/amber/green/violet) so meaning remains stable.
+- Never remap meaning by color across themes (e.g., green cannot become "warning" in dark mode).
+
 ---
 
 ## Step 1 — Read and Parse the Specification
@@ -265,6 +296,14 @@ return (
 );
 ```
 
+For Sinais e Sistemas-style visuals, constrain control surfaces to match existing interaction density:
+
+- Keep controls compact and directly below canvas in one row/wrapped row.
+- Prefer 1-3 controls plus one reset action.
+- Use PT-BR labels that describe the learning variable (e.g., `t₀`, escala, frequência).
+- Pair each control with immediate visual feedback and a short on-canvas interpretation label.
+- Prefer guided/auto-driven progression when manual control is not educationally essential.
+
 Read the React state in the draw function:
 
 ```typescript
@@ -290,12 +329,35 @@ const draw = (p: p5) => {
 - Use RGB arrays in p5: `p.fill(59, 130, 246)` for blue-500.
 - For transparency: `p.fill(59, 130, 246, 200)` (RGBA with alpha 0–255).
 
+#### Sinais e Sistemas Palette Preset
+
+Use this preset when the lesson belongs to (or references) the Sinais e Sistemas visual language:
+
+- Background: `(2, 7, 19)`
+- Panel/card background: `(15, 20, 35)`
+- Primary curve/axis emphasis: `(0, 150, 255)`
+- Secondary comparison: `(255, 180, 50)`
+- Positive/result state: `(100, 200, 100)`
+- Formula/info bars: `(180, 130, 255)`
+- Main title text: `fill(200)`
+- Secondary/footer text: `fill(100)`
+
+In light-mode variants requested by spec, keep semantic roles identical and only invert neutrals/backgrounds for contrast.
+
 ### Text
 
 - Font: Use `p.textFont("monospace")` for code-related labels, `p.textFont("sans-serif")` for general text.
 - Size: Match the spec. Example: `p.textSize(12)` for small labels, `p.textSize(16)` for emphasis.
 - Alignment: Use `p.textAlign(p.LEFT, p.TOP)` (horizontal, vertical).
 - Color: Set with `p.fill()` before `p.text()`.
+
+#### Sinais e Sistemas Text Rhythm
+
+- Title: top-centered, `textSize(12-14)`, `y` around `6-10`.
+- Panel titles/equation labels: `textSize(9-10)`.
+- Axis ticks/help labels: `textSize(6.5-8)`.
+- Footer takeaway: `textSize(8-9)`, centered near `h - 6`.
+- Keep paragraph-like strings short; prefer two concise lines over one long sentence.
 
 **Example:**
 
@@ -342,6 +404,13 @@ p.text("index: 5", 100, 200);
     p.circle(100, y, 30);
   };
   ```
+
+#### Sinais e Sistemas Pacing Defaults
+
+- Prefer gentle motion speeds (`time += 0.01-0.02`) to keep equations readable while motion occurs.
+- Keep one primary animated focus per scene (moving marker, sweep line, or window), not multiple competing motions.
+- For looping demonstrations, include a brief "interpretation hold" (subtle slowdown or repeated state) so learners can read labels.
+- Use progressive reveal of meaning: animate phenomenon first, then surface numeric/formula annotation.
 
 ### Looping
 
@@ -459,6 +528,7 @@ Before considering the component complete:
    - Does it match the spec exactly (colors, text, layout)?
    - Are all interactive controls responsive?
    - Does animation loop/step as specified?
+   - If Sinais e Sistemas style is requested, does it match the established course visual grammar (dark board panels, semantic accents, concise footer/takeaway)?
 
 2. **Performance:**
    - Does it run smoothly at 60 FPS?
