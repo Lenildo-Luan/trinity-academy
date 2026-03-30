@@ -32,6 +32,8 @@ When writing content, follow project conventions:
 - Text must fit the chapter flow and the course `module.json`.
 - Interactive components (including P5.js) can be referenced when pedagogically useful.
 - The primary language of lesson content is **Brazilian Portuguese**.
+- Never use raw markdown pipe tables (`| ... |`) in lessons.
+- For tabular content, always use `<MarkdownTable headers={...} rows={...} />` in MDX.
 
 ## How to Respond to Requests
 
