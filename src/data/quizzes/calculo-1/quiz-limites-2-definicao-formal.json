@@ -1,0 +1,113 @@
+{
+  "id": "quiz-limites-2-definicao-formal",
+  "courseId": "calculo-1",
+  "title": "Limites: Definicao Formal (Epsilon-Delta)",
+  "description": "Avalie seu dominio da definicao epsilon-delta, quantificadores e provas simples de limite.",
+  "timeLimit": 720,
+  "questions": [
+    {
+      "id": "q1",
+      "text": "Na definicao epsilon-delta de limite, qual leitura esta correta?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "Existe epsilon>0 tal que para todo delta>0 a condicao vale" },
+        { "id": "b", "text": "Para todo epsilon>0, existe delta>0 tal que 0<|x-a|<delta implica |f(x)-L|<epsilon" },
+        { "id": "c", "text": "Para todo delta>0, existe epsilon>0 tal que |f(x)-L|=epsilon" },
+        { "id": "d", "text": "Basta testar um unico valor de epsilon" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "A ordem dos quantificadores e essencial: primeiro vem qualquer tolerancia epsilon, depois voce responde com um delta adequado."
+    },
+    {
+      "id": "q2",
+      "text": "Na condicao 0 < |x-a| < delta, por que exigimos 0 < |x-a|?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "Para forcar x=a" },
+        { "id": "b", "text": "Para excluir o ponto x=a da analise" },
+        { "id": "c", "text": "Para garantir que f(a)=L" },
+        { "id": "d", "text": "Para evitar epsilon negativo" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Limite analisa vizinhanca de a, nao necessariamente o valor no proprio ponto. Por isso x=a e excluido."
+    },
+    {
+      "id": "q3",
+      "text": "Para provar lim(x->3)(2x-1)=5 via epsilon-delta, uma escolha valida de delta em funcao de epsilon e:",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "delta = 2epsilon" },
+        { "id": "b", "text": "delta = epsilon/2" },
+        { "id": "c", "text": "delta = epsilon^2" },
+        { "id": "d", "text": "delta = 1/epsilon" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "|f(x)-5|=|2x-6|=2|x-3|. Para garantir <epsilon, basta impor |x-3|<epsilon/2, entao delta=epsilon/2 funciona."
+    },
+    {
+      "id": "q4",
+      "text": "Se um limite existe, o valor do delta para um dado epsilon e:",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "Unico" },
+        { "id": "b", "text": "Sempre igual a epsilon" },
+        { "id": "c", "text": "Necessariamente maior que 1" },
+        { "id": "d", "text": "Nao unico; qualquer valor menor que um delta valido tambem pode funcionar" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Se um delta funciona, valores menores normalmente tambem funcionam, pois impõem proximidade ainda maior."
+    },
+    {
+      "id": "q5",
+      "text": "Qual afirmacao sobre f(a) e lim(x->a)f(x) e correta na definicao formal?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "f(a) precisa existir e ser igual ao limite" },
+        { "id": "b", "text": "f(a) e irrelevante para a existencia do limite" },
+        { "id": "c", "text": "f(a) deve ser diferente do limite" },
+        { "id": "d", "text": "f(a) precisa ser infinito" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "A definicao usa pontos com 0<|x-a|<delta, entao o valor em a nao participa diretamente da condicao de limite."
+    },
+    {
+      "id": "q6",
+      "text": "Para refutar que lim(x->0)f(x)=L existe, qual estrategia formal e suficiente?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "Encontrar um epsilon>0 para o qual nenhum delta>0 consegue garantir a condicao" },
+        { "id": "b", "text": "Mostrar que f(0) nao existe" },
+        { "id": "c", "text": "Mostrar que f e nao linear" },
+        { "id": "d", "text": "Calcular derivada e obter zero" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Negar 'para todo epsilon existe delta' significa achar ao menos um epsilon que destrua a condicao, independentemente de delta."
+    },
+    {
+      "id": "q7",
+      "text": "Qual relacao entre epsilon e delta expressa corretamente a ideia de precisao-tolerancia?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "Quanto menor epsilon, menor pode precisar ser delta" },
+        { "id": "b", "text": "Quanto menor epsilon, maior deve ser delta" },
+        { "id": "c", "text": "epsilon e delta sao sempre iguais" },
+        { "id": "d", "text": "epsilon nao influencia delta" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Maior exigencia na saida (epsilon menor) normalmente requer entrada mais proxima de a (delta menor)."
+    },
+    {
+      "id": "q8",
+      "text": "Se lim(x->a)f(x)=L e lim(x->a)f(x)=M, o que a teoria garante?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "L pode ser diferente de M" },
+        { "id": "b", "text": "L=M (unicidade do limite)" },
+        { "id": "c", "text": "So vale se f for polinomial" },
+        { "id": "d", "text": "Depende do valor de f(a)" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "A definicao formal implica unicidade: uma funcao nao pode convergir para dois numeros distintos no mesmo ponto."
+    }
+  ]
+}

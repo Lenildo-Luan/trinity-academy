@@ -96,7 +96,7 @@ Portanto, o limite é f(1) + 1 = 1 + 1 = 2. Mas essa simplificação algébrica 
 
 ## Exploração Gráfica: Visualizando Limites
 
-{{ IntuitiveLimit visualization with interactive graph }}
+<IntuitiveLimit />
 
 Quando você traça o gráfico de f(x) = (x² - 1)/(x - 1), vê uma reta y = x + 1, mas com um "buraco" em x = 1 (porque a função não está definida lá). Conforme você se aproxima do buraco, o gráfico se aproxima do ponto (1, 2).
 
@@ -129,7 +129,7 @@ Se os limites laterais forem diferentes, o limite não existe.
 
 Considere uma função comum em processamento de sinais — um degrau eletrônico:
 
-$$f(x) = \begin{cases}
+$$f(x) = \begin{cases} 
 1 & \text{se } x < 0 \\
 3 & \text{se } x \geq 0
 \end{cases}$$
@@ -197,7 +197,7 @@ $$f(x) = \sin(1/x) \text{ quando } x \to 0$$
 
 Conforme x → 0, o termo 1/x cresce infinitamente, e sin(1/x) oscila cada vez mais rapidamente entre -1 e +1. Não há nenhum valor único que f(x) se aproxime. O limite não existe.
 
-{{ Oscillatory limit visualization }}
+<OscillatoryLimit />
 
 ### 3. Crescimento/Decrecimento Infinito
 $$\lim_{x \to 0^+} \frac{1}{x} = +\infty$$
@@ -223,4 +223,3 @@ Para cada função e ponto de interesse:
 ## Próximo Passo
 
 Agora que entendemos intuitivamente o que é um limite, precisamos de uma definição *formal* e *precisa* que nos permita provar que um limite existe ou calcular seu valor com certeza. No próximo capítulo, exploraremos a famosa definição epsilon-delta (ε-δ) de limite — o fundamento rigoroso sobre o qual toda a análise se constrói.
-

@@ -1,0 +1,113 @@
+{
+  "id": "quiz-limites-3-leis",
+  "courseId": "calculo-1",
+  "title": "Limites: Leis e Algebra",
+  "description": "Pratique leis de soma, produto, quociente, potencia, raiz e composicao de limites.",
+  "timeLimit": 720,
+  "questions": [
+    {
+      "id": "q1",
+      "text": "Se lim(x->a)f(x)=L e lim(x->a)g(x)=M, qual regra e sempre valida (com limites finitos)?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "lim(f+g)=L+M" },
+        { "id": "b", "text": "lim(f/g)=L/M, mesmo se M=0" },
+        { "id": "c", "text": "lim(f^n)=L+n" },
+        { "id": "d", "text": "lim(fg)=L+M" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "A lei da soma e sempre valida quando ambos os limites existem. A do quociente exige M diferente de zero."
+    },
+    {
+      "id": "q2",
+      "text": "Calcule lim(x->2)(x^2+3x-1).",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "8" },
+        { "id": "b", "text": "9" },
+        { "id": "c", "text": "10" },
+        { "id": "d", "text": "11" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Polinomios sao continuos. Substituicao direta: 2^2+3(2)-1=4+6-1=9."
+    },
+    {
+      "id": "q3",
+      "text": "Calcule lim(x->1) (x^2+2)/(x+3).",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "1/2" },
+        { "id": "b", "text": "2/3" },
+        { "id": "c", "text": "3/4" },
+        { "id": "d", "text": "4/5" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Como o denominador tende a 4 (nao zero), aplica-se quociente: (1^2+2)/(1+3)=3/4."
+    },
+    {
+      "id": "q4",
+      "text": "Para usar lim(f/g)=L/M, qual condicao adicional e indispensavel?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "L>0" },
+        { "id": "b", "text": "M!=0" },
+        { "id": "c", "text": "f e g lineares" },
+        { "id": "d", "text": "a=0" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "A lei do quociente requer denominador com limite nao nulo. Se M=0, pode surgir infinito ou forma indeterminada."
+    },
+    {
+      "id": "q5",
+      "text": "Calcule lim(x->4) sqrt(x+5).",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "2" },
+        { "id": "b", "text": "3" },
+        { "id": "c", "text": "4" },
+        { "id": "d", "text": "5" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "A raiz e continua no dominio. Substituindo: sqrt(4+5)=sqrt(9)=3."
+    },
+    {
+      "id": "q6",
+      "text": "Calcule lim(x->2) sin(x^2).",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "sin(2)" },
+        { "id": "b", "text": "sin(3)" },
+        { "id": "c", "text": "sin(4)" },
+        { "id": "d", "text": "4sin(x)" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Composicao com funcao externa continua: primeiro x^2->4, depois sin(4)."
+    },
+    {
+      "id": "q7",
+      "text": "Ao substituir x=a em uma expressao racional, obteve-se 0/0. O que isso indica imediatamente?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "O limite e 0" },
+        { "id": "b", "text": "O limite nao existe" },
+        { "id": "c", "text": "Forma indeterminada; e preciso manipular a expressao" },
+        { "id": "d", "text": "O limite e infinito" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "0/0 nao determina o valor do limite. Pode resultar em numero finito, infinito ou inexistencia, apos tecnicas algebricas."
+    },
+    {
+      "id": "q8",
+      "text": "Qual afirmacao sobre leis de limites e mais precisa?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "Elas substituem completamente a definicao formal" },
+        { "id": "b", "text": "Elas derivam da definicao formal e agilizam calculos" },
+        { "id": "c", "text": "Valem apenas para funcoes lineares" },
+        { "id": "d", "text": "Nao se aplicam a composicoes" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "As leis sao consequencias do fundamento formal e tornam os calculos praticos sem repetir prova epsilon-delta em cada caso."
+    }
+  ]
+}

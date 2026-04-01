@@ -837,4 +837,255 @@ export function DampedOscillationAnalysis() {
   );
 }
 
+export function IntuitiveLimit() {
+  const [targetX, setTargetX] = useState(1.5);
+  const [distance, setDistance] = useState(1.2);
+  const bounds: Bounds = { xMin: -1, xMax: 4, yMin: -1, yMax: 10 };
+
+  const draw = (p: p5) => {
+    drawAxes(p, bounds, 42, "Limite Intuitivo", "Pontos em x=a-d e x=a+d se aproximam do mesmo valor");
+
+    p.noFill();
+    p.stroke(37, 99, 235);
+    p.strokeWeight(2.5);
+    p.beginShape();
+    for (let x = bounds.xMin; x <= bounds.xMax; x += 0.02) {
+      p.vertex(mapX(p, x, bounds, 42), mapY(p, x * x, bounds, 42));
+    }
+    p.endShape();
+
+    const leftX = targetX - distance;
+    const rightX = targetX + distance;
+    const leftY = leftX * leftX;
+    const rightY = rightX * rightX;
+    const limitY = targetX * targetX;
+
+    p.stroke(180, 130, 255, 140);
+    withDash(p, [5, 5]);
+    p.line(mapX(p, targetX, bounds, 42), 42, mapX(p, targetX, bounds, 42), p.height - 42);
+    p.line(42, mapY(p, limitY, bounds, 42), p.width - 42, mapY(p, limitY, bounds, 42));
+    clearDash(p);
+
+    p.noStroke();
+    p.fill(16, 185, 129);
+    p.circle(mapX(p, leftX, bounds, 42), mapY(p, leftY, bounds, 42), 8);
+    p.fill(245, 158, 11);
+    p.circle(mapX(p, rightX, bounds, 42), mapY(p, rightY, bounds, 42), 8);
+    p.fill(180, 130, 255);
+    p.circle(mapX(p, targetX, bounds, 42), mapY(p, limitY, bounds, 42), 9);
+
+    drawOverlay(
+      p,
+      `a=${targetX.toFixed(2)} | f(a-d)=${leftY.toFixed(2)} | f(a+d)=${rightY.toFixed(2)} | L=${limitY.toFixed(2)}`,
+      [100, 200, 100],
+    );
+  };
+
+  return (
+    <div className="space-y-2">
+      <label className="flex items-center gap-3 text-sm text-gray-700">
+        a
+        <input type="range" min={-0.5} max={2.6} step={0.05} value={targetX} onChange={(e) => setTargetX(Number(e.target.value))} />
+        <span>{targetX.toFixed(2)}</span>
+      </label>
+      <label className="flex items-center gap-3 text-sm text-gray-700">
+        distancia d
+        <input type="range" min={0.1} max={1.8} step={0.05} value={distance} onChange={(e) => setDistance(Number(e.target.value))} />
+        <span>{distance.toFixed(2)}</span>
+      </label>
+      <P5Sketch setup={() => {}} draw={draw} height={340} />
+    </div>
+  );
+}
+
+export function OscillatoryLimit() {
+  const [windowSize, setWindowSize] = useState(0.9);
+  const bounds: Bounds = { xMin: -1.4, xMax: 1.4, yMin: -1.3, yMax: 1.3 };
+
+  const draw = (p: p5) => {
+    drawAxes(p, bounds, 42, "Limite Oscilatorio", "f(x)=sin(1/x) oscila sem convergir quando x->0");
+
+    p.noFill();
+    p.stroke(37, 99, 235);
+    p.strokeWeight(2);
+    p.beginShape();
+    for (let x = bounds.xMin; x <= bounds.xMax; x += 0.002) {
+      if (Math.abs(x) < 0.02) continue;
+      p.vertex(mapX(p, x, bounds, 42), mapY(p, Math.sin(1 / x), bounds, 42));
+    }
+    p.endShape();
+
+    p.stroke(180, 130, 255, 130);
+    withDash(p, [4, 4]);
+    p.line(mapX(p, -windowSize, bounds, 42), 42, mapX(p, -windowSize, bounds, 42), p.height - 42);
+    p.line(mapX(p, windowSize, bounds, 42), 42, mapX(p, windowSize, bounds, 42), p.height - 42);
+    clearDash(p);
+
+    drawOverlay(p, `janela em torno de 0: [-${windowSize.toFixed(2)}, ${windowSize.toFixed(2)}]`, [255, 180, 50]);
+  };
+
+  return (
+    <div className="space-y-2">
+      <label className="flex items-center gap-3 text-sm text-gray-700">
+        Janela
+        <input
+          type="range"
+          min={0.1}
+          max={1.2}
+          step={0.02}
+          value={windowSize}
+          onChange={(e) => setWindowSize(Number(e.target.value))}
+        />
+        <span>{windowSize.toFixed(2)}</span>
+      </label>
+      <P5Sketch setup={() => {}} draw={draw} height={330} />
+    </div>
+  );
+}
+
+export function EpsilonDeltaVisualization() {
+  const [epsilon, setEpsilon] = useState(0.6);
+  const [delta, setDelta] = useState(0.7);
+  const a = 2;
+  const l = 4;
+  const bounds: Bounds = { xMin: 0.2, xMax: 3.8, yMin: 0.2, yMax: 8.2 };
+
+  const draw = (p: p5) => {
+    drawAxes(p, bounds, 44, "Epsilon-Delta", "f(x)=x^2 em torno de a=2 e L=4");
+
+    p.noStroke();
+    p.fill(16, 185, 129, 28);
+    const yTop = mapY(p, l + epsilon, bounds, 44);
+    const yBottom = mapY(p, l - epsilon, bounds, 44);
+    p.rect(44, yTop, p.width - 88, yBottom - yTop);
+
+    p.fill(245, 158, 11, 28);
+    const xLeft = mapX(p, a - delta, bounds, 44);
+    const xRight = mapX(p, a + delta, bounds, 44);
+    p.rect(xLeft, 44, xRight - xLeft, p.height - 88);
+
+    p.noFill();
+    p.stroke(37, 99, 235);
+    p.strokeWeight(2.4);
+    p.beginShape();
+    for (let x = bounds.xMin; x <= bounds.xMax; x += 0.015) {
+      p.vertex(mapX(p, x, bounds, 44), mapY(p, x * x, bounds, 44));
+    }
+    p.endShape();
+
+    p.stroke(180, 130, 255, 140);
+    withDash(p, [5, 5]);
+    p.line(mapX(p, a, bounds, 44), 44, mapX(p, a, bounds, 44), p.height - 44);
+    p.line(44, mapY(p, l, bounds, 44), p.width - 44, mapY(p, l, bounds, 44));
+    clearDash(p);
+
+    drawOverlay(p, `epsilon=${epsilon.toFixed(2)} | delta=${delta.toFixed(2)} | a=${a} | L=${l}`, [100, 200, 100]);
+  };
+
+  return (
+    <div className="space-y-2">
+      <label className="flex items-center gap-3 text-sm text-gray-700">
+        epsilon
+        <input type="range" min={0.15} max={1.6} step={0.05} value={epsilon} onChange={(e) => setEpsilon(Number(e.target.value))} />
+        <span>{epsilon.toFixed(2)}</span>
+      </label>
+      <label className="flex items-center gap-3 text-sm text-gray-700">
+        delta
+        <input type="range" min={0.1} max={1.4} step={0.05} value={delta} onChange={(e) => setDelta(Number(e.target.value))} />
+        <span>{delta.toFixed(2)}</span>
+      </label>
+      <P5Sketch setup={() => {}} draw={draw} height={340} />
+    </div>
+  );
+}
+
+export function SqueezeTheoremVisualization() {
+  const [radius, setRadius] = useState(1.6);
+  const bounds: Bounds = { xMin: -2.4, xMax: 2.4, yMin: -2.4, yMax: 2.4 };
+
+  const draw = (p: p5) => {
+    drawAxes(p, bounds, 42, "Teorema do Sanduiche", "-|x| <= x sin(1/x) <= |x| perto de x=0");
+
+    p.noFill();
+    p.stroke(16, 185, 129);
+    p.strokeWeight(2);
+    p.beginShape();
+    for (let x = bounds.xMin; x <= bounds.xMax; x += 0.02) {
+      p.vertex(mapX(p, x, bounds, 42), mapY(p, Math.abs(x), bounds, 42));
+    }
+    p.endShape();
+    p.beginShape();
+    for (let x = bounds.xMin; x <= bounds.xMax; x += 0.02) {
+      p.vertex(mapX(p, x, bounds, 42), mapY(p, -Math.abs(x), bounds, 42));
+    }
+    p.endShape();
+
+    p.stroke(37, 99, 235);
+    p.strokeWeight(2.3);
+    p.beginShape();
+    for (let x = bounds.xMin; x <= bounds.xMax; x += 0.003) {
+      const y = Math.abs(x) < 0.015 ? 0 : x * Math.sin(1 / x);
+      p.vertex(mapX(p, x, bounds, 42), mapY(p, y, bounds, 42));
+    }
+    p.endShape();
+
+    p.stroke(180, 130, 255, 130);
+    withDash(p, [4, 4]);
+    p.line(mapX(p, -radius, bounds, 42), 42, mapX(p, -radius, bounds, 42), p.height - 42);
+    p.line(mapX(p, radius, bounds, 42), 42, mapX(p, radius, bounds, 42), p.height - 42);
+    clearDash(p);
+
+    drawOverlay(p, `faixa de analise: |x| < ${radius.toFixed(2)}`, [255, 180, 50]);
+  };
+
+  return (
+    <div className="space-y-2">
+      <label className="flex items-center gap-3 text-sm text-gray-700">
+        Faixa
+        <input type="range" min={0.3} max={2.2} step={0.05} value={radius} onChange={(e) => setRadius(Number(e.target.value))} />
+        <span>{radius.toFixed(2)}</span>
+      </label>
+      <P5Sketch setup={() => {}} draw={draw} height={330} />
+    </div>
+  );
+}
+
+export function GrowthRatesVisualization() {
+  const [xMax, setXMax] = useState(8);
+  const bounds = useMemo<Bounds>(() => ({ xMin: 0.2, xMax, yMin: -2, yMax: 17 }), [xMax]);
+
+  const draw = (p: p5) => {
+    drawAxes(p, bounds, 44, "Taxas de Crescimento", "Comparacao: ln(x), x, x^2/4 e 2^(x/2)");
+
+    const plot = (fn: (x: number) => number, color: [number, number, number]) => {
+      p.noFill();
+      p.stroke(...color);
+      p.strokeWeight(2.2);
+      p.beginShape();
+      for (let x = bounds.xMin; x <= bounds.xMax; x += 0.02) {
+        p.vertex(mapX(p, x, bounds, 44), mapY(p, fn(x), bounds, 44));
+      }
+      p.endShape();
+    };
+
+    plot((x) => Math.log(x), [16, 185, 129]);
+    plot((x) => x, [37, 99, 235]);
+    plot((x) => (x * x) / 4, [245, 158, 11]);
+    plot((x) => Math.pow(2, x / 2), [180, 130, 255]);
+
+    drawOverlay(p, "verde: ln(x) | azul: x | laranja: x^2/4 | roxo: 2^(x/2)", [215, 225, 240]);
+  };
+
+  return (
+    <div className="space-y-2">
+      <label className="flex items-center gap-3 text-sm text-gray-700">
+        Alcance de x
+        <input type="range" min={5} max={12} step={0.5} value={xMax} onChange={(e) => setXMax(Number(e.target.value))} />
+        <span>{xMax.toFixed(1)}</span>
+      </label>
+      <P5Sketch setup={() => {}} draw={draw} height={340} />
+    </div>
+  );
+}
+
 export const __calculo1P5Module = true;

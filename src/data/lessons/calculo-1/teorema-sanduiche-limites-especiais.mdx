@@ -29,7 +29,7 @@ Em outras palavras: se uma função fica "espremida" entre duas outras funções
 
 ### Intuição Geométrica
 
-{{ Squeeze theorem visualization }}
+<SqueezeTheoremVisualization />
 
 Imagine:
 - g(x) é o "pão inferior" — sempre menor que f(x)
@@ -151,7 +151,7 @@ O número e surge naturalmente em muitos contextos:
 
 2. **Derivada da exponencial:** d/dx(eˣ) = eˣ — é a única base onde a derivada é a própria função.
 
-3. **Descaimento radioativo:** Atividade A(t) = A₀ e^{-λt}
+3. **Descaimento radioativo:** Atividade $A(t) = A_0 e^{-\lambda t}$
 
 ### Prova Intuitiva (Não Rigorosa)
 
@@ -181,7 +181,7 @@ A tabela mostra convergência para e:
 Para qualquer taxa r de crescimento contínuo:
 $$\lim_{n \to \infty} \left(1 + \frac{r}{n}\right)^n = e^r$$
 
-Exemplo: Crescimento bacteriano a 50% ao ano com composição contínua após 1 ano é e^{0,5} ≈ 1,649 (64,9% de crescimento).
+Exemplo: Crescimento bacteriano a 50% ao ano com composição contínua após 1 ano é $e^{0,5}$ ≈ 1,649 (64,9% de crescimento).
 
 ## Aplicação: Análise de Circuitos e Sistemas
 
@@ -203,7 +203,7 @@ Em uma constante de tempo, o capacitor carrega para 63,2% de sua voltagem máxim
 A população cresce como:
 $$P(t) = \frac{K}{1 + (K/P_0 - 1)e^{-rt}}$$
 
-Conforme t → ∞, e^{-rt} → 0, então P(t) → K. A população se aproxima da capacidade de carga.
+Conforme t → ∞, $e^{-rt}$ → 0, então P(t) → K. A população se aproxima da capacidade de carga.
 
 ## Estratégia de Estudo: Reconhecendo Quando Usar Cada Técnica
 
@@ -239,4 +239,3 @@ Você completou o módulo de limites — o fundamento de todo cálculo. Você ag
 Limites responderam à pergunta: "O que acontece perto de um ponto?" A continuidade responde: "Como uma função se comporta *em* um ponto, considerando vizinhanças?"
 
 A continuidade é simplesmente: lim(x→a) f(x) = f(a) — o limite iguala o valor. Veremos que funções contínuas têm propriedades poderosas, como o Teorema do Valor Intermediário, que garantem que soluções para problemas existem. Continuidade é onde a análise rigorosa encontra a geometria intuitiva.
-

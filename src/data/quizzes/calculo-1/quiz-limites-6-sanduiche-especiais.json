@@ -1,0 +1,89 @@
+{
+  "id": "quiz-limites-6-sanduiche-especiais",
+  "courseId": "calculo-1",
+  "title": "Teorema do Sanduiche e Limites Especiais",
+  "description": "Consolide o Teorema do Sanduiche e os limites especiais envolvendo sin(x)/x e numero e.",
+  "timeLimit": 720,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "O Teorema do Sanduiche afirma que, se g(x)<=f(x)<=h(x) perto de a e lim g = lim h = L, entao:",
+      "alternatives": [
+        { "id": "a", "text": "lim f pode ser qualquer valor", "isCorrect": false },
+        { "id": "b", "text": "lim f = L", "isCorrect": true, "explanation": "Se f esta comprimida entre duas funcoes que convergem ao mesmo valor, ela tambem converge para esse valor." },
+        { "id": "c", "text": "lim f nao existe", "isCorrect": false },
+        { "id": "d", "text": "lim f = g(a)+h(a)", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Para x!=0, sabendo que -1<=sin(1/x)<=1, qual desigualdade e correta?",
+      "alternatives": [
+        { "id": "a", "text": "-|x| <= x sin(1/x) <= |x|", "isCorrect": true, "explanation": "Multiplicando a desigualdade por x e tratando sinal, obtem-se a forma simetrica com valor absoluto." },
+        { "id": "b", "text": "-x <= sin(1/x) <= x", "isCorrect": false },
+        { "id": "c", "text": "-1/x <= sin(1/x) <= 1/x", "isCorrect": false },
+        { "id": "d", "text": "|sin(1/x)| >= |x|", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "O valor de lim(x->0) sin(x)/x (com x em radianos) e:",
+      "alternatives": [
+        { "id": "a", "text": "0", "isCorrect": false },
+        { "id": "b", "text": "1", "isCorrect": true, "explanation": "Este e um limite especial fundamental do calculo: sin(x)/x tende a 1 quando x tende a 0 em radianos." },
+        { "id": "c", "text": "pi/2", "isCorrect": false },
+        { "id": "d", "text": "Nao existe", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "A aproximacao sin(x)≈x para x pequeno e valida principalmente quando:",
+      "alternatives": [
+        { "id": "a", "text": "x esta em graus", "isCorrect": false },
+        { "id": "b", "text": "x esta em radianos e proximo de 0", "isCorrect": true, "explanation": "A aproximacao vem de lim sin(x)/x=1 e depende de x em radianos." },
+        { "id": "c", "text": "x e muito grande", "isCorrect": false },
+        { "id": "d", "text": "x e multiplo de pi", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Qual limite define o numero de Euler e?",
+      "alternatives": [
+        { "id": "a", "text": "lim(n->infinito) (1+1/n)^n", "isCorrect": true, "explanation": "A sequencia (1+1/n)^n converge para e, base natural de logaritmos e exponenciais." },
+        { "id": "b", "text": "lim(x->0) sin(x)/x", "isCorrect": false },
+        { "id": "c", "text": "lim(x->infinito) 1/x", "isCorrect": false },
+        { "id": "d", "text": "lim(n->infinito) n/(n+1)", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Interpretacao de lim(n->infinito) (1+1/n)^n = e em financas:",
+      "alternatives": [
+        { "id": "a", "text": "Juros simples", "isCorrect": false },
+        { "id": "b", "text": "Composicao continua de juros", "isCorrect": true, "explanation": "O limite modela composicao cada vez mais frequente, chegando ao caso continuo." },
+        { "id": "c", "text": "Desconto linear", "isCorrect": false },
+        { "id": "d", "text": "Amortizacao constante", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "No uso do Teorema do Sanduiche, qual erro conceitual e comum?",
+      "alternatives": [
+        { "id": "a", "text": "Exigir que f seja continua", "isCorrect": false },
+        { "id": "b", "text": "Nao verificar que as duas funcoes externas convergem ao mesmo limite", "isCorrect": true, "explanation": "Se os limites externos forem diferentes, o teorema nao conclui nada sobre f." },
+        { "id": "c", "text": "Usar desigualdades", "isCorrect": false },
+        { "id": "d", "text": "Estudar x perto de a", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "A funcao sinc(x)=sin(pi x)/(pi x) em processamento de sinais e definida em x=0 por continuidade porque:",
+      "alternatives": [
+        { "id": "a", "text": "sin(0)=0", "isCorrect": false },
+        { "id": "b", "text": "lim(x->0) sin(pi x)/(pi x)=1", "isCorrect": true, "explanation": "Pelo limite especial, o valor continuo em x=0 deve ser 1, evitando um buraco no grafico." },
+        { "id": "c", "text": "pi x nunca zera", "isCorrect": false },
+        { "id": "d", "text": "sinc e polinomio", "isCorrect": false }
+      ]
+    }
+  ]
+}

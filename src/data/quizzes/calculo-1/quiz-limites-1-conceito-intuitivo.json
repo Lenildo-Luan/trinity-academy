@@ -1,0 +1,114 @@
+{
+  "id": "quiz-limites-1-conceito-intuitivo",
+  "courseId": "calculo-1",
+  "title": "Limites: Conceito Intuitivo",
+  "description": "Verifique sua compreensão sobre aproximação, limites laterais e interpretação gráfica de limites.",
+  "timeLimit": 720,
+  "questions": [
+    {
+      "id": "q1",
+      "text": "Quando escrevemos lim(x→a) f(x) = L, qual ideia está sendo expressa de forma intuitiva?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "f(a) deve ser exatamente igual a L" },
+        { "id": "b", "text": "Para x próximo de a (sem precisar x=a), f(x) fica próximo de L" },
+        { "id": "c", "text": "f(x) só pode ser calculada para x=a" },
+        { "id": "d", "text": "L é sempre o maior valor da função" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "A noção intuitiva de limite descreve comportamento próximo de a, não necessariamente o valor em a. Por isso, f(a) pode até não existir e ainda assim o limite existir."
+    },
+    {
+      "id": "q2",
+      "text": "Se lim(x→a-) f(x) = 3 e lim(x→a+) f(x) = 5, o que podemos concluir sobre lim(x→a) f(x)?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "Existe e vale 4" },
+        { "id": "b", "text": "Existe e vale 5" },
+        { "id": "c", "text": "Não existe" },
+        { "id": "d", "text": "Existe somente se f(a)=4" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "O limite bilateral só existe quando os limites laterais existem e são iguais. Como 3 e 5 são diferentes, o limite em a não existe."
+    },
+    {
+      "id": "q3",
+      "text": "Considere f(x) = (x² - 1)/(x - 1). O que acontece quando x→1?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "O limite não existe porque f(1) não existe" },
+        { "id": "b", "text": "O limite existe e vale 2" },
+        { "id": "c", "text": "O limite existe e vale 1" },
+        { "id": "d", "text": "O limite é infinito" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Para x≠1, f(x)=x+1. Portanto, quando x se aproxima de 1, f(x) se aproxima de 2. A ausência de f(1) não impede a existência do limite."
+    },
+    {
+      "id": "q4",
+      "text": "Qual situação representa uma descontinuidade de salto em x=a?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "lim(x→a-)f(x)=lim(x→a+)f(x), mas f(a) é diferente desse valor" },
+        { "id": "b", "text": "lim(x→a-)f(x) e lim(x→a+)f(x) existem, mas são diferentes" },
+        { "id": "c", "text": "f(a) não existe, porém os limites laterais são iguais" },
+        { "id": "d", "text": "f(x) oscila com amplitude decrescente para 0" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Descontinuidade de salto ocorre quando os dois lados se aproximam de valores distintos. Nos casos a e c há descontinuidade removível (sem salto)."
+    },
+    {
+      "id": "q5",
+      "text": "Em uma tabela numérica para x→2, os valores de f(x) à esquerda e à direita se aproximam de 7, mas f(2)=10. Qual afirmação é correta?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "O limite é 10" },
+        { "id": "b", "text": "O limite não existe" },
+        { "id": "c", "text": "O limite é 7" },
+        { "id": "d", "text": "Não é possível concluir sem derivada" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Limite depende da aproximação, não do valor isolado em x=2. Se ambos os lados tendem a 7, então lim(x→2)f(x)=7."
+    },
+    {
+      "id": "q6",
+      "text": "Para f(x)=sin(1/x) quando x→0, por que o limite não existe?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "Porque f(0)=0" },
+        { "id": "b", "text": "Porque a função cresce para +∞" },
+        { "id": "c", "text": "Porque oscila entre -1 e 1 sem se aproximar de um único valor" },
+        { "id": "d", "text": "Porque sin é descontínua" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Conforme x→0, 1/x cresce em módulo e sin(1/x) oscila infinitamente sem convergir para um único número."
+    },
+    {
+      "id": "q7",
+      "text": "Qual interpretação está correta para lim(t→∞) V(t)=Vmax em um circuito RC?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "A tensão ultrapassa Vmax em regime permanente" },
+        { "id": "b", "text": "A tensão se aproxima de Vmax ao longo do tempo" },
+        { "id": "c", "text": "A tensão é constante e igual a Vmax para todo t" },
+        { "id": "d", "text": "A tensão em t=0 já é Vmax" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "O limite em t→∞ descreve comportamento de longo prazo: o capacitor tende a Vmax sem implicar que isso valha para todo instante."
+    },
+    {
+      "id": "q8",
+      "text": "Quando podemos afirmar que lim(x→a)f(x) existe?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "Quando f(a) existe" },
+        { "id": "b", "text": "Quando f(a)=0" },
+        { "id": "c", "text": "Quando os limites laterais existem e são iguais" },
+        { "id": "d", "text": "Quando a função é polinomial" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "A condição essencial para limite bilateral é coincidência dos dois limites laterais. f(a) pode até não existir."
+    }
+  ]
+}
+

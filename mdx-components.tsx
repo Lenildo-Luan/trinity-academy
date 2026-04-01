@@ -261,6 +261,11 @@ const {
   FunctionTransformations,
   EvenOddFunctions,
   DampedOscillationAnalysis,
+  IntuitiveLimit,
+  OscillatoryLimit,
+  EpsilonDeltaVisualization,
+  SqueezeTheoremVisualization,
+  GrowthRatesVisualization,
 } = require("./src/components/calculo-1-p5-examples");
 import {
   SuperpositionPrinciple,
@@ -617,6 +622,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     FunctionTransformations,
     EvenOddFunctions,
     DampedOscillationAnalysis,
+    IntuitiveLimit,
+    OscillatoryLimit,
+    EpsilonDeltaVisualization,
+    SqueezeTheoremVisualization,
+    GrowthRatesVisualization,
     SuperpositionPrinciple,
     TimeInvarianceDemo,
     MemoryAndCausality,

@@ -1,0 +1,90 @@
+{
+  "id": "quiz-limites-5-infinito-assintotas",
+  "courseId": "calculo-1",
+  "title": "Limites no Infinito e Assintotas",
+  "description": "Teste sua compreensao sobre comportamento assintotico, assintotas e comparacao de crescimento.",
+  "timeLimit": 720,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Se lim(x->infinito) f(x)=L, isso indica que:",
+      "alternatives": [
+        { "id": "a", "text": "f(x)=L para todo x", "isCorrect": false },
+        { "id": "b", "text": "f(x) se aproxima de L para x suficientemente grande", "isCorrect": true, "explanation": "Limite no infinito descreve tendencia para x grande, nao igualdade em todos os pontos." },
+        { "id": "c", "text": "f(x) cruza L apenas uma vez", "isCorrect": false },
+        { "id": "d", "text": "L deve ser positivo", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Para f(x)=(x+1)/(x^2+2), qual e a assintota horizontal?",
+      "alternatives": [
+        { "id": "a", "text": "y=1", "isCorrect": false },
+        { "id": "b", "text": "y=x", "isCorrect": false },
+        { "id": "c", "text": "y=0", "isCorrect": true, "explanation": "Grau do numerador (1) menor que do denominador (2): limite no infinito e 0, logo assintota horizontal y=0." },
+        { "id": "d", "text": "Nao existe", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Para f(x)=(3x^2+2x-1)/(2x^2-x+5), a assintota horizontal e:",
+      "alternatives": [
+        { "id": "a", "text": "y=0", "isCorrect": false },
+        { "id": "b", "text": "y=1", "isCorrect": false },
+        { "id": "c", "text": "y=3/2", "isCorrect": true, "explanation": "Com graus iguais, a assintota horizontal e a razao dos coeficientes lideres: 3/2." },
+        { "id": "d", "text": "y=2/3", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Se lim(x->2-)1/(x-2)=-infinito e lim(x->2+)1/(x-2)=+infinito, concluimos que:",
+      "alternatives": [
+        { "id": "a", "text": "Existe assintota horizontal em y=2", "isCorrect": false },
+        { "id": "b", "text": "Existe assintota vertical em x=2", "isCorrect": true, "explanation": "Explosao para infinito perto de x=2 caracteriza assintota vertical x=2." },
+        { "id": "c", "text": "O limite bilateral vale 0", "isCorrect": false },
+        { "id": "d", "text": "A funcao e continua em x=2", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Qual comparacao de crescimento esta correta quando x->infinito?",
+      "alternatives": [
+        { "id": "a", "text": "log(x) cresce mais rapido que x", "isCorrect": false },
+        { "id": "b", "text": "x^2 cresce mais rapido que e^x", "isCorrect": false },
+        { "id": "c", "text": "e^x cresce mais rapido que qualquer polinomio", "isCorrect": true, "explanation": "A exponencial domina polinomios em grande escala. Por isso x^n/e^x tende a 0 para n fixo." },
+        { "id": "d", "text": "x! cresce mais devagar que e^x", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Para f(x)=(x^2+1)/(x-1), qual afirmacao e verdadeira?",
+      "alternatives": [
+        { "id": "a", "text": "Tem apenas assintota horizontal", "isCorrect": false },
+        { "id": "b", "text": "Nao possui assintotas", "isCorrect": false },
+        { "id": "c", "text": "Tem assintota vertical x=1 e obliqua y=x+1", "isCorrect": true, "explanation": "Denominador zera em x=1 (vertical). Divisao polinomial: f(x)=x+1+2/(x-1), logo obliqua y=x+1." },
+        { "id": "d", "text": "Tem assintota horizontal y=1", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Sobre f(x)=sin(x) quando x->infinito, e correto afirmar que:",
+      "alternatives": [
+        { "id": "a", "text": "Converge para 0", "isCorrect": false },
+        { "id": "b", "text": "Converge para 1", "isCorrect": false },
+        { "id": "c", "text": "Nao tem limite, pois oscila sem convergir", "isCorrect": true, "explanation": "sin(x) permanece oscilando entre -1 e 1, sem se aproximar de um unico numero." },
+        { "id": "d", "text": "Converge para -1", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Em modelagem de sistemas, analisar x->infinito e util principalmente para:",
+      "alternatives": [
+        { "id": "a", "text": "Encontrar apenas valores iniciais", "isCorrect": false },
+        { "id": "b", "text": "Descrever comportamento de longo prazo e regime permanente", "isCorrect": true, "explanation": "Limites no infinito capturam tendencia assintotica, essencial para estabilidade e resposta de longo prazo." },
+        { "id": "c", "text": "Evitar uso de funcoes exponenciais", "isCorrect": false },
+        { "id": "d", "text": "Eliminar a necessidade de limites laterais", "isCorrect": false }
+      ]
+    }
+  ]
+}
+
