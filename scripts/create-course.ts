@@ -15,7 +15,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { execSync } from 'child_process';
 
-import { validateCourse, CourseInput } from '../validators/course-validator';
+import { validateCourse, CourseInput } from './validators/course-validator';
 import {
   ensureDir,
   fileExists,
@@ -25,7 +25,7 @@ import {
   writeJSON,
   courseExists,
   getTemplate,
-} from '../utils/file-utils';
+} from './utils/file-utils';
 
 interface CreateCourseOptions {
   skipBuildValidation?: boolean;

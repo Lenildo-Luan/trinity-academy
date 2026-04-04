@@ -1,0 +1,189 @@
+{
+  "id": "quiz-13",
+  "courseId": "calculo-1",
+  "title": "Propriedades de Funções Contínuas",
+  "description": "Teste sua compreensão sobre leis de continuidade, composição e continuidade de polinômios e racionais",
+  "timeLimit": 540,
+  "questions": [
+    {
+      "id": "q1",
+      "text": "Se f e g são contínuas em x=a, qual expressão PODE falhar em ser contínua em a?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "f(x)+g(x)" },
+        { "id": "b", "text": "f(x)g(x)" },
+        { "id": "c", "text": "f(x)/g(x)" },
+        { "id": "d", "text": "f(g(x))" }
+      ],
+      "correctAnswer": "c",
+      "explanation": {
+        "correct": "O quociente pode falhar se g(a)=0. As demais operações preservam continuidade sob as hipóteses dadas.",
+        "incorrect_a": "Soma de funções contínuas é contínua.",
+        "incorrect_b": "Produto de funções contínuas é contínuo.",
+        "incorrect_d": "Composição de contínuas é contínua quando f é contínua em g(a)."
+      }
+    },
+    {
+      "id": "q2",
+      "text": "Qual função é contínua em todo R?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "f(x)=1/(x-1)" },
+        { "id": "b", "text": "g(x)=sqrt(x+2)" },
+        { "id": "c", "text": "h(x)=ln(x)" },
+        { "id": "d", "text": "p(x)=x^4-3x+1" }
+      ],
+      "correctAnswer": "d",
+      "explanation": {
+        "correct": "p(x) é polinômio, e todo polinômio é contínuo em todo R.",
+        "incorrect_a": "Não está definida em x=1.",
+        "incorrect_b": "Só está definida para x>=-2.",
+        "incorrect_c": "Só está definida para x>0."
+      }
+    },
+    {
+      "id": "q3",
+      "text": "A função racional r(x)=(x^2+1)/(x^2-4) é contínua em:",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "Todo R" },
+        { "id": "b", "text": "R\\{-2,2}" },
+        { "id": "c", "text": "[-2,2]" },
+        { "id": "d", "text": "Apenas (0,inf)" }
+      ],
+      "correctAnswer": "b",
+      "explanation": {
+        "correct": "Racionais são contínuas no domínio. Aqui o denominador zera em x=±2, então domínio é R\\{-2,2}.",
+        "incorrect_a": "Em x=±2 a função não está definida.",
+        "incorrect_c": "O intervalo inclui x=±2, onde há falha de definição.",
+        "incorrect_d": "Não há motivo para restringir ao semieixo positivo."
+      }
+    },
+    {
+      "id": "q4",
+      "text": "Considere h(x)=sin(x^2). Qual afirmação é correta?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "h é descontínua em x=0" },
+        { "id": "b", "text": "h é contínua apenas para x>=0" },
+        { "id": "c", "text": "h é contínua em todo R" },
+        { "id": "d", "text": "h só é contínua onde sin(x)=0" }
+      ],
+      "correctAnswer": "c",
+      "explanation": {
+        "correct": "x^2 é contínua em R e sin(u) é contínua em R. A composição sin(x^2) é contínua em todo R.",
+        "incorrect_a": "Não há quebra em x=0.",
+        "incorrect_b": "A função também é contínua para x<0.",
+        "incorrect_d": "Continuidade não depende de sin(x)=0."
+      }
+    },
+    {
+      "id": "q5",
+      "text": "Para k(x)=sqrt(x^2-4), qual é o domínio onde a função é contínua?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "R" },
+        { "id": "b", "text": "(-2,2)" },
+        { "id": "c", "text": "(-inf,-2] U [2,inf)" },
+        { "id": "d", "text": "[-2,2]" }
+      ],
+      "correctAnswer": "c",
+      "explanation": {
+        "correct": "É preciso x^2-4>=0, isto é |x|>=2. Nesse domínio, a composição é contínua.",
+        "incorrect_a": "Para x em (-2,2), o radicando é negativo.",
+        "incorrect_b": "Nesse intervalo a função nem está definida.",
+        "incorrect_d": "Entre -2 e 2 o radicando é negativo."
+      }
+    },
+    {
+      "id": "q6",
+      "text": "Qual propriedade caracteriza corretamente polinômios em relação à continuidade?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "Podem ter assíntotas verticais" },
+        { "id": "b", "text": "São contínuos apenas em intervalos fechados" },
+        { "id": "c", "text": "São contínuos em todo R" },
+        { "id": "d", "text": "São contínuos apenas quando o grau é par" }
+      ],
+      "correctAnswer": "c",
+      "explanation": {
+        "correct": "Todo polinômio é contínuo em todo R, independentemente do grau.",
+        "incorrect_a": "Assíntota vertical é típica de racionais, não de polinômios.",
+        "incorrect_b": "Também são contínuos em intervalos abertos e em todo R.",
+        "incorrect_d": "Graus ímpares também são contínuos."
+      }
+    },
+    {
+      "id": "q7",
+      "text": "A função m(x)=e^x*cos(x)/(x^2+1) é contínua em:",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "R\\{0}" },
+        { "id": "b", "text": "R" },
+        { "id": "c", "text": "(0,inf)" },
+        { "id": "d", "text": "[-1,1]" }
+      ],
+      "correctAnswer": "b",
+      "explanation": {
+        "correct": "e^x e cos(x) são contínuas em R, e x^2+1>0 para todo x. Logo o quociente é contínuo em R.",
+        "incorrect_a": "Não há problema específico em x=0.",
+        "incorrect_c": "A função também é contínua para x<0.",
+        "incorrect_d": "Ela é contínua além desse intervalo também."
+      }
+    },
+    {
+      "id": "q8",
+      "text": "Se f é contínua em [1,2], f(1)<0 e f(2)>0, então:",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "Existe exatamente uma raiz em (1,2)" },
+        { "id": "b", "text": "Existe ao menos uma raiz em (1,2)" },
+        { "id": "c", "text": "Não é possível concluir nada" },
+        { "id": "d", "text": "A raiz está em x=1.5" }
+      ],
+      "correctAnswer": "b",
+      "explanation": {
+        "correct": "Pelo TVI, mudança de sinal em intervalo contínuo garante ao menos uma raiz. Não garante unicidade nem posição exata.",
+        "incorrect_a": "Pode haver mais de uma raiz.",
+        "incorrect_c": "A continuidade permite concluir existência.",
+        "incorrect_d": "O teorema não fixa o ponto da raiz."
+      }
+    },
+    {
+      "id": "q9",
+      "text": "Qual sentença sobre continuidade no domínio está correta?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "ln(x) não é contínua porque não está definida em x<=0" },
+        { "id": "b", "text": "ln(x) é contínua no seu domínio (0,inf)" },
+        { "id": "c", "text": "sqrt(x) é descontínua em x=0" },
+        { "id": "d", "text": "1/x é contínua em todo R" }
+      ],
+      "correctAnswer": "b",
+      "explanation": {
+        "correct": "Uma função pode ser perfeitamente contínua no seu domínio mesmo não estando definida em todo R. ln(x) é contínua em (0,inf).",
+        "incorrect_a": "A ausência de definição fora do domínio não implica descontinuidade no domínio.",
+        "incorrect_c": "sqrt(x) é contínua em [0,inf), incluindo x=0 (continuidade à direita).",
+        "incorrect_d": "1/x falha em x=0."
+      }
+    },
+    {
+      "id": "q10",
+      "text": "Na prática de engenharia, para garantir continuidade em um modelo R(x)=N(x)/D(x), qual verificação é essencial?",
+      "type": "single-choice",
+      "options": [
+        { "id": "a", "text": "Checar se N(x) é polinômio" },
+        { "id": "b", "text": "Checar se D(x) nunca zera no intervalo de operação" },
+        { "id": "c", "text": "Checar se N e D têm mesmo grau" },
+        { "id": "d", "text": "Checar se R(0)=0" }
+      ],
+      "correctAnswer": "b",
+      "explanation": {
+        "correct": "Para quocientes, continuidade exige denominador não nulo. Em engenharia isso vira regra de segurança do intervalo de operação.",
+        "incorrect_a": "Ajuda, mas não resolve o risco principal de divisão por zero.",
+        "incorrect_c": "Mesmo grau influencia assíntota horizontal, não continuidade local no domínio.",
+        "incorrect_d": "Valor em 0 é irrelevante se o intervalo e o denominador não forem verificados."
+      }
+    }
+  ]
+}

@@ -87,15 +87,37 @@
         "slug": "teorema-sanduiche",
         "description": "Teorema do Sanduíche. Limites especiais: lim(sin(x)/x) quando x→0, lim(1 + 1/n)ⁿ e o número e. Aplicações em análise de sinais.",
         "quizId": "quiz-11"
-      }
-    ]
-  },
-  {
-    "id": "continuidade",
-    "title": "Continuidade",
-    "description": "Definição de continuidade, tipos de descontinuidade e o Teorema do Valor Intermediário",
-    "lessons": []
-  },
+       }
+     ]
+   },
+   {
+     "id": "continuidade",
+     "title": "Continuidade",
+     "description": "Definição de continuidade, tipos de descontinuidade e o Teorema do Valor Intermediário",
+     "lessons": [
+       {
+         "id": "charpter-12",
+         "title": "Definição e Tipos de Descontinuidade",
+         "slug": "definicao-tipos-descontinuidade",
+         "description": "Três condições para continuidade em um ponto. Descontinuidades removíveis, de salto e infinitas. Identificação de descontinuidades em gráficos e fórmulas.",
+         "quizId": "quiz-12"
+       },
+       {
+         "id": "charpter-13",
+         "title": "Propriedades de Funções Contínuas",
+         "slug": "propriedades-funcoes-continuas",
+         "description": "Continuidade em intervalos. Operações que preservam continuidade. Composição de funções contínuas. Polinômios e funções racionais como funções contínuas.",
+         "quizId": "quiz-13"
+       },
+       {
+         "id": "charpter-14",
+         "title": "O Teorema do Valor Intermediário",
+         "slug": "teorema-valor-intermediario",
+         "description": "Enunciado e interpretação geométrica do TVI. Usando TVI para provar existência de zeros. Aplicação: busca de raízes como base de métodos numéricos.",
+         "quizId": "quiz-14"
+       }
+     ]
+   },
   {
     "id": "derivadas",
     "title": "Derivadas e Regras de Derivação",

@@ -9,8 +9,12 @@
 
 import * as path from 'path';
 
-import { validateLesson, LessonInput } from '../validators/lesson-validator';
-import { ensureDir, writeFile, writeJSON } from '../utils/file-utils';
+import {
+  validateLesson,
+  LessonInput,
+  ValidationError,
+} from './validators/lesson-validator';
+import { ensureDir, writeFile, writeJSON } from './utils/file-utils';
 
 interface CreateLessonBriefOptions {
   verbose?: boolean;
@@ -42,7 +46,7 @@ export async function createLessonBrief(
   const validationErrors = validateLesson(input);
   if (validationErrors.length > 0) {
     const errors = validationErrors.map(
-      (e) => `  ❌ ${e.field}: ${e.message}`
+      (e: ValidationError) => `  ❌ ${e.field}: ${e.message}`
     );
     return {
       success: false,
@@ -116,11 +120,11 @@ Chapter: ${input.chapterId} - ${input.chapterTitle}
 Description: ${input.description}
 
 Learning Objectives:
-${input.objectives?.map((obj) => `  • ${obj}`).join('\n')}
+${input.objectives?.map((obj: string) => `  • ${obj}`).join('\n')}
 
 Prerequisites:
 ${input.prerequisites && input.prerequisites.length > 0
-  ? input.prerequisites.map((pre) => `  • ${pre}`).join('\n')
+  ? input.prerequisites.map((pre: string) => `  • ${pre}`).join('\n')
   : '  • None'}
 
 Files Created:

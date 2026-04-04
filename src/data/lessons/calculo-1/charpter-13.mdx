@@ -1,0 +1,294 @@
+# Propriedades de Funções Contínuas
+
+Um circuito eletrônico bem projetado propaga sinais sem saltos nem distorções — é contínuo do começo ao fim. Uma estrada bem construída mantém a altura constante sem quedas abruptas — contínua. Na engenharia, a continuidade não é apenas um conceito matemático bonito — é uma propriedade que garante comportamento previsível e confiável.
+
+Neste capítulo, vamos descobrir as propriedades que garantem continuidade. Aprenderemos que somar ou multiplicar funções contínuas preserva continuidade, que composições de contínuas são contínuas, e que famílias inteiras de funções (polinômios, racionais) são sempre contínuas onde definidas. Essas propriedades transformam a verificação de continuidade de uma tarefa tedioso em algo direto.
+
+## Objetivos de Aprendizado
+
+Ao final deste capítulo, você será capaz de:
+
+- **Aplicar leis de continuidade** para função somas, diferenças, produtos e quocientes
+- **Determinar continuidade de composições** e funções compostas
+- **Classificar funções contínuas** por tipo (polinomial, racional, transcendental)
+- **Justificar continuidade** em domínios inteiros usando propriedades
+- **Construir funções contínuas** combinando blocos básicos contínuos
+
+## As Leis de Continuidade
+
+Se você sabe que f e g são contínuas em um ponto a, pode concluir automaticamente que certas operações também são contínuas.
+
+**Teorema (Leis da Continuidade):** Se f e g são contínuas em x = a, então:
+
+1. **Soma:** f + g é contínua em a
+   - $\lim_{x \to a} [f(x) + g(x)] = \lim_{x \to a} f(x) + \lim_{x \to a} g(x) = f(a) + g(a)$
+
+2. **Diferença:** f - g é contínua em a
+   - Similar à soma
+
+3. **Produto:** f · g é contínua em a
+   - $\lim_{x \to a} [f(x) \cdot g(x)] = \lim_{x \to a} f(x) \cdot \lim_{x \to a} g(x) = f(a) \cdot g(a)$
+
+4. **Quociente:** f/g é contínua em a, **desde que g(a) ≠ 0**
+   - Se g(a) = 0, pode haver descontinuidade infinita
+
+5. **Multiplicação por escalar:** c · f é contínua em a (onde c é constante)
+
+### Exemplo 1: Usando as Leis
+
+$$f(x) = \frac{x^2 + \sin(x)}{x^2 + 1}$$
+
+Analize a continuidade em todo ℝ.
+
+**Análise:**
+- Numerador: x² é contínua (polinômio) e sin(x) é contínua (função trigonométrica)
+  - x² + sin(x) é contínua (soma de contínuas)
+- Denominador: x² + 1 é contínuo (polinômio) e x² + 1 ≥ 1 > 0 para todo x
+  - Nunca é zero
+- Quociente de contínua por contínua (com denominador ≠ 0) = contínua
+- **f(x) é contínua em todo ℝ**
+
+### Exemplo 2: Análise Cuidadosa
+
+$$g(x) = \frac{x^2 - 1}{x - 1}$$
+
+Esta função é contínua em todo ℝ?
+
+**Análise:**
+- Numerador x² - 1 é contínuo
+- Denominador x - 1 é contínuo
+- MAS: denominador = 0 quando x = 1
+- Em x = 1, não podemos aplicar a lei do quociente (g(a) = 0)
+- **Domínio:** $\mathbb{R} \setminus \{1\}$
+
+Dentro do domínio, g é contínua? Sim! Para cada x ≠ 1, podemos simplificar:
+
+$$g(x) = \frac{(x-1)(x+1)}{x-1} = x + 1 \text{ para } x \neq 1$$
+
+Portanto, g(x) = x + 1 para x ≠ 1, e essa é contínua em todo seu domínio.
+
+## Continuidade de Composições
+
+A **composição de funções** é fundamental em engenharia: sistema 1 alimenta sistema 2 alimenta sistema 3.
+
+<CompositionPipeline />
+
+**Teorema (Continuidade de Composição):** Se g é contínua em a e f é contínua em g(a), então a composição (f ∘ g)(x) = f(g(x)) é contínua em a.
+
+Intuitivamente: se g leva x suavemente para g(a), e f leva g(a) suavemente para f(g(a)), então f(g(x)) leva x suavemente para f(g(a)).
+
+**Prova intuitiva:**
+$$\lim_{x \to a} f(g(x)) = f\left(\lim_{x \to a} g(x)\right) = f(g(a))$$
+
+Podemos passar o limite para dentro da composição *porque f é contínua*.
+
+### Exemplo 3: Composição Simples
+
+$$h(x) = \sin(x^2)$$
+
+Analize a continuidade.
+
+**Análise:**
+- f(u) = sin(u) é contínua em todo ℝ
+- g(x) = x² é contínua em todo ℝ
+- h(x) = f(g(x)) = sin(x²) é a composição
+- Por continuidade de composição: h é contínua em todo ℝ
+
+**Visualização:** x varia → x² varia continuamente → sin(x²) varia continuamente. Sem saltos!
+
+### Exemplo 4: Composição com Restrição
+
+$$k(x) = \sqrt{x^2 - 4}$$
+
+Analize a continuidade.
+
+**Análise:**
+- f(u) = √u é contínua em [0, ∞)
+- g(x) = x² - 4 é contínua em todo ℝ
+- Para composição ser definida: x² - 4 ≥ 0
+  - x² ≥ 4
+  - x ≤ -2 ou x ≥ 2
+  - Domínio: (-∞, -2] ∪ [2, ∞)
+- Em cada intervalo do domínio: k é contínua
+  - g mapeia o domínio para [0, ∞)
+  - f mapeia [0, ∞) continuamente
+  - Composição é contínua
+- **k(x) é contínua em (-∞, -2] ∪ [2, ∞)**
+
+### Exemplo 5: Aplicação — Circuito RC
+
+A voltagem em um capacitor em um circuito RC é:
+
+$$V(t) = V_0 (1 - e^{-t/RC})$$
+
+Onde V₀, R, C são constantes positivas.
+
+**Analize continuidade:**
+- e^u é contínua em todo ℝ
+- -t/RC é contínua (linear)
+- e^(-t/RC) é contínua (composição de contínuas)
+- 1 - e^(-t/RC) é contínua (diferença de contínuas)
+- V₀(1 - e^(-t/RC)) é contínua (produto de contínuas)
+- **V(t) é contínua para todo t ≥ 0**
+
+Fisicamente: a voltagem no capacitor cresce continuamente sem saltos. Isso faz sentido: campos elétricos não mudam instantaneamente.
+
+## Polinômios são Contínuos Em Todo ℝ
+
+**Teorema:** Todo polinômio p(x) = aₙxⁿ + aₙ₋₁xⁿ⁻¹ + ··· + a₀ é contínuo em todo ℝ.
+
+<PolynomialGalaxy />
+
+**Prova:**
+- Potências xⁿ são contínuas (composições x · x · ... · x)
+- Escalares aₙ vezes potências são contínuas (multiplicação por constante)
+- Soma de contínuas = contínua
+- Logo p(x) é contínuo
+
+**Consequência:** Você *nunca* precisa verificar continuidade de polinômios — é garantida!
+
+### Exemplo 6: Polinômios Complexos
+
+$$p(x) = 5x^7 - 3x^4 + 2x^2 - x + 10$$
+
+- É um polinômio → contínua em todo ℝ
+- Não há exceções, domínio é ℝ inteiro
+
+## Funções Racionais são Contínuas No Seu Domínio
+
+**Teorema:** Uma função racional $r(x) = \frac{p(x)}{q(x)}$ é contínua em todos os pontos onde q(x) ≠ 0.
+
+**Prova:**
+- p(x) é polinômio → contínuo em ℝ
+- q(x) é polinômio → contínuo em ℝ
+- r = p/q é quociente de contínuas
+- Onde q(x) ≠ 0, a função é contínua (lei do quociente)
+- Onde q(x) = 0, há descontinuidade (removível ou infinita)
+
+**Consequência:** Para racionais, o único lugar onde pode haver descontinuidade é onde o denominador é zero.
+
+### Exemplo 7: Analisando Racionais
+
+$$r(x) = \frac{x^3 - 8}{x^2 - 4}$$
+
+Determine onde é contínua.
+
+**Análise:**
+- Numerador: x³ - 8 é polinômio
+- Denominador: x² - 4 = (x-2)(x+2)
+- Zeros do denominador: x = 2 e x = -2
+- Domínio: $\mathbb{R} \setminus \{-2, 2\}$
+
+Dentro do domínio:
+- Racional = quociente de contínuas com q(x) ≠ 0
+- **r(x) é contínua em $\mathbb{R} \setminus \{-2, 2\}$**
+
+Tipo de descontinuidade?
+$$r(x) = \frac{(x-2)(x^2 + 2x + 4)}{(x-2)(x+2)} = \frac{x^2 + 2x + 4}{x+2} \text{ para } x \neq 2$$
+
+- Em x = 2: removível (limite existe)
+- Em x = -2: infinita (limite é ±∞)
+
+## Funções Trigonométricas, Exponenciais e Logarítmicas
+
+Assumindo conhecimento de funções transcendentais:
+
+**Teorema:** As seguintes funções são contínuas em seus domínios:
+- sin(x), cos(x), tan(x) — contínuas em seus domínios
+- e^x — contínua em todo ℝ
+- a^x (a > 0, a ≠ 1) — contínua em todo ℝ
+- ln(x) — contínua em (0, ∞)
+- log_a(x) — contínua em (0, ∞)
+
+**Consequência:** Você pode combinar essas funções com polinômios e racionais via operações e composição — o resultado será contínuo.
+
+### Exemplo 8: Combinando Tipos
+
+$$f(x) = \frac{e^x \cos(x)}{x^2 + 1}$$
+
+Analise continuidade em todo ℝ.
+
+**Análise:**
+- e^x é contínua em ℝ
+- cos(x) é contínua em ℝ
+- e^x · cos(x) é contínua em ℝ (produto de contínuas)
+- x² + 1 é contínua e ≥ 1 > 0 em ℝ
+- f(x) = (contínua)/(contínua > 0) é contínua em ℝ
+- **f é contínua em todo ℝ**
+
+## Continuidade e Zeros
+
+Uma propriedade útil de funções contínuas em intervalos fechados:
+
+**Observação:** Se f é contínua em [a, b] com f(a) e f(b) tendo sinais opostos (um positivo, outro negativo), então f tem *pelo menos* um zero em (a, b).
+
+Isso decorre do **Teorema do Valor Intermediário** (próximo capítulo), mas é intuitivo: se o gráfico começa abaixo do eixo x e termina acima, ele *precisa* cruzar o eixo em algum ponto intermediário.
+
+### Exemplo 9: Encontrar Zeros
+
+$$f(x) = x^3 - 2x - 1$$
+
+Prove que existe um zero entre x = 1 e x = 2.
+
+**Solução:**
+- f é polinômio → contínua em todo ℝ, especialmente em [1, 2]
+- f(1) = 1 - 2 - 1 = -2 < 0
+- f(2) = 8 - 4 - 1 = 3 > 0
+- f(1) < 0 e f(2) > 0
+- Por continuidade, existe c ∈ (1, 2) com f(c) = 0
+- **Há um zero entre 1 e 2**
+
+(Não encontramos exatamente onde, mas garantimos que existe!)
+
+## Resumo de Tipos Contínuos
+
+<MarkdownTable
+  headers={["Tipo", "Forma", "Domínio Padrão", "Contínuo Em"]}
+  rows={[
+    ["**Polinômio**", "$a_n x^n + \\cdots + a_0$", "ℝ", "Todo ℝ"],
+    ["**Racional**", "$\\frac{p(x)}{q(x)}$", "ℝ \\ \\{zeros de q\\}", "Seu domínio inteiro"],
+    ["**Exponencial**", "$a^x$ (a > 0)", "ℝ", "Todo ℝ"],
+    ["**Logarítmica**", "$\\log_a(x)$", "(0, ∞)", "Seu domínio inteiro"],
+    ["**Trigonométrica**", "sin(x), cos(x), ...", "Depende", "Seu domínio inteiro"],
+  ]}
+/>
+
+## Construindo Funções Contínuas
+
+Você pode criar novas funções contínuas:
+
+1. **Comece com blocos contínuos** (polinômios, exponenciais, etc.)
+2. **Combine com +, -, ×, ÷** (respeitar divisão por zero)
+3. **Componha** (f(g(x)))
+4. **O resultado é contínuo** em seu domínio
+
+### Exemplo 10: Construção
+
+Crie uma função contínua em todo ℝ que modele "aceleração suave de um motor".
+
+**Ideia:** Começar em 0, crescer continuamente, aproximar de limite máximo.
+
+$$f(x) = 100 \cdot \frac{x}{1 + |x|}$$
+
+- Numerador x é contínuo
+- Denominador 1 + |x| ≥ 1 > 0 em todo ℝ
+- Racional com denominador > 0 → contínua em ℝ
+- f(0) = 0 (começa parado)
+- f(x) → 100 quando x → ∞ (aproxima do máximo)
+- f(x) → -100 quando x → -∞
+- f é suave (contínua) por toda parte
+
+**Aplicação:** x poderia ser tempo, e f(x) a aceleração do motor — cresce continuamente sem saltos!
+
+## Resumo
+
+- **Operações algébricas** preservam continuidade: somas, produtos, quocientes (quando denominador ≠ 0)
+- **Composições** de contínuas são contínuas: f(g(x)) onde f contínua em g(a)
+- **Polinômios** são contínuos em todo ℝ
+- **Racionais** são contínuas em seu domínio (onde denominador ≠ 0)
+- **Exponenciais, logarítmicas, trigonométricas** são contínuas em seus domínios
+- **Combine blocos contínuos** para criar novas funções contínuas
+
+## Ponte para o Próximo Capítulo
+
+Agora que você domina continuidade em pontos e nas operações, vamos explorar uma das consequências mais profundas: o **Teorema do Valor Intermediário (TVI)**. Este teorema garante que funções contínuas em intervalos fechados atingem todos os valores entre seus extremos — uma propriedade que parece óbvia graficamente, mas tem aplicações poderosas para prova de existência de soluções, métodos numéricos e muito mais.

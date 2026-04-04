@@ -1,0 +1,284 @@
+# Definição e Tipos de Descontinuidade
+
+Imagine um sistema de controle de temperatura em uma fornalha industrial. A fornalha aquece continuamente de 20°C até 100°C — sem saltos ou surpresas. Mas agora considere um disjuntor automático: quando a corrente atinge 30A, ele desliga instantaneamente. Não há transição suave — há um salto abrupto. Na engenharia, você encontra sistemas contínuos (suaves) e descontínuos (com saltos ou ruptura). Entender *onde* e *por que* uma função é descontínua é essencial para prever comportamentos inesperados.
+
+Neste capítulo, vamos aprender a definição precisa de continuidade, identificar os três tipos principais de descontinuidade e desenvolver a habilidade de detectar descontinuidades tanto em gráficos quanto em fórmulas algébricas.
+
+## Objetivos de Aprendizado
+
+Ao final deste capítulo, você será capaz de:
+
+- **Definir** continuidade em um ponto usando os três critérios fundamentais
+- **Identificar e classificar** descontinuidades como removíveis, de salto ou infinitas
+- **Analisar gráficos** para localizar e descrever descontinuidades
+- **Examinar fórmulas** para prever onde descontinuidades ocorrem
+- **Aplicar** continuidade para resolver problemas de engenharia
+
+## O que é Continuidade em um Ponto?
+
+Intuitivamente, uma função é contínua em um ponto x = a se você pode desenhar o gráfico *sem levantar o lápis* do papel naquele ponto. Mas como tornar isso preciso?
+
+**Definição:** Uma função f é **contínua em um ponto x = a** se todas as três condições a seguir são satisfeitas:
+
+1. **f(a) está definida** — o ponto (a, f(a)) existe
+2. **$\lim_{x \to a} f(x)$ existe** — o limite bilateral existe e é finito
+3. **$\lim_{x \to a} f(x) = f(a)$** — o limite é igual ao valor da função
+
+Se *qualquer uma* dessas condições falhar, a função é **descontínua** em x = a.
+
+### Analise Critério por Critério
+
+**Condição 1: f(a) está definida**
+
+A função precisa ter um valor em x = a. Se f(a) não existe (fora do domínio), descontinuidade certa!
+
+Exemplo: $f(x) = \frac{1}{x}$ não é contínua em x = 0 porque f(0) não existe.
+
+**Condição 2: $\lim_{x \to a} f(x)$ existe**
+
+O limite bilateral deve existir — o gráfico não pode ter um salto ou ir para infinito quando x se aproxima de a.
+
+Exemplo: $f(x) = \begin{cases} 1 & \text{se } x < 0 \\ 2 & \text{se } x \geq 0 \end{cases}$ tem limite que não existe em x = 0 porque os limites laterais diferem.
+
+**Condição 3: O limite concorda com o valor**
+
+Mesmo que o limite exista e f(a) exista, eles precisam ser iguais. Se não forem, há um "buraco" no gráfico.
+
+Exemplo: $f(x) = \begin{cases} x + 1 & \text{se } x \neq 2 \\ 5 & \text{se } x = 2 \end{cases}$ tem $\lim_{x \to 2} f(x) = 3$ mas f(2) = 5, então descontinuidade.
+
+## Três Tipos de Descontinuidade
+
+Dependendo de qual (ou quais) condições falham, temos três tipos diferentes:
+
+<DiscontinuityTypesComparison />
+
+### Tipo 1: Descontinuidade Removível
+
+**O que acontece:**
+- O limite existe: $\lim_{x \to a} f(x) = L$
+- A função NÃO é definida em x = a, OU é definida mas com valor diferente do limite
+- Geometricamente: há um "buraco" no gráfico
+
+**Por que "removível"?**
+
+Podemos "remover" a descontinuidade redefinindo f(a) = L. É como consertar um buraco muito pequeno.
+
+**Exemplo 1: Buraco Puro**
+
+$$f(x) = \frac{x^2 - 1}{x - 1}$$
+
+- Fatorando: $f(x) = \frac{(x-1)(x+1)}{x-1} = x + 1$ para x ≠ 1
+- Domínio: $\mathbb{R} \setminus \{1\}$ (x = 1 está excluído)
+- $\lim_{x \to 1} f(x) = 1 + 1 = 2$ (existe!)
+- f(1) não existe (fora do domínio)
+- **Descontinuidade removível em x = 1**
+
+Visualizando: o gráfico é uma reta y = x + 1, mas com um buraco em (1, 2).
+
+**Exemplo 2: Valor Definido Incorretamente**
+
+$$f(x) = \begin{cases} x^2 & \text{se } x \neq 3 \\ 10 & \text{se } x = 3 \end{cases}$$
+
+- $\lim_{x \to 3} f(x) = 3^2 = 9$ (existe!)
+- f(3) = 10 (definido, mas errado!)
+- **Descontinuidade removível em x = 3**
+
+Poderíamos corrigir redefinindo f(3) = 9.
+
+**Exemplo 3: Aplicação em Engenharia**
+
+Um sensor de pressão mede pressão P em uma tubulação. A relação entre pressão medida e pressão real é:
+
+$$f(P) = \begin{cases} \frac{P^2 - 100}{P - 10} & \text{se } P \neq 10 \text{ bar} \\ ? & \text{se } P = 10 \text{ bar} \end{cases}$$
+
+Se P = 10 é um ponto crítico, simplificamos:
+
+$$f(P) = \frac{(P-10)(P+10)}{P-10} = P + 10 \text{ para } P \neq 10$$
+
+Logo $\lim_{P \to 10} f(P) = 20$. Devemos calibrar o sensor para ler exatamente 20 bar quando a pressão real é 10 bar, removendo a descontinuidade.
+
+### Tipo 2: Descontinuidade de Salto
+
+**O que acontece:**
+- Os limites laterais existem MAS são diferentes
+- $\lim_{x \to a^-} f(x) \neq \lim_{x \to a^+} f(x)$
+- O gráfico tem um "salto" ou "pulo" em x = a
+
+**Geometricamente:** Há um vazio vertical entre dois pedaços do gráfico.
+
+**Exemplo 4: Função Degrau**
+
+$$f(x) = \begin{cases} 1 & \text{se } x < 0 \\ 2 & \text{se } x \geq 0 \end{cases}$$
+
+- $\lim_{x \to 0^-} f(x) = 1$ (aproximando pela esquerda)
+- $\lim_{x \to 0^+} f(x) = 2$ (aproximando pela direita)
+- Os limites diferem!
+- **Descontinuidade de salto em x = 0 com magnitude 1**
+
+**Exemplo 5: Função do Inteiro Maior**
+
+A função "piso" (menor inteiro): $f(x) = \lfloor x \rfloor$
+
+Para x = 2 (ou qualquer inteiro):
+- $\lim_{x \to 2^-} f(x) = 1$ (por exemplo, x = 1.9 dá f(1.9) = 1)
+- $\lim_{x \to 2^+} f(x) = 2$ (por exemplo, x = 2.1 dá f(2.1) = 2)
+- Salto de magnitude 1 em cada inteiro
+
+**Exemplo 6: Aplicação em Engenharia — Tarifação de Banda Larga**
+
+A velocidade de conexão muda em "patamares":
+
+$$v(P) = \begin{cases} 10 \text{ Mbps} & \text{se } R < 30 \text{ reais/mês} \\ 50 \text{ Mbps} & \text{se } 30 \leq R < 80 \text{ reais/mês} \\ 200 \text{ Mbps} & \text{se } R \geq 80 \text{ reais/mês} \end{cases}$$
+
+Em R = 30 reais:
+- Pela esquerda (R = 29.99): v = 10 Mbps
+- Pela direita (R = 30.01): v = 50 Mbps
+- **Descontinuidade de salto** — o cliente não obtém uma transição suave!
+
+### Tipo 3: Descontinuidade Infinita
+
+**O que acontece:**
+- Pelo menos um limite lateral é ±∞
+- $\lim_{x \to a^-} f(x) = \pm\infty$ OU $\lim_{x \to a^+} f(x) = \pm\infty$
+- O gráfico tem uma **assíntota vertical**
+
+**Geometricamente:** O gráfico vai para cima ou para baixo indefinidamente quando x se aproxima de a.
+
+**Exemplo 7: Assíntota Simples**
+
+$$f(x) = \frac{1}{x}$$
+
+- Domínio: $\mathbb{R} \setminus \{0\}$
+- $\lim_{x \to 0^-} f(x) = -\infty$ (valores negativos, crescendo em magnitude)
+- $\lim_{x \to 0^+} f(x) = +\infty$ (valores positivos, crescendo)
+- **Descontinuidade infinita em x = 0**
+- Há uma assíntota vertical em x = 0
+
+**Exemplo 8: Função Racional**
+
+$$f(x) = \frac{3x}{(x-2)^2}$$
+
+- Quando x = 2: denominador = 0, função indefinida
+- $\lim_{x \to 2^-} f(x) = +\infty$ (sempre positivo, crescente)
+- $\lim_{x \to 2^+} f(x) = +\infty$ (sempre positivo, crescente)
+- **Descontinuidade infinita em x = 2**
+- Assíntota vertical bilateral (ambos os lados vão para +∞)
+
+**Exemplo 9: Aplicação em Engenharia — Ressonância**
+
+A amplitude de vibração de um sistema massa-mola é:
+
+$$A(\omega) = \frac{F_0 / m}{\sqrt{(\omega_0^2 - \omega^2)^2 + (2\gamma\omega)^2}}$$
+
+onde ω é a frequência de excitação e ω₀ é a frequência natural.
+
+Quando amortecimento γ = 0 (caso ideal sem fricção):
+
+$$A(\omega) = \frac{F_0 / m}{|\omega_0^2 - \omega^2|}$$
+
+Em ω = ω₀ (ressonância exata):
+- O denominador = 0
+- A amplitude → ∞
+- **Descontinuidade infinita**
+
+Fisicamente: pequenas perturbações na frequência exata causam vibrações cada vez maiores — a estrutura pode colapsar!
+
+## Identificando Descontinuidades em Gráficos
+
+Quando você vê um gráfico, procure por:
+
+1. **Buracos** → Descontinuidade removível
+   - Um ponto que está "faltando" no gráfico
+   - O resto do gráfico é contínuo ao redor
+
+2. **Saltos** → Descontinuidade de salto
+   - Dois pedaços do gráfico separados verticalmente
+   - O gráfico "pula" de um valor para outro
+
+3. **Assíntotas Verticais** → Descontinuidade infinita
+   - O gráfico vai para ±∞
+   - Frequentemente uma reta vertical tracejada indica a assíntota
+
+<DiscontinuityTypesVisualization />
+
+## Identificando Descontinuidades em Fórmulas
+
+### Estratégia Geral
+
+1. **Encontre o domínio:** Onde a função é definida?
+   - Procure por denominadores zero
+   - Procure por raízes pares de números negativos
+   - Procure por logaritmos de zero ou negativos
+
+2. **Teste cada ponto excluído do domínio:**
+   - Existe algum limite quando x se aproxima daquele ponto?
+   - Se o limite existe e é finito → removível
+   - Se os limites laterais existem mas diferem → salto
+   - Se algum limite é ±∞ → infinita
+
+### Exemplo 10: Análise Completa
+
+$$f(x) = \frac{x^2 - 4}{x^2 - 3x + 2}$$
+
+**Passo 1: Fatore numerador e denominador**
+
+- Numerador: $x^2 - 4 = (x-2)(x+2)$
+- Denominador: $x^2 - 3x + 2 = (x-1)(x-2)$
+
+$$f(x) = \frac{(x-2)(x+2)}{(x-1)(x-2)}$$
+
+**Passo 2: Identifique pontos excluídos**
+
+Denominador = 0 quando x = 1 ou x = 2
+Domínio: $\mathbb{R} \setminus \{1, 2\}$
+
+**Passo 3: Simplifique (onde possível)**
+
+$$f(x) = \frac{(x+2)}{(x-1)} \text{ para } x \neq 2$$
+
+(Cancelamos (x - 2) do numerador e denominador)
+
+**Passo 4: Analise cada ponto excluído**
+
+Em x = 2:
+- Após simplificação: $f(x) = \frac{x+2}{x-1}$ é definida em x = 2 como $\frac{4}{1} = 4$
+- $\lim_{x \to 2} f(x) = \frac{2+2}{2-1} = 4$
+- O limite existe e é finito
+- **Descontinuidade removível** (há um buraco em (2, 4), mas poderia ser "removido" redefinindo)
+
+Em x = 1:
+- A simplificação ainda deixa (x - 1) no denominador
+- $\lim_{x \to 1^-} f(x) = \frac{1+2}{0^-} = -\infty$
+- $\lim_{x \to 1^+} f(x) = \frac{1+2}{0^+} = +\infty$
+- **Descontinuidade infinita** (assíntota vertical)
+
+**Conclusão:** f tem descontinuidade removível em x = 2 e descontinuidade infinita em x = 1.
+
+## Continuidade em Intervalos
+
+Uma função é **contínua em um intervalo fechado [a, b]** se:
+- É contínua em todo ponto interior (a, b)
+- É contínua à direita em a: $\lim_{x \to a^+} f(x) = f(a)$
+- É contínua à esquerda em b: $\lim_{x \to b^-} f(x) = f(b)$
+
+**Exemplo 11:** A função $f(x) = \sqrt{x}$ é contínua no intervalo [0, ∞) mas não em (-1, 1) pois não é definida para x < 0.
+
+## Resumo
+
+<MarkdownTable
+  headers={["Tipo", "Causa", "Limite Existe?", "Característica Visual", "Pode Ser Removida?"]}
+  rows={[
+    ["**Removível**", "Valor f(a) ausente ou errado", "Sim (finito)", "Buraco no gráfico", "Sim"],
+    ["**Salto**", "Limites laterais diferem", "Não", "Pulo vertical", "Não"],
+    ["**Infinita**", "Limite é ±∞", "Não", "Assíntota vertical", "Não"],
+  ]}
+/>
+
+- **Continuidade em a:** f(a) definido, limite existe, limite = f(a)
+- **Descontinuidade removível:** Limite existe mas não iguala f(a)
+- **Descontinuidade de salto:** Limites laterais existem mas diferem
+- **Descontinuidade infinita:** Algum limite lateral é ±∞
+
+## Ponte para o Próximo Capítulo
+
+Agora que você entende *onde* funções podem falhar em ser contínuas, vamos explorar as funções que *nunca* são interrompidas — as **funções contínuas**. Descobriremos propriedades poderosas: operações que preservam continuidade, como composições funcionam, e por que polinômios e funções racionais têm comportamentos previsíveis. Essas propriedades serão a base para teoremas fundamentais que permitem prever o comportamento de sistemas reais.

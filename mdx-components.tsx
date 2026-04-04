@@ -292,6 +292,16 @@ import {
   LaminateComposites,
   SandwichPanel,
 } from "./src/components/composite-matrix-polymer-p5-examples";
+const {
+  DiscontinuityTypesComparison,
+  DiscontinuityExplorer,
+  CompositionPipeline,
+  PolynomialGalaxy,
+  IntermediateValueTheorem,
+  BisectionMethod,
+  DiscontinuityTypesVisualization,
+  IntermediateValueTheoremVisualization,
+} = require("./src/components/continuity-p5-examples");
 
 function getTextContent(node: ReactNode): string {
   if (typeof node === "string") return node;
@@ -646,6 +656,14 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     PultrusionProcess,
     LaminateComposites,
     SandwichPanel,
+    DiscontinuityTypesComparison,
+    DiscontinuityExplorer,
+    CompositionPipeline,
+    PolynomialGalaxy,
+    IntermediateValueTheorem,
+    BisectionMethod,
+    DiscontinuityTypesVisualization,
+    IntermediateValueTheoremVisualization,
     ...components,
   };
 }

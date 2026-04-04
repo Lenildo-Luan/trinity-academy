@@ -1,0 +1,309 @@
+{
+  "id": "quiz-12",
+  "courseId": "calculo-1",
+  "title": "Definição e Tipos de Descontinuidade",
+  "description": "Teste sua compreensão sobre continuidade em um ponto e os três tipos de descontinuidade (removível, salto e infinita)",
+  "timeLimit": 540,
+  "questions": [
+    {
+      "id": "q1",
+      "text": "Qual das seguintes funções tem uma descontinuidade removível em x = 2?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "f(x) = (x² - 4)/(x - 2)"
+        },
+        {
+          "id": "b",
+          "text": "f(x) = |x - 2|/(x - 2)"
+        },
+        {
+          "id": "c",
+          "text": "f(x) = 1/(x - 2)"
+        },
+        {
+          "id": "d",
+          "text": "f(x) = ⌊x⌋ (função piso)"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": {
+        "correct": "A função f(x) = (x² - 4)/(x - 2) = (x-2)(x+2)/(x-2) = x+2 para x≠2. O limite quando x→2 é 4, então a descontinuidade é removível (há um buraco em (2,4) que poderia ser 'preenchido' redefinindo f(2)=4).",
+        "incorrect_b": "f(x) = |x-2|/(x-2) representa um salto: pela esquerda é -1, pela direita é +1. Os limites laterais diferem, então é descontinuidade de salto, não removível.",
+        "incorrect_c": "f(x) = 1/(x-2) tem descontinuidade infinita em x=2. O limite é ±∞, não finito, então não é removível.",
+        "incorrect_d": "A função piso ⌊x⌋ tem descontinuidades de salto em todo inteiro, incluindo x=2. Não é removível."
+      }
+    },
+    {
+      "id": "q2",
+      "text": "Duas das três condições de continuidade em x = a estão listadas abaixo. Qual é a terceira?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "A derivada f'(a) deve existir"
+        },
+        {
+          "id": "b",
+          "text": "O limite lim(x→a) f(x) = f(a)"
+        },
+        {
+          "id": "c",
+          "text": "O domínio deve ser um intervalo aberto contendo a"
+        },
+        {
+          "id": "d",
+          "text": "A função deve ser injetora em uma vizinhança de a"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": {
+        "correct": "As três condições de continuidade em x=a são: (1) f(a) está definida, (2) lim(x→a) f(x) existe (e é finito), e (3) lim(x→a) f(x) = f(a). A terceira é que o limite IGUALA o valor da função.",
+        "incorrect_a": "A existência da derivada é uma condição muito mais forte que continuidade. Existem funções contínuas que não são diferenciáveis (ex: f(x)=|x| em x=0).",
+        "incorrect_c": "O domínio não precisa ser um intervalo aberto. A continuidade é definida em um ponto específico; o domínio pode ter forma qualquer.",
+        "incorrect_d": "Injetividade (ser um-a-um) é irrelevante para continuidade. Uma função contínua pode ser não-injetora e ainda ser contínua."
+      }
+    },
+    {
+      "id": "q3",
+      "text": "Uma função f tem f(1) = 3 e lim(x→1) f(x) = 5. Qual tipo de descontinuidade existe em x = 1?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Removível"
+        },
+        {
+          "id": "b",
+          "text": "De salto"
+        },
+        {
+          "id": "c",
+          "text": "Infinita"
+        },
+        {
+          "id": "d",
+          "text": "Nenhuma (a função é contínua)"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": {
+        "correct": "O limite existe e é finito (5), mas não iguala o valor da função (3). Isto é a definição de descontinuidade REMOVÍVEL: o limite existe, mas lim(x→1) f(x) ≠ f(1). Poderíamos 'remover' o problema redefinindo f(1) = 5.",
+        "incorrect_b": "De salto ocorre quando os limites laterais existem mas são DIFERENTES entre si. Aqui o limite bilateral é único (5).",
+        "incorrect_c": "Infinita ocorre quando o limite é ±∞. Aqui o limite é finito (5).",
+        "incorrect_d": "Se lim(x→1) f(x) ≠ f(1), então há descontinuidade. A terceira condição de continuidade falha."
+      }
+    },
+    {
+      "id": "q4",
+      "text": "Analise f(x) = (x³ - 8)/(x² - 4) em x = 2. Qual tipo de descontinuidade existe?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Removível (há um buraco)"
+        },
+        {
+          "id": "b",
+          "text": "De salto (limites laterais diferem)"
+        },
+        {
+          "id": "c",
+          "text": "Infinita (assíntota vertical)"
+        },
+        {
+          "id": "d",
+          "text": "Nenhuma (função contínua em x=2)"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": {
+        "correct": "Fatore: f(x) = (x³-8)/(x²-4) = (x-2)(x²+2x+4)/[(x-2)(x+2)]. Para x≠2: f(x) = (x²+2x+4)/(x+2). O limite quando x→2 é (4+4+4)/(2+2) = 12/4 = 3. O limite existe e é finito, então é removível.",
+        "incorrect_b": "De salto requer que os limites laterais existam mas sejam DIFERENTES. Aqui há um único limite bilateral de 3.",
+        "incorrect_c": "Infinita ocorreria se o denominador não cancelasse completamente. Aqui (x-2) cancela do numerador e denominador, tornando o limite finito.",
+        "incorrect_d": "f(2) não está definida (0/0), então há descontinuidade. O fato de o limite existir não torna contínua sem redefinir f(2)."
+      }
+    },
+    {
+      "id": "q5",
+      "text": "A função f(x) = ⌊x⌋ (piso) em x = 3 satisfaz qual condição de continuidade?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Apenas f(3) está definida"
+        },
+        {
+          "id": "b",
+          "text": "f(3) está definida E o limite existe (mas são diferentes)"
+        },
+        {
+          "id": "c",
+          "text": "Todas as três condições são satisfeitas"
+        },
+        {
+          "id": "d",
+          "text": "Nenhuma condição é satisfeita"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": {
+        "correct": "f(3) = ⌊3⌋ = 3 (definida). MAS lim(x→3⁻) f(x) = 2 e lim(x→3⁺) f(x) = 3, então o limite bilateral não existe. Apenas a primeira condição é atendida.",
+        "incorrect_b": "O limite NÃO existe porque os limites laterais diferem (2 ≠ 3). Então nem a segunda nem a terceira condição são satisfeitas.",
+        "incorrect_c": "Se o limite não existe (devido aos limites laterais diferentes), continuidade falha.",
+        "incorrect_d": "A primeira condição SIM é satisfeita: f(3) = 3 está perfeitamente definido."
+      }
+    },
+    {
+      "id": "q6",
+      "text": "Você tem uma função f contínua em [1, 5] com f(1) = -2 e f(5) = 8. Qual valor F DEVE atingir em algum ponto do intervalo?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "f(3) = 3 (pelo Teorema do Valor Intermediário)"
+        },
+        {
+          "id": "b",
+          "text": "f(4) = 6 com certeza"
+        },
+        {
+          "id": "c",
+          "text": "Todos os valores entre -2 e 8, incluindo 0"
+        },
+        {
+          "id": "d",
+          "text": "Apenas os valores positivos maiores que -2"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": {
+        "correct": "O Teorema do Valor Intermediário (TVI) garante que f atinge TODOS os valores entre f(1)=-2 e f(5)=8. Portanto, f atinge 0, 3, 7, qualquer valor N em (-2, 8) em algum ponto c ∈ (1,5).",
+        "incorrect_a": "Embora f(3)=3 seja possível, o TVI não garante que aconteça EXATAMENTE em x=3. Garante apenas que existe ALGUM c onde f(c)=3.",
+        "incorrect_b": "f(4)=6 é possível, mas não garantido. Poderia ser f(2)=6 ou f(3.7)=6.",
+        "incorrect_d": "O TVI garante todos os valores entre -2 e 8, incluindo negativos como -1, -0.5, etc. Não há restrição a positivos."
+      }
+    },
+    {
+      "id": "q7",
+      "text": "Uma descontinuidade é removível se e somente se:",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "A função não está definida em x = a"
+        },
+        {
+          "id": "b",
+          "text": "O limite existe (é finito) mas não iguala f(a)"
+        },
+        {
+          "id": "c",
+          "text": "Os limites laterais existem mas são diferentes"
+        },
+        {
+          "id": "d",
+          "text": "O gráfico tem uma assíntota vertical"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": {
+        "correct": "Removível significa que o limite lim(x→a) f(x) = L existe e é finito, mas ou f(a) não está definida, ou f(a) ≠ L. Podemos 'remover' redefinindo f(a) = L.",
+        "incorrect_a": "Se f(a) não está definida, poderia ser removível OU ter outra falha (tipo limite não existir). Isso sozinho não caracteriza removível.",
+        "incorrect_c": "Quando limites laterais diferem, o limite bilateral não existe, então é descontinuidade de SALTO, não removível.",
+        "incorrect_d": "Assíntota vertical significa o limite é ±∞, caracterizando descontinuidade INFINITA, não removível."
+      }
+    },
+    {
+      "id": "q8",
+      "text": "A função f(x) = {x+1 se x<2; 5 se x=2; x+1 se x>2} é contínua em x=2?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Sim, porque f(2) está definida"
+        },
+        {
+          "id": "b",
+          "text": "Não, porque o limite é 3 mas f(2)=5"
+        },
+        {
+          "id": "c",
+          "text": "Sim, porque o limite e a função concordam"
+        },
+        {
+          "id": "d",
+          "text": "Não, porque há um salto no gráfico"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": {
+        "correct": "lim(x→2) f(x) = 3 (tanto pela esquerda quanto pela direita), mas f(2) = 5. Como lim ≠ f(a), não há continuidade. É removível: podemos redefnir f(2)=3 para consertar.",
+        "incorrect_a": "f(a) estar definida é apenas UMA das três condições. O limite também deve existir E igualar f(a).",
+        "incorrect_c": "O limite (3) NÃO concorda com a função (5). Estão diferente!",
+        "incorrect_d": "Não há 'salto' visual clássico porque a fórmula é x+1 em ambos os lados. É removível, não de salto."
+      }
+    },
+    {
+      "id": "q9",
+      "text": "Para qual valor de k a função f(x) = {(x²-1)/(x-1) se x≠1; k se x=1} é contínua em x=1?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "k = 0"
+        },
+        {
+          "id": "b",
+          "text": "k = 1"
+        },
+        {
+          "id": "c",
+          "text": "k = 2"
+        },
+        {
+          "id": "d",
+          "text": "Nenhum valor de k funciona"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": {
+        "correct": "Para x≠1: f(x) = (x²-1)/(x-1) = (x-1)(x+1)/(x-1) = x+1. Logo lim(x→1) f(x) = 1+1 = 2. Para continuidade, precisamos f(1) = k = 2.",
+        "incorrect_a": "Se k=0, então f(1)=0 mas lim=2, então não contínua.",
+        "incorrect_b": "Se k=1, então f(1)=1 mas lim=2, não contínua.",
+        "incorrect_d": "Definitivamente existe um valor que funciona: k=2 torna lim = f(1) e a função contínua."
+      }
+    },
+    {
+      "id": "q10",
+      "text": "Um sensor de corrente tem leitura f(x) = x para x<30A, e f(x)=∞ para x≥30A (queima). Qual tipo de descontinuidade em x=30?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Removível (buraco)"
+        },
+        {
+          "id": "b",
+          "text": "De salto"
+        },
+        {
+          "id": "c",
+          "text": "Infinita"
+        },
+        {
+          "id": "d",
+          "text": "Não é uma descontinuidade válida"
+        }
+      ],
+      "correctAnswer": "c",
+      "explanation": {
+        "correct": "lim(x→30⁻) f(x) = 30 (finito), mas lim(x→30⁺) f(x) = ∞. Como um limite lateral é infinito, há uma ASSÍNTOTA VERTICAL, caracterizando descontinuidade infinita.",
+        "incorrect_a": "Removível requer que AMBOS os limites laterais sejam finitos e iguais.",
+        "incorrect_b": "De salto requer que ambos os limites laterais sejam finitos (mas diferentes). Um é infinito aqui.",
+        "incorrect_d": "É uma descontinuidade perfeitamente válida. Acontece quando o sistema 'quebra' ou satura."
+      }
+    }
+  ]
+}

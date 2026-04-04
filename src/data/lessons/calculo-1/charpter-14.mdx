@@ -1,0 +1,295 @@
+# O Teorema do Valor Intermediário
+
+Imagine um carro que parte do repouso (velocidade 0 km/h) em São Paulo e chega a Salvador viajando continuamente. Em algum momento, o velocímetro marcou *exatamente* 80 km/h, mesmo que nunca paremos para anotar o instante preciso. Não é magia — é garantido pela **continuidade**: se você passa continuamente de um valor a outro, é obrigado passar por todos os valores intermediários.
+
+Este princípio simples, formalizado como o **Teorema do Valor Intermediário**, é um dos teoremas mais poderosos do cálculo. Permite provar que soluções existem *sem encontrá-las explicitamente* — uma habilidade essencial em engenharia quando fórmulas fechadas não existem.
+
+Neste capítulo, vamos aprender o enunciado do TVI, ganhar intuição geométrica, aplicar a determinação de raízes e explorar métodos numéricos baseados nele.
+
+## Objetivos de Aprendizado
+
+Ao final deste capítulo, você será capaz de:
+
+- **Enunciar formalmente** o Teorema do Valor Intermediário
+- **Interpretar geometricamente** o TVI em gráficos
+- **Aplicar o TVI** para provar a existência de zeros e soluções
+- **Usar o TVI** como base para métodos numéricos de busca de raízes
+- **Resolver problemas aplicados** que dependem de TVI
+
+## O Enunciado do Teorema
+
+**Teorema (Teorema do Valor Intermediário):** Seja f uma função contínua no intervalo fechado [a, b]. Se N é *qualquer* número entre f(a) e f(b), então existe *pelo menos* um número c em (a, b) tal que:
+
+$$f(c) = N$$
+
+**Em palavras simples:**
+- Se f é contínua de a até b
+- E você escolhe qualquer valor N entre os "extremos" f(a) e f(b)
+- Então a função *deve* passar por N em algum ponto intermediário
+
+### Requisitos Críticos
+
+O teorema exige **três condições** que devem ser satisfeitas:
+
+1. **f é contínua** em [a, b] — sem interrupções, saltos ou assíntotas
+2. **[a, b] é fechado** — inclui os extremos a e b
+3. **N está entre f(a) e f(b)** — se f(a) < f(b), então f(a) < N < f(b); se f(a) > f(b), então f(b) < N < f(a)
+
+Se qualquer uma falhar, o teorema *não garante* nada.
+
+## Interpretação Geométrica
+
+Imagine o gráfico de f no plano cartesiano entre x = a e x = b:
+
+- **Ponto inicial:** (a, f(a))
+- **Ponto final:** (b, f(b))
+- **Caminho:** O gráfico conecta esses pontos continuamente (sem levantar o lápis)
+
+**O TVI diz:** Para qualquer reta horizontal y = N entre f(a) e f(b), essa reta *intercepta* o gráfico *pelo menos uma vez* no intervalo (a, b).
+
+**Por que "pelo menos"?** Uma reta pode interceptar o gráfico várias vezes — o teorema apenas garante que há pelo menos uma.
+
+### Visualização
+
+<IntermediateValueTheoremVisualization />
+
+## Aplicação 1: Prova de Existência de Zeros
+
+A aplicação mais importante do TVI é **provar que uma equação f(x) = 0 tem solução** sem encontrá-la explicitamente.
+
+**Corolário (Existência de Zeros):** Se f é contínua em [a, b] e f(a) e f(b) têm *sinais opostos* (um positivo, outro negativo), então existe pelo menos um c em (a, b) tal que f(c) = 0.
+
+**Por quê?** Aplicar o TVI com N = 0, que está entre f(a) e f(b).
+
+### Exemplo 1: Raiz Cúbica
+
+Prove que x³ - 2x - 1 = 0 tem uma solução real.
+
+**Solução:**
+
+Defina f(x) = x³ - 2x - 1.
+
+- f é polinômio → contínua em todo ℝ
+- Teste alguns valores:
+  - f(0) = 0 - 0 - 1 = -1 < 0
+  - f(2) = 8 - 4 - 1 = 3 > 0
+- f(0) < 0 e f(2) > 0 (sinais opostos)
+- Por TVI (corolário de zeros): existe c ∈ (0, 2) com f(c) = 0
+- **A equação x³ - 2x - 1 = 0 tem solução em (0, 2)**
+
+Nota: Não encontramos a solução exata, mas *provamos que existe*.
+
+### Exemplo 2: Localizar Zero Com Mais Precisão
+
+Continue com f(x) = x³ - 2x - 1. Estreite o intervalo.
+
+**Teste intermediários:**
+- f(1) = 1 - 2 - 1 = -2 < 0
+- f(1.5) = 3.375 - 3 - 1 = -0.625 < 0
+- f(1.7) = 4.913 - 3.4 - 1 = 0.513 > 0
+
+Agora sabemos:
+- f(1.5) < 0 e f(1.7) > 0
+- **Zero está em (1.5, 1.7)**
+
+Continuando:
+- f(1.6) = 4.096 - 3.2 - 1 = -0.104 < 0
+- f(1.65) ≈ 4.492 - 3.3 - 1 = 0.192 > 0
+- **Zero está em (1.6, 1.65)**
+
+Este processo iterativo é a base do **método da bissecção**.
+
+### Exemplo 3: Aplicação em Engenharia — Ponto de Operação
+
+Um diodo tem característica não-linear I(V) (corrente em função de voltagem):
+
+$$I(V) = I_s (e^{V/(nV_T)} - 1)$$
+
+onde I_s e V_T são constantes.
+
+Conectado em série com resistência R e fonte V_0. O ponto de operação satisfaz (lei de Kirchhoff):
+
+$$V_0 = V + I(V) \cdot R$$
+
+ou
+
+$$f(V) = V + I_s R(e^{V/(nV_T)} - 1) - V_0 = 0$$
+
+Para determinar se há solução em um intervalo [0, V_0]:
+
+- $f(0) = 0 + I_s R(e^0 - 1) - V_0 = -V_0 < 0$
+- $f(V_0) = V_0 + I_s R(e^{V_0/(nV_T)} - 1) - V_0 = I_s R(e^{V_0/(nV_T)} - 1) > 0$
+- f é contínua (composição de contínuas)
+- **Existe ponto de operação V em (0, V_0)**
+
+A engenharia precisa saber que o circuito *converge* para um estado estável — o TVI *prova* isso sem resolver exponencial.
+
+## Aplicação 2: Solving for Desired Outputs
+
+O TVI também funciona para qualquer valor N, não apenas zero.
+
+### Exemplo 4: Temperatura Desejada
+
+A temperatura T(t) em um forno durante aquecimento é:
+
+$$T(t) = 20 + 80(1 - e^{-t/10})$$
+
+onde t é tempo em minutos e T em °C.
+
+Prove que há um tempo onde T = 50°C.
+
+**Solução:**
+
+Defina $f(t) = T(t) - 50 = 20 + 80(1 - e^{-t/10}) - 50 = 50(1 - e^{-t/10}) - 30$.
+
+Teste:
+- f(0) = 50(1 - 1) - 30 = -30 < 0
+- $f(20) = 50(1 - e^{-2}) - 30 \approx 50(0.865) - 30 \approx 43.25 - 30 \approx 13.25 > 0$
+
+Por TVI:
+- f é contínua (composição de contínuas)
+- f(0) < 0, f(20) > 0
+- **Existe t ∈ (0, 20) onde T(t) = 50**
+
+O forno *alcança* 50°C em algum momento. Quando exatamente? Seria necessário resolver exponenciais — mas a existência é *garantida pelo TVI*.
+
+## O Método da Bissecção (Raízes Numéricas)
+
+O TVI é a base teórica de um algoritmo simples e robusto para encontrar raízes:
+
+**Algoritmo da Bissecção:**
+
+1. **Entrada:** Função f contínua, intervalo [a, b] com f(a) e f(b) de sinais opostos, tolerância ε
+2. **Repita:**
+   - Encontre ponto médio: m = (a + b)/2
+   - Calcule f(m)
+   - Se |f(m)| < ε, raiz encontrada: **retorne m**
+   - Se f(m) tem o mesmo sinal de f(a): **novo intervalo = [m, b]**
+   - Se f(m) tem o mesmo sinal de f(b): **novo intervalo = [a, m]**
+3. **Saída:** Raiz aproximada com erro < ε
+
+**Por que funciona?**
+- TVI garante que há raiz no intervalo
+- Cada iteração reduz o intervalo pela metade
+- Converge exponencialmente para a raiz
+
+<BisectionMethod />
+
+### Exemplo 5: Aplicar Bissecção
+
+Encontre raiz de f(x) = x³ - 2x - 1 = 0 com erro < 0.01.
+
+Sabemos que a raiz está em (1.5, 1.7):
+
+**Iteração 1:**
+- a = 1.5, b = 1.7
+- m = 1.6
+- f(1.6) = -0.104 < 0 (mesmo sinal de f(1.5) < 0)
+- Novo intervalo: [1.6, 1.7]
+
+**Iteração 2:**
+- a = 1.6, b = 1.7
+- m = 1.65
+- f(1.65) ≈ 0.192 > 0
+- Novo intervalo: [1.6, 1.65]
+
+**Iteração 3:**
+- a = 1.6, b = 1.65
+- m = 1.625
+- f(1.625) ≈ 0.041 > 0
+- Novo intervalo: [1.6, 1.625]
+
+**Iteração 4:**
+- a = 1.6, b = 1.625
+- m = 1.6125
+- |f(m)| < 0.01
+- **Raiz ≈ 1.6125** com erro < 0.01
+
+Este método é *garantido converger* porque TVI garante que sempre há um zero no intervalo sendo reduzido.
+
+## Conceitos Refinados
+
+### O TVI Requer Continuidade
+
+**Contra-exemplo:** f(x) descontínua
+
+$$f(x) = \begin{cases} x + 1 & \text{se } x < 1 \\ 5 & \text{se } x \geq 1 \end{cases}$$
+
+Em [0, 2]:
+- f(0) = 1
+- f(2) = 5
+- N = 3 está entre 1 e 5
+- Mas olhando para gráfico: o gráfico salta de ~2 para 5 em x = 1
+- **Nunca passa por y = 3**
+- **TVI não se aplica porque f é descontínua em x = 1**
+
+### O TVI Garante Existência, Não Unicidade
+
+Uma função pode cruzar um valor intermediário *múltiplas vezes*. O TVI garante apenas que há *pelo menos* um cruzamento.
+
+**Exemplo:** f(x) = x³ - 3x em [-2, 2]
+
+- f(-2) = -8 + 6 = -2
+- f(2) = 8 - 6 = 2
+- N = 0 está entre -2 e 2
+- f(x) = 0 quando x = 0, ±√3
+- **Há três zeros em [-2, 2]!** (TVI garante pelo menos um)
+
+## Extensões do TVI
+
+### TVI Para Qualquer Intervalo Fechado
+
+O TVI se aplica a qualquer intervalo fechado [a, b], mesmo que infinito em um sentido? **Não!** O intervalo deve ser fechado e limitado para TVI clássico.
+
+Se aplicarmos ao intervalo [0, ∞), a função pode ir para infinito sem passar por um valor intermediário específico.
+
+### Teorema do Valor Extremo (Relacionado)
+
+Uma consequência próxima:
+
+**Teorema:** Se f é contínua em [a, b], então f atinge seu máximo M e mínimo m em [a, b]. Além disso, f atinge todos os valores entre m e M.
+
+Este é um refinamento que, combinado com TVI, garante que funções contínuas em intervalos fechados têm comportamento "completo".
+
+## Resumo das Aplicações
+
+<MarkdownTable
+  headers={["Aplicação", "Ideia", "Quando Usar"]}
+  rows={[
+    ["Prova de zeros", "f(a) e f(b) sinais opostos ⇒ raiz existe", "Sem fórmula fechada para f(x)=0"],
+    ["Solução de equações", "Defina f(x) = equação; procure mudança de sinal", "Equações não-lineares"],
+    ["Método da bissecção", "Reduzir intervalo iterativamente", "Encontrar raiz numericamente"],
+    ["Prova de existência", "Mostrar que um estado/solução existe", "Análise de circuitos, sistemas dinâmicos"],
+  ]}
+/>
+
+## Exemplo Integrado: Projeto de Filtro Passa-Banda
+
+Um filtro eletrônico tem ganho:
+
+$$G(f) = \frac{K}{\sqrt{(1 - (f/f_0)^2)^2 + ((f/Q f_0))^2}}$$
+
+Queremos encontrar a frequência f onde o ganho é exatamente a metade do ganho máximo (ponto de -3dB).
+
+1. **G é contínua** em f ∈ [0, ∞) onde definida? Sim (quociente de polinômios com denominador > 0)
+2. **G(f_0) = K máximo**
+3. **G(0) ≈ K, G(∞) ≈ 0**
+4. Queremos resolver G(f) = K/√2
+5. Definir h(f) = G(f) - K/√2
+   - h(0) > 0
+   - h(∞) < 0
+   - Mudar de sinal em intervalo
+6. **Por TVI:** Existe f onde h(f) = 0, ou seja, G(f) = K/√2
+7. **Usar bissecção numericamente** para encontrar essa frequência
+
+## Resumo
+
+- **TVI:** Função contínua em [a, b] atinge todos os valores entre f(a) e f(b)
+- **Corolário:** Se f(a) e f(b) têm sinais opostos, existe raiz em (a, b)
+- **Requer:** Continuidade e intervalo fechado [a, b]
+- **Aplicações:** Prova de existência de zeros, soluções de equações, métodos numéricos
+- **Método da Bissecção:** Algoritmo robusto para encontrar raízes usando TVI repetidamente
+
+## Ponte para Próximas Ideias
+
+Agora que você entende como funções contínuas se comportam e como encontrar onde elas atingem valores específicos, você está pronto para o próximo grande tópico: **derivadas**. Enquanto o TVI trata da questão "que valores a função alcança?", derivadas respondem "quão rapidamente a função muda?". A taxa de mudança é o conceito central que permitirá otimização, análise de movimentos, e muito mais na engenharia moderna.

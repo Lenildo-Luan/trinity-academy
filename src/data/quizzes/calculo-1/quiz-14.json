@@ -1,0 +1,310 @@
+{
+  "id": "quiz-14",
+  "courseId": "calculo-1",
+  "title": "O Teorema do Valor Intermediário",
+  "description": "Teste sua compreensão do TVI, aplicações em prova de existência de zeros e métodos numéricos",
+  "timeLimit": 540,
+  "questions": [
+    {
+      "id": "q1",
+      "text": "O Teorema do Valor Intermediário garante que existe c ∈ (a,b) onde f(c) = N se qual condição é satisfeita?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "f é derivável em [a,b] e N está entre f(a) e f(b)"
+        },
+        {
+          "id": "b",
+          "text": "f é contínua em [a,b] e N está entre f(a) e f(b)"
+        },
+        {
+          "id": "c",
+          "text": "f é positiva em [a,b] e N=0"
+        },
+        {
+          "id": "d",
+          "text": "f é crescente em [a,b] e N é qualquer número"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": {
+        "correct": "O TVI requer: (1) f contínua em [a,b], (2) N entre f(a) e f(b) [inclusive na igualdade se N=f(a) ou N=f(b)]. Derivabilidade não é necessária. Positividade ou monotonicidade não entram na hipótese do TVI clássico.",
+        "incorrect_a": "Derivabilidade é mais forte que continuidade. O TVI não requer derivabilidade.",
+        "incorrect_c": "Positividade não é parte da hipótese do TVI.",
+        "incorrect_d": "Crescimento não é exigido. f pode oscilar."
+      }
+    },
+    {
+      "id": "q2",
+      "text": "Use o TVI para provar que f(x) = x³ - 3x + 1 tem uma raiz em (-2, -1). Qual par de valores você calcularia?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "f(-2) e f(-1); procure sinais opostos"
+        },
+        {
+          "id": "b",
+          "text": "f(-3) e f(0); procure onde f=0"
+        },
+        {
+          "id": "c",
+          "text": "f'(-2) e f'(-1); procure sinal da derivada"
+        },
+        {
+          "id": "d",
+          "text": "f(-2/3); procure raízes racionais"
+        }
+      ],
+      "correctAnswer": "a",
+      "explanation": {
+        "correct": "Para usar TVI em (-2,-1), calcule f(-2) e f(-1). Se têm sinais opostos (um positivo, outro negativo), há raiz no intervalo. f(-2)=-8+6+1=-1<0. f(-1)=-1+3+1=3>0. Sinais opostos → raiz existe.",
+        "incorrect_b": "f(-3) e f(0) dão intervalo maior (-3,0), não (-2,-1).",
+        "incorrect_c": "A derivada ajuda com análise de crescimento, não com TVI direto.",
+        "incorrect_d": "Raízes racionais vêm do Teorema da Raiz Racional, não do TVI."
+      }
+    },
+    {
+      "id": "q3",
+      "text": "Se f é contínua em [0,10], f(0)=-5 e f(10)=15, qual valor DEVE ser atingido entre 0 e 10?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Apenas 0 (uma raiz)"
+        },
+        {
+          "id": "b",
+          "text": "Todos os valores entre -5 e 15, incluindo 0"
+        },
+        {
+          "id": "c",
+          "text": "Exatamente 5 (valor médio)"
+        },
+        {
+          "id": "d",
+          "text": "Nenhum em particular (TVI não garante)"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": {
+        "correct": "TVI garante que f atinge TODOS os valores entre f(0)=-5 e f(10)=15. Logo, f atinge 0, -1, 5, 10, 15, ou qualquer N ∈ (-5, 15). Isso inclui o zero (raiz), mas muito mais.",
+        "incorrect_a": "TVI garante mais que apenas zero; garante todos os valores intermediários.",
+        "incorrect_c": "f(c)=5 é possível, mas não há garantia de ser exatamente em c=5.",
+        "incorrect_d": "TVI definitivamente garante valores intermediários."
+      }
+    },
+    {
+      "id": "q4",
+      "text": "A função f(x) = (x² - 4)/(x - 2) satisfaz as hipóteses do TVI em [1, 3]?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Sim, porque é um quociente de polinômios"
+        },
+        {
+          "id": "b",
+          "text": "Não, porque tem uma descontinuidade infinita em x=2"
+        },
+        {
+          "id": "c",
+          "text": "Sim, porque 1 e 3 são racionais"
+        },
+        {
+          "id": "d",
+          "text": "Não, porque x=2 está no intervalo [1,3]"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": {
+        "correct": "f(x) = (x²-4)/(x-2) = (x-2)(x+2)/(x-2) simplifica a x+2 para x≠2, MAS não está definida em x=2 (forma indeterminada 0/0). A descontinuidade em x=2 está dentro de [1,3], violando a hipótese de continuidade. TVI não se aplica sem redefinição.",
+        "incorrect_a": "Quocientes de polinômios são contínuos EXCETO onde o denominador é zero.",
+        "incorrect_c": "Racionalidade dos extremos é irrelevante.",
+        "incorrect_d": "A razão é que há descontinuidade, não apenas que x=2 esté 'no' intervalo abstratamente."
+      }
+    },
+    {
+      "id": "q5",
+      "text": "No método da bissecção para encontrar raiz de f(x)=x³-2x-1 em [0,2], qual é o próximo intervalo após calcular f(1)?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "[0, 1] porque f(1) < 0"
+        },
+        {
+          "id": "b",
+          "text": "[1, 2] porque f(1) < 0"
+        },
+        {
+          "id": "c",
+          "text": "[0, 1.5] porque 1.5 é o ponto médio de 1 e 2"
+        },
+        {
+          "id": "d",
+          "text": "Depende do sinal de f(1) em relação aos sinais de f(0) e f(2)"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": {
+        "correct": "f(0)=-1<0, f(2)=3>0, f(1)=1-2-1=-2<0. Como f(1) tem o MESMO sinal que f(0) (ambos negativos), a raiz está entre 1 e 2. Próximo intervalo: [1,2].",
+        "incorrect_a": "Se f(1)<0 e f(0)<0 têm o mesmo sinal, a raiz não está em [0,1].",
+        "incorrect_c": "Não saltamos para 1.5 ainda; primeiro estreitamos o intervalo baseado em sinais.",
+        "incorrect_d": "Embora a lógica mencionada seja verdadeira, há uma resposta mais direta: [1,2]."
+      }
+    },
+    {
+      "id": "q6",
+      "text": "Um engenheiro quer usar o TVI para garantir que existe uma corrente I onde a potência P(I) = 50W. Qual suposição é NECESSÁRIA?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "P(I) é uma função linear"
+        },
+        {
+          "id": "b",
+          "text": "Existem I₁ e I₂ onde P(I₁) < 50 < P(I₂) e P é contínua"
+        },
+        {
+          "id": "c",
+          "text": "A corrente máxima é > 50A"
+        },
+        {
+          "id": "d",
+          "text": "P(I) é crescente"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": {
+        "correct": "TVI requer: (1) P contínua em [I₁, I₂], (2) 50 está entre P(I₁) e P(I₂). Logo, precisamos encontrar I₁, I₂ onde os valores de potência cercam 50, com continuidade. Linearidade, crescimento monótono, ou corrente máxima não são necessários.",
+        "incorrect_a": "P(I) pode ser não-linear (ex: P=I²R é quadrática).",
+        "incorrect_c": "Corrente máxima refere-se a limite de design, não ao TVI.",
+        "incorrect_d": "Monotonicidade não é exigida."
+      }
+    },
+    {
+      "id": "q7",
+      "text": "Se f(x) = x³ + 2x - 5 e você quer usar TVI para encontrar uma raiz com precisão ±0.1, quantas iterações de bissecção são necessárias começando de [0,2]?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "1 (pois f(0)=-5 e f(2)=7 têm sinais opostos)"
+        },
+        {
+          "id": "b",
+          "text": "2 (divide o intervalo 2 vezes)"
+        },
+        {
+          "id": "c",
+          "text": "3 (divida até que intervalo < 0.25)"
+        },
+        {
+          "id": "d",
+          "text": "5 (divida até que intervalo < 0.0625)"
+        }
+      ],
+      "correctAnswer": "d",
+      "explanation": {
+        "correct": "Intervalo inicial: 2-0=2. Após n iterações, tamanho=2/2ⁿ. Para ±0.1, queremos 2/2ⁿ < 0.2, logo 2ⁿ > 10, assim n≥4. Mas a opção d diz '< 0.0625', que é 2/32=2/2⁵, requerendo exatamente 5 iterações para garantir erro < 0.0625 ≤ 0.1. Logo d é mais apropriado.",
+        "incorrect_a": "Uma iteração apenas encontra que há raiz, não aproxima com precisão.",
+        "incorrect_b": "2 iterações: intervalo=2/4=0.5, insuficiente.",
+        "incorrect_c": "3 iterações: intervalo=2/8=0.25, ainda não garante ±0.1."
+      }
+    },
+    {
+      "id": "q8",
+      "text": "Uma função g é descontínua com um salto em x=3. Você ainda pode usar TVI em um intervalo contendo 3?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Sim, se o salto é pequeno"
+        },
+        {
+          "id": "b",
+          "text": "Não, porque TVI requer continuidade"
+        },
+        {
+          "id": "c",
+          "text": "Sim, se você evita exatamente x=3"
+        },
+        {
+          "id": "d",
+          "text": "Sim, o salto não afeta o TVI"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": {
+        "correct": "TVI exige continuidade em TODO o intervalo [a,b]. Se há descontinuidade de salto em x=3 dentro do intervalo, não pode aplicar TVI. Você poderia aplicar em [a,3) ou (3,b], MAS não em um intervalo fechado [a,b] contendo 3.",
+        "incorrect_a": "Tamanho do salto é irrelevante; qualquer descontinuidade invalida TVI.",
+        "incorrect_c": "Se evita x=3, você está usando um intervalo não-contendo-3, não um contendo 3.",
+        "incorrect_d": "Saltos definitivamente afetam TVI negando continuidade."
+      }
+    },
+    {
+      "id": "q9",
+      "text": "Qual afirmação é FALSA sobre o TVI?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "O TVI garante a EXISTÊNCIA de uma solução, não sua unicidade"
+        },
+        {
+          "id": "b",
+          "text": "O TVI requer que f seja contínua e [a,b] seja fechado"
+        },
+        {
+          "id": "c",
+          "text": "Se f é descontínua, o TVI não se aplica"
+        },
+        {
+          "id": "d",
+          "text": "O TVI garante que f atinge valores em (a,b), não em {a,b}"
+        }
+      ],
+      "correctAnswer": "d",
+      "explanation": {
+        "correct": "Declaração d é FALSA. O TVI garante que f atinge valores N no INTERVALO (a,b) aberto, NÃO que todos os valores sejam alcançados apenas no interior. Na verdade, f(a) e f(b) são os extremos e são alcançados nos extremos do intervalo. O TVI fala sobre valores intermediários N estritamente entre f(a) e f(b), que podem ser atingidos em (a,b) ou até coincidentemente em a ou b.",
+        "incorrect_a": "Verdadeira. TVI garante 'pelo menos um' c, não 'exatamente um'.",
+        "incorrect_b": "Verdadeira. Continuidade e intervalo fechado são requisitos.",
+        "incorrect_c": "Verdadeira. Descontinuidade invalida TVI."
+      }
+    },
+    {
+      "id": "q10",
+      "text": "Um sensor de temperatura mostra T(t) contínua em [0,60] minutos, com T(0)=20°C e T(60)=35°C. O TVI garante qual temperatura?",
+      "type": "single-choice",
+      "options": [
+        {
+          "id": "a",
+          "text": "Exatamente 27.5°C em algum momento"
+        },
+        {
+          "id": "b",
+          "text": "Todas as temperaturas entre 20°C e 35°C em algum momento"
+        },
+        {
+          "id": "c",
+          "text": "No mínimo 22°C"
+        },
+        {
+          "id": "d",
+          "text": "Nenhuma específica sem mais dados"
+        }
+      ],
+      "correctAnswer": "b",
+      "explanation": {
+        "correct": "TVI: T contínua em [0,60], T(0)=20, T(60)=35. Para TODO N ∈ (20,35), existe algum t ∈ (0,60) onde T(t)=N. Portanto, T atinge todas as temperaturas entre 20 e 35 graus em algum momento.",
+        "incorrect_a": "27.5 é atingida, mas não é a única garantida. TVI garante muito mais.",
+        "incorrect_c": "Não há motivo para 22 em particular. O TVI garante um range contínuo.",
+        "incorrect_d": "TVI definitivamente garante algo: todos os valores intermediários."
+      }
+    }
+  ]
+}
+
