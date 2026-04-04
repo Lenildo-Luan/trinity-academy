@@ -9,7 +9,10 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "create-course": "ts-node scripts/cli/create-course.cli.ts",
+    "create-lesson-brief": "ts-node scripts/cli/create-lesson-brief.cli.ts",
+    "trinity": "ts-node scripts/cli/trinity.cli.ts"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.6",

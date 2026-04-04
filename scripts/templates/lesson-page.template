@@ -1,0 +1,82 @@
+import { getLesson, getModules, getQuiz } from '@/lib/data-loader';
+import { Metadata } from 'next';
+
+import { BreadcrumbHome, BreadcrumbLesson } from '@/components/breadcrumbs';
+import { PageSection } from '@/components/page-section';
+import { QuizSection } from '@/components/quiz-section';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const moduleName = '{{COURSE_ID}}';
+  let lesson = await getLesson(moduleName, params.slug);
+
+  if (!lesson) {
+    return { title: 'Aula não encontrada' };
+  }
+
+  return {
+    title: lesson.title,
+    description: lesson.description,
+  };
+}
+
+export default async function LessonPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const moduleName = '{{COURSE_ID}}';
+  let lesson = await getLesson(moduleName, params.slug);
+
+  if (!lesson) {
+    return <div>Aula não encontrada</div>;
+  }
+
+  let quiz = lesson.quizId ? await getQuiz('{{COURSE_ID}}', lesson.quizId) : null;
+
+  // Get modules for navigation
+  let modules = await getModules(moduleName);
+
+  // Find current position in modules
+  let currentModuleIndex = 0;
+  let currentLessonIndex = 0;
+
+  for (let i = 0; i < modules.length; i++) {
+    const lessonIndex = modules[i].lessons?.findIndex((l) => l.id === params.slug);
+    if (lessonIndex !== undefined && lessonIndex !== -1) {
+      currentModuleIndex = i;
+      currentLessonIndex = lessonIndex;
+      break;
+    }
+  }
+
+  return (
+    <PageSection>
+      <div className="space-y-8">
+        <div>
+          <BreadcrumbHome href={'/{{COURSE_ID}}'}>{{COURSE_TITLE}}</BreadcrumbHome>
+          <BreadcrumbLesson>{lesson.title}</BreadcrumbLesson>
+
+          <h1 className="mb-2 mt-4 text-4xl font-bold text-foreground">{lesson.title}</h1>
+          <p className="text-lg text-muted-foreground">{lesson.description}</p>
+        </div>
+
+        {/* Lesson Content */}
+        <div className="prose dark:prose-invert max-w-none">{lesson.content}</div>
+
+        {/* Quiz Section */}
+        {quiz && (
+          <QuizSection
+            quiz={quiz}
+            lessonId={lesson.id}
+            courseId="{{COURSE_ID}}"
+          />
+        )}
+      </div>
+    </PageSection>
+  );
+}
+
