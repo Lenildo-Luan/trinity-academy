@@ -9,11 +9,6 @@ description: >
   NOTE: Phase 0 course creation is now fully AUTOMATED via npm run create-course script.
   Use the script for accuracy, speed, and guaranteed success. This skill documents
   both the automated approach (RECOMMENDED) and legacy manual implementation.
----
-
-# Course Creation Skill
-
-You are a **course creation specialist** for Trinity Academy. Your job is to take course requirements and **atomically create** the complete course infrastructure, including registration, folders, metadata, and pages.
 
 You do not create lessons. You do not design content. You are responsible for:
 
@@ -25,6 +20,11 @@ You do not create lessons. You do not design content. You are responsible for:
 
 ---
 
+## Step 1 — Validate Course Requirements
+
+Before creating anything, validate the input:
+
+```typescript
 ## ⭐ RECOMMENDED: Use the Automation Script
 
 For Phase 0 (Course Setup), use the automated script for guaranteed success:
@@ -80,11 +80,6 @@ Success/Error Report
 ---
 
 ## Legacy: Manual Implementation (If needed)
-
-Before creating anything, validate the input:
-
-```typescript
-interface CourseRequest {
   id: string;
   title: string;
   description: string;
@@ -102,58 +97,7 @@ interface CourseRequest {
 1. **Course ID**
    - Must be kebab-case (lowercase, hyphens only, no spaces)
    - Example: `protocolo-dns`, `introducao-ao-git`, `redes-de-computadores`
-   - Must NOT already exist in `src/data/courses.ts`
-   - Must be 3-50 characters
-
-2. **Title**
-   - Must not be empty
-   - Should be descriptive and in Portuguese
-
-3. **Description**
-   - Must not be empty
-   - Should be 50-500 characters
-   - Provides context for course landing page
-
-4. **Background Image URL**
-   - Must be a valid URL
-   - Should work with Next.js Image optimization
-   - Examples: Unsplash, ImageKit, or other CDNs
-
-5. **Initial Modules** (optional)
-   - Each module needs unique ID (kebab-case)
-   - Title and description required
-   - Lessons array starts empty
-
-**Error handling:** If any validation fails, stop and report the specific error.
-
----
-
-## Step 2 — Verify No Conflicts
-
-Check that the course doesn't already exist:
-
-1. Search `src/data/courses.ts` for the course ID
-2. Check if `src/data/lessons/[course-id]/` directory exists
-3. Check if `src/app/(sidebar)/[course-id]/` directory exists
-
-**If conflicts found:** Report and STOP (don't overwrite).
-
----
-
-## Step 3 — Create Course Directories
-
-Create the folder structure in this order:
-
-```
-src/
-├── data/
-│   ├── lessons/
-│   │   └── [course-id]/          ← CREATE
-│   └── quizzes/
-│       └── [course-id]/          ← CREATE
-└── app/
-    └── (sidebar)/
-        └── [course-id]/          ← CREATE
+## Step 1 — Validate Course Requirements
             └── [slug]/           ← CREATE
 ```
 
@@ -581,43 +525,3 @@ All course metadata should be in **Brazilian Portuguese (PT-BR)**:
 - "Protocolos de Roteamento"
 - "Segurança em Redes"
 
----
-
-## ⭐ AUTOMATION SCRIPT (RECOMMENDED FOR PHASE 0)
-
-**Instead of following steps 1-8 manually, use the automated script:**
-
-```bash
-npm run create-course \
-  --id [course-id] \
-  --title "[Title]" \
-  --description "[50-500 chars]" \
-  --image "[URL]" \
-  --modules "[id:Title:Desc]" \
-  --verbose
-```
-
-**Script automatically handles:**
-- ✅ All 30+ validations (inputs, conflicts, formats)
-- ✅ Atomic directory creation
-- ✅ module.json generation with proper JSON structure
-- ✅ courses.ts atomic registration
-- ✅ Page template generation and substitution
-- ✅ TypeScript validation (tsc --noEmit)
-- ✅ Next.js build validation
-- ✅ Clear success/error reporting
-
-**Why use the script:**
-1. **Accuracy** — 100% validation, zero manual errors
-2. **Speed** — 1-2 minutes vs 15-20 minutes
-3. **Consistency** — All courses created the same way
-4. **Safety** — Atomic operations (all-or-nothing)
-5. **Documentation** — Built-in error messages and recovery steps
-
-**Documentation:**
-- Quick start: `AUTOMATION_GETTING_STARTED.md`
-- Reference: `scripts/README.md`
-- Examples: `COMANDOS_PRONTOS.md`
-- Architecture: `scripts/ARCHITECTURE.md`
-
----

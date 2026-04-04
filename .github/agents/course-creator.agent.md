@@ -56,21 +56,21 @@ The script handles:
 **Location:** `scripts/create-course.ts` (CLI: `scripts/cli/create-course.cli.ts`)
 **Documentation:** See `AUTOMATION_GETTING_STARTED.md` and `scripts/README.md`
 
-## Trinity Project Context
 
-When creating a course, follow project conventions:
+1. **Extract requirements** — identify course ID, title, description, background image URL, and initial modules
+2. **Validate inputs** — ensure course doesn't already exist, ID is valid, and required metadata is provided
+3. **Create infrastructure** — folders, files, and routes in atomic fashion
+4. **Register course** — add to courses.ts and update data loading functions if needed
+5. **Generate pages** — create course landing page and lesson routes
+6. **Validate build** — run `npx next build` to confirm everything works
+7. **Report results** — provide clear success message with course URL and next steps
 
-- **Course data:** Defined in `src/data/courses.ts` with metadata (id, title, description, backgroundImage)
-- **Course structure:** Lesson directories in `src/data/lessons/[course-id]/` with `module.json` and MDX files
-- **Quiz storage:** Quiz files in `src/data/quizzes/[course-id]/`
-- **Routes:** Course pages in `src/app/(sidebar)/[course-id]/` with landing page and dynamic lesson routes
-- **Module organization:** Each course has one or more modules, each containing lessons
-- **Language:** Content is primarily **Brazilian Portuguese (PT-BR)**
-- **Course ID:** Kebab-case identifier (e.g., `redes-de-computadores`, `introducao-a-programacao`)
+## Key Responsibilities
 
-## How to Respond to Requests
-
-When receiving a request to create a course:
+### Course Registration
+- Add entry to `src/data/courses.ts` with unique ID, title, description, and backgroundImage URL
+- Ensure ID is kebab-case and doesn't conflict with existing courses
+- Validate that required fields are present and properly formatted
 
 ### Option 1: Use Automated Script (RECOMMENDED)
 
@@ -95,21 +95,6 @@ Then:
 
 If automated script is unavailable:
 
-1. **Extract requirements** — identify course ID, title, description, background image URL, and initial modules
-2. **Validate inputs** — ensure course doesn't already exist, ID is valid, and required metadata is provided
-3. **Create infrastructure** — folders, files, and routes in atomic fashion
-4. **Register course** — add to courses.ts and update data loading functions if needed
-5. **Generate pages** — create course landing page and lesson routes
-6. **Validate build** — run `npx next build` to confirm everything works
-7. **Report results** — provide clear success message with course URL and next steps
-
-## Key Responsibilities
-
-### Course Registration
-- Add entry to `src/data/courses.ts` with unique ID, title, description, and backgroundImage URL
-- Ensure ID is kebab-case and doesn't conflict with existing courses
-- Validate that required fields are present and properly formatted
-
 ### Folder Structure Creation
 - Create `src/data/lessons/[course-id]/` directory
 - Create `src/data/quizzes/[course-id]/` directory
@@ -125,28 +110,6 @@ If automated script is unavailable:
 - Create `src/app/(sidebar)/[course-id]/page.tsx` (course landing page)
 - Create `src/app/(sidebar)/[course-id]/[slug]/page.tsx` (lesson page)
 - Use existing course routes as templates
-- Update hardcoded course references to use the new course ID
-
-### Atomic Creation
-- Create all files together, or none (atomic writes)
-- Stop on first error and report clearly
-- Don't partially create courses
-
-### Build Validation
-- Run `npx next build` after all files are created
-- Confirm exit code is 0 (success)
-- Report any TypeScript or build errors clearly
-
-## Input Requirements
-
-You need the following information to create a course:
-
-```typescript
-interface CourseCreationRequest {
-  id: string;                    // e.g., "protocolo-dns"
-  title: string;                 // e.g., "Protocolo DNS"
-  description: string;           // course description
-  backgroundImage: string;       // image URL
   initialModules?: {             // optional: pre-create modules
     id: string;
     title: string;
@@ -197,14 +160,12 @@ After orchestrating course creation, confirm:
 
 ## Important Notes
 
-- **Automation Available:** Phase 0 course creation is fully automated via `npm run create-course` script. Use this for accuracy and speed.
 - **No lesson creation:** This agent only creates the course structure and metadata. Lessons are created separately via the lesson creation pipeline.
 - **Module initialization:** Create at least one empty module so the course structure is complete.
 - **Background image:** Provide a valid image URL (can be Unsplash, ImageKit, or other CDN).
 - **Course ID convention:** Use kebab-case with hyphens, matching existing course naming (e.g., `redes-de-computadores`).
 - **Template matching:** The generated pages should match existing course pages exactly (copy from `redes-de-computadores` as template).
 - **Language:** All UI text and descriptions are in **Brazilian Portuguese (PT-BR)**.
-- **Script Documentation:** See `AUTOMATION_GETTING_STARTED.md`, `scripts/README.md`, and `COMANDOS_PRONTOS.md` for detailed examples and troubleshooting.
 
 ## Next Steps After Course Creation
 

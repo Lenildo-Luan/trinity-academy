@@ -31,29 +31,6 @@ npm run create-course \
 
 ---
 
-## What This Skill Handles
-
-- ✅ **Course registration** — adds course to `src/data/courses.ts`
-- ✅ **Folder structure** — creates lesson and quiz directories
-- ✅ **Module metadata** — initializes `module.json` with course modules
-- ✅ **Route pages** — creates landing page and lesson routing
-- ✅ **Build validation** — ensures everything builds correctly
-- ✅ **Atomic writes** — all-or-nothing file creation
-
-## What This Skill Does NOT Handle
-
-- ❌ Creating lessons (use lesson creation pipeline)
-- ❌ Writing lesson content (use writer agent)
-- ❌ Designing visualizations (use p5js-developer agent)
-- ❌ Creating quiz questions (use quiz-developer agent)
-
-## Quick Reference
-
-### Input Requirements
-
-```typescript
-{
-  id: "course-id",           // kebab-case
   title: "Course Title",     // in Portuguese
   description: "...",        // course description
   backgroundImage: "url",    // image URL
