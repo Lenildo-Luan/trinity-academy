@@ -171,23 +171,6 @@ Your MDX file should have this structure:
 
 [Content with explanations, examples, and apply patterns]
 
-### Visual Specification (if applicable)
-
-{{
-TYPE: [Static Illustration | Animation | Interactive Visualization | Step-by-Step Animation]
-TITLE: ComponentNameHere
-EDUCATIONAL PURPOSE: ...
-CANVAS SIZE: 700x400
-VISUAL DESCRIPTION: ...
-INITIAL STATE: ...
-BEHAVIOR: ...
-LABELS AND TEXT ON CANVAS: ...
-EDUCATIONAL ANNOTATIONS: ...
-ACCESSIBILITY NOTES: ...
-}}
-
-[Text referencing the visualization]
-
 <ComponentNameHere />
 
 ## [More Sections as Needed]
@@ -202,19 +185,6 @@ ACCESSIBILITY NOTES: ...
 
 [Bridge to next lesson]
 ```
-
-### About Visual Specifications
-
-If your lesson includes **interactive visualizations or diagrams**:
-
-1. **Insert visual specification blocks** in `{{ }}` as shown above
-2. **The Design Annotator** will refine these specs
-3. **The P5.js Developer** will build the component from the spec
-4. **You reference the component** in your text using `<ComponentName />`
-
-If you don't have visual specs yet, you can:
-- Write placeholder comments (`<!-- TODO: Add visualization for concept X -->`)
-- The Integration Agent will coordinate with other agents to build them
 
 ### Writing Conventions in MDX
 
@@ -257,12 +227,7 @@ When submitting your work to the **Integration Agent**, provide:
    - `courseId` — Course identifier
    - `description` — One-sentence summary (for SEO/metadata)
 
-3. **Visual specifications** (if included):
-   - List of `{{ }}` specs in the content
-   - Component names needed
-   - Any notes for the P5.js Developer
-
-4. **A brief summary** of what was written:
+3. **A brief summary** of what was written:
    - Learning objectives covered
    - Key concepts taught
    - Any pedagogical patterns used

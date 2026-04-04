@@ -5,39 +5,39 @@
     "description": "Fundamentos do curso: definição, tipos e transformações de funções reais",
     "lessons": [
       {
-        "id": "introducao-a-funcoes",
+        "id": "charpter-1",
         "title": "Introdução a Funções",
         "slug": "introducao-a-funcoes",
         "description": "Definição de função, domínio, contradomínio e imagem. Notação f(x), teste da reta vertical e importância de funções em modelagem de engenharia.",
-        "quizId": "quiz-1-introducao-a-funcoes"
+        "quizId": "quiz-1"
       },
       {
-        "id": "tipos-de-funcoes",
+        "id": "charpter-2",
         "title": "Tipos de Funções",
         "slug": "tipos-de-funcoes",
         "description": "Funções polinomiais, racionais, de raiz, valor absoluto e definidas por partes. Identificação, esboço de gráficos e análise de comportamento.",
-        "quizId": "quiz-2-tipos-de-funcoes"
+        "quizId": "quiz-2"
       },
       {
-        "id": "funcoes-exponenciais-e-logaritmicas",
+        "id": "charpter-3",
         "title": "Funções Exponenciais e Logarítmicas",
         "slug": "funcoes-exponenciais-e-logaritmicas",
         "description": "Crescimento e decaimento exponencial, número de Euler e, logaritmos naturais. Aplicações em circuitos RC, radioatividade e modelagem populacional.",
-        "quizId": "quiz-3-exponenciais-logaritmicas"
+        "quizId": "quiz-3"
       },
       {
-        "id": "funcoes-trigonometricas-e-inversas",
+        "id": "charpter-4",
         "title": "Funções Trigonométricas e Inversas",
         "slug": "funcoes-trigonometricas-e-inversas",
         "description": "Seno, cosseno, tangente e suas inversas. Amplitude, período e transformações. Composição de funções e aplicações em oscilações e movimento periódico.",
-        "quizId": "quiz-4-trigonometricas-inversas"
+        "quizId": "quiz-4"
       },
       {
-        "id": "transformacoes-e-analise-de-funcoes",
+        "id": "charpter-5",
         "title": "Transformações e Análise de Funções",
         "slug": "transformacoes-e-analise-de-funcoes",
         "description": "Deslocamentos, reflexões e estiramentos. Funções pares e ímpares. Injetividade, sobrejetividade e funções inversas. Análise global e revisão do módulo.",
-        "quizId": "quiz-5-transformacoes-analise"
+        "quizId": "quiz-5"
       }
     ]
   },
@@ -47,46 +47,46 @@
     "description": "Conceito intuitivo e formal de limite, técnicas algébricas e limites no infinito",
     "lessons": [
       {
-        "id": "limite-conceito-intuitivo",
+        "id": "charpter-6",
         "title": "O Conceito Intuitivo de Limite",
         "slug": "limite-conceito-intuitivo",
         "description": "O que significa f(x) se aproximar de L conforme x → a. Limites laterais (esquerda e direita). Exploração gráfica e numérica. Definição informal.",
-        "quizId": "quiz-limites-1-conceito-intuitivo"
+        "quizId": "quiz-6"
       },
       {
-        "id": "limite-definicao-formal",
+        "id": "charpter-7",
         "title": "A Definição Formal de Limite",
         "slug": "limite-definicao-formal",
         "description": "Definição epsilon-delta (ε-δ). Compreensão da relação precisão-tolerância. Provas simples com funções lineares.",
-        "quizId": "quiz-limites-2-definicao-formal"
+        "quizId": "quiz-7"
       },
       {
-        "id": "leis-limites",
+        "id": "charpter-8",
         "title": "Leis de Limites e Álgebra de Limites",
         "slug": "leis-limites",
         "description": "Regras de soma, produto, quociente e potência para limites. Limites de funções compostas. Aplicação das leis para calcular limites sem gráficos.",
-        "quizId": "quiz-limites-3-leis"
+        "quizId": "quiz-8"
       },
       {
-        "id": "formas-indeterminadas",
+        "id": "charpter-9",
         "title": "Formas Indeterminadas e Técnicas Algébricas",
         "slug": "formas-indeterminadas",
         "description": "Formas 0/0 e ∞/∞. Métodos de fatoração, racionalização e simplificação. Limites com raízes quadradas e polinômios de grau superior.",
-        "quizId": "quiz-limites-4-formas-indeterminadas"
+        "quizId": "quiz-9"
       },
       {
-        "id": "limites-infinito-assintotas",
+        "id": "charpter-10",
         "title": "Limites no Infinito e Assíntotas",
         "slug": "limites-infinito-assintotas",
         "description": "Comportamento de funções conforme x → ±∞. Assíntotas horizontais e verticais. Comparação de taxas de crescimento polinomial, exponencial e logarítmica.",
-        "quizId": "quiz-limites-5-infinito-assintotas"
+        "quizId": "quiz-10"
       },
       {
-        "id": "teorema-sanduiche",
+        "id": "charpter-11",
         "title": "O Teorema do Sanduíche e Limites Especiais",
         "slug": "teorema-sanduiche",
         "description": "Teorema do Sanduíche. Limites especiais: lim(sin(x)/x) quando x→0, lim(1 + 1/n)ⁿ e o número e. Aplicações em análise de sinais.",
-        "quizId": "quiz-limites-6-sanduiche-especiais"
+        "quizId": "quiz-11"
       }
     ]
   },
