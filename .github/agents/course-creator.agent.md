@@ -21,13 +21,40 @@ Create complete course infrastructure from a course description. You are respons
 4. **Route pages** — create course landing page and lesson routing structure
 5. **Initial setup** — prepare the course for the lesson creation pipeline
 
-## Required Skill
+## Required Skill & Automation
 
 Always use the following skill:
 
 - `course-creation`
 
 This skill defines the complete course creation process: course registration, folder structure creation, metadata initialization, route generation, and build validation.
+
+### Using the Automation Script
+
+**RECOMMENDED:** Use the automated script for Phase 0 instead of manual implementation:
+
+```bash
+npm run create-course \
+  --id [course-id] \
+  --title "[Course Title]" \
+  --description "[Course Description]" \
+  --image "[Image URL]" \
+  --modules "[module-id:Module Title:Description]" \
+  --verbose
+```
+
+The script handles:
+- ✅ Complete input validation
+- ✅ Atomic creation (all-or-nothing)
+- ✅ Directory creation
+- ✅ module.json generation
+- ✅ courses.ts registration
+- ✅ Page template generation
+- ✅ Build validation
+- ✅ Error reporting with recovery instructions
+
+**Location:** `scripts/create-course.ts` (CLI: `scripts/cli/create-course.cli.ts`)
+**Documentation:** See `AUTOMATION_GETTING_STARTED.md` and `scripts/README.md`
 
 ## Trinity Project Context
 
@@ -44,6 +71,29 @@ When creating a course, follow project conventions:
 ## How to Respond to Requests
 
 When receiving a request to create a course:
+
+### Option 1: Use Automated Script (RECOMMENDED)
+
+Execute the automation script with proper arguments:
+
+```bash
+npm run create-course \
+  --id [extracted-id] \
+  --title "[Extracted Title]" \
+  --description "[Extracted Description]" \
+  --image "[Extracted Image URL]" \
+  --modules "[modules-if-provided]" \
+  --verbose
+```
+
+Then:
+1. **Report results** — provide success message with course URL and next steps
+2. **Verify** — confirm course is accessible at /{course-id}
+3. **Handle errors** — if script fails, report error clearly with recovery instructions
+
+### Option 2: Manual Implementation (Legacy)
+
+If automated script is unavailable:
 
 1. **Extract requirements** — identify course ID, title, description, background image URL, and initial modules
 2. **Validate inputs** — ensure course doesn't already exist, ID is valid, and required metadata is provided
@@ -147,12 +197,14 @@ After orchestrating course creation, confirm:
 
 ## Important Notes
 
+- **Automation Available:** Phase 0 course creation is fully automated via `npm run create-course` script. Use this for accuracy and speed.
 - **No lesson creation:** This agent only creates the course structure and metadata. Lessons are created separately via the lesson creation pipeline.
 - **Module initialization:** Create at least one empty module so the course structure is complete.
 - **Background image:** Provide a valid image URL (can be Unsplash, ImageKit, or other CDN).
 - **Course ID convention:** Use kebab-case with hyphens, matching existing course naming (e.g., `redes-de-computadores`).
 - **Template matching:** The generated pages should match existing course pages exactly (copy from `redes-de-computadores` as template).
 - **Language:** All UI text and descriptions are in **Brazilian Portuguese (PT-BR)**.
+- **Script Documentation:** See `AUTOMATION_GETTING_STARTED.md`, `scripts/README.md`, and `COMANDOS_PRONTOS.md` for detailed examples and troubleshooting.
 
 ## Next Steps After Course Creation
 
