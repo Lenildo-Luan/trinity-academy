@@ -3,7 +3,32 @@
     "id": "conjuntos-numericos",
     "title": "Conjuntos Numéricos",
     "description": "Naturais, inteiros, racionais, irracionais e reais. Representação na reta numérica, intervalos e operações com conjuntos.",
-    "lessons": []
+    "lessons": [
+      {
+        "id": "charpter-1",
+        "title": "Números Naturais e Inteiros",
+        "slug": "numeros-naturais-e-inteiros",
+        "description": "Definição dos conjuntos ℕ e ℤ. Operações básicas, propriedades (comutativa, associativa, distributiva) e representação na reta numérica. Valor absoluto e módulo."
+      },
+      {
+        "id": "charpter-2",
+        "title": "Números Racionais e Irracionais",
+        "slug": "numeros-racionais-e-irracionais",
+        "description": "Definição de ℚ: frações e dízimas. Números irracionais: √2, π, e. Diferença entre racionais e irracionais. Representação decimal e aproximações."
+      },
+      {
+        "id": "charpter-3",
+        "title": "O Conjunto dos Números Reais",
+        "slug": "conjunto-numeros-reais",
+        "description": "União de ℚ e ℝ\\ℚ formando ℝ. Propriedades da reta real, densidade e completude. Comparação e ordenação de números reais."
+      },
+      {
+        "id": "charpter-4",
+        "title": "Intervalos e Operações com Conjuntos",
+        "slug": "intervalos-operacoes-conjuntos",
+        "description": "Intervalos abertos, fechados e semi-abertos. União, interseção e complementar de conjuntos. Representação em notação de conjunto e na reta numérica."
+      }
+    ]
   },
   {
     "id": "algebra-e-expressoes",

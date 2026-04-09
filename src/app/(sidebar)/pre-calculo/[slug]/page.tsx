@@ -84,7 +84,7 @@ export default async function Page({
                 <NextPageLink
                   title={lesson.next.title}
                   description={lesson.next.description}
-                  href={`/${lesson.next.id}`}
+                  href={`/pre-calculo/${lesson.next.id}`}
                 />
               ) : (
                 <NextPageLink

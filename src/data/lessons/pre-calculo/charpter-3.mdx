@@ -1,0 +1,276 @@
+# O Conjunto dos Números Reais
+
+Você explorou os números naturais, inteiros, racionais e descobriu que irracionais também existem. Agora, vamos unir tudo isso.
+
+O **conjunto dos números reais** (ℝ) é a **reunião completa** de todos os racionais com todos os irracionais. É nele que vamos trabalhar por todo o Cálculo e além — porque é onde a maioria dos fenômenos físicos e de engenharia ocorrem.
+
+Nesta lição, vamos explorar as propriedades essenciais que tornam ℝ tão especial: a **densidade** e a **completude**.
+
+## Objetivos de Aprendizado
+
+Ao final desta lição, você será capaz de:
+
+- **Definir** o conjunto dos números reais (ℝ)
+- **Entender** a união de racionais e irracionais
+- **Explicar** o conceito de densidade
+- **Explicar** o conceito de completude (axioma do supremo)
+- **Comparar e ordenar** números reais
+- **Trabalhar** com desigualdades em ℝ
+- **Aplicar** propriedades de números reais em contextos práticos
+
+## Definição: Números Reais (ℝ)
+
+O conjunto dos números reais é a **união** de racionais e irracionais:
+
+$$\mathbb{R} = \mathbb{Q} \cup (\mathbb{R} \setminus \mathbb{Q})$$
+
+onde $\mathbb{R} \setminus \mathbb{Q}$ representa os **números irracionais**.
+
+Ou, visualmente:
+
+```
+ℝ (Números Reais)
+├── ℚ (Racionais)
+│   ├── ℤ (Inteiros)
+│   │   ├── ℕ (Naturais)
+│   │   └── Negativos
+│   └── Frações (não-inteiras)
+└── Irracionais (√2, π, e, ...)
+```
+
+### Propriedades Fundamentais de ℝ
+
+1. **Ordenado:** Dados dois números reais $a$ e $b$, sempre vale uma e apenas uma das relações:
+   - $a < b$ (a é menor que b)
+   - $a = b$ (a é igual a b)
+   - $a > b$ (a é maior que b)
+
+2. **Denso:** Entre quaisquer dois números reais, existe infinitos outros números reais.
+
+3. **Completo:** Todo conjunto limitado superiormente tem um supremo (menor limite superior).
+
+Vamos explorar as duas últimas propriedades em detalhe.
+
+## Densidade de ℝ
+
+A propriedade de **densidade** significa que:
+
+> **Entre quaisquer dois números reais distintos $a$ e $b$, existe infinitos números reais.**
+
+### Exemplo 1: Densidade
+
+Considere $a = 1$ e $b = 2$.
+
+Existem infinitos números reais entre eles:
+- Inteiros: nenhum
+- Racionais: $\frac{11}{10} = 1.1$, $\frac{12}{10} = 1.2$, ..., $\frac{19}{10} = 1.9$
+- Irracionais: $\sqrt{2} \approx 1.414$, $\frac{\pi}{2} \approx 1.571$, ...
+
+Você pode sempre encontrar um número entre dois números, repetindo infinitamente:
+
+$$1 < 1.5 < 2$$
+$$1 < 1.25 < 1.5$$
+$$1 < 1.125 < 1.25$$
+$$\vdots$$
+
+Esta é a ideia essencial da **densidade**.
+
+### Por Que a Densidade Importa?
+
+A densidade garante que:
+- A reta numérica **não tem "buracos"** ou "vazios"
+- Qualquer aproximação pode ser melhorada indefinidamente
+- Podemos usar sequências convergentes (conceito chave no Cálculo)
+
+### Exemplo 2: Encontrando Racionais Densos
+
+Encontre um racional entre $\pi \approx 3.14159$ e $\frac{22}{7} \approx 3.14286$.
+
+**Solução:** Tire a média aritmética:
+
+$$\frac{\pi + \frac{22}{7}}{2} \approx \frac{3.14159 + 3.14286}{2} \approx 3.14222$$
+
+Verifique: $\pi < 3.14222 < \frac{22}{7}$ ✓
+
+E você pode repetir para encontrar tantos racionais quanto quiser entre eles!
+
+## Completude de ℝ
+
+A propriedade de **completude** é mais profunda. Ela pode ser enunciada de várias maneiras equivalentes:
+
+### Axioma do Supremo (Propriedade de Completude)
+
+> **Se um conjunto não-vazio de números reais é limitado superiormente, então ele tem um supremo (menor limite superior).**
+
+Isso pode soar abstrato. Vamos desdobrar.
+
+#### Definições Importantes
+
+**Limite superior:** Um número $M$ é um limite superior de um conjunto $A$ se $a \leq M$ para **todo** $a \in A$.
+
+**Supremo:** O supremo (ou "sup") de um conjunto é o **menor** de todos os limites superiores.
+
+**Exemplo 3: Encontrando o Supremo**
+
+Considere o conjunto $A = \{x \in \mathbb{R} : 0 < x < 1\}$ (números reais entre 0 e 1, **sem incluir** 0 ou 1).
+
+- Limites superiores: 1, 1.5, 2, 100, ... (qualquer número $\geq 1$)
+- **Supremo:** 1 (o menor limite superior)
+
+Note que o supremo é 1, mas 1 **não pertence ao conjunto** $A$.
+
+**Exemplo 4: Um Conjunto com Máximo**
+
+Considere $B = \{x \in \mathbb{R} : 0 < x \leq 1\}$ (números entre 0 e 1, **incluindo** 1).
+
+- Limites superiores: 1, 1.5, 2, 100, ...
+- **Supremo:** 1
+- **Máximo:** 1 (o maior elemento que pertence ao conjunto)
+
+Neste caso, supremo = máximo.
+
+### Por Que a Completude Importa?
+
+A completude garante:
+- A reta real **não tem "saltos"** — é contínua
+- Equações como $x^2 = 2$ têm soluções reais (como $x = \sqrt{2}$)
+- A integral e o cálculo funcionam adequadamente
+
+**Sem completude, o Cálculo colapsaria.**
+
+## Comparação e Ordenação de Números Reais
+
+Em ℝ, você pode sempre comparar dois números usando a **reta numérica**:
+
+```
+                 ← menor          maior →
+────●─────●──────●──────●────────●───────
+   -2    -1      0      1       √2      2
+```
+
+### Regras de Comparação
+
+1. **Positivos vs Negativos:** Todo número positivo é maior que qualquer negativo.
+   - $0.001 > -100$
+
+2. **Entre Positivos:** Compare usando tamanho.
+   - $0.5 < 0.501$
+   - $1 < \sqrt{2} < 2$
+
+3. **Entre Negativos:** O "mais negativo" é menor.
+   - $-5 < -3$ (porque $|-5| > |-3|$)
+
+### Exemplo 5: Ordenar Números Reais
+
+Ordene em ordem crescente:
+$$-2, \sqrt{2}, -\frac{1}{2}, 0, \pi, 1.5$$
+
+**Conversão para decimais:**
+- $-2 = -2.000$
+- $\sqrt{2} \approx 1.414$
+- $-\frac{1}{2} = -0.500$
+- $0 = 0.000$
+- $\pi \approx 3.142$
+- $1.5 = 1.500$
+
+**Ordem crescente:**
+$$-2 < -\frac{1}{2} < 0 < \sqrt{2} < 1.5 < \pi$$
+
+## Desigualdades em ℝ
+
+Uma **desigualdade** é uma relação de ordem entre expressões:
+
+$$a < b, \quad a > b, \quad a \leq b, \quad a \geq b$$
+
+### Propriedades das Desigualdades
+
+1. **Transitiva:** Se $a < b$ e $b < c$, então $a < c$.
+
+2. **Aditiva:** Se $a < b$, então $a + c < b + c$ (pode adicionar a ambos os lados).
+
+3. **Multiplicativa por positivo:** Se $a < b$ e $c > 0$, então $ac < bc$.
+
+4. **Multiplicativa por negativo (inverte!):** Se $a < b$ e $c < 0$, então $ac > bc$.
+   - **Atenção:** Multiplicar/dividir por negativo inverte a desigualdade!
+
+### Exemplo 6: Resolvendo Desigualdades
+
+Resolva $2x - 3 < 5$.
+
+**Solução:**
+$$2x - 3 < 5$$
+$$2x < 8$$ (adicione 3 a ambos os lados)
+$$x < 4$$ (divida por 2, que é positivo — não inverte)
+
+**Verificação:** Se $x = 3$, então $2(3) - 3 = 3 < 5$ ✓
+
+### Exemplo 7: Desigualdade com Negativo
+
+Resolva $-3x + 2 \geq 11$.
+
+**Solução:**
+$$-3x + 2 \geq 11$$
+$$-3x \geq 9$$ (subtraia 2 de ambos os lados)
+$$x \leq -3$$ (divida por -3 — **inverte a desigualdade**)
+
+**Verificação:** Se $x = -4$, então $-3(-4) + 2 = 14 \geq 11$ ✓
+
+## Estrutura Hierárquica de ℝ
+
+```
+ℝ (Números Reais)
+ ├─ ℚ (Racionais)
+ │  ├─ ℤ (Inteiros)
+ │  │  ├─ ℕ (Naturais)
+ │  │  └─ Negativos + Zero
+ │  └─ Frações próprias (1/2, 3/4, ...)
+ └─ Irracionais (√2, π, e, ...)
+```
+
+### Relações de Continência
+
+$$\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}$$
+
+Cada conjunto está **completamente contido** no próximo.
+
+### Exemplos da Hierarquia
+
+- **2 é**: Natural, Inteiro, Racional, Real
+- **-3 é**: Inteiro, Racional, Real (mas **não** Natural)
+- **1/2 é**: Racional, Real (mas **não** Inteiro)
+- **√2 é**: Real (mas **não** Racional, Inteiro, ou Natural)
+
+## Aplicação: Precisão em Engenharia
+
+Na engenharia, frequentemente temos que lidar com números reais que não podemos expressar exatamente.
+
+### Exemplo 8: Aproximação de Uma Medida
+
+Um engenheiro mede a diagonal de uma sala quadrada com lado = 10 m.
+
+A diagonal é:
+$$d = \sqrt{10^2 + 10^2} = \sqrt{200} = 10\sqrt{2}$$
+
+Mas $\sqrt{2}$ é irracional. Na prática:
+- Aproximação simples: $\sqrt{2} \approx 1.414$, logo $d \approx 14.14$ m
+- Melhor aproximação: $\sqrt{2} \approx 1.41421$, logo $d \approx 14.1421$ m
+
+A densidade de ℝ garante que podemos sempre melhorar nossa aproximação.
+
+## Resumo: Números Reais
+
+| Propriedade | Descrição |
+|---|---|
+| **Definição** | ℝ = ℚ ∪ (Irracionais) |
+| **Ordenado** | Para quaisquer a, b: a < b, a = b, ou a > b |
+| **Denso** | Entre quaisquer dois reais, infinitos outros reais |
+| **Completo** | Todo conjunto limitado superiormente tem supremo |
+| **Contínuo** | A reta real não tem "buracos" |
+| **Infinito** | Há infinitos números em qualquer intervalo |
+
+## Ponte para a Próxima Lição
+
+Você agora entende os números reais em sua totalidade: como são construídos, suas propriedades profundas e por que são tão especiais.
+
+Na próxima lição, vamos aprender a **organizar números reais em grupos** usando intervalos (conjuntos contínuos) e a trabalhar com **operações entre conjuntos** (união, interseção, complementar) — ferramentas essenciais para o Cálculo.
+

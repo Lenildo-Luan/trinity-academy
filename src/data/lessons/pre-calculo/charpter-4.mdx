@@ -1,0 +1,329 @@
+# Intervalos e Operações com Conjuntos
+
+Imagine que um engenheiro diz: "Esta temperatura deve estar entre 20°C e 30°C". Não é só 20 ou só 30 — é **tudo entre eles**. Ou, ao contrário: "Qualquer valor menor que -10 ou maior que 50 causará falha".
+
+Os **intervalos** são subconjuntos especiais de ℝ que descrevem essas "faixas" contínuas. E as **operações entre conjuntos** — união, interseção, complementar — permitem combinar essas faixas de forma poderosa.
+
+Nesta lição, vamos dominar a linguagem e as operações de conjuntos que você usará em todo o Cálculo.
+
+## Objetivos de Aprendizado
+
+Ao final desta lição, você será capaz de:
+
+- **Definir** e **notacionar** intervalos (abertos, fechados, semi-abertos)
+- **Representar** intervalos na reta numérica
+- **Converter** entre notação de conjunto e notação de intervalo
+- **Realizar** operações entre conjuntos (união, interseção, complementar)
+- **Interpretar** desigualdades como intervalos
+- **Combinar** intervalos usando operações de conjunto
+- **Aplicar** intervalos em problemas de domínio e restrições
+
+## Tipos de Intervalos
+
+Um **intervalo** é um conjunto contínuo de números reais. Existem diversos tipos, dependendo se os extremos estão incluídos ou não.
+
+### 1. Intervalo Fechado [a, b]
+
+Um intervalo **fechado** inclui os dois extremos:
+
+$$[a, b] = \{x \in \mathbb{R} : a \leq x \leq b\}$$
+
+- Notação: **[colchete quadrado significa "incluído"**
+- Na reta: ●─────●
+- Exemplos:
+  - $[0, 1]$ inclui 0, 1 e tudo entre
+  - $[-3, 5]$ inclui -3, 5 e tudo entre
+
+### 2. Intervalo Aberto (a, b)
+
+Um intervalo **aberto** exclui os dois extremos:
+
+$$(a, b) = \{x \in \mathbb{R} : a < x < b\}$$
+
+- Notação: **(parêntese significa "excluído"**
+- Na reta: ○─────○
+- Exemplos:
+  - $(0, 1)$ inclui 0.5, 0.9, 0.999... mas **não** 0 nem 1
+  - $(-3, 5)$ não inclui -3 nem 5
+
+### 3. Intervalos Semi-Abertos
+
+Um intervalo pode incluir um extremo e excluir o outro:
+
+- **[a, b)** inclui $a$, exclui $b$: $\{x : a \leq x < b\}$
+  - Na reta: ●─────○
+
+- **(a, b]** exclui $a$, inclui $b$: $\{x : a < x \leq b\}$
+  - Na reta: ○─────●
+
+### 4. Intervalos Infinitos
+
+Quando um intervalo se estende infinitamente, usamos o símbolo $\infty$:
+
+| Notação | Descrição | Reta Numérica |
+|---|---|---|
+| $(a, \infty)$ | Maiores que $a$ | `o--------->` |
+| $[a, \infty)$ | Maiores ou iguais a $a$ | `*--------->` |
+| $(-\infty, b)$ | Menores que $b$ | `<---------o` |
+| $(-\infty, b]$ | Menores ou iguais a $b$ | `<---------*` |
+| $(-\infty, \infty)$ | Todos os reais | `<--------->` (toda reta) |
+
+⚠️ **Nota:** $\infty$ nunca é incluído — sempre use parêntese com $\infty$.
+
+### Exemplo 1: Representar Intervalos na Reta
+
+Represente na reta numérica:
+
+1. $[1, 3]$ — fechado, inclui 1 e 3
+   ```
+   ─────●─────────●─────
+       1           3
+   ```
+
+2. $(1, 3)$ — aberto, exclui 1 e 3
+   ```
+   ─────○─────────○─────
+       1           3
+   ```
+
+3. $[1, 3)$ — semi-aberto, inclui 1, exclui 3
+   ```
+   ─────●─────────○─────
+       1           3
+   ```
+
+4. $(2, \infty)$ — infinito para cima, exclui 2
+   ```
+   ─────○─────────────→
+       2
+   ```
+
+## Notação de Conjunto vs Notação de Intervalo
+
+A mesma ideia pode ser expressa de duas formas:
+
+| Desigualdade | Notação de Conjunto | Notação de Intervalo |
+|---|---|---|
+| $a \leq x \leq b$ | $\{x \in \mathbb{R} : a \leq x \leq b\}$ | $[a, b]$ |
+| $a < x < b$ | $\{x \in \mathbb{R} : a < x < b\}$ | $(a, b)$ |
+| $a \leq x < b$ | $\{x \in \mathbb{R} : a \leq x < b\}$ | $[a, b)$ |
+| $x > a$ | $\{x \in \mathbb{R} : x > a\}$ | $(a, \infty)$ |
+| $x \leq b$ | $\{x \in \mathbb{R} : x \leq b\}$ | $(-\infty, b]$ |
+
+### Exemplo 2: Converter Desigualdade em Intervalo
+
+Converta a desigualdade em notação de intervalo:
+
+1. $-2 < x \leq 5$ → $(-2, 5]$
+2. $x \geq 0$ → $[0, \infty)$
+3. $x < -1$ → $(-\infty, -1)$
+4. $|x| < 3$ (ou $-3 < x < 3$) → $(-3, 3)$
+
+## Operações com Conjuntos
+
+Quando você trabalha com intervalos, frequentemente precisa **combinar** ou **intersecar** eles. As operações fundamentais são:
+
+### 1. União (∪)
+
+A **união** de dois conjuntos $A$ e $B$ inclui **todos os elementos que estão em $A$ ou em $B$** (ou em ambos):
+
+$$A \cup B = \{x : x \in A \text{ ou } x \in B\}$$
+
+Na reta numérica, a união é a **reunião de todos os pontos**:
+
+```
+A = [1, 3]    ─────●───────●─────
+B = (2, 5)    ────────○───────○─────
+A ∪ B = [1, 5)  ───●───────────○─────
+```
+
+Resultado: $A \cup B = [1, 5)$
+
+### 2. Interseção (∩)
+
+A **interseção** de dois conjuntos $A$ e $B$ inclui **apenas os elementos que estão em ambos**:
+
+$$A \cap B = \{x : x \in A \text{ e } x \in B\}$$
+
+Na reta numérica, a interseção é a **sobreposição**:
+
+```
+A = [1, 3]    ─────●───────●─────
+B = (2, 5)    ────────○───────○─────
+A ∩ B = (2, 3]    ────────○──────●──────
+```
+
+Resultado: $A \cap B = (2, 3]$
+
+### 3. Complementar (A' ou A^c)
+
+O **complementar** de um conjunto $A$ em relação a ℝ inclui **todos os números reais que não estão em $A$**:
+
+$$A^c = \{x \in \mathbb{R} : x \notin A\}$$
+
+Se $A = [1, 3]$, então:
+
+$$A^c = (-\infty, 1) \cup (3, \infty)$$
+
+Na reta numérica:
+
+```
+A = [1, 3]     ──────●────────●──────
+A^c = (-∞,1)∪(3,∞)  ←──○ e ○──→
+```
+
+### Exemplo 3: Operações com Intervalos
+
+Dados $A = [0, 2]$ e $B = (1, 4)$, encontre:
+
+**a) $A \cup B$ (união)**
+
+```
+A = [0, 2]     ──●─────────●───
+B = (1, 4)     ──────○──────────○─
+A ∪ B = [0, 4)   ──●──────────────○─
+```
+
+Resultado: $A \cup B = [0, 4)$
+
+**b) $A \cap B$ (interseção)**
+
+```
+A = [0, 2]     ──●─────────●───
+B = (1, 4)     ──────○──────────○─
+A ∩ B = (1, 2]    ──────○──●──
+```
+
+Resultado: $A \cap B = (1, 2]$
+
+**c) $A^c$ (complementar de $A$)**
+
+$$A^c = (-\infty, 0) \cup (2, \infty)$$
+
+### Exemplo 4: Operações Mais Complexas
+
+Dados $A = [-2, 1)$, $B = (0, 3]$, e $C = [1, 2]$, encontre:
+
+**a) $(A \cup B) \cap C$**
+
+Primeiro, $A \cup B$:
+
+```
+A = [-2, 1)  ──●──────○───
+B = (0, 3]   ────○────────●
+A ∪ B = [-2,3]  ──●────────●
+```
+
+Agora, $(A \cup B) \cap C$:
+
+```
+A ∪ B = [-2, 3]  ──●──────────●──
+C = [1, 2]       ────────●──●──
+(A ∪ B) ∩ C = [1, 2]  ────●──●──
+```
+
+Resultado: $(A \cup B) \cap C = [1, 2]$
+
+## Diferença entre Conjuntos
+
+A **diferença** $A \setminus B$ (lê-se "$A$ menos $B$") inclui elementos que estão em $A$ mas **não** em $B$:
+
+$$A \setminus B = \{x : x \in A \text{ e } x \notin B\}$$
+
+### Exemplo 5: Diferença de Intervalos
+
+Dado $A = [0, 3]$ e $B = (1, 2)$, encontre $A \setminus B$:
+
+Os pontos em $A$ que **não estão** em $B$:
+
+```
+A = [0, 3]       ──●────────────●──
+B = (1, 2)       ────○────●────
+A \ B = [0,1]∪[2,3]  ──●─○  ●──●──
+```
+
+Resultado: $A \setminus B = [0, 1] \cup [2, 3]$
+
+## Aplicações: Domínio de Funções
+
+Os intervalos são **essenciais** para especificar o **domínio** de uma função.
+
+### Exemplo 6: Domínio de Uma Função
+
+Encontre o domínio de $f(x) = \frac{1}{x - 2}$.
+
+O denominador não pode ser zero:
+$$x - 2 \neq 0$$
+$$x \neq 2$$
+
+**Domínio:** Todos os reais exceto 2
+
+$$\text{Dom}(f) = (-\infty, 2) \cup (2, \infty)$$
+
+Ou em notação de conjunto: $\{x \in \mathbb{R} : x \neq 2\}$
+
+### Exemplo 7: Domínio com Raiz Quadrada
+
+Encontre o domínio de $g(x) = \sqrt{x - 3}$.
+
+Raiz quadrada precisa de um radicando não-negativo:
+$$x - 3 \geq 0$$
+$$x \geq 3$$
+
+**Domínio:** $[3, \infty)$
+
+## Propriedades das Operações
+
+As operações entre conjuntos seguem leis, similares à aritmética:
+
+| Propriedade | Descrição | Fórmula |
+|---|---|---|
+| **Comutativa** | Ordem não importa | $A \cup B = B \cup A$; $A \cap B = B \cap A$ |
+| **Associativa** | Agrupamento não importa | $(A \cup B) \cup C = A \cup (B \cup C)$ |
+| **Distributiva** | Pode "distribuir" | $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$ |
+| **De Morgan** | Complemento de operação | $(A \cup B)^c = A^c \cap B^c$ |
+| **De Morgan** | Complemento de operação | $(A \cap B)^c = A^c \cup B^c$ |
+
+### Exemplo 8: Lei de De Morgan
+
+Verifique $(A \cup B)^c = A^c \cap B^c$ com $A = [0, 2]$ e $B = (1, 3)$.
+
+**Lado esquerdo:**
+$$A \cup B = [0, 3)$$
+$$(A \cup B)^c = (-\infty, 0) \cup [3, \infty)$$
+
+**Lado direito:**
+$$A^c = (-\infty, 0) \cup (2, \infty)$$
+$$B^c = (-\infty, 1] \cup [3, \infty)$$
+$$A^c \cap B^c = [(-\infty, 0) \cup (2, \infty)] \cap [(-\infty, 1] \cup [3, \infty)]$$
+$$= (-\infty, 0) \cup [3, \infty)$$
+
+**Ambos resultam em:** $(-\infty, 0) \cup [3, \infty)$ ✓
+
+## Resumo: Intervalos e Operações
+
+| Tipo | Notação | Inclui Extremos? | Reta |
+|---|---|---|---|
+| Fechado | $[a, b]$ | Sim (ambos) | ●────● |
+| Aberto | $(a, b)$ | Não | ○────○ |
+| Semi-aberto | $[a, b)$ ou $(a, b]$ | Um sim, outro não | ●────○ ou ○────● |
+| Infinito | $[a, \infty)$, $(-\infty, b]$ | Depende (nunca ∞) | ●────→ ou ←────● |
+
+| Operação | Símbolo | Significado |
+|---|---|---|
+| **União** | $A \cup B$ | Elementos em $A$ **ou** $B$ |
+| **Interseção** | $A \cap B$ | Elementos em $A$ **e** $B$ |
+| **Complementar** | $A^c$ | Elementos **não** em $A$ |
+| **Diferença** | $A \setminus B$ | Elementos em $A$ **não** em $B$ |
+
+## Ponte para o Próximo Módulo
+
+Você agora domina a linguagem de conjuntos e intervalos — a "sintaxe" fundamental do Cálculo.
+
+Com essa base sólida sobre os números reais (naturais → inteiros → racionais → irracionais → reais), intervalos e operações entre conjuntos, você está **completamente preparado** para os próximos módulos:
+
+- **Funções Fundamentais:** Como os números reais se transformam através de operações e relações
+- **Álgebra e Expressões:** Manipular intervalos e desigualdades em contextos mais complexos
+- **Cálculo:** Limites, continuidade e derivadas — todos construídos sobre essa base
+
+Parabéns por completar o módulo de **Conjuntos Numéricos**! 🎉

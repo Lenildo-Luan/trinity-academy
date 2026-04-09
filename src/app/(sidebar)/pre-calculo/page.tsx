@@ -34,6 +34,7 @@ export default async function Page() {
   const course = getCourse("pre-calculo");
   let modules: Module[] = await getModules("pre-calculo");
   let lessons = modules.flatMap(({ lessons }) => lessons);
+  let firstLessonId = lessons[0]?.id;
   let duration = lessons.reduce(
     (sum, { video }) => sum + (video?.duration ?? 0),
     0,
@@ -91,15 +92,17 @@ export default async function Page() {
                 </div>
               </div>
 
-              <div className="mt-10">
-                <Link
-                  href={`/pre-calculo/capitulo-1`}
-                  className="inline-flex items-center gap-x-2 rounded-full bg-gray-950 px-3 py-0.5 text-sm/7 font-semibold text-white hover:bg-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600"
-                >
-                  <PlayIcon className="fill-white" />
-                  Começar
-                </Link>
-              </div>
+              {firstLessonId && (
+                <div className="mt-10">
+                  <Link
+                    href={`/pre-calculo/${firstLessonId}`}
+                    className="inline-flex items-center gap-x-2 rounded-full bg-gray-950 px-3 py-0.5 text-sm/7 font-semibold text-white hover:bg-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600"
+                  >
+                    <PlayIcon className="fill-white" />
+                    Começar
+                  </Link>
+                </div>
+              )}
             </div>
 
             <div className="grid grid-cols-1 gap-y-16 pb-10 sm:px-4">
