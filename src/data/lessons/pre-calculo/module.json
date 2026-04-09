@@ -1,0 +1,45 @@
+[
+  {
+    "id": "conjuntos-numericos",
+    "title": "Conjuntos Numéricos",
+    "description": "Naturais, inteiros, racionais, irracionais e reais. Representação na reta numérica, intervalos e operações com conjuntos.",
+    "lessons": []
+  },
+  {
+    "id": "algebra-e-expressoes",
+    "title": "Álgebra e Expressões Algébricas",
+    "description": "Produtos notáveis, fatoração, simplificação de expressões racionais e operações com radicais e potências.",
+    "lessons": []
+  },
+  {
+    "id": "equacoes-e-inequacoes",
+    "title": "Equações e Inequações",
+    "description": "Equações de 1º e 2º grau, inequações lineares e quadráticas, equações modulares e sistemas de equações lineares.",
+    "lessons": []
+  },
+  {
+    "id": "funcoes-fundamentais",
+    "title": "Funções Fundamentais",
+    "description": "Conceito de função, domínio, imagem e contradomínio. Funções afim, quadrática e modular: gráficos e propriedades.",
+    "lessons": []
+  },
+  {
+    "id": "funcoes-exponenciais-e-logaritmicas",
+    "title": "Funções Exponenciais e Logarítmicas",
+    "description": "Definição e propriedades das funções exponencial e logarítmica. Equações e inequações exponenciais e logarítmicas. Aplicações práticas.",
+    "lessons": []
+  },
+  {
+    "id": "trigonometria",
+    "title": "Trigonometria",
+    "description": "Razões trigonométricas no triângulo retângulo, ciclo trigonométrico, funções seno, cosseno e tangente e suas propriedades.",
+    "lessons": []
+  },
+  {
+    "id": "geometria-analitica",
+    "title": "Geometria Analítica",
+    "description": "Plano cartesiano, distância entre pontos, equação da reta: coeficiente angular, ponto-angular e geral. Paralelismo e perpendicularismo.",
+    "lessons": []
+  }
+]
+

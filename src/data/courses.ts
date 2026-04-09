@@ -73,4 +73,12 @@ export const courses: Course[] = [
     backgroundImage: "https://ik.imagekit.io/qfmgarse7/calculus.avif",
     available: true,
   },
+  {
+    id: "pre-calculo",
+    title: "Pré-Cálculo",
+    description:
+      "Fundamentos matemáticos essenciais para o Cálculo 1: números, álgebra, funções, trigonometria e introdução ao pensamento analítico.",
+    backgroundImage: "https://ik.imagekit.io/qfmgarse7/pre-calculus.avif",
+    available: true,
+  },
 ];
