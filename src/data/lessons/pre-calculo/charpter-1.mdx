@@ -4,6 +4,8 @@ Quando você conta objetos — 1, 2, 3, 4 — você está usando os **números n
 
 Este é o primeiro passo em nossa jornada pelos números reais: compreender as propriedades fundamentais de ℕ (naturais) e ℤ (inteiros), e como representá-los na reta numérica.
 
+<NaturalIntegerSetMap />
+
 ## Objetivos de Aprendizado
 
 Ao final desta lição, você será capaz de:
@@ -94,6 +96,8 @@ As operações em ℤ seguem as mesmas propriedades que em ℕ, mas agora com n�
 
 Pense em movimento na reta numérica:
 
+<IntegerMovementNumberLine />
+
 - Começar em 5, mover +3: $5 + 3 = 8$ ✓
 - Começar em 5, mover -3: $5 + (-3) = 2$ ✓
 - Começar em -2, mover +6: $-2 + 6 = 4$ ✓
@@ -178,6 +182,8 @@ Marque na reta: -4, -1, 0, 2, 3
 
 O **valor absoluto** (ou **módulo**) de um número é sua **distância até zero**, sem considerar o sinal.
 
+<AbsoluteValueDistanceExplorer />
+
 Notação: $|a|$ (lê-se "módulo de a")
 
 $$|a| = \begin{cases} a & \text{se } a \geq 0 \\ -a & \text{se } a < 0 \end{cases}$$
@@ -224,14 +230,17 @@ Na reta numérica:
 
 ## Resumo: Naturais e Inteiros
 
-| Propriedade | Naturais (ℕ) | Inteiros (ℤ) |
-|---|---|---|
-| **Definição** | `\{1, 2, 3, ...\}` ou `\{0, 1, 2, ...\}` | `\{..., -2, -1, 0, 1, 2, ...\}` |
-| **Contém zero?** | Depende da convenção | Sim, sempre |
-| **Contém negativos?** | Não | Sim |
-| **Adição fechada?** | Sim (N + N = N) | Sim (Z + Z = Z) |
-| **Subtração fechada?** | Não (3 - 5 ∉ N) | Sim (Z - Z = Z) |
-| **Divisão fechada?** | Não (3 ÷ 2 ∉ N) | Não (3 ÷ 2 ∉ Z) |
+<MarkdownTable
+  headers={["Propriedade", "Naturais (ℕ)", "Inteiros (ℤ)"]}
+  rows={[
+    ["**Definição**", "`\\{1, 2, 3, ...\\}` ou `\\{0, 1, 2, ...\\}`", "`\\{..., -2, -1, 0, 1, 2, ...\\}`"],
+    ["**Contém zero?**", "Depende da convenção", "Sim, sempre"],
+    ["**Contém negativos?**", "Não", "Sim"],
+    ["**Adição fechada?**", "Sim (N + N = N)", "Sim (Z + Z = Z)"],
+    ["**Subtração fechada?**", "Não (3 - 5 ∉ N)", "Sim (Z - Z = Z)"],
+    ["**Divisão fechada?**", "Não (3 ÷ 2 ∉ N)", "Não (3 ÷ 2 ∉ Z)"],
+  ]}
+/>
 
 ## Ponte para a Próxima Lição
 

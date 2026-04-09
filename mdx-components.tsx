@@ -302,6 +302,20 @@ const {
   DiscontinuityTypesVisualization,
   IntermediateValueTheoremVisualization,
 } = require("./src/components/continuity-p5-examples");
+const {
+  NaturalIntegerSetMap,
+  IntegerMovementNumberLine,
+  AbsoluteValueDistanceExplorer,
+  RationalDecimalConverter,
+  Sqrt2IrrationalProofStepper,
+  RationalIrrationalDensityLine,
+  RealSetHierarchyTree,
+  DensityZoomExplorer,
+  SupremumMaximumComparator,
+  IntervalNotationBuilder,
+  IntervalSetOperationsLab,
+  FunctionDomainVisualizer,
+} = require("./src/components/pre-calculo-p5-examples");
 
 function getTextContent(node: ReactNode): string {
   if (typeof node === "string") return node;
@@ -637,6 +651,18 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     EpsilonDeltaVisualization,
     SqueezeTheoremVisualization,
     GrowthRatesVisualization,
+    NaturalIntegerSetMap,
+    IntegerMovementNumberLine,
+    AbsoluteValueDistanceExplorer,
+    RationalDecimalConverter,
+    Sqrt2IrrationalProofStepper,
+    RationalIrrationalDensityLine,
+    RealSetHierarchyTree,
+    DensityZoomExplorer,
+    SupremumMaximumComparator,
+    IntervalNotationBuilder,
+    IntervalSetOperationsLab,
+    FunctionDomainVisualizer,
     SuperpositionPrinciple,
     TimeInvarianceDemo,
     MemoryAndCausality,

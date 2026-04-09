@@ -1,0 +1,310 @@
+{
+  "id": "quiz-1",
+  "title": "Quiz 1 - Números Naturais e Inteiros",
+  "description": "Avalie sua compreensão sobre ℕ, ℤ, propriedades operatórias, reta numérica e valor absoluto.",
+  "timeLimit": 720,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual conjunto contém o número -7?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "Apenas ℕ",
+          "isCorrect": false,
+          "explanation": "Números naturais não incluem negativos; -7 não pertence a ℕ."
+        },
+        {
+          "id": "b",
+          "text": "ℤ, mas não ℕ",
+          "isCorrect": true,
+          "explanation": "-7 é inteiro (pertence a ℤ), porém não é natural."
+        },
+        {
+          "id": "c",
+          "text": "Nenhum dos dois",
+          "isCorrect": false,
+          "explanation": "-7 pertence sim a ℤ, então não é correto dizer que não pertence a nenhum."
+        },
+        {
+          "id": "d",
+          "text": "ℕ e ℤ",
+          "isCorrect": false,
+          "explanation": "Todo natural é inteiro, mas -7 não é natural."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Qual expressão ilustra corretamente a propriedade distributiva?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "3(4 + 2) = 3\u00b74 + 3\u00b72",
+          "isCorrect": true,
+          "explanation": "A multiplicação se distribui sobre a soma: a(b+c)=ab+ac."
+        },
+        {
+          "id": "b",
+          "text": "3(4 + 2) = 3\u00b74 + 2",
+          "isCorrect": false,
+          "explanation": "Faltou multiplicar o segundo termo também por 3."
+        },
+        {
+          "id": "c",
+          "text": "3(4 + 2) = (3\u00b74)(3\u00b72)",
+          "isCorrect": false,
+          "explanation": "Essa forma transforma soma em produto, o que não é distributividade."
+        },
+        {
+          "id": "d",
+          "text": "3 + (4\u00b72) = (3+4)\u00b72",
+          "isCorrect": false,
+          "explanation": "A igualdade não vale em geral; é uma confusão comum entre propriedades."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Em ℤ, qual é o valor de -5 - (-2)?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "-7",
+          "isCorrect": false,
+          "explanation": "Isso corresponderia a -5 + (-2), não a -5 - (-2)."
+        },
+        {
+          "id": "b",
+          "text": "-3",
+          "isCorrect": true,
+          "explanation": "Subtrair um negativo equivale a somar seu oposto: -5 + 2 = -3."
+        },
+        {
+          "id": "c",
+          "text": "3",
+          "isCorrect": false,
+          "explanation": "O resultado continua negativo porque -5 está mais à esquerda que +2."
+        },
+        {
+          "id": "d",
+          "text": "-10",
+          "isCorrect": false,
+          "explanation": "Não há produto aqui; é operação de subtração."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Na reta numérica, qual afirmação é verdadeira?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "-3 > -1",
+          "isCorrect": false,
+          "explanation": "Em números negativos, o mais à esquerda é menor."
+        },
+        {
+          "id": "b",
+          "text": "Todo número à esquerda de outro é maior",
+          "isCorrect": false,
+          "explanation": "É o contrário: à esquerda significa menor valor."
+        },
+        {
+          "id": "c",
+          "text": "-1 < 2",
+          "isCorrect": true,
+          "explanation": "-1 está à esquerda de 2 na reta, portanto é menor."
+        },
+        {
+          "id": "d",
+          "text": "0 é sempre maior que qualquer inteiro",
+          "isCorrect": false,
+          "explanation": "Existem inteiros positivos maiores que 0."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Qual alternativa representa corretamente |x| = 4?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "x = 4 apenas",
+          "isCorrect": false,
+          "explanation": "Módulo mede distância ao zero, então há dois valores simétricos."
+        },
+        {
+          "id": "b",
+          "text": "x = -4 apenas",
+          "isCorrect": false,
+          "explanation": "-4 é solução, mas não a única."
+        },
+        {
+          "id": "c",
+          "text": "x = 4 ou x = -4",
+          "isCorrect": true,
+          "explanation": "Ambos estão a distância 4 do zero."
+        },
+        {
+          "id": "d",
+          "text": "x = 0",
+          "isCorrect": false,
+          "explanation": "|0|=0, não 4."
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Uma temperatura caiu de 3°C para -2°C. Qual variação (final - inicial)?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "+5°C",
+          "isCorrect": false,
+          "explanation": "A temperatura não subiu 5; ela desceu 5 unidades."
+        },
+        {
+          "id": "b",
+          "text": "-5°C",
+          "isCorrect": true,
+          "explanation": "Variação = -2 - 3 = -5."
+        },
+        {
+          "id": "c",
+          "text": "-1°C",
+          "isCorrect": false,
+          "explanation": "Erro de subtração entre números com sinais diferentes."
+        },
+        {
+          "id": "d",
+          "text": "+1°C",
+          "isCorrect": false,
+          "explanation": "Não condiz com a queda observada."
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual conjunto é fechado para subtração?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "Apenas ℕ",
+          "isCorrect": false,
+          "explanation": "Ex.: 3-5 = -2, que não está em ℕ."
+        },
+        {
+          "id": "b",
+          "text": "ℤ",
+          "isCorrect": true,
+          "explanation": "Diferença entre inteiros é sempre um inteiro."
+        },
+        {
+          "id": "c",
+          "text": "Nenhum conjunto numérico",
+          "isCorrect": false,
+          "explanation": "ℤ é fechado para subtração."
+        },
+        {
+          "id": "d",
+          "text": "Somente quando o minuendo é maior",
+          "isCorrect": false,
+          "explanation": "Mesmo com minuendo menor, o resultado ainda pertence a ℤ."
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Se a e b são inteiros e a\u00b7b = 0, o que necessariamente é verdadeiro?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "a = b",
+          "isCorrect": false,
+          "explanation": "Pode ocorrer, mas não é obrigatório."
+        },
+        {
+          "id": "b",
+          "text": "a e b são negativos",
+          "isCorrect": false,
+          "explanation": "Produto de negativos é positivo, não zero."
+        },
+        {
+          "id": "c",
+          "text": "Pelo menos um entre a ou b é zero",
+          "isCorrect": true,
+          "explanation": "É a propriedade do produto nulo."
+        },
+        {
+          "id": "d",
+          "text": "a + b = 0",
+          "isCorrect": false,
+          "explanation": "Não é necessário; ex.: a=0, b=5 dá soma 5."
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Qual resultado está correto para (-4)\u00b7(-6)?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "-24",
+          "isCorrect": false,
+          "explanation": "Produto de dois negativos é positivo, não negativo."
+        },
+        {
+          "id": "b",
+          "text": "24",
+          "isCorrect": true,
+          "explanation": "Pela regra de sinais, (-)\u00b7(-)=+, então o resultado é 24."
+        },
+        {
+          "id": "c",
+          "text": "10",
+          "isCorrect": false,
+          "explanation": "Esse valor não corresponde ao produto 4\u00b76."
+        },
+        {
+          "id": "d",
+          "text": "-10",
+          "isCorrect": false,
+          "explanation": "Além de sinal incorreto, o valor absoluto também está errado."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Se |x| < 5, qual intervalo descreve corretamente os valores possíveis de x?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "[-5, 5]",
+          "isCorrect": false,
+          "explanation": "|x|<5 exclui os extremos -5 e 5."
+        },
+        {
+          "id": "b",
+          "text": "(-5, 5)",
+          "isCorrect": true,
+          "explanation": "Módulo menor que 5 significa distância ao zero estritamente menor que 5."
+        },
+        {
+          "id": "c",
+          "text": "(-\u221e, -5) \u222a (5, \u221e)",
+          "isCorrect": false,
+          "explanation": "Esse é o conjunto complementar (|x|>5), não |x|<5."
+        },
+        {
+          "id": "d",
+          "text": "[0, 5)",
+          "isCorrect": false,
+          "explanation": "Faltam os valores negativos entre -5 e 0."
+        }
+      ]
+    }
+  ]
+}
+
+

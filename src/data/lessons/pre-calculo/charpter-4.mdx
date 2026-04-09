@@ -60,13 +60,18 @@ Um intervalo pode incluir um extremo e excluir o outro:
 
 Quando um intervalo se estende infinitamente, usamos o símbolo $\infty$:
 
-| Notação | Descrição | Reta Numérica |
-|---|---|---|
-| $(a, \infty)$ | Maiores que $a$ | `o--------->` |
-| $[a, \infty)$ | Maiores ou iguais a $a$ | `*--------->` |
-| $(-\infty, b)$ | Menores que $b$ | `<---------o` |
-| $(-\infty, b]$ | Menores ou iguais a $b$ | `<---------*` |
-| $(-\infty, \infty)$ | Todos os reais | `<--------->` (toda reta) |
+<IntervalNotationBuilder />
+
+<MarkdownTable
+  headers={["Notação", "Descrição", "Reta Numérica"]}
+  rows={[
+    ["$(a, \\infty)$", "Maiores que $a$", "`o--------->`"],
+    ["$[a, \\infty)$", "Maiores ou iguais a $a$", "`*--------->`"],
+    ["$(-\\infty, b)$", "Menores que $b$", "`<---------o`"],
+    ["$(-\\infty, b]$", "Menores ou iguais a $b$", "`<---------*`"],
+    ["$(-\\infty, \\infty)$", "Todos os reais", "`<--------->` (toda reta)"],
+  ]}
+/>
 
 ⚠️ **Nota:** $\infty$ nunca é incluído — sempre use parêntese com $\infty$.
 
@@ -102,13 +107,16 @@ Represente na reta numérica:
 
 A mesma ideia pode ser expressa de duas formas:
 
-| Desigualdade | Notação de Conjunto | Notação de Intervalo |
-|---|---|---|
-| $a \leq x \leq b$ | $\{x \in \mathbb{R} : a \leq x \leq b\}$ | $[a, b]$ |
-| $a < x < b$ | $\{x \in \mathbb{R} : a < x < b\}$ | $(a, b)$ |
-| $a \leq x < b$ | $\{x \in \mathbb{R} : a \leq x < b\}$ | $[a, b)$ |
-| $x > a$ | $\{x \in \mathbb{R} : x > a\}$ | $(a, \infty)$ |
-| $x \leq b$ | $\{x \in \mathbb{R} : x \leq b\}$ | $(-\infty, b]$ |
+<MarkdownTable
+  headers={["Desigualdade", "Notação de Conjunto", "Notação de Intervalo"]}
+  rows={[
+    ["$a \\leq x \\leq b$", "$\\{x \\in \\mathbb{R} : a \\leq x \\leq b\\}$", "$[a, b]$"],
+    ["$a < x < b$", "$\\{x \\in \\mathbb{R} : a < x < b\\}$", "$(a, b)$"],
+    ["$a \\leq x < b$", "$\\{x \\in \\mathbb{R} : a \\leq x < b\\}$", "$[a, b)$"],
+    ["$x > a$", "$\\{x \\in \\mathbb{R} : x > a\\}$", "$(a, \\infty)$"],
+    ["$x \\leq b$", "$\\{x \\in \\mathbb{R} : x \\leq b\\}$", "$(-\\infty, b]$"],
+  ]}
+/>
 
 ### Exemplo 2: Converter Desigualdade em Intervalo
 
@@ -122,6 +130,8 @@ Converta a desigualdade em notação de intervalo:
 ## Operações com Conjuntos
 
 Quando você trabalha com intervalos, frequentemente precisa **combinar** ou **intersecar** eles. As operações fundamentais são:
+
+<IntervalSetOperationsLab />
 
 ### 1. União (∪)
 
@@ -248,6 +258,8 @@ Resultado: $A \setminus B = [0, 1] \cup [2, 3]$
 
 Os intervalos são **essenciais** para especificar o **domínio** de uma função.
 
+<FunctionDomainVisualizer />
+
 ### Exemplo 6: Domínio de Uma Função
 
 Encontre o domínio de $f(x) = \frac{1}{x - 2}$.
@@ -276,13 +288,16 @@ $$x \geq 3$$
 
 As operações entre conjuntos seguem leis, similares à aritmética:
 
-| Propriedade | Descrição | Fórmula |
-|---|---|---|
-| **Comutativa** | Ordem não importa | $A \cup B = B \cup A$; $A \cap B = B \cap A$ |
-| **Associativa** | Agrupamento não importa | $(A \cup B) \cup C = A \cup (B \cup C)$ |
-| **Distributiva** | Pode "distribuir" | $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$ |
-| **De Morgan** | Complemento de operação | $(A \cup B)^c = A^c \cap B^c$ |
-| **De Morgan** | Complemento de operação | $(A \cap B)^c = A^c \cup B^c$ |
+<MarkdownTable
+  headers={["Propriedade", "Descrição", "Fórmula"]}
+  rows={[
+    ["**Comutativa**", "Ordem não importa", "$A \\cup B = B \\cup A$; $A \\cap B = B \\cap A$"],
+    ["**Associativa**", "Agrupamento não importa", "$(A \\cup B) \\cup C = A \\cup (B \\cup C)$"],
+    ["**Distributiva**", "Pode \"distribuir\"", "$A \\cap (B \\cup C) = (A \\cap B) \\cup (A \\cap C)$"],
+    ["**De Morgan**", "Complemento de operação", "$(A \\cup B)^c = A^c \\cap B^c$"],
+    ["**De Morgan**", "Complemento de operação", "$(A \\cap B)^c = A^c \\cup B^c$"],
+  ]}
+/>
 
 ### Exemplo 8: Lei de De Morgan
 
@@ -302,19 +317,25 @@ $$= (-\infty, 0) \cup [3, \infty)$$
 
 ## Resumo: Intervalos e Operações
 
-| Tipo | Notação | Inclui Extremos? | Reta |
-|---|---|---|---|
-| Fechado | $[a, b]$ | Sim (ambos) | ●────● |
-| Aberto | $(a, b)$ | Não | ○────○ |
-| Semi-aberto | $[a, b)$ ou $(a, b]$ | Um sim, outro não | ●────○ ou ○────● |
-| Infinito | $[a, \infty)$, $(-\infty, b]$ | Depende (nunca ∞) | ●────→ ou ←────● |
+<MarkdownTable
+  headers={["Tipo", "Notação", "Inclui Extremos?", "Reta"]}
+  rows={[
+    ["Fechado", "$[a, b]$", "Sim (ambos)", "●────●"],
+    ["Aberto", "$(a, b)$", "Não", "○────○"],
+    ["Semi-aberto", "$[a, b)$ ou $(a, b]$", "Um sim, outro não", "●────○ ou ○────●"],
+    ["Infinito", "$[a, \\infty)$, $(-\\infty, b]$", "Depende (nunca ∞)", "●────→ ou ←────●"],
+  ]}
+/>
 
-| Operação | Símbolo | Significado |
-|---|---|---|
-| **União** | $A \cup B$ | Elementos em $A$ **ou** $B$ |
-| **Interseção** | $A \cap B$ | Elementos em $A$ **e** $B$ |
-| **Complementar** | $A^c$ | Elementos **não** em $A$ |
-| **Diferença** | $A \setminus B$ | Elementos em $A$ **não** em $B$ |
+<MarkdownTable
+  headers={["Operação", "Símbolo", "Significado"]}
+  rows={[
+    ["**União**", "$A \\cup B$", "Elementos em $A$ **ou** $B$"],
+    ["**Interseção**", "$A \\cap B$", "Elementos em $A$ **e** $B$"],
+    ["**Complementar**", "$A^c$", "Elementos **não** em $A$"],
+    ["**Diferença**", "$A \\setminus B$", "Elementos em $A$ **não** em $B$"],
+  ]}
+/>
 
 ## Ponte para o Próximo Módulo
 

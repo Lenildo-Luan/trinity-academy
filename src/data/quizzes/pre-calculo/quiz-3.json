@@ -1,0 +1,309 @@
+{
+  "id": "quiz-3",
+  "title": "Quiz 3 - O Conjunto dos Números Reais",
+  "description": "Verifique seu domínio sobre ℝ, densidade, completude, supremo e comparação de reais.",
+  "timeLimit": 720,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual igualdade descreve corretamente o conjunto dos reais?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "ℝ = ℤ ∪ ℕ",
+          "isCorrect": false,
+          "explanation": "Isso ignora frações não inteiras e irracionais."
+        },
+        {
+          "id": "b",
+          "text": "ℝ = ℚ ∪ (ℝ\\ℚ)",
+          "isCorrect": true,
+          "explanation": "Reais são a união dos racionais com os irracionais."
+        },
+        {
+          "id": "c",
+          "text": "ℝ = ℚ apenas",
+          "isCorrect": false,
+          "explanation": "Irracionais como \u03c0 e \u221a2 ficariam de fora."
+        },
+        {
+          "id": "d",
+          "text": "ℝ = (ℝ\\ℚ) apenas",
+          "isCorrect": false,
+          "explanation": "Isso excluiria todos os racionais."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "A densidade de ℝ implica que:",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "Entre dois reais existe exatamente um número",
+          "isCorrect": false,
+          "explanation": "Não é único; há infinitos."
+        },
+        {
+          "id": "b",
+          "text": "Entre dois reais não existe número inteiro",
+          "isCorrect": false,
+          "explanation": "Pode ou não existir inteiro, depende do intervalo."
+        },
+        {
+          "id": "c",
+          "text": "Entre dois reais distintos sempre existem infinitos reais",
+          "isCorrect": true,
+          "explanation": "Essa é exatamente a ideia de densidade."
+        },
+        {
+          "id": "d",
+          "text": "A reta real é discreta",
+          "isCorrect": false,
+          "explanation": "Discreta é o oposto de densa/contínua."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "No conjunto A = {x \u2208 ℝ : 0 < x < 1}, qual é o supremo?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "0",
+          "isCorrect": false,
+          "explanation": "0 é ínfimo, não supremo."
+        },
+        {
+          "id": "b",
+          "text": "1",
+          "isCorrect": true,
+          "explanation": "1 é o menor limitante superior de A."
+        },
+        {
+          "id": "c",
+          "text": "Não existe",
+          "isCorrect": false,
+          "explanation": "Existe sim: 1."
+        },
+        {
+          "id": "d",
+          "text": "0,5",
+          "isCorrect": false,
+          "explanation": "0,5 não limita superiormente A (há elementos maiores)."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Qual diferença está correta entre supremo e máximo?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "São sempre iguais, independentemente do conjunto",
+          "isCorrect": false,
+          "explanation": "Podem coincidir, mas não sempre."
+        },
+        {
+          "id": "b",
+          "text": "Supremo deve pertencer ao conjunto",
+          "isCorrect": false,
+          "explanation": "Não precisa pertencer; máximo precisa."
+        },
+        {
+          "id": "c",
+          "text": "Máximo é o maior elemento do conjunto; supremo é o menor limitante superior",
+          "isCorrect": true,
+          "explanation": "Definição correta dos dois conceitos."
+        },
+        {
+          "id": "d",
+          "text": "Máximo sempre existe em conjuntos limitados",
+          "isCorrect": false,
+          "explanation": "Ex.: (0,1) é limitado e não tem máximo."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Ordene corretamente: -2, -1/2, 0, \u221a2, 1,5, \u03c0.",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "-2 < -1/2 < 0 < \u221a2 < 1,5 < \u03c0",
+          "isCorrect": true,
+          "explanation": "\u221a2 ≈ 1,414 e \u03c0 ≈ 3,142; a ordem está correta."
+        },
+        {
+          "id": "b",
+          "text": "-2 < -1/2 < 0 < 1,5 < \u221a2 < \u03c0",
+          "isCorrect": false,
+          "explanation": "1,5 não é menor que \u221a2."
+        },
+        {
+          "id": "c",
+          "text": "-1/2 < -2 < 0 < \u221a2 < 1,5 < \u03c0",
+          "isCorrect": false,
+          "explanation": "-2 é menor que -1/2."
+        },
+        {
+          "id": "d",
+          "text": "-2 < 0 < -1/2 < \u221a2 < 1,5 < \u03c0",
+          "isCorrect": false,
+          "explanation": "-1/2 não pode vir depois de 0."
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Ao resolver -3x \u2265 9, qual é o passo correto ao dividir por -3?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "x \u2265 -3",
+          "isCorrect": false,
+          "explanation": "Ao dividir por número negativo, o sinal deve inverter."
+        },
+        {
+          "id": "b",
+          "text": "x \u2264 -3",
+          "isCorrect": true,
+          "explanation": "A desigualdade inverte: x \u2264 -3."
+        },
+        {
+          "id": "c",
+          "text": "x = -3",
+          "isCorrect": false,
+          "explanation": "A solução é um intervalo, não um único ponto."
+        },
+        {
+          "id": "d",
+          "text": "x \u2264 3",
+          "isCorrect": false,
+          "explanation": "Sinal numérico incorreto no resultado."
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual relação de inclusão é verdadeira?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "ℚ \u2282 ℤ",
+          "isCorrect": false,
+          "explanation": "Na verdade, ℤ \u2282 ℚ."
+        },
+        {
+          "id": "b",
+          "text": "ℕ \u2282 ℤ \u2282 ℚ \u2282 ℝ",
+          "isCorrect": true,
+          "explanation": "Essa é a cadeia clássica de inclusões."
+        },
+        {
+          "id": "c",
+          "text": "ℝ \u2282 ℚ",
+          "isCorrect": false,
+          "explanation": "Racionais são subconjunto dos reais, não o contrário."
+        },
+        {
+          "id": "d",
+          "text": "ℤ \u2282 ℕ",
+          "isCorrect": false,
+          "explanation": "Inteiros incluem negativos, então não cabem dentro de ℕ."
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Qual frase melhor descreve a completude de ℝ?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "Todo conjunto não vazio de ℝ possui máximo",
+          "isCorrect": false,
+          "explanation": "Conjuntos como (0,1) não têm máximo."
+        },
+        {
+          "id": "b",
+          "text": "Todo conjunto limitado superiormente possui supremo em ℝ",
+          "isCorrect": true,
+          "explanation": "Esse é o enunciado fundamental da completude."
+        },
+        {
+          "id": "c",
+          "text": "Todo número real é racional",
+          "isCorrect": false,
+          "explanation": "Existem irracionais em ℝ."
+        },
+        {
+          "id": "d",
+          "text": "Completude significa que não há números negativos",
+          "isCorrect": false,
+          "explanation": "Completude não tem relação com sinal dos números."
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Considere B = {x \u2208 ℝ : 0 < x \u2264 1}. Qual alternativa está correta?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "B não possui máximo",
+          "isCorrect": false,
+          "explanation": "Como 1 pertence a B, existe máximo."
+        },
+        {
+          "id": "b",
+          "text": "sup(B)=1 e máximo(B)=1",
+          "isCorrect": true,
+          "explanation": "1 é limitante superior mínimo e também pertence ao conjunto."
+        },
+        {
+          "id": "c",
+          "text": "sup(B)=0 e máximo(B)=1",
+          "isCorrect": false,
+          "explanation": "0 é limitante inferior, não superior."
+        },
+        {
+          "id": "d",
+          "text": "sup(B)=1 e máximo(B) não existe",
+          "isCorrect": false,
+          "explanation": "Esse caso seria de (0,1), não de (0,1]."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Qual afirmação sobre densidade em ℝ é verdadeira?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "Entre dois irracionais não existe racional",
+          "isCorrect": false,
+          "explanation": "Existem infinitos racionais entre quaisquer dois reais distintos."
+        },
+        {
+          "id": "b",
+          "text": "Entre dois racionais não existe irracional",
+          "isCorrect": false,
+          "explanation": "Também existem irracionais entre quaisquer dois racionais distintos."
+        },
+        {
+          "id": "c",
+          "text": "Entre quaisquer dois reais distintos existem racionais e irracionais",
+          "isCorrect": true,
+          "explanation": "Essa propriedade reforça a densidade de ambos os subconjuntos em ℝ."
+        },
+        {
+          "id": "d",
+          "text": "A densidade vale apenas para números positivos",
+          "isCorrect": false,
+          "explanation": "A densidade vale para toda a reta real."
+        }
+      ]
+    }
+  ]
+}
+

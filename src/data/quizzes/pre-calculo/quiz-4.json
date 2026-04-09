@@ -1,0 +1,309 @@
+{
+  "id": "quiz-4",
+  "title": "Quiz 4 - Intervalos e Operações com Conjuntos",
+  "description": "Avalie domínio sobre tipos de intervalos, união, interseção, complementar e aplicações em domínio de funções.",
+  "timeLimit": 720,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual intervalo representa a desigualdade -2 < x \u2264 5?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "[-2, 5]",
+          "isCorrect": false,
+          "explanation": "-2 não está incluído; o extremo esquerdo deve ser aberto."
+        },
+        {
+          "id": "b",
+          "text": "(-2, 5]",
+          "isCorrect": true,
+          "explanation": "Esquerda aberta para -2 e direita fechada para 5."
+        },
+        {
+          "id": "c",
+          "text": "(-2, 5)",
+          "isCorrect": false,
+          "explanation": "Aqui 5 estaria excluído, mas a desigualdade inclui 5."
+        },
+        {
+          "id": "d",
+          "text": "[-2, 5)",
+          "isCorrect": false,
+          "explanation": "Extremos invertidos em relação à desigualdade dada."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "Se A=[1,3] e B=(2,5), então A\u2229B é:",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "[1,5)",
+          "isCorrect": false,
+          "explanation": "Isso descreve a união, não a interseção."
+        },
+        {
+          "id": "b",
+          "text": "(2,3]",
+          "isCorrect": true,
+          "explanation": "Valores comuns aos dois: maior que 2 e até 3 inclusive."
+        },
+        {
+          "id": "c",
+          "text": "[2,3)",
+          "isCorrect": false,
+          "explanation": "2 não pertence a B e 3 pertence a A; extremos estão errados."
+        },
+        {
+          "id": "d",
+          "text": "(1,5)",
+          "isCorrect": false,
+          "explanation": "Também não é interseção; é intervalo mais amplo."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Considere A=[0,2]. O complementar de A em ℝ é:",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "(-\u221e,0) \u222a (2,\u221e)",
+          "isCorrect": true,
+          "explanation": "Complementar são todos os reais fora de [0,2], sem incluir 0 e 2."
+        },
+        {
+          "id": "b",
+          "text": "(-\u221e,0] \u222a [2,\u221e)",
+          "isCorrect": false,
+          "explanation": "0 e 2 pertencem a A, então não podem estar no complementar."
+        },
+        {
+          "id": "c",
+          "text": "(0,2)",
+          "isCorrect": false,
+          "explanation": "Isso é interior de A, não complementar."
+        },
+        {
+          "id": "d",
+          "text": "ℝ",
+          "isCorrect": false,
+          "explanation": "Complementar exclui os pontos de A."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Qual é o domínio de f(x)=1/(x-2)?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "ℝ",
+          "isCorrect": false,
+          "explanation": "x=2 torna o denominador zero, então não é permitido."
+        },
+        {
+          "id": "b",
+          "text": "ℝ\\{2}",
+          "isCorrect": true,
+          "explanation": "Todos os reais exceto x=2."
+        },
+        {
+          "id": "c",
+          "text": "[2,\u221e)",
+          "isCorrect": false,
+          "explanation": "Inclui 2 e exclui muitos valores válidos à esquerda."
+        },
+        {
+          "id": "d",
+          "text": "(-\u221e,2)",
+          "isCorrect": false,
+          "explanation": "Faltou incluir os valores maiores que 2."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "O domínio de g(x)=\u221a(x-3) é:",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "(3,\u221e)",
+          "isCorrect": false,
+          "explanation": "x=3 é válido, pois gera raiz de 0."
+        },
+        {
+          "id": "b",
+          "text": "[3,\u221e)",
+          "isCorrect": true,
+          "explanation": "Precisamos de x-3\u22650, então x\u22653."
+        },
+        {
+          "id": "c",
+          "text": "(-\u221e,3]",
+          "isCorrect": false,
+          "explanation": "Isto faria x-3 negativo para x<3, o que não é permitido."
+        },
+        {
+          "id": "d",
+          "text": "ℝ\\{3}",
+          "isCorrect": false,
+          "explanation": "x=3 é permitido; a restrição é x\u22653."
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Se A=[0,3] e B=(1,2), então A\\B é:",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "(1,2)",
+          "isCorrect": false,
+          "explanation": "Isso é B, não A sem B."
+        },
+        {
+          "id": "b",
+          "text": "[0,1] \u222a [2,3]",
+          "isCorrect": true,
+          "explanation": "Removemos a parte interna (1,2) de A."
+        },
+        {
+          "id": "c",
+          "text": "[0,3]",
+          "isCorrect": false,
+          "explanation": "Ignora a remoção de B."
+        },
+        {
+          "id": "d",
+          "text": "[0,1) \u222a (2,3]",
+          "isCorrect": false,
+          "explanation": "1 e 2 não pertencem a B, então devem permanecer em A\\B."
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual opção descreve corretamente um intervalo semiaberto?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "(a,b)",
+          "isCorrect": false,
+          "explanation": "Ambos os extremos são abertos; não é semiaberto."
+        },
+        {
+          "id": "b",
+          "text": "[a,b]",
+          "isCorrect": false,
+          "explanation": "Ambos fechados; também não é semiaberto."
+        },
+        {
+          "id": "c",
+          "text": "[a,b) ou (a,b]",
+          "isCorrect": true,
+          "explanation": "Um extremo incluído e o outro excluído."
+        },
+        {
+          "id": "d",
+          "text": "(-\u221e,\u221e)",
+          "isCorrect": false,
+          "explanation": "Esse é o conjunto de todos os reais."
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Para x > 4, qual é a notação de intervalo correta?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "[4,\u221e)",
+          "isCorrect": false,
+          "explanation": "[4,\u221e) inclui 4, mas x>4 exclui 4."
+        },
+        {
+          "id": "b",
+          "text": "(4,\u221e)",
+          "isCorrect": true,
+          "explanation": "Parêntese em 4 indica exclusão do extremo."
+        },
+        {
+          "id": "c",
+          "text": "(-\u221e,4)",
+          "isCorrect": false,
+          "explanation": "Esse intervalo representa x<4."
+        },
+        {
+          "id": "d",
+          "text": "(-\u221e,4]",
+          "isCorrect": false,
+          "explanation": "Esse intervalo representa x\u22644."
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Se A=(-\u221e, 2) e B=[1, 4], qual é A\u2229B?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "[1, 2)",
+          "isCorrect": true,
+          "explanation": "Elementos comuns: de 1 (incluído em ambos) até 2 (excluído por A)."
+        },
+        {
+          "id": "b",
+          "text": "(1, 2)",
+          "isCorrect": false,
+          "explanation": "1 deve ser incluído, pois pertence aos dois conjuntos."
+        },
+        {
+          "id": "c",
+          "text": "[1, 4]",
+          "isCorrect": false,
+          "explanation": "Valores acima de 2 não pertencem a A."
+        },
+        {
+          "id": "d",
+          "text": "(-\u221e, 4]",
+          "isCorrect": false,
+          "explanation": "Isso representa união parcial, não interseção."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Qual é o domínio de h(x)=1/\u221a(x+1)?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "[-1, \u221e)",
+          "isCorrect": false,
+          "explanation": "x=-1 zera o denominador; não é permitido."
+        },
+        {
+          "id": "b",
+          "text": "(-1, \u221e)",
+          "isCorrect": true,
+          "explanation": "Para raiz no denominador, precisamos x+1>0, então x>-1."
+        },
+        {
+          "id": "c",
+          "text": "(-\u221e, -1)",
+          "isCorrect": false,
+          "explanation": "Nesse intervalo x+1<0 e a raiz não é real."
+        },
+        {
+          "id": "d",
+          "text": "ℝ\\{-1}",
+          "isCorrect": false,
+          "explanation": "Mesmo excluindo -1, valores menores que -1 ainda invalidam a raiz."
+        }
+      ]
+    }
+  ]
+}
+

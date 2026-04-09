@@ -28,6 +28,8 @@ onde $\mathbb{R} \setminus \mathbb{Q}$ representa os **números irracionais**.
 
 Ou, visualmente:
 
+<RealSetHierarchyTree />
+
 ```
 ℝ (Números Reais)
 ├── ℚ (Racionais)
@@ -67,6 +69,8 @@ Existem infinitos números reais entre eles:
 - Irracionais: $\sqrt{2} \approx 1.414$, $\frac{\pi}{2} \approx 1.571$, ...
 
 Você pode sempre encontrar um número entre dois números, repetindo infinitamente:
+
+<DensityZoomExplorer />
 
 $$1 < 1.5 < 2$$
 $$1 < 1.25 < 1.5$$
@@ -128,6 +132,8 @@ Considere $B = \{x \in \mathbb{R} : 0 < x \leq 1\}$ (números entre 0 e 1, **inc
 - **Máximo:** 1 (o maior elemento que pertence ao conjunto)
 
 Neste caso, supremo = máximo.
+
+<SupremumMaximumComparator />
 
 ### Por Que a Completude Importa?
 
@@ -259,14 +265,17 @@ A densidade de ℝ garante que podemos sempre melhorar nossa aproximação.
 
 ## Resumo: Números Reais
 
-| Propriedade | Descrição |
-|---|---|
-| **Definição** | ℝ = ℚ ∪ (Irracionais) |
-| **Ordenado** | Para quaisquer a, b: a < b, a = b, ou a > b |
-| **Denso** | Entre quaisquer dois reais, infinitos outros reais |
-| **Completo** | Todo conjunto limitado superiormente tem supremo |
-| **Contínuo** | A reta real não tem "buracos" |
-| **Infinito** | Há infinitos números em qualquer intervalo |
+<MarkdownTable
+  headers={["Propriedade", "Descrição"]}
+  rows={[
+    ["**Definição**", "ℝ = ℚ ∪ (Irracionais)"],
+    ["**Ordenado**", "Para quaisquer a, b: a < b, a = b, ou a > b"],
+    ["**Denso**", "Entre quaisquer dois reais, infinitos outros reais"],
+    ["**Completo**", "Todo conjunto limitado superiormente tem supremo"],
+    ["**Contínuo**", "A reta real não tem \"buracos\""],
+    ["**Infinito**", "Há infinitos números em qualquer intervalo"],
+  ]}
+/>
 
 ## Ponte para a Próxima Lição
 

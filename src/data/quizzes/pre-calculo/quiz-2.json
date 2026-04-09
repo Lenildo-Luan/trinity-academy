@@ -1,0 +1,309 @@
+{
+  "id": "quiz-2",
+  "title": "Quiz 2 - Números Racionais e Irracionais",
+  "description": "Teste sua compreensão sobre frações, dízimas, irracionalidade e aproximações.",
+  "timeLimit": 720,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Qual número é irracional?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "0,125",
+          "isCorrect": false,
+          "explanation": "0,125 é decimal finito, portanto racional (1/8)."
+        },
+        {
+          "id": "b",
+          "text": "7/3",
+          "isCorrect": false,
+          "explanation": "Razão entre inteiros: número racional."
+        },
+        {
+          "id": "c",
+          "text": "\u221a2",
+          "isCorrect": true,
+          "explanation": "\u221a2 não pode ser escrito como fração de inteiros."
+        },
+        {
+          "id": "d",
+          "text": "0,333...",
+          "isCorrect": false,
+          "explanation": "Dízima periódica é racional: 0,333... = 1/3."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "A fração 1/6 gera qual tipo de representação decimal?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "Decimal finito",
+          "isCorrect": false,
+          "explanation": "1/6 = 0,1666..., não termina."
+        },
+        {
+          "id": "b",
+          "text": "Dízima periódica",
+          "isCorrect": true,
+          "explanation": "1/6 tem repetição de dígitos no decimal."
+        },
+        {
+          "id": "c",
+          "text": "Irracional",
+          "isCorrect": false,
+          "explanation": "Todo quociente de inteiros (com denominador não nulo) é racional."
+        },
+        {
+          "id": "d",
+          "text": "Número natural",
+          "isCorrect": false,
+          "explanation": "1/6 não é inteiro positivo."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "Qual fração corresponde a 0,\u03053 (dízima periódica simples)?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "3/10",
+          "isCorrect": false,
+          "explanation": "3/10 = 0,3 exato, sem repetição infinita."
+        },
+        {
+          "id": "b",
+          "text": "1/3",
+          "isCorrect": true,
+          "explanation": "0,333... é exatamente 1/3."
+        },
+        {
+          "id": "c",
+          "text": "3/8",
+          "isCorrect": false,
+          "explanation": "3/8 = 0,375."
+        },
+        {
+          "id": "d",
+          "text": "33/100",
+          "isCorrect": false,
+          "explanation": "33/100 = 0,33 finito, não dízima infinita."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Qual afirmação está correta sobre \u03c0?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "\u03c0 é racional porque 3,14 é racional",
+          "isCorrect": false,
+          "explanation": "3,14 é apenas aproximação de \u03c0, não igualdade."
+        },
+        {
+          "id": "b",
+          "text": "\u03c0 é irracional e tem decimal infinito não-periódico",
+          "isCorrect": true,
+          "explanation": "Essa é a característica correta de \u03c0."
+        },
+        {
+          "id": "c",
+          "text": "\u03c0 = 22/7 exatamente",
+          "isCorrect": false,
+          "explanation": "22/7 aproxima \u03c0, mas não é valor exato."
+        },
+        {
+          "id": "d",
+          "text": "\u03c0 pertence a ℚ",
+          "isCorrect": false,
+          "explanation": "\u03c0 não pertence ao conjunto dos racionais."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Qual classificação é correta para o número 2,75?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "Irracional",
+          "isCorrect": false,
+          "explanation": "2,75 é decimal finito, logo racional."
+        },
+        {
+          "id": "b",
+          "text": "Racional",
+          "isCorrect": true,
+          "explanation": "2,75 = 275/100 = 11/4."
+        },
+        {
+          "id": "c",
+          "text": "Natural",
+          "isCorrect": false,
+          "explanation": "Não é inteiro positivo."
+        },
+        {
+          "id": "d",
+          "text": "Não real",
+          "isCorrect": false,
+          "explanation": "Todo racional é real."
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "Em relação a \u221a4 e \u221a5, qual opção está correta?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "Ambos são irracionais",
+          "isCorrect": false,
+          "explanation": "\u221a4 = 2 é racional."
+        },
+        {
+          "id": "b",
+          "text": "\u221a4 é racional e \u221a5 é irracional",
+          "isCorrect": true,
+          "explanation": "Raiz de quadrado perfeito é racional; de não perfeito pode ser irracional."
+        },
+        {
+          "id": "c",
+          "text": "Ambos são racionais",
+          "isCorrect": false,
+          "explanation": "\u221a5 não é racional."
+        },
+        {
+          "id": "d",
+          "text": "\u221a4 é irracional e \u221a5 é racional",
+          "isCorrect": false,
+          "explanation": "Está invertido."
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "Qual opção é uma boa aproximação racional de \u03c0 com erro relativamente pequeno?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "3/2",
+          "isCorrect": false,
+          "explanation": "3/2 = 1,5 está muito distante de \u03c0."
+        },
+        {
+          "id": "b",
+          "text": "22/7",
+          "isCorrect": true,
+          "explanation": "22/7 ≈ 3,142857, aproxima \u03c0 razoavelmente bem."
+        },
+        {
+          "id": "c",
+          "text": "7/22",
+          "isCorrect": false,
+          "explanation": "7/22 ≈ 0,318, totalmente fora de escala."
+        },
+        {
+          "id": "d",
+          "text": "31/10",
+          "isCorrect": false,
+          "explanation": "31/10 = 3,1 é aproximação bem pior que 22/7."
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "Qual afirmação resume corretamente a diferença entre racional e irracional?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "Racional tem decimal infinito e irracional tem decimal finito",
+          "isCorrect": false,
+          "explanation": "Racionais podem ter decimal finito ou periódico."
+        },
+        {
+          "id": "b",
+          "text": "Racional não pode ser escrito como fração",
+          "isCorrect": false,
+          "explanation": "Isso define irracional, não racional."
+        },
+        {
+          "id": "c",
+          "text": "Irracional tem decimal infinito não-periódico",
+          "isCorrect": true,
+          "explanation": "Essa é a característica central dos irracionais."
+        },
+        {
+          "id": "d",
+          "text": "Todo decimal infinito é irracional",
+          "isCorrect": false,
+          "explanation": "Dízimas periódicas são infinitas e racionais."
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "Qual número é racional por ser decimal finito?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "\u03c0",
+          "isCorrect": false,
+          "explanation": "\u03c0 é irracional e não possui decimal finito/periódico."
+        },
+        {
+          "id": "b",
+          "text": "\u221a3",
+          "isCorrect": false,
+          "explanation": "\u221a3 é irracional."
+        },
+        {
+          "id": "c",
+          "text": "2,375",
+          "isCorrect": true,
+          "explanation": "2,375 é decimal finito e pode ser escrito como fração (19/8)."
+        },
+        {
+          "id": "d",
+          "text": "e",
+          "isCorrect": false,
+          "explanation": "e é irracional."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Sobre a soma de um racional com um irracional, qual alternativa é correta em geral?",
+      "alternatives": [
+        {
+          "id": "a",
+          "text": "Sempre resulta em racional",
+          "isCorrect": false,
+          "explanation": "A soma não vira racional em geral; isso é uma confusão comum."
+        },
+        {
+          "id": "b",
+          "text": "Sempre resulta em irracional",
+          "isCorrect": true,
+          "explanation": "Se r é racional e i irracional, r+i não pode ser racional; caso contrário i seria racional por diferença."
+        },
+        {
+          "id": "c",
+          "text": "Depende apenas do sinal dos números",
+          "isCorrect": false,
+          "explanation": "O sinal não determina racionalidade."
+        },
+        {
+          "id": "d",
+          "text": "Nunca é número real",
+          "isCorrect": false,
+          "explanation": "Tanto racionais quanto irracionais são reais, e a soma continua em ℝ."
+        }
+      ]
+    }
+  ]
+}
+
