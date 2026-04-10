@@ -1,5 +1,5 @@
 import type React from "react";
-import { Navbar } from "../organisms/navbar";
+import { Navbar } from "@/components/organisms/navbar";
 
 export function CenteredPageLayout({
   breadcrumbs,
