@@ -5,8 +5,8 @@ import {
   DropdownButton,
   DropdownItem,
   DropdownMenu,
-} from "@/components/dropdown";
-import { IconButton } from "@/components/icon-button";
+} from "@/components/molecules/dropdown";
+import { IconButton } from "@/components/atoms/icon-button";
 import { ChevronDownIcon } from "@/icons/chevron-down-icon";
 import { CloseIcon } from "@/icons/close-icon";
 import { MenuIcon } from "@/icons/menu-icon";

@@ -5,10 +5,10 @@ import {
   BreadcrumbHome,
   BreadcrumbSeparator,
   Breadcrumbs,
-} from '@/components/breadcrumbs'
-import { CenteredPageLayout } from '@/components/centered-layout'
-import { ProfileHeader } from '@/components/profile-header'
-import { ProfileStatsCards } from '@/components/profile-stats-cards'
+  CenteredPageLayout,
+  ProfileHeader,
+  ProfileStatsCards,
+} from '@/components'
 import { useUserProfile } from '@/hooks/use-user-profile'
 import { useUserStats } from '@/hooks/use-user-stats'
 import { useEffect, useState } from 'react'

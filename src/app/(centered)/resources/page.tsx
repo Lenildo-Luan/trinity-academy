@@ -1,14 +1,14 @@
-import { Book, Bookshelf } from "@/components/bookshelf";
+import { Book, Bookshelf } from "@/components/organisms/bookshelf";
 import {
   Breadcrumb,
   BreadcrumbHome,
   BreadcrumbSeparator,
   Breadcrumbs,
-} from "@/components/breadcrumbs";
-import { CenteredPageLayout } from "@/components/centered-layout";
-import { ContentLink } from "@/components/content-link";
-import { PageSection } from "@/components/page-section";
-import { VideoCard } from "@/components/video-card";
+} from "@/components/molecules/breadcrumbs";
+import { CenteredPageLayout } from "@/components/templates/centered-layout";
+import { ContentLink } from "@/components/molecules/content-link";
+import { PageSection } from "@/components/molecules/page-section";
+import { VideoCard } from "@/components/molecules/video-card";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

@@ -1,7 +1,5 @@
-import {
-  Breadcrumbs,
-} from "@/components/breadcrumbs";
-import { SidebarLayoutContent } from "@/components/sidebar-layout";
+import { Breadcrumbs } from "@/components/molecules/breadcrumbs";
+import { SidebarLayoutContent } from "@/components/organisms/sidebar-layout";
 import { courses } from "@/data/courses";
 import { getCourseStats } from "@/data/lessons";
 import { BookIcon } from "@/icons/book-icon";

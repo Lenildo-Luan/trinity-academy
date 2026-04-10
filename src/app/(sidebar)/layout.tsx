@@ -1,4 +1,4 @@
-import { SidebarLayout } from "@/components/sidebar-layout";
+import { SidebarLayout } from "@/components";
 import type React from "react";
 
 export default function CourseLayout({

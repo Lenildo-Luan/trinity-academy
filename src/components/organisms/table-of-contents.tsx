@@ -75,7 +75,7 @@ function useTableOfContents(contentId: string) {
   return headings;
 }
 
-export default function TableOfContents({ contentId }: { contentId: string }) {
+export function TableOfContents({ contentId }: { contentId: string }) {
   let headings = useTableOfContents(contentId);
 
   return (

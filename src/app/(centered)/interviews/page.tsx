@@ -3,9 +3,9 @@ import {
   BreadcrumbHome,
   Breadcrumbs,
   BreadcrumbSeparator,
-} from "@/components/breadcrumbs";
-import { CenteredPageLayout } from "@/components/centered-layout";
-import { VideoCard } from "@/components/video-card";
+} from "@/components/molecules/breadcrumbs";
+import { CenteredPageLayout } from "@/components/templates/centered-layout";
+import { VideoCard } from "@/components/molecules/video-card";
 import { getInterviews } from "@/data/interviews";
 import type { Metadata } from "next";
 

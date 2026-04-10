@@ -1,7 +1,6 @@
 'use client'
 
-import { Button } from "@/components/button";
-import { TextInput } from "@/components/input";
+import { Button, TextInput } from "@/components/atoms";
 import { sendOTP } from "../actions";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";

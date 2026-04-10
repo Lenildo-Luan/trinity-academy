@@ -3,10 +3,10 @@ import {
   BreadcrumbHome,
   Breadcrumbs,
   BreadcrumbSeparator,
-} from "@/components/breadcrumbs";
-import { CenteredPageLayout } from "@/components/centered-layout";
-import { NextPageLink } from "@/components/next-page-link";
-import { TimestampButton, Video } from "@/components/video-player";
+} from "@/components/molecules/breadcrumbs";
+import { CenteredPageLayout } from "@/components/templates/centered-layout";
+import { NextPageLink } from "@/components/molecules/next-page-link";
+import { TimestampButton, Video } from "@/components/molecules/video-player";
 import { getInterview, getInterviewTranscript } from "@/data/interviews";
 import { ClockIcon } from "@/icons/clock-icon";
 import type { Metadata } from "next";

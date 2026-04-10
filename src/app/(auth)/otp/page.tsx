@@ -1,7 +1,6 @@
 'use client'
 
-import { Button } from "@/components/button";
-import { OTPInput } from "@/components/input";
+import { Button, OTPInput } from "@/components/atoms";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useTransition, useEffect, useRef, Suspense } from "react";

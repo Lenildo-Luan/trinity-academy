@@ -3,11 +3,11 @@ import {
   BreadcrumbHome,
   Breadcrumbs,
   BreadcrumbSeparator,
-} from "@/components/breadcrumbs";
-import { ContentLink } from "@/components/content-link";
-import { Logo } from "@/components/logo";
-import { PageSection } from "@/components/page-section";
-import { SidebarLayoutContent } from "@/components/sidebar-layout";
+} from "@/components/molecules/breadcrumbs";
+import { ContentLink } from "@/components/molecules/content-link";
+import { Logo } from "@/components/atoms/logo";
+import { PageSection } from "@/components/molecules/page-section";
+import { SidebarLayoutContent } from "@/components/organisms/sidebar-layout";
 import { getModules, type Module } from "@/data/lessons";
 import { getCourse } from "@/data/courses";
 import { BookIcon } from "@/icons/book-icon";

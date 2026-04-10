@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import { ProfilePhotoUpload } from './profile-photo-upload'
-import { TextInput } from './input'
-import { Button } from './button'
+import { TextInput } from '../atoms/input'
+import { Button } from '../atoms/button'
 import { clsx } from 'clsx'
 
 type ProfileHeaderProps = {

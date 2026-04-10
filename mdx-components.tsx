@@ -5,7 +5,7 @@ import React, { ReactNode } from "react";
 import { createHighlighter, Highlighter } from "shiki";
 import theme from "./src/app/syntax-theme.json";
 import { P5Sketch } from "./src/components/p5-js/p5-sketch";
-import { MarkdownTable } from "./src/components/MarkdownTable";
+import { MarkdownTable } from "./src/components/templates/MarkdownTable";
 import {
   BouncingBall,
   FollowMouse,

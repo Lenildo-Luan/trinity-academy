@@ -1,6 +1,6 @@
 "use client";
 
-import { IconButton } from "@/components/icon-button";
+import { IconButton } from "@/components/atoms/icon-button";
 import { getModules, type Module } from "@/data/lessons";
 import { SidebarIcon } from "@/icons/sidebar-icon";
 import {

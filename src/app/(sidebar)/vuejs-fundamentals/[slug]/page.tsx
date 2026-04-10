@@ -3,12 +3,12 @@ import {
   BreadcrumbHome,
   Breadcrumbs,
   BreadcrumbSeparator,
-} from "@/components/breadcrumbs";
-import { NextPageLink } from "@/components/next-page-link";
-import { QuizSection } from "@/components/quiz-section";
-import { SidebarLayoutContent } from "@/components/sidebar-layout";
-import TableOfContents from "@/components/table-of-contents";
-import { Video } from "@/components/video-player";
+} from "@/components/molecules/breadcrumbs";
+import { NextPageLink } from "@/components/molecules/next-page-link";
+import { QuizSection } from "@/components/organisms/quiz-section";
+import { SidebarLayoutContent } from "@/components/organisms/sidebar-layout";
+import { TableOfContents } from "@/components/organisms/table-of-contents";
+import { Video } from "@/components/molecules/video-player";
 import { getLesson, getLessonContent } from "@/data/lessons";
 import { getQuiz } from "@/data/quizzes";
 import type { Metadata } from "next";

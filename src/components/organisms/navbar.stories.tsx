@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Navbar } from './navbar'
-import { Logo } from './logo'
-import { withAuth, mockUsers } from '../../.storybook/decorators/auth-decorator'
+import { Logo } from '../atoms/logo'
+import { withAuth, mockUsers } from '../../../.storybook/decorators/auth-decorator'
 
 const meta = {
   title: 'Components/Navbar',
