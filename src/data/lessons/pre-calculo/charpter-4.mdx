@@ -29,7 +29,7 @@ Um intervalo **fechado** inclui os dois extremos:
 $$[a, b] = \{x \in \mathbb{R} : a \leq x \leq b\}$$
 
 - Notação: **[colchete quadrado significa "incluído"**
-- Na reta: ●─────●
+- Na reta: segmento com os dois extremos fechados
 - Exemplos:
   - $[0, 1]$ inclui 0, 1 e tudo entre
   - $[-3, 5]$ inclui -3, 5 e tudo entre
@@ -41,7 +41,7 @@ Um intervalo **aberto** exclui os dois extremos:
 $$(a, b) = \{x \in \mathbb{R} : a < x < b\}$$
 
 - Notação: **(parêntese significa "excluído"**
-- Na reta: ○─────○
+- Na reta: segmento com os dois extremos abertos
 - Exemplos:
   - $(0, 1)$ inclui 0.5, 0.9, 0.999... mas **não** 0 nem 1
   - $(-3, 5)$ não inclui -3 nem 5
@@ -51,10 +51,10 @@ $$(a, b) = \{x \in \mathbb{R} : a < x < b\}$$
 Um intervalo pode incluir um extremo e excluir o outro:
 
 - **[a, b)** inclui $a$, exclui $b$: $\{x : a \leq x < b\}$
-  - Na reta: ●─────○
+  - Na reta: segmento com extremo esquerdo fechado e direito aberto
 
 - **(a, b]** exclui $a$, inclui $b$: $\{x : a < x \leq b\}$
-  - Na reta: ○─────●
+  - Na reta: segmento com extremo esquerdo aberto e direito fechado
 
 ### 4. Intervalos Infinitos
 
@@ -65,11 +65,11 @@ Quando um intervalo se estende infinitamente, usamos o símbolo $\infty$:
 <MarkdownTable
   headers={["Notação", "Descrição", "Reta Numérica"]}
   rows={[
-    ["$(a, \\infty)$", "Maiores que $a$", "`o--------->`"],
-    ["$[a, \\infty)$", "Maiores ou iguais a $a$", "`*--------->`"],
-    ["$(-\\infty, b)$", "Menores que $b$", "`<---------o`"],
-    ["$(-\\infty, b]$", "Menores ou iguais a $b$", "`<---------*`"],
-    ["$(-\\infty, \\infty)$", "Todos os reais", "`<--------->` (toda reta)"],
+    ["$(a, \\infty)$", "Maiores que $a$", "Semirreta à direita com extremo aberto em $a$"],
+    ["$[a, \\infty)$", "Maiores ou iguais a $a$", "Semirreta à direita com extremo fechado em $a$"],
+    ["$(-\\infty, b)$", "Menores que $b$", "Semirreta à esquerda com extremo aberto em $b$"],
+    ["$(-\\infty, b]$", "Menores ou iguais a $b$", "Semirreta à esquerda com extremo fechado em $b$"],
+    ["$(-\\infty, \\infty)$", "Todos os reais", "Reta completa"],
   ]}
 />
 
@@ -80,28 +80,16 @@ Quando um intervalo se estende infinitamente, usamos o símbolo $\infty$:
 Represente na reta numérica:
 
 1. $[1, 3]$ — fechado, inclui 1 e 3
-   ```
-   ─────●─────────●─────
-       1           3
-   ```
+   <IntervalWorkedExampleDiagram variant="closed-13" />
 
 2. $(1, 3)$ — aberto, exclui 1 e 3
-   ```
-   ─────○─────────○─────
-       1           3
-   ```
+   <IntervalWorkedExampleDiagram variant="open-13" />
 
 3. $[1, 3)$ — semi-aberto, inclui 1, exclui 3
-   ```
-   ─────●─────────○─────
-       1           3
-   ```
+   <IntervalWorkedExampleDiagram variant="half-13" />
 
 4. $(2, \infty)$ — infinito para cima, exclui 2
-   ```
-   ─────○─────────────→
-       2
-   ```
+   <IntervalWorkedExampleDiagram variant="ray-2-inf" />
 
 ## Notação de Conjunto vs Notação de Intervalo
 
@@ -141,11 +129,7 @@ $$A \cup B = \{x : x \in A \text{ ou } x \in B\}$$
 
 Na reta numérica, a união é a **reunião de todos os pontos**:
 
-```
-A = [1, 3]    ─────●───────●─────
-B = (2, 5)    ────────○───────○─────
-A ∪ B = [1, 5)  ───●───────────○─────
-```
+<IntervalWorkedExampleDiagram variant="union-13-25" />
 
 Resultado: $A \cup B = [1, 5)$
 
@@ -157,11 +141,7 @@ $$A \cap B = \{x : x \in A \text{ e } x \in B\}$$
 
 Na reta numérica, a interseção é a **sobreposição**:
 
-```
-A = [1, 3]    ─────●───────●─────
-B = (2, 5)    ────────○───────○─────
-A ∩ B = (2, 3]    ────────○──────●──────
-```
+<IntervalWorkedExampleDiagram variant="inter-13-25" />
 
 Resultado: $A \cap B = (2, 3]$
 
@@ -177,10 +157,7 @@ $$A^c = (-\infty, 1) \cup (3, \infty)$$
 
 Na reta numérica:
 
-```
-A = [1, 3]     ──────●────────●──────
-A^c = (-∞,1)∪(3,∞)  ←──○ e ○──→
-```
+<IntervalWorkedExampleDiagram variant="complement-13" />
 
 ### Exemplo 3: Operações com Intervalos
 
@@ -188,21 +165,13 @@ Dados $A = [0, 2]$ e $B = (1, 4)$, encontre:
 
 **a) $A \cup B$ (união)**
 
-```
-A = [0, 2]     ──●─────────●───
-B = (1, 4)     ──────○──────────○─
-A ∪ B = [0, 4)   ──●──────────────○─
-```
+<IntervalWorkedExampleDiagram variant="union-02-14" />
 
 Resultado: $A \cup B = [0, 4)$
 
 **b) $A \cap B$ (interseção)**
 
-```
-A = [0, 2]     ──●─────────●───
-B = (1, 4)     ──────○──────────○─
-A ∩ B = (1, 2]    ──────○──●──
-```
+<IntervalWorkedExampleDiagram variant="inter-02-14" />
 
 Resultado: $A \cap B = (1, 2]$
 
@@ -218,19 +187,11 @@ Dados $A = [-2, 1)$, $B = (0, 3]$, e $C = [1, 2]$, encontre:
 
 Primeiro, $A \cup B$:
 
-```
-A = [-2, 1)  ──●──────○───
-B = (0, 3]   ────○────────●
-A ∪ B = [-2,3]  ──●────────●
-```
+<IntervalWorkedExampleDiagram variant="union-complex" />
 
 Agora, $(A \cup B) \cap C$:
 
-```
-A ∪ B = [-2, 3]  ──●──────────●──
-C = [1, 2]       ────────●──●──
-(A ∪ B) ∩ C = [1, 2]  ────●──●──
-```
+<IntervalWorkedExampleDiagram variant="inter-complex" />
 
 Resultado: $(A \cup B) \cap C = [1, 2]$
 
@@ -246,11 +207,7 @@ Dado $A = [0, 3]$ e $B = (1, 2)$, encontre $A \setminus B$:
 
 Os pontos em $A$ que **não estão** em $B$:
 
-```
-A = [0, 3]       ──●────────────●──
-B = (1, 2)       ────○────●────
-A \ B = [0,1]∪[2,3]  ──●─○  ●──●──
-```
+<IntervalWorkedExampleDiagram variant="difference-03-12" />
 
 Resultado: $A \setminus B = [0, 1] \cup [2, 3]$
 
@@ -320,10 +277,10 @@ $$= (-\infty, 0) \cup [3, \infty)$$
 <MarkdownTable
   headers={["Tipo", "Notação", "Inclui Extremos?", "Reta"]}
   rows={[
-    ["Fechado", "$[a, b]$", "Sim (ambos)", "●────●"],
-    ["Aberto", "$(a, b)$", "Não", "○────○"],
-    ["Semi-aberto", "$[a, b)$ ou $(a, b]$", "Um sim, outro não", "●────○ ou ○────●"],
-    ["Infinito", "$[a, \\infty)$, $(-\\infty, b]$", "Depende (nunca ∞)", "●────→ ou ←────●"],
+    ["Fechado", "$[a, b]$", "Sim (ambos)", "Segmento com dois extremos fechados"],
+    ["Aberto", "$(a, b)$", "Não", "Segmento com dois extremos abertos"],
+    ["Semi-aberto", "$[a, b)$ ou $(a, b]$", "Um sim, outro não", "Segmento com um extremo aberto e outro fechado"],
+    ["Infinito", "$[a, \\infty)$, $(-\\infty, b]$", "Depende (nunca ∞)", "Semirreta"],
   ]}
 />
 
