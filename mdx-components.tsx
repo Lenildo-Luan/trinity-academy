@@ -13,17 +13,17 @@ import {
   CirclePattern,
   Particles,
   TrafficLight,
-} from "./src/components/p5-js/p5-examples";
+} from "./src/components/p5-js/introducao-a-programacao/p5-examples";
 import {
   ImperativeVsReactive,
   VirtualDomDiff,
   ProgressiveFramework,
-} from "./src/components/p5-js/vue-p5-examples";
+} from "./src/components/p5-js/vuejs-fundamentals/vue-p5-examples";
 import {
   FileChaosSim,
   GitTimeline,
   SnapshotVsDiff,
-} from "./src/components/p5-js/git-p5-examples";
+} from "./src/components/p5-js/github-fundamentals/git-p5-examples";
 import {
   SensorTypes,
   ActuatorTypes,
@@ -49,7 +49,7 @@ import {
   CCDSensorPipeline,
   EyeVsCamera,
   ConeColorMixing,
-} from "./src/components/p5-js/sensors-actuators-p5-examples";
+} from "./src/components/p5-js/materiais-micro-nano-tecnologia/sensors-actuators-p5-examples";
 import {
   PixelMatrixVisualization,
   GrayscaleLevels,
@@ -59,7 +59,7 @@ import {
   RGBColorSpace,
   AnalogToDigital,
   ImageResolutionDemo,
-} from "./src/components/p5-js/image-digitization-p5-examples";
+} from "./src/components/p5-js/materiais-micro-nano-tecnologia/image-digitization-p5-examples";
 import {
   UltrasoundImaging,
   ThermalCameraView,
@@ -68,7 +68,7 @@ import {
   SensorSpectrumOverview,
   SensorApplicationsDashboard,
   SeismicSonarMapping,
-} from "./src/components/p5-js/image-sensors-p5-examples";
+} from "./src/components/p5-js/materiais-micro-nano-tecnologia/image-sensors-p5-examples";
 import {
   LogicalCommunication,
   HouseLetterAnalogy,
@@ -76,14 +76,14 @@ import {
   TCPvsUDP,
   MultiplexingDemux,
   SegmentEncapsulation,
-} from "./src/components/p5-js/transport-layer-p5-examples";
-import { RoutingForwardingDataPlaneSimulator } from "./src/components/p5-js/network-layer-p5-examples";
+} from "./src/components/p5-js/redes-de-computadores/transport-layer-p5-examples";
+import { RoutingForwardingDataPlaneSimulator } from "./src/components/p5-js/redes-de-computadores/network-layer-p5-examples";
 import {
   RouterArchitectureOverview,
   MemorySwitchingSimulator,
   BusSwitchingSimulator,
   CrossbarSwitchingSimulator,
-} from "./src/components/p5-js/router-architecture-p5-examples";
+} from "./src/components/p5-js/redes-de-computadores/router-architecture-p5-examples";
 import {
   LongestPrefixMatchVisualizer,
   InputQueueContentionSimulator,
@@ -91,7 +91,7 @@ import {
   DropTailVsRedComparator,
   SchedulingDisciplinesComparator,
   QueueCongestionTimelineSimulator,
-} from "./src/components/p5-js/router-decision-queueing-p5-examples";
+} from "./src/components/p5-js/redes-de-computadores/router-decision-queueing-p5-examples";
 import {
   IPv4HeaderDiagram,
   BitwiseAndMaskVisualizer,
@@ -99,7 +99,7 @@ import {
   IPv4FragmentationSimulator,
   TTLHopsSimulator,
   CIDRLongestPrefixMatchVisualizer,
-} from "./src/components/p5-js/ipv4-cidr-p5-examples";
+} from "./src/components/p5-js/redes-de-computadores/ipv4-cidr-p5-examples";
 import {
   DhcpDoraSimulator,
   DhcpDoraTimelineVisualizer,
@@ -107,25 +107,25 @@ import {
   DhcpPoolAllocatorSimulator,
   NatTranslationSimulator,
   DhcpToInternetFlowVisualizer,
-} from "./src/components/p5-js/dhcp-allocation-p5-examples";
+} from "./src/components/p5-js/redes-de-computadores/dhcp-allocation-p5-examples";
 import {
   NatPacketFlowVisualizer,
   NatTableDynamicSimulator,
   SLAACAutoConfigSimulator,
   DualStackTransitionSimulator,
-} from "./src/components/p5-js/nat-ipv6-p5-examples";
+} from "./src/components/p5-js/redes-de-computadores/nat-ipv6-p5-examples";
 import {
   BestEffortVsQoSGuarantees,
   DatagramVsVirtualCircuitComparison,
   CongestionAndPacketDropSimulator,
   DijkstraStepByStep,
-} from "./src/components/p5-js/network-service-models-p5-examples";
+} from "./src/components/p5-js/redes-de-computadores/network-service-models-p5-examples";
 import {
   RoutingTopologyR1R5Visualizer,
   DijkstraRoutingStepSimulator,
   DistanceVectorBellmanFordIterativeVisualizer,
   LinkStateVsDistanceVectorConvergenceComparator,
-} from "./src/components/p5-js/routing-fundamentals-p5-examples";
+} from "./src/components/p5-js/redes-de-computadores/routing-fundamentals-p5-examples";
 import {
   RouteOscillationVisualizer,
   CountToInfinityVisualizer,
@@ -139,7 +139,7 @@ import {
   HotPotatoRoutingVisualizer,
   InterAsPacketFlowVisualizer,
   BgpAsPathPolicyVisualizer,
-} from "./src/components/p5-js/routing-challenges-p5-examples";
+} from "./src/components/p5-js/redes-de-computadores/routing-challenges-p5-examples";
 import {
   MultiplexingSender,
   DemultiplexingReceiver,
@@ -147,7 +147,7 @@ import {
   TCPDemultiplexing,
   UDPvsTCPDemuxComparison,
   SegmentHeaderPorts,
-} from "./src/components/p5-js/multiplexing-demux-p5-examples";
+} from "./src/components/p5-js/redes-de-computadores/multiplexing-demux-p5-examples";
 import {
   UDPBestEffort,
   UDPNoHandshake,
@@ -155,7 +155,7 @@ import {
   UDPChecksumDemo,
   UDPUseCases,
   UDPvsTPHeaderSize,
-} from "./src/components/p5-js/udp-protocol-p5-examples";
+} from "./src/components/p5-js/redes-de-computadores/udp-protocol-p5-examples";
 import {
   RDT10SimpleChannel,
   RDT20AckNak,
@@ -164,7 +164,7 @@ import {
   RDT30TimerRetransmission,
   StopAndWaitUtilization,
   PipelineGBNvsSR,
-} from "./src/components/p5-js/reliable-data-transfer-p5-examples";
+} from "./src/components/p5-js/redes-de-computadores/reliable-data-transfer-p5-examples";
 import {
   TCPPointToPoint,
   TCPSegmentStructure,
@@ -174,7 +174,7 @@ import {
   TCPTimeoutCalculation,
   TCPRetransmissionScenarios,
   TCPBuffersAndMSS,
-} from "./src/components/p5-js/tcp-fundamentals-p5-examples";
+} from "./src/components/p5-js/redes-de-computadores/tcp-fundamentals-p5-examples";
 import {
   TCPFlowControlBuffer,
   TCPRwndZeroProblem,
@@ -182,7 +182,7 @@ import {
   TCPTwoWayHandshakeProblem,
   TCPConnectionTeardown,
   TCPResetFlag,
-} from "./src/components/p5-js/tcp-flow-connection-p5-examples";
+} from "./src/components/p5-js/redes-de-computadores/tcp-flow-connection-p5-examples";
 import {
   CongestionCosts,
   CongestionScenarios,
@@ -191,7 +191,7 @@ import {
   TCPCubicVsReno,
   TCPBBRvsLossBased,
   TCPSlowStartDetail,
-} from "./src/components/p5-js/congestion-control-p5-examples";
+} from "./src/components/p5-js/redes-de-computadores/congestion-control-p5-examples";
 import {
   ECNSignaling,
   TCPFairnessConvergence,
@@ -199,7 +199,7 @@ import {
   QUICArchitecture,
   QUICHandshakeComparison,
   QUICHOLBlocking,
-} from "./src/components/p5-js/ecn-fairness-quic-p5-examples";
+} from "./src/components/p5-js/redes-de-computadores/ecn-fairness-quic-p5-examples";
 import {
   SignalDefinition,
   SignalExamples,
@@ -207,7 +207,7 @@ import {
   ContinuousVsDiscrete,
   SystemHardwareSoftware,
   SignalProcessingChain,
-} from "./src/components/p5-js/signals-systems-intro-p5-examples";
+} from "./src/components/p5-js/sinais-e-sistemas/signals-systems-intro-p5-examples";
 import {
   SignalEnergyArea,
   SignalPowerAverage,
@@ -215,7 +215,7 @@ import {
   RMSValueDemo,
   SinusoidalEnergyPower,
   SNRVisualization,
-} from "./src/components/p5-js/signal-energy-power-p5-examples";
+} from "./src/components/p5-js/sinais-e-sistemas/signal-energy-power-p5-examples";
 import {
   TimeShiftDemo,
   TimeScalingDemo,
@@ -223,7 +223,7 @@ import {
   ShiftThenScaleDemo,
   ScaleThenShiftDemo,
   CombinedOperationsSummary,
-} from "./src/components/p5-js/signal-operations-p5-examples"; // signal ops
+} from "./src/components/p5-js/sinais-e-sistemas/signal-operations-p5-examples";
 import {
   ContinuousVsDiscreteTime,
   AnalogVsDigitalSignal,
@@ -231,7 +231,7 @@ import {
   EnergyVsPowerClassification,
   DeterministicVsRandom,
   SignalClassificationMap,
-} from "./src/components/p5-js/signal-classification-p5-examples";
+} from "./src/components/p5-js/sinais-e-sistemas/signal-classification-p5-examples";
 import {
   UnitStepFunction,
   CausalSignalWithStep,
@@ -239,7 +239,7 @@ import {
   SamplingProperty,
   DelayedImpulseAndStep,
   ImpulseStepRelation,
-} from "./src/components/p5-js/signal-models-p5-examples";
+} from "./src/components/p5-js/sinais-e-sistemas/signal-models-p5-examples";
 import {
   SystemBlockDiagram,
   RCCircuitModel,
@@ -247,7 +247,7 @@ import {
   InitialConditionsEffect,
   PhysicsToMathModel,
   NaturalVsForcedResponse,
-} from "./src/components/p5-js/systems-intro-p5-examples";
+} from "./src/components/p5-js/sinais-e-sistemas/systems-intro-p5-examples";
 const {
   VerticalLineTest,
   RootFunctionsComparison,
@@ -266,7 +266,7 @@ const {
   EpsilonDeltaVisualization,
   SqueezeTheoremVisualization,
   GrowthRatesVisualization,
-} = require("./src/components/p5-js/calculo-1-p5-examples");
+} = require("./src/components/p5-js/calculo-1/calculo-1-p5-examples");
 import {
   SuperpositionPrinciple,
   TimeInvarianceDemo,
@@ -274,14 +274,14 @@ import {
   BIBOStabilityDemo,
   InvertibilityDemo,
   SystemClassificationSummary,
-} from "./src/components/p5-js/systems-classification-p5-examples";
+} from "./src/components/p5-js/sinais-e-sistemas/systems-classification-p5-examples";
 import {
   TwoAnalysisMethods,
   ZeroInputZeroStateDecomp,
   CharacteristicModes,
   ConvolutionIntegral,
   LCITAnalysisWorkflow,
-} from "./src/components/p5-js/time-domain-analysis-p5-examples";
+} from "./src/components/p5-js/sinais-e-sistemas/time-domain-analysis-p5-examples";
 import {
   PolymericMatrixStructure,
   PropertiesComparison,
@@ -291,7 +291,7 @@ import {
   PultrusionProcess,
   LaminateComposites,
   SandwichPanel,
-} from "./src/components/p5-js/composite-matrix-polymer-p5-examples";
+} from "./src/components/p5-js/materiais-micro-nano-tecnologia/composite-matrix-polymer-p5-examples";
 const {
   DiscontinuityTypesComparison,
   DiscontinuityExplorer,
@@ -301,7 +301,7 @@ const {
   BisectionMethod,
   DiscontinuityTypesVisualization,
   IntermediateValueTheoremVisualization,
-} = require("./src/components/p5-js/continuity-p5-examples");
+} = require("./src/components/p5-js/pre-calculo/continuity-p5-examples");
 const {
   NaturalIntegerSetMap,
   IntegerMovementNumberLine,
@@ -318,7 +318,7 @@ const {
   NumberLineReferenceDiagram,
   RealSetHierarchyStaticDiagram,
   IntervalWorkedExampleDiagram,
-} = require("./src/components/p5-js/pre-calculo-p5-examples");
+} = require("./src/components/p5-js/pre-calculo/pre-calculo-p5-examples");
 
 function getTextContent(node: ReactNode): string {
   if (typeof node === "string") return node;
