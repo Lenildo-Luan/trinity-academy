@@ -19,8 +19,8 @@ jobs:
         run: npm ci
       - name: Build Storybook
         run: npm run build-storybook
-      - name: Run Storybook tests
-        run: npx vitest run
+      - name: Run coverage checks
+        run: npm run coverage
 
   chromatic:
     needs: storybook-checks

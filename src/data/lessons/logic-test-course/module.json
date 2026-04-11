@@ -1,0 +1,45 @@
+[
+  {
+    "id": "module-1",
+    "title": "Módulo 1",
+    "description": "Primeiro módulo de teste",
+    "lessons": [
+      {
+        "id": "lesson-1",
+        "title": "Aula 1",
+        "description": "Primeira aula",
+        "video": {
+          "thumbnail": "thumb-1.png",
+          "duration": 120,
+          "url": "https://example.com/video-1"
+        },
+        "quizId": "quiz-1"
+      },
+      {
+        "id": "lesson-2",
+        "title": "Aula 2",
+        "description": "Segunda aula",
+        "video": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "module-2",
+    "title": "Módulo 2",
+    "description": "Segundo módulo de teste",
+    "lessons": [
+      {
+        "id": "lesson-3",
+        "title": "Aula 3",
+        "description": "Terceira aula",
+        "video": {
+          "thumbnail": "thumb-3.png",
+          "duration": 30,
+          "url": "https://example.com/video-3"
+        },
+        "quizId": "quiz-3"
+      }
+    ]
+  }
+]
