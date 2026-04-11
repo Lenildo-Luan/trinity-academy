@@ -15,7 +15,8 @@ vi.mock("@/lib/supabase/server", () => ({
 }));
 
 beforeEach(() => {
-  globalThis.IS_REACT_ACT_ENVIRONMENT = true;
+  (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean })
+    .IS_REACT_ACT_ENVIRONMENT = true;
   resetSupabaseMocks();
   resetNextNavigationMocks();
   vi.clearAllMocks();

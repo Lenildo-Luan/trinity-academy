@@ -17,15 +17,15 @@ export function renderHook<T, P = undefined>(
   const result = { current: undefined as T }
   let props = options?.initialProps as P
 
-  function TestComponent(componentProps: P) {
-    result.current = hook(componentProps)
+  function TestComponent() {
+    result.current = hook(props)
     return null
   }
 
   const render = (nextProps = props) => {
     props = nextProps
     act(() => {
-      root.render(React.createElement(TestComponent, props as object))
+      root.render(<TestComponent />)
     })
   }
 
