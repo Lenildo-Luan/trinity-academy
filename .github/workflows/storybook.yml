@@ -25,8 +25,9 @@ jobs:
 
   chromatic:
     needs: storybook-quality
-    if: ${{ secrets.CHROMATIC_PROJECT_TOKEN != '' }}
     runs-on: ubuntu-latest
+    env:
+      CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -38,7 +39,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Publish to Chromatic
+        if: ${{ env.CHROMATIC_PROJECT_TOKEN != '' }}
         uses: chromaui/action@v1
         with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          projectToken: ${{ env.CHROMATIC_PROJECT_TOKEN }}
           onlyChanged: true
