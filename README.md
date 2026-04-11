@@ -50,5 +50,21 @@ To learn more about the technologies used in this site template, see the followi
 - [Headless UI](https://headlessui.dev) - the official Headless UI documentation
 - [MDX](https://mdxjs.com/) - the official MDX documentation
 
+## Storybook workflow
+
+Use Storybook to build, test, and document UI components.
+
+```bash
+npm run storybook
+npm run build-storybook
+npx vitest run
+```
+
+- Write stories in `src/components/**/**/*.stories.tsx` with `tags: ['autodocs']`.
+- Use realistic component states (loading, auth, empty, error) when applicable.
+- Keep docs pages in `src/stories/*.mdx`.
+- Chromatic publication is configured in `.github/workflows/storybook.yml` (requires `CHROMATIC_PROJECT_TOKEN`).
+
 ## TODO
+
 - [ ] Iniciar versionamento 1.0.0_alpha
