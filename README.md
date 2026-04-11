@@ -18,6 +18,66 @@ npm run dev
 
 Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
 
+## Quality checks
+
+```bash
+npm run lint
+npm run format:check
+npm run coverage
+```
+
+## CI/CD and releases
+
+### CI stages (`.github/workflows/app-ci.yml`)
+
+**Triggers**: `pull_request` and `push` to `main`.
+
+Pipeline order:
+
+1. `npm ci`
+2. `npm run format:check`
+3. `npm run lint`
+4. `npm run test:ci`
+5. `npm run build`
+
+If any stage fails, CI blocks merge/deploy.
+
+### Release flow (`.github/workflows/release-please.yml`)
+
+**Triggers**: `push` to `main` and `workflow_dispatch`.
+
+`release-please` reads Conventional Commit messages and opens/updates a release PR.  
+When that PR is merged, it updates the version manifest and `CHANGELOG.md`, then tags/releases.
+
+Use Conventional Commits in PR titles/commits, for example:
+
+- `feat: add quiz timer pause state` → **minor** bump
+- `fix: handle empty lesson metadata` → **patch** bump
+- `feat!: migrate quiz schema` or `BREAKING CHANGE:` → **major** bump
+
+### Deploy gating (`.github/workflows/vercel-cd.yml`)
+
+Production deploy runs only when:
+
+- `Application CI` completed with `success`
+- source event is `push` to `main`
+- run belongs to this same repository
+
+Job uses GitHub Environment `production` and requires these repository/environment secrets:
+
+- `VERCEL_TOKEN`
+- `VERCEL_ORG_ID`
+- `VERCEL_PROJECT_ID`
+
+### Recommended branch protection for `main`
+
+- Require pull requests before merging
+- Require status checks:
+  - `App quality gates` (from `Application CI`)
+  - `storybook-quality` (from `Storybook UI Checks`)
+- Require branches to be up to date before merging
+- Block force pushes and branch deletion
+
 ## Images
 
 This code uses the Next.js `<Image>` component to render images.
