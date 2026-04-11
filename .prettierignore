@@ -1,0 +1,10 @@
+.github/agents/*.agent.md
+.next/**
+coverage/**
+storybook-static/**
+node_modules/**
+supabase/**
+src/components/p5-js/**
+src/data/lessons/**
+src/data/quizzes/**
+src/stories/assets/**
