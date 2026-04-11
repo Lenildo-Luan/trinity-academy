@@ -4,16 +4,17 @@ import Image from "next/image";
 import React, { ReactNode } from "react";
 import { createHighlighter, Highlighter } from "shiki";
 import theme from "./src/app/syntax-theme.json";
+import * as p5jsComponents from "./src/components/p5-js";
+// import * as IntroducaoAProgramacao from "./src/components/p5-js/introducao-a-programacao";
 import { P5Sketch } from "./src/components/p5-js/p5-sketch";
 import { MarkdownTable } from "./src/components/templates/MarkdownTable";
-import * as IntroducaoAProgramacao from "./src/components/p5-js/introducao-a-programacao";
-import * as VueJsFundamentals from "./src/components/p5-js/vuejs-fundamentals";
-import * as GithubFundamentals from "./src/components/p5-js/github-fundamentals";
-import * as MateriaisMicroNano from "./src/components/p5-js/materiais-micro-nano-tecnologia";
-import * as RedesDeComputadores from "./src/components/p5-js/redes-de-computadores";
-import * as SinaisESistemas from "./src/components/p5-js/sinais-e-sistemas";
-import * as Calculo1 from "./src/components/p5-js/calculo-1";
-import * as PreCalculo from "./src/components/p5-js/pre-calculo";
+// import * as VueJsFundamentals from "./src/components/p5-js/vuejs-fundamentals";
+// import * as GithubFundamentals from "./src/components/p5-js/github-fundamentals";
+// import * as MateriaisMicroNano from "./src/components/p5-js/materiais-micro-nano-tecnologia";
+// import * as RedesDeComputadores from "./src/components/p5-js/redes-de-computadores";
+// import * as SinaisESistemas from "./src/components/p5-js/sinais-e-sistemas";
+// import * as Calculo1 from "./src/components/p5-js/calculo-1";
+// import * as PreCalculo from "./src/components/p5-js/pre-calculo";
 
 function getTextContent(node: ReactNode): string {
   if (typeof node === "string") return node;
@@ -53,13 +54,17 @@ async function getHighlighter() {
 }
 
 async function CodeBlock({ code, lang }: { code: string; lang: string }) {
-  if (!code || typeof code !== 'string') {
-    return <pre><code>{code}</code></pre>;
+  if (!code || typeof code !== "string") {
+    return (
+      <pre>
+        <code>{code}</code>
+      </pre>
+    );
   }
 
   try {
     let out = (await getHighlighter()).codeToHtml(code, {
-      lang: lang || 'text',
+      lang: lang || "text",
       theme: theme.name,
       transformers: [
         transformerColorizedBrackets({
@@ -80,7 +85,11 @@ async function CodeBlock({ code, lang }: { code: string; lang: string }) {
     return <div dangerouslySetInnerHTML={{ __html: out }} />;
   } catch (error) {
     // Fallback if syntax highlighting fails
-    return <pre><code className={lang ? `language-${lang}` : ''}>{code}</code></pre>;
+    return (
+      <pre>
+        <code className={lang ? `language-${lang}` : ""}>{code}</code>
+      </pre>
+    );
   }
 }
 
@@ -146,14 +155,15 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     },
     P5Sketch,
     MarkdownTable,
-    ...IntroducaoAProgramacao,
-    ...VueJsFundamentals,
-    ...GithubFundamentals,
-    ...MateriaisMicroNano,
-    ...RedesDeComputadores,
-    ...SinaisESistemas,
-    ...Calculo1,
-    ...PreCalculo,
-    ...components,
+    ...p5jsComponents,
+    // ...IntroducaoAProgramacao,
+    // ...VueJsFundamentals,
+    // ...GithubFundamentals,
+    // ...MateriaisMicroNano,
+    // ...RedesDeComputadores,
+    // ...SinaisESistemas,
+    // ...Calculo1,
+    // ...PreCalculo,
+    // ...components,
   };
 }
