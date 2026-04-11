@@ -1,0 +1,27 @@
+export {
+  DiscontinuityTypesComparison,
+  DiscontinuityExplorer,
+  CompositionPipeline,
+  PolynomialGalaxy,
+  IntermediateValueTheorem,
+  BisectionMethod,
+  DiscontinuityTypesVisualization,
+  IntermediateValueTheoremVisualization,
+} from "./continuity-p5-examples";
+export {
+  NaturalIntegerSetMap,
+  IntegerMovementNumberLine,
+  AbsoluteValueDistanceExplorer,
+  RationalDecimalConverter,
+  Sqrt2IrrationalProofStepper,
+  RationalIrrationalDensityLine,
+  RealSetHierarchyTree,
+  DensityZoomExplorer,
+  SupremumMaximumComparator,
+  IntervalNotationBuilder,
+  IntervalSetOperationsLab,
+  FunctionDomainVisualizer,
+  NumberLineReferenceDiagram,
+  RealSetHierarchyStaticDiagram,
+  IntervalWorkedExampleDiagram,
+} from "./pre-calculo-p5-examples";
