@@ -14,7 +14,8 @@
     "build-storybook": "storybook build",
     "create-course": "ts-node scripts/cli/create-course.cli.ts",
     "create-lesson-brief": "ts-node scripts/cli/create-lesson-brief.cli.ts",
-    "trinity": "ts-node scripts/cli/trinity.cli.ts"
+    "trinity": "ts-node scripts/cli/trinity.cli.ts",
+    "chromatic": "npx chromatic --project-token=chpt_95045c8e3c426aa"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.6",
