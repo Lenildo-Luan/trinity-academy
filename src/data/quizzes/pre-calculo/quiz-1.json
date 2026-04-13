@@ -1,310 +1,308 @@
 {
   "id": "quiz-1",
-  "title": "Quiz 1 - Números Naturais e Inteiros",
-  "description": "Avalie sua compreensão sobre ℕ, ℤ, propriedades operatórias, reta numérica e valor absoluto.",
-  "timeLimit": 720,
+  "title": "Quiz — Aula 1: Conjuntos Numéricos",
+  "description": "Verifique seu entendimento sobre conjuntos, ℕ, ℤ, ℚ, notação e erros conceituais comuns.",
+  "timeLimit": 900,
   "questions": [
     {
       "id": "q1",
-      "question": "Qual conjunto contém o número -7?",
+      "question": "Na convenção adotada na aula, qual conjunto representa os números naturais?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "Apenas ℕ",
+          "id": "a1",
+          "text": "{0, 1, 2, 3, ...}",
           "isCorrect": false,
-          "explanation": "Números naturais não incluem negativos; -7 não pertence a ℕ."
+          "explanation": "Essa é uma convenção possível em alguns contextos, mas a aula adotou naturais começando em 1."
         },
         {
-          "id": "b",
-          "text": "ℤ, mas não ℕ",
+          "id": "a2",
+          "text": "{1, 2, 3, 4, ...}",
           "isCorrect": true,
-          "explanation": "-7 é inteiro (pertence a ℤ), porém não é natural."
+          "explanation": "Correto. Nesta trilha, ℕ começa em 1, conforme destacado na seção de erros comuns."
         },
         {
-          "id": "c",
-          "text": "Nenhum dos dois",
+          "id": "a3",
+          "text": "{..., -2, -1, 0, 1, 2, ...}",
           "isCorrect": false,
-          "explanation": "-7 pertence sim a ℤ, então não é correto dizer que não pertence a nenhum."
+          "explanation": "Esse conjunto é ℤ, pois inclui negativos, zero e positivos."
         },
         {
-          "id": "d",
-          "text": "ℕ e ℤ",
+          "id": "a4",
+          "text": "{a/b | a,b ∈ ℤ, b ≠ 0}",
           "isCorrect": false,
-          "explanation": "Todo natural é inteiro, mas -7 não é natural."
+          "explanation": "Essa é a definição de ℚ, não de ℕ."
         }
       ]
     },
     {
       "id": "q2",
-      "question": "Qual expressão ilustra corretamente a propriedade distributiva?",
+      "question": "Qual afirmação sobre a reta numérica está correta?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "3(4 + 2) = 3\u00b74 + 3\u00b72",
+          "id": "a1",
+          "text": "Um número mais à esquerda é maior.",
+          "isCorrect": false,
+          "explanation": "É o oposto: na reta numérica, mais à esquerda significa menor valor."
+        },
+        {
+          "id": "a2",
+          "text": "-5 é maior que -2 porque 5 > 2.",
+          "isCorrect": false,
+          "explanation": "Comparar apenas valores absolutos causa erro. -5 está à esquerda de -2, então é menor."
+        },
+        {
+          "id": "a3",
+          "text": "-1 é maior que -2.",
           "isCorrect": true,
-          "explanation": "A multiplicação se distribui sobre a soma: a(b+c)=ab+ac."
+          "explanation": "Correto. -1 está à direita de -2 na reta numérica."
         },
         {
-          "id": "b",
-          "text": "3(4 + 2) = 3\u00b74 + 2",
+          "id": "a4",
+          "text": "Todo número negativo é maior que zero.",
           "isCorrect": false,
-          "explanation": "Faltou multiplicar o segundo termo também por 3."
-        },
-        {
-          "id": "c",
-          "text": "3(4 + 2) = (3\u00b74)(3\u00b72)",
-          "isCorrect": false,
-          "explanation": "Essa forma transforma soma em produto, o que não é distributividade."
-        },
-        {
-          "id": "d",
-          "text": "3 + (4\u00b72) = (3+4)\u00b72",
-          "isCorrect": false,
-          "explanation": "A igualdade não vale em geral; é uma confusão comum entre propriedades."
+          "explanation": "Números negativos estão à esquerda de 0, portanto são menores."
         }
       ]
     },
     {
       "id": "q3",
-      "question": "Em ℤ, qual é o valor de -5 - (-2)?",
+      "question": "Qual opção descreve corretamente os inteiros?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "-7",
+          "id": "a1",
+          "text": "Somente números positivos usados para contagem.",
           "isCorrect": false,
-          "explanation": "Isso corresponderia a -5 + (-2), não a -5 - (-2)."
+          "explanation": "Isso descreve os naturais, não os inteiros."
         },
         {
-          "id": "b",
-          "text": "-3",
+          "id": "a2",
+          "text": "Naturais, zero e negativos.",
           "isCorrect": true,
-          "explanation": "Subtrair um negativo equivale a somar seu oposto: -5 + 2 = -3."
+          "explanation": "Correto. ℤ inclui todos os naturais, o zero e seus opostos negativos."
         },
         {
-          "id": "c",
-          "text": "3",
+          "id": "a3",
+          "text": "Apenas frações não inteiras.",
           "isCorrect": false,
-          "explanation": "O resultado continua negativo porque -5 está mais à esquerda que +2."
+          "explanation": "Frações não inteiras são racionais, mas não inteiros."
         },
         {
-          "id": "d",
-          "text": "-10",
+          "id": "a4",
+          "text": "Todos os números que não são irracionais.",
           "isCorrect": false,
-          "explanation": "Não há produto aqui; é operação de subtração."
+          "explanation": "Essa definição incluiria vários racionais não inteiros, então é ampla demais para ℤ."
         }
       ]
     },
     {
       "id": "q4",
-      "question": "Na reta numérica, qual afirmação é verdadeira?",
+      "question": "Por que todo inteiro também é racional?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "-3 > -1",
-          "isCorrect": false,
-          "explanation": "Em números negativos, o mais à esquerda é menor."
-        },
-        {
-          "id": "b",
-          "text": "Todo número à esquerda de outro é maior",
-          "isCorrect": false,
-          "explanation": "É o contrário: à esquerda significa menor valor."
-        },
-        {
-          "id": "c",
-          "text": "-1 < 2",
+          "id": "a1",
+          "text": "Porque todo inteiro pode ser escrito como n/1.",
           "isCorrect": true,
-          "explanation": "-1 está à esquerda de 2 na reta, portanto é menor."
+          "explanation": "Correto. Se n ∈ ℤ, então n = n/1, que é uma razão de inteiros com denominador não nulo."
         },
         {
-          "id": "d",
-          "text": "0 é sempre maior que qualquer inteiro",
+          "id": "a2",
+          "text": "Porque todo inteiro tem decimal infinito não periódico.",
           "isCorrect": false,
-          "explanation": "Existem inteiros positivos maiores que 0."
+          "explanation": "Decimal infinito não periódico caracteriza irracionais, não inteiros."
+        },
+        {
+          "id": "a3",
+          "text": "Porque inteiros são subconjunto dos irracionais.",
+          "isCorrect": false,
+          "explanation": "É o contrário: inteiros pertencem aos racionais."
+        },
+        {
+          "id": "a4",
+          "text": "Porque inteiros nunca incluem o zero.",
+          "isCorrect": false,
+          "explanation": "ℤ inclui zero, e isso não explica racionalidade."
         }
       ]
     },
     {
       "id": "q5",
-      "question": "Qual alternativa representa corretamente |x| = 4?",
+      "question": "Qual expressão em notação de construção de conjunto significa 'naturais menores que 5'?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "x = 4 apenas",
+          "id": "a1",
+          "text": "{x | x ∈ ℤ e x ≤ 5}",
           "isCorrect": false,
-          "explanation": "Módulo mede distância ao zero, então há dois valores simétricos."
+          "explanation": "Inclui negativos e o 5; não representa apenas naturais menores que 5."
         },
         {
-          "id": "b",
-          "text": "x = -4 apenas",
-          "isCorrect": false,
-          "explanation": "-4 é solução, mas não a única."
-        },
-        {
-          "id": "c",
-          "text": "x = 4 ou x = -4",
+          "id": "a2",
+          "text": "{x | x ∈ ℕ e x < 5}",
           "isCorrect": true,
-          "explanation": "Ambos estão a distância 4 do zero."
+          "explanation": "Correto. A condição restringe a naturais e impõe limite estrito menor que 5."
         },
         {
-          "id": "d",
-          "text": "x = 0",
+          "id": "a3",
+          "text": "{x | x > 5}",
           "isCorrect": false,
-          "explanation": "|0|=0, não 4."
+          "explanation": "Falta restringir o conjunto e a desigualdade está invertida."
+        },
+        {
+          "id": "a4",
+          "text": "{1, 2, 3, 4, 5}",
+          "isCorrect": false,
+          "explanation": "Essa lista inclui 5, que não satisfaz a condição x < 5."
         }
       ]
     },
     {
       "id": "q6",
-      "question": "Uma temperatura caiu de 3°C para -2°C. Qual variação (final - inicial)?",
+      "question": "Qual alternativa explica corretamente por que 5/0 é inválido?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "+5°C",
-          "isCorrect": false,
-          "explanation": "A temperatura não subiu 5; ela desceu 5 unidades."
-        },
-        {
-          "id": "b",
-          "text": "-5°C",
+          "id": "a1",
+          "text": "Porque a divisão por zero é indefinida.",
           "isCorrect": true,
-          "explanation": "Variação = -2 - 3 = -5."
+          "explanation": "Correto. Em matemática, divisão por zero não possui valor definido."
         },
         {
-          "id": "c",
-          "text": "-1°C",
+          "id": "a2",
+          "text": "Porque o numerador deveria ser zero.",
           "isCorrect": false,
-          "explanation": "Erro de subtração entre números com sinais diferentes."
+          "explanation": "Mesmo com numerador zero, 0/0 continua indefinido."
         },
         {
-          "id": "d",
-          "text": "+1°C",
+          "id": "a3",
+          "text": "Porque 5 é natural e não pode ser dividido.",
           "isCorrect": false,
-          "explanation": "Não condiz com a queda observada."
+          "explanation": "Naturais podem ser divididos. O problema é exclusivamente o denominador zero."
+        },
+        {
+          "id": "a4",
+          "text": "Porque o resultado seria sempre 5.",
+          "isCorrect": false,
+          "explanation": "Essa conclusão é incorreta; não há resultado numérico válido para divisão por zero."
         }
       ]
     },
     {
       "id": "q7",
-      "question": "Qual conjunto é fechado para subtração?",
+      "question": "Qual conjunto é fechado para subtração conforme discutido na aula?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "Apenas ℕ",
+          "id": "a1",
+          "text": "ℕ",
           "isCorrect": false,
-          "explanation": "Ex.: 3-5 = -2, que não está em ℕ."
+          "explanation": "Não é fechado: por exemplo, 3 - 5 = -2 e -2 não pertence a ℕ."
         },
         {
-          "id": "b",
+          "id": "a2",
           "text": "ℤ",
           "isCorrect": true,
-          "explanation": "Diferença entre inteiros é sempre um inteiro."
+          "explanation": "Correto. A diferença entre dois inteiros é sempre um inteiro."
         },
         {
-          "id": "c",
+          "id": "a3",
           "text": "Nenhum conjunto numérico",
           "isCorrect": false,
-          "explanation": "ℤ é fechado para subtração."
+          "explanation": "Há conjuntos fechados para subtração, como ℤ e ℚ."
         },
         {
-          "id": "d",
-          "text": "Somente quando o minuendo é maior",
+          "id": "a4",
+          "text": "Apenas o conjunto vazio",
           "isCorrect": false,
-          "explanation": "Mesmo com minuendo menor, o resultado ainda pertence a ℤ."
+          "explanation": "Além de irrelevante ao contexto, não responde ao fechamento dos conjuntos estudados."
         }
       ]
     },
     {
       "id": "q8",
-      "question": "Se a e b são inteiros e a\u00b7b = 0, o que necessariamente é verdadeiro?",
+      "question": "Se a·b = 0 com a e b inteiros, o que deve ser verdadeiro?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "a = b",
+          "id": "a1",
+          "text": "a = b sempre.",
           "isCorrect": false,
-          "explanation": "Pode ocorrer, mas não é obrigatório."
+          "explanation": "Não necessariamente. Exemplo: a = 0 e b = 7."
         },
         {
-          "id": "b",
-          "text": "a e b são negativos",
+          "id": "a2",
+          "text": "a e b são negativos.",
           "isCorrect": false,
-          "explanation": "Produto de negativos é positivo, não zero."
+          "explanation": "Produto de negativos não é zero em geral."
         },
         {
-          "id": "c",
-          "text": "Pelo menos um entre a ou b é zero",
+          "id": "a3",
+          "text": "Pelo menos um dos dois é zero.",
           "isCorrect": true,
-          "explanation": "É a propriedade do produto nulo."
+          "explanation": "Correto. Essa é a propriedade do produto nulo."
         },
         {
-          "id": "d",
-          "text": "a + b = 0",
+          "id": "a4",
+          "text": "a + b = 0.",
           "isCorrect": false,
-          "explanation": "Não é necessário; ex.: a=0, b=5 dá soma 5."
+          "explanation": "Pode acontecer, mas não é condição necessária para produto zero."
         }
       ]
     },
     {
       "id": "q9",
-      "question": "Qual resultado está correto para (-4)\u00b7(-6)?",
+      "question": "Qual simplificação está correta?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "-24",
+          "id": "a1",
+          "text": "-15/3 = 5",
           "isCorrect": false,
-          "explanation": "Produto de dois negativos é positivo, não negativo."
+          "explanation": "O sinal foi perdido. Um negativo dividido por positivo é negativo."
         },
         {
-          "id": "b",
-          "text": "24",
+          "id": "a2",
+          "text": "-15/3 = -5",
           "isCorrect": true,
-          "explanation": "Pela regra de sinais, (-)\u00b7(-)=+, então o resultado é 24."
+          "explanation": "Correto. O quociente tem módulo 5 e sinal negativo."
         },
         {
-          "id": "c",
-          "text": "10",
+          "id": "a3",
+          "text": "-15/3 = 15",
           "isCorrect": false,
-          "explanation": "Esse valor não corresponde ao produto 4\u00b76."
+          "explanation": "Além de sinal incorreto, o valor está errado."
         },
         {
-          "id": "d",
-          "text": "-10",
+          "id": "a4",
+          "text": "-15/3 = -3",
           "isCorrect": false,
-          "explanation": "Além de sinal incorreto, o valor absoluto também está errado."
+          "explanation": "Houve erro no cálculo do quociente."
         }
       ]
     },
     {
       "id": "q10",
-      "question": "Se |x| < 5, qual intervalo descreve corretamente os valores possíveis de x?",
+      "question": "Qual afirmação final resume corretamente a hierarquia apresentada?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "[-5, 5]",
-          "isCorrect": false,
-          "explanation": "|x|<5 exclui os extremos -5 e 5."
-        },
-        {
-          "id": "b",
-          "text": "(-5, 5)",
+          "id": "a1",
+          "text": "ℕ ⊂ ℤ ⊂ ℚ",
           "isCorrect": true,
-          "explanation": "Módulo menor que 5 significa distância ao zero estritamente menor que 5."
+          "explanation": "Correto. Naturais estão contidos em inteiros, e inteiros em racionais."
         },
         {
-          "id": "c",
-          "text": "(-\u221e, -5) \u222a (5, \u221e)",
+          "id": "a2",
+          "text": "ℚ ⊂ ℤ ⊂ ℕ",
           "isCorrect": false,
-          "explanation": "Esse é o conjunto complementar (|x|>5), não |x|<5."
+          "explanation": "A inclusão está invertida; racionais são mais amplos que inteiros."
         },
         {
-          "id": "d",
-          "text": "[0, 5)",
+          "id": "a3",
+          "text": "ℤ ⊂ ℕ ⊂ ℚ",
           "isCorrect": false,
-          "explanation": "Faltam os valores negativos entre -5 e 0."
+          "explanation": "Inteiros não cabem em naturais por causa dos negativos."
+        },
+        {
+          "id": "a4",
+          "text": "ℕ = ℤ = ℚ",
+          "isCorrect": false,
+          "explanation": "Os três conjuntos são diferentes e possuem níveis distintos de abrangência."
         }
       ]
     }
   ]
 }
-
-

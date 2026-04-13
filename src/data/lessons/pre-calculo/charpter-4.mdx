@@ -1,307 +1,402 @@
-# Intervalos e Operações com Conjuntos
+import { MarkdownTable } from "../../../components/templates/MarkdownTable";
 
-Imagine que um engenheiro diz: "Esta temperatura deve estar entre 20°C e 30°C". Não é só 20 ou só 30 — é **tudo entre eles**. Ou, ao contrário: "Qualquer valor menor que -10 ou maior que 50 causará falha".
+# Aula 4: Síntese e Aplicações dos Conjuntos Numéricos
 
-Os **intervalos** são subconjuntos especiais de ℝ que descrevem essas "faixas" contínuas. E as **operações entre conjuntos** — união, interseção, complementar — permitem combinar essas faixas de forma poderosa.
+## Introdução
 
-Nesta lição, vamos dominar a linguagem e as operações de conjuntos que você usará em todo o Cálculo.
+Nas três aulas anteriores, você explorou os diferentes tipos de números e como organizá-los. Aprendeu sobre naturais, inteiros, racionais, irracionais e reais. Descobriu o que é um intervalo e como resolver desigualdades.
 
-## Objetivos de Aprendizado
+Agora é hora de juntar tudo. Nesta aula final do Módulo 1, você verá como esses conceitos trabalham **juntos** para resolver problemas do mundo real. Você também aprenderá a reconhecer qual tipo de número usar em cada situação e como comunicar suas soluções de forma clara e precisa.
 
-Ao final desta lição, você será capaz de:
+---
 
-- **Definir** e **notacionar** intervalos (abertos, fechados, semi-abertos)
-- **Representar** intervalos na reta numérica
-- **Converter** entre notação de conjunto e notação de intervalo
-- **Realizar** operações entre conjuntos (união, interseção, complementar)
-- **Interpretar** desigualdades como intervalos
-- **Combinar** intervalos usando operações de conjunto
-- **Aplicar** intervalos em problemas de domínio e restrições
+## Objetivos de Aprendizagem
 
-## Tipos de Intervalos
+Ao final desta aula, você será capaz de:
 
-Um **intervalo** é um conjunto contínuo de números reais. Existem diversos tipos, dependendo se os extremos estão incluídos ou não.
+- **Integrar** conceitos de todos os tipos de números em um único problema
+- **Aplicar** intervalos e desigualdades em situações práticas do mundo real
+- **Classificar** números e decidir qual sistema numérico é apropriado para cada contexto
+- **Comunicar** soluções de forma clara usando notações matemáticas corretas
+- **Resolver** problemas multi-etapas que envolvem vários conceitos
 
-### 1. Intervalo Fechado [a, b]
+---
 
-Um intervalo **fechado** inclui os dois extremos:
+## Revisão: A Hierarquia Completa dos Números
 
-$$[a, b] = \{x \in \mathbb{R} : a \leq x \leq b\}$$
+Antes de começarmos, vamos revisar tudo que aprendemos.
 
-- Notação: **[colchete quadrado significa "incluído"**
-- Na reta: segmento com os dois extremos fechados
-- Exemplos:
-  - $[0, 1]$ inclui 0, 1 e tudo entre
-  - $[-3, 5]$ inclui -3, 5 e tudo entre
+### A Cadeia de Conjuntos
 
-### 2. Intervalo Aberto (a, b)
+$$\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}$$
 
-Um intervalo **aberto** exclui os dois extremos:
+**Leitura:** "Os naturais estão contidos nos inteiros, que estão contidos nos racionais, que estão contidos nos reais."
 
-$$(a, b) = \{x \in \mathbb{R} : a < x < b\}$$
-
-- Notação: **(parêntese significa "excluído"**
-- Na reta: segmento com os dois extremos abertos
-- Exemplos:
-  - $(0, 1)$ inclui 0.5, 0.9, 0.999... mas **não** 0 nem 1
-  - $(-3, 5)$ não inclui -3 nem 5
-
-### 3. Intervalos Semi-Abertos
-
-Um intervalo pode incluir um extremo e excluir o outro:
-
-- **[a, b)** inclui $a$, exclui $b$: $\{x : a \leq x < b\}$
-  - Na reta: segmento com extremo esquerdo fechado e direito aberto
-
-- **(a, b]** exclui $a$, inclui $b$: $\{x : a < x \leq b\}$
-  - Na reta: segmento com extremo esquerdo aberto e direito fechado
-
-### 4. Intervalos Infinitos
-
-Quando um intervalo se estende infinitamente, usamos o símbolo $\infty$:
-
-<IntervalNotationBuilder />
+### Cada Conjunto em Uma Frase
 
 <MarkdownTable
-  headers={["Notação", "Descrição", "Reta Numérica"]}
+  headers={['Conjunto', 'Definição', 'Exemplos']}
   rows={[
-    ["$(a, \\infty)$", "Maiores que $a$", "Semirreta à direita com extremo aberto em $a$"],
-    ["$[a, \\infty)$", "Maiores ou iguais a $a$", "Semirreta à direita com extremo fechado em $a$"],
-    ["$(-\\infty, b)$", "Menores que $b$", "Semirreta à esquerda com extremo aberto em $b$"],
-    ["$(-\\infty, b]$", "Menores ou iguais a $b$", "Semirreta à esquerda com extremo fechado em $b$"],
-    ["$(-\\infty, \\infty)$", "Todos os reais", "Reta completa"],
+    ['**ℕ** Naturais', 'Números usados para contar', '1, 5, 100, 1000'],
+    ['**ℤ** Inteiros', 'Naturais, zero e negativos', '-5, 0, 3, 42'],
+    ['**ℚ** Racionais', 'Números que podem ser frações', '-2/3, 0,5, 4, π approximation'],
+    ['**ℝ** Reais', 'Todos os números na reta', '-√2, 0,333..., π, √5']
   ]}
 />
 
-⚠️ **Nota:** $\infty$ nunca é incluído — sempre use parêntese com $\infty$.
+### Números Irracionais (𝕴)
 
-### Exemplo 1: Representar Intervalos na Reta
+Os números irracionais vivem **dentro** de ℝ mas **fora** de ℚ. Não podem ser escritos como frações.
 
-Represente na reta numérica:
+**Exemplos:** π, e, √2, √3, φ (razão áurea)
 
-1. $[1, 3]$ — fechado, inclui 1 e 3
-   <IntervalWorkedExampleDiagram variant="closed-13" />
+---
 
-2. $(1, 3)$ — aberto, exclui 1 e 3
-   <IntervalWorkedExampleDiagram variant="open-13" />
+## Problema 1: Classificação de Números (Baixa Dificuldade)
 
-3. $[1, 3)$ — semi-aberto, inclui 1, exclui 3
-   <IntervalWorkedExampleDiagram variant="half-13" />
+**Contexto:** Você está catalogando dados em um sistema e precisa saber em qual conjunto numérico cada valor pertence.
 
-4. $(2, \infty)$ — infinito para cima, exclui 2
-   <IntervalWorkedExampleDiagram variant="ray-2-inf" />
+**Tarefa:** Classifique cada número abaixo. Diga qual é o "menor conjunto" que o contém.
 
-## Notação de Conjunto vs Notação de Intervalo
+- 7
+- -3
+- 1/2
+- √7
+- 0
+- 2,5
+- π
+- -15/3
 
-A mesma ideia pode ser expressa de duas formas:
+### Solução Passo a Passo
+
+**7:** É um número inteiro positivo. O menor conjunto é ℕ.
+- Explicação: 7 é um natural, então está em ℕ (e também em ℤ, ℚ, ℝ, mas ℕ é o menor)
+
+**-3:** É um inteiro negativo. O menor conjunto é ℤ.
+- Explicação: -3 não é um natural (é negativo), mas é um inteiro. Está em ℤ (e em ℚ, ℝ)
+
+**1/2:** É uma fração. O menor conjunto é ℚ.
+- Explicação: 1/2 não é um inteiro, mas é racional porque é uma fração de dois inteiros. Está em ℚ (e em ℝ)
+
+**√7:** É irracional. O menor conjunto é ℝ.
+- Explicação: √7 ≈ 2,6457... Os dígitos nunca terminam nem se repetem, então é irracional. Não está em ℚ, mas está em ℝ.
+
+**0:** É um inteiro. O menor conjunto é ℤ.
+- Explicação: 0 não é um natural (em nossa convenção), mas é um inteiro. Também está em ℚ (porque 0 = 0/1)
+
+**2,5:** É um decimal finito, logo racional. O menor conjunto é ℚ.
+- Explicação: 2,5 = 5/2, que é uma fração. Está em ℚ (e em ℝ)
+
+**π:** É irracional. O menor conjunto é ℝ.
+- Explicação: π ≈ 3,14159... Não se repete, não pode ser fração. Está em ℝ mas não em ℚ.
+
+**-15/3:** Simplificamos: -15/3 = -5. É um inteiro! O menor conjunto é ℤ.
+- Explicação: Mesmo que pareça uma fração, é igual a -5, que é inteiro. O conjunto menor é ℤ.
+
+> 💡 **Dica:** Sempre simplifique antes de classificar! Uma fração pode se simplificar para um inteiro.
+
+---
+
+## Problema 2: Resolvendo Desigualdades Compostas (Médio)
+
+**Contexto:** Você é um engenheiro de qualidade em uma fábrica de eletrônicos. O voltímetro que você está testando deve medir entre 4,5V e 5,5V para passar no teste. Mais 20% de variação é aceitável, mas acima disso, o equipamento é rejeitado.
+
+**Tarefa:** Se a voltagem real é V, escreva uma desigualdade que represente quando o voltímetro está **aceitável** (dentro de 20% de variação).
+
+### Solução Passo a Passo
+
+**Passo 1:** Entender o problema.
+- Voltagem ideal: entre 4,5V e 5,5V
+- Variação aceitável: até 20% do valor ideal
+- Precisamos encontrar o intervalo de voltagens aceitáveis
+
+**Passo 2:** Calcular a faixa de tolerância.
+A variação máxima é 20% de 5V (ponto médio):
+- Variação = 0,20 × 5 = 1V
+- Mínimo aceitável: 5 - 1 = 4V
+- Máximo aceitável: 5 + 1 = 6V
+
+**Passo 3:** Escrever a desigualdade.
+$$4 \leq V \leq 6$$
+
+**Passo 4:** Em notação de intervalo.
+$$V \in [4, 6]$$
+
+**Passo 5:** Verificar.
+- Se V = 4V: está aceito (está no intervalo)
+- Se V = 5,5V: está aceito (está no intervalo)
+- Se V = 6V: está aceito (está no intervalo)
+- Se V = 3,5V: está **rejeitado** (fora do intervalo)
+- Se V = 6,5V: está **rejeitado** (fora do intervalo)
+
+> 🔑 **Conceito-chave:** Problemas de engenharia frequentemente envolvem intervalos de tolerância. Quanto menor a faixa, mais preciso o equipamento precisa ser.
+
+---
+
+## Problema 3: Combinando Múltiplos Conceitos (Médio-Alto)
+
+**Contexto:** Você está planejando uma festa de aniversário. Você tem um orçamento de R$ 500. Uma unidade de bebida custa R$ 15 e oferece 2 litros. Uma unidade de comida custa R$ 20 e alimenta 4 pessoas.
+
+**Tarefa:** Se você espera entre 16 e 20 pessoas, e quer que cada pessoa receba pelo menos 2 litros de bebida e comida para 2 pessoas, quantas unidades de cada você deve comprar? E quanto você gastará?
+
+### Solução Passo a Passo
+
+**Passo 1:** Definir variáveis.
+- Seja $n$ = número de pessoas ($16 \leq n \leq 20$)
+- Seja $b$ = número de unidades de bebida
+- Seja $c$ = número de unidades de comida
+
+**Passo 2:** Determinar a quantidade de bebida necessária.
+- Cada pessoa precisa de 2 litros
+- Cada unidade oferece 2 litros
+- Pessoas necessárias de bebida: 2 litros/pessoa × n pessoas = 2n litros
+- Unidades de bebida: 2n ÷ 2 = n unidades
+- Então: $b \geq n$
+
+**Passo 3:** Determinar a quantidade de comida necessária.
+- Cada pessoa precisa de comida para 2 pessoas (ou seja, 0,5 unidades por pessoa)
+- Cada unidade alimenta 4 pessoas
+- Pessoas a alimentar: n
+- Unidades de comida: n ÷ 4 (arredondado para cima)
+- Para n entre 16 e 20: precisamos de 4 a 5 unidades de comida
+- Então: $c \geq \lceil n/4 \rceil$
+
+**Passo 4:** Calcular o custo.
+- Custo = 15b + 20c
+- Custo mínimo: Se n = 16, b = 16, c = 4
+  - Custo = 15(16) + 20(4) = 240 + 80 = R$ 320
+- Custo máximo: Se n = 20, b = 20, c = 5
+  - Custo = 15(20) + 20(5) = 300 + 100 = R$ 400
+
+**Passo 5:** Verificar o orçamento.
+- Intervalo de custo: [320, 400]
+- Orçamento disponível: R$ 500
+- Conclusão: ✅ Você tem dinheiro suficiente! Sobrará entre R$ 100 e R$ 180.
+
+**Resposta Final:**
+- Para 16 pessoas: compre 16 unidades de bebida e 4 unidades de comida (custo: R$ 320)
+- Para 20 pessoas: compre 20 unidades de bebida e 5 unidades de comida (custo: R$ 400)
+- Em qualquer caso, você gastará menos que R$ 500.
+
+> 💡 **Dica:** Problemas do mundo real frequentemente envolvem:
+> - Classificar números (racionais para dinheiro, inteiros para quantidades)
+> - Usar desigualdades ($\leq$, $\geq$)
+> - Encontrar intervalos de soluções
+> - Verificar se a solução faz sentido no contexto
+
+---
+
+## Problema 4: Desigualdades com Valor Absoluto (Alto)
+
+**Contexto:** Você é um técnico de instrumentação. Um sensor de temperatura deve manter a temperatura dentro de ±2°C da temperatura alvo de 25°C. Se a temperatura real é T, escreva uma desigualdade que represente uma **leitura aceitável**.
+
+### Solução Passo a Passo
+
+**Passo 1:** Entender o símbolo ±.
+- "±2°C" significa "mais ou menos 2°C"
+- Mínimo aceitável: 25 - 2 = 23°C
+- Máximo aceitável: 25 + 2 = 27°C
+
+**Passo 2:** Usar valor absoluto.
+A distância entre $T$ e $25$ deve ser $\leq 2$.
+
+$$|T - 25| \leq 2$$
+
+**Passo 3:** Resolver a desigualdade com valor absoluto.
+$$|T - 25| \leq 2$$
+
+Isso significa:
+$$-2 \leq T - 25 \leq 2$$
+
+**Passo 4:** Isolar T.
+$$-2 + 25 \leq T \leq 2 + 25$$
+$$23 \leq T \leq 27$$
+
+**Passo 5:** Em notação de intervalo.
+$$T \in [23, 27]$$
+
+**Verificar:**
+- Se T = 23: |23 - 25| = 2 ✅ Aceitável (está no intervalo)
+- Se T = 25: |25 - 25| = 0 ✅ Aceitável (perfeito!)
+- Se T = 27: |27 - 25| = 2 ✅ Aceitável (está no intervalo)
+- Se T = 22: |22 - 25| = 3 ❌ Rejeitado (fora do intervalo)
+- Se T = 28: |28 - 25| = 3 ❌ Rejeitado (fora do intervalo)
+
+> 🔑 **Conceito-chave:** Desigualdades com valor absoluto aparecem quando você especifica "proximidade" ou "desvio permitido" em relação a um valor alvo.
+
+---
+
+## Problema 5: Sequências de Operações (Alto)
+
+**Contexto:** Você está analisando dados de vendas. O lucro mensal P (em milhares de reais) segue a fórmula:
+
+$$P = -2x^2 + 8x - 5$$
+
+onde $x$ é o número de funcionários (em dezenas). Determine para quais valores de $x$ o lucro é positivo ($P > 0$).
+
+### Solução Passo a Passo
+
+**Passo 1:** Configurar a desigualdade.
+$$-2x^2 + 8x - 5 > 0$$
+
+**Passo 2:** Multiplicar por -1 (vira o símbolo!).
+$$2x^2 - 8x + 5 < 0$$
+
+**Passo 3:** Usar a fórmula quadrática para encontrar as raízes.
+$$x = \frac{8 \pm \sqrt{64 - 40}}{4} = \frac{8 \pm \sqrt{24}}{4} = \frac{8 \pm 2\sqrt{6}}{4} = \frac{4 \pm \sqrt{6}}{2}$$
+
+**Passo 4:** Calcular aproximadamente.
+- √6 ≈ 2,449
+- x₁ = (4 - 2,449)/2 ≈ 0,776
+- x₂ = (4 + 2,449)/2 ≈ 3,224
+
+**Passo 5:** Determinar o intervalo.
+A parábola é negativa entre suas raízes:
+$$0{,}776 < x < 3{,}224$$
+
+**Passo 6:** Interpretar no contexto.
+- x é o número de funcionários em dezenas
+- x ≈ 0,776 significa cerca de 7-8 funcionários
+- x ≈ 3,224 significa cerca de 32 funcionários
+- **Conclusão:** A empresa lucra quando tem entre 8 e 32 funcionários.
+
+**Em notação de intervalo aproximada:**
+$$x \in (0,776; 3,224)$$
+
+ou em números de funcionários:
+**Entre 8 e 32 funcionários** (aproximadamente)
+
+> 💡 **Dica:** Problemas com funções quadráticas aparecem frequentemente em economia e engenharia. Saber resolver desigualdades quadráticas é essencial!
+
+---
+
+## Checklist: Como Abordar Problemas Numéricos
+
+Quando você encontrar um problema envolvendo números, desigualdades ou intervalos, siga este checklist:
+
+1. **Leia com atenção** — Qual é a pergunta? O que você precisa encontrar?
+2. **Identifique os números** — Que tipo de números aparecem? Naturais? Racionais? Reais?
+3. **Escolha a notação** — Desigualdade? Intervalo? Conjunto?
+4. **Resolva passo a passo** — Não pule etapas. Mostre seu trabalho.
+5. **Verifique a resposta** — A resposta faz sentido? Teste alguns valores.
+6. **Comunique claramente** — Escreva em palavras E em símbolos matemáticos.
+
+> 🧪 **Tente:** Escolha um dos 5 problemas acima. Resolva novamente sem olhar a solução. Depois compare sua resposta.
+
+---
+
+## Erros Comuns Vistos em Todos os Conceitos
+
+### Erro 1: Confundir Intervalo com Número Individual
+
+**Errado:** "A solução é [2, 5]" quando você deveria dizer "A solução é qualquer número em [2, 5]"
+
+**Correto:** "A solução é $x \in [2, 5]$" ou "A solução é o intervalo $[2, 5]$"
+
+### Erro 2: Esquecer de Verificar
+
+**Errado:** Resolver uma equação ou desigualdade e confiar cegamente no resultado.
+
+**Correto:** Sempre teste valores dentro e fora de seu intervalo para verificar que sua resposta faz sentido.
+
+### Erro 3: Misturar Notações
+
+**Errado:** "A solução é $\{x \mid x \in [2, 5]\}$" (misturando notação de conjunto com notação de intervalo)
+
+**Correto:** Use uma ou a outra:
+- Notação de intervalo: $[2, 5]$
+- Notação de conjunto: $\{x \mid 2 \leq x \leq 5\}$
+
+### Erro 4: Ignorar o Contexto
+
+**Errado:** Obter x = -3,5 como "número de pessoas" e aceitar sem questionar.
+
+**Correto:** Verificar: "Faz sentido ter -3,5 pessoas? Não! Preciso de um número natural."
+
+---
+
+## Resumo: Todos os Conjuntos, Uma Visão
 
 <MarkdownTable
-  headers={["Desigualdade", "Notação de Conjunto", "Notação de Intervalo"]}
+  headers={['Conjunto', 'Símbolo', 'O Que Contém', 'Quando Usar', 'Exemplos']}
   rows={[
-    ["$a \\leq x \\leq b$", "$\\{x \\in \\mathbb{R} : a \\leq x \\leq b\\}$", "$[a, b]$"],
-    ["$a < x < b$", "$\\{x \\in \\mathbb{R} : a < x < b\\}$", "$(a, b)$"],
-    ["$a \\leq x < b$", "$\\{x \\in \\mathbb{R} : a \\leq x < b\\}$", "$[a, b)$"],
-    ["$x > a$", "$\\{x \\in \\mathbb{R} : x > a\\}$", "$(a, \\infty)$"],
-    ["$x \\leq b$", "$\\{x \\in \\mathbb{R} : x \\leq b\\}$", "$(-\\infty, b]$"],
+    ['Naturais', 'ℕ', '1, 2, 3, ...', 'Contagem, quantidade', '"Quantas pessoas..."'],
+    ['Inteiros', 'ℤ', '..., -2, -1, 0, 1, 2, ...', 'Inteiros com negativos', '"Temperatura", "Dívida"'],
+    ['Racionais', 'ℚ', 'Frações, decimais', 'Divisão, proporção', '"3/4 do bolo", "R$ 12,50"'],
+    ['Irracionais', '𝕴', '√2, π, e, ...', 'Medições, geometria', '"Diagonal do quadrado"'],
+    ['Reais', 'ℝ', 'Todos acima + combinações', 'Praticamente tudo em cálculo', '"Qualquer número que existe"']
   ]}
 />
 
-### Exemplo 2: Converter Desigualdade em Intervalo
+---
 
-Converta a desigualdade em notação de intervalo:
+## Próximas Etapas
 
-1. $-2 < x \leq 5$ → $(-2, 5]$
-2. $x \geq 0$ → $[0, \infty)$
-3. $x < -1$ → $(-\infty, -1)$
-4. $|x| < 3$ (ou $-3 < x < 3$) → $(-3, 3)$
+Você completou o Módulo 1: **Conjuntos Numéricos**! 🎉
 
-## Operações com Conjuntos
+Agora está pronto para o Módulo 2, que tratará de **Álgebra e Expressões Algébricas**. Lá, você usará todos esses conceitos de números para:
 
-Quando você trabalha com intervalos, frequentemente precisa **combinar** ou **intersecar** eles. As operações fundamentais são:
+- Manipular variáveis e expressões
+- Simplificar e fatorar
+- Resolver equações e desigualdades mais complexas
 
-<IntervalSetOperationsLab />
+Os números que você aprendeu aqui são a **base** para tudo que vem depois. Cada número que você manipular estará em um desses conjuntos. Cada equação que você resolver será sobre números reais.
 
-### 1. União (∪)
+---
 
-A **união** de dois conjuntos $A$ e $B$ inclui **todos os elementos que estão em $A$ ou em $B$** (ou em ambos):
+## Desafios Finais do Módulo 1
 
-$$A \cup B = \{x : x \in A \text{ ou } x \in B\}$$
+Parabéns por chegar até aqui! Aqui estão alguns desafios finais para consolidar seu aprendizado:
 
-Na reta numérica, a união é a **reunião de todos os pontos**:
+### Desafio 1: Classificação e Reflexão
+Classifique esses números:
+- 2/3
+- √10
+- -5
+- 0,123123123... (onde 123 se repete)
+- (√2)²
 
-<IntervalWorkedExampleDiagram variant="union-13-25" />
+**Depois pense:** Por que é importante saber em qual conjunto um número está?
 
-Resultado: $A \cup B = [1, 5)$
+### Desafio 2: Problema Prático
+Um ônibus tem 50 lugares. Cada passagem custa R$ 3,50. Você ganha R$ 0,50 por passageiro vendido. Se você vender x passagens:
+- Qual é o domínio de x? (Quais valores são possíveis?)
+- Qual é seu lucro total em função de x?
+- Para lucrar pelo menos R$ 20, quantas passagens você precisa vender?
 
-### 2. Interseção (∩)
+### Desafio 3: Desigualdade Composta
+Resolva: $|2x - 3| \leq 5$
+- Expresse a solução em notação de intervalo
+- Expresse em notação de conjunto
+- Liste 3 números que satisfazem a desigualdade
 
-A **interseção** de dois conjuntos $A$ e $B$ inclui **apenas os elementos que estão em ambos**:
+### Desafio 4: Síntese
+Escreva um parágrafo curto respondendo:
+"Por que os matemáticos precisavam de diferentes tipos de números? Por que não era suficiente apenas os naturais?"
 
-$$A \cap B = \{x : x \in A \text{ e } x \in B\}$$
+---
 
-Na reta numérica, a interseção é a **sobreposição**:
+## Recursos para Revisão
 
-<IntervalWorkedExampleDiagram variant="inter-13-25" />
+Se você precisar revisar qualquer tópico do Módulo 1:
 
-Resultado: $A \cap B = (2, 3]$
+- **Aula 1:** Revisit para refrescar Números Naturais, Inteiros e Racionais
+- **Aula 2:** Revisit para refrescar Números Irracionais e Reais
+- **Aula 3:** Revisit para refrescar Intervalos e Desigualdades
+- **Aula 4 (Esta Aula):** Revisit para ver como tudo se conecta
 
-### 3. Complementar (A' ou A^c)
+Todos os conceitos que aprendeu são ferramentas. Quanto mais você as usar em problemas práticos, mais naturais elas se tornarão.
 
-O **complementar** de um conjunto $A$ em relação a ℝ inclui **todos os números reais que não estão em $A$**:
+---
 
-$$A^c = \{x \in \mathbb{R} : x \notin A\}$$
+## Parabéns! 🌟
 
-Se $A = [1, 3]$, então:
+Você completou o Módulo 1 de **Pré-Cálculo: Fundamentos Matemáticos**!
 
-$$A^c = (-\infty, 1) \cup (3, \infty)$$
+Você aprendeu:
+- ✅ Os cinco grandes conjuntos de números
+- ✅ Como os conjuntos se relacionam
+- ✅ O que são intervalos e desigualdades
+- ✅ Como resolver problemas práticos
 
-Na reta numérica:
-
-<IntervalWorkedExampleDiagram variant="complement-13" />
-
-### Exemplo 3: Operações com Intervalos
-
-Dados $A = [0, 2]$ e $B = (1, 4)$, encontre:
-
-**a) $A \cup B$ (união)**
-
-<IntervalWorkedExampleDiagram variant="union-02-14" />
-
-Resultado: $A \cup B = [0, 4)$
-
-**b) $A \cap B$ (interseção)**
-
-<IntervalWorkedExampleDiagram variant="inter-02-14" />
-
-Resultado: $A \cap B = (1, 2]$
-
-**c) $A^c$ (complementar de $A$)**
-
-$$A^c = (-\infty, 0) \cup (2, \infty)$$
-
-### Exemplo 4: Operações Mais Complexas
-
-Dados $A = [-2, 1)$, $B = (0, 3]$, e $C = [1, 2]$, encontre:
-
-**a) $(A \cup B) \cap C$**
-
-Primeiro, $A \cup B$:
-
-<IntervalWorkedExampleDiagram variant="union-complex" />
-
-Agora, $(A \cup B) \cap C$:
-
-<IntervalWorkedExampleDiagram variant="inter-complex" />
-
-Resultado: $(A \cup B) \cap C = [1, 2]$
-
-## Diferença entre Conjuntos
-
-A **diferença** $A \setminus B$ (lê-se "$A$ menos $B$") inclui elementos que estão em $A$ mas **não** em $B$:
-
-$$A \setminus B = \{x : x \in A \text{ e } x \notin B\}$$
-
-### Exemplo 5: Diferença de Intervalos
-
-Dado $A = [0, 3]$ e $B = (1, 2)$, encontre $A \setminus B$:
-
-Os pontos em $A$ que **não estão** em $B$:
-
-<IntervalWorkedExampleDiagram variant="difference-03-12" />
-
-Resultado: $A \setminus B = [0, 1] \cup [2, 3]$
-
-## Aplicações: Domínio de Funções
-
-Os intervalos são **essenciais** para especificar o **domínio** de uma função.
-
-<FunctionDomainVisualizer />
-
-### Exemplo 6: Domínio de Uma Função
-
-Encontre o domínio de $f(x) = \frac{1}{x - 2}$.
-
-O denominador não pode ser zero:
-$$x - 2 \neq 0$$
-$$x \neq 2$$
-
-**Domínio:** Todos os reais exceto 2
-
-$$\text{Dom}(f) = (-\infty, 2) \cup (2, \infty)$$
-
-Ou em notação de conjunto: $\{x \in \mathbb{R} : x \neq 2\}$
-
-### Exemplo 7: Domínio com Raiz Quadrada
-
-Encontre o domínio de $g(x) = \sqrt{x - 3}$.
-
-Raiz quadrada precisa de um radicando não-negativo:
-$$x - 3 \geq 0$$
-$$x \geq 3$$
-
-**Domínio:** $[3, \infty)$
-
-## Propriedades das Operações
-
-As operações entre conjuntos seguem leis, similares à aritmética:
-
-<MarkdownTable
-  headers={["Propriedade", "Descrição", "Fórmula"]}
-  rows={[
-    ["**Comutativa**", "Ordem não importa", "$A \\cup B = B \\cup A$; $A \\cap B = B \\cap A$"],
-    ["**Associativa**", "Agrupamento não importa", "$(A \\cup B) \\cup C = A \\cup (B \\cup C)$"],
-    ["**Distributiva**", "Pode \"distribuir\"", "$A \\cap (B \\cup C) = (A \\cap B) \\cup (A \\cap C)$"],
-    ["**De Morgan**", "Complemento de operação", "$(A \\cup B)^c = A^c \\cap B^c$"],
-    ["**De Morgan**", "Complemento de operação", "$(A \\cap B)^c = A^c \\cup B^c$"],
-  ]}
-/>
-
-### Exemplo 8: Lei de De Morgan
-
-Verifique $(A \cup B)^c = A^c \cap B^c$ com $A = [0, 2]$ e $B = (1, 3)$.
-
-**Lado esquerdo:**
-$$A \cup B = [0, 3)$$
-$$(A \cup B)^c = (-\infty, 0) \cup [3, \infty)$$
-
-**Lado direito:**
-$$A^c = (-\infty, 0) \cup (2, \infty)$$
-$$B^c = (-\infty, 1] \cup [3, \infty)$$
-$$A^c \cap B^c = [(-\infty, 0) \cup (2, \infty)] \cap [(-\infty, 1] \cup [3, \infty)]$$
-$$= (-\infty, 0) \cup [3, \infty)$$
-
-**Ambos resultam em:** $(-\infty, 0) \cup [3, \infty)$ ✓
-
-## Resumo: Intervalos e Operações
-
-<MarkdownTable
-  headers={["Tipo", "Notação", "Inclui Extremos?", "Reta"]}
-  rows={[
-    ["Fechado", "$[a, b]$", "Sim (ambos)", "Segmento com dois extremos fechados"],
-    ["Aberto", "$(a, b)$", "Não", "Segmento com dois extremos abertos"],
-    ["Semi-aberto", "$[a, b)$ ou $(a, b]$", "Um sim, outro não", "Segmento com um extremo aberto e outro fechado"],
-    ["Infinito", "$[a, \\infty)$, $(-\\infty, b]$", "Depende (nunca ∞)", "Semirreta"],
-  ]}
-/>
-
-<MarkdownTable
-  headers={["Operação", "Símbolo", "Significado"]}
-  rows={[
-    ["**União**", "$A \\cup B$", "Elementos em $A$ **ou** $B$"],
-    ["**Interseção**", "$A \\cap B$", "Elementos em $A$ **e** $B$"],
-    ["**Complementar**", "$A^c$", "Elementos **não** em $A$"],
-    ["**Diferença**", "$A \\setminus B$", "Elementos em $A$ **não** em $B$"],
-  ]}
-/>
-
-## Ponte para o Próximo Módulo
-
-Você agora domina a linguagem de conjuntos e intervalos — a "sintaxe" fundamental do Cálculo.
-
-Com essa base sólida sobre os números reais (naturais → inteiros → racionais → irracionais → reais), intervalos e operações entre conjuntos, você está **completamente preparado** para os próximos módulos:
-
-- **Funções Fundamentais:** Como os números reais se transformam através de operações e relações
-- **Álgebra e Expressões:** Manipular intervalos e desigualdades em contextos mais complexos
-- **Cálculo:** Limites, continuidade e derivadas — todos construídos sobre essa base
-
-Parabéns por completar o módulo de **Conjuntos Numéricos**! 🎉
+Você está **pronto** para Cálculo 1, onde esses conceitos serão usados constantemente. Parabéns pelo seu dedica e perseverança! 🚀

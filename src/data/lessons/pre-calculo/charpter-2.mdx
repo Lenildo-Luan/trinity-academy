@@ -1,255 +1,314 @@
-# Números Racionais e Irracionais
+# Aula 2: Números Irracionais e Números Reais
 
-Você conhece os inteiros agora. Mas o que fazer quando precisa dividir 1 pizza entre 2 pessoas? Não pode usar apenas inteiros. Precisa de **1/2**. E quando um engenheiro mede uma viga que tem 2,5 metros? Ou quando quer calcular a diagonal de um quadrado com lado 1 metro — o resultado é √2, um número que não pode ser expresso como fração.
+## Introdução
 
-Nesta lição, vamos explorar dois universos de números: os **racionais** (que podem ser frações) e os **irracionais** (que não podem).
+Na aula anterior, aprendemos sobre números racionais—números que podem ser escritos como frações. Mas existe um mistério na matemática: alguns números não podem ser escritos como frações, por mais que você tente.
 
-## Objetivos de Aprendizado
+Imagine um quadrado com lado igual a 1. Qual é o comprimento da diagonal? Você pode usar o teorema de Pitágoras para descobrir, e a resposta é $\sqrt{2}$ (raiz quadrada de 2). Mas $\sqrt{2}$ não é um número racional. Ele não pode ser escrito como uma fração simples. Ele é um **número irracional**.
 
-Ao final desta lição, você será capaz de:
+Nesta aula, vamos explorar esses números misteriosos e ver como eles completam a visão que temos sobre os números.
 
-- **Definir** números racionais (ℚ) e sua representação como frações
-- **Converter** entre frações, decimais e dízimas periódicas
-- **Reconhecer** números irracionais clássicos: √2, π, e
-- **Diferenciar** entre números racionais e irracionais
-- **Trabalhar** com dízimas periódicas e aproximações
-- **Entender** por que √2 não é racional
-- **Aplicar** números racionais e irracionais em problemas práticos
+---
 
-## Números Racionais (ℚ)
+## Objetivos de Aprendizagem
 
-Um **número racional** é qualquer número que pode ser expresso como a **razão (divisão) de dois inteiros**:
+Ao final desta aula, você será capaz de:
 
-$$\mathbb{Q} = \left\{ \frac{p}{q} : p, q \in \mathbb{Z}, q \neq 0 \right\}$$
+- **Definir** o que é um número irracional e dar exemplos
+- **Distinguir** entre números racionais e irracionais
+- **Entender** por que certos números não podem ser frações
+- **Reconhecer** o conjunto dos números reais ($\mathbb{R}$) e sua relação com os conjuntos anteriores
+- **Usar** a reta numérica real para visualizar todos os números
 
-A letra **ℚ** vem do termo "quociente" (resultado de uma divisão).
+---
 
-### Exemplos de Números Racionais
+## O Problema Com $\sqrt{2}$
 
-- $\frac{1}{2}$ (meio)
-- $\frac{3}{4}$ (três quartos)
-- $\frac{-5}{3}$ (cinco terços negativos)
-- $7 = \frac{7}{1}$ (todo inteiro é racional)
-- $0 = \frac{0}{1}$ (zero é racional)
-- $-2,5 = \frac{-5}{2}$ (decimais finitos são racionais)
+Vamos começar com uma pergunta simples: qual é a raiz quadrada de 2?
 
-### Representação Decimal de Racionais
+$\sqrt{2}$ é o número que, quando multiplicado por si mesmo, dá 2.
 
-Quando você divide o numerador pelo denominador, obtém um **decimal**:
+$$\sqrt{2} \times \sqrt{2} = 2$$
 
-$$\frac{1}{2} = 0,5$$
-$$\frac{1}{4} = 0,25$$
-$$\frac{1}{3} = 0,333... = 0,\overline{3}$$
+Se você usar uma calculadora, verá: $\sqrt{2} \approx 1{,}41421356\ldots$
 
-Existem dois tipos:
+Mas aqui está o problema: os dígitos nunca terminam e nunca se repetem em um padrão. Isso significa que $\sqrt{2}$ não pode ser escrito como uma fração simples.
 
-<RationalDecimalConverter />
+### Tentando Encontrar Uma Fração
 
-#### 1. Decimais Finitos
+Pense bem: existe uma fração que, quando multiplicada por si mesma, dá exatamente 2?
 
-Quando a divisão "termina" em um número finito de casas decimais:
+- $\left(\frac{1}{1}\right)^2 = 1$ (muito pequeno)
+- $\left(\frac{2}{1}\right)^2 = 4$ (muito grande)
+- $\left(\frac{3}{2}\right)^2 = \frac{9}{4} = 2{,}25$ (muito grande)
+- $\left(\frac{7}{5}\right)^2 = \frac{49}{25} = 1{,}96$ (perto, mas não exato)
+- $\left(\frac{14}{10}\right)^2 = \frac{196}{100} = 1{,}96$ (ainda não exato)
 
-$$\frac{1}{2} = 0,5$$
-$$\frac{3}{8} = 0,375$$
-$$\frac{1}{5} = 0,2$$
+Não importa quanto você tente, nunca encontrará uma fração que funcione perfeitamente. $\sqrt{2}$ não é um número racional.
 
-**Regra:** Um racional tem decimal finito se, quando você simplifica a fração, o denominador tem **apenas fatores 2 e 5**.
+> 🔑 **Conceito-chave:** Um número **irracional** é um número que não pode ser escrito como uma fração de dois inteiros. Seus dígitos decimais nunca terminam e nunca se repetem em um padrão.
 
-$$\frac{1}{8} = \frac{1}{2^3} \rightarrow \text{decimal finito} \, (0,125)$$
-$$\frac{1}{6} = \frac{1}{2 \cdot 3} \rightarrow \text{dízima periódica} \, (0,1666...)$$
+---
 
-#### 2. Dízimas Periódicas
+## Exemplos de Números Irracionais
 
-Quando a divisão **se repete infinitamente**:
+Existem muitos números irracionais. Aqui estão alguns dos mais famosos:
 
-$$\frac{1}{3} = 0,333333... = 0,\overline{3}$$
-$$\frac{1}{7} = 0,142857142857... = 0,\overline{142857}$$
-$$\frac{5}{6} = 0,8333... = 0,8\overline{3}$$
+### π (Pi)
 
-A barra acima indica a **parte que se repete** (período).
+π é a razão entre a circunferência de um círculo e seu diâmetro.
 
-### Exemplo 1: Encontrar a Fração a Partir da Dízima
+π ≈ 3,14159265358979...
 
-Converta $0,\overline{3}$ (0.333...) em fração.
+Os dígitos nunca terminam e nunca se repetem. Se você fosse capaz de calcular π até um trilhão de dígitos, ainda não encontraria um padrão que se repete.
 
-**Solução:**
+### e (Euler's Number)
 
-Seja $x = 0,\overline{3} = 0,333...$
+e é um número importante em matemática que aparece em muitas fórmulas, especialmente em cálculo.
 
-Multiplique por 10:
-$$10x = 3,333...$$
+e ≈ 2,71828182845904...
 
-Subtraia:
-$$10x - x = 3,333... - 0,333...$$
-$$9x = 3$$
-$$x = \frac{3}{9} = \frac{1}{3}$$
+Como π, os dígitos de e nunca terminam nem se repetem.
 
-**Verificação:** $\frac{1}{3} = 0,333...$ ✓
+### $\sqrt{2}$, $\sqrt{3}$, $\sqrt{5}$ (Raízes Quadradas)
 
-### Exemplo 2: Dízima com Período Maior
+Nem todas as raízes quadradas são racionais. De fato:
 
-Converta $0,\overline{142857}$ em fração.
+- $\sqrt{1} = 1$ (racional)
+- $\sqrt{2} \approx 1{,}414\ldots$ (irracional)
+- $\sqrt{3} \approx 1{,}732\ldots$ (irracional)
+- $\sqrt{4} = 2$ (racional)
+- $\sqrt{5} \approx 2{,}236\ldots$ (irracional)
+- $\sqrt{9} = 3$ (racional)
 
-**Solução:**
+A regra é: se a raiz quadrada de um número não é um inteiro perfeito, então é irracional.
 
-Seja $x = 0,\overline{142857}$
+### $\sqrt{2} + 1$
 
-O período tem 6 dígitos, então multiplique por $10^6 = 1.000.000$:
+Se você somar um número racional (1) com um número irracional ($\sqrt{2}$), o resultado é irracional.
 
-$$1.000.000x = 142857,\overline{142857}$$
+$$\sqrt{2} + 1 \approx 2{,}414\ldots$$
 
-Subtraia:
-$$1.000.000x - x = 142857$$
-$$999.999x = 142857$$
-$$x = \frac{142857}{999999} = \frac{1}{7}$$
+> 💡 **Dica:** Não confunda π com frações como 22/7 ou 355/113. Essas são aproximações racionais de π, mas não são π exatamente. π é e permanece irracional.
 
-(Você pode verificar que $\frac{1}{7} = 0,\overline{142857}$ com uma calculadora.)
+---
 
-## Números Irracionais
+## Por Que Alguns Números Não Podem Ser Frações?
 
-Um **número irracional** é um número que **não pode ser expresso como fração** de dois inteiros.
+Isso pode parecer estranho: como um número pode existir se não pode ser escrito como uma fração?
 
-A representação decimal de um número irracional é **não-periódica infinita** — continua para sempre sem se repetir.
+A resposta está em entender o que significa "ser um número". Os antigos matemáticos gregos acreditavam que todo número poderia ser escrito como uma fração. Mas quando descobriram √2, ficaram chocados!
 
-### Os Irracionais Clássicos
+### A Prova de que $\sqrt{2}$ é Irracional
 
-#### 1. Raízes Quadradas Não-Perfeitas: √2
+Há uma prova matemática elegante de que √2 não pode ser uma fração. A ideia é:
 
-O número $\sqrt{2}$ é a solução de $x^2 = 2$.
+1. Suponha que $\sqrt{2} = \frac{a}{b}$, onde $a$ e $b$ são inteiros sem fatores em comum.
+2. Então $a^2 = 2b^2$
+3. Isso significa que a² é par (divisível por 2), então a também é par.
+4. Se $a$ é par, então $a = 2k$ para algum inteiro $k$.
+5. Substituindo: $(2k)^2 = 2b^2$, ou $4k^2 = 2b^2$, ou $2k^2 = b^2$
+6. Isso significa que b² é par, então b também é par.
+7. Mas dissemos que a e b não têm fatores em comum! Chegamos a uma contradição.
+8. Portanto, $\sqrt{2}$ não pode ser uma fração.
 
-$$\sqrt{2} = 1,414213562373095...$$
+Essa é uma prova por contradição—mostramos que a suposição leva a um absurdo, então a suposição deve ser falsa.
 
-**Como sabemos que √2 é irracional?** (Prova por contradição)
+> ⚠️ **Aviso:** Essa prova é elegante, mas você não precisa memorizar todos os passos agora. O importante é entender a ideia: podemos provar logicamente que alguns números não podem ser frações.
 
-<Sqrt2IrrationalProofStepper />
+---
 
-Suponha que $\sqrt{2} = \frac{p}{q}$ onde $p$ e $q$ são inteiros com nenhum fator comum.
+## A Reta Numérica Real
 
-Elevando ao quadrado:
-$$2 = \frac{p^2}{q^2}$$
-$$2q^2 = p^2$$
-
-Isso significa que $p^2$ é par (pois é igual a $2q^2$). Se $p^2$ é par, então $p$ também é par. Logo, $p = 2k$ para algum inteiro $k$.
-
-Substituindo:
-$$2q^2 = (2k)^2 = 4k^2$$
-$$q^2 = 2k^2$$
-
-Isso significa que $q^2$ é par, logo $q$ também é par.
-
-**Contradição!** Se ambos $p$ e $q$ são pares, eles têm fator comum 2, contrariando nossa suposição. Logo, $\sqrt{2}$ **não pode ser racional**.
-
-#### 2. O Número Pi: π
-
-O número $\pi$ é a razão entre o perímetro de um círculo e seu diâmetro:
-
-$$\pi = \frac{\text{perímetro}}{2 \cdot \text{raio}}$$
-
-$$\pi = 3,14159265358979...$$
-
-Usado em qualquer cálculo envolvendo círculos, esferas, ondas.
-
-#### 3. O Número de Euler: e
-
-O número $e$ surge naturalmente em crescimento exponencial, cálculo, probabilidade:
-
-$$e = 2,71828182845904...$$
-
-É a base do logaritmo natural: $\ln(x) = \log_e(x)$
-
-#### 4. Raízes de Primos
-
-$$\sqrt{3} = 1,732050807568877...$$
-$$\sqrt{5} = 2,236067977499789...$$
-$$\sqrt{7} = 2,645751311064590...$$
-
-A raiz quadrada de qualquer número primo é irracional.
-
-## Diferença: Racionais vs Irracionais
-
-<MarkdownTable
-  headers={["Propriedade", "Racional (ℚ)", "Irracional"]}
-  rows={[
-    ["Representação", "Fração p/q (p, q ∈ ℤ)", "Não pode ser fração"],
-    ["Decimal", "Finito ou periódico", "Infinito não-periódico"],
-    ["Exemplos", "1/2, 3/4, 0.25, 5", "√2, π, e, √3"],
-    ["Contagem", "Infinitos (contáveis)", "Infinitos (não-contáveis)"],
-    ["Densidade", "Densos em ℝ", "Também densos em ℝ"],
-  ]}
-/>
-
-### Exemplo 3: Classificar Números
-
-Diga se cada número é racional ou irracional:
-
-- **0,5** → Racional ($\frac{1}{2}$)
-- **0,333...** → Racional ($\frac{1}{3}$)
-- **√4** → Racional ($\sqrt{4} = 2 = \frac{2}{1}$)
-- **√5** → Irracional (não é fração)
-- **π** → Irracional (por definição)
-- **3,14** → Racional ($\frac{314}{100}$)
-- **3,141592...** → Irracional (é π, não termina/não repete)
-
-### Exemplo 4: Aproximações Racionais de Irracionais
-
-Embora π seja irracional, podemos aproximar:
-
-$$\pi \approx 3,14159...$$
-
-Aproximações racionais comuns:
-- $\pi \approx \frac{22}{7} = 3,142857...$ (aproximação simples)
-- $\pi \approx \frac{355}{113} = 3,1415929...$ (aproximação muito boa)
-
-A engenharia usa essas aproximações quando a precisão infinita não é necessária.
-
-## Representação na Reta Numérica
-
-Tanto racionais quanto irracionais preenchem completamente a reta numérica, **mas de forma diferente**:
-
-<RationalIrrationalDensityLine />
+Agora vamos pensar visualmente. Imagine uma reta numérica com todos os números que conhecemos:
 
 <NumberLineReferenceDiagram variant="rational-irrational-reference" />
 
-**Propriedade importante:** Entre **qualquer dois números racionais**, existe um irracional. E entre **qualquer dois irracionais**, existe um racional. Ambos são **densos** na reta real.
+Onde está $\sqrt{2}$? Está entre 1 e 2, mais perto de $1{,}4$.
 
-## Operações com Racionais e Irracionais
+Onde está $\pi$? Está entre 3 e 4.
 
-### Operações com Racionais
+Se você colocar todos os números racionais na reta, terá muitos pontos. Mas entre esses pontos racionais, há espaços. E esses espaços são preenchidos pelos números irracionais!
 
-Todas as operações fecham em ℚ:
-- $\frac{1}{2} + \frac{1}{3} = \frac{5}{6}$ (racional + racional = racional)
-- $\frac{1}{2} \times \frac{1}{3} = \frac{1}{6}$ (racional × racional = racional)
+De fato, existem mais números irracionais do que racionais, mesmo que pareça estranho.
 
-### Operações com Irracionais
+<RationalIrrationalDensityLine />
 
-- $\sqrt{2} + \sqrt{2} = 2\sqrt{2}$ (irracional, mesmo aproximado)
-- $\sqrt{2} \times \sqrt{2} = 2$ (pode virar racional!)
-- $\sqrt{2} + \sqrt{3}$ permanece irracional
+---
 
-### Racional + Irracional
+## Números Reais (ℝ)
 
-- $1 + \sqrt{2} = 1 + 1,414... = 2,414...$ (irracional)
-- $\frac{1}{2} + \pi$ (irracional)
+Agora chegamos ao conjunto que unifica tudo.
 
-**Regra:** Racional + Irracional = Irracional (com raras exceções).
+Os **números reais** (ℝ) são todos os números que você pode colocar na reta numérica. Isso inclui:
 
-## Resumo: Racionais e Irracionais
+- Números naturais ($1, 2, 3, \ldots$)
+- Números inteiros ($\ldots, -2, -1, 0, 1, 2, \ldots$)
+- Números racionais ($\frac{1}{2}, \frac{3}{4}, -\frac{5}{8}, \ldots$)
+- Números irracionais ($\sqrt{2}, \pi, e, \ldots$)
 
-<MarkdownTable
-  headers={["Conceito", "Descrição"]}
-  rows={[
-    ["**Racional (ℚ)**", "Pode ser escrito como p/q (p, q inteiros, q ≠ 0)"],
-    ["**Decimal Finito**", "0,5; 0,25; 0,125 (terminam)"],
-    ["**Dízima Periódica**", "0,333...; 0,142857... (repetem)"],
-    ["**Irracional**", "Não pode ser fração; decimal infinito não-periódico"],
-    ["**Exemplos Irracionais**", "√2, π, e, √3, √5, ..."],
-    ["**Aproximação**", "Usamos frações para aproximar irracionais na prática"],
-  ]}
-/>
+$$\mathbb{R} = \text{números racionais} \cup \text{números irracionais}$$
 
-## Ponte para a Próxima Lição
+(O símbolo ∪ significa "união", ou seja, todos os elementos de ambos os conjuntos.)
 
-Você agora sabe que existem dois tipos de números reais: racionais e irracionais. Ambos preenchem a reta numérica completamente.
+### A Hierarquia Completa
 
-Na próxima lição, vamos **unir esses mundos**: definir formalmente o conjunto dos **números reais** (ℝ) como a união de racionais e irracionais, e explorar as propriedades fundamentais que fazem a reta real tão especial — **densidade** e **completude**.
+Agora podemos ver como todos os conjuntos se relacionam:
 
+$$\mathbb{N}\;(\text{naturais}) \subset \mathbb{Z}\;(\text{inteiros}) \subset \mathbb{Q}\;(\text{racionais}) \subset \mathbb{R}\;(\text{reais})$$
+
+E fora de ℚ, mas ainda dentro de ℝ, estão os números irracionais.
+
+### Representação Visual
+
+<RealSetHierarchyStaticDiagram />
+
+> 🔑 **Conceito-chave:** Os números reais (ℝ) são TODOS os números que você pode representar na reta numérica. São a união de racionais e irracionais.
+
+---
+
+## Propriedades Importantes dos Números Reais
+
+### 1. Completude
+
+Cada ponto na reta numérica corresponde a um número real. Não há "buracos" na reta real. Se você puder desenhar um ponto em uma reta numérica, esse ponto representa um número real.
+
+Isso é diferente do conjunto dos números racionais, que têm "buracos" preenchidos pelos irracionais.
+
+### 2. Ordem
+
+Os números reais têm uma ordem bem definida. Você pode comparar qualquer dois números reais.
+
+- Se $a$ está à esquerda de $b$ na reta numérica, então $a < b$
+- Se $a$ está à direita de $b$, então $a > b$
+
+### 3. Operações
+
+Você pode adicionar, subtrair, multiplicar e dividir números reais (exceto divisão por zero). O resultado é sempre um número real.
+
+- $\sqrt{2} + 3 = 3 + \sqrt{2}$ (a ordem não importa)
+- $\sqrt{2} \times \sqrt{2} = 2$
+- $\pi \div 2 \approx 1{,}5708\ldots$
+
+---
+
+## Erros Comuns e Conceitos Errados
+
+### Erro 1: Pensar que π = 22/7
+
+Uma aproximação muito usada é π ≈ 22/7. Mas 22/7 é uma fração (um número racional), enquanto π é irracional. Eles são próximos, mas não iguais.
+
+- $\pi \approx 3{,}14159\ldots$
+- $\frac{22}{7} \approx 3{,}14285\ldots$
+
+São próximos, mas diferentes!
+
+### Erro 2: Achar que Números Irracionais Não Existem
+
+Alguns alunos pensam que números irracionais são "abstratos" ou "não existem na vida real". Mas eles estão em toda parte!
+
+- A diagonal de um quadrado é $\sqrt{2}$ vezes o lado (muito real!)
+- A circunferência de qualquer círculo envolve π (muito real!)
+- O crescimento de populações envolve o número e (muito real!)
+
+### Erro 3: Confundir Números Irracionais com Frações Complexas
+
+Uma fração como 1/3 = 0,333... tem dígitos que se repetem. Isso a torna racional, não irracional.
+
+- $\frac{1}{3} = 0{,}333\ldots$ (racional—o padrão "3" repete)
+- $\sqrt{2} = 1{,}414213\ldots$ (irracional—nenhum padrão repete)
+
+A diferença: racionais têm padrões que se repetem; irracionais não.
+
+---
+
+## Exemplos Práticos: Onde Encontramos Números Irracionais?
+
+### Geometria
+
+A diagonal de um quadrado com lado 1 é $\sqrt{2}$. A diagonal de um cubo com lado 1 é $\sqrt{3}$.
+
+Se você está construindo algo e precisa de medidas precisas, encontrará números irracionais!
+
+### Natureza
+
+O número π aparece em:
+- Circunferência de círculos
+- Área de círculos
+- Movimento de ondas (som, luz)
+
+O número φ (fi) = 1,618... (a razão áurea) aparece em:
+- Proporções do corpo humano
+- Pétalas de flores
+- Conchas de caracol
+
+### Física e Engenharia
+
+A constante e aparece em:
+- Decaimento radioativo
+- Circuitos elétricos
+- Crescimento bacteriano
+
+---
+
+## Representação Decimal de Números Reais
+
+Todos os números reais podem ser representados como decimais. Mas existem três tipos:
+
+### 1. Decimais Finitos (Racionais)
+
+Terminam após alguns dígitos.
+
+- $0{,}5 = \frac{1}{2}$
+- $0{,}25 = \frac{1}{4}$
+- $3{,}14 = \frac{314}{100}$
+
+### 2. Decimais Periódicos (Racionais)
+
+Os dígitos se repetem em um padrão.
+
+- $0{,}333\ldots = \frac{1}{3}$ (o 3 repete)
+- $0{,}142857142857\ldots = \frac{1}{7}$ (o padrão "142857" repete)
+- $2{,}666\ldots = \frac{8}{3}$ (o 6 repete)
+
+### 3. Decimais Não-Periódicos (Irracionais)
+
+Os dígitos continuam para sempre sem repetir um padrão.
+
+- $\sqrt{2} = 1{,}41421356237\ldots$
+- $\pi = 3{,}14159265358979\ldots$
+- $e = 2{,}71828182845904\ldots$
+
+> 🧪 **Tente:** Pense em um número racional que você conhece. Ele é um decimal finito ou periódico?
+
+---
+
+## Resumo
+
+- Um **número irracional** é um número que não pode ser escrito como uma fração. Seus dígitos decimais nunca terminam nem se repetem.
+- Exemplos famosos de números irracionais: π, e, √2, √3, √5
+- Os números reais (ℝ) são TODOS os números que você pode colocar na reta numérica.
+- A hierarquia completa é: ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ
+- Os números reais são a união de racionais e irracionais: ℝ = ℚ ∪ 𝕴
+- Números racionais têm decimais finitos ou periódicos; números irracionais têm decimais não-periódicos.
+- Números irracionais não são abstratos—aparecem em geometria, natureza, física e engenharia.
+
+---
+
+## Próximas Etapas
+
+Agora que você entende os números reais e sabe que incluem tanto racionais quanto irracionais, estamos prontos para explorar operações com esses números. Na próxima aula, aprenderemos sobre **operações e propriedades dos números reais**, como adição, subtração, multiplicação e divisão, e descobriremos regras especiais que fazem a matemática funcionar de forma elegante.
+
+Você também verá por que alguns números têm raízes quadradas (como √9 = 3) e outros têm raízes que são números irracionais (como √2). Essas operações serão fundamentais para tudo o que faremos em Cálculo 1.
+
+---
+
+## Desafios Práticos (Reflexão Opcional)
+
+Antes de continuar, tente responder essas perguntas:
+
+1. √9 é racional ou irracional? Por quê?
+2. Se você divide dois números irracionais, o resultado é sempre irracional?
+3. Qual é a diferença entre 0,333... (periódico) e √2 (não-periódico)?
+4. Se π é irracional, como podemos usá-lo para calcular a área de um círculo?
+5. Por que você acha que os gregos antigos ficaram chocados ao descobrir números irracionais?
