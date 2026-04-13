@@ -1,265 +1,463 @@
-# O Conjunto dos Números Reais
+import { MarkdownTable } from "../../../components/templates/MarkdownTable";
 
-Você explorou os números naturais, inteiros, racionais e descobriu que irracionais também existem. Agora, vamos unir tudo isso.
+# Aula 3: Intervalos e Desigualdades
 
-O **conjunto dos números reais** (ℝ) é a **reunião completa** de todos os racionais com todos os irracionais. É nele que vamos trabalhar por todo o Cálculo e além — porque é onde a maioria dos fenômenos físicos e de engenharia ocorrem.
+## Introdução
 
-Nesta lição, vamos explorar as propriedades essenciais que tornam ℝ tão especial: a **densidade** e a **completude**.
+Até agora, estudamos os diferentes tipos de números: naturais, inteiros, racionais, irracionais e reais. Mas na vida real, frequentemente não nos interessam números individuais—nos interessam **grupos de números**.
 
-## Objetivos de Aprendizado
+Por exemplo, em uma sala de aula, a temperatura deve estar entre 18°C e 25°C. Isso não é um único número, mas um **intervalo** de números. Em uma loja, você procura camisetas que custam menos de R$ 100. Isso é outro intervalo: todos os preços menores que 100.
 
-Ao final desta lição, você será capaz de:
+Essas situações envolvem **desigualdades**. Nesta aula, aprenderemos como representar e trabalhar com intervalos e desigualdades na reta numérica real.
 
-- **Definir** o conjunto dos números reais (ℝ)
-- **Entender** a união de racionais e irracionais
-- **Explicar** o conceito de densidade
-- **Explicar** o conceito de completude (axioma do supremo)
-- **Comparar e ordenar** números reais
-- **Trabalhar** com desigualdades em ℝ
-- **Aplicar** propriedades de números reais em contextos práticos
+---
 
-## Definição: Números Reais (ℝ)
+## Objetivos de Aprendizagem
 
-O conjunto dos números reais é a **união** de racionais e irracionais:
+Ao final desta aula, você será capaz de:
 
-$$\mathbb{R} = \mathbb{Q} \cup (\mathbb{R} \setminus \mathbb{Q})$$
+- **Usar** símbolos de desigualdade corretamente
+- **Resolver** desigualdades simples
+- **Entender** o que é um intervalo e seus diferentes tipos
+- **Representar** intervalos usando notação de intervalo, notação de conjunto e reta numérica
+- **Aplicar** intervalos e desigualdades em situações práticas
 
-onde $\mathbb{R} \setminus \mathbb{Q}$ representa os **números irracionais**.
+---
 
-Ou, visualmente:
+## Símbolos de Desigualdade
 
-<RealSetHierarchyTree />
+Quando comparamos dois números, usamos símbolos especiais.
 
-<RealSetHierarchyStaticDiagram />
-
-### Propriedades Fundamentais de ℝ
-
-1. **Ordenado:** Dados dois números reais $a$ e $b$, sempre vale uma e apenas uma das relações:
-   - $a < b$ (a é menor que b)
-   - $a = b$ (a é igual a b)
-   - $a > b$ (a é maior que b)
-
-2. **Denso:** Entre quaisquer dois números reais, existe infinitos outros números reais.
-
-3. **Completo:** Todo conjunto limitado superiormente tem um supremo (menor limite superior).
-
-Vamos explorar as duas últimas propriedades em detalhe.
-
-## Densidade de ℝ
-
-A propriedade de **densidade** significa que:
-
-> **Entre quaisquer dois números reais distintos $a$ e $b$, existe infinitos números reais.**
-
-### Exemplo 1: Densidade
-
-Considere $a = 1$ e $b = 2$.
-
-Existem infinitos números reais entre eles:
-- Inteiros: nenhum
-- Racionais: $\frac{11}{10} = 1.1$, $\frac{12}{10} = 1.2$, ..., $\frac{19}{10} = 1.9$
-- Irracionais: $\sqrt{2} \approx 1.414$, $\frac{\pi}{2} \approx 1.571$, ...
-
-Você pode sempre encontrar um número entre dois números, repetindo infinitamente:
-
-<DensityZoomExplorer />
-
-$$1 < 1.5 < 2$$
-$$1 < 1.25 < 1.5$$
-$$1 < 1.125 < 1.25$$
-$$\vdots$$
-
-Esta é a ideia essencial da **densidade**.
-
-### Por Que a Densidade Importa?
-
-A densidade garante que:
-- A reta numérica **não tem "buracos"** ou "vazios"
-- Qualquer aproximação pode ser melhorada indefinidamente
-- Podemos usar sequências convergentes (conceito chave no Cálculo)
-
-### Exemplo 2: Encontrando Racionais Densos
-
-Encontre um racional entre $\pi \approx 3.14159$ e $\frac{22}{7} \approx 3.14286$.
-
-**Solução:** Tire a média aritmética:
-
-$$\frac{\pi + \frac{22}{7}}{2} \approx \frac{3.14159 + 3.14286}{2} \approx 3.14222$$
-
-Verifique: $\pi < 3.14222 < \frac{22}{7}$ ✓
-
-E você pode repetir para encontrar tantos racionais quanto quiser entre eles!
-
-## Completude de ℝ
-
-A propriedade de **completude** é mais profunda. Ela pode ser enunciada de várias maneiras equivalentes:
-
-### Axioma do Supremo (Propriedade de Completude)
-
-> **Se um conjunto não-vazio de números reais é limitado superiormente, então ele tem um supremo (menor limite superior).**
-
-Isso pode soar abstrato. Vamos desdobrar.
-
-#### Definições Importantes
-
-**Limite superior:** Um número $M$ é um limite superior de um conjunto $A$ se $a \leq M$ para **todo** $a \in A$.
-
-**Supremo:** O supremo (ou "sup") de um conjunto é o **menor** de todos os limites superiores.
-
-**Exemplo 3: Encontrando o Supremo**
-
-Considere o conjunto $A = \{x \in \mathbb{R} : 0 < x < 1\}$ (números reais entre 0 e 1, **sem incluir** 0 ou 1).
-
-- Limites superiores: 1, 1.5, 2, 100, ... (qualquer número $\geq 1$)
-- **Supremo:** 1 (o menor limite superior)
-
-Note que o supremo é 1, mas 1 **não pertence ao conjunto** $A$.
-
-**Exemplo 4: Um Conjunto com Máximo**
-
-Considere $B = \{x \in \mathbb{R} : 0 < x \leq 1\}$ (números entre 0 e 1, **incluindo** 1).
-
-- Limites superiores: 1, 1.5, 2, 100, ...
-- **Supremo:** 1
-- **Máximo:** 1 (o maior elemento que pertence ao conjunto)
-
-Neste caso, supremo = máximo.
-
-<SupremumMaximumComparator />
-
-### Por Que a Completude Importa?
-
-A completude garante:
-- A reta real **não tem "saltos"** — é contínua
-- Equações como $x^2 = 2$ têm soluções reais (como $x = \sqrt{2}$)
-- A integral e o cálculo funcionam adequadamente
-
-**Sem completude, o Cálculo colapsaria.**
-
-## Comparação e Ordenação de Números Reais
-
-Em ℝ, você pode sempre comparar dois números usando a **reta numérica**:
-
-<NumberLineReferenceDiagram variant="real-compare" />
-
-### Regras de Comparação
-
-1. **Positivos vs Negativos:** Todo número positivo é maior que qualquer negativo.
-   - $0.001 > -100$
-
-2. **Entre Positivos:** Compare usando tamanho.
-   - $0.5 < 0.501$
-   - $1 < \sqrt{2} < 2$
-
-3. **Entre Negativos:** O "mais negativo" é menor.
-   - $-5 < -3$ (porque $|-5| > |-3|$)
-
-### Exemplo 5: Ordenar Números Reais
-
-Ordene em ordem crescente:
-$$-2, \sqrt{2}, -\frac{1}{2}, 0, \pi, 1.5$$
-
-**Conversão para decimais:**
-- $-2 = -2.000$
-- $\sqrt{2} \approx 1.414$
-- $-\frac{1}{2} = -0.500$
-- $0 = 0.000$
-- $\pi \approx 3.142$
-- $1.5 = 1.500$
-
-**Ordem crescente:**
-$$-2 < -\frac{1}{2} < 0 < \sqrt{2} < 1.5 < \pi$$
-
-## Desigualdades em ℝ
-
-Uma **desigualdade** é uma relação de ordem entre expressões:
-
-$$a < b, \quad a > b, \quad a \leq b, \quad a \geq b$$
-
-### Propriedades das Desigualdades
-
-1. **Transitiva:** Se $a < b$ e $b < c$, então $a < c$.
-
-2. **Aditiva:** Se $a < b$, então $a + c < b + c$ (pode adicionar a ambos os lados).
-
-3. **Multiplicativa por positivo:** Se $a < b$ e $c > 0$, então $ac < bc$.
-
-4. **Multiplicativa por negativo (inverte!):** Se $a < b$ e $c < 0$, então $ac > bc$.
-   - **Atenção:** Multiplicar/dividir por negativo inverte a desigualdade!
-
-### Exemplo 6: Resolvendo Desigualdades
-
-Resolva $2x - 3 < 5$.
-
-**Solução:**
-$$2x - 3 < 5$$
-$$2x < 8$$ (adicione 3 a ambos os lados)
-$$x < 4$$ (divida por 2, que é positivo — não inverte)
-
-**Verificação:** Se $x = 3$, então $2(3) - 3 = 3 < 5$ ✓
-
-### Exemplo 7: Desigualdade com Negativo
-
-Resolva $-3x + 2 \geq 11$.
-
-**Solução:**
-$$-3x + 2 \geq 11$$
-$$-3x \geq 9$$ (subtraia 2 de ambos os lados)
-$$x \leq -3$$ (divida por -3 — **inverte a desigualdade**)
-
-**Verificação:** Se $x = -4$, então $-3(-4) + 2 = 14 \geq 11$ ✓
-
-## Estrutura Hierárquica de ℝ
-
-<RealSetHierarchyStaticDiagram />
-
-### Relações de Continência
-
-$$\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}$$
-
-Cada conjunto está **completamente contido** no próximo.
-
-### Exemplos da Hierarquia
-
-- **2 é**: Natural, Inteiro, Racional, Real
-- **-3 é**: Inteiro, Racional, Real (mas **não** Natural)
-- **1/2 é**: Racional, Real (mas **não** Inteiro)
-- **√2 é**: Real (mas **não** Racional, Inteiro, ou Natural)
-
-## Aplicação: Precisão em Engenharia
-
-Na engenharia, frequentemente temos que lidar com números reais que não podemos expressar exatamente.
-
-### Exemplo 8: Aproximação de Uma Medida
-
-Um engenheiro mede a diagonal de uma sala quadrada com lado = 10 m.
-
-A diagonal é:
-$$d = \sqrt{10^2 + 10^2} = \sqrt{200} = 10\sqrt{2}$$
-
-Mas $\sqrt{2}$ é irracional. Na prática:
-- Aproximação simples: $\sqrt{2} \approx 1.414$, logo $d \approx 14.14$ m
-- Melhor aproximação: $\sqrt{2} \approx 1.41421$, logo $d \approx 14.1421$ m
-
-A densidade de ℝ garante que podemos sempre melhorar nossa aproximação.
-
-## Resumo: Números Reais
+### Os Quatro Símbolos Básicos
 
 <MarkdownTable
-  headers={["Propriedade", "Descrição"]}
+  headers={['Símbolo', 'Significado', 'Exemplo']}
   rows={[
-    ["**Definição**", "ℝ = ℚ ∪ (Irracionais)"],
-    ["**Ordenado**", "Para quaisquer a, b: a < b, a = b, ou a > b"],
-    ["**Denso**", "Entre quaisquer dois reais, infinitos outros reais"],
-    ["**Completo**", "Todo conjunto limitado superiormente tem supremo"],
-    ["**Contínuo**", "A reta real não tem \"buracos\""],
-    ["**Infinito**", "Há infinitos números em qualquer intervalo"],
+    ['<', 'menor que', '3 < 5 (3 é menor que 5)'],
+    ['>', 'maior que', '7 > 2 (7 é maior que 2)'],
+    ['≤', 'menor ou igual a', 'x ≤ 10 (x é menor ou igual a 10)'],
+    ['≥', 'maior ou igual a', 'y ≥ 0 (y é maior ou igual a 0)']
   ]}
 />
 
-## Ponte para a Próxima Lição
+### Uma Dica Útil
 
-Você agora entende os números reais em sua totalidade: como são construídos, suas propriedades profundas e por que são tão especiais.
+Uma maneira fácil de lembrar: o símbolo **sempre aponta para o número menor**.
 
-Na próxima lição, vamos aprender a **organizar números reais em grupos** usando intervalos (conjuntos contínuos) e a trabalhar com **operações entre conjuntos** (união, interseção, complementar) — ferramentas essenciais para o Cálculo.
+- $2 < 5$ (o símbolo aponta para o 2, que é menor)
+- $5 > 2$ (o símbolo aponta para o 2, que é menor)
+- $-3 < -1$ (o símbolo aponta para -3, que é menor)
 
+> 💡 **Dica:** Pense no símbolo como a boca de um crocodilo faminto. A boca sempre se abre para o número maior, porque o crocodilo quer comer o número maior!
+
+---
+
+## Desigualdades: O Que São?
+
+Uma **desigualdade** é uma afirmação que compara dois números ou expressões.
+
+### Exemplos de Desigualdades
+
+- $x < 10$ (x é menor que 10)
+- $y \geq -5$ (y é maior ou igual a -5)
+- $3 \leq z \leq 8$ (z está entre 3 e 8, incluindo 3 e 8)
+- $a > b + 2$ (a é maior que b mais 2)
+
+### Desigualdades vs Equações
+
+Uma equação diz que dois valores são **iguais**:
+- $x = 5$ (x é exatamente 5)
+
+Uma desigualdade diz que dois valores têm uma **relação de tamanho**:
+- $x < 5$ (x é menor que 5—pode ser 4, 3, 2, 1, 0, -1, ..., $\pi$, $\sqrt{2}$, qualquer número menor que 5)
+
+> 🔑 **Conceito-chave:** Uma desigualdade tem infinitas soluções, enquanto uma equação geralmente tem um número finito de soluções (ou nenhuma).
+
+---
+
+## Resolvendo Desigualdades Simples
+
+Resolver uma desigualdade significa encontrar todos os valores que tornam a desigualdade verdadeira.
+
+### Exemplo 1: $x + 3 < 7$
+
+Para resolver, fazemos o mesmo que com equações—subtraímos 3 de ambos os lados:
+
+$$
+\begin{aligned}
+x + 3 &< 7 \\
+x &< 7 - 3 \\
+x &< 4
+\end{aligned}
+$$
+
+**Solução:** x pode ser qualquer número menor que 4. Exemplos: 3, 2, 1, 0, -5, 3,9, π, ...
+
+### Exemplo 2: $2x \geq 8$
+
+Dividimos ambos os lados por 2:
+
+$$
+\begin{aligned}
+2x &\geq 8 \\
+x &\geq \frac{8}{2} \\
+x &\geq 4
+\end{aligned}
+$$
+
+**Solução:** x pode ser 4 ou qualquer número maior que 4. Exemplos: 4, 5, 10, 100, 4,1, π + 1, ...
+
+### Exemplo 3: $-x < 3$
+
+Aqui temos um número negativo multiplicando x. Quando multiplicamos ou dividimos uma desigualdade por um número negativo, **o símbolo vira ao contrário**!
+
+$$
+\begin{aligned}
+-x &< 3 \\
+x &> -3 \quad \text{(o símbolo virou!)}
+\end{aligned}
+$$
+
+> ⚠️ **Aviso:** Essa é uma regra muito importante! Se você multiplica ou divide por um número negativo, deve virar o símbolo de desigualdade. Esse é um erro comum.
+
+**Solução:** x pode ser qualquer número maior que -3. Exemplos: -2, -1, 0, 1, 5, √2, ...
+
+---
+
+## O Que É um Intervalo?
+
+Um **intervalo** é um conjunto de números contínuos em uma reta numérica.
+
+Existem vários tipos de intervalos, dependendo de quais números estão inclusos e quais são exclusos.
+
+### Exemplo Visual
+
+Imagine a reta numérica:
+
+<NumberLineReferenceDiagram variant="marked-points" />
+
+Um intervalo pode ser:
+- De 1 até 4
+- De -2 até 3
+- De 0 até infinito
+- De menos infinito até 5
+
+---
+
+## Tipos de Intervalos
+
+Existem quatro tipos principais, dependendo se os extremos estão inclusos ou não.
+
+<IntervalWorkedExampleDiagram variant="basic-types" />
+
+### 1. Intervalo Aberto (a, b)
+
+Os extremos **não** estão inclusos.
+
+**Notação:** (a, b)
+
+**Significado:** Todos os números entre a e b, mas não a nem b.
+
+**Em notação de desigualdade:** $a < x < b$
+
+**Na reta numérica:** veja a visualização interativa acima.
+
+(Os parênteses indicam que 1 e 4 não estão inclusos)
+
+**Exemplo:** $(1, 4) = \{x \mid 1 < x < 4\} = \{1{,}1; 1{,}5; 2; 3; 3{,}9; \ldots\}$
+
+### 2. Intervalo Fechado [a, b]
+
+Os extremos **estão** inclusos.
+
+**Notação:** [a, b]
+
+**Significado:** Todos os números entre a e b, incluindo a e b.
+
+**Em notação de desigualdade:** $a \leq x \leq b$
+
+**Na reta numérica:** veja a visualização interativa acima.
+
+(Os colchetes indicam que 1 e 4 estão inclusos)
+
+**Exemplo:** $[1, 4] = \{x \mid 1 \leq x \leq 4\} = \{1; 1{,}5; 2; 3; 4; \ldots\}$
+
+### 3. Intervalo Semiaberto [a, b) e (a, b]
+
+Um extremo está incluso, o outro não.
+
+**[a, b):** Inclui a, mas não b. Significado: $a \leq x < b$
+
+**Na reta numérica:** veja a visualização interativa acima.
+
+**Exemplo:** $[1, 4) = \{1; 1{,}5; 2; 3; 3{,}9; \ldots\}$ (inclui 1, mas não 4)
+
+**( a, b]:** Não inclui a, mas inclui b. Significado: $a < x \leq b$
+
+**Na reta numérica:** veja a visualização interativa acima.
+
+**Exemplo:** $(1, 4] = \{1{,}1; 1{,}5; 2; 3; 4; \ldots\}$ (não inclui 1, mas inclui 4)
+
+> 💡 **Dica:** Um jeito fácil de lembrar:
+> - **[** (colchete) = fechado, incluso ✓
+> - **(** (parêntese) = aberto, não incluso ✗
+
+---
+
+## Intervalos Infinitos
+
+Alguns intervalos se estendem até o infinito. Usamos o símbolo **∞** para representar infinito.
+
+<IntervalNotationBuilder />
+
+### Intervalo de a até infinito: [a, ∞)
+
+Todos os números maiores ou iguais a a.
+
+**Notação:** [a, ∞)
+
+**Significado:** $a \leq x$
+
+**Na reta numérica:** use o construtor acima para experimentar extremos abertos/fechados e a posição dos limites.
+
+**Exemplo:** $[0, \infty) = \{0, 1, 2, 3, \ldots\}$ (todos os números não-negativos)
+
+> ⚠️ **Aviso:** Note que usamos [ com o número e ) com ∞. Isso porque ∞ não é um número real, então não pode estar "incluso". Sempre usamos parêntese com ∞.
+
+### Intervalo de menos infinito até b: (-∞, b]
+
+Todos os números menores ou iguais a b.
+
+**Notação:** $(-\infty, b]$
+
+**Significado:** $x \leq b$
+
+**Na reta numérica:** visualize como um raio se estende indefinidamente para a esquerda.
+
+**Exemplo:** $(-\infty, 0] = \{\ldots, -3, -2, -1, 0\}$ (todos os números não-positivos)
+
+### Intervalo de menos infinito até mais infinito: (-∞, ∞)
+
+Todos os números reais.
+
+**Notação:** (-∞, ∞)
+
+**Significado:** Qualquer x real
+
+**Na reta numérica:** visualmente, isso cobre toda a reta real.
+
+**Exemplo:** $(-\infty, \infty) = \mathbb{R}$ (o conjunto de todos os números reais)
+
+---
+
+## Comparando Notações
+
+Vamos ver as diferentes maneiras de representar o mesmo intervalo:
+
+<IntervalSetOperationsLab />
+
+<MarkdownTable
+  headers={['Intervalo', 'Notação de Conjunto', 'Desigualdade', 'Na Reta']}
+  rows={[
+    ['(1, 5)', '{x | 1 < x < 5}', '1 < x < 5', '(────)'],
+    ['[1, 5]', '{x | 1 ≤ x ≤ 5}', '1 ≤ x ≤ 5', '[────]'],
+    ['[1, 5)', '{x | 1 ≤ x < 5}', '1 ≤ x < 5', '[────)'],
+    ['(1, 5]', '{x | 1 < x ≤ 5}', '1 < x ≤ 5', '(────]'],
+    ['[0, ∞)', '{x | x ≥ 0}', 'x ≥ 0', '[───→'],
+    ['(-∞, 0)', '{x | x < 0}', 'x < 0', '←──)']
+  ]}
+/>
+
+---
+
+## Resolvendo Desigualdades com Múltiplos Passos
+
+Vamos resolver uma desigualdade mais complexa passo a passo.
+
+### Exemplo: $2x - 5 \geq 3$
+
+**Passo 1:** Adicione 5 a ambos os lados.
+$$
+\begin{aligned}
+2x - 5 &\geq 3 \\
+2x &\geq 3 + 5 \\
+2x &\geq 8
+\end{aligned}
+$$
+
+**Passo 2:** Divida ambos os lados por 2.
+$$
+\begin{aligned}
+2x &\geq 8 \\
+x &\geq 4
+\end{aligned}
+$$
+
+**Solução:** $x \geq 4$
+
+**Em notação de intervalo:** [4, ∞)
+
+**Na reta numérica:**
+<IntervalWorkedExampleDiagram variant="ray-4-inf-closed" />
+
+---
+
+## Desigualdades Compostas
+
+Uma **desigualdade composta** combina duas desigualdades.
+
+### Forma 1: $a < x < b$ (E lógico)
+
+Significa: x é maior que a **E** x é menor que b.
+
+**Exemplo:** $2 < x < 5$
+
+Significa: x é simultaneamente maior que 2 e menor que 5.
+
+**Em notação de intervalo:** (2, 5)
+
+<IntervalWorkedExampleDiagram variant="open-25" />
+
+**Soluções:** 2,1; 3; 4; 4,9; ...
+
+### Forma 2: $x < 1$ OU $x > 3$ (OU lógico)
+
+Significa: x é menor que 1 **OU** x é maior que 3 (mas não entre eles).
+
+**Em notação de intervalo:** $(-\infty, 1) \cup (3, \infty)$
+
+(O símbolo ∪ significa "união"—os elementos de ambos os conjuntos)
+
+<IntervalWorkedExampleDiagram variant="complement-13" />
+
+**Soluções:** ..., -5, 0, 0,9; ..., ou 3,1; 4; 10; ...
+
+---
+
+## Desigualdades com Valor Absoluto
+
+O **valor absoluto** de um número é sua distância até zero na reta numérica.
+
+**Notação:** |x|
+
+### Exemplos
+
+- |5| = 5 (5 está a uma distância de 5 de zero)
+- |-5| = 5 (-5 também está a uma distância de 5 de zero)
+- |0| = 0 (0 está a uma distância de 0 de zero)
+
+<AbsoluteValueDistanceExplorer />
+
+### Desigualdades com Valor Absoluto
+
+**|x| < 3** significa: "a distância de x até zero é menor que 3"
+
+Isso é equivalente a: $-3 < x < 3$
+
+<NumberLineReferenceDiagram variant="abs-lt-3" />
+
+**|x| ≥ 2** significa: "a distância de x até zero é maior ou igual a 2"
+
+Isso é equivalente a: $x \leq -2$ OU $x \geq 2$
+
+**Em notação de intervalo:** (-∞, -2] ∪ [2, ∞)
+
+<NumberLineReferenceDiagram variant="outside-ge-2" />
+
+> 💡 **Dica:** Desigualdades com valor absoluto geralmente se transformam em desigualdades compostas com "E" (para $<$) ou "OU" (para $>$).
+
+---
+
+## Erros Comuns e Conceitos Errados
+
+### Erro 1: Esquecer de Virar o Símbolo
+
+Quando você multiplica ou divide por um número negativo, deve virar o símbolo.
+
+❌ Errado: $-2x < 6 \;\to\; x < -3$
+✅ Correto: $-2x < 6 \;\to\; x > -3$ (virou!)
+
+### Erro 2: Confundir < com ≤
+
+- $x < 5$ significa todos os números menores que 5 (não inclui 5)
+- $x \leq 5$ significa todos os números menores ou iguais a 5 (inclui 5)
+
+A diferença é pequena, mas importante!
+
+### Erro 3: Usar Parêntese com Infinito
+
+Sempre use parênteses ( ) com ∞, nunca colchetes [ ].
+
+- ✅ Correto: [3, ∞)
+- ❌ Errado: [3, ∞]
+
+---
+
+## Aplicações Práticas
+
+### Exemplo 1: Controle de Qualidade em uma Fábrica
+
+Uma fábrica produz parafusos com comprimento de 10 mm. Para serem aprovados, o comprimento deve estar entre 9,9 mm e 10,1 mm.
+
+**Em desigualdade:** $9{,}9 \leq x \leq 10{,}1$
+
+**Em notação de intervalo:** [9,9; 10,1]
+
+**Em notação de conjunto:** $\{x \mid 9{,}9 \leq x \leq 10{,}1\}$
+
+### Exemplo 2: Faixa Salarial em um Emprego
+
+Uma vaga de emprego oferece salário entre R$ 2.500 e R$ 3.500 (não garante os valores extremos).
+
+**Em desigualdade:** $2.500 < s < 3.500$
+
+**Em notação de intervalo:** (2.500; 3.500)
+
+### Exemplo 3: Restrição de Idade
+
+Você precisa ter no mínimo 18 anos para entrar em um clube (mas não há limite superior).
+
+**Em desigualdade:** $i \geq 18$
+
+**Em notação de intervalo:** [18, ∞)
+
+---
+
+## Resumo
+
+- **Símbolos de desigualdade:** $<$, $>$, $\leq$, $\geq$
+- Uma **desigualdade** compara dois números e tem infinitas soluções.
+- Um **intervalo** é um conjunto contínuo de números reais.
+- **Intervalo aberto (a, b):** Não inclui os extremos. Usa parênteses ( )
+- **Intervalo fechado [a, b]:** Inclui os extremos. Usa colchetes [ ]
+- **Intervalos semiabertos:** [a, b) ou (a, b]
+- **Intervalos infinitos:** Use (-∞, b], [a, ∞), (-∞, ∞). Sempre parêntese com ∞.
+- Ao resolver desigualdades, **vire o símbolo** se multiplicar ou dividir por número negativo.
+- **Desigualdades compostas:** $a < x < b$ (E) ou $x < a$ OU $x > b$ (OU)
+- **Valor absoluto:** |x| mede a distância de x até zero.
+
+---
+
+## Próximas Etapas
+
+Agora que você domina intervalos e desigualdades, você tem todas as ferramentas para entender domínios e ranges de funções em Cálculo 1. Intervalos aparecerão constantemente quando você resolver problemas do tipo "em que valores de x a função existe?" ou "que valores de y são possíveis?"
+
+Na próxima aula, faremos uma **síntese completa dos Conjuntos Numéricos** e exploraremos como aplicar tudo que aprendemos em problemas práticos e teóricos. Você verá como os conceitos de números, intervalos e desigualdades trabalham juntos para resolver problemas reais.
+
+---
+
+## Desafios Práticos (Reflexão Opcional)
+
+Antes de continuar, tente responder essas perguntas:
+
+1. Qual é a diferença entre (5, 10) e [5, 10]? Qual intervalo inclui o número 5?
+
+2. Se você sabe que $x > 3$ e $x < 8$, como você representa isso em um único intervalo?
+
+3. Resolva a desigualdade: $3x - 2 < 10$. Qual é a solução em notação de intervalo?
+
+4. A desigualdade $-2x \geq 6$ pode ser resolvida assim: $x \geq -3$? Se não, qual é a resposta correta?
+
+5. Se você sabe que |x| ≤ 2, quais são os valores possíveis de x?
+
+6. Um restaurante oferece pratos entre R$ 25 e R$ 45. Escreva isso como uma desigualdade e como um intervalo.

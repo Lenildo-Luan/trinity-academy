@@ -1,309 +1,308 @@
 {
   "id": "quiz-4",
-  "title": "Quiz 4 - Intervalos e Operações com Conjuntos",
-  "description": "Avalie domínio sobre tipos de intervalos, união, interseção, complementar e aplicações em domínio de funções.",
-  "timeLimit": 720,
+  "title": "Quiz — Aula 4: Síntese e Aplicações",
+  "description": "Consolide a integração entre classificação numérica, desigualdades, intervalos e modelagem de problemas reais.",
+  "timeLimit": 900,
   "questions": [
     {
       "id": "q1",
-      "question": "Qual intervalo representa a desigualdade -2 < x \u2264 5?",
+      "question": "Qual é o menor conjunto que contém o número -15/3?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "[-2, 5]",
+          "id": "a1",
+          "text": "ℕ",
           "isCorrect": false,
-          "explanation": "-2 não está incluído; o extremo esquerdo deve ser aberto."
+          "explanation": "Após simplificar, -15/3 = -5, que não é natural."
         },
         {
-          "id": "b",
-          "text": "(-2, 5]",
+          "id": "a2",
+          "text": "ℤ",
           "isCorrect": true,
-          "explanation": "Esquerda aberta para -2 e direita fechada para 5."
+          "explanation": "Correto. Simplificando primeiro, obtemos -5, que é inteiro."
         },
         {
-          "id": "c",
-          "text": "(-2, 5)",
+          "id": "a3",
+          "text": "ℚ apenas",
           "isCorrect": false,
-          "explanation": "Aqui 5 estaria excluído, mas a desigualdade inclui 5."
+          "explanation": "Embora seja racional, existe conjunto menor que também o contém: ℤ."
         },
         {
-          "id": "d",
-          "text": "[-2, 5)",
+          "id": "a4",
+          "text": "ℝ apenas",
           "isCorrect": false,
-          "explanation": "Extremos invertidos em relação à desigualdade dada."
+          "explanation": "Todo inteiro é real, mas ℝ não é o menor conjunto para esse valor."
         }
       ]
     },
     {
       "id": "q2",
-      "question": "Se A=[1,3] e B=(2,5), então A\u2229B é:",
+      "question": "Para uma voltagem aceitável com 4 ≤ V ≤ 6, qual notação intervalar está correta?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "[1,5)",
+          "id": "a1",
+          "text": "(4, 6)",
           "isCorrect": false,
-          "explanation": "Isso descreve a união, não a interseção."
+          "explanation": "Isso excluiria os extremos 4 e 6, que são válidos."
         },
         {
-          "id": "b",
-          "text": "(2,3]",
+          "id": "a2",
+          "text": "[4, 6]",
           "isCorrect": true,
-          "explanation": "Valores comuns aos dois: maior que 2 e até 3 inclusive."
+          "explanation": "Correto. Como há ≤, os extremos entram no intervalo."
         },
         {
-          "id": "c",
-          "text": "[2,3)",
+          "id": "a3",
+          "text": "[4, 6)",
           "isCorrect": false,
-          "explanation": "2 não pertence a B e 3 pertence a A; extremos estão errados."
+          "explanation": "Exclui 6 indevidamente."
         },
         {
-          "id": "d",
-          "text": "(1,5)",
+          "id": "a4",
+          "text": "(4, 6]",
           "isCorrect": false,
-          "explanation": "Também não é interseção; é intervalo mais amplo."
+          "explanation": "Exclui 4 indevidamente."
         }
       ]
     },
     {
       "id": "q3",
-      "question": "Considere A=[0,2]. O complementar de A em ℝ é:",
+      "question": "Se um sensor deve ficar dentro de ±2°C em torno de 25°C, qual intervalo representa leituras aceitáveis?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "(-\u221e,0) \u222a (2,\u221e)",
+          "id": "a1",
+          "text": "(23, 27)",
+          "isCorrect": false,
+          "explanation": "Esse intervalo exclui extremos, mas o desvio máximo permitido inclui 23 e 27."
+        },
+        {
+          "id": "a2",
+          "text": "[23, 27]",
           "isCorrect": true,
-          "explanation": "Complementar são todos os reais fora de [0,2], sem incluir 0 e 2."
+          "explanation": "Correto. |T-25| ≤ 2 equivale a 23 ≤ T ≤ 27."
         },
         {
-          "id": "b",
-          "text": "(-\u221e,0] \u222a [2,\u221e)",
+          "id": "a3",
+          "text": "[24, 26]",
           "isCorrect": false,
-          "explanation": "0 e 2 pertencem a A, então não podem estar no complementar."
+          "explanation": "Faixa estreita demais; não cobre todo desvio permitido."
         },
         {
-          "id": "c",
-          "text": "(0,2)",
+          "id": "a4",
+          "text": "(-∞, 23] ∪ [27, ∞)",
           "isCorrect": false,
-          "explanation": "Isso é interior de A, não complementar."
-        },
-        {
-          "id": "d",
-          "text": "ℝ",
-          "isCorrect": false,
-          "explanation": "Complementar exclui os pontos de A."
+          "explanation": "Esse é o conjunto das leituras fora da tolerância."
         }
       ]
     },
     {
       "id": "q4",
-      "question": "Qual é o domínio de f(x)=1/(x-2)?",
+      "question": "No problema da festa, qual expressão modela corretamente o custo total em função das quantidades b e c?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "ℝ",
-          "isCorrect": false,
-          "explanation": "x=2 torna o denominador zero, então não é permitido."
-        },
-        {
-          "id": "b",
-          "text": "ℝ\\{2}",
+          "id": "a1",
+          "text": "C = 15b + 20c",
           "isCorrect": true,
-          "explanation": "Todos os reais exceto x=2."
+          "explanation": "Correto. Cada unidade de bebida custa 15 e cada unidade de comida custa 20."
         },
         {
-          "id": "c",
-          "text": "[2,\u221e)",
+          "id": "a2",
+          "text": "C = 2b + 4c",
           "isCorrect": false,
-          "explanation": "Inclui 2 e exclui muitos valores válidos à esquerda."
+          "explanation": "2 e 4 são capacidades (litros/pessoas), não custos."
         },
         {
-          "id": "d",
-          "text": "(-\u221e,2)",
+          "id": "a3",
+          "text": "C = 500 - 15b - 20c",
           "isCorrect": false,
-          "explanation": "Faltou incluir os valores maiores que 2."
+          "explanation": "Isso representa saldo restante, não custo total."
+        },
+        {
+          "id": "a4",
+          "text": "C = b + c",
+          "isCorrect": false,
+          "explanation": "Soma quantidades sem considerar preços unitários."
         }
       ]
     },
     {
       "id": "q5",
-      "question": "O domínio de g(x)=\u221a(x-3) é:",
+      "question": "No mesmo contexto da festa (16 a 20 pessoas), qual faixa de custo foi obtida na aula?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "(3,\u221e)",
+          "id": "a1",
+          "text": "[300, 450]",
           "isCorrect": false,
-          "explanation": "x=3 é válido, pois gera raiz de 0."
+          "explanation": "Intervalo plausível, mas não é o calculado passo a passo."
         },
         {
-          "id": "b",
-          "text": "[3,\u221e)",
+          "id": "a2",
+          "text": "[320, 400]",
           "isCorrect": true,
-          "explanation": "Precisamos de x-3\u22650, então x\u22653."
+          "explanation": "Correto. Foi o resultado para os cenários mínimo e máximo de pessoas."
         },
         {
-          "id": "c",
-          "text": "(-\u221e,3]",
+          "id": "a3",
+          "text": "(320, 400)",
           "isCorrect": false,
-          "explanation": "Isto faria x-3 negativo para x<3, o que não é permitido."
+          "explanation": "Os extremos são possíveis, então devem ser incluídos."
         },
         {
-          "id": "d",
-          "text": "ℝ\\{3}",
+          "id": "a4",
+          "text": "[400, 500]",
           "isCorrect": false,
-          "explanation": "x=3 é permitido; a restrição é x\u22653."
+          "explanation": "Isso desloca a faixa para cima e não reflete os cálculos da aula."
         }
       ]
     },
     {
       "id": "q6",
-      "question": "Se A=[0,3] e B=(1,2), então A\\B é:",
+      "question": "Considere P = -2x² + 8x - 5. Ao multiplicar a desigualdade P > 0 por -1, o que acontece?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "(1,2)",
+          "id": "a1",
+          "text": "A desigualdade permanece >.",
           "isCorrect": false,
-          "explanation": "Isso é B, não A sem B."
+          "explanation": "Ao multiplicar por número negativo, o sentido da desigualdade inverte."
         },
         {
-          "id": "b",
-          "text": "[0,1] \u222a [2,3]",
+          "id": "a2",
+          "text": "A desigualdade vira <.",
           "isCorrect": true,
-          "explanation": "Removemos a parte interna (1,2) de A."
+          "explanation": "Correto. -2x² + 8x - 5 > 0 torna-se 2x² - 8x + 5 < 0."
         },
         {
-          "id": "c",
-          "text": "[0,3]",
+          "id": "a3",
+          "text": "A desigualdade vira =.",
           "isCorrect": false,
-          "explanation": "Ignora a remoção de B."
+          "explanation": "Multiplicar por -1 não transforma desigualdade em igualdade."
         },
         {
-          "id": "d",
-          "text": "[0,1) \u222a (2,3]",
+          "id": "a4",
+          "text": "Nada muda porque há x².",
           "isCorrect": false,
-          "explanation": "1 e 2 não pertencem a B, então devem permanecer em A\\B."
+          "explanation": "A presença de x² não altera a regra de sinais da desigualdade."
         }
       ]
     },
     {
       "id": "q7",
-      "question": "Qual opção descreve corretamente um intervalo semiaberto?",
+      "question": "Para o problema do lucro, a aula encontrou raízes aproximadas x1 ≈ 0,776 e x2 ≈ 3,224. Em qual intervalo o lucro é positivo?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "(a,b)",
+          "id": "a1",
+          "text": "x < 0,776 ou x > 3,224",
           "isCorrect": false,
-          "explanation": "Ambos os extremos são abertos; não é semiaberto."
+          "explanation": "Isso seria verdade se a parábola estivesse voltada para cima no formato final considerado."
         },
         {
-          "id": "b",
-          "text": "[a,b]",
-          "isCorrect": false,
-          "explanation": "Ambos fechados; também não é semiaberto."
-        },
-        {
-          "id": "c",
-          "text": "[a,b) ou (a,b]",
+          "id": "a2",
+          "text": "0,776 < x < 3,224",
           "isCorrect": true,
-          "explanation": "Um extremo incluído e o outro excluído."
+          "explanation": "Correto. A desigualdade quadrática final ficou < 0 para a expressão transformada."
         },
         {
-          "id": "d",
-          "text": "(-\u221e,\u221e)",
+          "id": "a3",
+          "text": "x = 0,776 ou x = 3,224",
           "isCorrect": false,
-          "explanation": "Esse é o conjunto de todos os reais."
+          "explanation": "As raízes são fronteiras, não a região inteira de lucro positivo."
+        },
+        {
+          "id": "a4",
+          "text": "x ≥ 3,224",
+          "isCorrect": false,
+          "explanation": "Inclui região onde o sinal não atende à desigualdade encontrada."
         }
       ]
     },
     {
       "id": "q8",
-      "question": "Para x > 4, qual é a notação de intervalo correta?",
+      "question": "Qual par de notações é equivalente e correto para a solução de uma faixa fechada entre 2 e 5?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "[4,\u221e)",
-          "isCorrect": false,
-          "explanation": "[4,\u221e) inclui 4, mas x>4 exclui 4."
-        },
-        {
-          "id": "b",
-          "text": "(4,\u221e)",
+          "id": "a1",
+          "text": "[2,5] e {x | 2 ≤ x ≤ 5}",
           "isCorrect": true,
-          "explanation": "Parêntese em 4 indica exclusão do extremo."
+          "explanation": "Correto. Ambas descrevem os mesmos reais com extremos incluídos."
         },
         {
-          "id": "c",
-          "text": "(-\u221e,4)",
+          "id": "a2",
+          "text": "(2,5) e {x | 2 ≤ x ≤ 5}",
           "isCorrect": false,
-          "explanation": "Esse intervalo representa x<4."
+          "explanation": "Há inconsistência: a notação intervalar exclui extremos e a de conjunto inclui."
         },
         {
-          "id": "d",
-          "text": "(-\u221e,4]",
+          "id": "a3",
+          "text": "[2,5] e {x | x ∈ [2,5]}",
           "isCorrect": false,
-          "explanation": "Esse intervalo representa x\u22644."
+          "explanation": "A segunda forma mistura notações e foi apontada como erro comum na aula."
+        },
+        {
+          "id": "a4",
+          "text": "(2,5] e {x | 2 ≤ x < 5}",
+          "isCorrect": false,
+          "explanation": "As extremidades não coincidem entre as duas expressões."
         }
       ]
     },
     {
       "id": "q9",
-      "question": "Se A=(-\u221e, 2) e B=[1, 4], qual é A\u2229B?",
+      "question": "Um resultado algébrico para 'número de pessoas' deu x = -3,5. Segundo a aula, qual é a atitude correta?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "[1, 2)",
+          "id": "a1",
+          "text": "Aceitar o valor porque veio da conta.",
+          "isCorrect": false,
+          "explanation": "A aula enfatiza validar no contexto; resultado matematicamente possível pode ser inviável no problema."
+        },
+        {
+          "id": "a2",
+          "text": "Descartar o resultado por não fazer sentido no domínio natural do contexto.",
           "isCorrect": true,
-          "explanation": "Elementos comuns: de 1 (incluído em ambos) até 2 (excluído por A)."
+          "explanation": "Correto. Quantidade de pessoas exige valores naturais (não negativos e inteiros)."
         },
         {
-          "id": "b",
-          "text": "(1, 2)",
+          "id": "a3",
+          "text": "Converter automaticamente para 3,5 pessoas.",
           "isCorrect": false,
-          "explanation": "1 deve ser incluído, pois pertence aos dois conjuntos."
+          "explanation": "Isso ainda não resolve o problema de domínio para contagem de pessoas."
         },
         {
-          "id": "c",
-          "text": "[1, 4]",
+          "id": "a4",
+          "text": "Trocar o sinal para +3,5 sem justificar.",
           "isCorrect": false,
-          "explanation": "Valores acima de 2 não pertencem a A."
-        },
-        {
-          "id": "d",
-          "text": "(-\u221e, 4]",
-          "isCorrect": false,
-          "explanation": "Isso representa união parcial, não interseção."
+          "explanation": "Alterar resultado sem base matemática é um erro conceitual."
         }
       ]
     },
     {
       "id": "q10",
-      "question": "Qual é o domínio de h(x)=1/\u221a(x+1)?",
+      "question": "No checklist da aula, qual etapa evita aceitar soluções incorretas por falta de contexto?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "[-1, \u221e)",
+          "id": "a1",
+          "text": "Ler apenas a primeira linha do problema.",
           "isCorrect": false,
-          "explanation": "x=-1 zera o denominador; não é permitido."
+          "explanation": "Leitura parcial aumenta risco de interpretação errada."
         },
         {
-          "id": "b",
-          "text": "(-1, \u221e)",
+          "id": "a2",
+          "text": "Pular etapas algébricas para ganhar tempo.",
+          "isCorrect": false,
+          "explanation": "Pular etapas dificulta detectar falhas de raciocínio."
+        },
+        {
+          "id": "a3",
+          "text": "Verificar se a resposta faz sentido no cenário e testar valores.",
           "isCorrect": true,
-          "explanation": "Para raiz no denominador, precisamos x+1>0, então x>-1."
+          "explanation": "Correto. A validação contextual é parte central da metodologia proposta."
         },
         {
-          "id": "c",
-          "text": "(-\u221e, -1)",
+          "id": "a4",
+          "text": "Usar só símbolos, sem explicar em palavras.",
           "isCorrect": false,
-          "explanation": "Nesse intervalo x+1<0 e a raiz não é real."
-        },
-        {
-          "id": "d",
-          "text": "ℝ\\{-1}",
-          "isCorrect": false,
-          "explanation": "Mesmo excluindo -1, valores menores que -1 ainda invalidam a raiz."
+          "explanation": "A aula pede comunicação clara em palavras e símbolos."
         }
       ]
     }
   ]
 }
-

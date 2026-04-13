@@ -957,6 +957,8 @@ type NumberLineVariant =
   | "integers-overview"
   | "marked-points"
   | "abs-leq-2"
+  | "abs-lt-3"
+  | "outside-ge-2"
   | "rational-irrational-reference"
   | "real-compare";
 
@@ -1090,8 +1092,31 @@ export function NumberLineReferenceDiagram({ variant = "integers-overview" }: { 
       return;
     }
 
+    if (variant === "outside-ge-2") {
+      p.stroke(16, 185, 129);
+      p.strokeWeight(5);
+      p.line(mapX(p, -5.8, b, 44), y - 16, mapX(p, -2, b, 44), y - 16);
+      p.line(mapX(p, 2, b, 44), y - 16, mapX(p, 5.8, b, 44), y - 16);
+      drawArrow(p, mapX(p, -5.4, b, 44), y - 16, mapX(p, -5.8, b, 44), y - 16);
+      drawArrow(p, mapX(p, 5.4, b, 44), y - 16, mapX(p, 5.8, b, 44), y - 16);
+      p.noStroke();
+      p.fill(16, 185, 129);
+      p.circle(mapX(p, -2, b, 44), y - 16, 11);
+      p.circle(mapX(p, 2, b, 44), y - 16, 11);
+      infoBox(p, "|x| >= 2: x <= -2 ou x >= 2");
+      return;
+    }
+
     p.stroke(16, 185, 129);
     p.strokeWeight(5);
+    if (variant === "abs-lt-3") {
+      p.line(mapX(p, -3, b, 44), y - 16, mapX(p, 3, b, 44), y - 16);
+      drawOpenPoint(p, mapX(p, -3, b, 44), y - 16);
+      drawOpenPoint(p, mapX(p, 3, b, 44), y - 16);
+      infoBox(p, "|x| < 3: -3 < x < 3");
+      return;
+    }
+
     p.line(mapX(p, -2, b, 44), y - 16, mapX(p, 2, b, 44), y - 16);
     p.noStroke();
     p.fill(16, 185, 129);
@@ -1142,8 +1167,10 @@ export function RealSetHierarchyStaticDiagram() {
 type IntervalExampleVariant =
   | "closed-13"
   | "open-13"
+  | "open-25"
   | "half-13"
   | "ray-2-inf"
+  | "ray-4-inf-closed"
   | "basic-types"
   | "union-13-25"
   | "inter-13-25"
@@ -1198,7 +1225,14 @@ export function IntervalWorkedExampleDiagram({ variant = "basic-types" }: { vari
     const b: Bounds = { xMin: -2.6, xMax: 5.2, yMin: -1, yMax: 4 };
     drawGrid(p, b, 44);
 
-    if (variant === "closed-13" || variant === "open-13" || variant === "half-13" || variant === "ray-2-inf") {
+    if (
+      variant === "closed-13" ||
+      variant === "open-13" ||
+      variant === "open-25" ||
+      variant === "half-13" ||
+      variant === "ray-2-inf" ||
+      variant === "ray-4-inf-closed"
+    ) {
       const y = p.height * 0.54;
       if (variant === "closed-13") {
         drawInterval(p, b, y, 1, 3, true, true, [37, 99, 235]);
@@ -1206,9 +1240,19 @@ export function IntervalWorkedExampleDiagram({ variant = "basic-types" }: { vari
       } else if (variant === "open-13") {
         drawInterval(p, b, y, 1, 3, false, false, [37, 99, 235]);
         infoBox(p, "(1, 3): extremos excluidos");
+      } else if (variant === "open-25") {
+        drawInterval(p, b, y, 2, 5, false, false, [37, 99, 235]);
+        infoBox(p, "(2, 5): extremos excluidos");
       } else if (variant === "half-13") {
         drawInterval(p, b, y, 1, 3, true, false, [37, 99, 235]);
         infoBox(p, "[1, 3): inclui 1 e exclui 3");
+      } else if (variant === "ray-4-inf-closed") {
+        p.stroke(16, 185, 129);
+        p.strokeWeight(4);
+        p.line(mapX(p, 4, b, 44), y, mapX(p, 5, b, 44), y);
+        drawClosedPoint(p, mapX(p, 4, b, 44), y, [16, 185, 129]);
+        drawArrow(p, mapX(p, 4.6, b, 44), y, mapX(p, 5, b, 44), y);
+        infoBox(p, "[4, inf): maior ou igual a 4");
       } else {
         p.stroke(16, 185, 129);
         p.strokeWeight(4);
@@ -1358,4 +1402,3 @@ export function IntervalWorkedExampleDiagram({ variant = "basic-types" }: { vari
 }
 
 export const __preCalculoP5Module = true;
-

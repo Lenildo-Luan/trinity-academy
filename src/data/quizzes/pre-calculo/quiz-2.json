@@ -1,309 +1,308 @@
 {
   "id": "quiz-2",
-  "title": "Quiz 2 - Números Racionais e Irracionais",
-  "description": "Teste sua compreensão sobre frações, dízimas, irracionalidade e aproximações.",
-  "timeLimit": 720,
+  "title": "Quiz — Aula 2: Irracionais e Reais",
+  "description": "Avalie sua compreensão sobre irracionais, representação decimal, reta real e relações entre ℚ e ℝ.",
+  "timeLimit": 900,
   "questions": [
     {
       "id": "q1",
       "question": "Qual número é irracional?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "0,125",
+          "id": "a1",
+          "text": "0,25",
           "isCorrect": false,
-          "explanation": "0,125 é decimal finito, portanto racional (1/8)."
+          "explanation": "0,25 é decimal finito e pode ser escrito como 1/4, portanto é racional."
         },
         {
-          "id": "b",
+          "id": "a2",
           "text": "7/3",
           "isCorrect": false,
-          "explanation": "Razão entre inteiros: número racional."
+          "explanation": "Razão de inteiros com denominador não nulo define um racional."
         },
         {
-          "id": "c",
-          "text": "\u221a2",
+          "id": "a3",
+          "text": "√2",
           "isCorrect": true,
-          "explanation": "\u221a2 não pode ser escrito como fração de inteiros."
+          "explanation": "Correto. √2 não pode ser expresso como fração de dois inteiros."
         },
         {
-          "id": "d",
+          "id": "a4",
           "text": "0,333...",
           "isCorrect": false,
-          "explanation": "Dízima periódica é racional: 0,333... = 1/3."
+          "explanation": "0,333... é dízima periódica e equivale a 1/3."
         }
       ]
     },
     {
       "id": "q2",
-      "question": "A fração 1/6 gera qual tipo de representação decimal?",
+      "question": "Qual afirmação descreve corretamente o decimal de um número irracional?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "Decimal finito",
+          "id": "a1",
+          "text": "É sempre finito.",
           "isCorrect": false,
-          "explanation": "1/6 = 0,1666..., não termina."
+          "explanation": "Decimais finitos são racionais."
         },
         {
-          "id": "b",
-          "text": "Dízima periódica",
+          "id": "a2",
+          "text": "É infinito e periódico.",
+          "isCorrect": false,
+          "explanation": "Infinito periódico ainda é racional."
+        },
+        {
+          "id": "a3",
+          "text": "É infinito e não periódico.",
           "isCorrect": true,
-          "explanation": "1/6 tem repetição de dígitos no decimal."
+          "explanation": "Correto. Essa é a assinatura decimal dos irracionais."
         },
         {
-          "id": "c",
-          "text": "Irracional",
+          "id": "a4",
+          "text": "Pode ser escrito como a/b com a,b inteiros.",
           "isCorrect": false,
-          "explanation": "Todo quociente de inteiros (com denominador não nulo) é racional."
-        },
-        {
-          "id": "d",
-          "text": "Número natural",
-          "isCorrect": false,
-          "explanation": "1/6 não é inteiro positivo."
+          "explanation": "Isso define os racionais, não os irracionais."
         }
       ]
     },
     {
       "id": "q3",
-      "question": "Qual fração corresponde a 0,\u03053 (dízima periódica simples)?",
+      "question": "Na ideia da prova por contradição de √2 irracional, qual passo gera a contradição?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "3/10",
-          "isCorrect": false,
-          "explanation": "3/10 = 0,3 exato, sem repetição infinita."
-        },
-        {
-          "id": "b",
-          "text": "1/3",
+          "id": "a1",
+          "text": "Concluir que a e b são ambos pares, embora supostamente sem fatores comuns.",
           "isCorrect": true,
-          "explanation": "0,333... é exatamente 1/3."
+          "explanation": "Correto. Isso viola a hipótese inicial de fração irredutível e fecha a contradição."
         },
         {
-          "id": "c",
-          "text": "3/8",
+          "id": "a2",
+          "text": "Mostrar que 2 é número primo.",
           "isCorrect": false,
-          "explanation": "3/8 = 0,375."
+          "explanation": "Esse fato ajuda, mas não é a contradição central da prova."
         },
         {
-          "id": "d",
-          "text": "33/100",
+          "id": "a3",
+          "text": "Dizer que √2 é menor que 1.",
           "isCorrect": false,
-          "explanation": "33/100 = 0,33 finito, não dízima infinita."
+          "explanation": "Isso é falso e não faz parte da demonstração apresentada."
+        },
+        {
+          "id": "a4",
+          "text": "Escrever √2 ≈ 1,4.",
+          "isCorrect": false,
+          "explanation": "Aproximação decimal não prova racionalidade ou irracionalidade."
         }
       ]
     },
     {
       "id": "q4",
-      "question": "Qual afirmação está correta sobre \u03c0?",
+      "question": "Qual opção traz uma aproximação racional de π sem afirmar igualdade exata?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "\u03c0 é racional porque 3,14 é racional",
+          "id": "a1",
+          "text": "π = 22/7 exatamente.",
           "isCorrect": false,
-          "explanation": "3,14 é apenas aproximação de \u03c0, não igualdade."
+          "explanation": "22/7 é aproximação útil, mas não o valor exato de π."
         },
         {
-          "id": "b",
-          "text": "\u03c0 é irracional e tem decimal infinito não-periódico",
+          "id": "a2",
+          "text": "22/7 é uma aproximação racional de π.",
           "isCorrect": true,
-          "explanation": "Essa é a característica correta de \u03c0."
+          "explanation": "Correto. A aula destaca esse cuidado: aproximação não é identidade."
         },
         {
-          "id": "c",
-          "text": "\u03c0 = 22/7 exatamente",
+          "id": "a3",
+          "text": "Se aproximação é boa, então torna π racional.",
           "isCorrect": false,
-          "explanation": "22/7 aproxima \u03c0, mas não é valor exato."
+          "explanation": "Qualidade da aproximação não altera a natureza irracional de π."
         },
         {
-          "id": "d",
-          "text": "\u03c0 pertence a ℚ",
+          "id": "a4",
+          "text": "Nenhum racional aproxima π.",
           "isCorrect": false,
-          "explanation": "\u03c0 não pertence ao conjunto dos racionais."
+          "explanation": "Há infinitas aproximações racionais para π."
         }
       ]
     },
     {
       "id": "q5",
-      "question": "Qual classificação é correta para o número 2,75?",
+      "question": "Qual afirmação sobre a reta numérica real está correta?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "Irracional",
+          "id": "a1",
+          "text": "Só números racionais podem ser representados na reta.",
           "isCorrect": false,
-          "explanation": "2,75 é decimal finito, logo racional."
+          "explanation": "Irracionais também ocupam pontos da reta real."
         },
         {
-          "id": "b",
-          "text": "Racional",
+          "id": "a2",
+          "text": "Entre 1 e 2 não existe irracional.",
+          "isCorrect": false,
+          "explanation": "√2 está entre 1 e 2 e é irracional."
+        },
+        {
+          "id": "a3",
+          "text": "Todo ponto da reta corresponde a um número real.",
           "isCorrect": true,
-          "explanation": "2,75 = 275/100 = 11/4."
+          "explanation": "Correto. Essa é a ideia de completude abordada na aula."
         },
         {
-          "id": "c",
-          "text": "Natural",
+          "id": "a4",
+          "text": "π está entre 2 e 3.",
           "isCorrect": false,
-          "explanation": "Não é inteiro positivo."
-        },
-        {
-          "id": "d",
-          "text": "Não real",
-          "isCorrect": false,
-          "explanation": "Todo racional é real."
+          "explanation": "π ≈ 3,14159, então fica entre 3 e 4."
         }
       ]
     },
     {
       "id": "q6",
-      "question": "Em relação a \u221a4 e \u221a5, qual opção está correta?",
+      "question": "Qual igualdade representa corretamente a estrutura dos reais?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "Ambos são irracionais",
+          "id": "a1",
+          "text": "ℝ = ℤ ∪ ℕ",
           "isCorrect": false,
-          "explanation": "\u221a4 = 2 é racional."
+          "explanation": "Faltam racionais não inteiros e todos os irracionais."
         },
         {
-          "id": "b",
-          "text": "\u221a4 é racional e \u221a5 é irracional",
+          "id": "a2",
+          "text": "ℝ = ℚ ∪ irracionais",
           "isCorrect": true,
-          "explanation": "Raiz de quadrado perfeito é racional; de não perfeito pode ser irracional."
+          "explanation": "Correto. A união de racionais e irracionais forma todo o conjunto real."
         },
         {
-          "id": "c",
-          "text": "Ambos são racionais",
+          "id": "a3",
+          "text": "ℝ = ℚ apenas",
           "isCorrect": false,
-          "explanation": "\u221a5 não é racional."
+          "explanation": "Isso excluiria números como √2, π e e."
         },
         {
-          "id": "d",
-          "text": "\u221a4 é irracional e \u221a5 é racional",
+          "id": "a4",
+          "text": "ℝ = irracionais apenas",
           "isCorrect": false,
-          "explanation": "Está invertido."
+          "explanation": "Isso excluiria todos os racionais."
         }
       ]
     },
     {
       "id": "q7",
-      "question": "Qual opção é uma boa aproximação racional de \u03c0 com erro relativamente pequeno?",
+      "question": "Qual cadeia de inclusão está correta?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "3/2",
+          "id": "a1",
+          "text": "ℚ ⊂ ℤ ⊂ ℕ ⊂ ℝ",
           "isCorrect": false,
-          "explanation": "3/2 = 1,5 está muito distante de \u03c0."
+          "explanation": "A inclusão entre ℚ, ℤ e ℕ está invertida."
         },
         {
-          "id": "b",
-          "text": "22/7",
+          "id": "a2",
+          "text": "ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ",
           "isCorrect": true,
-          "explanation": "22/7 ≈ 3,142857, aproxima \u03c0 razoavelmente bem."
+          "explanation": "Correto. Essa é a hierarquia apresentada ao final da aula."
         },
         {
-          "id": "c",
-          "text": "7/22",
+          "id": "a3",
+          "text": "ℤ ⊂ ℕ ⊂ ℚ ⊂ ℝ",
           "isCorrect": false,
-          "explanation": "7/22 ≈ 0,318, totalmente fora de escala."
+          "explanation": "Inteiros incluem negativos e não cabem em ℕ."
         },
         {
-          "id": "d",
-          "text": "31/10",
+          "id": "a4",
+          "text": "ℝ ⊂ ℚ ⊂ ℤ ⊂ ℕ",
           "isCorrect": false,
-          "explanation": "31/10 = 3,1 é aproximação bem pior que 22/7."
+          "explanation": "Relação totalmente invertida."
         }
       ]
     },
     {
       "id": "q8",
-      "question": "Qual afirmação resume corretamente a diferença entre racional e irracional?",
+      "question": "Qual classificação é correta para 0,142857142857... ?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "Racional tem decimal infinito e irracional tem decimal finito",
+          "id": "a1",
+          "text": "Irracional, porque é infinito.",
           "isCorrect": false,
-          "explanation": "Racionais podem ter decimal finito ou periódico."
+          "explanation": "Infinito por si só não basta; aqui há período repetitivo."
         },
         {
-          "id": "b",
-          "text": "Racional não pode ser escrito como fração",
-          "isCorrect": false,
-          "explanation": "Isso define irracional, não racional."
-        },
-        {
-          "id": "c",
-          "text": "Irracional tem decimal infinito não-periódico",
+          "id": "a2",
+          "text": "Racional, porque é decimal periódico.",
           "isCorrect": true,
-          "explanation": "Essa é a característica central dos irracionais."
+          "explanation": "Correto. Todo decimal periódico representa uma fração."
         },
         {
-          "id": "d",
-          "text": "Todo decimal infinito é irracional",
+          "id": "a3",
+          "text": "Natural, porque é positivo.",
           "isCorrect": false,
-          "explanation": "Dízimas periódicas são infinitas e racionais."
+          "explanation": "Naturais são inteiros; esse número é decimal."
+        },
+        {
+          "id": "a4",
+          "text": "Não real, porque não termina.",
+          "isCorrect": false,
+          "explanation": "Decimais infinitos periódicos ainda são reais."
         }
       ]
     },
     {
       "id": "q9",
-      "question": "Qual número é racional por ser decimal finito?",
+      "question": "Em geral, a soma de um racional com um irracional é:",
       "alternatives": [
         {
-          "id": "a",
-          "text": "\u03c0",
+          "id": "a1",
+          "text": "Sempre racional.",
           "isCorrect": false,
-          "explanation": "\u03c0 é irracional e não possui decimal finito/periódico."
+          "explanation": "Se fosse racional, ao subtrair o racional obteríamos irracional = racional, absurdo."
         },
         {
-          "id": "b",
-          "text": "\u221a3",
-          "isCorrect": false,
-          "explanation": "\u221a3 é irracional."
-        },
-        {
-          "id": "c",
-          "text": "2,375",
+          "id": "a2",
+          "text": "Sempre irracional.",
           "isCorrect": true,
-          "explanation": "2,375 é decimal finito e pode ser escrito como fração (19/8)."
+          "explanation": "Correto. Essa propriedade foi usada na aula com exemplos como √2 + 1."
         },
         {
-          "id": "d",
-          "text": "e",
+          "id": "a3",
+          "text": "Depende apenas do sinal dos termos.",
           "isCorrect": false,
-          "explanation": "e é irracional."
+          "explanation": "Sinal não determina racionalidade."
+        },
+        {
+          "id": "a4",
+          "text": "Nunca é número real.",
+          "isCorrect": false,
+          "explanation": "Racionais e irracionais pertencem a ℝ, então a soma segue em ℝ."
         }
       ]
     },
     {
       "id": "q10",
-      "question": "Sobre a soma de um racional com um irracional, qual alternativa é correta em geral?",
+      "question": "Qual frase resume melhor a completude de ℝ?",
       "alternatives": [
         {
-          "id": "a",
-          "text": "Sempre resulta em racional",
+          "id": "a1",
+          "text": "ℝ é completo porque não tem números negativos.",
           "isCorrect": false,
-          "explanation": "A soma não vira racional em geral; isso é uma confusão comum."
+          "explanation": "Completude não está ligada ao sinal dos números."
         },
         {
-          "id": "b",
-          "text": "Sempre resulta em irracional",
+          "id": "a2",
+          "text": "ℝ é completo porque toda conta em ℝ dá inteiro.",
+          "isCorrect": false,
+          "explanation": "Muitas operações em ℝ não resultam em inteiros."
+        },
+        {
+          "id": "a3",
+          "text": "Na reta real não há buracos: todo ponto corresponde a um real.",
           "isCorrect": true,
-          "explanation": "Se r é racional e i irracional, r+i não pode ser racional; caso contrário i seria racional por diferença."
+          "explanation": "Correto. Essa é a interpretação intuitiva usada na aula para completude."
         },
         {
-          "id": "c",
-          "text": "Depende apenas do sinal dos números",
+          "id": "a4",
+          "text": "Completude significa que ℚ = ℝ.",
           "isCorrect": false,
-          "explanation": "O sinal não determina racionalidade."
-        },
-        {
-          "id": "d",
-          "text": "Nunca é número real",
-          "isCorrect": false,
-          "explanation": "Tanto racionais quanto irracionais são reais, e a soma continua em ℝ."
+          "explanation": "ℚ é subconjunto de ℝ; irracionais mostram que os conjuntos não são iguais."
         }
       ]
     }
   ]
 }
-
